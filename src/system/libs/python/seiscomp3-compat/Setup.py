@@ -1,0 +1,1 @@
+from seiscomp.setup import *

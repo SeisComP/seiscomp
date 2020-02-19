@@ -4,10 +4,26 @@
 Filter grammar
 **************
 
-SeisComP3 supports string-based filter definitions. This section covers available filters and their parameters.
+SeisComP supports string-based filter definitions. This section covers available
+filters and their parameters.
 
-The filter definition supports building filter chains (operator >> or ->) as well as combining them with basic
-mathematical operators like \+, \-, \*, \/, \^ (exponentiation) and \|. \| (absolute value).
+The filter definition supports :ref:`SeisComP filters <sec-filters-list>` and
+building filter chains (operator >> or ->) as well as combining them with basic mathematical operators like
+
+* \+ : addition
+* \- : subtraction
+* \* : multiplitation
+* \/ : division
+* \^ : power / exponentiation
+* \|. \| : absolute value.
+
+Use brackets *()* to apply the operations within before the one outside.
+
+.. note::
+
+   Filters in SeisComP are recursive allowing real-time application. Therefore,
+   filter artefacts, e.g. ringing, are always visible at the beginning of the traces
+   or after data gaps.
 
 Example
 =======
@@ -16,21 +32,19 @@ Example
 
    A(1,2)>>(B(3,4)*2+C(5,6,7))>>D(8)
 
-where A, B, C and D are different filters configured with different parameters. If a sample is filtered it passes the following stages:
+where A, B, C and D are different filters configured with different parameters.
+In this example a sample *s* is filtered to get the final sample *sf* passing the following stages:
 
-s = a sample
+#. filter sample *s* with A: *sa* = A(1,2)(*s*)
+#. filter *sa* with B: *sb* = B(3,4)(*sa*)
+#. *sb* = *sb* \* 2
+#. filter *sa* with C: *sc* = C(5,6,7)(*sa*)
+#. add *sb* and *sc*: *sbc* = *sb* + *sc*
+#. filter *sbc* with D: *sf* = D(8)(*sbc*)
 
- 1. filter *s* with A: *sa* = A(1,2)(*s*)
- 2. filter *sa* with B: *sb* = B(3,4)(*sa*)
- 3. *sb* = *sb* \* 2
- 4. filter *sa* with C: *sc* = C(5,6,7)(*sa*)
- 5. add *sb* and *sc*: *sbc* = *sb* + *sc*
- 6. filter *sbc* with D: *sf* = D(8)(*sbc*)
+sf = final sample.
 
-sf = final sample
-
-The default filter applied by scautopick is
-
+The default filter applied by :ref:`scautopick` is
 
 :py:func:`RMHP(10)<RMHP()>` >> :py:func:`ITAPER(30)<ITAPER()>` >> :py:func:`BW(4,0.7,2)<BW()>` >> :py:func:`STALTA(2,80)<STALTA()>`
 
@@ -39,9 +53,36 @@ is filtered with a fourth order Butterworth bandpass with corner frequencies of 
 Finally an STA/LTA filter with a short-time time window of 2 seconds and a long-term time window of
 80 seconds is applied.
 
+To apply mathematical operations on original waveforms use :py:func:`self()`, e.g.:
 
-Filters
-=======
+.. code-block:: sh
+
+   self()*-1>>A(1,2)
+
+Test filter strings
+===================
+
+Filters can be conveniently tested without much configuration. To perform such tests
+
+#. Open waveforms in :ref:`scrttv` or the picker window of :ref:`scolv`
+#. Open a simple graphical text editor, e.g. gedit, pluma or kwrite and write down
+   the filter string
+#. Mark / highlight the filter string and use the mouse to drag the filter string
+   onto the waveforms
+#. Observe the differences between filtered and unfiltered waveforms.
+
+
+.. figure:: media/scrttv-filter.png
+   :align: center
+   :width: 10cm
+
+   scrttv with raw (blue) and filtered (black) data. The applied filter string
+   is shown in the lower left corner.
+
+.. _sec-filters-list:
+
+List of filters
+===============
 
 The following filter functions are available. If a filter function has no
 parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()>`) or without (e.g. :py:func:`DIFF<DIFF()>`).
@@ -55,7 +96,7 @@ parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()
 
 .. py:function:: BW_LP(order, hi-freq)
 
-   Butterworth lowpass filter realized as a causal recursive IIR (infinite impulse response) filter.
+   Butterworth low-pass filter realized as a causal recursive IIR (infinite impulse response) filter.
 
    :param order: The filter order
    :param hi-freq: The corner frequency
@@ -63,7 +104,7 @@ parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()
 
 .. py:function:: BW_HP(order, lo-freq)
 
-   Butterworth highpass filter realized as a causal recursive IIR (infinite impulse response) filter.
+   Butterworth high-pass filter realized as a causal recursive IIR (infinite impulse response) filter.
 
    :param order: The filter order
    :param lo-freq: The corner frequency
@@ -143,11 +184,11 @@ parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()
 
 .. py:function:: RMHP(timespan)
 
-   A highpass filter realized as running mean highpass filter. For a given time window in
+   A high-pass filter realized as running mean high-pass filter. For a given time window in
    seconds the running mean is subtracted from the single amplitude values. This is equivalent
-   to highpass filtering the data.
+   to high-pass filtering the data.
 
-   Running mean highpass of e.g. 10 seconds calculates the difference to the running mean of 10 seconds.
+   Running mean high-pass of e.g. 10 seconds calculates the difference to the running mean of 10 seconds.
 
    :param timespan: The timespan in seconds
 
@@ -163,6 +204,10 @@ parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()
       RMHP = self-RM
 
    :param timespan: The timespan in seconds
+
+.. py:function:: self()
+
+   The original data itself.
 
 .. py:function:: SM5([type = 1])
 

@@ -11,9 +11,9 @@ more deeply in the :ref:`next chapter<system-management>`.
 Initial configuration
 =====================
 
-To configure SeisComP3 initially, run :program:`seiscomp setup`. This is the
+To configure SeisComP initially, run :program:`seiscomp setup`. This is the
 successor of the former :program:`./setup` script.
-The initial configuration also allows to setup the MySQL database for SeisComP3.
+The initial configuration also allows to setup the MySQL database for SeisComP.
 
 As a wrapper to :program:`seiscomp setup`, a wizard can be started from
 :ref:`scconfig<scconfig>` (Ctrl-N).
@@ -23,23 +23,23 @@ As a wrapper to :program:`seiscomp setup`, a wizard can be started from
     With **Ubuntu 16.04** MariaDB has become the standard flavour of MySQL in Ubuntu
     and either MariaDB or MySQL can be installed. The implementation of MariaDB
     in Ubuntu requires additional steps. They must be taken in order to allow
-    SeisComP3 to make use of MariaDB.
+    SeisComP to make use of MariaDB.
 
     The full procedure including database optimization is:
 
     .. code-block:: sh
 
-        user@hosst:~$ sudo systemctl enable mysql
+        user@host:~$ sudo systemctl enable mysql
         user@host:~$ sudo mysql_secure_installation
             provide new root password
             answer all questions with yes [Enter]
 
         user@host:~$ sudo mysql -u root -p
-            CREATE DATABASE seiscomp3 CHARACTER SET utf8 COLLATE utf8_bin;
-            grant usage on seiscomp3.* to sysop@localhost identified by 'sysop';
-            grant all privileges on seiscomp3.* to sysop@localhost;
-            grant usage on seiscomp3.* to sysop@'%' identified by 'sysop';
-            grant all privileges on seiscomp3.* to sysop@'%';
+            CREATE DATABASE seiscomp CHARACTER SET utf8 COLLATE utf8_bin;
+            grant usage on seiscomp.* to sysop@localhost identified by 'sysop';
+            grant all privileges on seiscomp.* to sysop@localhost;
+            grant usage on seiscomp.* to sysop@'%' identified by 'sysop';
+            grant all privileges on seiscomp.* to sysop@'%';
             flush privileges;
 
         user@host:~$ sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
@@ -48,7 +48,7 @@ As a wrapper to :program:`seiscomp setup`, a wizard can be started from
             innodb_flush_log_at_trx_commit = 2
 
         user@host:~$ sudo systemctl restart mysql
-        user@host:~$ mysql -u sysop -p seiscomp3 < ~/seiscomp3/share/db/mysql.sql
+        user@host:~$ mysql -u sysop -p seiscomp < ~/seiscomp/share/db/mysql.sql
 
     Currently, the :ref:`scconfig` wizard and :program:`seiscomp setup` cannot
     be used to set up the MariaDB database. The option "Create database" must
@@ -58,7 +58,7 @@ In :program:`seiscomp setup` default values are given in brackets [].
 
 .. code-block:: none
 
-   user@host:~$ seiscomp3/bin/seiscomp setup
+   user@host:~$ seiscomp/bin/seiscomp setup
 
    ====================================================================
    SeisComP setup
@@ -118,7 +118,7 @@ trunk modules and the default request handler of Arclink.
          your own. The database schema is installed under share/db/postgresql.sql.
    Database backend [0]:
 
-If the database is enable the database backend can be selected. SeisComP3
+If the database is enable the database backend can be selected. SeisComP
 supports two main backends: MySQL and PostgreSQL. Select the backend to be used
 here but be prepared that only for the MySQL backend the setup can help to
 create the database and tables for you. If you are using PostgreSQL you have
@@ -128,12 +128,12 @@ part of the distribution and can be found in :file:`share/db/postgresql.sql`.
 .. note::
 
    As of PostgreSQL version 9 the default output encoding has changed to hex.
-   In order to fix issues with seiscomp3 log in to your database and run the
+   In order to fix issues with seiscomp log in to your database and run the
    following command.
 
    .. code-block:: sql
 
-      ALTER DATABASE seiscomp3 SET bytea_output TO 'escape';
+      ALTER DATABASE seiscomp SET bytea_output TO 'escape';
 
 
 ----
@@ -169,7 +169,7 @@ database with the same name, say 'yes' here.
 
 .. code-block:: none
 
-   Database name [seiscomp3]:
+   Database name [seiscomp]:
    Database hostname [localhost]:
    Database read-write user [sysop]:
    Database read-write password [sysop]:
@@ -208,7 +208,7 @@ you may use:
 
 .. code-block:: sh
 
-   user@host:~$ seiscomp3/bin/seiscomp enable seedlink scautopick scautoloc scamp scmag scevent
+   user@host:~$ seiscomp/bin/seiscomp enable seedlink scautopick scautoloc scamp scmag scevent
    enabled seedlink
    enabled scautopick
    enabled scautoloc
@@ -229,7 +229,7 @@ be provided and the configuration needs to be updated.
 Supply metadata for networks and stations
 =========================================
 
-SeisComP3 requires the metadata from seismic stations for data acquisition
+SeisComP requires the metadata from seismic stations for data acquisition
 and processing. The metadata can be obtained from network operators or
 various other sources in different formats. The metadata include, e.g.:
 
@@ -237,17 +237,17 @@ various other sources in different formats. The metadata include, e.g.:
 - operation times
 - location
 - sensor and data logger specifications
-- data stream specificiations
+- data stream specifications
 
-SeisComP3 comes with various importers to add metadata
+SeisComP comes with various importers to add metadata
 for networks and stations including full response information.
 
-:ref:`import_inv` is the tool to import inventory data into SeisComP3.
+:ref:`import_inv` is the tool to import inventory data into SeisComP.
 Alternatively can be used.
 
 .. code-block:: sh
 
-   user@host:~$ seiscomp3/bin/seiscomp exec import_inv dlsv inventory.dataless
+   user@host:~$ seiscomp/bin/seiscomp exec import_inv dlsv inventory.dataless
 
 This will import a dataless SEED volume into `etc/inventory/inventory.dataless.xml`.
 
@@ -262,7 +262,7 @@ add bindings in a more convenient way, start :ref:`scconfig`.
 
 .. code-block:: sh
 
-   user@host:~$ seiscomp3/bin/seiscomp exec scconfig
+   user@host:~$ seiscomp/bin/seiscomp exec scconfig
 
 
 Update configuration and start everything
@@ -275,7 +275,7 @@ bindings to the database and synchronizes the inventory with the database.
 
 .. code-block:: sh
 
-   user@host:~$ seiscomp3/bin/seiscomp update-config
+   user@host:~$ seiscomp/bin/seiscomp update-config
    [output]
 
 After the configuration has been updated and the inventory has been synchronized,
@@ -283,7 +283,7 @@ call :program:`seiscomp start` to start all enabled modules:
 
 .. code-block:: sh
 
-   user@host:~$ seiscomp3/bin/seiscomp start
+   user@host:~$ seiscomp/bin/seiscomp start
    starting seedlink
    starting scautopick
    starting scautoloc
@@ -297,4 +297,4 @@ If everything is working, the analysis tools can be started, e.g. MapView.
 
 .. code-block:: sh
 
-   user@host:~$ seiscomp3/bin/seiscomp exec scmv
+   user@host:~$ seiscomp/bin/seiscomp exec scmv

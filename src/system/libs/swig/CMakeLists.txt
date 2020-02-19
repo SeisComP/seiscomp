@@ -1,15 +1,15 @@
-INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_PATH})
+INCLUDE_DIRECTORIES(${PYTHON_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
-SET(WRAPPER_MODULES Config)
+SET(WRAPPER_MODULES config)
 
-SET(WRAPPER_MODULE_Config_EXTRA_SC_LIBS config)
+SET(WRAPPER_MODULE_config_EXTRA_SC_LIBS config)
 
 
 FOREACH (wrapper_module ${WRAPPER_MODULES})
         SET(
                 ${wrapper_module}_SOURCES
-                        ${wrapper_module}PYTHON_wrap.cxx
+                        ${wrapper_module}_python_wrap.cxx
                         ${WRAPPER_MODULE_${wrapper_module}_EXTRA_FILES}
         )
         ADD_LIBRARY(_${wrapper_module} MODULE ${${wrapper_module}_SOURCES})
@@ -20,7 +20,7 @@ FOREACH (wrapper_module ${WRAPPER_MODULES})
 ENDFOREACH (wrapper_module)
 
 SC_SWIG_GET_MODULE_PATH(_module_path)
-SET(_module_path ${SC3_PACKAGE_PYTHON_LIB_DIR}/seiscomp3)
+SET(_module_path ${SC3_PACKAGE_PYTHON_LIB_DIR}/seiscomp)
 
 FOREACH (wrapper_module ${WRAPPER_MODULES})
         INSTALL(

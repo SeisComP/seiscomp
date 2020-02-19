@@ -2,43 +2,42 @@
 Introduction and Scope
 **********************
 
-SeisComP is likely the most widely distributed software package for
-seismological data acquisition and real-time data exchange over the Internet. Its
-data transmission protocol SeedLink became a de facto world standard. The first
-version of SeisComP was developed for the
-`GEOFON <http://geofon.gfz-potsdam.de/geofon/>`_ network and further extended
-within the MEREDIAN project under the lead of
-`GEOFON <http://geofon.gfz-potsdam.de/geofon/>`_/`GFZ <http://www.gfz-potsdam.de/>`_
-Potsdam and `ORFEUS <http://www.orfeus-eu.org/>`_. Originally SeisComP was
-designed as a high standard fully automatic data acquisition and (near-)real-time
-data processing tool including quality control, event detection and location as
-well as dissemination of event alerts. In the context of the
-`GITEWS <http://www.gitews.de/>`_ project (German Indian Ocean Tsunami Early
-Warning System) additional functionality were implemented to fulfill the
-requirements of 24/7 early warning control centers. Major changes in the
-architecture of SeisComP were necessary and many new features result in the
-upgrade of SeisComP to version 3. Important SeisComP releases are shown below.
-A first prototype of SeisComP3 developed by the GITEWS/GEOFON development group
-was released in May 2007. SeisComP3 provides the following features:
+SeisComP is likely the most widely distributed software package for real-time monitoring
+of earthquakes and other seismic events. It provides automatic and interactive
+seismological data acquisition, processing and data exchange over the Internet. Its
+data transmission protocol SeedLink has become a de facto world standard.
+
+SeisComP convinces many seismologists and earthquake specialists at data and
+research centers, companies and governmental agencies world-wide by:
+
+* powerful and reliable automatic data processing in real time or during post-processing
+* user-friendly and comprehensive graphical interfaces
+* modern and well-maintained `OpenSource software <https://github.com/SeisComP3>`_ welcoming community contributions.
+
+The first work on what became SeisComP today began nearly two decades ago
+with developments at GFZ of plugins for digitizers.
+The :ref:`section on historical information <history>` provide details on the past
+and current releases.
+
+Today SeisComP includes the following features:
 
 * data acquisition
+* waveform archiving
+* waveform data distribution
 * data quality control
 * data recording
 * real-time data exchange
 * network status monitoring
 * real-time data processing
 * issuing event alerts
-* waveform archiving
-* waveform data distribution
 * automatic event detection and location
 * interactive event detection and location
 * event parameter archiving
 * easy access to relevant information about stations, waveforms and recent
   earthquakes
 
-The new requirements for early warning purposes made it necessary to adopt the
-design and architecture of the previous SeisComP. The guidelines for the design
-of SeisComP3 are:
+The guidelines for the design
+of SeisComP are:
 
 * implementation of critical functions as standalone modules to guarantee the
   independence from other functions (e.g. picker, magnitude calculation,
@@ -50,41 +49,20 @@ of SeisComP3 are:
 * robust system for rapid and reliable earthquake solutions (especially during
   seismic crises)
 
-+---------+--------------------------------+-----------------------------------------------------+
-| Version | Time                           |                                                     |
-+=========+================================+=====================================================+
-| 1.0     | February 2001                  | SeedLink 2.0 (plugin interface) Plugins for         |
-|         |                                | EarthData PS2400 and Lennartz M24                   |
-+---------+--------------------------------+-----------------------------------------------------+
-| 1.1     | August 2001                    | SeedLink 2.1 (streams.xml, improved buffer          |
-|         |                                | structure); make conf/make key scripts LISS         |
-|         |                                | plugin, SeedLink-Antelope connectivity              |
-+---------+--------------------------------+-----------------------------------------------------+
-| 1.1.5   | January 2002                   | SeedLink 2.5 (multi-station mode)                   |
-+---------+--------------------------------+-----------------------------------------------------+
-| 1.16    | March 2002                     | GIF live seismograms                                |
-+---------+--------------------------------+-----------------------------------------------------+
-| 2.0     | October 2003                   | SeedLink 3.0 (INFO request, time window extraction) |
-|         |                                | libslink, chain plugin, Comserv-independence        |
-+---------+--------------------------------+-----------------------------------------------------+
-| 2.1     | June 2004                      | Python add-on package (SeisPy) incl. AutoLoc2 chain |
-|         |                                | plugin extension interface, triggered streams       |
-+---------+--------------------------------+-----------------------------------------------------+
-| 2.5     | March 2006                     | Integration of add-on packages, modular config      |
-|         |                                | script                                              |
-+---------+--------------------------------+-----------------------------------------------------+
-| 3.0     | alpha May 2007                 | new architecture, new magnitude types, GUI          |
-+---------+--------------------------------+-----------------------------------------------------+
-| 3.0     | Barcelona release May 2008     | Stability and performance improvements, improved    |
-|         |                                | GUI functionality                                   |
-+---------+--------------------------------+-----------------------------------------------------+
-| 3.0     | Erice release May 2009         | New Earthquake Schema and performance improvements, |
-|         |                                | improved GUI functionality                          |
-+---------+--------------------------------+-----------------------------------------------------+
-| 3.0     | Potsdam release September 2010 | New Inventory Schema and performance improvements,  |
-|         |                                | improved GUI functionality                          |
-+---------+--------------------------------+-----------------------------------------------------+
-| 3.0     | Seattle release 2012           | New user friendly configuration GUI scconfig        |
-+---------+--------------------------------+-----------------------------------------------------+
-| 3.0     | Jakarta release 2014           | Completely OpenSource, including all GUIs           |
-+---------+--------------------------------+-----------------------------------------------------+
+These design principles have given SeisComP much robustness and flexibility
+to respond to new developments.
+
+This documentation begins with an overview and :ref:`concepts` necessary for using SeisComP successfully.
+It then covers the :ref:`installation <installation>`, and how to configure and operate a working SeisComP system.
+A few :ref:`tutorials` will guide you through a first example set up and further operations.
+The tutorials are followed by detailed technical descriptions of each individual SeisComP
+module, grouped by their general functionality - interactive analysis, data acquisition, inventory management,
+automatic processing, etc.
+
+The final part of the documentation relates to contributing your own code to SeisComP.
+This requires a deeper knowledge of the SeisComP data model and other details.
+It also includes guidelines for developers.
+
+SeisComP is developed and distributed under the terms of the GNU
+`Affero General Public License <https://www.gnu.org/licenses/agpl-3.0.html>`_,
+as set out in the :ref:`license` section.

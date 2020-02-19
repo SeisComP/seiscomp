@@ -1,7 +1,0 @@
-default: all
-
-all:
-	mkdir -p build
-	cd build && ccmake ../ -DCMAKE_INSTALL_PREFIX=${HOME}/seiscomp3
-	echo "*** To build the sources change into the 'build' directory and enter make[ install] ***"
-

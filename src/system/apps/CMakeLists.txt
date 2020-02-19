@@ -1,4 +1,4 @@
-SUBDIRS(seiscomp utils stationconf)
+SUBDIRS(seiscomp utils)
 
 SC_INSTALL_INIT(diskmon config/diskmon.py)
 

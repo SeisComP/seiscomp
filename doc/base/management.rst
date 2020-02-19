@@ -9,7 +9,7 @@ archiving, processing, distribution and much more. To control all these
 module and to update their configuration the central program :program:`seiscomp`
 is used. This is a Python script and it is installed in :file:`bin/seiscomp`.
 
-The graphical tool :ref:`scconfig<scconfig>` is a user-friendly wrapper 
+The graphical tool :ref:`scconfig<scconfig>` is a user-friendly wrapper
 tool for many commands in :program:`seiscomp`.
 
 The entire management framework is built upon Python which is portable to different
@@ -38,14 +38,14 @@ To get an overview of all available commands, issue
 
 .. code-block:: sh
 
-   /path/to/seiscomp3/bin/seiscomp help
+   /path/to/seiscomp/bin/seiscomp help
 
 This will print all commands. To get help for a particular command, append
 it to the ``help`` command.
 
 .. code-block:: sh
 
-   /path/to/seiscomp3/bin/seiscomp help [command]
+   /path/to/seiscomp/bin/seiscomp help [command]
 
 Commands
 ********
@@ -64,7 +64,7 @@ Commands
 
 **install-deps** [packages]
 
-  Installs 3rd party packages on which SeisComP3 depends such as MySQL. This is
+  Installs 3rd party packages on which SeisComP depends such as MySQL. This is
   currently only supported for major Linux distributions. A list of packages
   needs to be given.
 
@@ -166,7 +166,7 @@ The SeisComP shell can be started with
 
 .. code-block:: sh
 
-   user@host:~$ seiscomp3/bin/seiscomp shell
+   user@host:~$ seiscomp/bin/seiscomp shell
 
 which will open a command prompt. The shell is a helper to manage module station
 bindings. Instead of manipulating hundreds of files using difficult commands
@@ -215,13 +215,13 @@ Examples
 
       $ print station GE.MORC
       [global]
-      /home/sysop/seiscomp3/etc/key/global/profile_BH
+      /home/sysop/seiscomp/etc/key/global/profile_BH
       --------------------------------------------------------------------------------
       detecStream = BH
       --------------------------------------------------------------------------------
 
       [seedlink]
-      /home/sysop/seiscomp3/etc/key/seedlink/profile_geofon
+      /home/sysop/seiscomp/etc/key/seedlink/profile_geofon
       --------------------------------------------------------------------------------
       sources = chain
       sources.chain.address = geofon.gfz-potsdam.de
@@ -229,7 +229,7 @@ Examples
       --------------------------------------------------------------------------------
 
       [scautopick]
-      /home/sysop/seiscomp3/etc/key/scautopick/profile_default
+      /home/sysop/seiscomp/etc/key/scautopick/profile_default
       --------------------------------------------------------------------------------
       detecEnable = true
       detecFilter = "RMHP(10)>>ITAPER(30)>>BW(4,0.7,2)>>STALTA(2,80)"
@@ -239,7 +239,7 @@ Examples
       --------------------------------------------------------------------------------
 
       [slarchive]
-      /home/sysop/seiscomp3/etc/key/slarchive/profile_1day
+      /home/sysop/seiscomp/etc/key/slarchive/profile_1day
       --------------------------------------------------------------------------------
       selectors = BHZ.D
       keep = 1
@@ -262,33 +262,33 @@ name in the Module object is important. It is important to note that only
 one module can be placed in one init script.
 
 The Module class must implement the interface used by :program:`seiscomp`.
-See :py:class:`seiscomp3.Kernel.Module` for more details.
+See :py:class:`seiscomp.Kernel.Module` for more details.
 
 A simple default implementation looks like this which is available as a
 template and can be used directly by using the same name as the module's
-name. The modules name in this template is derived from the filename, but this
+name. The module's name in this template is derived from the filename, but this
 isn't a general rule as stated before.
 
 .. code-block:: py
 
-   import seiscomp3.Kernel
+   import seiscomp.Kernel
 
-   class Module(seiscomp3.Kernel.Module):
+   class Module(seiscomp.Kernel.Module):
      def __init__(self, env):
-       seiscomp3.Kernel.Module.__init__(self, env, env.moduleName(__file__))
+       seiscomp.Kernel.Module.__init__(self, env, env.moduleName(__file__))
 
 
-SeisComP3 provides a Python module (:py:mod:`seiscomp3.Kernel`) that allows to
+SeisComP provides a Python module (:py:mod:`seiscomp.Kernel`) that allows to
 write init scripts in an easy way.
 
 
 Python kernel module
 ====================
 
-The SeisComP3 setup kernel module provides interfaces to write init handlers
+The SeisComP setup kernel module provides interfaces to write init handlers
 for modules used by :program:`seiscomp` in Python.
 
-.. py:module:: seiscomp3.Kernel
+.. py:module:: seiscomp.Kernel
 
 .. py:class:: Module(env, name)
 
@@ -306,13 +306,13 @@ for modules used by :program:`seiscomp` in Python.
 
    .. py:attribute: name
 
-      The modules unique name. This name is used for run/pid and log files.
-   
+      The module's unique name. This name is used for run/pid and log files.
+
    .. py:attribute: order
 
-      The modules start order. The default value is 100 and modules with
+      The module's start order. The default value is 100 and modules with
       the same value are ordered alphabetically.
-   
+
    .. py:method:: isRunning()
 
       :rtype: Boolean
@@ -372,7 +372,7 @@ for modules used by :program:`seiscomp` in Python.
 
       This is called from :program:`seiscomp print crontab`.
 
-.. py:class:: CoreModule(seiscomp3.Kernel.Module)
+.. py:class:: CoreModule(seiscomp.Kernel.Module)
 
    The core module interface. A core module is a normal module but is started
    before all modules and stopped afterwards. Core modules are always enabled

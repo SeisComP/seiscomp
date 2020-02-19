@@ -7,17 +7,26 @@ Glossary
 The glossary is partly extracted from New Manual of Observatory Practice and some information
 is taken from Modern Global Seismology.
 
-.. glossary::
+SeisComP terms
+==============
 
-   module
-      A module is usually a binary executable that does a certain job such as :ref:`seedlink`
-      or :ref:`scautopick`.
+.. glossary::
 
    binding
       A binding is a set of configuration options to configure the connection between a
       :term:`module` and a station. Bindings are located in ``etc/key/modulename/station_NET_STA``.
       They are either written to the database or used to create native configuration files
-      for standalone modules.
+      for standalone modules. The concepts section on :ref:`configuration <concepts_configuration>`
+      provides more details.
+
+   module
+      A module is usually a binary executable that does a certain job such as :ref:`seedlink`
+      or :ref:`scautopick`. The concepts section on :ref:`modules <concepts_modules>`
+      provides more details.
+
+   plugin
+      An extension to a module. The concepts section on :ref:`plugins <concepts_plugins>`
+      provides more details.
 
    profile
       A profile is a special :term:`binding`. Instead of defining the same set of configuration
@@ -40,8 +49,14 @@ is taken from Modern Global Seismology.
       which refers to ``etc/key/seedlink/profile_geofon`` and ``etc/key/scautopick/profile_teleseismic``.
       Changing the profile changes the bindings of all stations that use this profile.
 
+   standalone module
+
+      A module that needs to convert the configuration or do not use the default
+      configuration options (see below) is called a standalone modules.
+      Examples for standalone modules are :ref:`seedlink`, :ref:`slarchive` or :ref:`slmon`.
+
    trunk
-      The module and library collection which forms and uses the SeisComP3
+      The module and library collection which forms and uses the SeisComP
       framework. The Application class is part of this framework. All trunk
       modules share a common configuration schema and a database with
       Inventory, EventParameters, Configuration, Routing and QC schemas.
@@ -50,28 +65,76 @@ is taken from Modern Global Seismology.
 
 ----
 
+Scientific and technical terms
+==============================
+
 .. glossary::
+
+   AIC
+      Aikaike Information Criterion used for refinement of phase picks.
+      Phase pickers for picking P and S phase arrivals based on AIC may reach
+      high accuracy if tuned well.
 
    aftershocks
       Earthquakes that follow a large earthquake in a sequence. They are smaller than the mainshock
       and within 1-2 fault lengths distance from the mainshock fault. Aftershocks can continue over
       a period of weeks, months, or years, decreasing in frequency with time. In general, the larger
       the mainshock, the larger and more numerous the aftershocks, and the longer they will continue.
+   array
+    A set of observing sensors at which the observed and sought signal are mostly coherent.
+    If the sensors are seismometers or barometers measuring infrasound, the terms
+    :term:`seismic array` or :term:`infrasound array` are used, respectively.
+    Arrays are different from a :term:`network` by the applied methods, e.g.
+    :term:`F-K` analysis, :term:`beam` forming or :term:`vespagram` analysis.
+
+   ATF
+      The :term:`array transfer function` or :term:`array response function`
+      describes the sensitivity and resolution of an :term:`array` to signals
+      propagating through the array with a particular :term:`azimuth`, :term:`slowness`
+      and :term:`frequency`.
+
+   array response function
+      A synonym of :term:`ATF` or :term:`array transfer function`.
+
+   array transfer function
+      A synonym of :term:`ATF` or :term:`array response function`.
+
+
+   ArcLink
+      `ArcLink <https://docs.gempa.de/seiscomp/current/apps/arclink.html>`_
+      complements :term:`SeedLink` by providing access to archived waveform
+      data.
 
    arrival
       a) The appearance of seismic energy on a seismic record
-      b) QuakeML object. The detected phase onset associated to an origin in SeisComP3
+      b) QuakeML object. The detected phase onset associated to an origin in SeisComP
 
    arrival time
       The time at which a particular phase of a seismic wave arrives at a station.
 
    asthenosphere
-      The ductile part of the Earth, just below the brittle lithosphere, in the upper
-      mantle. The lithosphere/asthenosphere reaches down to about 200 km.
+      The ductile part of the Earth, just below the brittle :term:`lithosphere`,
+      in the upper mantle. The lithosphere/asthenosphere reaches down to about 200 km.
 
    azimuth
       In general a direction measured clock-wise in degrees against north. In seismology used to
       measure the direction from a seismic source to a seismic station recording this event.
+
+   beam
+      The sum of signals observed at an :term:`array` shifted with respect
+      to the array reference coordinate assuming a particular :term:`slowness`
+      and :term:`azimuth`. Optimum values for slowness and azimuth can be
+      found, e.g. by :term:`F-K` analysis.
+
+   beam packing
+      Equvialent to the :term:`F-K` analysis where the :term:`beam` and the related
+      parameters such as :term:`beam power` or :term:`semblance` are formed in the
+      time domain. Seismograms from the :term:`array` stations are shifted according
+      to the considered ranges of :term:`slowness` and :term:`backazimuth` or
+      :term:`wave number` and summed to form the beam.
+
+   beam power
+      The energy of :term:`beam` within a defined time window.
 
    backazimuth
       The direction from the seismic station towards a seismic source, measured in degrees clock-wise
@@ -92,6 +155,18 @@ is taken from Modern Global Seismology.
       The process of determining the response function (distortion of the input signal) and
       sensitivity of an instrument or its derived component.
 
+   CAV
+      cumulated absolute velocity
+
+   CI
+      Characteristic Intensity
+
+   channel code
+      Description of characeristics of data related to the recording sensor and
+      data logger as well as instrument responses, sampling frequencies, etc.
+      The standard codes are defined in the
+      `SEED manual <https://www.fdsn.org/seed_manual/SEEDManual_V2.4.pdf>`_.
+
    Circum-Pacific belt
       The zone surrounding the Pacific Ocean that is characterized by frequent and strong
       earthquakes and many volcanoes as well as high tsunami hazard. Also called the Ring of Fire.
@@ -99,6 +174,10 @@ is taken from Modern Global Seismology.
    coda
       The tail of a seismic signal, usually with exponentially decaying amplitudes, which
       follow a strong wave arrival. Coda waves are due to scattering and superposition of multi-path arrivals.
+
+   coda phase
+      A detection of a single phase of unknown path found within the coda signal envelope,
+      designated as tx, e.g. Px or Sx.
 
    coherent
       Seismic signals detected on various seismic sensors of a seismic array or network are said to
@@ -138,7 +217,7 @@ is taken from Modern Global Seismology.
 
    delay
       The time difference between the arrival time and the end time of the last record achieved plus
-      the half record length. (SeisComP3)
+      the half record length. The delay can be computed by :ref:`scqc`.
 
    depth Phase
       see :term:`pP phase` or :term:`sP phase`
@@ -152,6 +231,9 @@ is taken from Modern Global Seismology.
       depend on the direction of wave propagation with respect to fault orientation and slip
       direction (radiation pattern). The directivity and thus the radiation pattern is different for
       :term:`P<P wave>` and :term:`S waves<S wave>`.
+
+   EDA
+      Effective Design Acceleration
 
    epicenter
       Vertical projection of the hypocenter to the surface.
@@ -182,13 +264,22 @@ is taken from Modern Global Seismology.
       filtering can be accomplished electronically while recording or numerically in a computer. Filtering also
       occurs naturally as seismic energy passes through the Earth.
 
-      The available and integrated filters in SeisComP3 are documented in :ref:`filter-grammar`.
+      The available and integrated filters in SeisComP are documented in :ref:`filter-grammar`.
 
    first motion
       The first noticeable displacement in a seismogram caused by the arrival of a P wave at the seismometer.
       Upward motion of the ground at the seismometer indicates a dilatation at the source, downward motion
       indicates a compression. Due to the presence of seismic noise the proper polarity of the first motion
       may be difficult to recognize.
+
+   F-K
+      F-K refers to a 2D-:term:`Fourier analysis` were the base functions
+      are defined, e.g. by ranges of :term:`frequency` and :term:`wave number`.
+      F-K analysis is applied for signal detection by transforming time series
+      recorded at several sensors, e.g. seismic or infrasound :term:`array`
+      stations to the time and space domain.
+
+      The equivalent to F-K analysis in the time domain is :term:`beam packing`.
 
    focal mechanism
       see :term:`fault-plane solution`
@@ -207,17 +298,31 @@ is taken from Modern Global Seismology.
       into a series of numbers that characterize the relative amplitude and phase components of the signal
       as a function of frequency.
 
+   frequency
+      Number of cycles of a repeating signal per unit time, typically per second.
+
    frequency domain
       The transformation of a seismic signal from the time domain (as a seismogram) to the frequency
-      domain is conducted by a Fourier analysis. The signal is represented in the frequency domain by
+      domain is conducted by a :term:`Fourier analysis`. The signal is represented in the frequency domain by
       the amplitude and phase components as a function of frequency (see spectrum). The representations of
       a seismic signal in the time and in the frequency domain are equivalent in a mathematical sense.
       For some procedures of data analysis the time-domain representation of a seismic record is more
       suitable while for others the frequency-domain approach is more appropriate and efficient.
 
+   gempa GmbH
+      `gempa GmbH <http://www.gempa.de/>`_ is a spin-off from :term:`GFZ` which
+      offers a range of services and products to monitor, process and analyze
+      geologically activity.
+
    geometrical spreading
       The component of reduction in wave amplitude due to the radial spreading of seismic energy with
       increasing distance from a given source.
+
+   GFZ
+      `German Research Center for Geosciences <http://www.gfz-potsdam.de/>`_
+
+   GMPE
+      Ground Motion Prediction Equation
 
    Green's function
       A mathematical representation that, in reference to earthquake shaking, is used to represent the
@@ -232,11 +337,21 @@ is taken from Modern Global Seismology.
       about 7.3 km/s to 0 km/s. The CMB reflects the change from the solid mantle material to the
       fluid outer core.
 
+   GUI
+
+      Graphical use interface, e.g. :ref:`scolv`.
+
    hypocenter
       Coordinates of an earthquake point source. Hypocenters based on :term:`P<P wave>` and :term:`S wave`
       first arrivals point to the place where the rupture process starts. For large earthquakes the
       source location determined by :term:`P wave` first arrivals can differ significantly from the location of
       maximum energy release.
+
+   Ia
+      Arias Intensity
+
+   infrasound array
+      An :term:`array` of barometers measuring infrasound signals.
 
    intensity
       A measure of the effects of an earthquake at a particular place at the Earth's surface on humans
@@ -259,14 +374,24 @@ is taken from Modern Global Seismology.
       weak coupling implies that the fault is unlocked or only capable of accumulating low stress.
       A fault with weak interplate coupling could be aseismic or could slip by creep.
 
+   inventory
+      The inventory is the collection of all available meta data related to :term:`network`,
+      :term:`station`, :term:`location code`, station :term:`channel code`,
+      characteristics of sensors and data loggers, etc..
+
    latency
-      The time difference between the current time and the arrival time of the record. (SeisComP3)
+      The time difference between the current time and the arrival time of the record (SeisComP).
+      The latency can be computed by :ref:`scqc`.
 
    Lithosphere
       The outer solid part of the Earth, including crust and uppermost mantle. The lithosphere is
       about 100 km thick, although its thickness is age-dependent (older lithosphere is thicker).
       At some locations the lithosphere below the crust is brittle enough to produce earthquakes by
       faulting, such as within a subducted oceanic plate.
+
+   location code
+      Description of particular sensor location associated to a station. The standard
+      location codes are defined in the `SEED manual <https://www.fdsn.org/seed_manual/SEEDManual_V2.4.pdf>`_.
 
    Love wave
       A major type of surface waves having a horizontal motion that is transverse (or perpendicular)
@@ -329,10 +454,10 @@ is taken from Modern Global Seismology.
       magnitudes around 7 because the maximum amplitudes of larger earthquakes occur at longer periods than
       the bandpass of 0.1 s and 3 s for the magnitude calculation.
 
-      In SeisComP3 a modified local magnitude :term:`MLv <magnitude, local vertical (MLv)>` is determined by simulation of a Wood-Anderson instrument and then measuring
+      In SeisComP a modified local magnitude :term:`MLv <magnitude, local vertical (MLv)>` is determined by simulation of a Wood-Anderson instrument and then measuring
       the amplitude in a 150 s time window on the vertical component of station with distances smaller than 8°.
 
-      The amplitude unit in SeisComP3 is **millimeter** (mm).
+      The amplitude unit in SeisComP is **millimeter** (mm).
 
       Read the :ref:`technical documentation <global_ml>` for the configuration.
 
@@ -340,7 +465,7 @@ is taken from Modern Global Seismology.
      The :term:`ML <magnitude, local (ML)>` magnitude with amplitudes measured on
      the vertical component instead of the horizontals.
 
-     The amplitude unit in SeisComP3 is **millimeter** (mm).
+     The amplitude unit in SeisComP is **millimeter** (mm).
 
      Read the :ref:`technical documentation <global_mlv>` for the configuration.
 
@@ -348,7 +473,7 @@ is taken from Modern Global Seismology.
       The local magnitude measured on the horizontal components with
       a modified calibration functions as compared to :term:`ML <magnitude, local (ML)>`.
 
-      The amplitude unit in SeisComP3 is **millimeter** (mm).
+      The amplitude unit in SeisComP is **millimeter** (mm).
 
       Read the :ref:`technical documentation <global_mlh>` for the configuration.
 
@@ -361,7 +486,7 @@ is taken from Modern Global Seismology.
    magnitude, Nuttli (MN)
       Canadian Nuttli magnitude.
 
-      The amplitude unit in SeisComP3 is **meter/second** (m/s).
+      The amplitude unit in SeisComP is **meter/second** (m/s).
 
       Read the :ref:`technical documentation <global_mn>` for the configuration.
 
@@ -372,7 +497,7 @@ is taken from Modern Global Seismology.
 
       .. math::
 
-         mb = \log \frac{A}{T} + Q(h,\Delta)
+         mb = \log \left(\frac{A}{T}\right) + Q(h,\Delta)
 
       with A as the displacement amplitude in micrometers, T as the dominant period of the signal in seconds, Q as a
       correction term for depth and distance. mb is usually determined at periods around 1s in adaptation to the use
@@ -384,24 +509,25 @@ is taken from Modern Global Seismology.
       earthquakes occur at lower frequencies than the frequency range between 0.7 Hz - 2 Hz used for the magnitude
       calculation.
 
-      In SeisComP3 mb is determined by simulation of a WWSSN short-period seismometer and then measuring the amplitudes in
-      a 30 s time window at stations in the distance range of 5° to 105°.
+      In SeisComP mb amplitudes are measured on vertical-component seismograms
+      in a 30 s time window after simulation of a :term:`WWSSN_SP` short-period
+      seismometer. Amplitudes are considered within epicentral distances of 5° to 105°.
 
-      * Amplitude unit in SeisComP3 is **nanometer** (nm)
+      * Amplitude unit in SeisComP is **nanometer** (nm)
       * Distance range: 5 - 105°
-      * Time window: 30 s
+      * Time window: 0 - 30 s
 
    magnitude, broadband body-wave (mB)
       mB is a magnitude based on body waves like mb, but the amplitude is measured in a broad
       frequency range and longer time windows. Instead of amplitude measurements on displacement
       data together with the dominant period, the maximum velocity amplitude Vmax is taken
-      directly from velocity-proportional records with V = 2πA/T. The time window for the
+      directly from velocity-proportional records with :math:`V = 2 \pi A/T`. The time window for the
       measurement can be determined by the duration of the high-frequency (1-3 Hz) radiation
       (Bormann & Saul, 2008). This time window usually contains the phases P, pP, sP, PcP, but
       not PP. According to the long time window and broad frequency range used for amplitude
       measurements mB saturates not like mb.
 
-      In SeisComP3 a default time window of 60 s is actually taken for amplitude measurements
+      In SeisComP a default time window of 60 s is actually taken for amplitude measurements
       at stations in the distance range of 5° to 105°. If the distance to the epicenter is
       known the time window is computed as
 
@@ -409,22 +535,35 @@ is taken from Modern Global Seismology.
 
          t = min(11.5 \Delta, 60)
 
-      * Amplitude unit in SeisComP3 is **nanometer per second** (nm/s)
+      * Amplitude unit in SeisComP is **nanometer per second** (nm/s)
       * Distance range: 5 - 105°
       * Time window: 60 s if set by :ref:`scautopick`, otherwise the minimum of 60 s and 11.5 s/° * distance in degree
 
+   magnitude, cumulative body-wave (mBc)
+      mBc is the cumulative body-wave magnitude. See Bormann and Wylegalla (2005)
+      and  Bormann and Saul (2009) for details.
+
    magnitude, surface wave (Ms)
-      Ms is a magnitude scale based on teleseismic surface waves. Ms is based on measurements of
+      Ms is a magnitude scale based on teleseismic surface waves. Historically, Ms
+      is based on measurements of
       the maximum horizontal true ground motion displacement amplitudes
 
       .. math::
 
          A_{Hmax} =\sqrt{{A_N}^2 + {A_E}^2}
 
-      in the total seismogram at periods around 20s. For shallow earthquakes the dominant
+      in the total seismogram at periods around 20 s. For shallow earthquakes the dominant
       long-period signals are the surface waves. The period of 20 s corresponds to the Airy
       phase, a local minimum in the group velocity dispersion curve of Rayleigh surface waves.
-      The Moscow-Praque equation for surface wave magnitude is given by
+      For measuring amplitudes a correction for the WWSSN_LP instrument response is applied.
+
+      The Moscow-Prague equation for surface wave magnitude is given by
+
+      .. math::
+
+         M_s = \log \left(\frac{A_{Hmax}}{T}\right) + 1.66 \log(\Delta) + 3.3
+
+      where T is the measured period.
 
       .. math::
 
@@ -434,7 +573,28 @@ is taken from Modern Global Seismology.
       allow a broader spectrum of dominant periods. This formula is valid for distances of
       2° to 160° and source depths smaller than 50 km.
 
+      * Amplitude unit in SeisComP is **meter per second** (m/s)
+
+   magnitude, surface wave (Ms_20)
+      Ms_20 is the surface-wave magnitude at 20 s period based on the recommendations
+      by the IASPEI magnitude working group issued on 27 March, 2013.
+
+      Read the :ref:`technical documentation <global_ms_20>` for more details and the configuration.
+
+   magnitude, broadband surface wave (Ms(BB))
+      Ms(BB) is a broadband magnitude scale based on teleseismic surface waves.
+      In contrast to :term:`Ms <magnitude, surface wave (Ms)>`, amplitudes for Ms(BB)
+      are measured as the maximum on vertical true ground motion velocity seismograms without
+      instrument simulation or restitution.
+
+      The Moscow-Prague equation for surface wave magnitude is applied as given by
+
+      .. math::
+
+         M_s = \log \left(\frac{A}{2\pi}\right) + 1.66 \log(\Delta) + 3.3
+
       * Amplitude unit in SeisComP3 is **meter per second** (m/s)
+      * Period range: all
       * Distance range: 2 - 160°
       * Depth range: 0 - 100 km
       * Time window: distance (km) / 3.5 km/s + 30 s
@@ -456,7 +616,7 @@ is taken from Modern Global Seismology.
       This equation is valid for local (< 2000 km) and shallow (< 80 km) earthquakes. For
       deeper earthquakes additional correction functions have to be applied (Katsumata, 1996).
 
-      * Amplitude unit in SeisComP3 is **micrometer** (um)
+      * Amplitude unit in SeisComP is **micrometer** (um)
       * Time window: 150 s
       * Epicentral distance range: 0 - 20°
       * Depth range: 0 - 80 km
@@ -470,9 +630,13 @@ is taken from Modern Global Seismology.
 
       .. math::
 
-         Mw = 2\frac{\log M_0 - 16.1}{3}
+         Mw = \frac{2}{3}(\log M_0 - 16.1)
 
       This equation is analog to the relation between M\ :sub:`s` and M\ :sub:`0`.
+
+   magnitude, averaged moment (Mw(avg))
+
+      Moment magnitude derived as a weighted average of other magnitudes.
 
    magnitude, broadband P-wave moment (Mwp)
       The Mwp is a rapid estimate of the moment magnitude based on the first-arrival P waves
@@ -482,7 +646,7 @@ is taken from Modern Global Seismology.
       of multiple records results in an estimation of the moment magnitude without correction
       for the source mechanism (Tsuboi et al., 1995).
 
-      * Amplitude unit in SeisComP3 is **nanometer times second** (nm*s)
+      * Amplitude unit in SeisComP is **nanometer times second** (nm*s)
       * Time window: 95 s
       * Epicentral distance range: 5 - 105°
 
@@ -497,6 +661,10 @@ is taken from Modern Global Seismology.
       magnitudes using linear conversion after Whitmore et al. (2002):
 
       Mw(Mwp) = 1.31 Mwp - 1.91
+
+   magnitude, summary (M)
+
+      Summary magnitude derived from multiple other magnitudes.
 
    mainshock
       The largest earthquake in a sequence, sometimes preceded by one or more foreshocks,
@@ -518,7 +686,15 @@ is taken from Modern Global Seismology.
          about 2 to 9 s (the stronger secondary microseisms), and 11 to 18 s (the weaker
          primary microseisms).
 
-   moho
+   miniSeed
+      `miniSeed <http://www.iris.edu/data/miniseed.htm>`_ is the standard for
+      the exchange of seismic time series. It uses a fixed record length and
+      applies data compression.
+
+   MMI
+      Modified Mercalli Intensity
+
+   Moho
       The abbreviation for the :term:`Mohorovičić discontinuity`.
 
    Mohorovičić discontinuity
@@ -527,11 +703,14 @@ is taken from Modern Global Seismology.
       discovered it. The boundary is between 20 and 60 km deep beneath the continents and between
       5 and 10 km deep beneath the ocean floor.
 
+   network
+      A set of stations typically maintained by one or more institutions and
+      tuned to record particular signals.
+
    network magnitude
-      a) The network magnitude is an averaged magnitude value based on several station magnitudes of one event.
-         To stabilize the result a 12.5%-trimmed mean is computed, i.e. the smallest 12.5% of the station
-         magnitude values and the biggest 12.5% are not used for the mean calculation in SeisComP3.
-      b) QuakeML object.
+      a. The network magnitude is a magnitude value summarizing severval :term:`station magnitude` values
+	 of one :term:`origin`. Read the documentation of :ref:`scmag` for the details.
+      #. QuakeML object.
 
    noise (seismic)
       Incoherent natural or artificial perturbations caused by a diversity of agents and
@@ -592,6 +771,15 @@ is taken from Modern Global Seismology.
       Pg is the direct P wave arriving first in local distances less than 100 km. For larger
       distances Pn arrives first (see :term:`Pn phase` for details).
 
+   PGA
+      Peak Ground Acceleration
+
+   PGD
+      Peak Ground Displacement
+
+   PGV
+      Peak Ground Velocity
+
    Pn phase
       Pn is the P head wave along the Moho arriving first at local distances larger than
       100 km (depending on the crustal thickness). Pn has usually smaller amplitudes than Pg.
@@ -620,9 +808,18 @@ is taken from Modern Global Seismology.
 
    pP phase
       A P wave that has a takeoff angle of greater than 90° at the source and therefore
-      is first reflected at the surface near the epicenter. The pP is a depth phase
-      because at teleseismic distances pP has nearly the same path than the P wave except
+      is first reflected at the surface near the epicenter. The pP is a depth phase.
+      For shallow events and at teleseismic distances pP has nearly the same path as the P wave except
       for the path from hypocenter of the earthquake to the reflection point at the surface.
+
+   SEED
+      Standard for the Exchange of Earthquake Data, a data format for seismological
+      data and metadata (inventory).
+      It is controlled as a standard by the International Federation
+      of Digital Seismograph Networks (FDSN).
+      The current version is 2.4, updated August 2012.
+      See the `SEED Reference Manual <http://www.fdsn.org/pdf/SEEDManual_V2.4.pdf>`_
+      for details.
 
    sP phase
       Another depth phase. The sP is a :term:`S wave` with a takeoff angle of greater than 90° at
@@ -640,6 +837,14 @@ is taken from Modern Global Seismology.
    Sn phase
       Sn is the S head wave along the Moho arriving first at local distances larger than
       100 km (depending on the crustal thickness). Sn has usually smaller amplitudes than Sg.
+
+   sP phase
+      A P wave starting as an :term:`S phase` at the source and arriving as .
+      The S phase has a takeoff angle greater than 90° at the source and therefore
+      is first reflected at the surface near the epicenter and then converted into
+      a P phase. The sP is a depth phase. For shallow events and at teleseismic
+      distances sP has nearly the same path as the P wave except
+      for the path from hypocenter of the earthquake to the reflection point at the surface.
 
    pick
       a) Automatic or manual determined phase onset
@@ -692,6 +897,12 @@ is taken from Modern Global Seismology.
       boundaries according to Snell's Law. The amplitudes of reflected and refracted waves
       at each boundary are recalculated according to the Law of Conservation of Energy.
 
+   RecordStream
+       Interface to access data records from data processing modules.
+       :term:`SeisComP` applications access waveform data through the
+       `RecordStream <https://docs.gempa.de/seiscomp/current/apps/global_recordstream.html>`_
+       interface.
+
    recurrence interval
       The average time span between large earthquakes at a particular site. Also
       termed 'return period'.
@@ -725,7 +936,7 @@ is taken from Modern Global Seismology.
       Abbreviation for :term:`root mean square <root mean square (RMS)>`
 
    root mean square (RMS)
-      A statistical measure of the magnitude of a varying quantity defined as
+      Also referred to as :term:`RMS`. A statistical measure of the magnitude of a varying quantity defined as
 
       .. math::
 
@@ -744,6 +955,11 @@ is taken from Modern Global Seismology.
       The speed at which a rupture front moves across the surface of the fault during
       an earthquake.
 
+   SCML
+      :term:`SeisComP3` Markup Language. SCML is a flavor of `QuakeML
+      <https://quake.ethz.ch/quakeml/>`_  and is used by SeisComP and by
+      products of :term:`gempa GmbH` for exchange.
+
    SDS
       SeisComP Data Structure which is used for archiving waveform data. Below the
       base directory of the archive the SDS has the structure:
@@ -757,9 +973,40 @@ is taken from Modern Global Seismology.
                  + channel code
                    + one file per day and location, e.g. NET.STA.LOC.CHAN.D.YEAR.DOY
 
+   SED
+      Specific Energy Density
+
+   SeedLink
+      `SeedLink <https://docs.gempa.de/seiscomp/current/apps/seedlink.html>`_ is a
+      real-time data acquisition protocol and a client-server software that
+      implements this protocol
+
+   SeisComP
+      SeisComP is likely the most widely distributed software package for
+      seismological data acquisition and real-time data exchange over internet.
+      Its data transmission protocol SeedLink became a de facto world standard.
+      The first version of SeisComP was developed for the `GEOFON
+      <http://geofon.gfz-potsdam.de/geofon/>`_ network and further extended
+      within the MEREDIAN project under the lead of `GEOFON
+      <http://geofon.gfz-potsdam.de/geofon/>`_/`GFZ
+      <http://www.gfz-potsdam.de/>`_ Potsdam and `ORFEUS
+      <http://www.orfeus-eu.org/>`_. Originally SeisComP was designed as a high
+      standard fully automatic data acquisition and (near-)real-time data
+      processing tool including quality control, event detection and location as
+      well as dissemination of event alerts. In the context of the `GITEWS
+      <http://www.gitews.de/>`_ project (German Indian Ocean Tsunami Early
+      Warning System) additional functionality were implemented to fulfil the
+      requirements of 24/7 early warning control centers. Major changes in the
+      architecture of SeisComP were necessary and many new features result in
+      the upgrade of SeisComP to version 3. Important SeisComP releases are
+      shown below.  A first prototype of SeisComP3 developed by the
+      GITEWS/GEOFON development group was released in May 2007.
+
    seismic array
       An ordered arrangement of seismometers with central data acquisition specially
-      designed to analyze seismic signal based on coherent phases.
+      designed to analyze seismic signal based on coherent phases. A seismic array
+      differs from a local network of seismic stations mainly by the techniques
+      used for data analysis. Often, a seismic array are referred to as :term:`array`.
 
    seismic gap
       A section of a fault that has produced earthquakes in the past but is now quiet.
@@ -823,16 +1070,21 @@ is taken from Modern Global Seismology.
       A localized area or volume generating coherent, usually transient seismic waveforms,
       such as an earthquake, explosion, vibrator etc.
 
+   semblance
+      Normalized :term:`beam power`.
+
    signal-to-noise ratio
       The comparison between the amplitude of the seismic signal and the amplitude of
-      the noise; abbreviated as SNR.
+      the noise; abbreviated as :term:`SNR`.
 
    slab
-      Usually, the part of the lithospheric plate that is underthrusting in a subduction
-      zone and is consumed by the Earth's mantle is called slab.
+      Usually, the part of the :term:`lithospheric <lithosphere>`
+      plate that is underthrusting in a subduction zone and is
+      consumed by the Earth's mantle is called slab.
 
    slab pull
-      The force of gravity causing the cooler and denser oceanic slab to sink into the
+      The force of gravity causing the cooler and denser oceanic :term:`slab` to sink
+      into the
       hotter and less dense mantle material. The downdip component of this force leads
       to downdip extensional stress in the slab and may produce earthquakes within the
       subducted slab. Slab pull may also contribute to stress on the subduction thrust
@@ -858,12 +1110,12 @@ is taken from Modern Global Seismology.
       slowness corresponds to a low velocity.
 
    SNR
-      Signal-to-noise ratio.
+      Abbreviation for :term:`signal-to-noise ratio`.
 
    source depth
       Location of an earthquake below the Earth's surface. Earthquakes can occur
       between the surface and depths of about 700 km. Usually three classes of
-      earthquakes are seperated according to the depth: Shallow earthquakes occur
+      earthquakes are separated according to the depth: Shallow earthquakes occur
       in the depth range of 0 to 70 km; intermediate earthquakes between 70 and 300km
       depth; and deep earthquakes between 300 and 700 km depth. Earthquakes at large
       depths occur much less frequent than shallow earthquakes. Additionally, deep
@@ -873,11 +1125,21 @@ is taken from Modern Global Seismology.
       in the waveforms. At stations with large distance to the epicenter the pP wave
       follows the direct P wave by a time interval that slighty increase with distance
       but rapidly with depth. The depth can be derived from this time interval by using
-      traveltime curves.
+      :term:`travel-time curves <travel-time curve>`.
 
    source time function
       The source time function describes the ground motion generated at the fault over
       time. The function is predicted by a theoretical model.
+
+   Spooler
+      Application which watches a directory for new bulletins and performs the
+      final and service specific dissemination operation. This may involve
+      talking to modem (for fax, SMS), connecting to a SMTP server (email) or
+      rendering a Web page.
+
+   station
+      Site of measurement typically consisting of one or more sensors and one or
+      more dataloggers.
 
    station magnitude
       a) The station magnitude is the magnitude value based on the amplitude measurements of a single station.
@@ -897,6 +1159,9 @@ is taken from Modern Global Seismology.
       A parameter in many models of the earthquake source that affects the level of
       high-frequency shaking radiated by the earthquake. Commonly stated in units termed
       bars or megapascals (1 bar equals 1 kg/cm², and 1 megapascal equals 10 bars).
+
+   T
+      period, time duration
 
    takeoff angle
       The angle that a seismic ray makes with a downward vertical axis through the
@@ -918,6 +1183,12 @@ is taken from Modern Global Seismology.
       A seismic record is usually presented in the time domain, i.e., as a display of
       varying amplitudes of (filtered) ground motion as a function of time (in contrast
       to the equivalent representation in the frequency domain) (see also Fourier analysis).
+
+   Tp
+      predominant period
+
+   Tm
+      mean period
 
    transfer function
       The transfer function of a seismic sensor-recorder system (or of the Earth
@@ -941,8 +1212,15 @@ is taken from Modern Global Seismology.
       An event based on :term:`XXL picks<XXL pick>`.
 
    XXL pick
-      Picks that have extraordinary large amplitudes and large :term:`SNR<SNR>` and
+      Picks that have extraordinarily large amplitudes and large :term:`SNR<SNR>` and
       that lie within a relatively small region.
+
+   vespagram
+      Vesparams are diagrams of :term:`beam` traces over time typically formed
+      for a particular :term:`azimuth` (or :term:`backazimuth`) and for
+      ranges of :term:`slowness` (slowness vespagram). When the slowess
+      is kept constant and the backazimuth is varied the term backazimuth
+      vespagram is used.
 
    Wadati-Benioff zone
       A dipping planar (flat) zone of earthquakes that is produced by the interaction
@@ -951,8 +1229,11 @@ is taken from Modern Global Seismology.
       the continental and the oceanic plate) or by slip on faults within the downgoing
       plate as a result of bending and extension as the plate is pulled into the mantle.
       Slip may also initiate between adjacent segments of downgoing plates. Wadati-Benioff
-      zones are usually well developed along the trenches of the Circum-Pacific belt,
+      zones are usually well-developed along the trenches of the Circum-Pacific belt,
       dipping towards the continents.
+
+   wave number
+      Number of cycles of a repeating signal per unit length, typically per meter of kilometer.
 
    P wave
       P (primary) waves are compressional waves involving volumetric variations in the
@@ -1024,3 +1305,15 @@ is taken from Modern Global Seismology.
    weight
       Attribute of the QuakeML objects Arrival and !MagnitudeReferences defining the
       effect of the referenced object (e.g. Pick).
+
+   WWSSN_SP
+      Short period seismograph with a dominant period of 1 s of the World-Wide
+      Standard Seismograph Network (WWSSN).
+
+   WWSSN_LP
+      Long period seismograph with a dominant period of 20 s of the World-Wide
+      Standard Seismograph Network (WWSSN).
+
+   XML
+      Extensible Markup Language
+

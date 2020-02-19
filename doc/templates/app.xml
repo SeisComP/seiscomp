@@ -69,7 +69,7 @@
 				  logging.syslog.enabled = true
 					logging.syslog.path = /var/log/messages
 				  logging.local.enabled = false
-					logging.local.path = ~/.seiscomp3/testme.log
+					logging.local.path = ~/.seiscomp/testme.log
 				-->
 				<struct type="backend" link = "logging.backends">
 					<parameter name="enabled" type="boolean"/>

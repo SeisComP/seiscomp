@@ -12,13 +12,13 @@ From Wikipedia:
   In computer programming, unit testing is a software testing method by which
   individual units of source code, sets of one or more computer program modules
   together with associated control data, usage procedures, and operating
-  procedures, are tested to determine whether they are fit for use.
+  procedures, are tested to determine whether they are fit for use. [#WPUT]_
 
-This chapter targets programmers, either ones contributing to SeisComP3 or
+This chapter targets programmers, either ones contributing to SeisComP or
 adding their extended set of modules / libraries.
 
-Since most of the SeisComP3 code is written in C++, this chapter focuses on
-C++ unit tests. For C++, we have evaluated 3 unit test frameworks:
+Since most of the SeisComP code is written in C++, this chapter focuses on
+C++ unit tests. For C++, we have evaluated three unit test frameworks:
 
 * CppUnit
 * Google Test
@@ -27,9 +27,9 @@ C++ unit tests. For C++, we have evaluated 3 unit test frameworks:
 We found that Boost Test is the most appropriate, flexible and easy to
 understand unit test framework. Another important fact was the availability of
 Boost Test on all major Linux distributions via their package managers. That
-SeisComP3 makes already use of other Boost libraries was the icing on the cake.
+SeisComP makes already use of other Boost libraries was the icing on the cake.
 
-So this chapter is about integrating unit tests into SC3 with the Boost Test
+So this chapter is about integrating unit tests into SeisComP with the Boost Test
 library.
 
 Apart from the availability of the Boost test libraries, cmake with version
@@ -43,9 +43,9 @@ added a shortcut to the CMake macro :code:`SC_ADD_LIBRARY`. It collects all .cpp
 files in the directory :code:`${CMAKE_CURRENT_SOURCE_DIR}/test/{libraryname}`
 and creates tests from them.
 
-An example is the SeisComP3 core library. It is located at
-:code:`src/trunk/lib/seiscomp3`. Following the above rule, the test files
-shall be located in :code:`src/trunk/lib/seiscomp3/test/core/*.cpp`. For each
+An example is the SeisComP core library. It is located at
+:code:`src/trunk/lib/seiscomp`. Following the above rule, the test files
+shall be located in :code:`src/trunk/lib/seiscomp/test/core/*.cpp`. For each
 found source file, the macro will create a test with the same name and link
 its executable against the library the tests are built for.
 
@@ -68,13 +68,13 @@ Test implementation
 ===================
 
 The following section shows an example of a simple but in many cases sufficient
-test module. This example can be used as a template for an SeisComP3 unit test.
+test module. This example can be used as a template for an SeisComP unit test.
 
 .. code-block:: cpp
 
    #define SEISCOMP_TEST_MODULE [TestModuleName]
-   #include <seiscomp3/unittest/unittests.h>
-   #include <seiscomp3/core/datetime.h>
+   #include <seiscomp/unittest/unittests.h>
+   #include <seiscomp/core/datetime.h>
 
    BOOST_AUTO_TEST_CASE(addition) {
        Seiscomp::Core::TimeSpan k = 5, l = 7;
@@ -88,9 +88,9 @@ test module. This example can be used as a template for an SeisComP3 unit test.
    }
 
 That was simple, wasn't it? For more complex examples and usages, visit the
-Boost Unit Test Framework documentation [1]_. Furthermore you have to link
+Boost Unit Test Framework documentation [#b1]_. Furthermore you have to link
 your test executable against :code:`${Boost_unit_test_framework_LIBRARY}` and
-:code:`seiscomp3_unittest`. A simple CMakeLists.txt file looks as follows:
+:code:`seiscomp_unittest`. A simple CMakeLists.txt file looks as follows:
 
 .. code-block:: cmake
 
@@ -109,7 +109,7 @@ Warning levels
 
 In Boost Test there are **3 different levels** to handle the results.
 
-- Warning: WARN [2]_
+- Warning: WARN [#b2]_
   The error is printed and the error counter **is not** increased.
   The test execution will not be interrupted and will continue to execute other
   test cases.
@@ -152,12 +152,12 @@ Tools
 +-----------------------------------------------------------+-------------------------------------------+-----------------------------------------------------------+-----------------------------+
 | BOOST_ERROR("message")                                    | increasing error counter and show message | BOOST_ERROR("There was a problem")                        |            message          |
 +-----------------------------------------------------------+-------------------------------------------+-----------------------------------------------------------+-----------------------------+
-| BOOST_TEST_MESSAGE("message") [3]_                        | show message                              | BOOST_TEST_MESSAGE("Your ad can be placed here")          |            message          |
+| BOOST_TEST_MESSAGE("message") [#b3]_                      | show message                              | BOOST_TEST_MESSAGE("Your ad can be placed here")          |            message          |
 +-----------------------------------------------------------+-------------------------------------------+-----------------------------------------------------------+-----------------------------+
 | BOOST_<LEVEL>_THROW(expression,exception)                 | perform an exception perception check     | BOOST_<LEVEL>_THROW(myVector(-2),out_of_range)            |         true or false       |
 +-----------------------------------------------------------+-------------------------------------------+-----------------------------------------------------------+-----------------------------+
 
-For more tools and information about the Boost unit test tools see [4]_.
+For more tools and information about the Boost unit test tools see [#b4]_.
 
 Test output
 ===========
@@ -171,7 +171,7 @@ An example output looks like this:
 .. code::
 
    Running tests...
-   Test project /home/sysop/seiscomp3/build
+   Test project /home/sysop/seiscomp/build
        Start 1: stringtoxml
    1/4 Test #1: stringtoxml ......................***Failed    0.03 sec
        Start 2: datetime_time
@@ -191,9 +191,8 @@ An example output looks like this:
    Makefile:61: recipe for target 'test' failed
    make: *** [test] Error 8
 
------------------------------------------------------------------------------------------------------------
-
-.. [1] As of Boost version 1.46, it is located at http://www.boost.org/doc/libs/1_46_0/libs/test/doc/html/index.html
-.. [2] *to see the warnings use the instruction:* **boost::unit_test::unit_test_log.set_threshold_level(boost::unit_test::log_warnings);**
-.. [3] *to see the messages use the instruction:* **boost::unit_test::unit_test_log.set_threshold_level(boost::unit_test::log_messages);**
-.. [4] As of Boost version 1.46, it is located at http://www.boost.org/doc/libs/1_46_0/libs/test/doc/html/utf.html
+.. [#WPUT] https://en.wikipedia.org/wiki/Unit_testing
+.. [#b1] As of Boost version 1.46, it is located at http://www.boost.org/doc/libs/1_46_0/libs/test/doc/html/index.html
+.. [#b2] *to see the warnings use the instruction:* **boost::unit_test::unit_test_log.set_threshold_level(boost::unit_test::log_warnings);**
+.. [#b3] *to see the messages use the instruction:* **boost::unit_test::unit_test_log.set_threshold_level(boost::unit_test::log_messages);**
+.. [#b4] As of Boost version 1.46, it is located at http://www.boost.org/doc/libs/1_46_0/libs/test/doc/html/utf.html

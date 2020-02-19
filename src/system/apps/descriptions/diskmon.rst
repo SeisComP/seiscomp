@@ -1,4 +1,4 @@
-Diskmon is a SeisComP3 init script that checks on each call to :program:`seiscomp check`
+Diskmon is a SeisComP init script that checks on each call to :program:`seiscomp check`
 the filesystem by running the following command:
 
 .. code-block:: sh

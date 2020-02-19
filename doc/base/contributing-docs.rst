@@ -4,13 +4,13 @@
 Contributing Documentation
 **************************
 
-This is the documentation for the core processing elements and utilities that make up the SeisComP3 system.
+This is the documentation for the core processing elements and utilities that make up the SeisComP system.
 It aims to document the configuration and command line options for
-SeisComP3 in multiple formats (HTML, man, PDF, ePub etc) in a
-consistent way. The functionality of SeisComP3 differs between
-versions so the documentation is versioned along with SeisComP3.
+SeisComP in multiple formats (HTML, man, PDF, ePub etc) in a
+consistent way. The functionality of SeisComP differs between
+versions so the documentation is versioned along with SeisComP.
 For more general topics and tutorials please refer to the
-`SeisComp3 wiki <http://www.seiscomp3.org/>`_.
+`SeisComp3 wiki <http://www.seiscomp.org/>`_.
 
 The documentation is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ (reST) a
 simple text mark up format. The documentation is generated using `Sphinx <http://sphinx.pocoo.org/index.html>`_
@@ -20,7 +20,8 @@ The Sphinx website has a very good
 `directives <http://sphinx.pocoo.org/markup/index.html>`_.
 
 If you would like to add to this documentation or you find an error then please submit a patch to
-`trac <http://www.seiscomp3.org/newticket>`_ or to the mailing list.  
+`trac <http://www.seiscomp.org/newticket>`_ or to the
+SeisComP `discussion forum <http://forum.seiscomp.org>`_.
 
 If you are viewing the HTML version of the documentation in a browser
 then you can use the *Show Source* link on each page to view the reST
@@ -60,13 +61,17 @@ For a new executable an entry should also be made in the man section of conf.py.
 form of the documentation that is generated from only the .xml file.
 
 
-Images 
+Images
 ======
 
 Any images should be placed in a suitable sub-directory of :file:`descriptions/media`.
 They can then be referred to (in .rst) like::
 
     .. figure::  media/scolv/scolv-overview.png
+       :width: 16cm
+       :align: center
+
+       Overview of the defrobnicator switches in :ref:`scolv`.
 
 The images will be moved to the correct location during the documentation build.
 
@@ -86,7 +91,7 @@ Any description XML uses the root element *seiscomp*:
      ...
    </seiscomp>
 
-3 elements are used inside the root element: :ref:`module<xml-module>`, :ref:`plugin<xml-plugin>` and :ref:`binding<xml-binding>`.
+Three elements are used inside the root element: :ref:`module<xml-module>`, :ref:`plugin<xml-plugin>` and :ref:`binding<xml-binding>`.
 Modules, plugins and bindings can be described in one XML or split up into one file per description. It is better to
 have things as close as possible. A module and its binding should go into one module.XML whereas plugins should
 go into separate XML files.
@@ -118,7 +123,7 @@ Element: **module**
 | **standalone**              | attrib   |    no     | The standalone attribute is also optional and |
 |                             |          |           | by default false. Standalone means that the   |
 |                             |          |           | module does not take the global configuration |
-|                             |          |           | files (eg :file:`etc/global.cfg`) into        |
+|                             |          |           | files (e.g. :file:`etc/global.cfg`) into      |
 |                             |          |           | account.                                      |
 +-----------------------------+----------+-----------+-----------------------------------------------+
 | **inherit-global-bindings** | attrib   |    no     | If global bindings are inherited. The default |
@@ -437,7 +442,7 @@ This element is used to describe the command-line options of a module. The eleme
 much simpler than the :ref:`configuration<xml-configuration>` element. The command-line only
 contains group elements which in turn have either option or optionReference elements. Through
 the optionReference element it is possible to refer to existing command-line options. This is
-important for all modules that are using the SeisComP3 libraries because they share a set of
+important for all modules that are using the SeisComP libraries because they share a set of
 basic command-line options inherited from the Application class.
 
 Element: **command-line**

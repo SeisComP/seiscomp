@@ -1,26 +1,26 @@
 .. _api-client-python:
 
-seiscomp3.Client
-================
+seiscomp.client
+===============
 
-.. py:module:: seiscomp3.Client
+.. py:module:: seiscomp.client
 
 Modules are meant to be standalone programs doing a particular job. The
-seiscomp3.Client package focuses on three main aspects:
+seiscomp.client package focuses on three main aspects:
 
 * Communicate with other modules
 * Access station- and event metadata through a database
 * Fetch waveform data
 
 Therefore a client package has been developed combining these concepts in an
-easy way with only a couple of API calls. Since SeisComP3 has been developed in
+easy way with only a couple of API calls. Since SeisComP has been developed in
 C++ and uses the object oriented paradigm forcefully, modules build on the
-Application (C++: :class:`Seiscomp::Client::Application`, :class:`Python: seiscomp3.Client.Application`)
+Application (C++: :class:`Seiscomp::Client::Application`, :class:`Python: seiscomp.client.Application`)
 class. It manages the messaging connection and waveform sources in a transparent
 way.
 
 The class :class:`Seiscomp::Client::Application` is the base class for
-all SeisComP3 applications. It manages messaging and database
+all SeisComP applications. It manages messaging and database
 connections, provides access to command line options and configuration
 parameters and also handles and interprets notifier messages.
 
@@ -45,24 +45,24 @@ prefixed with *handle*, e.g. :func:`handleMessage`.
 Application class
 -----------------
 
-The application class is part of the seiscomp3.Client package. It needs to
+The application class is part of the seiscomp.client package. It needs to
 be imported first.
 
 .. code-block:: python
 
-   import seiscomp3.Client
+   import seiscomp.client
 
 A common strategy to write a module with that class is to derive from it and
 run it in a Python main method.
 
 .. code-block:: python
 
-   import seiscomp3.Client, sys
+   import seiscomp.client, sys
 
    # Class definition
-   class MyApp(seiscomp3.Client.Application):
+   class MyApp(seiscomp.client.Application):
        def __init__(self, argc, argv):
-           seiscomp3.Client.Application.__init__(self, argc, argv)
+           seiscomp.client.Application.__init__(self, argc, argv)
 
    # Main method to call the app
    def main(argc, argv):
@@ -106,18 +106,18 @@ the next sections.
 Constructor
 ^^^^^^^^^^^
 
-To create an application, derive from the seiscomp3.Client.Application class
+To create an application, derive from the seiscomp.client.Application class
 and configure it in the constructor.
 
 .. code-block:: python
    :linenos:
    :emphasize-lines: 7,9,11
 
-   class MyApp(seiscomp3.Client.Application):
+   class MyApp(seiscomp.client.Application):
        # MyApp constructor
        def __init__(self, argc, argv):
            # IMPORTANT: call the base class constructor
-           seiscomp3.Client.Application.__init__(self, argc, argv)
+           seiscomp.client.Application.__init__(self, argc, argv)
            # Default is TRUE
            self.setMessagingEnabled(False)
            # Default is TRUE, TRUE
@@ -154,7 +154,7 @@ Setting the username to an empty string results in a random username selected
 by the messaging server.
 
 All application methods are defined in the C++ header file
-:file:`src/trunk/libs/seiscomp3/client/application.h`.
+:file:`src/trunk/libs/seiscomp/client/application.h`.
 
 
 Init
@@ -179,7 +179,7 @@ The workflow of the init function looks like this:
        loadDBConfigModule
        loadCities
 
-Methods marked with virtual can be overriden. :func:`init` itself calls
+Methods marked with virtual can be overridden. :func:`init` itself calls
 a lot of handlers that can be customized. Typical handlers are
 :func:`initConfiguration`, :func:`createCommandLineDescription`
 and :func:`validateParameters`.
@@ -194,7 +194,7 @@ An example is show below:
 .. code-block:: python
 
    def initConfiguration(self):
-       if not seiscomp3.Client.Application.initConfiguration(self):
+       if not seiscomp.client.Application.initConfiguration(self):
            return False
 
        try: self._directory = self.configGetString("directory")
@@ -209,7 +209,7 @@ False.
 
 :func:`createCommandLineDescription` is used to add custom command line options.
 This is a void function and does not return any value. It is also not necessary
-to call the baseclass method although it does not hurt.
+to call the base class method although it does not hurt.
 
 .. code-block:: python
 
@@ -218,7 +218,8 @@ to call the baseclass method although it does not hurt.
        self.commandline().addStringOption("Storage", "directory,o", "Specify the storage directory")
 
 A new command line option group is added with :func:`addGroup` and then a new
-option is added to this group which is a string option. 4 types can be added
+option is added to this group which is a string option.
+Four types can be added
 as options: string, int, double and bool: :func:`addStringOption`, :func:`addIntOption`,
 :func:`addDoubleOption` and :func:`addBoolOption`.
 
@@ -235,11 +236,11 @@ application is aborted with a non-zero result code.
        # The directory validity is checked to avoid duplicate checks in
        # initConfiguration.
        if not self._directory:
-           seiscomp3.Logging.error("directory not set")
+           seiscomp.logging.error("directory not set")
            return False
 
        if not exists(self._directory):
-           seiscomp3.Logging.error("directory %s does not exist" %\
+           seiscomp.logging.error("directory %s does not exist" %\
                                    self._directory)
            return False
 
@@ -252,7 +253,7 @@ overridden method :func:`init`.
 .. code-block: python
 
    def init(self):
-       if seiscomp3.Client.Application.init(self) == False:
+       if seiscomp.client.Application.init(self) == False:
            return False
 
        # Custom initialization code runs here.
@@ -311,7 +312,7 @@ operation and dispatches the parentID and the object either to
 behaviour is enabled by default. If disabled, a clients needs to parse the
 messages by itself and implement this method.
 
-:func:`enableAutoApplyNotifier` controls whether incoming notifer objects are
+:func:`enableAutoApplyNotifier` controls whether incoming notifier objects are
 applied automatically to objects in local memory. If the client has already
 an object in memory and an update notifier for this object is received, the object
 in the notifier is copied to the local object. This behaviour is enabled by default.
@@ -336,7 +337,7 @@ void function.
 .. code-block:: python
 
    def done(self):
-       seiscomp3.Client.Application.done()
+       seiscomp.client.Application.done()
 
        # Custom clean ups
        closeMyDataFiles();
@@ -347,7 +348,7 @@ void function.
 StreamApplication class
 -----------------------
 
-The application class has another occurence: :class:`seiscomp3.Client.StreamApplication`.
+The application class has another occurrence: :class:`seiscomp.client.StreamApplication`.
 
 The class :class:`StreamApplication` extends the :class:`Application`
 in terms of record acquisition. It spawns another thread that reads the records
@@ -384,7 +385,7 @@ returns the RecordStream instance which can be used to add stream requests.
 .. code-block:: python
 
    def init(self):
-       if seiscomp3.Client.StreamApplication.init(self) == False:
+       if seiscomp.client.StreamApplication.init(self) == False:
            return False
 
        # Subscribe to some streams

@@ -1,16 +1,16 @@
 from __future__ import print_function
 import os, sys, subprocess as sub
-import seiscomp3.Kernel, seiscomp3.Config
+import seiscomp.kernel, seiscomp.config
 
-class Module(seiscomp3.Kernel.Module):
+class Module(seiscomp.kernel.Module):
     def __init__(self, env):
-      seiscomp3.Kernel.Module.__init__(self, env, env.moduleName(__file__))
+      seiscomp.kernel.Module.__init__(self, env, env.moduleName(__file__))
 
     def start(self):
-      cfg = seiscomp3.Config.Config()
+      cfg = seiscomp.config.Config()
       cfg.readConfig(os.path.join(self.env.SEISCOMP_ROOT, "etc", "defaults", self.name + ".cfg"))
       cfg.readConfig(os.path.join(self.env.SEISCOMP_ROOT, "etc", self.name + ".cfg"))
-      try: cfg.readConfig(os.path.join(os.environ['HOME'], ".seiscomp3", self.name + ".cfg"))
+      try: cfg.readConfig(os.path.join(os.environ['HOME'], ".seiscomp", self.name + ".cfg"))
       except: pass
 
       run_dir = os.path.join(self.env.SEISCOMP_ROOT, "var", "run", self.name)

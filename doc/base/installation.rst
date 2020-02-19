@@ -1,17 +1,19 @@
+.. _installation:
+
 ************
 Installation
 ************
 
-SeisComP3 is distributed in the form of tar files for different releases,
+SeisComP is distributed in the form of tar files for different releases,
 Linux systems and architectures:
 
 * Acquisition, processing and GUIs (for each supported platform)
-* Maps (maps from the SeisComP3 releases Seattle and Zurich also work in Jakarta)
+* Maps (maps from the SeisComP releases Seattle and Zurich also work in Jakarta)
 * Documentation
 * Station configuration files (optional)
 
-Download these from http://www.seiscomp3.org/ .
-This section describes the installation of the binary packages of SeisComP3 on
+Download these from http://www.seiscomp.org/ .
+This section describes the installation of the binary packages of SeisComP on
 an
 
 * :program:`Ubuntu 14`, 64 bit system
@@ -38,7 +40,7 @@ Minimum requirements are:
 +-----+----------------------------------------------------------------------------------------+
 
 In case large networks (>100 stations) are operated, a distributed system is
-recommended. Normally a SeisComP3 system is separated in several subsystems.
+recommended. Normally a SeisComP system is separated in several subsystems.
 A separation of data acquisition, processing and graphical user interfaces is
 useful to permit stable performance.
 
@@ -80,11 +82,11 @@ GUI system:
 Installation procedure
 ======================
 
-The next steps describe the installation of SeisComP3 with the prepared
+The next steps describe the installation of SeisComP with the prepared
 tar.gz files.
 
 * Log in as user (e.g. sysop)
-* Copy one of the :file:`seiscomp3-jakarta-[version]-[OS]-[arch].tar.gz` files to
+* Copy one of the :file:`seiscomp-jakarta-[version]-[OS]-[arch].tar.gz` files to
   your home directory. Take care which is the right package (32 or 64-bit) for
   your operating system.
 
@@ -94,37 +96,37 @@ tar.gz files.
 
      user@host:/tmp$ cd
 
-* Un-tar the SeisComP3 binary packagemake
+* Un-tar the SeisComP binary packagemake
 
   .. code-block:: sh
 
-     user@host:~$ tar xzf seiscomp3-jakarta-[version]-[OS]-[arch].tar.gz
+     user@host:~$ tar xzf seiscomp-jakarta-[version]-[OS]-[arch].tar.gz
 
-* Un-tar the SeisComP3 map package into seiscomp3/share/maps
-
-  .. code-block:: sh
-
-     user@host:~$ tar xzf seiscomp3-[release]-maps.tar.gz
-
-* If desired, un-tar the documentation into seiscomp3/share/doc
+* Un-tar the SeisComP map package into seiscomp/share/maps
 
   .. code-block:: sh
 
-     user@host:~$ tar xzf seiscomp3-jakarta-[version]-doc.tar.gz
+     user@host:~$ tar xzf seiscomp-[release]-maps.tar.gz
 
-Unpacking these file creates the :ref:`SeisComP3 directory structure<directory_structure>`.
+* If desired, un-tar the documentation into seiscomp/share/doc
+
+  .. code-block:: sh
+
+     user@host:~$ tar xzf seiscomp-jakarta-[version]-doc.tar.gz
+
+Unpacking these file creates the :ref:`SeisComP directory structure<directory_structure>`.
 
 Install dependencies
 --------------------
 
-SeisComP3 depends on a number of additional packages shipped with each Linux
+SeisComP depends on a number of additional packages shipped with each Linux
 distribution. The following table gives an overview (the names of packages,
 files or commands may differ slightly for other Linux systems):
 
 :program:`Packages`
 
 +--------------------+--------------------+----------------------+----------------------------------------+
-|:program:`Ubuntu 14`|:program:`OpenSUSE` |:program:`CentOS 6`   | SeisComP3 component                    |
+|:program:`Ubuntu 14`|:program:`OpenSUSE` |:program:`CentOS 6`   | SeisComP component                     |
 +====================+====================+======================+========================================+
 | flex               | flex               | flex                 | Seedlink (compilation only)            |
 +--------------------+--------------------+----------------------+----------------------------------------+
@@ -168,7 +170,7 @@ give 'mysql-server' as parameter.
 
 .. code-block:: sh
 
-   user@host:~$ seiscomp3/bin/seiscomp install-deps base mysql-server
+   user@host:~$ seiscomp/bin/seiscomp install-deps base mysql-server
    Distribution: Ubuntu 10.04
    [sudo] password for sysop:
    Reading package lists... Done
@@ -184,14 +186,14 @@ If your distribution is not supported by :command:`install-deps`
 
 .. code-block:: sh
 
-   user@host:~$ cd seiscomp3/share/deps/ubuntu/[version]
+   user@host:~$ cd seiscomp/share/deps/ubuntu/[version]
    ...
 
 :program:`OpenSUSE` `version`
 
 .. code-block:: sh
 
-   user@host:~$ cd seiscomp3/share/deps/sles/[version]
+   user@host:~$ cd seiscomp/share/deps/sles/[version]
    ...
 
 
@@ -199,7 +201,7 @@ If your distribution is not supported by :command:`install-deps`
 
 .. code-block:: sh
 
-   user@host:~$ cd seiscomp3/share/deps/centos/[version]
+   user@host:~$ cd seiscomp/share/deps/centos/[version]
    ...
 
 .. code-block:: sh
@@ -212,7 +214,7 @@ If your distribution is not supported by :command:`install-deps`
    bash install-fdsnws.sh
    ...
 
-or contact the SeisComP3 developpers to add support for your distribution.
+or contact the SeisComP developers to add support for your distribution.
 
 SQL configuration
 -----------------
@@ -339,7 +341,7 @@ following table.
 | *var*               | Variable files whose content is expected to continually change.    |
 +---------------------+--------------------------------------------------------------------+
 | *var/log*           | Log files of started modules. Usually modules log either to syslog |
-|                     | or ~/.seiscomp3/log. This directory contains the logs of the start |
+|                     | or ~/.seiscomp/log. This directory contains the logs of the start  |
 |                     | of each module.                                                    |
 +---------------------+--------------------------------------------------------------------+
 | *var/lib*           | Default directory for files created by modules such as the         |

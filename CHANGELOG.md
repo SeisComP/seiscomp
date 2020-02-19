@@ -2,35 +2,16 @@
 
 ## Release YYYY.ddd
 
-* scesv
-
-  * Added configuration parameter 'recenterMap' to control map centering
-
-* scolv
-
-  * Add event type to left hand summary panel
-
-* scqc
-
-  * Added description of plugin configuration parameters. Default for writing
-    to the database is false.
-  * Added more QC parameters to the documentation
-
 * trunk
 
-  * Added Array.bytes() to Python wrappers (only)
+  * Add new surface waves magnitude Ms_20 according to IASPEI standard
 
-* seedlink
+* scqcv
 
-  * Support websocket connections from https://github.com/crotwell/seisplotjs-seedlink
-  * Fix config to properly support multiple sources (plugins) per station
-  * Use unambiguous station ID (net.station)
-
-## Release 2018.327 patch18
-
-* system
-
-  * Add dependencies for Debian 9 and Debian 10
+  * Expose more configuration parameters to scconfig
+  * Change the default value of streams.cumulative to false to show
+    only stream configured in streams.codes
+  * Correct some default values of the parameter "parameter"
 
 * scevent/evrc
 
@@ -50,13 +31,21 @@
 * scesv
 
   * Fixed region filter with event list which did not work correctly
+  * Added configuration paraemeter 'recenterMap' to control map centering
 
 * scolv
 
   * Add option `askForConfirmation` to custom commits to allow
     inspection of the options to be applied.
   * Open dialog when a custom commit is activated together with shift key.
+  * Add event type to left hand summary panel
   * Add `visibleMagnitudes` to description
+
+* scqc
+
+  * Added description of plugin configuration parameters. Default for writing
+   to the database is false.
+  * Added more QC parameters to the documentation
 
 * scconfig
 
@@ -71,34 +60,21 @@
   * Added option --origin-id-suffix to name relocated origins
     using the original publicID plus the specified suffix
 
-## Release 2018.327 patch17
+* trunk
 
-* fdsnws
-
-  * Implement fdsnws-availability-1.0.0
-  * Add event type filter and text output column
-  * Fix crash if database is not configured correctly
-  * Add tests
-  * Bug fixes
-
-* scolv
-
-  * Enable custom commit profiles to be added as buttons
-  * Allow to select the preferred magnitude prior to committing
-    a solution in the magnitude tab
-  * Fix picker metadata resolver if pick has been made on a single
-    component
+  * Added Array.bytes() to Python wrappers (only)
 
 * GUI
 
   * Increase default maximum map tile cache to 128mb
   * Fix rendering of geofeatures with more than one subfeature
   * Add lat/lon, depth and magnitude database filter to event list
-  * Add `scheme.precision.magnitude` configuration option
 
-* ql2sc
+* seedlink
 
-  * Add --ep option and fix ping-pong effect with two cross-connected systems
+  * Support websocket connections from https://github.com/crotwell/seisplotjs-seedlink
+  * Fix config to properly support multiple sources (plugins) per station
+  * Use unambiguous station ID (net.station)
 
 * system
 
@@ -108,7 +84,6 @@
 
   * Add option `--with-filename` which outputs of all accessed archive files
     after import
-  * Fix crash if a data file is not writable
 
 ## Release 2018.327 patch16
 
@@ -116,11 +91,6 @@
 
   * Fix regression with respect to event type mapping. An empty event type
     was mapped to "other event".
-
-* trunk
-
-  * Renamed Array::bytes() -> elementSize()
-  * Added Array.bytes() to Python wrappers (only)
 
 ## Release 2018.327 patch15
 
@@ -137,11 +107,13 @@
 
   * Fix duplicate mapping detection in scream\_plugin\_ring plugin. Whenever a duplicate stream
     id was given then it was ignored regardless of the attached sysid.
-  * Work around EarthData WNRO bug
 
 * scolv
 
   * Fix event type list preparation in combination with `olv.commonEventTypes`.
+  * Add configuration of multiple custom commit buttons
+  * Add checkbox to set the preferred magntitude in the scolv magnitude tab in combination with
+    pressing a custom commit button
 
 * ql2sc
 
@@ -149,31 +121,20 @@
     on long idle periods.
   * Fix bug that prevents forwarding updates if the routing must be resolved via the parent object
     which hasn't updated. A workaround is to explicitly specify routing rules on all object levels.
-  * Add event attribute synchronization per input host
 
 * scamp
 
-  * Add geomtric\_mean method for combining ML amplitudes measured on both horizontals.
+  * Add geometric\_mean method for combining ML amplitudes measured on both horizontals.
     This corresponds to averaging the single-component station magnitudes instead of the amplitudes.
 
 * python-apps
 
   * Add simple script to dump public objects
 
-* Nuttli magnitude
+* sh2proc
 
-  * Fix phase priority parsing and fix crash
-  * Do not apply default uncertainties to Vmin/Vmax 
-
-* scdispatch
-
-  * Fix routing table lookup when dealing with merge operation
-
-* trunk
-
-  * Migration scripts for scwfparam db extension added thanks to Philipp Kaestli / ETHZ
-  * Fix LocSAT locator implementation to correctly send the initial hypocenter
-    parameters to libloc
+  * Add parameters parsed from Seismic Handler to SeisComP3. 
+    Thanks to Klaus Stammler for providing valuable information on Seismic Handler.
 
 * scmag
 
@@ -193,7 +154,7 @@
 
 * sh2proc
 
-  * Add parameters parsed from Seismic Handler to SeisComP3. 
+  * Add parameters parsed from Seismic Handler to SeisComP3.·
     Thanks to Klaus Stammler for providing valuable information on Seismic Handler.
 
 * trunk
@@ -206,7 +167,7 @@
 
 * scevtstreams
 
-  * Add ```--input``` and ```--format``` options to read event parameters 
+  * Add ```--input``` and ```--format``` options to read event parameters·
     from file
   * Add asymmetric time margins
 
@@ -249,6 +210,14 @@
     * Require valid user if network or station is restricted
     * Stop iteration at network or station level if restricted flag but
       no user is present 
+
+* fdsnws
+
+  * Fix dataselect restricted handling with respect to station service
+
+    * Require valid user if network or station is restricted
+    * Stop iteration at network or station level if restricted flag but
+      no user is present
 
   * Implement service specific version numbers 
 
@@ -536,7 +505,7 @@ magnitude correction. Note that **it only affects ML, not MLv and not MLh**.
     }
     ```
     Namespaces can be nested.
-  * Remove LocSAT unused configuration option to use the location rms as
+  * Remov LocSAT unused configuration option to use the location rms as
     time error
   * Add LocSAT options ```defaultTimeError``` and ```usePickUncertainties```
     which can be configured via the configuration files or during runtime in

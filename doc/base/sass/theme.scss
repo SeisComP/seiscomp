@@ -1,0 +1,69 @@
+$fontDirectory: 'fonts/';
+
+@import "font-roboto.scss";
+
+// ----------------------------------------------------------------------------
+// Fonts
+// ----------------------------------------------------------------------------
+$fontSize               : 11pt;
+
+$fontRegularFamily      : 'Roboto';
+$fontRegularWeight      : 300;
+
+$fontMonoFamily         : 'Roboto Mono', 'Courier New', monospace;
+$fontMonoWeight         : normal;
+$fontMonoSize           : 0.9em;
+
+// ----------------------------------------------------------------------------
+// Colors
+// ----------------------------------------------------------------------------
+$primaryBackground      : #fff;
+$primaryForeground      : #222;
+
+$secondaryBackground    : #eee;
+$secondaryForeground    : #111;
+
+$alternateBackground    : #f6f7f8;
+
+$brandColor             : #0092d4;
+
+$badgeBackground        : orange;
+$badgeForeground        : white;
+
+$invertedBackground     : $brandColor;
+$invertedBackground2    : darken($invertedBackground, 25);
+$invertedForeground     : white;
+
+$borderColor            : #dfe0e4;
+$codeBackground         : #f5f5f5;
+
+$infoForeground         : #276f86;
+$infoBackground         : #f8ffff;
+$infoBorder             : #a9d5de;
+
+$warningForeground      : #794b02;
+$warningBackground      : #fffaf3;
+$warningBorder          : #c9ba9b;
+
+$errorForeground        : #9f3a38;
+$errorBackground        : #fff6f6;
+$errorBorder            : #e0b4b4;
+
+$tableHeaderForeground  : #fff;
+$tableHeaderBackground  : $brandColor;
+$tableBorder            : #ddd;
+$tableAlternateRow      : $alternateBackground;
+
+$footnoteBracketsForeground: white;
+$footnoteBracketsBackground: $brandColor;
+
+
+// ----------------------------------------------------------------------------
+// Sizes
+// ----------------------------------------------------------------------------
+$pageMaxWidth: 80rem;
+$contentMargin: 1rem;
+$contentSpacing: 1rem;
+
+$sidebarWidth: 14rem;
+$sidebarSpacing: 1rem;

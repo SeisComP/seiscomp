@@ -1,0 +1,3 @@
+This directory is for external contributions to be built along with
+the base source tree. Just add a directory here and cmake will descent
+into it.

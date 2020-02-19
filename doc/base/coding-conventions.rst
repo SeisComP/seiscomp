@@ -29,19 +29,30 @@ C++ code is (or should be) written with the following code style:
 .. code-block:: c++
 
    /***************************************************************************
-    *   Copyright (C) by GFZ Potsdam                                          *
+    * Copyright (C) ...                                                       *
     *                                                                         *
-    *   You can redistribute and/or modify this program under the             *
-    *   terms of the SeisComP Public License.                                 *
+    * All rights reserved.                                                    *
+    * Contact: <contact>                                                      *
     *                                                                         *
-    *   This program is distributed in the hope that it will be useful,       *
-    *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
-    *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
-    *   SeisComP Public License for more details.                             *
+    * Author: <name>                                                          *
+    * Email: <email>                                                          *
+    *                                                                         *
+    * GNU Affero General Public License Usage                                 *
+    * This file may be used under the terms of the GNU Affero                 *
+    * Public License version 3.0 as published by the Free Software Foundation *
+    * and appearing in the file LICENSE included in the packaging of this     *
+    * file. Please review the following information to ensure the GNU Affero  *
+    * Public License version 3.0 requirements will be met:                    *
+    * https://www.gnu.org/licenses/agpl-3.0.html.                             *
+    *                                                                         *
+    * Other Usage                                                             *
+    * Alternatively, this file may be used in accordance with the terms and   *
+    * conditions contained in a signed written agreement between you and      *
+    * gempa GmbH.                                                             *
     ***************************************************************************/
 
-   #ifndef __NAMESPACE_LIB_FILENAME_H__
-   #define __NAMESPACE_LIB_FILENAME_H__
+   #ifndef NAMESPACE_LIB_FILENAME_H__
+   #define NAMESPACE_LIB_FILENAME_H__
 
 
    #include <math.h>
@@ -104,8 +115,8 @@ File layout
 
   .. code-block:: c++
 
-     #ifndef __NAMESPACE_LIB_FILENAME_H__
-     #define __NAMESPACE_LIB_FILENAME_H__
+     #ifndef NAMESPACE_LIB_FILENAME_H__
+     #define NAMESPACE_LIB_FILENAME_H__
      ...
      #endif
 
@@ -173,9 +184,10 @@ Return values
 
 While designing methods or functions these rules about return values should be kept in mind:
 
-- Functions returning an int or related types, 0 means success everything else
-  is an error
-- Functions returning a pointer, NULL ( or 0 ) means an error and of course an
+- Functions returning an int or related types as status: 0 means success;
+  everything else is an error
+- Functions returning a pointer:
+  0 (or :code:`nullptr`) means an error and of course an
   invalid pointer
 - Functions returning a class object can throw an exception in case of an error.
   This is not obligatory and should be used with care.
@@ -185,9 +197,8 @@ While designing methods or functions these rules about return values should be k
 Exception specifications
 ========================
 
-According to http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2010/n3051.html
-dynamic exception specificiations are considered or proposed as deprecated
-feature. Don't use them in declaring a function prototype.
+According to [1]_ dynamic exception specifications are considered or proposed
+as deprecated feature. Don't use them in declaring a function prototype.
 
 .. code-block:: c++
 
@@ -196,3 +207,33 @@ feature. Don't use them in declaring a function prototype.
 
    // Just declare it without an exception specification
    int foo();
+
+
+Null pointer
+============
+
+Use either 0 or the :code:`nullptr` keyword of C++11.
+Check a null pointer with implicit boolean conversion.
+
+.. code-block:: c++
+
+   if ( !ptr )
+       do_something();
+
+rather than
+
+.. code-block:: c++
+
+   if ( ptr == 0 )
+       do_something();
+
+or
+
+.. code-block:: c++
+
+   if ( ptr == NULL )
+       do_something();
+
+.. [1] http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2010/n3051.html
+.. [2] http://www.gotw.ca/publications/mill22.htm
+.. [3] http://www.stroustrup.com/bs_faq2.html#null

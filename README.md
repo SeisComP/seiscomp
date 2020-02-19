@@ -1,113 +1,125 @@
-# About
+# SeisComP
 
-Project homepage: http://www.seiscomp3.org
+## About
 
-This software has been developed by the [GEOFON Program](http://geofon.gfz-potsdam.de) at [Helmholtz Centre Potsdam, GFZ German Research Centre for Geosciences](http://www.gfz-potsdam.de) and [gempa GmbH](http://www.gempa.de).
+SeisComP is a seismological software for data acquisition, processing,
+distribution and interactive analysis that has been developed by the
+GEOFON Program at  Helmholtz Centre Potsdam, GFZ German Research Centre
+for Geosciences and gempa GmbH.
 
-SeisComP3 is distributed under the [SeisComP Public License](COPYING)
+## License
 
-> **Note**
+SeisComP is primarily released under the AGPL 3.0. The SeisComP libraries
+can be used holding a commercial license to enable creation of closed source
+software. Please check the [license agreement](doc/base/license.rst).
 
-> - The purpose of this repository is to test upcoming features and to
->   integrate community source code and patches
-> - For production systems only use the official releases from http://www.seiscomp3.org or the corresponding tags in this repository.
-> - Commercial modules obtained from [gempa GmbH](http://www.gempa.de) are only
->   available for official releases. Binary compatibility of intermediate
->   SeisComP3 versions is not guaranteed.
+## Asking Questions
 
+Please ask questions in the [forums](https://forum.seiscomp3.org) and
+use appropriate topics to get help on usage or to discuss new features.
 
-# Compiling
+If you found a concrete issue in the codes or if you have code related
+questions please use the Github issue tracker of the corresponding
+repository,
+e.g. [GitHub issue tracker of this repository](https://github.com/SeisComP/seiscomp/issues).
 
-The easiest way to compile SeisComP3 is to use the provided Makefile.cvs which
-creates the build directory inside the source tree.
+## Checkout the repositories
 
+The SeisComP software collection is distributed among several repositories.
+This repository only contains the build environment, the runtime framework
+(seiscomp control script) and the documentation.
+
+To checkout all repositories to build a complete SeisComP distribution the
+following script can be used:
+
+```sh
+#!/bin/bash
+
+if [ $# -eq 0 ]
+then
+    echo "$0 <target-directory>"
+    exit 1
+fi
+
+target_dir=$1
+repo_path=https://github.com/SeisComP
+
+echo "Cloning base repository into $1"
+git clone $repo_path/seiscomp.git $1
+
+echo "Cloning base components"
+cd $1/src/base
+git clone $repo_path/seedlink.git
+git clone $repo_path/common.git
+git clone $repo_path/main.git
+git clone $repo_path/extras.git
+
+echo "Cloning external base components"
+git clone $repo_path/gns.git
+git clone $repo_path/ipgp.git
+git clone $repo_path/sed.git
+
+echo "Done"
+
+cd ../../
+
+echo "If you want to use 'mu', call 'mu register --recursive'"
+echo "To initialize the build, run 'make'."
 ```
-$ make -f Makefile.cvs
-$ cd build
-$ make
-$ make install
-```
 
-By default all files are installed under $HOME/seiscomp3. This location can be
-changed with cmake or with its frontend ccmake.
+To keep track of the state of each subrepository, [mu-repo](http://fabioz.github.io/mu-repo/)
+is a recommended way.
 
-Basically the build directory can live anywhere. The following steps create
-a build directory, configure the build and start it:
 
-```
-$ mkdir sc3-build
-$ cd sc3-build
-$ ccmake /path/to/sc3-src
-# Configure with ccmake
-$ make
-$ make install
-```
+## Build
 
-## Step-by-step instructions
+### Prerequisites
 
-1. Checkout SeisComP3 source code from Github
+The following packages should be installed to compile SeisComP:
 
-   ```
-   sysop@host:~$ git clone https://github.com/SeisComP3/seiscomp3.git sc3-src
-   sysop@host:~$ cd sc3-src
-   sysop@host:~/sc3-src$
-   ```
-
-2. Change into the desired branch (if not master) or checkout tag
-   ```
-   sysop@host:~/sc3-src$ git checkout release/jakarta/2017.124.02
-   ```
-
-3. Configure the build
-
-   SeisComP3 is using cmake as build environment. For users that are not experienced
-   with cmake it is recommended to use `ccmake`, an ncurses frontend which is launched
-   by the default `Makefile.cvs`.
-   
-   ```
-   sysop@host:~/sc3-src$ make -f Makefile.cvs
-   ```
-   
-   This will bring up the cmake frontend. Press `c` to configure the build initially.
-   If cmake is being used, the variables can be passed as command line options:
-
-   ```
-   sysop@host:~/sc3-src/build$ cmake -DCMAKE_INSTALL_PREFIX=/path/to/install/dir ..
-   ```
-
-   With ccmake some components can be activated and deactivated such as database
-   backends you want to compile support for. The default just enables MySQL. Once done
-   with options, press `c` again to apply the changes. If everything runs without errors,
-   press `g` to generate the Makefiles. `ccmake` will quit if the Makefiles have been
-   generated:
-   
-   ```
-   *** To build the sources change into the 'build' directory and enter make[ install] ***
-   sysop@host:~/sc3-src$ cd build
-   sysop@host:~/sc3-src/build$ make
-   ```
-   
-   If `make` finished without errors, install SeisComp3 with
-   
-   ```
-   sysop@host:~/sc3-src/build$ make install
-   ```
-   
-   All files are then installed under `~/seiscomp3` or under the directory you have
-   specified with ```CMAKE_INSTALL_PREFIX```.
-  
-
-# Dependencies
-
-To compile the sources the following development packages are required (Redhat/CentOS package names):
-
+- g++
+- git
+- cmake + cmake-gui
+- libboost
+- libxml2-dev
 - flex
-- libxml2-devel
-- boost-devel
-- openssl-devel
-- ncurses-devel
-- mysql-devel
-- postgresql-devel (optional)
-- python-devel
-- m2crypto-devel
-- qt4-devel
+- libssl-dev
+- crypto-dev
+- libqt4-dev (optional)
+- qtbase5-dev (optional)
+- libmysqlclient-dev (optional)
+- libpq-dev (optional)
+- libsqlite3-dev (optional)
+- ncurses-dev (optional)
+
+### Configuration
+
+The SeisComP build system provides several build options which can be
+controlled with a cmake gui or from the commandline
+passing `-D[OPTION]=ON|OFF` to cmake.
+
+In addition to standard cmake options such as `CMAKE_INSTALL_PREFIX`
+the following global options are available:
+
+|Option|Default|Description|
+|------|-------|-----------|
+|SC_GLOBAL_UNITTESTS|ON|Whether to build unittests or not. If enabled then use `ctest` in the build directory to run the unittests.|
+|SC_GLOBAL_PYTHON_WRAPPER|ON|Build Python wrappers for the C++ libraries. You should not turn off this option unless you know exactly what you are doing.|
+|SC_GLOBAL_PYTHON_WRAPPER_NUMPY|ON|Add Numpy support to Python wrappers. If enabled then all SeisComP arrays will provide a method `numpy()` which returns a Numpy array representation.|
+|SC_ENABLE_CONTRIB|ON|Enable inclusion of external contributions into the build. This includes all directories in `src/extras`.|
+|SC_GLOBAL_GUI|ON|Enables compilation of GUI components. This requires the Qt libraries to be installed. Either Qt4 or Qt5 are supported. The build will prefer Qt5 if found and will fallback to Qt4 if the Qt5 development libraries are not installed on the host system.|
+|SC_GLOBAL_GUI_QT5|ON|If SC_GLOBAL_GUI is enabled then Qt5 support will be enabled if this option is active. Otherwise only Qt4 will be supported.|
+
+### Compilation
+
+1. Clone all required repositories (see above)
+2. Run ```make```
+3. Configure the build
+4. Press 'c' as long as 'g' appears
+5. Press 'g' to generate the Makefiles
+6. Enter the build directory and run ```make```
+
+### Installation
+
+1. Enter the build directory and run ```make install```
+   to install SeisComP

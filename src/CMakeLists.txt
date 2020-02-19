@@ -13,6 +13,12 @@ ELSE (NOT SC_SYSTEM_OWN_MSEED)
 	MARK_AS_ADVANCED(MSEED_FOUND)
 ENDIF (NOT SC_SYSTEM_OWN_MSEED)
 
-# System directory has highest priority, so pass its name to make it the first
-# item in the result list if available, then trunk and then gui-qt4
-SC_ADD_SUBDIRS(system trunk gui-qt4)
+SET(SC_SYSTEM_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/system/libs)
+
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/system/libs)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR}/system/libs)
+
+SUBDIRS(system base)
+IF(SC_ENABLE_CONTRIB)
+	SUBDIRS(extras)
+ENDIF()

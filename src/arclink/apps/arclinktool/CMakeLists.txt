@@ -1,1 +1,0 @@
-INSTALL(PROGRAMS arclinktool.py RENAME arclinktool DESTINATION ${SC3_PACKAGE_BIN_DIR})

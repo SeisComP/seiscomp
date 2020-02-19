@@ -21,32 +21,32 @@ Illustrate the basic messaging concepts.
 Script
 ------
 
-This script was demonstrated at the SeisComP3 workshop in Erice. It should be
+This script was demonstrated at the SeisComP workshop in Erice. It should be
 relatively self-explanatory, but full understanding does require certain knowlege
 of Python.
 
 The script does nothing but
 
-* connect to a SeisComP3 messaging server
+* connect to a SeisComP messaging server
 * subscribe to messages sent to messaging group "EVENT"
 * listen to these messages
 * dump the event IDs to the screen
 
-No actual real-world use case but a truly minimum example for a SeisComP3
+No actual real-world use case but a truly minimum example for a SeisComP
 application.
 
 
 .. code-block:: python
 
-   import sys, traceback, seiscomp3.Client
+   import sys, traceback, seiscomp.client
 
-   class EventListener(seiscomp3.Client.Application):
+   class EventListener(seiscomp.client.Application):
 
        def __init__(self):
-           seiscomp3.Client.Application.__init__(self, len(sys.argv), sys.argv)
+           seiscomp.client.Application.__init__(self, len(sys.argv), sys.argv)
            self.setMessagingEnabled(True)
            self.setDatabaseEnabled(True, True)
-           self.setPrimaryMessagingGroup(seiscomp3.Communication.Protocol.LISTENER_GROUP)
+           self.setPrimaryMessagingGroup(seiscomp.client.Protocol.LISTENER_GROUP)
            self.addMessagingSubscription("EVENT")
 
        def doSomethingWithEvent(self, event):
@@ -61,14 +61,14 @@ application.
 
        def updateObject(self, parentID, object):
            # called if an updated object is received
-           event = seiscomp3.DataModel.Event.Cast(object)
+           event = seiscomp.datamodel.Event.Cast(object)
            if event:
                print "received update for event %s" % event.publicID()
                self.doSomethingWithEvent(event)
 
        def addObject(self, parentID, object):
            # called if a new object is received
-           event = seiscomp3.DataModel.Event.Cast(object)
+           event = seiscomp.datamodel.Event.Cast(object)
            if event:
                print "received new event %s" % event.publicID()
                self.doSomethingWithEvent(event)
@@ -77,15 +77,15 @@ application.
            # does not need to be reimplemented. it is just done to illustrate
            # how to override methods
            print "Hi! The EventListener is now running."
-           return seiscomp3.Client.Application.run(self)
+           return seiscomp.client.Application.run(self)
 
    app = EventListener()
    sys.exit(app())
 
 Note that the EventListener class is derived from the application class
-seiscomp3.Client.Application from which it inherits most of the functionality.
+seiscomp.client.Application from which it inherits most of the functionality.
 For instance the ability to connect to the messaging and to the database are
-both provided by seiscomp3.Client.Application; the EventListener only has to
+both provided by seiscomp.client.Application; the EventListener only has to
 enable messaging and database usage in the __init__ routine. The real action
 takes place in the doSomethingWithEvent routine, which is called by both
 updateObject and addObject, depending on whether the event object received is a
@@ -111,7 +111,7 @@ Scripts
 -------
 
 The scripts in this section all deal with inventory access. All need to be
-invoked with the :option:`-d` command line option to specify the SeisComP3 database
+invoked with the :option:`-d` command line option to specify the SeisComP database
 from which the information is to be read. For example:
 
 .. code-block:: sh
@@ -121,18 +121,18 @@ from which the information is to be read. For example:
 configured-streams.py
 ^^^^^^^^^^^^^^^^^^^^^
 
-Print a list of all streams configured on a SeisComP3 system.
+Print a list of all streams configured on a SeisComP system.
 
 .. code-block:: python
 
    #!/usr/bin/env python
 
-   import sys, traceback, seiscomp3.Client
+   import sys, traceback, seiscomp.client
 
-   class ListStreamsApp(seiscomp3.Client.Application):
+   class ListStreamsApp(seiscomp.client.Application):
 
        def __init__(self, argc, argv):
-           seiscomp3.Client.Application.__init__(self, argc, argv)
+           seiscomp.client.Application.__init__(self, argc, argv)
            self.setMessagingEnabled(False)
            self.setDatabaseEnabled(True, True)
            self.setLoggingToStdErr(True)
@@ -141,7 +141,7 @@ Print a list of all streams configured on a SeisComP3 system.
 
        def validateParameters(self):
            try:
-               if seiscomp3.Client.Application.validateParameters(self) == False:
+               if seiscomp.client.Application.validateParameters(self) == False:
                    return False
                return True
 
@@ -152,9 +152,9 @@ Print a list of all streams configured on a SeisComP3 system.
 
        def run(self):
            try:
-               dbr = seiscomp3.DataModel.DatabaseReader(self.database())
-               now = seiscomp3.Core.Time.GMT()
-               inv = seiscomp3.DataModel.Inventory()
+               dbr = seiscomp.datamodel.DatabaseReader(self.database())
+               now = seiscomp.core.Time.GMT()
+               inv = seiscomp.datamodel.Inventory()
                dbr.loadNetworks(inv)
 
                result = []
@@ -205,24 +205,24 @@ Print a list of all streams configured on a SeisComP3 system.
 station-coordinates.py
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Print the coordinates of all stations configured on a SeisComP3 system.
+Print the coordinates of all stations configured on a SeisComP system.
 
 .. code-block:: python
 
    #!/usr/bin/env python
 
-   import sys, seiscomp3.Client, seiscomp3.DataModel
+   import sys, seiscomp.client, seiscomp.datamodel
 
-   class InvApp(seiscomp3.Client.Application):
+   class InvApp(seiscomp.client.Application):
        def __init__(self, argc, argv):
-           seiscomp3.Client.Application.__init__(self, argc, argv)
+           seiscomp.client.Application.__init__(self, argc, argv)
            self.setMessagingEnabled(False)
            self.setDatabaseEnabled(True, True)
            self.setLoggingToStdErr(True)
 
        def validateParameters(self):
            try:
-               if seiscomp3.Client.Application.validateParameters(self) == False:
+               if seiscomp.client.Application.validateParameters(self) == False:
                    return False
 
                return True
@@ -233,11 +233,11 @@ Print the coordinates of all stations configured on a SeisComP3 system.
                sys.exit(-1)
 
        def run(self):
-           now = seiscomp3.Core.Time.GMT()
+           now = seiscomp.core.Time.GMT()
            try:
                lines = []
-               dbr = seiscomp3.DataModel.DatabaseReader(self.database())
-               inv = seiscomp3.DataModel.Inventory()
+               dbr = seiscomp.datamodel.DatabaseReader(self.database())
+               inv = seiscomp.datamodel.Inventory()
                dbr.loadNetworks(inv)
                nnet = inv.networkCount()
                for inet in xrange(nnet):
@@ -282,24 +282,24 @@ Print the coordinates of all stations configured on a SeisComP3 system.
 channel-gains.py
 ^^^^^^^^^^^^^^^^
 
-Print channel gains for all streams configured on a SeisComP3 system.
+Print channel gains for all streams configured on a SeisComP system.
 
 .. code-block:: python
 
    #!/usr/bin/env python
 
-   import traceback, sys, seiscomp3.Client, seiscomp3.DataModel
+   import traceback, sys, seiscomp.client, seiscomp.datamodel
 
-   class InvApp(seiscomp3.Client.Application):
+   class InvApp(seiscomp.client.Application):
        def __init__(self, argc, argv):
-           seiscomp3.Client.Application.__init__(self, argc, argv)
+           seiscomp.client.Application.__init__(self, argc, argv)
            self.setMessagingEnabled(False)
            self.setDatabaseEnabled(True, True)
            self.setLoggingToStdErr(True)
 
        def validateParameters(self):
            try:
-               if seiscomp3.Client.Application.validateParameters(self) == False:
+               if seiscomp.client.Application.validateParameters(self) == False:
                    return False
 
                return True
@@ -310,11 +310,11 @@ Print channel gains for all streams configured on a SeisComP3 system.
                sys.exit(-1)
 
        def run(self):
-           now = seiscomp3.Core.Time.GMT()
+           now = seiscomp.core.Time.GMT()
            try:
                lines = []
-               dbq = seiscomp3.DataModel.DatabaseQuery(self.database())
-               inv = seiscomp3.DataModel.Inventory()
+               dbq = seiscomp.datamodel.DatabaseQuery(self.database())
+               inv = seiscomp.datamodel.Inventory()
                dbq.loadNetworks(inv)
                nnet = inv.networkCount()
                for inet in xrange(nnet):
@@ -369,13 +369,13 @@ Simple waveform client
 Summary
 -------
 
-Example client that connects to a record stream service and dumps the content
+Example client that connects to a RecordStream service and dumps the content
 to stdout.
 
 Goal
 ----
 
-Illustrate the basic record stream concepts.
+Illustrate the basic RecordStream concepts.
 
 Script
 ------
@@ -384,18 +384,18 @@ Script
 
    #!/usr/bin/env python
 
-   import seiscomp3.Client, sys
+   import seiscomp.client, sys
 
-   class App(seiscomp3.Client.StreamApplication):
+   class App(seiscomp.client.StreamApplication):
        def __init__(self, argc, argv):
-           seiscomp3.Client.StreamApplication.__init__(self, argc, argv)
+           seiscomp.client.StreamApplication.__init__(self, argc, argv)
            # Do not connect to messaging and do not use database at all
            self.setMessagingEnabled(False)
            self.setDatabaseEnabled(False, False)
 
 
        def init(self):
-           if seiscomp3.Client.StreamApplication.init(self) == False:
+           if seiscomp.client.StreamApplication.init(self) == False:
                return False
 
            # For testing purposes we subscribe to the last 5 minutes of data.
@@ -403,10 +403,10 @@ Script
            # a real-time capable backend such as Seedlink.
 
            # First, query now
-           now = seiscomp3.Core.Time.GMT()
+           now = seiscomp.core.Time.GMT()
            # Substract 5 minutes for the start time
-           start = now - seiscomp3.Core.TimeSpan(300,0)
-           # Set the start time in our record stream
+           start = now - seiscomp.core.TimeSpan(300,0)
+           # Set the start time in our RecordStream
            self.recordStream().setStartTime(start)
            # And the end time
            self.recordStream().setEndTime(now)
@@ -419,7 +419,7 @@ Script
 
 
        # handleRecord is called when a new record is being read from the
-       # record stream
+       # RecordStream
        def handleRecord(self, rec):
            # Print the streamID which is a join of NSLC separated with '.'
            print rec.streamID()
@@ -434,7 +434,7 @@ Script
                # Try to extract a float array. If the samples are of other
                # data types, use rec.dataType() to query the type and use
                # the appropriate array classes.
-               data = seiscomp3.Core.FloatArray.Cast(rec.data())
+               data = seiscomp.core.FloatArray.Cast(rec.data())
                # Print the samples
                if data:
                    print "  data: %s" % str([data.get(i) for i in xrange(data.size())])
@@ -468,7 +468,7 @@ Waveform client and record filtering
 Summary
 -------
 
-Example client that connects to a record stream service, filters the records
+Example client that connects to a RecordStream service, filters the records
 with a given SeisComp3 filter and dumps the content to stdout.
 
 Goal
@@ -483,17 +483,17 @@ Script
 
    #!/usr/bin/env python
 
-   import seiscomp3.Client, sys
+   import seiscomp.client, sys
 
-   class App(seiscomp3.Client.StreamApplication):
+   class App(seiscomp.client.StreamApplication):
        def __init__(self, argc, argv):
-           seiscomp3.Client.StreamApplication.__init__(self, argc, argv)
+           seiscomp.client.StreamApplication.__init__(self, argc, argv)
            # Do not connect to messaging and do not use database at all
            self.setMessagingEnabled(False)
            self.setDatabaseEnabled(False, False)
 
        def init(self):
-           if seiscomp3.Client.StreamApplication.init(self) == False:
+           if seiscomp.client.StreamApplication.init(self) == False:
                return False
 
            # For testing purposes we subscribe to the last 5 minutes of data.
@@ -501,10 +501,10 @@ Script
            # a real-time capable backend such as Seedlink.
 
            # First, query now
-           now = seiscomp3.Core.Time.GMT()
+           now = seiscomp.core.Time.GMT()
            # Substract 5 minutes for the start time
-           start = now - seiscomp3.Core.TimeSpan(300,0)
-           # Set the start time in our record stream
+           start = now - seiscomp.core.TimeSpan(300,0)
+           # Set the start time in our RecordStream
            self.recordStream().setStartTime(start)
            # And the end time
            self.recordStream().setEndTime(now)
@@ -514,24 +514,24 @@ Script
            self.recordStream().addStream("GE", "MORC", "", "BHN")
 
            # Create IIR filter instance that deals with data (samples)
-           filterIIR = seiscomp3.Math.InPlaceFilterF.Create("BW(4,1,10")
+           filterIIR = seiscomp.math.InPlaceFilterF.Create("BW(4,1,10")
            if not filterIIR:
-               seiscomp3.Logging.error("Failed to create filter")
+               seiscomp.logging.error("Failed to create filter")
                return False
 
            # Create a record filter that applies the given IIR filter to
            # each record fed. Deals with gaps and sps changes on record basis.
-           self.recordFilter = seiscomp3.IO.RecordIIRFilterF(filterIIR)
+           self.recordFilter = seiscomp.io.RecordIIRFilterF(filterIIR)
 
            # Demultiplexes record volumes and runs the passed filter
            # on each stream.
-           self.demuxer = seiscomp3.IO.RecordDemuxFilter(self.recordFilter)
+           self.demuxer = seiscomp.io.RecordDemuxFilter(self.recordFilter)
 
            return True
 
 
        # handleRecord is called when a new record is being read from the
-       # record stream
+       # RecordStream
        def handleRecord(self, raw_rec):
            # Feed the raw record into the demuxer and filter it
            rec = self.demuxer.feed(raw_rec)
@@ -550,7 +550,7 @@ Script
                        # Try to extract a float array. If the samples are of other
                        # data types, use rec.dataType() to query the type and use
                        # the appropriate array classes.
-                       data = seiscomp3.Core.FloatArray.Cast(rec.data())
+                       data = seiscomp.core.FloatArray.Cast(rec.data())
                        # Print the samples
                        if data:
                            print "  data: %s" % str([data.get(i) for i in xrange(data.size())])

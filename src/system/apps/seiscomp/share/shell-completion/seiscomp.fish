@@ -33,7 +33,7 @@ end
 
 set -l seiscompBinaries (__fish_seiscomp_binaries)
 
-complete -f -c seiscomp -n "__fish_seiscomp_needs_command" -a "install-deps" -d "Installs OS dependencies to run SeisComP3"
+complete -f -c seiscomp -n "__fish_seiscomp_needs_command" -a "install-deps" -d "Installs OS dependencies to run SeisComP"
 complete -f -c seiscomp -n "__fish_seiscomp_needs_command" -a "setup" -d "Initializes the configuration of all available modules"
 complete -f -c seiscomp -n "__fish_seiscomp_needs_command" -a "shell" -d "Launches the SeisComP shell"
 complete -f -c seiscomp -n "__fish_seiscomp_needs_command" -a "enable" -d "Enables all given modules to be started"
