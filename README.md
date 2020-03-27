@@ -70,7 +70,6 @@ echo "To initialize the build, run 'make'."
 To keep track of the state of each subrepository, [mu-repo](http://fabioz.github.io/mu-repo/)
 is a recommended way.
 
-
 ## Build
 
 ### Prerequisites
