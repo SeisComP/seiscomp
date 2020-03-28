@@ -1,5 +1,5 @@
 {
-	"contributors": "https://raw.githubusercontent.com/gempa/cla/master/.contributors",
+	"contributors": "https://api.github.com/repos/gempa/cla/contents/.contributors",
 	"label": "cla-signed",
 	"message": "We require contributors to sign our Contributor License Agreement, and we don't have {{usersWithoutCLA}} on file. In order for us to review and merge your code, please contact @gempa-jabe to get yourself added."
 }
