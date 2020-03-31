@@ -55,9 +55,9 @@ git clone $repo_path/main.git
 git clone $repo_path/extras.git
 
 echo "Cloning external base components"
-git clone $repo_path/gns.git
-git clone $repo_path/ipgp.git
-git clone $repo_path/sed.git
+git clone $repo_path/contrib-gns.git gns
+git clone $repo_path/contrib-ipgp.git ipgp
+git clone $repo_path/contrib-sed.git sed
 
 echo "Done"
 
