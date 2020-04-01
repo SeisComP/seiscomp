@@ -88,11 +88,6 @@ class Environment(seiscomp.config.Config):
         except:
             pass
 
-
-    def __del__(self):
-        if self.cwd and os:
-            os.chdir(self.cwd)
-
     def _readConfig(self):
         self.syslog = False
 
