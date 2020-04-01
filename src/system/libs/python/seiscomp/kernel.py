@@ -90,7 +90,7 @@ class Environment(seiscomp.config.Config):
 
 
     def __del__(self):
-        if self.cwd:
+        if self.cwd and os:
             os.chdir(self.cwd)
 
     def _readConfig(self):
