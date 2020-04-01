@@ -12,7 +12,7 @@ research centers, companies and governmental agencies world-wide by:
 
 * powerful and reliable automatic data processing in real time or during post-processing
 * user-friendly and comprehensive graphical interfaces
-* modern and well-maintained `OpenSource software <https://github.com/SeisComP3>`_ welcoming community contributions.
+* modern and well-maintained `OpenSource software <https://github.com/SeisComP>`_ welcoming community contributions.
 
 The first work on what became SeisComP today began nearly two decades ago
 with developments at GFZ of plugins for digitizers.

@@ -13,14 +13,14 @@ You will ...
 * Tutorial on :ref:`<tutorials_archiving>`
 
 :Afterwards/Results/Outcomes:
-* The station meta data and waveforms are available from a local web server
+* The station meta data and waveforms are available from a local web server.
 
 :Time range estimate:
 * 10 minutes
 
 ----------
 
-By default, fdsnws will serve all three FDSN web services
+By default, :ref:`fdsnws` will serve all three FDSN web services
 
 * fdsnws-dataselect
 * fdsnws-event
@@ -28,16 +28,18 @@ By default, fdsnws will serve all three FDSN web services
 
 on a server running locally on port 8080.
 
-The availability feature allows to obtain information on continuous data segments
-in the waveform archive. The information are written to the
+The additional availability feature allows users to obtain information
+on continuous data segments in the waveform archive.
+This information is written to the
 :ref:`database <concepts_database>` by :ref:`scardac`.
 To active the availability feature set :confval:`serveAvailability` and
-:ref:`dataAvailability.enable` to true.
+:ref:`dataAvailability.enable` to true. The information can be retrieved using
+:ref:`scxmldump` or :ref:`fdsnws`.
 
 Set-up
 ======
 
-* In scconfig, go to the System tab.
+* In :program:`scconfig`, go to the System tab.
   Click on the line for the "fdsnws" module, and press "Enable module(s)".
   Then restart SeisComP.
 
@@ -46,11 +48,12 @@ Set-up
     $ seiscomp enable fdsnws
     $ seiscomp start fdsnws
 
-* Logging information goes to ~/.seiscomp/fdsnws.log
+* Logging information goes to :file:`~/.seiscomp/fdsnws.log` by default.
   Information about requests handled goes to the file named in `accessLog`,
   if you set this.
 
-To see the available configuration options, go to the Modules tab in scconfig.
+To see the available configuration options, go to the Modules tab in
+:program:`scconfig`.
 Under Utilities open "fdsnws" to reveal the options.
 To disable fdsnws-event, for instance, unlock the "serveEvent" area
 and uncheck this parameter.
@@ -63,7 +66,8 @@ SeisComP :ref:`inventory <concepts_inventory>` using the `allowRestricted`,
 Visiting the service
 ====================
 
-Once `fdsnws` is running, you can visit the local web server that it runs.
+Once :program:`fdsnws` is running, you can visit the local web server
+that it runs.
 In your browser, visit http://localhost:8080/fdsnws/dataselect/1/
 
 .. figure:: media/servefdsnws_dataselect.png
@@ -73,15 +77,16 @@ In your browser, visit http://localhost:8080/fdsnws/dataselect/1/
    Information screen shown by fdsnws-dataselect at
    http://localhost:8080/fdsnws/dataselect/1/
 
-Testing
-=======
+Check it works
+==============
 
-* If you visit the URL `/fdsnws/dataselect/1/version` you should receive
-  a version number string - currently `1.1.0`.
+* If you visit the URL `http://localhost:8080/fdsnws/dataselect/1/version`
+  you should receive a version number string - currently `1.1.0`.
 
 * The fdsnws-station service should give a list of networks configured
-  and served by the service,
-  e.g. visiting `/fsdnws/station/1/query?level=network&format=text` produces::
+  and served by the service, e.g. visiting
+  `http://localhost:8080/fsdnws/station/1/query?level=network&format=text`
+  produces::
 
     #Network|Description|StartTime|EndTime|TotalStations
     GE|GEOFON Program, GFZ Potsdam, Germany|1993-01-01T00:00:00||84
@@ -127,7 +132,7 @@ Final tests
 
 * The `fdsnws_fetch` client is a convenient tool for requesting waveforms
   from a FDSN web service.
-  More info is here:
+  More information about it is at
   http://geofon.gfz-potsdam.de/software/fdsnws_scripts
 
 

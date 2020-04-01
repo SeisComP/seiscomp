@@ -12,8 +12,7 @@ You will ...
 * Inserts result into your current SeisComP database for later processing.
 
 :Pre-requisites for this tutorial:
-* None, or list other tutorials
-
+*  None
 
 :Afterwards/Results/Outcomes:
 * The event is in your SeisComP system, with a new event ID
@@ -25,7 +24,9 @@ You will ...
 
 Playbacks are an important way of testing network configuration
 (choice of stations and streams used) and the SeisComp settings
-used for locating events (scautopick and scevent parameters).
+used for locating events
+(:program:`scautopick` and :program:`scevent` parameters).
+
 
 General set-up
 ==============
@@ -35,16 +36,17 @@ For a playback, you need
 #. Stations with inventory in the database.
    (See tutorial on :ref:`tutorials_geofon_waveforms`)
 #. Station configuration via bindings.
-#. Recorded waveforms in an SDS archive.
-   (See :ref:`tutorials_archiving`)
+#. Recorded waveforms in an :term:`SDS` archive.
+   (See :ref:`tutorials_archiving`.)
 
-Set-up with CX + GE networks
-============================
+Set up SeisComP with CX + GE networks
+=====================================
 
 For this playback we will pick on 100 Hz (HH*) streams from stations in the GE and CX networks.
 Some of these stations use location code "10" for HH streams.
 The SeisComP system needs to know which stream to work with for each station.
-In :ref:`scconfig` go to "Bindings". Create 2 profiles in global giving descriptive names, e.g.:
+In :program:`scconfig` go to "Bindings".
+Create two profiles in global giving descriptive names, e.g.:
 
 * global/__HH
 * global/10HH
@@ -60,11 +62,12 @@ Add another profile:
 * scautopick/teleseismic
 
 No further configuration, just use the defaults.
-Bind the scautopick/teleseismic profile to networks CX and GE, save the configuration and update the configuration in the database (in scconfig: System -> Update configuration)
+Bind the scautopick/teleseismic profile to networks CX and GE, save the configuration and update the configuration in the database
+(in :program:`scconfig`: System -> Update configuration).
 
 At this point you are ready to run the playback as described below.
 
 Final tests
 ===========
 
-* In scolv, the event is visible.
+* In :program:`scolv`, the event is visible.

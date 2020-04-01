@@ -4,7 +4,7 @@
 Get real-time data from a remote Seedlink server
 ************************************************
 
-You will use :ref:`scconfig` to ...
+You will use :program:`scconfig` to:
 
 * Add stations of the GEOFON seismic network, obtained from GEOFON,
   as a source of data.
@@ -14,8 +14,8 @@ You will use :ref:`scconfig` to ...
 * :ref:`Installation<tutorials_postinstall>`
 
 :Afterwards/Results/Outcomes:
-* :ref:`slinktool` -Q locally shows GE streams are available.
-* :ref:`scrttv` locally shows the GE station traces
+* :program:`slinktool -Q` locally shows GE streams are available.
+* :program:`scrttv` locally shows the GE station traces
 
 :Time range estimate:
 * 10-15 minutes.
@@ -49,8 +49,8 @@ Check data are available
 
 First, we'll query the upstream Seedlink server, which runs on
 host `geofon.gfz-potsdam.de` at port 18000.
-We do this with SeisComP's `slinktool` command, giving the '-L' option
-to `slinktool` ::
+We do this with SeisComP's :program:`slinktool` command, giving the '-L' option
+to :program:`slinktool` ::
 
   $ slinktool -L geofon.gfz-potsdam.de
   6C GF01  GF01
@@ -175,7 +175,7 @@ Now find where your web browser has saved the file.
 Import the inventory
 ####################
 
-It is easiest to use the import function of the `scconfig` GUI.
+It is easiest to use the import function of the :program:`scconfig` GUI.
 Alternatively, you can import from the command line:
 
 * From FDSN StationXML: ::
@@ -186,13 +186,13 @@ Alternatively, you can import from the command line:
 
     invextr -f --chans 'NE.STA.*' mynetwork.xml > etc/inventory/mynetwork.xml
 
-Either way, afterwards, inventory is in `~/seiscomp/etc/inventory`.
+Either way, afterwards, inventory is in :file:`~/seiscomp/etc/inventory`.
 It now needs to be loaded in to the SeisComP database.
 
 Import the metadata for your stations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Open *scconfig* from the terminal.
+* Open :program:`scconfig` from the terminal.
   Click on the "Inventory" tab on the left side bar.
 
 * Select "Import" and at "Source:", browse to the file with the inventory
@@ -214,7 +214,7 @@ Import the metadata for your stations
 
 * Sync or Sync keys.
   Make sure :ref:`scmaster` and Spread are running.
-  SeisComP reads the inventory files in `~/seiscomp/etc/inventory`
+  SeisComP reads the inventory files in file:`~/seiscomp/etc/inventory`
   and loads them into the database.
   You will see messages like "Sending notifiers: 2%" as this occurs.
   Eventually you should see "Program exited normally" again.
@@ -230,7 +230,7 @@ In SeisComP terminology, *bindings* are the connection between modules
 and individual stations.
 See the "Bindings" section of :ref:`concepts_configuration` for full details.
 
-Now go to the "Bindings" tab on the left side bar of `scconfig`.
+Now go to the "Bindings" tab on the left side bar of :program:`scconfig`.
 We will need to create bindings for every GE station to the
 "global", "scautopick" and "seedlink" applications, as follows:
 
@@ -258,7 +258,7 @@ We will need to create bindings for every GE station to the
   left side (you may do that also at the station level).
 
 * Press Control+S to save the configuration.
-  This writes configuration files in `~/seiscomp/etc/key`.
+  This writes configuration files in :file:`~/seiscomp/etc/key`.
 
 
 Update the configuration
@@ -270,8 +270,8 @@ SeisComP's modules then require restarting to load the updated information.
 * Go to the System tab and press ESC (the Escape key, to de-select all modules).
 
   #. Click on "Update configuration", at the right of the window.
-       (**Not** "Update", - that just refreshes `scconfig`'s display of what
-       is running!)
+     (**Not** "Update", - that just refreshes :program:`scconfig`'s
+     display of what is running!)
   #. Press *Start* to start acquiring data from the already configured stations.
 
 * Alternatively, at the command line::
@@ -284,9 +284,9 @@ Check it works
 ##############
 
 * To confirm that you have waveform data for the station locally,
-  run `slinktool -Q`.
-* Open *scmv* to see a map view of the configured stations.
-* Open *scrttv* to see the incoming real-time streams.
+  run :program:`slinktool -Q`.
+* Open :program:`scmv` to see a map view of the configured stations.
+* Open :program:`scrttv` to see the incoming real-time streams.
 
 If you see colored triangles and traces incoming it means that
 you have configured your system properly.

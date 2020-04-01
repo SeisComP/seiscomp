@@ -469,7 +469,7 @@ Summary
 -------
 
 Example client that connects to a RecordStream service, filters the records
-with a given SeisComp3 filter and dumps the content to stdout.
+with a given SeisComP filter and dumps the content to stdout.
 
 Goal
 ----

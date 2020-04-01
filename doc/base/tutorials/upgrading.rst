@@ -7,10 +7,10 @@ Upgrading SeisComP
 You will ...
 
 * Upgrade a SeisComP system
-* Migrate a SeisComP3 system to a higher SeisComP version
+* Migrate a SeisComP3 system to a newer SeisComP version
 
 :Pre-requisites for this tutorial:
-* Tutorial on :ref:`installation <tutorials_postinstall>` and SeisComP installed
+* Tutorial on :ref:`installation <tutorials_postinstall>` and SeisComP previously installed
 
 :Afterwards/Results/Outcomes:
 * Upgraded SeisComP
@@ -137,11 +137,11 @@ and the :ref:`messaging system <sec-tutorials_upgrading_messaging>`.
 Files and directories
 ---------------------
 
-With **SeisComP3** all the default installation typically requires all modules and configurations
+With **SeisComP3** all the default installation typically required all modules and configurations
 in the directories
 
-* seiscomp/ , typically $HOME/seiscomp or /opt/seiscomp/
-* $HOME/.seiscomp/
+* seiscomp3/ , typically $HOME/seiscomp3 or /opt/seiscomp3/
+* $HOME/.seiscomp3/
 
 As of **SeisComP in version 4** the directories are:
 
@@ -151,16 +151,17 @@ As of **SeisComP in version 4** the directories are:
 **All configuration files** must be migrated to the new structures. This
 includes:
 
-* Configurations and inventory in seiscomp/:
+* Configurations and inventory in seiscomp3/:
 
-  * seiscomp/etc/\*.cfg
-  * seiscomp/etc/inventory/
-  * seiscomp/etc/keys/
+  * seiscomp3/etc/\*.cfg
+  * seiscomp3/etc/inventory/
+  * seiscomp3/etc/keys/
 
-* Configurations and logs in $HOME/.seiscomp/
-* All user-defined files and directories in seiscomp/share/
-* All user-defined :ref:`seedlink` and other templates in seiscomp/share/templates/
-* The waveform archive and other archives typically in seiscomp/var/lib/
+* Configurations in $HOME/.seiscomp3/
+* Logs in $HOME/.seiscomp3/log (optional)
+* All user-defined files and directories in seiscomp3/share/
+* All user-defined :ref:`seedlink` and other templates in seiscomp3/share/templates/
+* The waveform archive and other archives typically in seiscomp3/var/lib/
 * User-defined files and directories in other places.
 
   .. warning::
@@ -177,9 +178,9 @@ includes:
 
      *   any file related to spread, arclink and arclinkproxy.
 
-Configurations containing absolute paths, e.g. :file:`/home/sysop/seiscomp/share/scautoloc/grid_custom.conf`,
+Configurations containing absolute paths, e.g. :file:`/home/sysop/seiscomp3/share/scautoloc/grid_custom.conf`,
 must be adjusted. Better use :ref:`internal SeisComP variables <concepts_configuration_variables>`
-such as *@DATADIR@* instead of *seiscomp/share*.
+such as *@DATADIR@* instead of *seiscomp3/share*.
 
 System variables
 ----------------
@@ -261,13 +262,13 @@ configuration. Migrate the legacy database parameters and configure the new one:
      .. code-block:: sh
 
         queues.production.processors.messages.dbstore.driver = mysql
-        queues.production.processors.messages.dbstore.read = sysop:sysop@localhost/seiscomp
-        queues.production.processors.messages.dbstore.write = sysop:sysop@localhost/seiscomp
+        queues.production.processors.messages.dbstore.read = sysop:sysop@localhost/seiscomp3
+        queues.production.processors.messages.dbstore.write = sysop:sysop@localhost/seiscomp3
 
      .. note::
 
         The name of the database can be freely chosen. The example assumes that
-        the database named *seiscomp* exists already and that it shall be continued
+        the database named *seiscomp3* exists already and that it shall be continued
         to be used with the new SeisComP.
 
    * Add the names of the queues to the :confval:`queues` parameter.

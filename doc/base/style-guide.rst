@@ -77,6 +77,11 @@ Other markup tools and conventions
 
      :file:`/etc/foo/bar.cfg`
 
+- Use the reST :program: indicator for SeisComP programs.
+  Use :ref: if a cross reference to the documentation is needed. ::
+
+     :program:`scfoomatic`
+
 - Configuration values and options have a special syntax using the :confval: tag. ::
 
      :confval:`foo`
@@ -94,17 +99,17 @@ English
 - SeisComP module names are proper nouns, even though written with lower case.
   Thus they do not need an article.
 
-  * Correct: "Although scmaster receives a message"
+  * Correct: "Although :program:`scmaster` receives a message"
   * Incorrect: "Although the scmaster receives a message..."
 
 Disputed: a sentences may begin with a lower case module name e.g. "scmaster has five modes..."
-To avoid this: "The scmaster module has..."
+To avoid this: "The :program:`scmaster` module has..."
 
 - Worttrennung:
 
-  - Getrennt:
-    base class
-  - Zusammengeschrieben:
+  - Seperate words:
+    base class, wave number
+  - One word:
     aftershock, foreshock, *and mainshock too*,
     bandpass, eigenperiod etc., metadata, standalone, username, workflow,
   - Difficult:

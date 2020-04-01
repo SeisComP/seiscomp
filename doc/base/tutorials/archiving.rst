@@ -43,7 +43,7 @@ In scconfig
 
 #. Under the Modules tab, go to Acquisition, and select "slarchive".
    Here you can see the default parameters used.
-   By default, `slarchive` connects to your local Seedlink server,
+   By default, :program:`slarchive` connects to your local Seedlink server,
    and archives to your local disk.
 
 #. Under the System tab, select the line for slarchive, and click
@@ -52,7 +52,7 @@ In scconfig
 #. Under Bindings:
    On RHS right-click "slarchive" to add an slarchive profile.
    Name it 'week', to keep waveforms for 7 days, and click 'Ok'.
-   The new profile appears in the (bottom right corner of scconfig.
+   The new profile appears in the (bottom right corner of :program:`scconfig`.
    Double click on the profile to open its settings.
    Unlock the box labeled "keep", and change the default from 30 to 7.
 
@@ -75,7 +75,7 @@ In scconfig
 #. Then return to System, and click 'Update configuration'.
    (Make sure the 'slarchive' module, or no module, is selected.)
 
-#. Restart `slarchive`
+#. Restart :program:`slarchive`.
 
 Command line
 ============
@@ -96,8 +96,8 @@ Afterwards it will look something like this::
   seedlink:geofon
   slarchive:week
 
-Repeat this for each top-level key file (station_GE_ACRG, station_GE_ARPR,
-and so on.)
+Repeat this for each top-level key file
+(:file:`station_GE_ACRG`, :file:`station_GE_ARPR`, and so on.)
 Now create the binding profile in the key directory.
 This is a file with a name corresponding to the binding profile name
 (here "week")::

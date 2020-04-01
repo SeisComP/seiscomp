@@ -80,6 +80,7 @@ Scientific and technical terms
       and within 1-2 fault lengths distance from the mainshock fault. Aftershocks can continue over
       a period of weeks, months, or years, decreasing in frequency with time. In general, the larger
       the mainshock, the larger and more numerous the aftershocks, and the longer they will continue.
+
    array
     A set of observing sensors at which the observed and sought signal are mostly coherent.
     If the sensors are seismometers or barometers measuring infrasound, the terms
@@ -127,7 +128,7 @@ Scientific and technical terms
       found, e.g. by :term:`F-K` analysis.
 
    beam packing
-      Equvialent to the :term:`F-K` analysis where the :term:`beam` and the related
+      Equivalent to the :term:`F-K` analysis where the :term:`beam` and the related
       parameters such as :term:`beam power` or :term:`semblance` are formed in the
       time domain. Seismograms from the :term:`array` stations are shifted according
       to the considered ranges of :term:`slowness` and :term:`backazimuth` or
@@ -162,7 +163,7 @@ Scientific and technical terms
       Characteristic Intensity
 
    channel code
-      Description of characeristics of data related to the recording sensor and
+      Description of characteristics of data related to the recording sensor and
       data logger as well as instrument responses, sampling frequencies, etc.
       The standard codes are defined in the
       `SEED manual <https://www.fdsn.org/seed_manual/SEEDManual_V2.4.pdf>`_.
@@ -273,7 +274,7 @@ Scientific and technical terms
       may be difficult to recognize.
 
    F-K
-      F-K refers to a 2D-:term:`Fourier analysis` were the base functions
+      F-K refers to a 2-D :term:`Fourier analysis` where the base functions
       are defined, e.g. by ranges of :term:`frequency` and :term:`wave number`.
       F-K analysis is applied for signal detection by transforming time series
       recorded at several sensors, e.g. seismic or infrasound :term:`array`
@@ -383,7 +384,7 @@ Scientific and technical terms
       The time difference between the current time and the arrival time of the record (SeisComP).
       The latency can be computed by :ref:`scqc`.
 
-   Lithosphere
+   lithosphere
       The outer solid part of the Earth, including crust and uppermost mantle. The lithosphere is
       about 100 km thick, although its thickness is age-dependent (older lithosphere is thicker).
       At some locations the lithosphere below the crust is brittle enough to produce earthquakes by
@@ -457,7 +458,7 @@ Scientific and technical terms
       In SeisComP a modified local magnitude :term:`MLv <magnitude, local vertical (MLv)>` is determined by simulation of a Wood-Anderson instrument and then measuring
       the amplitude in a 150 s time window on the vertical component of station with distances smaller than 8°.
 
-      The amplitude unit in SeisComP is **millimeter** (mm).
+      * Amplitude unit in SeisComP: **millimeter** (mm)
 
       Read the :ref:`technical documentation <global_ml>` for the configuration.
 
@@ -465,7 +466,7 @@ Scientific and technical terms
      The :term:`ML <magnitude, local (ML)>` magnitude with amplitudes measured on
      the vertical component instead of the horizontals.
 
-     The amplitude unit in SeisComP is **millimeter** (mm).
+     * Amplitude unit in SeisComP: **millimeter** (mm)
 
      Read the :ref:`technical documentation <global_mlv>` for the configuration.
 
@@ -473,7 +474,7 @@ Scientific and technical terms
       The local magnitude measured on the horizontal components with
       a modified calibration functions as compared to :term:`ML <magnitude, local (ML)>`.
 
-      The amplitude unit in SeisComP is **millimeter** (mm).
+      * Amplitude unit in SeisComP: **millimeter** (mm)
 
       Read the :ref:`technical documentation <global_mlh>` for the configuration.
 
@@ -484,9 +485,9 @@ Scientific and technical terms
       Read the :ref:`technical documentation <global_mlr>` for the configuration.
 
    magnitude, Nuttli (MN)
-      Canadian Nuttli magnitude.
+      Nuttli magnitude for Canada and other Cratonic regions.
 
-      The amplitude unit in SeisComP is **meter/second** (m/s).
+      * Amplitude unit in SeisComP: **meter/second** (m/s)
 
       Read the :ref:`technical documentation <global_mn>` for the configuration.
 
@@ -511,9 +512,9 @@ Scientific and technical terms
 
       In SeisComP mb amplitudes are measured on vertical-component seismograms
       in a 30 s time window after simulation of a :term:`WWSSN_SP` short-period
-      seismometer. Amplitudes are considered within epicentral distances of 5° to 105°.
+      seismometer. Amplitudes are used from stations with epicentral distances between 5° and 105°.
 
-      * Amplitude unit in SeisComP is **nanometer** (nm)
+      * Amplitude unit in SeisComP: **nanometer** (nm)
       * Distance range: 5 - 105°
       * Time window: 0 - 30 s
 
@@ -593,7 +594,7 @@ Scientific and technical terms
 
          M_s = \log \left(\frac{A}{2\pi}\right) + 1.66 \log(\Delta) + 3.3
 
-      * Amplitude unit in SeisComP3 is **meter per second** (m/s)
+      * Amplitude unit in SeisComP: **meter per second** (m/s)
       * Period range: all
       * Distance range: 2 - 160°
       * Depth range: 0 - 100 km
@@ -616,7 +617,7 @@ Scientific and technical terms
       This equation is valid for local (< 2000 km) and shallow (< 80 km) earthquakes. For
       deeper earthquakes additional correction functions have to be applied (Katsumata, 1996).
 
-      * Amplitude unit in SeisComP is **micrometer** (um)
+      * Amplitude unit in SeisComP: **micrometer** (um)
       * Time window: 150 s
       * Epicentral distance range: 0 - 20°
       * Depth range: 0 - 80 km
@@ -646,7 +647,7 @@ Scientific and technical terms
       of multiple records results in an estimation of the moment magnitude without correction
       for the source mechanism (Tsuboi et al., 1995).
 
-      * Amplitude unit in SeisComP is **nanometer times second** (nm*s)
+      * Amplitude unit in SeisComP: **nanometer times second** (nm*s)
       * Time window: 95 s
       * Epicentral distance range: 5 - 105°
 
@@ -699,7 +700,7 @@ Scientific and technical terms
 
    Mohorovičić discontinuity
       The discontinuity in seismic velocities that defines the boundary between crust and mantle
-      of the Earth. Named after the Croation seismologist Andrija Mohorovičič (1857-1936) who
+      of the Earth. Named after the Croatian seismologist Andrija Mohorovičič (1857-1936) who
       discovered it. The boundary is between 20 and 60 km deep beneath the continents and between
       5 and 10 km deep beneath the ocean floor.
 
@@ -708,7 +709,7 @@ Scientific and technical terms
       tuned to record particular signals.
 
    network magnitude
-      a. The network magnitude is a magnitude value summarizing severval :term:`station magnitude` values
+      a. The network magnitude is a magnitude value summarizing several :term:`station magnitude` values
 	 of one :term:`origin`. Read the documentation of :ref:`scmag` for the details.
       #. QuakeML object.
 
@@ -1123,7 +1124,7 @@ Scientific and technical terms
       simple P and S waveforms with more impulsive onsets. A more reliable way to
       determine the depth of an earthquake is to identify depth phases (e.g. pP, sP)
       in the waveforms. At stations with large distance to the epicenter the pP wave
-      follows the direct P wave by a time interval that slighty increase with distance
+      follows the direct P wave by a time interval that slightly increases with distance
       but rapidly with depth. The depth can be derived from this time interval by using
       :term:`travel-time curves <travel-time curve>`.
 
@@ -1216,9 +1217,9 @@ Scientific and technical terms
       that lie within a relatively small region.
 
    vespagram
-      Vesparams are diagrams of :term:`beam` traces over time typically formed
+      Vespagrams are diagrams of :term:`beam` traces over time typically formed
       for a particular :term:`azimuth` (or :term:`backazimuth`) and for
-      ranges of :term:`slowness` (slowness vespagram). When the slowess
+      ranges of :term:`slowness` (slowness vespagram). When the slowness
       is kept constant and the backazimuth is varied the term backazimuth
       vespagram is used.
 
@@ -1251,7 +1252,7 @@ Scientific and technical terms
       The general nomenclature of P waves entitles reflections at the topside of boundaries
       with lowercase letters (m – Moho reflection; c - CMB reflection; i - inner core-outer
       core boundary reflection), e.g. PmP is a reflected P wave at the Moho. Reflections
-      at the bottomside of boundaries get no additional letter, e.g. PP is a reflected
+      at the bottom side of boundaries get no additional letter, e.g. PP is a reflected
       P wave at the Earth's surface. Refracted rays get capital letters (K - through
       the outer core; I - through the inner core), e.g. PKIKP is a P wave traversing
       the crust/mantle, the outer core, the inner core, again the outer core and again
@@ -1266,7 +1267,7 @@ Scientific and technical terms
       and regional distances. The general nomenclature of S waves is analog to the P waves.
       The reflections at the topside of boundaries have lowercase letters (m - Moho
       reflection; c - CMB reflection), e.g. SmS is a reflected S wave at the Moho.
-      Reflections at the bottomside of boundaries get no additional letter, e.g. SS is a
+      Reflections at the bottom side of boundaries get no additional letter, e.g. SS is a
       reflected S wave at the Earth's surface. Refracted rays get capital letters (J - through
       the inner core), e.g. SKJKS is a S wave traversing the crust/mantle, the outer core
       as a :term:`P wave`, the inner core as a :term:`S wave`, again the outer core as a P wave and again
@@ -1316,4 +1317,3 @@ Scientific and technical terms
 
    XML
       Extensible Markup Language
-

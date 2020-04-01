@@ -10,7 +10,7 @@ SeisComP in multiple formats (HTML, man, PDF, ePub etc) in a
 consistent way. The functionality of SeisComP differs between
 versions so the documentation is versioned along with SeisComP.
 For more general topics and tutorials please refer to the
-`SeisComp3 wiki <http://www.seiscomp.org/>`_.
+`SeisComP wiki <http://www.seiscomp.org/>`_.
 
 The documentation is written in `reStructuredText <http://docutils.sourceforge.net/rst.html>`_ (reST) a
 simple text mark up format. The documentation is generated using `Sphinx <http://sphinx.pocoo.org/index.html>`_
@@ -57,8 +57,8 @@ respective module, e.g. :file:`src/seedlink/apps/seedlink/descriptions/seedlink.
 The intention is that the documentation is close to the code to make it easier for developers to keep the
 documentation up to date with code changes.
 
-For a new executable an entry should also be made in the man section of conf.py. The man page is a short
-form of the documentation that is generated from only the .xml file.
+For a new executable an entry should also be made in the man section of :file:`conf.py`.
+The man page is a short form of the documentation that is generated from only the .xml file.
 
 
 Images
@@ -169,7 +169,7 @@ Plugin
 
 A plugin template can be found in :file:`doc/templates/plugin.xml`.
 
-It describes an extension of a modules configuration. This is most likely the
+It describes an extension of a module's configuration. This is most likely the
 case when an application loads dynamically shared libraries also called plugins.
 
 Element: **plugin**
@@ -179,8 +179,8 @@ Element: **plugin**
 +===================+==========+===========+===============================================+
 | **name**          | attrib   |    yes    | The name of the plugin.                       |
 +-------------------+----------+-----------+-----------------------------------------------+
-| **extends**       | element  |    yes    | The list of module names separated by comma   |
-|                   |          |           | the plugin extends.                           |
+| **extends**       | element  |    yes    | The list of names of module names that        |
+|                   |          |           | the plugin extends, separated by commas.      |
 +-------------------+----------+-----------+-----------------------------------------------+
 | **description**   | element  |    no     | A short description of the plugin.            |
 +-------------------+----------+-----------+-----------------------------------------------+
@@ -189,7 +189,7 @@ Element: **plugin**
 |                   |          |           | :ref:`configuration<xml-configuration>`.      |
 +-------------------+----------+-----------+-----------------------------------------------+
 
-It follows a simple example of how a plugin definition looks like.
+Below is a simple example of how a plugin definition appears in XML.
 
 .. code-block:: xml
 
@@ -231,7 +231,7 @@ Element: **binding**
 |                   |          |           | :ref:`configuration<xml-configuration>`.      |
 +-------------------+----------+-----------+-----------------------------------------------+
 
-It follows a simple example of how a plugin definition looks like.
+Below is an example of how a simple binding definition appears as XML.
 
 .. code-block:: xml
 
@@ -381,7 +381,7 @@ Element: **group**
 +-------------------+----------+-----------+---------------------------------------------------+
 
 
-It follows an example of the plugin definition for the NonLinLoc plugin. It contains
+Below is an example of the plugin definition for the NonLinLoc plugin. It contains
 groups, parameters and structures.
 
 .. code-block:: xml
@@ -515,7 +515,7 @@ Element: **option**
 +---------------------+----------+-----------+-----------------------------------------------+
 
 
-It follows an example of the module definition for scautoloc (extract).
+Below is an example of the module definition for :program:`scautoloc` (extract).
 
 .. code-block:: xml
 

@@ -99,6 +99,7 @@ For developers
    :titlesonly:
 
    /base/sdk
+   /base/build
    /base/contributing-docs
    /base/style-guide
    /base/coding-conventions

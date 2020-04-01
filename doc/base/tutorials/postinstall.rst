@@ -6,7 +6,7 @@ Installation on Ubuntu
 
 You will ...
 
-* install a basic SeisComP installation.
+* make a basic SeisComP installation.
 
 :Pre-requisites for this tutorial:
 * None
@@ -45,7 +45,7 @@ but the steps for other Ubuntu versions are similar.
      $ uname -m
 
    Compare the available disk space with the requirements given in
-   the ref:`installation` section.
+   the :ref:`installation` section.
    If 'uname' shows 'i686', you have a 32-bit system;
    if you see 'x86_64', you have 64-bit.
 
@@ -53,16 +53,16 @@ Download SeisComP binary package, maps and documentation
 ========================================================
 
 3. Download the appropriate SeisComP binary package taking into
-   account your Linux distribution and the architecture. Get the package from
-   `www.seiscomp.org <https://www.seiscomp.org/downloader>`_ -
-   for Ubuntu and other Linux flavours such as CentOS, Debian,
-   Fedora (Red Hat), OpenSuSE, and Raspbian.
+   account your Linux distribution and the architecture.
+   Get the package from
+   `www.seiscomp3.org <https://www.seiscomp3.org/downloader>`_ -
+   for Ubuntu and other Linux flavours such as CentOS and Debian.
 
-#. From the same site you also download
+#. From the same site you should also download
 
-   * maps, e.g. https://www.seiscomp.org/downloader/seiscomp-jakarta-maps.tar.gz
+   * maps, e.g. https://www.seiscomp3.org/downloader/seiscomp3-jakarta-maps.tar.gz
    * documentation, e.g. for SeisComP3 in version jakarta-2018.327:
-     https://www.seiscomp.org/downloader/seiscomp-jakarta-2018.327-doc.tar.gz.
+     https://www.seiscomp3.org/downloader/seiscomp3-jakarta-2018.327-doc.tar.gz.
 
    Make sure, the documentation matches your SeisComP version.
 
@@ -70,9 +70,9 @@ Download SeisComP binary package, maps and documentation
    you will find in your home or downloads directory ::
 
      $ cd
-     $ tar xzf seiscomp-jakarta-2018.327.15-ubuntu18.04-x86_64.tar.gz
-     $ tar xzf seiscomp-jakarta-maps.tar.gz
-     $ tar xzf seiscomp-jakarta-2018.327-doc.tar.gz
+     $ tar xzf seiscomp3-jakarta-2018.327.15-ubuntu18.04-x86_64.tar.gz
+     $ tar xzf seiscomp3-jakarta-maps.tar.gz
+     $ tar xzf seiscomp3-jakarta-2018.327-doc.tar.gz
      $ ls seiscomp
      bin  etc  include  lib  man  sbin  share
 
@@ -123,7 +123,7 @@ Download SeisComP binary package, maps and documentation
    `/home/sysop` as shown above.
    Cut and paste your own output from the
    `seiscomp print env` command, not what is shown here.
-   Edit your file:`.bashrc` file, inserting the commannd from the output. ::
+   Edit your :file:`.bashrc` file, inserting the commannd from the output. ::
 
      $ vi .bashrc
 
@@ -168,7 +168,7 @@ Download SeisComP binary package, maps and documentation
      For Ubuntu 18.04, take care with MySQL installation.
      Before the next step, you must set a root password *for MySQL or MariaDB*
      (not the Linux root password!). See the Internet, or the SeisComP forum
-     `thread <https://forum.www.seiscomp.org/t/upgraded-to-ubuntu-18-04-and-i-broke-my-seiscomp/1139>`_
+     `thread <https://forum.seiscomp3.org/t/upgraded-to-ubuntu-18-04-and-i-broke-my-seiscomp3/1139>`_
      (for logged-in forum members).
 
 
@@ -196,9 +196,9 @@ Download SeisComP binary package, maps and documentation
 
      Use 'help [command]' to get more help about a command
 
-#. Start spread and `scmaster`.
+#. Start spread and :program:`scmaster`.
    As described in the :ref:`overview`, these are needed for
-   commication between the SeisComP database and the individual
+   communication between the SeisComP database and the individual
    SeisComP modules. ::
 
      $ seiscomp start scmaster spread
@@ -206,8 +206,8 @@ Download SeisComP binary package, maps and documentation
      starting scmaster
 
 #. Add license files.
-   Use of the SeisComP GUI programs currently requires your agreement to the
-   SeisComP `public license <http://www.seiscomp.org/license.html>`_.
+   Use of the SeisComP3 GUI programs requires your agreement to the
+   SeisComP `public license <http://seiscomp3.org/license.html>`_.
    This requirement is expected to change in 2020.
    Until then you will need to do the following:
 
@@ -224,7 +224,7 @@ Download SeisComP binary package, maps and documentation
         $ ls ~/.seiscomp/key
         License  License.key  License.signed
 
-#. Start the scconfig GUI ::
+#. Start the :program:`scconfig` GUI ::
 
      $ scconfig
 
@@ -237,7 +237,7 @@ Download SeisComP binary package, maps and documentation
 
       First view of :ref:`scconfig` configurator.
 
-#. Run scrttv ::
+#. Run :program:`scrttv` ::
 
      $ ~/seiscomp/bin/seiscomp exec scrttv
 

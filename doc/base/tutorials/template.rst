@@ -10,8 +10,7 @@ You will ...
 * Configure something else
 
 :Pre-requisites for this tutorial:
-* None, or
-* list of other :ref:`tutorials <tutorials>
+* None
 
 :Afterwards/Results/Outcomes:
 * {What comes out at the end}
@@ -32,7 +31,7 @@ To use this template, you'll need to:
 * Assign a position for your new tutorial within the sequence of
   existing tutorials.
 
-* Copy this file (`99_template.rst`) to the tutorials directory
+* Copy this file (`template.rst`) to the tutorials directory
   with a new name, `{nn}_{something}.rst`.
   Add it to the table of contents file, `tutorial.rst`.
 

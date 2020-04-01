@@ -712,6 +712,30 @@ table {
 	}
 }
 
+/* Footnote table should have no borders */
+
+table.docutils.footnote {
+	border: none;
+}
+
+table.docutils.footnote td {
+	border: none;
+}
+
+/* Field lists: no interior borders, use <td> on left to indent field bodies */
+
+table.docutils.field-list td {
+	border: 0;
+}
+
+th.field-name {
+	text-align: left;
+}
+
+td.field-body ul {
+	list-style: none;
+	padding-left: 0;
+}
 
 // ----------------------------------------------------------------------------
 // Footnotes
