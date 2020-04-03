@@ -10,13 +10,14 @@ In a nutshell
 You can use the entire SeisComP software collection under
 the terms of the GNU AGPL, non-commercially or commercially. You can talk
 about the software, you can give training sessions with the software, you
-can install the software wherever you like regardless if you are doing it for
-profit or not. You can operate the software and do your business with it.
+can install the software wherever you like regardless of whether
+you are doing it for profit or not.
+You can operate the software and do your business with it.
 
-If you want to modify the software then you have to publish all the changes
-you did. Even if you only run it on your servers and expose it to the public.
+If you want to modify the software then you must publish all the changes
+you made. Even if you only run it on your servers and expose it to the public.
 If you build software applications linking against SeisComP libraries you have
-to publish them under the GNU AGPL/GPL if they are beyond of private use.
+to publish them under the GNU AGPL/GPL if they are for use by others.
 
 If you want to write closed-source software with SeisComP you can apply for
 a Commercial License. It is your decision whether you want to use the
