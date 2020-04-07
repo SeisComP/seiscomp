@@ -321,7 +321,7 @@ sys.stderr.write("Building configuration from '%s'\n" % base_dir)
 
 out_build_dir = "build-doc"
 
-for i in xrange(1, len(sys.argv)):
+for i in range(1, len(sys.argv)):
     opt = sys.argv[i]
     if opt == "--all": allowContrib = True
     else: out_build_dir = sys.argv[i]
