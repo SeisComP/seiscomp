@@ -9,9 +9,7 @@ for Geosciences and gempa GmbH.
 
 ## License
 
-SeisComP is primarily released under the AGPL 3.0. The SeisComP libraries
-can be used holding a commercial license to enable creation of closed source
-software. Please check the [license agreement](doc/base/license.rst).
+SeisComP is primarily released under the AGPL 3.0. Please check the [license agreement](doc/base/license.rst).
 
 ## Asking Questions
 
