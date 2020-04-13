@@ -10,12 +10,15 @@ You will ...
   a configured station
 
 :Pre-requisites for this tutorial:
+
 * Tutorial on :ref:`<tutorials_archiving>`
 
 :Afterwards/Results/Outcomes:
-* The station meta data and waveforms are available from a local web server.
+
+* The station meta data and waveforms are available from a local web server
 
 :Time range estimate:
+
 * 10 minutes
 
 ----------

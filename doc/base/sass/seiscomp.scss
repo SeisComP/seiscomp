@@ -60,27 +60,24 @@ body {
 		> .container {
 			margin-top: 0;
 			margin-bottom: 0;
-			min-height: 6rem;
-			padding-top: 3rem;
+			padding-top: 2.7rem;
+			text-align: center;
 
-			> .background {
-				opacity: 0.2;
-				position: absolute;
-				right: 0;
-				bottom: 2.5%;
-				height: 95%;
-			}
+			> .brand {
+				position: relative;
+				display: inline-block;
 
-			> .content {
-				.title {
-					font-weight: 100;
-					font-size: 2rem;
+				> .logo {
+					opacity: 0.9;
+					height: 8rem;
 				}
 
-				.version {
+				> .version {
 					padding: 0.25em 0.5em;
 					font-size: 0.8rem;
 					position: absolute;
+					left: 100%;
+					top: 2rem;
 					background: $badgeBackground;
 					color: $badgeForeground;
 					border-radius: 0.25rem;

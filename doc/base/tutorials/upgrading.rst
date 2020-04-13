@@ -10,13 +10,16 @@ You will ...
 * Migrate a SeisComP3 system to a newer SeisComP version
 
 :Pre-requisites for this tutorial:
+
 * Tutorial on :ref:`installation <tutorials_postinstall>` and SeisComP previously installed
 
 :Afterwards/Results/Outcomes:
+
 * Upgraded SeisComP
 
 :Time range estimate:
-* 60 minutes.
+
+* 60 minutes
 
 ------------
 

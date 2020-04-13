@@ -7,17 +7,20 @@ Play back archived waveforms
 You will ...
 
 * Use previously recorded waveform files to re-run the analysis
-  of an old event using SeisComP. This is known as a *waveform playback*.
-* Use your current inventory, configuration and station bindings.
-* Inserts result into your current SeisComP database for later processing.
+  of an old event using SeisComP. This is known as a *waveform playback*
+* Use your current inventory, configuration and station bindings
+* Inserts result into your current SeisComP database for later processing
 
 :Pre-requisites for this tutorial:
+
 *  None
 
 :Afterwards/Results/Outcomes:
+
 * The event is in your SeisComP system, with a new event ID
 
 :Time range estimate:
+
 * 60 minutes
 
 ----------

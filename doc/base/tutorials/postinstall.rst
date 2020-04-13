@@ -6,17 +6,20 @@ Installation on Ubuntu
 
 You will ...
 
-* make a basic SeisComP installation.
+* make a basic SeisComP installation
 
 :Pre-requisites for this tutorial:
+
 * None
 
 :Afterwards/Results/Outcomes:
-* Run a SeisComP executable.
-* Run a SeisComP GUI program.
+
+* Run a SeisComP executable
+* Run a SeisComP GUI program
 
 :Time range estimate:
-* 10-15 minutes.
+
+* 10-15 minutes
 
 ------------
 

@@ -10,16 +10,20 @@ You will ...
 * Configure something else
 
 :Pre-requisites for this tutorial:
+
 * None
 
 :Afterwards/Results/Outcomes:
+
 * {What comes out at the end}
 
 :Time range estimate:
-* {XX} minutes.
+
+* {XX} minutes
 
 :Related tutorial(s):
-* {X, Y, Z} - where to go next.
+
+* {X, Y, Z} - where to go next
 
 -----------
 

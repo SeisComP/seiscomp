@@ -6,23 +6,27 @@ Set up local archiving
 
 You will ...
 
-* Set up :ref:`slarchive` with its necessary bindings.
-* Set up `purge_datafiles` in crontab.
+* Set up :ref:`slarchive` with its necessary bindings
+* Set up `purge_datafiles` in crontab
 
 :Pre-requisites for this tutorial:
+
 * :ref:`Tutorial on <tutorials_addstation>`
-* :ref:`Tutorial on real time data<tutorials_geofon_waveforms>`,
+* :ref:`Tutorial on real time data<tutorials_geofon_waveforms>`
   so that you have GE stations.
   Alternatively you may already obtain real-time waveform data from
   somewhere else.
 
 :Afterwards/Results/Outcomes:
-* See day files for GE stations in your local archive.
+
+* See day files for GE stations in your local archive
 
 :Time range estimate:
-* 5 minutes.
+
+* 5 minutes
 
 :Related tutorial(s):
+
 * Tutorial on :ref:`tutorials_servefdsnws`
 * Tutorial on :ref:`tutorials_waveformplayback`
 

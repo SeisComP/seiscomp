@@ -6,16 +6,19 @@ Help! I'm stuck! Now what?
 
 You will ...
 
-* Troubleshoot and resolve problems with SeisComP.
+* Troubleshoot and resolve problems with SeisComP
 
 :Pre-requisites for this tutorial:
+
 * None
 
 :Afterwards/Results/Outcomes:
-* Improved understanding of ways to solve SeisComP problems.
+
+* Improved understanding of ways to solve SeisComP problems
 
 :Time range estimate:
-* 5 minutes.
+
+* 5 minutes
 
 ----------
 

@@ -6,21 +6,24 @@ Add a new station
 
 You will ...
 
-* Add a new station to your SeisComP system for archiving.
-* Configure it for processing too.
+* Add a new station to your SeisComP system for archiving
+* Configure it for processing too
 
 :Pre-requisites for this tutorial:
-* :ref:`tutorials_postinstall`,
+
+* :ref:`tutorials_postinstall`
 * :ref:`tutorials_geofon_waveforms`
-* :ref:`tutorials_archiving`,
-* An understanding of :ref:`concepts_inventory`.
+* :ref:`tutorials_archiving`
+* An understanding of :ref:`concepts_inventory`
 
 :Afterwards/Results/Outcomes:
-* For the new station data are acquired and archived in real time.
-* The new station is used for automatic real-time data processing.
+
+* For the new station data are acquired and archived in real time
+* The new station is used for automatic real-time data processing
 
 :Time range estimate:
-* 40 minutes.
+
+* 40 minutes
 
 ----------
 

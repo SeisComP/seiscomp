@@ -7,20 +7,24 @@ Get real-time data from a remote Seedlink server
 You will use :program:`scconfig` to:
 
 * Add stations of the GEOFON seismic network, obtained from GEOFON,
-  as a source of data.
-* Configure bindings to see these in your local system.
+  as a source of data
+* Configure bindings to see these in your local system
 
 :Pre-requisites for this tutorial:
+
 * :ref:`Installation<tutorials_postinstall>`
 
 :Afterwards/Results/Outcomes:
-* :program:`slinktool -Q` locally shows GE streams are available.
+
+* :program:`slinktool -Q` locally shows GE streams are available
 * :program:`scrttv` locally shows the GE station traces
 
 :Time range estimate:
-* 10-15 minutes.
+
+* 10-15 minutes
 
 :Related tutorial(s):
+
 * Tutorial on :ref:`tutorials_archiving`
 * Tutorial on :ref:`tutorials_servefdsnws`
 
