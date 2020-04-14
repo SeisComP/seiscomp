@@ -33,3 +33,12 @@ The following information is stored in the database:
 
 The configuration just covers the station bindings. Application/module specific
 configurations (all .cfg files) are not stored in the database.
+
+Related modules
+===============
+
+* :ref:`scardac`
+* :ref:`scdb`
+* :ref:`scdispatch`
+* :ref:`scquery`
+* :ref:`scxmldump`

@@ -8,18 +8,24 @@ You will ...
 
 * make a basic SeisComP installation
 
-:Pre-requisites for this tutorial:
+Pre-requisites for this tutorial:
 
-* None
+* Internet access
 
-:Afterwards/Results/Outcomes:
+Afterwards/Results/Outcomes:
 
 * Run a SeisComP executable
 * Run a SeisComP GUI program
 
-:Time range estimate:
+Time range estimate:
 
 * 10-15 minutes
+
+Related tutorial(s):
+
+* :ref:`tutorials_upgrade`
+* :ref:`tutorials_addstation`
+* :ref:`tutorials_geofon_waveforms`
 
 ------------
 
@@ -29,17 +35,19 @@ Get your native or virtual Ubuntu ready
 The following documentation refers to Ubuntu 18.04,
 but the steps for other Ubuntu versions are similar.
 
-#. Add a new user.
-   (This is not mandatory; you can install under an existing user
-   directory. Creating a new user is recommended as it allows an easy cleanup of the system later simply by
-   removing the new user if needed.)
-   Throughout our documentation, this user is called `sysop`.
+#. Add a new user. Throughout our documentation, this user is called `sysop`.
 
    .. code-block:: bash
 
       $ sudo adduser sysop
       $ sudo addgroup admin
       $ sudo usermod -a -G admin,adm,audio sysop
+
+   .. note:
+
+      Adding a new user is not mandatory. You can install under an existing user
+      directory. Creating a new user is recommended as it allows an easy cleanup of the system later simply by
+      removing the new user if needed.
 
 #. Check the size and the architecture: ::
 
@@ -57,17 +65,20 @@ Download SeisComP binary package, maps and documentation
 
 3. Download the appropriate SeisComP binary package taking into
    account your Linux distribution and the architecture.
-   Get the package from
-   `www.seiscomp3.org <https://www.seiscomp3.org/downloader>`_ -
-   for Ubuntu and other Linux flavours such as CentOS and Debian.
+   Get the package from the `SeisComP package downloader`_ or `gempa GmbH`_.
+   Packages are available for Ubuntu and other Linux flavors such as CentOS and Debian.
 
-#. From the same site you should also download
+#. When getting packages from from `SeisComP package downloader`_ you should also download
 
-   * maps, e.g. https://www.seiscomp3.org/downloader/seiscomp3-jakarta-maps.tar.gz
-   * documentation, e.g. for SeisComP3 in version jakarta-2018.327:
-     https://www.seiscomp3.org/downloader/seiscomp3-jakarta-2018.327-doc.tar.gz.
+   * maps, e.g. from the `Jakarta release maps`_
+   * documentation, e.g. for `SeisComP3 in version jakarta-2018.327`_.
 
    Make sure, the documentation matches your SeisComP version.
+
+   .. note::
+
+      The SeisComP packages received from gempa GmbH contain the documentation
+      for the respective version and no separate download is required.
 
 #. Untar the :file:`seiscomp*` files (binary package, maps and documentation)
    you will find in your home or downloads directory ::
@@ -156,7 +167,12 @@ Download SeisComP binary package, maps and documentation
       commands to be run every time you log in.
 
 
-#. Database. For a MySQL installation: ::
+#. Database. For a MariaDB installation: ::
+
+     $ ~/seiscomp/bin/seiscomp install-deps mariadb-server
+
+   or a MySQL installation: ::
+
 
      $ ~/seiscomp/bin/seiscomp install-deps mysql-server
 
@@ -209,23 +225,24 @@ Download SeisComP binary package, maps and documentation
      starting scmaster
 
 #. Add license files.
-   Use of the SeisComP3 GUI programs requires your agreement to the
-   SeisComP `public license <http://seiscomp3.org/license.html>`_.
-   This requirement is expected to change in 2020.
-   Until then you will need to do the following:
+   Use of the :term:`GUI` programs in SeisComP3 requires your agreement to the
+   `SeisComP public license`_.
+   This requirement is dropped with the publication of the SeisComP in version 4 in 2020
+   and the `new SeisComP license scheme`_.
 
-   - Obtain license files following the procedure at
-     http://www.seiscomp.org/ .
+   Until SeisComP3 you will need to do the following:
 
-   - Un-tar these into the correct directory:
+   #. Obtain the `SeisComP public license`_ files.
 
-     .. code-block:: bash
+   #. Un-pack these into the correct directory, e.g.:
 
-        $ cd ~
-        $ mkdir -p .seiscomp/key
-        $ tar -xf temporary-license.tar
-        $ ls ~/.seiscomp/key
-        License  License.key  License.signed
+      .. code-block:: bash
+
+         $ cd ~
+         $ mkdir -p .seiscomp3/key
+         $ tar -xf temporary-license.tar
+         $ ls ~/.seiscomp3/key
+         License  License.key  License.signed
 
 #. Start the :program:`scconfig` GUI ::
 
@@ -246,11 +263,11 @@ Download SeisComP binary package, maps and documentation
 
    After seeing the SeisComP splash screen,
    you'll likely get an error message "Could not read inventory (NULL)".
-   After a new installation, that's okay - you'll add inventory to your
-   system later. (:ref:`tutorials_geofon_waveforms`.)
+   After a new installation, that's okay.
    Click that box away, and you'll see a screen with
-   "Enabled", and "Disabled" tabs, and time along bottom axis.
-   (See figure below.)
+   "Enabled", and "Disabled" tabs, and time along bottom axis as in the figure below.
+   To see stations and data you will later need to :ref:`add inventory <tutorials_addstation>`
+   and :ref:`waveforms <tutorials_geofon_waveforms>` to your system.
 
    .. figure:: media/postinstall_scrttv.png
       :width: 14.6cm
@@ -267,3 +284,15 @@ Download SeisComP binary package, maps and documentation
 
 
 Congratulations, you're done with this tutorial.
+
+References
+==========
+
+.. target-notes::
+
+.. _`SeisComP package downloader` : https://www.seiscomp.de/downloader/
+.. _`gempa GmbH` : https://www.gempa.de/
+.. _`Jakarta release maps` : https://www.seiscomp.de/downloader/seiscomp-jakarta-maps.tar.gz
+.. _`SeisComP3 in version jakarta-2018.327` : https://www.seiscomp.de/downloader/seiscomp3-jakarta-2018.327-doc.tar.gz
+.. _`SeisComP public license` : https://www.seiscomp3.org/license.html
+.. _`new SeisComP license scheme` : https://www.seiscomp.de/doc/base/license.html

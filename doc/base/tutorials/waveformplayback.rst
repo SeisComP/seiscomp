@@ -11,15 +11,15 @@ You will ...
 * Use your current inventory, configuration and station bindings
 * Inserts result into your current SeisComP database for later processing
 
-:Pre-requisites for this tutorial:
+Pre-requisites for this tutorial:
 
 *  None
 
-:Afterwards/Results/Outcomes:
+Afterwards/Results/Outcomes:
 
 * The event is in your SeisComP system, with a new event ID
 
-:Time range estimate:
+Time range estimate:
 
 * 60 minutes
 

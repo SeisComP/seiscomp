@@ -10,7 +10,7 @@ Here we describe the simplest case only.
 .. note ::
 
    For production systems only use the official releases
-   from http://www.seiscomp.de or the corresponding tags in this repository.
+   from https://www.seiscomp.de or the corresponding tags in this repository.
 
 Before building, **install all the dependencies**,
 as described below in :ref:`build_dependencies`.
@@ -47,7 +47,7 @@ Step-by-step instructions
 
    .. code-block:: sh
 
-      sysop@host:~$ git clone https://github.com/SeisComP3/seiscomp3.git sc-src  # FIXME
+      sysop@host:~$ git clone https://github.com/SeisComP/seiscomp.git sc-src  # FIXME
       sysop@host:~$ cd sc-src
       sysop@host:~/sc-src$
 

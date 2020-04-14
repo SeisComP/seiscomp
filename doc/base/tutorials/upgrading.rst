@@ -9,15 +9,15 @@ You will ...
 * Upgrade a SeisComP system
 * Migrate a SeisComP3 system to a newer SeisComP version
 
-:Pre-requisites for this tutorial:
+Pre-requisites for this tutorial:
 
 * Tutorial on :ref:`installation <tutorials_postinstall>` and SeisComP previously installed
 
-:Afterwards/Results/Outcomes:
+Afterwards/Results/Outcomes:
 
 * Upgraded SeisComP
 
-:Time range estimate:
+Time range estimate:
 
 * 60 minutes
 
@@ -60,6 +60,12 @@ station connected to the processing system:
 
 .. _tutorials_upgrade_changelog:
 
+Package download
+================
+
+Get the latest or older SeisComP release packages from gempa GmbH or from the
+`SeisComP package downloader`_.
+
 Documentation of changes
 ========================
 
@@ -77,7 +83,7 @@ The change log can also be accessed from the Docs panel in :ref:`scconfig`.
 .. note::
 
    New features are regularly advertised and described in detail on the
-   `News website of gempa GmbH <https://www.gempa.de/news/>`_.
+   `News website of gempa GmbH`_ and on the `SeisComP forum`_.
 
 .. _tutorials_upgrade_number:
 
@@ -296,3 +302,14 @@ Finally, adjust the system daemon startup script and crontab entries. For cronta
 .. code-block:: sh
 
    crontab -e
+
+
+
+References
+==========
+
+.. target-notes::
+
+.. _`News website of gempa GmbH` : https://www.gempa.de/news/
+.. _`SeisComP forum` : https://forum.seiscomp3.org
+.. _`SeisComP package downloader` : https://www.seiscomp.de/downloader/

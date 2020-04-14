@@ -15,13 +15,15 @@ Overview
 SeisComP is not a single executable but it provides a set of modules which
 can be
 
-* :ref:`command-line modules <concepts_modules_commandline>`
+* :ref:`Command-line modules <concepts_modules_commandline>`
 * :ref:`Daemon modules <concepts_modules_daemon>`.
 
 A :term:`module` is :ref:`configured by its configuration files <concepts_modules_config>` either to be used directly or to
 generate its native configuration. Modules that need to convert the configuration or do not
-use the default configuration options (see below) are called **standalone** modules.
-Example for standalone modules are :ref:`seedlink`, :ref:`slarchive` or :ref:`slmon`.
+use the default configuration options (see below) are called :term:`standalone modules <standalone module>`.
+All other modules are called :term:`trunk` modules.
+
+Examples for standalone modules are :ref:`seedlink`, :ref:`slarchive` and :ref:`slmon`.
 
 .. _concepts_modules_commandline:
 
@@ -88,7 +90,7 @@ Daemon modules can also be executed as :ref:`command-line tools <concepts_module
 Configuration
 =============
 
-Each standalone module tries to read from three configuration files whereas :term:`trunk` modules
+Each :term:`standalone module` tries to read from three configuration files whereas :term:`trunk` modules
 try to read the six files. Note that configuration parameters defined earlier are overwritten
 if defined in files read in later:
 

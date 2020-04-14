@@ -10,20 +10,20 @@ You will use :program:`scconfig` to:
   as a source of data
 * Configure bindings to see these in your local system
 
-:Pre-requisites for this tutorial:
+Pre-requisites for this tutorial:
 
 * :ref:`Installation<tutorials_postinstall>`
 
-:Afterwards/Results/Outcomes:
+Afterwards/Results/Outcomes:
 
 * :program:`slinktool -Q` locally shows GE streams are available
 * :program:`scrttv` locally shows the GE station traces
 
-:Time range estimate:
+Time range estimate:
 
 * 10-15 minutes
 
-:Related tutorial(s):
+Related tutorial(s):
 
 * Tutorial on :ref:`tutorials_archiving`
 * Tutorial on :ref:`tutorials_servefdsnws`

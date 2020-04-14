@@ -170,6 +170,10 @@ using :ref:`scxmldump`.
 Related tools
 =============
 
+
+* :ref:`arclink2inv`
+* :ref:`dlsv2inv`
+* :ref:`fdsnxml2inv`
 * :ref:`import_inv`
 * :ref:`invextr`
 * :ref:`inv2dlsv`

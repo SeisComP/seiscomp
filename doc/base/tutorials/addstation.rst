@@ -9,19 +9,19 @@ You will ...
 * Add a new station to your SeisComP system for archiving
 * Configure it for processing too
 
-:Pre-requisites for this tutorial:
+Pre-requisites for this tutorial:
 
 * :ref:`tutorials_postinstall`
 * :ref:`tutorials_geofon_waveforms`
 * :ref:`tutorials_archiving`
 * An understanding of :ref:`concepts_inventory`
 
-:Afterwards/Results/Outcomes:
+Afterwards/Results/Outcomes:
 
 * For the new station data are acquired and archived in real time
 * The new station is used for automatic real-time data processing
 
-:Time range estimate:
+Time range estimate:
 
 * 40 minutes
 
@@ -76,7 +76,7 @@ OR import, scinv, whatever. See the inventory tutorial.
 Then:
 
 .. code-block:: sh
- 
+
    $ seiscomp update-config
    $ seiscomp restart
 

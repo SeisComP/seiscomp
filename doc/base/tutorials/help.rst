@@ -8,15 +8,15 @@ You will ...
 
 * Troubleshoot and resolve problems with SeisComP
 
-:Pre-requisites for this tutorial:
+Pre-requisites for this tutorial:
 
-* None
+* Have your SeisComP installation and configuration available
 
-:Afterwards/Results/Outcomes:
+Afterwards/Results/Outcomes:
 
-* Improved understanding of ways to solve SeisComP problems
+* Improved understanding of ways to solve issues when operating SeisComP
 
-:Time range estimate:
+Time range estimate:
 
 * 5 minutes
 
@@ -166,16 +166,16 @@ In addition:
 
   .. code-block:: sh
 
-     $ ~/seiscomp3/bin/seiscomp exec scmag --debug
+     $ ~/seiscomp/bin/seiscomp exec scmag --debug
      11:47:50 [debug] Adding plugin path: .
-     11:47:50 [debug] Adding plugin path: /home/user/.seiscomp3/plugins
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/lib/plugins
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/lib
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/share/plugins
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/lib
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/lib
-     11:47:50 [debug] Adding plugin path: /home/user/seiscomp3/share/plugins/scmag
-     11:47:50 [debug] Trying to open plugin at /home/user/seiscomp3/share/plugins/dbmysql.so
+     11:47:50 [debug] Adding plugin path: /home/user/.seiscomp/plugins
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/lib/plugins
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/lib
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/share/plugins
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/lib
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/lib
+     11:47:50 [debug] Adding plugin path: /home/user/seiscomp/share/plugins/scmag
+     11:47:50 [debug] Trying to open plugin at /home/user/seiscomp/share/plugins/dbmysql.so
      11:47:50 [info] Plugin dbmysql registered
      11:47:50 [info]
      Plugins:
@@ -224,10 +224,10 @@ In addition:
 
    .. code-block:: sh
 
-      $ ~/seiscomp3/bin/seiscomp exec scmag -vvvv
+      $ ~/seiscomp/bin/seiscomp exec scmag -vvvv
 
    The output is the same, but it is sent to your normal logging file,
-   typically `~/.seiscomp3/log/scmag.log`.
+   typically `~/.seiscomp/log/scmag.log`.
 
 In :ref:`scconfig`, logging can be set globally.
 Go to the Modules tab, then System > global (see "logging")

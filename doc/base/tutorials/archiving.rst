@@ -1,15 +1,15 @@
 .. _tutorials_archiving:
 
-**********************
-Set up local archiving
-**********************
+*******************************
+Set up local waveform archiving
+*******************************
 
 You will ...
 
 * Set up :ref:`slarchive` with its necessary bindings
 * Set up `purge_datafiles` in crontab
 
-:Pre-requisites for this tutorial:
+Pre-requisites for this tutorial:
 
 * :ref:`Tutorial on <tutorials_addstation>`
 * :ref:`Tutorial on real time data<tutorials_geofon_waveforms>`
@@ -17,15 +17,16 @@ You will ...
   Alternatively you may already obtain real-time waveform data from
   somewhere else.
 
-:Afterwards/Results/Outcomes:
+Afterwards/Results/Outcomes:
 
-* See day files for GE stations in your local archive
+* Save real-time data in a local archive for later processing
+* See :term:`miniSEED` day files for GE stations in your local :ref:`waveform archive <concepts_waveformarchives>`.
 
 :Time range estimate:
 
 * 5 minutes
 
-:Related tutorial(s):
+Related tutorial(s):
 
 * Tutorial on :ref:`tutorials_servefdsnws`
 * Tutorial on :ref:`tutorials_waveformplayback`
@@ -38,19 +39,19 @@ will only keep waveforms for a short time.
 This makes it hard to review old events, for example.
 
 In this example, we'll arrange for keeping waveforms for one week.
-Before starting, you'll need bindings for your stations
-(see :ref:`tutorials_geofon_waveforms`).
+Before starting, you'll need bindings for your stations:
+read the tutorial :ref:`tutorials_geofon_waveforms`.
 
 
 In scconfig
 ===========
 
-#. Under the Modules tab, go to Acquisition, and select "slarchive".
+#. Under the Modules tab, go to Acquisition, and select :program:`slarchive`.
    Here you can see the default parameters used.
    By default, :program:`slarchive` connects to your local Seedlink server,
    and archives to your local disk.
 
-#. Under the System tab, select the line for slarchive, and click
+#. Under the System tab, select the line for :program:`slarchive`, and click
    "Enable module(s)" button at the top.
 
 #. Under Bindings:
@@ -64,7 +65,7 @@ In scconfig
    should apply to, under "Networks" on the left-hand side of the
    bindings tool.
 
-.. warning:: The name "week" is just a label.
+.. warning:: The name 'week' is just a label.
    Its functionality comes from changing the value of the `keep` parameter.
    Changing the *name* of a binding profile does not change its function.
 
@@ -72,14 +73,17 @@ In scconfig
    using the "selectors" box.
    For instance, you may collect data at several sample rates,
    and only wish to archive the highest rate.
-   (e.g. if you collect LH, BH, HH streams at 0.1, 20, and 100 samples
-   per second respectively, you might retain only the HH streams,
-   by setting "selectors" to "HH".)
+   E.g. if you collect LH, BH, HH streams at 0.1, 20, and 100 samples
+   per second, respectively, you might retain only the HH streams,
+   by setting "selectors" to "HH".
 
 #. Then return to System, and click 'Update configuration'.
-   (Make sure the 'slarchive' module, or no module, is selected.)
+   Make sure the :program:`slarchive` module, or no module, is selected.
 
 #. Restart :program:`slarchive`.
+
+#. Adjust the :ref:`concepts_RecordStream` for making use of the archived waveforms
+   from within a :term:`GUI` or automatic data processing modules.
 
 Command line
 ============
@@ -100,11 +104,9 @@ Afterwards it will look something like this::
   seedlink:geofon
   slarchive:week
 
-Repeat this for each top-level key file
-(:file:`station_GE_ACRG`, :file:`station_GE_ARPR`, and so on.)
+Repeat this for each top-level key file: :file:`station_GE_ACRG`, :file:`station_GE_ARPR`, and so on.
 Now create the binding profile in the key directory.
-This is a file with a name corresponding to the binding profile name
-(here "week")::
+This is a file with a name corresponding to the binding profile name; here: 'week' ::
 
   $ cd ~/seiscomp/etc/key
   $ mkdir slarchive

@@ -6,6 +6,10 @@
 
   * Add new surface waves magnitude Ms_20 according to IASPEI standard
 
+* scautopick
+
+  * Add amplitudes.enableUpdate to descriptions
+
 * scqcv
 
   * Expose more configuration parameters to scconfig

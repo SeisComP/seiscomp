@@ -164,6 +164,13 @@ The default port to access the web frontend is 18180:
 
    scmaster: web frontend
 
+Related modules
+===============
+
+* :ref:`scmaster`
+* :ref:`scm`
+* :ref:`scmm`
+
 References
 ==========
 
