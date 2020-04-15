@@ -250,15 +250,22 @@ Command-line
 
 
 def find_doc_dirs(directory):
+    visited = set()
     # The followlinks option has been added with Python 2.6
     if sys.version_info >= (2, 6):
         for root, dirs, files in os.walk(directory, followlinks=True):
             if os.path.basename(root) == "descriptions":
-                yield root
+                abs_root = os.path.abspath(os.path.realpath(root))
+                if not abs_root in visited:
+                    visited.add(abs_root)
+                    yield abs_root
     else:
         for root, dirs, files in os.walk(directory):
             if os.path.basename(root) == "descriptions":
-                yield root
+                abs_root = os.path.abspath(os.path.realpath(root))
+                if not abs_root in visited:
+                    visited.add(abs_root)
+                    yield abs_root
 
 
 def get_app_rst(searchpaths, appname):
