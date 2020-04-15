@@ -311,16 +311,17 @@ Scientific and technical terms
       suitable while for others the frequency-domain approach is more appropriate and efficient.
 
    gempa GmbH
-      `gempa GmbH <http://www.gempa.de/>`_ is a spin-off from :term:`GFZ` which
-      offers a range of services and products to monitor, process and analyze
-      geologically activity.
+      `gempa GmbH <http://www.gempa.de/>`_ is a spin-off from :term:`GFZ`
+      offering a range of services and products to monitor, process and analyze
+      seismicity. It is the main development and service company for SeisComP.
 
    geometrical spreading
       The component of reduction in wave amplitude due to the radial spreading of seismic energy with
       increasing distance from a given source.
 
    GFZ
-      `German Research Center for Geosciences <http://www.gfz-potsdam.de/>`_
+      `German Research Center for Geosciences <http://www.gfz-potsdam.de/>`_.
+      SeisComP was originally developed at GFZ.
 
    GMPE
       Ground Motion Prediction Equation
@@ -378,7 +379,8 @@ Scientific and technical terms
    inventory
       The inventory is the collection of all available meta data related to :term:`network`,
       :term:`station`, :term:`location code`, station :term:`channel code`,
-      characteristics of sensors and data loggers, etc..
+      characteristics of sensors and data loggers, etc. More details are given in
+      the concepts section :ref:`concepts_inventory`.
 
    latency
       The time difference between the current time and the arrival time of the record (SeisComP).
@@ -815,7 +817,7 @@ Scientific and technical terms
 
    SEED
       Standard for the Exchange of Earthquake Data, a data format for seismological
-      data and metadata (inventory).
+      data and metadata (:term:`inventory`).
       It is controlled as a standard by the International Federation
       of Digital Seismograph Networks (FDSN).
       The current version is 2.4, updated August 2012.

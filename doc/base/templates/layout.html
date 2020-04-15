@@ -149,7 +149,7 @@
     <div class="header">
       <div class="container">
         <div class="brand">
-          <img class="logo" src="{{ pathto('_static/seiscomp.svg', 1) }}"/>
+          <img class="logo" src="{{ pathto('_static/brands/seiscomp.svg', 1) }}"/>
            <!-- span class="title">{{ project }} {{ release }}</span -->
           <span class="version">{{ version }}</span>
         </div>
@@ -176,17 +176,27 @@
     </div>
     <div class="footer">
       <div class="container">
-        <div class="content">
-        Release <b>{{ release }}</b> version <b>{{ version }}</b>
-        {%- if show_copyright %}
-          <div class="copyright">
-          {%- if hasdoc('copyright') %}
-            {% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}
-          {%- else %}
-            {% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}
-          {%- endif %}
+        <div class="horizontal layout content">
+        <a class="fade-in" href="https://www.gempa.de" target="_blank">
+          <img class="brand" src="{{ pathto('_static/brands/gempa.svg', 1) }}"/>
+        </a>
+        <div class="stretched align-center fitted content">
+          <div>
+          Release <b>{{ release }}</b> version <b>{{ version }}</b>
           </div>
-        {%- endif %}
+          {%- if show_copyright %}
+            <div class="copyright">
+            {%- if hasdoc('copyright') %}
+              {% trans path=pathto('copyright'), copyright=copyright|e %}<a href="{{ path }}">Copyright</a> &copy; {{ copyright }}.{% endtrans %}
+            {%- else %}
+              {% trans copyright=copyright|e %}Copyright &copy; {{ copyright }}.{% endtrans %}
+            {%- endif %}
+            </div>
+          {%- endif %}
+        </div>
+        <a class="fade-in" href="https://www.gfz-potsdam.de" target="_blank">
+          <img class="brand" src="{{ pathto('_static/brands/gfz.svg', 1) }}"/>
+        </a>
         </div>
       </div>
     </div>

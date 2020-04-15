@@ -148,17 +148,16 @@ body {
 	}
 
 	.footer {
-		background: darken($secondaryBackground, 10);
+		// background: darken($secondaryBackground, 10);
 		color: darken($secondaryForeground, 20);
-		text-align: center;
-		font-size: 0.8rem;
-
-		.content {
-			margin: 0;
-		}
 
 		.copyright {
 			display: inline;
+		}
+
+		.brand {
+			width: 8rem;
+			opacity: 0.7;
 		}
 	}
 }
@@ -194,9 +193,25 @@ a {
 	color: darken($invertedBackground, 10);
 	text-decoration: none;
 
+	&:focus {
+		outline: none;
+	}
+
 	&:hover {
 		color: $invertedBackground;
 		text-decoration: underline;
+	}
+
+	&.fade-in {
+		> * {
+			transition: opacity 0.2s;
+		}
+
+		&:hover {
+			> * {
+				opacity: 1;
+			}
+		}
 	}
 
 	&.headerlink {
@@ -258,6 +273,10 @@ li {
 	text-align: right;
 }
 
+.pull-left {
+	float: left;
+}
+
 .pull-right {
 	float: right;
 }
@@ -314,6 +333,22 @@ blockquote {
 // ----------------------------------------------------------------------------
 .layout {
 	display: flex;
+
+	&.horizontal {
+		flex-direction: row;
+	}
+
+	&.centered {
+		align-items: center;
+	}
+
+	.fixed {
+		flex: 0 0 auto;
+	}
+
+	.stretched {
+		flex: 1 1 auto;
+	}
 
 	&.column {
 		flex-direction: row;

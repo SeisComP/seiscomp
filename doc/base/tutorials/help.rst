@@ -18,7 +18,7 @@ Afterwards/Results/Outcomes:
 
 Time range estimate:
 
-* 5 minutes
+* 30 minutes
 
 ----------
 
@@ -61,9 +61,6 @@ Look under *Modules*, and choose the relevant module.
 For each parameter, the first few lines of description are shown;
 hovering over these reveals the full text.
 
-[Advanced:
-The text for these is taken from the XML files in `$SEISCOMP_ROOT/etc/descriptions`.]
-
 The HTML documentation is built regularly and available online, e.g. `gempa's documentation`_.
 
 .. _sec_tutorial_help_commandline:
@@ -89,6 +86,47 @@ and help on commandline options:
    The commandline option *-h* can be used with almost all modules. No matter how many
    other commandline parameters were given, *-h* will stop the module and print
    the help on the commandline.
+
+.. _sec_tutorial_help_config-params:
+
+Configuration parameters
+------------------------
+
+The :ref:`scconfig` GUI tool can be conveniently used to adjust the :term:`module`
+and :term:`bindings <binding>` configuration. It also displays help on each individual
+configuration parameter for every module. Read the :ref:`concepts
+section on configuration <concepts_configuration>` for a comprehensive overview.
+
+
+.. raw:: html
+
+  <div class="two column layout">
+
+.. figure:: media/scconfig-tooltips.png
+  :alt: scconfig: tool tips
+
+  Tool tips provide information on parameters.
+
+.. figure:: media/scconfig-evaluation.png
+  :alt: scconfig: parameter evaluation
+
+  scconfig evaluates the syntax of input values.
+
+.. raw:: html
+
+  </div>
+
+.. _sec_tutorial_help_config-params:
+
+Command-line parameters
+-----------------------
+
+Command-line parameters provide additional flexibility when executing modules.
+To learn about them read the :ref:`sec_tutorial_help_documentation` or execute
+
+.. code-block:: sh
+
+   [module name] -h
 
 .. _sec_tutorial_help_forum:
 

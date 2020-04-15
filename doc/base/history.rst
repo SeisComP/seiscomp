@@ -6,17 +6,21 @@ Historical information
 
 The first version of SeisComP was developed for the `GEOFON`_ network operated by `GFZ`_.
 
-Originally SeisComP was designed as a high standard fully automatic data acquisition and (near-)real-time
+Originally, SeisComP was designed as a high-standard, fully automatic data acquisition and (near-)real-time
 data processing tool including quality control, event detection and location as well as dissemination
 of event alerts.
 
-SeisComP was further extended within the MEREDIAN project under the lead of `GEOFON`_ and `ORFEUS`_.
+SeisComP was further extended within the MEREDIAN project under the lead of GEOFON and `ORFEUS`_.
 
 Following the devastating 2004 Indian Ocean earthquake and tsunami, the `GITEWS`_ (German Indian Ocean
 Tsunami Early Warning System) project led to additional functionality being implemented to fulfill the
 requirements of 24/7 early warning control centers. Major changes in the architecture of SeisComP
-were necessary and many new features resulted in the upgrade of SeisComP to version 3. Important
-SeisComP releases are shown below.
+were necessary and many new features resulted in the upgrade of SeisComP to version 3.
+
+Since 2008 SeisComP has been jointly developed by `gempa GmbH`_, a spin-off company of GFZ and GFZ.
+Nowadays, gempa GmbH is the main SeisComP developing and service company.
+
+Important SeisComP releases are shown below.
 
 
 +---------+--------------------------------+-----------------------------------------------------+
@@ -57,16 +61,17 @@ SeisComP releases are shown below.
 +---------+--------------------------------+-----------------------------------------------------+
 | 3.0     | Jakarta release 2014           | Completely Open Source, including all GUIs          |
 +---------+--------------------------------+-----------------------------------------------------+
-| 4.0     | ?? release 2020?               | Adopts the GNU Affero General Public License v. 3.0 |
+| 4.0     | AGPL release 2020              | Adopts the GNU Affero General Public License v. 3.0,|
+|         |                                | support for Python3 and QT5                         |
 +---------+--------------------------------+-----------------------------------------------------+
-
 
 References
 ==========
 
 .. target-notes::
 
-.. _`GEOFON`: https://geofon.gfz-potsdam.de/
-.. _`GFZ`: https://www.gfz-potsdam.de/
-.. _`GITEWS`: https://www.gitews.org/
-.. _`ORFEUS`: https://www.orfeus-eu.org/
+.. _`GEOFON`: https://geofon.gfz-potsdam.de
+.. _`GFZ`: https://www.gfz-potsdam.de
+.. _`GITEWS`: https://www.gitews.org
+.. _`ORFEUS`: https://www.orfeus-eu.org
+.. _`gempa GmbH`: https://www.gempa.de

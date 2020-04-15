@@ -12,9 +12,9 @@ This chapter describes the concept of inventories.
 Overview
 ========
 
-In SeisComP the inventory refers to the meta data of data recording stations.
-Many SeisComP applications require :ref:`inventory <concepts_inventory>` information to operate correctly.
-The inventory will be read from the :ref:`database <concepts_database>``
+In SeisComP the term :term:`inventory` refers to the meta data of data recording stations.
+Many SeisComP applications require :inventory information to operate correctly.
+The inventory will be read from the :ref:`database <concepts_database>`
 by default. To insert or update the inventory in the database, this information
 needs to be created or downloaded and converted. The following sections will
 describe the process of populating the database and how applications get access
