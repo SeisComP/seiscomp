@@ -16,9 +16,8 @@ Download these from http://www.seiscomp.org/ .
 This section describes the installation of the binary packages of SeisComP on
 an
 
-* :program:`Ubuntu 14`, 64 bit system
-* :program:`openSUSE 11`, 64 bit system
-* :program:`CentOS 6`, 64 bit system
+* :program:`Ubuntu 16`, 64 bit system
+* :program:`CentOS 7`, 64 bit system
 
 
 Requirements
@@ -30,13 +29,13 @@ station network to be operated.
 Minimum requirements are:
 
 +-----+----------------------------------------------------------------------------------------+
-| CPU | 1                                                                                      |
+| CPU | 2                                                                                      |
 +-----+----------------------------------------------------------------------------------------+
-| RAM | 2 GB                                                                                   |
+| RAM | 4 GB                                                                                   |
 +-----+----------------------------------------------------------------------------------------+
 | HDD | 20 GB                                                                                  |
 +-----+----------------------------------------------------------------------------------------+
-| OS  | SUSE 10.2/3 32/64bit, SUSE 11 32/64bit, (K)Ubuntu 7/8 32/64bit, Debian 5.0, CentOS 5.3 |
+| OS  | Ubuntu 16 64bit, Debian 8.0 64bit, CentOS 7 64bit                                      |
 +-----+----------------------------------------------------------------------------------------+
 
 In case large networks (>100 stations) are operated, a distributed system is
@@ -49,9 +48,9 @@ The minimum specifications of the system should be:
 Data acquisition system:
 
 +-----+----------------------------------------------------------------+
-| CPU | 1                                                              |
+| CPU | 2                                                              |
 +-----+----------------------------------------------------------------+
-| RAM | 2 GB                                                           |
+| RAM | 4 GB                                                           |
 +-----+----------------------------------------------------------------+
 | HDD | Raid1/5/0+1 with >= 200GB                                      |
 +-----+----------------------------------------------------------------+
@@ -60,9 +59,9 @@ Data acquisition system:
 Processing system:
 
 +-----+----------------------------------------------------------------+
-| CPU | 2                                                              |
+| CPU | 4                                                              |
 +-----+----------------------------------------------------------------+
-| RAM | 4 GB                                                           |
+| RAM | 8 GB                                                           |
 +-----+----------------------------------------------------------------+
 | HDD | Raid1/5/0+1 with >= 100GB                                      |
 +-----+----------------------------------------------------------------+
@@ -125,43 +124,6 @@ files or commands may differ slightly for other Linux systems):
 
 :program:`Packages`
 
-+--------------------+--------------------+----------------------+----------------------------------------+
-|:program:`Ubuntu 14`|:program:`OpenSUSE` |:program:`CentOS 6`   | SeisComP component                     |
-+====================+====================+======================+========================================+
-| flex               | flex               | flex                 | Seedlink (compilation only)            |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| libxml2            | libxml2            | libxml2              | Seedlink, Arclink, trunk               |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| libboost           | libboost           | boost                | trunk                                  |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| libboost-dev       | libboost-dev       | boost-devel          | trunk (compilation only)               |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| libncurses5        | libncurses         | ncurses              | trunk:scm (optional)                   |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| libncurses5-dev    | libncurses-dev     | ncurses-devel        | trunk:scm (compilation only, optional) |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| mysql-client       | libmysqlclient     | mysql                | trunk (only if MySQL is used)          |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| mariadb-client     |                    | mariadb-client       | trunk (only if MariaDB is used)        |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| libmysqlclient-dev | libmysqlclient-dev | mysql-devel          | trunk (compilation only if enabled)    |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| mysql-server       | mysql-server       | mysql-server         | trunk (only if MySQL is used locally)  |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| mariadb-server     |                    | mariadb-server       | trunk (only if MariaDB is used locally)|
-+--------------------+--------------------+----------------------+----------------------------------------+
-| libpq5             | libpq5             | postgresql           | trunk (only if PostgreSQL is used)     |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| libpq-dev          | libpq-dev          | postgresql-devel     | trunk (compilation only if enabled)    |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| libqt4-dev         | libqt4             | qt4                  | trunk (only GUI should be used)        |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| python-dev         | python-dev         | python-devel         | trunk (compilation only)               |
-+--------------------+--------------------+----------------------+----------------------------------------+
-| festival           | festival           | festival             | trunk (optional voice alert)           |
-+--------------------+--------------------+----------------------+----------------------------------------+
-
-
 First the environment has to be set up. The :program:`seiscomp` tool comes with
 the command :command:`install-deps` which installs required packages.
 Read the section :ref:`System management<system-management>` for more detailed instructions.
@@ -171,7 +133,7 @@ give 'mysql-server' as parameter.
 .. code-block:: sh
 
    user@host:~$ seiscomp/bin/seiscomp install-deps base mysql-server
-   Distribution: Ubuntu 10.04
+   Distribution: Ubuntu 16.04
    [sudo] password for sysop:
    Reading package lists... Done
    Building dependency tree
@@ -188,14 +150,6 @@ If your distribution is not supported by :command:`install-deps`
 
    user@host:~$ cd seiscomp/share/deps/ubuntu/[version]
    ...
-
-:program:`OpenSUSE` `version`
-
-.. code-block:: sh
-
-   user@host:~$ cd seiscomp/share/deps/sles/[version]
-   ...
-
 
 :program:`CentOS` `version`
 
@@ -245,14 +199,6 @@ SQL configuration
   **Note:** The location of the configuration can differ between distributions.
   The locations are given below for different Linux distribution.
 
-  :program:`OpenSUSE`
-
-  :file:`/etc/my.cnf`
-
-  :program:`Ubuntu 14`
-
-  :file:`/etc/mysql/my.cnf`  or :file:`/etc/mysql/conf.d/*`
-
   :program:`Ubuntu 16`
 
   :file:`/etc/mysql/mariadb.conf.d/50-server.cnf`
@@ -266,19 +212,6 @@ SQL configuration
 
 *  After adjusting the parameters, MySQL needs to be restarted. One can run
 
-  :program:`OpenSUSE`
-
-  .. code-block:: sh
-
-     user@host:~$ sudo rcmysql restart
-
-  :program:`Ubuntu 14`
-
-  .. code-block:: sh
-
-     user@host:~$ sudo restart mysql
-
-
   :program:`Ubuntu 16`
 
   .. code-block:: sh
@@ -290,18 +223,11 @@ SQL configuration
   .. code-block:: sh
 
      user@host:~$ su root
-     user@host:~$ /sbin/service mysqld restart
-
+     user@host:~$ systemctl restart mariadb
 
 * To start MySQL automatically during boot set
 
-  :program:`OpenSUSE`
-
-  .. code-block:: sh
-
-     user@host:~$ insserv mysql
-
-  :program:`Ubuntu 14, 16`
+  :program:`Ubuntu 16`
 
   .. code-block:: sh
 
@@ -312,7 +238,7 @@ SQL configuration
   .. code-block:: sh
 
      user@host:~$ su root
-     user@host:~$ /sbin/chkconfig mysqld on
+     user@host:~$ systemctl enable mariadb
 
 Now everything is installed and the system can be configured. The :ref:`next chapter<getting-started>`
 chapter explains the first steps.
