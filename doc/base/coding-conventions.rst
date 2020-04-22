@@ -51,8 +51,8 @@ C++ code is (or should be) written with the following code style:
     * gempa GmbH.                                                             *
     ***************************************************************************/
 
-   #ifndef NAMESPACE_LIB_FILENAME_H__
-   #define NAMESPACE_LIB_FILENAME_H__
+   #ifndef NAMESPACE_LIB_FILENAME_H
+   #define NAMESPACE_LIB_FILENAME_H
 
 
    #include <math.h>
@@ -115,8 +115,8 @@ File layout
 
   .. code-block:: c++
 
-     #ifndef NAMESPACE_LIB_FILENAME_H__
-     #define NAMESPACE_LIB_FILENAME_H__
+     #ifndef NAMESPACE_LIB_FILENAME_H
+     #define NAMESPACE_LIB_FILENAME_H
      ...
      #endif
 
@@ -233,6 +233,65 @@ or
 
    if ( ptr == NULL )
        do_something();
+
+Virtual Functions
+=================
+
+Virtual functions are a fundamental concept of polymorphic classes. Virtual
+functions will be overwritten in derived classes to implement specific
+behaviour. It can happen that the signature of the virtual function in the
+base class changes but derived classes do not follow this change.
+
+This causes in erroneous behaviour as the derived virtual function will not
+be called as desired. What is even worse is that this mismatch of signatures
+is hard to find and to debug.
+
+Fortunately C++11 introduces the long awaited override keyword which declares
+that a virtual function of a derived class intends to override the virtual
+function with the same name of the base class. If both signatures do not match,
+the compiler will throw an error.
+
+.. code-block:: c++
+
+   class Base {
+       virtual void print() {
+           cout << "Base class" << endl;
+       }
+   }
+
+   class Derived : public Base {
+       virtual void print() {
+           cout << "Derived class" << endl;
+       }
+   }
+
+If we change the signature of print to take an additional parameter then
+the derived method will not be called anymore.
+
+.. code-block:: c++
+
+   class Base {
+       virtual void print(ostream &os) {
+           os << "Base class" << endl;
+       }
+   }
+
+Adding the override keyword will force the compiler to check both signatures
+for equality.
+
+.. code-block:: c++
+
+   class Derived : public Base {
+       void print() override {
+           os << "Derived class" << endl;
+       }
+   }
+
+This code above will throw an error during compilation and one has to adapt
+the signature of the function.
+
+Use the override keyword whenever you implement a virtual function in derived
+classes.
 
 .. [1] http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2010/n3051.html
 .. [2] http://www.gotw.ca/publications/mill22.htm
