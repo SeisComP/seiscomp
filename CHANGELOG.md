@@ -1,3 +1,17 @@
+# AGPL
+
+## 4.0.0
+
+* fdsnxml2inv
+
+  * Add documentation
+  * Expose configuration in scconfig
+
+* scmssort
+
+  * Add documentation
+
+
 # Jakarta
 
 ## Release YYYY.ddd
