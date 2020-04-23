@@ -11,7 +11,6 @@
 
   * Add documentation
 
-
 # Jakarta
 
 ## Release YYYY.ddd
@@ -23,6 +22,7 @@
 * scautopick
 
   * Add amplitudes.enableUpdate to descriptions
+  * Add extraComments option to allow adding more comments to the pick, e.g. SNR
 
 * scqcv
 
