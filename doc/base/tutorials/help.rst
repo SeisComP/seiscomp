@@ -46,7 +46,7 @@ HTML documentation
 
 Most modules have HTML documentation. When installed, it can be found in :program:`scconfig`
 under *Docs*. The HTML documentation can also be reached from the *Help*  menu of all GUIs.
-It contains the description of configuration and commandline parameters along with
+It contains the description of configuration and command-line parameters along with
 an overview with many detailed information.
 
 .. figure:: media/gui_help.png
@@ -69,13 +69,13 @@ Commandline help
 ----------------
 
 In addition to the HTML documentation, many SeisComP commands have manual
-pages which can be read on the commandline:
+pages which can be read on the command line:
 
 .. code-block:: sh
 
    man [module name]
 
-and help on commandline options:
+and help on command-line options:
 
 .. code-block:: sh
 
@@ -83,9 +83,9 @@ and help on commandline options:
 
 .. note::
 
-   The commandline option *-h* can be used with almost all modules. No matter how many
-   other commandline parameters were given, *-h* will stop the module and print
-   the help on the commandline.
+   The command-line option *-h* can be used with almost all modules. No matter how many
+   other command-line parameters were given, *-h* will stop the module and print
+   the help on the command-line.
 
 .. _sec_tutorial_help_config-params:
 
