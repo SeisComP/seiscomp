@@ -11,8 +11,9 @@ You will ...
 
 Pre-requisites for this tutorial:
 
-* :ref:`Tutorial on <tutorials_addstation>`
-* :ref:`Tutorial on real time data<tutorials_geofon_waveforms>`
+* Have SeisComP installed
+* Tutorial on :ref:`adding a  new station<tutorials_addstation>`
+* Tutorial on :ref:`real-time data acquisition<tutorials_geofon_waveforms>`
   so that you have GE stations.
   Alternatively you may already obtain real-time waveform data from
   somewhere else.
@@ -22,7 +23,7 @@ Afterwards/Results/Outcomes:
 * Save real-time data in a local archive for later processing
 * See :term:`miniSEED` day files for GE stations in your local :ref:`waveform archive <concepts_waveformarchives>`.
 
-:Time range estimate:
+Time range estimate:
 
 * 5 minutes
 
