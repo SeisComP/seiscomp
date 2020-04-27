@@ -39,6 +39,27 @@ Try to answer the questions:
 
 For this example, we'll add station GF99 from the 6C network in Myanmar.
 
+Common inventory sources
+========================
+
+Meta data can be obtained from many different sources or created from scratch.
+
+Fetch inventories
+-----------------
+
+* Other SeisComP systems. Use :ref:`scxmldump` to fetch inventories.
+* `Eida nodes`_. Use web interfaces such web browsers or wget to fetch an inventory.
+* Data centers providing `FDSNWS`_. Use web interfaces such web browsers or wget to fetch an inventory.
+
+
+Create and share inventories
+----------------------------
+
+* gempa's `SMP`_ for creating inventory from scratch and community sharing.
+  Create inventories for new or old networks and stations from permanent or temporary
+  deployments.
+  SMP provides inventories in :term:`SCML` format in multiple versions which can be used without modification.
+
 Configuring for acquisition and archiving
 =========================================
 
@@ -141,3 +162,13 @@ If you have configured the station for processing, then:
 
   - In :program:`scolv`, the new station is either already included
     in automatic locations, or can be added manually.
+
+
+References
+==========
+
+.. target-notes::
+
+.. _`EIDA nodes` : http://orfeus-eu.org/stationbook/nodes/
+.. _`FDSNWS` : https://www.fdsn.org/webservices/datacenters/
+.. _`SMP` : https://smp.gempa.de
