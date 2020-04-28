@@ -30,10 +30,12 @@ Related tutorial(s):
 
 ----------
 
-Playbacks are an important way of testing module and whole-sytem configuration,
+Playbacks are an important way of testing module and whole-system configurations,
 operator trainings, system demonstrations and validations and tuning of the SeisComp modules
 used for detecting and locating events, e.g. involving
 
+* :ref:`seedlink`
+* :ref:`slarchive`
 * :ref:`scautopick`
 * :ref:`scautoloc`
 * :ref:`scamp`
@@ -107,11 +109,12 @@ using the command-line tool :ref:`msrtsimul`. Therefore, seedlink requires a con
 
      Open :scrttv: to verify the success of this re-configuration. No new data must arrive.
 
-#. Start all automatic data processing modules you wish to involve, e.g.
+#. Restart all automatic data processing modules you wish to involve. Additionally start
+   :ref:`slarchive` to archive the miniSEED data in the SDS archive for post-processing.
 
    .. code-block:: sh
 
-      seiscomp start scmaster scautopick scautoloc scamp scmag scevent
+      seiscomp restart scmaster scautopick scautoloc scamp scmag scevent slarchive
 
 #. Start all desired :term:`GUI` modules to observe the data acquisition and processing
    and the event results, e.g.:
@@ -127,11 +130,19 @@ using the command-line tool :ref:`msrtsimul`. Therefore, seedlink requires a con
       msrtsimul -v [your miniSEED file]
 
    This will play back the data as if they where perfectly recorded and received now.
-   To preserve the time of the records use
+   To preserve the time of the records use :program:`msrtsimul` with the historic
+   mode:
 
    .. code-block:: sh
 
       msrtsimul -v -m historic [your miniSEED file]
+
+   .. note::
+
+      Using :program:`msrtsimul` with the historic mode requires to reset the
+      seedlink buffer and the buffer of other processing modules by removing
+      the buffer files and restarting the modules. This mode may
+      therefore be exclusively used by experienced users.
 
 Revert the seedlink configuration after the playback to return to the original real-time
 data acquisition.
@@ -169,17 +180,24 @@ Reviewing results
 
 Use :ref:`scolv` or other :term:`GUIs <GUI>` to review the results:
 
-*  Event parameters are in the default database and the waveforms are in the default :term:`SDS` archive:
+*  Event parameters are in the default database. Configure :ref:`concepts_RecordStream`
+   if the waveforms are in the seedlink or in the :term:`SDS` archive:
 
    .. code-block:: sh
 
-      scolv -d mysql://sysop:sysop@localhost/seiscomp3 -I sdsarchvive:///home/sysop/seiscomp3/var/lib/archive
+      scolv -d mysql://sysop:sysop@localhost/seiscomp3
 
 *  Event parameters are in the default database but the waveforms are read from the miniSEED file:
 
    .. code-block:: sh
 
       scolv -d mysql://sysop:sysop@localhost/seiscomp3 -I file://[your file]
+
+   .. note::
+
+      Reading from the original file will only work if the actual times of the data
+      are preserved during the playback. This is **not** the case when starting
+      :program:`msrtsimul` without the historic mode.
 
 *  Event parameters are available in one XML file and the waveforms are read from the miniSEED file:
 
