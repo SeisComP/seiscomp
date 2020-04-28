@@ -36,7 +36,7 @@ on continuous data segments in the waveform archive.
 This information is written to the
 :ref:`database <concepts_database>` by :ref:`scardac`.
 To active the availability feature set :confval:`serveAvailability` and
-:ref:`dataAvailability.enable` to true.
+:confval:`dataAvailability.enable` to true.
 The availability information can be retrieved using :ref:`scxmldump` or :ref:`fdsnws`.
 
 Set-up

@@ -943,7 +943,7 @@ Scientific and technical terms
 
       .. math::
 
-         RMS = \sqrt{\frac{{x_1}^2+{x_2}^2+{x_3}^2+...+{x_n}^2}{N}}
+         RMS = \sqrt{\frac{{x_1}^2 + {x_2}^2 + {x_3}^2 + ... + {x_n}^2}{N}}
 
       for the time series with the N elements x\ :sub:`1` to x\ :sub:`n`.
 

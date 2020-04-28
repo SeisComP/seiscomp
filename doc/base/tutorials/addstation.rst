@@ -4,7 +4,8 @@
 Add a new station
 *****************
 
-You will ...
+This tutorial guides you through the most common activities
+involved in configuring a new station in your existing SeisComP system.
 
 * Add a new station to your SeisComP system for archiving
 * Configure it for processing too
@@ -91,8 +92,8 @@ we have it in a single file, :file:`inventory_GF99.xml`.
 
 Place this in :file:`~/seiscomp/etc/inventory`.
 
-OR import, scinv, whatever. See the inventory tutorial.
-
+OR import, scinv, whatever.
+See the inventory documentation (:ref:`concepts_inventory`).
 
 Then:
 
