@@ -2,6 +2,10 @@
 
 ## 4.0.0
 
+* scqc
+
+  * Add filtering to description XML for configuration in scconfig
+
 * fdsnxml2inv
 
   * Add documentation
