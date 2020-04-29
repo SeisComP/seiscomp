@@ -4,11 +4,12 @@
 Play back archived waveforms
 ****************************
 
-You will ...
+Aims:
 
 * Use previously recorded waveform files to re-run the analysis
-  of an old event using SeisComP. This is known as a *waveform playback*
-* Inserts result into your current SeisComP database for later processing
+  of an old event using SeisComP. This is known as a *waveform playback*.
+* Insert results into your current SeisComP database for later processing.
+* Review the results from playbacks.
 
 Pre-requisites for this tutorial:
 
@@ -31,7 +32,7 @@ Related tutorial(s):
 ----------
 
 Playbacks are an important way of testing module and whole-system configurations,
-operator trainings, system demonstrations and validations and tuning of the SeisComp modules
+operator trainings, system demonstrations and validations and tuning of the SeisComP modules
 used for detecting and locating events, e.g. involving
 
 * :ref:`seedlink`
@@ -48,8 +49,8 @@ other sources. The miniSEED data records in the data files must be sorted by end
 
 There are two types of playbacks:
 
-* :ref:`Real-time playbacks <_tutorials_rtplayback>`
-* :ref:`Non-real-time playbacks <_tutorials_rtplayback> or offline-playbacks`
+* :ref:`Real-time playbacks <tutorials_rtplayback>`.
+* :ref:`Non-real-time playbacks <tutorials_nonrtplayback>`.
 
 Data preparation
 ================
@@ -166,13 +167,13 @@ Non-real-time playbacks
 In non-real-time playbacks, also referred to as offline playbacks, data are processed
 by each module as fast as possible. The results can be communicated by
 
-* Messages: message-based offline playback
+* Messages: message-based playback
 * XML files in :term:`SCML` format: XML playback. They require the processing
   modules to provide the *--ep* option.
 
 .. warning::
 
-   In non-real-time playbacks scheduling and the creation history is not representative of
+   In non-real-time playbacks scheduling and the creation history are not representative of
    real-time situations.
 
 Reviewing results
@@ -185,13 +186,13 @@ Use :ref:`scolv` or other :term:`GUIs <GUI>` to review the results:
 
    .. code-block:: sh
 
-      scolv -d mysql://sysop:sysop@localhost/seiscomp3
+      scolv -d mysql://sysop:sysop@localhost/seiscomp
 
 *  Event parameters are in the default database but the waveforms are read from the miniSEED file:
 
    .. code-block:: sh
 
-      scolv -d mysql://sysop:sysop@localhost/seiscomp3 -I file://[your file]
+      scolv -d mysql://sysop:sysop@localhost/seiscomp -I file://[your file]
 
    .. note::
 
@@ -203,7 +204,7 @@ Use :ref:`scolv` or other :term:`GUIs <GUI>` to review the results:
 
    .. code-block:: sh
 
-      scolv --offline -d mysql://sysop:sysop@localhost/seiscomp3 -I file://[your miniSEED file]
+      scolv --offline -d mysql://sysop:sysop@localhost/seiscomp -I file://[your miniSEED file]
 
    To open the XML file click on the *File* menu of scolv. When results are available in several
    XML files, the files can be merged beforehand using :ref:`scxmlmerge`.

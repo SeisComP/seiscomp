@@ -59,6 +59,8 @@ A correct inventory is fundamental to SeisComP. Read the :ref:`inventory section
 in concepts for a description. `SMP`_ can be used to generate the required files
 in SCML format.
 
+.. _concepts_configuration-configs:
+
 Module and bindings configuration
 =================================
 
