@@ -19,16 +19,19 @@ The Sphinx website has a very good
 `introduction to reST`_ and also covers the Sphinx specific
 `directives`_.
 
-If you would like to add to this documentation or you find an error, then please submit a patch to
-`SeisComP on GitHub`_ or report to the
+If you would like to add to this documentation or you find an error, then please
+submit a patch to `SeisComP on GitHub`_ or report to the
 SeisComP `discussion forum`_.
-Please understand the :ref:`documentation style guide <documentation_style_guide>` before contributing
-documentation.
+
+.. note:
+
+   Please understand the :ref:`documentation style guide <documentation_style_guide>`
+   before contributing documentation.
 
 If you view the HTML version of the documentation in a browser,
 then you can use the *Show Source* link on each page to view the reST
-source. This or the documentation files for executables (see below) is
-a good starting point for a patch.
+source. The source and the documentation files for executables (see below) are
+good starting points for a new patch.
 
 Documenting Executables
 =======================
@@ -130,7 +133,7 @@ Element: **module**
 |                             |          |           | account.                                      |
 +-----------------------------+----------+-----------+-----------------------------------------------+
 | **inherit-global-bindings** | attrib   |    no     | If global bindings are inherited. The default |
-|                             |          |           | is 'false'. If 'yes' then all parameters of   |
+|                             |          |           | is 'false'. If 'yes', then all parameters of  |
 |                             |          |           | the global binding are also available in      |
 |                             |          |           | the module binding to allow overwriting them. |
 |                             |          |           | Standalone modules will never inherit global  |
@@ -282,7 +285,7 @@ Element: **configuration**
 | **group**         | element  |    no     | A parameter group that describes a logical        |
 |                   |          |           | grouping of parameters also called "scope" or     |
 |                   |          |           | "namespace". If a parameter in the                |
-|                   |          |           | configuration file contains dots. then only       |
+|                   |          |           | configuration file contains dots, then only       |
 |                   |          |           | the last part is a parameter all others are       |
 |                   |          |           | groups.                                           |
 |                   |          |           |                                                   |
@@ -501,7 +504,7 @@ Element: **option**
 |                     |          |           | *server*.                                     |
 +---------------------+----------+-----------+-----------------------------------------------+
 | **argument**        | attrib   |    no     | The optional argument string. If argument is  |
-|                     |          |           | not set the option is a switch.               |
+|                     |          |           | not set, the option is a switch.              |
 +---------------------+----------+-----------+-----------------------------------------------+
 | **default**         | attrib   |    no     | The option's default value used if the option |
 |                     |          |           | is not given though it is hard in most cases  |

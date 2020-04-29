@@ -192,8 +192,8 @@ Links and references
 
   Result: :ref:`short name <documentation_style_guide_headings>`
 
-* Do not show the URL to external web sites within the text. Rather, create a
-  reference list at the end of the document: ::
+* Create a reference list for external URLs at the end of the document.
+  Do not show the URL for external web sites within the text.  ::
 
     References
     ==========
@@ -207,6 +207,48 @@ Links and references
      `gempa GmbH`_
 
   Result: `gempa GmbH`_
+
+Text boxes
+----------
+
+You may emphasize information within the text as text boxes to stand out at different levels.
+Make sensible use of it!
+
+* Hints ::
+
+     .. hint::
+
+        This adds a useful hint.
+
+  Result:
+
+  .. hint::
+
+     This adds a useful hint.
+
+* Notes ::
+
+     .. note::
+
+        This adds an extra note.
+
+  Result:
+
+  .. note::
+
+     This adds an extra note.
+
+* Warnings ::
+
+     .. warning::
+
+        This adds an important warning.
+
+  Result:
+
+  .. warning::
+
+     This adds an important warning.
 
 
 English Language
@@ -256,8 +298,8 @@ avoiding this: "The :program:`scmaster` module has..."
 - Abbreviations:
 
   - e.g., i.e.
-  - STA, LTA
-  - TAR/tar?
+  - STA, LTA, STA/LTA detector
+  - TAR file
 
 Adding Images
 =============
@@ -313,7 +355,7 @@ Image style and format
 * Use PNG format.
 * Make the important image details readable at the normal image size without enlargement.
 * Images shall be optimized for file size.
-* Images should have a frame, e.g. a the window frame.
+* Images should have a frame, e.g. a window frame.
 * Avoid private information on images.
 * Do not show desktop background unless required.
 * Images from SeisComP GUIs can be screenshots.
