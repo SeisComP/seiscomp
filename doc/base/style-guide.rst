@@ -4,13 +4,11 @@
 Style Guide for Documentation
 *****************************
 
+
 File Layout
 ===========
 
-The :ref:`contributing_documentation` section details
-the documentation requirements for executables.
-
-The documentation of executable modules comes as a pair of source files:
+The documentation of an executable module comes as a pair of source files:
 
 * A description XML file (.xml) giving command details, command-line and configuration parameters,
 * A documentation reST text file (.rst) gives a more-detailed module description and examples.
@@ -19,6 +17,9 @@ Any other documentation, e.g. this style guide, tutorials, etc. only require the
 documentation reST text file.
 
 The reST text file should follow the guidelines in this style guide.
+
+The :ref:`contributing_documentation` section details
+the documentation requirements for executables including the structure of description XML files.
 
 
 Documentation Syntax

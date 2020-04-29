@@ -23,7 +23,7 @@ If you would like to add to this documentation or you find an error, then please
 submit a patch to `SeisComP on GitHub`_ or report to the
 SeisComP `discussion forum`_.
 
-.. note:
+.. note::
 
    Please understand the :ref:`documentation style guide <documentation_style_guide>`
    before contributing documentation.
