@@ -43,8 +43,8 @@ General principles
 
   .. _documentation_style_guide_headings:
 
-Section headings
-----------------
+Section and headings
+--------------------
 
 Module description files do *not* require top-level headings, as the
 build script will take this text and assemble it with other
@@ -73,7 +73,6 @@ Higher levels, marked up with asterisks, are used for sections of the documentat
 
 .. code-block:: sh
 
-
    Level 1 Title
    =============
 
@@ -90,7 +89,7 @@ Parts such as Examples are marked in **bold**.
 However notes and figures should use the appropriate RST directive, and don't require their own headings.
 
 - One blank line below headings is enough.
-  Two lines above are often used, and this looks better than one.
+- Two lines above are often used, and this looks better than one.
 
 Lists
 -----
@@ -220,8 +219,8 @@ English Language
   * Correct: "Although :program:`scmaster` receives a message"
   * Incorrect: "Although the scmaster receives a message..."
 
-Disputed: a sentences may begin with a lower case module name e.g. "scmaster has five modes..."
-To avoid this: "The :program:`scmaster` module has..."
+A sentence may begin with a lower case module name e.g. "scmaster has five modes..."
+avoiding this: "The :program:`scmaster` module has..."
 
 - Word separation:
 
@@ -234,20 +233,22 @@ To avoid this: "The :program:`scmaster` module has..."
     high-pass filter; command line; command-line parameter
 
 - Hyphenation for compound adjectives: yes, before a noun; after verb to be is harder.
-  See the `discussion`_
+  See the `discussion`_, e.g.:
+
+  - Use command-line parameters.
+  - Type on the command line.
 
 - Spelling:
 
-  - With 'z': digitizer, realize, visualize.
+  Use American English:
+
+  - With 'z': digitizer, realize, visualize, synchronize, behavior, color.
   - With 's': license.
-  - What about synchronise?
   - Center, data center.
-  - Unclear: behaviour/behavior.
-  - Ugly: timespan
 
 - Case:
 
-  - SEED, miniSEED (miniSEED in libmseed doc, or MiniSEED,
+  - SEED, miniSEED (miniSEED in `libmseed documentation`_, or MiniSEED,
     but Mini-SEED appears in Appendix G of the `Seed Reference Manual`_.)
   - Ctrl+S for 'control' key plus 's'.
   - MySQL, PostgreSQL, MariaDB
@@ -290,7 +291,7 @@ Compare with the :ref:`concept section on configuration<concepts_configuration-c
    <div class="two column layout">
 
    .. figure:: ../media/scconfig_no_bindings.png
-      :alt: scconfig: no bindings configurations
+      :alt: scconfig: bindings configurations
 
       scconfig modules panel indicating that no bindings can be configured.
 
@@ -327,4 +328,5 @@ References
 
 .. _`gempa GmbH`: https://www.gempa.de
 .. _`discussion` : https://english.stackexchange.com/questions/65630/you-should-be-well-organised-or-you-should-be-well-organised
+.. _`libmseed documentation` : https://github.com/iris-edu/libmseed/wiki
 .. _`Seed Reference Manual` : https://www.fdsn.org/pdf/SEEDManual_V2.4.pdf
