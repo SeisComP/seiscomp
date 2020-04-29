@@ -81,12 +81,18 @@ Scientific and technical terms
       a period of weeks, months, or years, decreasing in frequency with time. In general, the larger
       the mainshock, the larger and more numerous the aftershocks, and the longer they will continue.
 
+   amplitude
+      a) General term used for an observation of a wave at a particular time.
+      b) QuakeML object. Amplitudes are computed, e.g. for computing :term:`magnitudes <magnitude>`
+         of different types. Another type is the :term:`SNR`.
+         Amplitude computation depends on the type.
+
    array
-    A set of observing sensors at which the observed and sought signal are mostly coherent.
-    If the sensors are seismometers or barometers measuring infrasound, the terms
-    :term:`seismic array` or :term:`infrasound array` are used, respectively.
-    Arrays are different from a :term:`network` by the applied methods, e.g.
-    :term:`F-K` analysis, :term:`beam` forming or :term:`vespagram` analysis.
+      A set of observing sensors at which the observed and sought signal are mostly coherent.
+      If the sensors are seismometers or barometers measuring infrasound, the terms
+      :term:`seismic array` or :term:`infrasound array` are used, respectively.
+      Arrays are different from a :term:`network` by the applied methods, e.g.
+      :term:`F-K` analysis, :term:`beam` forming or :term:`vespagram` analysis.
 
    ATF
       The :term:`array transfer function` or :term:`array response function`
@@ -241,8 +247,9 @@ Scientific and technical terms
 
    event
       a) General term used for a localized disturbance (earthquake, explosion, etc.) which generates seismic waves.
-      b) QuakeML object. The event is the parent object of several origins. Among these origins a preferred origin
-         and its preferred magnitude is selected to represent the event.
+      b) QuakeML object. The event is the parent object of several :term:`origins <origin>`.
+         Among these origins a preferred origin
+         and its :term:`preferred magnitude` is selected to represent the event.
          An event can be seen as an earthquake folder
          which contains information about earthquake parameters.
 
@@ -415,7 +422,8 @@ Scientific and technical terms
 
    magnitude
       A number that characterizes the relative size of an earthquake. The magnitude is based on
-      measurement of the maximum motion recorded by a seismograph (sometimes for waves of a particular frequency),
+      :term:`amplitude` measurement of the maximum motion recorded by a seismograph
+      (sometimes for waves of a particular frequency),
       corrected for the attenuation with distance. Several scales have been defined, but the most commonly used are:
 
       1) local magnitude (ML), commonly referred to as "Richter magnitude"

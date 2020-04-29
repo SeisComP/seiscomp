@@ -58,13 +58,13 @@ Thus, you will generally need only two levels of headings but you can add more.
 +-------+------------------------------+
 | Level | Mark up beneath heading text |
 +=======+==============================+
-| 1     |  '===='                      |
+| 1     |  ' ==== '                    |
 +-------+------------------------------+
-| 2     |  '----'                      |
+| 2     |  " ---- "                    |
 +-------+------------------------------+
-| 3     |  '~~~~'                      |
+| 3     |  ' ~~~~ '                    |
 +-------+------------------------------+
-| 4     |  '^^^^'                      |
+| 4     |  ' ^^^^ '                    |
 +-------+------------------------------+
 
 Use Title Case for leval-1 headings, and only the first letter for level-2 headings is uppercase.
