@@ -70,6 +70,8 @@ Interactive analysis
 
    /gui
 
+.. _sec_index_modules:
+
 Modules and tools
 #################
 

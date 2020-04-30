@@ -18,8 +18,13 @@ research centers, companies and governmental agencies world-wide by:
 
 The first work on what became SeisComP today began nearly two decades ago
 with developments at GFZ of plugins for digitizers.
+It is now continued by gempa GmbH and GFZ.
 The :ref:`section on historical information <history>` provide details on the past
 and current releases.
+
+
+Features
+========
 
 Today SeisComP includes the following features:
 
@@ -39,9 +44,13 @@ Today SeisComP includes the following features:
 * Event parameter archiving
 * Easy access to relevant information about stations, waveforms and recent
   earthquakes through graphical user interface and command-line tools
+* Python interface for developing custom scripts and modules.
 
-The guidelines for the design
-of SeisComP are:
+
+Software Design
+===============
+
+The guidelines for the design of SeisComP are:
 
 * Implementation of critical functions as standalone modules to guarantee the
   independence from other functions (e.g. picker, magnitude calculation,
@@ -56,16 +65,33 @@ of SeisComP are:
 These design principles have given SeisComP much robustness and flexibility
 to respond to new developments.
 
-This documentation begins with an overview and :ref:`concepts` necessary for using SeisComP successfully.
+This Documentation
+==================
+
+This documentation begins with an :ref:`overview` and a :ref:`concepts` section
+necessary for understanding and using SeisComP successfully.
 It then covers the :ref:`installation <installation>`, and how to configure and operate a working SeisComP system.
 A few :ref:`tutorials` will guide you through a first example set up and further operations.
-The tutorials are followed by detailed technical descriptions of each individual SeisComP
-module, grouped by their general functionality - interactive analysis, data acquisition, inventory management,
-automatic processing, etc.
+
+The tutorials are followed by :ref:`detailed technical descriptions <sec_index_modules>` of each individual SeisComP
+module, grouped by their general functionality:
+
+* Interactive analysis
+* Data acquisition
+* Inventory management
+* Automatic processing
+* Utilities
+
+and many more :ref:`extensions <sec_index_extensions>`.
 
 The final part of the documentation relates to contributing your own code to SeisComP.
-This requires a deeper knowledge of the SeisComP data model and other details.
-It also includes guidelines for developers.
+This requires a deeper knowledge of the :ref:`SeisComP data model<api-datamodel-python>`
+and other details.
+This part also includes guidelines for developers such as
+:ref:`coding conventions <coding_conventions>`, :ref:`unit tests <unittests>` and a
+:ref:`guide for contributing documentation <contributing_documentation>`.
+:ref:`Some Python examples <sdk-python-examples>` help you to get started quickly
+with programming for SeisComP.
 
 SeisComP is developed and distributed under the terms of the GNU
 `Affero General Public License <https://www.gnu.org/licenses/agpl-3.0.html>`_,
