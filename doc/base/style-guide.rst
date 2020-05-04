@@ -239,6 +239,18 @@ Make sensible use of it!
 
      This adds an extra note.
 
+* Alerts ::
+
+     .. caution::
+
+        This adds a heads-up alert.
+
+  Result:
+
+  .. caution::
+
+     This adds a heads-up alert.
+
 * Warnings ::
 
      .. warning::
