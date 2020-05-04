@@ -16,9 +16,11 @@ For details, see the other chapters of this manual.
 
    /base/tutorials/postinstall
    /base/tutorials/upgrading
+   /base/tutorials/waveforms
+   /base/tutorials/archiving
+   /base/tutorials/processing
    /base/tutorials/addstation
    /base/tutorials/geofon_waveforms
-   /base/tutorials/archiving
    /base/tutorials/servefdsnws
    /base/tutorials/waveformplayback
    /base/tutorials/help

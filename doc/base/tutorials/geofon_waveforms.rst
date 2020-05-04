@@ -1,14 +1,14 @@
 .. _tutorials_geofon_waveforms:
 
-************************************************
-Get real-time data from a remote Seedlink server
-************************************************
+**********************************
+Add real-time stations from GEOFON
+**********************************
 
 You will use :program:`scconfig` to:
 
 * Add stations of the GEOFON seismic network, obtained from GEOFON,
-  as a source of data
-* Configure bindings to see these in your local system
+  as a source of data.
+* Configure bindings to see these in your local system.
 
 Pre-requisites for this tutorial:
 
@@ -65,7 +65,8 @@ to :program:`slinktool` ::
   ZB VAL41 VAL41
   ZB VOS   VOS
 
-This is a long list. It shows the network code and station code of each
+This is a long list.
+It shows the network code and station code of each
 of the stations for which data is available from this Seedlink server.
 We'll just be interested in a few stations, namely those corresponding
 to broadband 20 sps vertical channels - with channel code BHZ, and with network code GE ::
@@ -79,14 +80,12 @@ to broadband 20 sps vertical channels - with channel code BHZ, and with network 
   GE KBS   00 BHZ D 2019/11/24 13:22:12.9695  -  2019/11/24 22:46:17.4195
   GE KBS   10 BHZ D 2019/11/24 13:22:12.9695  -  2019/11/24 22:46:19.5945
   GE KBU      BHZ D 2019/11/28 06:53:21.8450  -  2019/11/28 12:22:18.2450
-
+  [..]
 
 The '-Q' option provides a formatted stream list,
 with one line for each stream available from the server.
-The columns are: network code, station code, location code (which may
-be empty) and channel code, a flag, and then the (UTC) time of the
-first and last data available at the server.
-(The `grep` command here is used to limit output to just those GE stations;
+The columns are described in :ref:`tutorials_waveforms`;
+the `grep` command here limits output to just those GE stations;
 without it, this server provides over 16000 lines of output.)
 
 For an active station, with low latency, the last data time (on the
@@ -100,13 +99,12 @@ Download station metadata
 
 There are several possible ways to obtain inventory.
 
-- Use WebDC http://eida.gfz-potsdam.de or
-  network pages http://geofon.gfz-potsdam.de/network.php?ncode=GE
+- Use WebDC3 [#WebDC]_ or network pages [#NETPAGES]_
   to obtain metadata for existing seismic networks.
 
 - Other sources of inventory, like a dataless SEED file, can also be used.
 
-- The Gempa Station Management Portal *SMP* (https://smp.gempa.de/)
+- The Gempa Station Management Portal `SMP`_
   is another important source of station metadata.
   If you would like to create your own inventory you may use this online tool.
   Before doing so, you will need to create
@@ -137,7 +135,7 @@ and query event catalogs
 from different data centres among other possibilities.
 
 You can find detailed information about WebDC3 in the on-line documentation at
-http://webdc3.readthedocs.io/en/latest/
+`Read The Docs`_.
 
 * Go to http://eida.gfz-potsdam.de/webdc3 with a browser.
 
@@ -169,7 +167,8 @@ http://webdc3.readthedocs.io/en/latest/
 
 * Go to the fourth tab, called "Download Data".
 
-* In the "FDSNWS Requests" block, click on "Save" to mkae your request to the FEOFON fdsnws-station web service.
+* In the "FDSNWS Requests" block, click on "Save" to mkae your request
+  to the GEOFON fdsnws-station web service.
 
 * When it's ready, you will be prompted to save an XML file to your local computer.
 
@@ -218,7 +217,7 @@ Import the metadata for your stations
 
 * Sync or Sync keys.
   Make sure :ref:`scmaster` and Spread are running.
-  SeisComP reads the inventory files in file:`~/seiscomp/etc/inventory`
+  SeisComP reads the inventory files in :file:`~/seiscomp/etc/inventory`
   and loads them into the database.
   You will see messages like "Sending notifiers: 2%" as this occurs.
   Eventually you should see "Program exited normally" again.
@@ -230,12 +229,8 @@ click on "Update configuration" and restart SeisComP (Stop and Start buttons).
 Configure bindings
 ##################
 
-In SeisComP terminology, *bindings* are the connection between modules
-and individual stations.
-See the "Bindings" section of :ref:`concepts_configuration` for full details.
-
-Now go to the "Bindings" tab on the left side bar of :program:`scconfig`.
-We will need to create bindings for every GE station to the
+As for individual stations (see the :ref:`processing` tutorial),
+we will need to create bindings for every GE station to the
 "global", "scautopick" and "seedlink" applications, as follows:
 
 
@@ -256,13 +251,23 @@ We will need to create bindings for every GE station to the
 
 * Create a *seedlink* profile named "geofon". Double click on the profile.
   Add a chain source with the green plus button on the left
-  (no other changes are necessary).
+  (no other changes are necessary for data from GEOFON's server,
+  as it is the default).
 
 * Drag and drop all profiles from the right side to the network icon on the
   left side (you may do that also at the station level).
 
-* Press Control+S to save the configuration.
+* Press Ctrl+S to save the configuration.
   This writes configuration files in :file:`~/seiscomp/etc/key`.
+
+.. note::
+
+   A few GEOFON stations (including KBS, LVC, SUMG) are distributed
+   with a non-blank location code, typically either "00" or "10".
+   Configuring these requires additional work.
+   You can create a profile setting :confval:`detecLocID` to "10",
+   called "BH10", and apply this to the appropriate stations.
+   Repeat this for stations where location code "00" is desired (e.g. SFJD).
 
 
 Update the configuration
@@ -310,5 +315,19 @@ you can follow the same procedure for other networks/stations, provided you
 References
 ##########
 
+.. target-notes::
+
+.. [#WebDC] The WebDC3 service is available at http://eida.gfz-potsdam.de.
+            See also
+            M. Bianchi, *et al.* (2015): WebDC3 Web Interface. GFZ Data Services.
+            doi:`10.5880/GFZ.2.4/2016.001 <http://dx.doi.org/10.5880/GFZ.2.4/2016.001>`_
+
 .. [#FDSN_SVCS] International Federation of Digital Seismograph Networks (2020).
-	        "FDSN Web Services", http://www.fdsn.org/webservices
+	        "FDSN Web Services", http://www.fdsn.org/webservices.
+
+.. [#NETPAGES] For instance that of the GEOFON Program, at
+               https://geofon.gfz-potsdam.de/waveform/archive/network.php?ncode=GE.
+
+.. _`SMP` : https://smp.gempa.de/
+
+.. _`Read The Docs` : http://webdc3.readthedocs.io
