@@ -108,7 +108,7 @@ Scientific and technical terms
 
    arrival
       a) The appearance of seismic energy on a seismic record
-      b) QuakeML object. The detected phase onset associated to an origin in SeisComP
+      b) QuakeML object. The detected phase onset associated to an origin in SeisComP.
 
    arrival time
       The time at which a particular phase of a seismic wave arrives at a station.
@@ -320,7 +320,7 @@ Scientific and technical terms
       increasing distance from a given source.
 
    GFZ
-      `German Research Center for Geosciences <http://www.gfz-potsdam.de/>`_.
+      Helmholtz Centre Potsdam `German Research Centre for Geosciences <http://www.gfz-potsdam.de/>`_.
       SeisComP was originally developed at GFZ.
 
    GMPE
@@ -943,7 +943,7 @@ Scientific and technical terms
 
       .. math::
 
-         RMS = \sqrt{\frac{{x_1}^2+{x_2}^2+{x_3}^2+...+{x_n}^2}{N}}
+         RMS = \sqrt{\frac{{x_1}^2 + {x_2}^2 + {x_3}^2 + ... + {x_n}^2}{N}}
 
       for the time series with the N elements x\ :sub:`1` to x\ :sub:`n`.
 
@@ -1002,8 +1002,11 @@ Scientific and technical terms
       requirements of 24/7 early warning control centers. Major changes in the
       architecture of SeisComP were necessary and many new features result in
       the upgrade of SeisComP to version 3. Important SeisComP releases are
-      shown below.  A first prototype of SeisComP3 developed by the
+      shown below.  A first prototype of :term:`SeisComP3` developed by the
       GITEWS/GEOFON development group was released in May 2007.
+
+   SeisComP3
+      A previous version of :term:`SeisComP`.
 
    seismic array
       An ordered arrangement of seismometers with central data acquisition specially

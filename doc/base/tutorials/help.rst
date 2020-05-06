@@ -116,7 +116,7 @@ section on configuration <concepts_configuration>` for a comprehensive overview.
 
   </div>
 
-.. _sec_tutorial_help_config-params:
+.. _sec_tutorial_help_cmdline-params:
 
 Command-line parameters
 -----------------------
@@ -188,7 +188,7 @@ Debugging options
 
 Most SeisComP applications support two important command line options:
 
-* Use ` --console` to send output to the terminal instead of the usual
+* Use `--console` to send output to the terminal instead of the usual
   log location.
 
 * `-v` for increased verbosity, or use `--verbosity=` *n* where *n*

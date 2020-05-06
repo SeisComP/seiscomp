@@ -15,7 +15,7 @@ Overview
 While real-time data sources provide data for a rather short amount of time,
 long-term access to waveforms can be established through waveform archives.
 The :ref:`RecordStream interface <concepts_RecordStream>` allows a combined access
-to real-time data and data in :ref:`SDS <_concepts_sds>` or other archives.
+to real-time data and data in :ref:`SDS <concepts_sds>` or other archives.
 
 .. note::
 
