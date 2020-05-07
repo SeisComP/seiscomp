@@ -83,12 +83,24 @@ The following packages should be installed to compile SeisComP:
 - flex
 - libssl-dev
 - crypto-dev
+- python-dev (optional)
+- python-numpy (optional)
 - libqt4-dev (optional)
 - qtbase5-dev (optional)
 - libmysqlclient-dev (optional)
 - libpq-dev (optional)
 - libsqlite3-dev (optional)
 - ncurses-dev (optional)
+
+The Python development libraries are required if Python wrappers should be
+compiled which is the default configuration. The development files must
+match the used Python interpreter of the system. If the system uses Python3
+then Python3 development files must be present in exactly the same version
+as the used Python3 interpreter. The same holds for Python2.
+
+Python-numpy is required if Numpy support is enable which is also
+the default configuration.
+
 
 ### Configuration
 
