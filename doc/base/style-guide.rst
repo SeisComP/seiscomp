@@ -67,7 +67,7 @@ Thus, you will generally need only two levels of headings but you can add more.
 | 4     |  ' ^^^^ '                    |
 +-------+------------------------------+
 
-Use Title Case for leval-1 headings, and only the first letter for level-2 headings is uppercase.
+Use Title Case for headings within a section, and make only the first letter uppercase for subheadings.
 Higher levels, marked up with asterisks, are used for sections of the documentation.
 
 **Example:**

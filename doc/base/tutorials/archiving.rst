@@ -12,15 +12,15 @@ You will ...
 Pre-requisites for this tutorial:
 
 * Have SeisComP installed
-* Tutorial on :ref:`adding a  new station<tutorials_addstation>`
+* Tutorial on :ref:`adding a new station<tutorials_addstation>`
 * Tutorial on :ref:`real-time data acquisition<tutorials_geofon_waveforms>`
-  so that you have GE stations.
+  so that you have local data for GE stations.
   Alternatively you may already obtain real-time waveform data from
-  somewhere else.
+  somewhere else (see :ref:`tutorials_waveforms`).
 
 Afterwards/Results/Outcomes:
 
-* Save real-time data in a local archive for later processing
+* Save real-time data in a local archive for later processing.
 * See :term:`miniSEED` day files for GE stations in your local :ref:`waveform archive <concepts_waveformarchives>`.
 
 Time range estimate:
@@ -34,15 +34,19 @@ Related tutorial(s):
 
 ----------
 
-Motivation:
+**Motivation**:
 Without activating archiving, your local Seedlink server
 will only keep waveforms for a short time.
 This makes it hard to review old events, for example.
 
 In this example, we'll arrange for keeping waveforms for one week.
-Before starting, you'll need bindings for your stations:
-read the tutorial :ref:`tutorials_geofon_waveforms`.
+Before starting, you'll need bindings for your stations;
+see the tutorials :ref:`tutorials_geofon_waveforms`
+or :ref:`tutorials_waveforms`.
 
+The :program:`slarchive` collects data and archives it
+locally using a :term:`SDS` file system structure of
+nested subdirectories and systematically named files.
 
 In scconfig
 ===========
@@ -71,12 +75,12 @@ In scconfig
    Changing the *name* of a binding profile does not change its function.
 
 .. note:: You can also choose which channels should be archived,
-   using the "selectors" box.
+   using the ":confval:`selectors`" box.
    For instance, you may collect data at several sample rates,
    and only wish to archive the highest rate.
-   E.g. if you collect LH, BH, HH streams at 0.1, 20, and 100 samples
+   If you collect LH, BH, HH streams at 0.1, 20, and 100 samples
    per second, respectively, you might retain only the HH streams,
-   by setting "selectors" to "HH".
+   by setting ":confval:`selectors`" to "HH".
 
 #. Then return to System, and click 'Update configuration'.
    Make sure the :program:`slarchive` module, or no module, is selected.
@@ -94,7 +98,7 @@ a new binding profile.
 e.g.::
 
   $ cd ~/seiscomp/etc/key
-  $ vi station_GE_APE
+  $ vi station_GR_CLL
 
 Add the line `slarchive:week` to whatever lines are already there.
 Afterwards it will look something like this::
@@ -105,7 +109,8 @@ Afterwards it will look something like this::
   seedlink:geofon
   slarchive:week
 
-Repeat this for each top-level key file: :file:`station_GE_ACRG`, :file:`station_GE_ARPR`, and so on.
+Repeat this for the top-level key file of each station
+you wish this binding to apply to.
 Now create the binding profile in the key directory.
 This is a file with a name corresponding to the binding profile name; here: 'week' ::
 
@@ -123,7 +128,7 @@ This is a file with a name corresponding to the binding profile name; here: 'wee
   starting slarchive
 
 
-.. note ::
+.. note::
 
    Left unattended, your disk will eventually fill up with archived data.
    To prevent this you will need a script like `purge_database`,
@@ -146,7 +151,7 @@ This is a file with a name corresponding to the binding profile name; here: 'wee
    This shows you that the `purge_datafiles` script
    will run every day at 3:20 a.m.
 
-.. note ::
+.. note::
 
   If you examine the `purge_datafiles` script, you will see that all it does
   is look for files with a last modified time older than a certain number
@@ -155,3 +160,34 @@ This is a file with a name corresponding to the binding profile name; here: 'wee
   ARCH_KEEP feature.
   A convenient way to do this for many stations is with
   multiple binding profiles, one for each length of time desired.
+
+
+Checking archiving is functioning
+=================================
+
+* If :program:`seedlink` is configured correctly, a new station's streams
+  appears in output from :program:`slinktool`::
+
+    $ slinktool -Q : | grep CLL
+    GR CLL      HHZ D 2020/04/01 01:11:57.6649  -  2020/04/01 07:28:49.0299
+    GR CLL      HHE D 2020/04/01 01:11:57.6649  -  2020/04/01 07:28:45.0299
+    GR CLL      HHN D 2020/04/01 01:11:57.6649  -  2020/04/01 07:28:39.2299
+
+  This shows three streams being acquired from station 'CLL'.
+  The second time shown is the time of the most recent data for each stream.
+
+* If :program:`slarchive` is configured correctly, waveform data for the
+  station appears in :program:`slarchive`'s SDS archive directory:
+
+   .. code-block:: sh
+
+      $ ls -l seiscomp/var/lib/archive/2020/GR/CLL
+      total 12
+      drwxr-xr-x 2 user user 4096 Apr  1 06:30 HHE.D
+      drwxr-xr-x 2 user user 4096 Apr  1 06:30 HHN.D
+      drwxr-xr-x 2 user user 4096 Apr  1 06:30 HHZ.D
+
+      $ ls -l seiscomp/var/lib/archive/2020/GR/CLL/HHZ.D/
+      total 12728
+      -rw-r--r-- 1 user user 5492224 Mar 31 00:04 GR.CLL..BHZ.D.2020.090
+      -rw-r--r-- 1 user user 7531008 Apr  1 00:03 GR.CLL..BHZ.D.2020.091
