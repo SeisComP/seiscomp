@@ -4,7 +4,7 @@
 Historical information
 **********************
 
-The first version of SeisComP was developed for the `GEOFON`_ network operated by `GFZ`_.
+The first version of SeisComP was developed for the :term:`GEOFON` network operated by :term:`GFZ`.
 
 Originally, SeisComP was designed as a high-standard, fully automatic data acquisition and (near-)real-time
 data processing tool including quality control, event detection and location as well as dissemination
@@ -17,7 +17,7 @@ Tsunami Early Warning System) project led to additional functionality being impl
 requirements of 24/7 early warning control centers. Major changes in the architecture of SeisComP
 were necessary and many new features resulted in the upgrade of SeisComP to version 3.
 
-Since 2008 SeisComP has been jointly developed by `gempa GmbH`_, a spin-off company of GFZ and GFZ.
+Since 2008 SeisComP has been jointly developed by :term:`gempa GmbH`, a spin-off company of GFZ and GFZ.
 Nowadays, gempa GmbH is the main SeisComP developing and service company.
 
 Important SeisComP releases are shown below.
@@ -70,8 +70,5 @@ References
 
 .. target-notes::
 
-.. _`GEOFON`: https://geofon.gfz-potsdam.de
-.. _`GFZ`: https://www.gfz-potsdam.de
 .. _`GITEWS`: https://www.gitews.org
 .. _`ORFEUS`: https://www.orfeus-eu.org
-.. _`gempa GmbH`: https://www.gempa.de
