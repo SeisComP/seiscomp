@@ -12,7 +12,7 @@ Linux systems and architectures:
 * Documentation
 * Station configuration files (optional)
 
-Download these from http://www.seiscomp.org/ .
+Download these from `SeisComP`_.
 This section describes the installation of the binary packages of SeisComP on
 an
 
@@ -295,3 +295,12 @@ following table.
 +---------------------+--------------------------------------------------------------------+
 | *etc/key*           | Station configurations and module bindings.                        |
 +---------------------+--------------------------------------------------------------------+
+
+
+
+References
+##########
+
+.. target-notes::
+
+.. _`SeisComP` : _https://www.seiscomp.org

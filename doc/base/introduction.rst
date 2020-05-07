@@ -14,12 +14,12 @@ research centers, companies and governmental agencies world-wide by:
 
 * Powerful and reliable automatic data processing in real time or during post-processing
 * User-friendly and comprehensive graphical interfaces
-* Modern and well-maintained `OpenSource software <https://github.com/SeisComP>`_ welcoming community contributions.
+* Modern and well-maintained OpenSource software on `GitHub`_ welcoming community contributions.
 
 The first work on what became SeisComP today began nearly two decades ago
-with developments at GFZ of plugins for digitizers.
-It is now continued by gempa GmbH and GFZ.
-The :ref:`section on historical information <history>` provide details on the past
+with developments at :term:`GFZ` of plugins for digitizers.
+It is now continued by :term:`gempa GmbH` and GFZ.
+The :ref:`section on historical information <history>` provides details on the past
 and current releases.
 
 
@@ -94,5 +94,14 @@ This part also includes guidelines for developers such as
 with programming for SeisComP.
 
 SeisComP is developed and distributed under the terms of the GNU
-`Affero General Public License <https://www.gnu.org/licenses/agpl-3.0.html>`_,
+`Affero General Public License`_,
 as set out in the :ref:`license` section.
+
+
+References
+==========
+
+.. target-notes::
+
+.. _`GitHub` : https://github.com/SeisComP
+.. _`Affero General Public License` : https://www.gnu.org/licenses/agpl-3.0.html

@@ -108,7 +108,7 @@ There are several possible ways to obtain inventory.
   is another important source of station metadata.
   If you would like to create your own inventory you may use this online tool.
   Before doing so, you will need to create
-  an account at https://smp.gempa.de/user/signup .
+  an `SMP account`_.
 
 Option 1: Using FDSN web services
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -329,5 +329,6 @@ References
                https://geofon.gfz-potsdam.de/waveform/archive/network.php?ncode=GE.
 
 .. _`SMP` : https://smp.gempa.de/
+.. _`SMP account` :  https://smp.gempa.de/user/signup
 
 .. _`Read The Docs` : http://webdc3.readthedocs.io

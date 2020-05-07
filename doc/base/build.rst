@@ -10,7 +10,7 @@ Here we describe the simplest case only.
 .. note ::
 
    For production systems only use the official releases
-   from https://www.seiscomp.de or the corresponding tags in this repository.
+   from `SeisComP`_, `gempa GmbH`_ or compile from the corresponding release tags in this repository.
 
 Before building, **install all the dependencies**,
 as described below in :ref:`build_dependencies`.
@@ -115,3 +115,11 @@ To compile the sources the following development packages are required (Redhat/C
 - python-devel
 - m2crypto-devel
 - qt4-devel
+
+References
+==========
+
+.. target-notes::
+
+.. _`SeisComP` : https://www.seiscomp.de/downloader/
+.. _`gempa GmbH` : https://www.gempa.de

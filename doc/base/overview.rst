@@ -260,6 +260,6 @@ References
 .. _`GEOFON` : https://geofon.gfz-potsdam.de
 .. _`EIDA` : https://www.orfeus-eu.org/data/eida/
 .. _`IRIS` : https://service.iris.edu/fdsnws/
-.. _`SMP` : https://smpw.gempa.de
+.. _`SMP` : https://smp.gempa.de
 .. _`SeisComP forum` : https://forum.seiscomp3.org
 .. _`gempa GmbH` : https://www.gempa.de

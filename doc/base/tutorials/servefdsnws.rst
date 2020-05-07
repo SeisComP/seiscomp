@@ -147,9 +147,7 @@ Final tests
   The above example is just for the first hour of 2020.
 
 * The `fdsnws_fetch` client is a convenient tool for requesting waveforms
-  from a FDSN web service.
-  More information about it is at
-  http://geofon.gfz-potsdam.de/software/fdsnws_scripts
+  from a FDSN web service. :term:`GEOFON` maintains `scripts for FDSNWS`_.
 
 References
 ==========
@@ -159,5 +157,7 @@ References
 .. [#FDSN_SPEC] International Federation of Digital Seismograph Networks (2019-04-02).
         FDSN Web Service Specifications Version 1.2.
         At http://www.fdsn.org/webservices/FDSN-WS-Specifications-1.2.pdf
+
 .. _`URL builder at GEOFON` : https://geofon.gfz-potsdam.de/waveform/builder.php
 .. _`FDSNWS description at GEOFON` : https://geofon.gfz-potsdam.de/waveform/webservices.php
+.. _`scripts for FDSNWS` : https://www.seiscomp3.org/doc/applications/fdsnws_scripts.html
