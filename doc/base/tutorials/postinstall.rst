@@ -6,7 +6,7 @@ Installation on Ubuntu
 
 You will ...
 
-* make a basic SeisComP installation
+* Make a basic SeisComP installation
 
 Pre-requisites for this tutorial:
 
@@ -29,9 +29,16 @@ Related tutorial(s):
 
 ------------
 
-Get your native or virtual Ubuntu ready
-=======================================
+You may install SeisComP by:
 
+#. :ref:`Compiling the source code <tutorials_postinstall_compile>`,
+#. :ref:`Installing pre-compiled release packages <tutorials_postinstall_package>`
+   including binaries, maps and documentation.
+
+Get your Linux System ready
+===========================
+
+First you need to get your Linux system ready.
 The following documentation refers to Ubuntu 18.04,
 but the steps for other Ubuntu versions are similar.
 
@@ -49,7 +56,8 @@ but the steps for other Ubuntu versions are similar.
       directory. Creating a new user is recommended as it allows an easy cleanup of the system later simply by
       removing the new user if needed.
 
-#. Check the size and the architecture: ::
+#. Check the size and the architecture. This is espcially required when installing
+   :ref:`pre-compiled packages<tutorials_postinstall_package>`: ::
 
      $ df -h
      $ cat /etc/issue
@@ -60,10 +68,25 @@ but the steps for other Ubuntu versions are similar.
    If 'uname' shows 'i686', you have a 32-bit system;
    if you see 'x86_64', you have 64-bit.
 
-Download SeisComP binary package, maps and documentation
-========================================================
 
-3. Download the appropriate SeisComP binary package taking into
+.. _tutorials_postinstall_compile:
+
+Install from source code
+========================
+
+To compile SeisComP from the source code follow the
+:ref:`instructions in the development section <build>`. You may later download and add
+maps as described below in the :ref:`package section <tutorials_postinstall_package>`.
+
+
+.. _tutorials_postinstall_package:
+
+Install pre-compiled release packages
+=====================================
+
+You may download and installed pre-compile SeisComP binary package, maps and documentation.
+
+#. Download the appropriate SeisComP binary package taking into
    account your Linux distribution and the architecture.
    Get the package from the `SeisComP package downloader`_ or `gempa GmbH`_.
    Packages are available for Ubuntu and other Linux flavors such as CentOS and Debian.

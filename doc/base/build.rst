@@ -7,7 +7,7 @@ Compiling SeisComP from source code
 To build from source you will need to clone from one or more repositories.
 Here we describe the simplest case only.
 
-.. note ::
+.. caution ::
 
    For production systems only use the official releases
    from `SeisComP`_, `gempa GmbH`_ or compile from the corresponding release tags in this repository.
