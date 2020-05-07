@@ -70,5 +70,5 @@ References
 
 .. target-notes::
 
-.. _`GITEWS`: https://www.gitews.org
 .. _`ORFEUS`: https://www.orfeus-eu.org
+.. _`GITEWS`: https://www.gitews.org
