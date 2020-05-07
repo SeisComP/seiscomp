@@ -94,18 +94,22 @@ Configure bindings
 In :program:`scconfig`, under the Bindings tab:
 
 1. Create a *seedlink* profile named "geofon", named after the upstream server.
-   Double click on the profile.
-   Add a 'chain' source with the green plus button on the left;
-   you can name it anything.
-   Open this and set the name of the server (:confval:`address`)
-   and its TCP port, :confval:`port`.
-   If you wish to limit the data requested to particular channels,
-   based on channel or location code,
-   set Seedlink's :confval:`selectors <sources.chain.selectors>` to "BH" say.
-   Otherwise you will be requesting all streams available for this
-   station, potentially wasting bandwidth and slowing your system.
-   No other changes are normally necessary.
-  
+
+   * Double click on the profile.
+   * Select the 'chain' plugin for the souce from the drop-down menu
+   * To add the plugin click on the green "plus" button on the left. Name it anything or even leave the name blank.
+   * Open this and set the name of the server (:confval:`address`)
+     and its TCP port, :confval:`port`. Normally you leave the port at 18000 which is the default.
+   * If you wish to limit the data requested to particular channels,
+     based on channel or location code,
+     set Seedlink's :confval:`selectors <sources.chain.selectors>` to "BH?.D" say
+     for fetch all BH stream and no auxiliary streams. Add the location code without
+     a space to limit by location as well, e.g. 00BH?.D. You may add a comma-separated
+     list of streams, e.g. "00BH?.D, 10BH?.D".
+     Otherwise you will be requesting all streams available for this
+     station, potentially wasting bandwidth and slowing your system.
+     No other changes are normally necessary.
+
 #. Drag and drop this profile from the right side to the network icon on the
    left side (you may do that also at the station level)
    to apply it to your station.
@@ -124,21 +128,23 @@ SeisComP's modules then require restarting to load the updated information.
 * Go to the System tab and press ESC (the Escape key, to de-select all modules).
 
   #. Click on "Update configuration", at the right of the window.
-     (**Not** "Update", - that just refreshes :program:`scconfig`'s
+     (**Not** "Refresh", - that just refreshes :program:`scconfig`'s
      display of what is running!)
   #. Press *Start* to start acquiring data from the already configured stations.
 
 * Alternatively, at the command line::
 
-    $ seiscomp update-config
-    $ seiscomp restart
+    $ seiscomp update-config seedlink
+    $ seiscomp restart seedlink
 
 
 Check it works
 ##############
 
 * To confirm that you have waveform data for the station locally,
-  run :program:`slinktool -Q`.
+  run ::
+
+     slinktool -Q localhost
 
 
 Further steps
@@ -147,7 +153,5 @@ Further steps
 At this point,
 you can follow the same procedure for other networks/stations, provided you
 
-1. Have metadata available.
+1. Have metadata available. You may follow the tutorial :ref:`tutorials_addstation`.
 2. Know the location of a Seedlink server for, and have access to, the waveforms.
-
-
