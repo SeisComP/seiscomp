@@ -18,11 +18,11 @@
  ***************************************************************************/
 
 
-#ifndef SEISCOMP_VERSION_H__
-#define SEISCOMP_VERSION_H__
+#ifndef SEISCOMP_VERSION_H
+#define SEISCOMP_VERSION_H
 
 
-#define SEISCOMP_RELEASE_NAME   "AGPL"
+#define SEISCOMP_RELEASE_BRANCH "Development"
 
 #define SEISCOMP_VERSION_MAJOR  4
 #define SEISCOMP_VERSION_MINOR  0
