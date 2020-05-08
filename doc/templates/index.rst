@@ -2,7 +2,7 @@
 Welcome
 #######
 
-This is the documentation for the SeisComP release |release| version |version|.
+This is the documentation for the SeisComP version |version| |release|.
 
 For examples and tutorials please check the `SeisComP wiki <http://www.seiscomp.org/>`_.
 Please consider :doc:`contributing</base/contributing-docs>` to this documentation.

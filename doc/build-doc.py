@@ -654,8 +654,8 @@ f = open(os.path.join(base_dir, "..", "src",
                       "system", "libs", "seiscomp", "version.h"))
 for l in f.readlines():
     l = l.strip()
-    if l.startswith('#define SEISCOMP_RELEASE_NAME'):
-        release = l[29:].strip()
+    if l.startswith('#define SEISCOMP_RELEASE_BRANCH'):
+        release = l[31:].strip()
     elif l.startswith('#define SEISCOMP_VERSION_MAJOR'):
         version_major = l[30:].strip()
     elif l.startswith('#define SEISCOMP_VERSION_MINOR'):
