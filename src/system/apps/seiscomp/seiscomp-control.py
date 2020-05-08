@@ -5,8 +5,6 @@ from __future__ import division, print_function
 import glob
 import importlib
 import os
-import pipes
-import shutil
 import signal
 import subprocess
 import sys
@@ -36,13 +34,22 @@ else:
 def get_library_path():
     if sys.platform == "darwin":
         return LD_LIBRARY_PATH + ":" + DYLD_FALLBACK_FRAMEWORK_PATH
-    else:
-        return LD_LIBRARY_PATH
+
+    return LD_LIBRARY_PATH
 
 
 def get_framework_path():
     return DYLD_FALLBACK_FRAMEWORK_PATH
 
+
+# Python 3 compatible string check
+def is_string(variable):
+    try:
+        string_class = basestring
+    except NameError:
+        string_class = str
+
+    return isinstance(variable, string_class)
 
 # ------------------------------------------------------------------------------
 # Helper functions
@@ -69,7 +76,7 @@ def system(args):
         except Exception as e:
             try:
                 proc.terminate()
-            except:
+            except Exception:
                 pass
             sys.stderr.write("Exception: %s\n" % str(e))
             continue
@@ -141,7 +148,7 @@ def get_module(name):
 
 
 def has_module(name):
-    return get_module(name) != None
+    return get_module(name) is not None
 
 
 def dump_paths():
@@ -213,7 +220,7 @@ def on_setup(args, flags):
 
     if "stdin" in flags:
         cfg = seiscomp.config.Config()
-        if cfg.readConfig("-") == False:
+        if not cfg.readConfig("-"):
             error("invalid configuration from stdin")
             return 1
     else:
@@ -474,7 +481,8 @@ def on_list(args, flags):
                 state = "disabled"
             print("%s is %s" % (mod.name, state))
         return 0
-    elif args[0] == "aliases":
+
+    if args[0] == "aliases":
         f = open(ALIAS_FILE, 'r')
         lines = [line.rstrip() for line in f.readlines()]
         for line in lines:
@@ -490,13 +498,15 @@ def on_list(args, flags):
                 print("%s -> %s" % (toks[0], toks[1]))
         f.close()
         return 0
-    elif args[0] == "enabled":
+
+    if args[0] == "enabled":
         for mod in mods:
             if env.isModuleEnabled(mod.name) or \
                isinstance(mod, seiscomp.kernel.CoreModule):
                 print(mod.name)
         return 0
-    elif args[0] == "disabled":
+
+    if args[0] == "disabled":
         for mod in mods:
             if not env.isModuleEnabled(mod.name) and \
                not isinstance(mod, seiscomp.kernel.CoreModule):
@@ -560,9 +570,8 @@ def on_print(args, flags):
         print("export %s=%s:$%s" %
               (SysLibraryPathVar, get_library_path(), SysLibraryPathVar))
         if sys.platform == "darwin":
-            print("export %s=%s:$%s" % \
-                    ( SysFrameworkPathVar, get_framework_path(),
-                      SysFrameworkPathVar))
+            print("export %s=%s:$%s" % (
+                SysFrameworkPathVar, get_framework_path(), SysFrameworkPathVar))
 
         print("export PYTHONPATH=%s:$PYTHONPATH" % PYTHONPATH)
         print("export MANPATH=%s:$MANPATH" % MANPATH)
@@ -588,7 +597,7 @@ def on_print_help(args):
 def on_install_deps_linux(args, flags):
     try:
         out = subprocess.Popen(['lsb_release', '-sir'],
-                  stdout=subprocess.PIPE).communicate()[0].splitlines()
+                               stdout=subprocess.PIPE).communicate()[0].splitlines()
         # some OS return release and version in one line
         if len(out) == 1:
             out = out[0].split()
@@ -643,15 +652,15 @@ def on_install_deps_linux(args, flags):
 def on_install_deps(args, flags):
     if sys.platform.startswith("linux"):
         return on_install_deps_linux(args, flags)
-    else:
-        error("unsupported platform")
-        print("*********************************************************************")
-        print("The platform you are currently running on is not supported to install")
-        print("dependencies automatically.")
-        print("You need to check the documentation for required packages and install")
-        print("them manually.")
-        print("*********************************************************************")
-        return 1
+
+    error("unsupported platform")
+    print("*********************************************************************")
+    print("The platform you are currently running on is not supported to install")
+    print("dependencies automatically.")
+    print("You need to check the documentation for required packages and install")
+    print("them manually.")
+    print("*********************************************************************")
+    return 1
 
 
 def on_install_deps_help(args):
@@ -684,7 +693,7 @@ def on_update_config(args, flags):
 
                 try:
                     proxy = mod.updateConfigProxy()
-                    if isinstance(proxy, basestring):
+                    if is_string(proxy):
                         configuredMods.setdefault(proxy, False)
                 except Exception as e:
                     pass
@@ -695,8 +704,8 @@ def on_update_config(args, flags):
                     try:
                         error_code = int(result)
                     except Exception as e:
-                        error(
-                            "unexpected return type when updating configuration of %s" % mod.name)
+                        error("unexpected return type when updating " \
+                              "configuration of %s" % mod.name)
                         return 1
 
                     if error_code != 0:
@@ -786,8 +795,8 @@ def on_alias(args, flags):
                 if toks[0] == args[1]:
                     has_alias = True
                     break
-                else:
-                    new_lines.append(line)
+
+                new_lines.append(line)
             f.close()
         except:
             pass
@@ -859,7 +868,8 @@ def on_alias(args, flags):
         os.chdir(cwd)
 
         return 0
-    elif args[0] == "remove":
+
+    if args[0] == "remove":
         if len(args) != 2:
             error("expected one argument for remove: alias-name")
             return 1
@@ -938,11 +948,9 @@ def on_alias(args, flags):
             pass
 
         return 0
-    else:
-        error("wrong command '%s': expected 'create' or 'remove'" % args[0])
-        return 1
 
-    return 0
+    error("wrong command '%s': expected 'create' or 'remove'" % args[0])
+    return 1
 
 
 def on_alias_help(args):
@@ -1000,15 +1008,15 @@ def on_help(args, flags):
         print()
         print("Use 'help [command]' to get more help about a command")
         return 0
-    else:
-        cmd = args[0]
-        try:
-            func = globals()["on_" + cmd.replace("-", "_") + "_help"]
-        except:
-            print("Sorry, no help available for %s" % cmd)
-            return 1
-        func(args[1:])
-        return 0
+
+    cmd = args[0]
+    try:
+        func = globals()["on_" + cmd.replace("-", "_") + "_help"]
+    except:
+        print("Sorry, no help available for %s" % cmd)
+        return 1
+    func(args[1:])
+    return 0
 
 
 def run_action(action, args, flags):
@@ -1044,7 +1052,7 @@ argv = sys.argv[1:]
 argflags = []
 
 # Check for flags
-while len(argv):
+while argv:
     if argv[0] == "--csv":
         useCSV = True
         argv = argv[1:]
@@ -1062,7 +1070,7 @@ if len(argv) < 1:
     sys.exit(1)
 
 action = argv[0]
-args = argv[1:]
+arguments = argv[1:]
 
 if not action in allowed_actions:
     print("seiscomp [flags] {%s} [args]" % "|".join(allowed_actions))
@@ -1095,14 +1103,14 @@ if os.path.islink(sys.argv[0]):
 # Guess SEISCOMP_ROOT from path of called script, directory links are not
 # resolved allowing to create separate SC3 environments
 if os.path.isabs(sys.argv[0]):
-    path = sys.argv[0]
+    root_path = sys.argv[0]
 else:
     cwd = os.getenv('PWD')
     if cwd is None:
         cwd = os.getcwd()
-    path = os.path.join(cwd, sys.argv[0])
+    root_path = os.path.join(cwd, sys.argv[0])
 
-SEISCOMP_ROOT = os.path.dirname(os.path.dirname(os.path.normpath(path)))
+SEISCOMP_ROOT = os.path.dirname(os.path.dirname(os.path.normpath(root_path)))
 INIT_PATH = os.path.join(SEISCOMP_ROOT, "etc", "init")
 DESC_PATH = os.path.join(SEISCOMP_ROOT, "etc", "descriptions")
 ALIAS_FILE = os.path.join(DESC_PATH, "aliases")
@@ -1171,11 +1179,11 @@ if action in actions_without_lock:
 else:
     try:
         isChild = os.environ["SEISCOMP_LOCK"] == "TRUE"
-    except:
+    except KeyError:
         pass
 
 if not isChild:
-    if env.tryLock("seiscomp") == False:
+    if not env.tryLock("seiscomp"):
         error("Could not get lock %s - is another process using it?" %
               env.lockFile("seiscomp"))
         sys.exit(1)
@@ -1191,7 +1199,7 @@ if not isChild:
 env.chroot()
 
 simpleCommand = (action == "install-deps") or \
-                (action == "print" and args == "env")
+                (action == "print" and arguments == "env")
 
 if not simpleCommand:
     config_mods = load_init_modules(INIT_PATH)
@@ -1201,4 +1209,4 @@ if not simpleCommand:
             continue
         mods.append(m)
 
-sys.exit(run_action(action, args, argflags))
+sys.exit(run_action(action, arguments, argflags))
