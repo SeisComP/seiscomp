@@ -41,7 +41,7 @@ os.chmod("seiscomp-python", permissions)
 
 wrapper="""#!/bin/sh
 # Determine the root directory of the 'seiscomp' utility.
-SEISCOMP_ROOT=`realpath "${0%/bin/seiscomp}"`
+SEISCOMP_ROOT=`realpath "${0%%/bin/seiscomp}"`
 # FIXME:
 # - Any portability issues with 'realpath'?
 # - Is there a more portable alternative?
