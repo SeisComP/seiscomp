@@ -303,4 +303,4 @@ References
 
 .. target-notes::
 
-.. _`SeisComP` : https://www.seiscomp.org
+.. _`SeisComP` : https://www.seiscomp.de

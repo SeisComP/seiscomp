@@ -571,11 +571,11 @@ References
 
 .. target-notes::
 
-.. _`SeisComP wiki` : https://www.seiscomp.org/
+.. _`SeisComP wiki` : https://www.seiscomp.de/
 .. _`reStructuredText` : https://docutils.sourceforge.net/rst.html
 .. _`Sphinx` : https://sphinx.pocoo.org/index.html
 .. _`Python documentation` : https://docs.python.org/
 .. _`introduction to reST` : https://sphinx.pocoo.org/rest.html
 .. _`directives` : https://sphinx.pocoo.org/markup/index.html
 .. _`SeisComP on GitHub` : https://github.com/SeisComP
-.. _`discussion forum` : https://forum.seiscomp.org
+.. _`discussion forum` : https://forum.seiscomp.de
