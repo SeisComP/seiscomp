@@ -311,5 +311,5 @@ References
 .. target-notes::
 
 .. _`News website of gempa GmbH` : https://www.gempa.de/news/
-.. _`SeisComP forum` : https://forum.seiscomp3.org
+.. _`SeisComP forum` : https://forum.seiscomp.de/
 .. _`SeisComP package downloader` : https://www.seiscomp.de/downloader/

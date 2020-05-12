@@ -137,9 +137,9 @@ The SeisComP Forum
    :width: 16cm
    :align: center
 
-   The SeisComP Forum (https://forum.seiscomp3.org).
+   The SeisComP Forum (https://forum.seiscomp.de).
 
-The `Forum <https://forum.seiscomp3.org>`_ is the place to
+The `Forum <https://forum.seiscomp.de>`_ is the place to
 discuss SeisComP.
 Anouncements about updates, training courses and more are posted
 here by the developers, and users can post questions or discuss
