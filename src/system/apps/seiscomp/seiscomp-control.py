@@ -152,15 +152,15 @@ def has_module(name):
 
 
 def dump_paths():
-    print("--------------------")
-    print("SEISCOMP_ROOT=%s" % SEISCOMP_ROOT)
-    print("PATH=%s" % os.environ["PATH"])
-    print("%s=%s" % (SysLibraryPathVar, os.environ[SysLibraryPathVar]))
+    print('--------------------')
+    print('SEISCOMP_ROOT="%s"' % SEISCOMP_ROOT)
+    print('PATH="%s"' % os.environ["PATH"])
+    print('%s="%s"' % (SysLibraryPathVar, os.environ[SysLibraryPathVar]))
     if SysFrameworkPathVar:
-        print("%s=%s" % (SysFrameworkPathVar, os.environ[SysFrameworkPathVar]))
-    print("PYTHONPATH=%s" % sys.path)
-    print("CWD=%s" % os.getcwd())
-    print("--------------------")
+        print('%s="%s"' % (SysFrameworkPathVar, os.environ[SysFrameworkPathVar]))
+    print('PYTHONPATH="%s"' % sys.path)
+    print('CWD="%s"' % os.getcwd())
+    print('--------------------')
 
 
 # Returns whether a module should run or not. It simply returns if its
@@ -565,18 +565,18 @@ def on_print(args, flags):
         for mod in mods:
             mod.printCrontab()
     elif args[0] == "env":
-        print("export SEISCOMP_ROOT=%s" % SEISCOMP_ROOT)
-        print("export PATH=%s:$PATH" % BIN_PATH)
-        print("export %s=%s:$%s" %
+        print('export SEISCOMP_ROOT="%s"' % SEISCOMP_ROOT)
+        print('export PATH="%s:$PATH"' % BIN_PATH)
+        print('export %s="%s:$%s"' %
               (SysLibraryPathVar, get_library_path(), SysLibraryPathVar))
         if sys.platform == "darwin":
-            print("export %s=%s:$%s" % (
+            print('export %s="%s:$%s"' % (
                 SysFrameworkPathVar, get_framework_path(), SysFrameworkPathVar))
 
-        print("export PYTHONPATH=%s:$PYTHONPATH" % PYTHONPATH)
-        print("export MANPATH=%s:$MANPATH" % MANPATH)
-        print("export LC_ALL=C")
-        print("source %s/share/shell-completion/seiscomp.bash" % SEISCOMP_ROOT)
+        print('export PYTHONPATH="%s:$PYTHONPATH"' % PYTHONPATH)
+        print('export MANPATH="%s:$MANPATH"' % MANPATH)
+        print('export LC_ALL=C')
+        print('source "%s/share/shell-completion/seiscomp.bash"' % SEISCOMP_ROOT)
     else:
         error("wrong argument: {crontab|env} expected")
         return 1

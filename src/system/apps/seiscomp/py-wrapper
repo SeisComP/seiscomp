@@ -39,18 +39,26 @@ os.chmod("seiscomp-python", permissions)
 
 
 
-wrapper="""#!/bin/sh
+wrapper="""#!/bin/sh -e
+
+normalized_dirname() {
+    # Normalize directory name without following symlinks.
+    # Brute-force but portable.
+    cd "${1%%/*}" && pwd || exit 1
+}
+
 # Determine the root directory of the 'seiscomp' utility.
-SEISCOMP_ROOT=`realpath "${0%%/bin/seiscomp}"`
+d="$(normalized_dirname "$0")"
+SEISCOMP_ROOT="$(realpath "${d%%/bin}")"
 # FIXME:
 # - Any portability issues with 'realpath'?
 # - Is there a more portable alternative?
 
 export SEISCOMP_ROOT
-export PATH=$SEISCOMP_ROOT/bin:$PATH
-export LD_LIBRARY_PATH=$SEISCOMP_ROOT/lib:$LD_LIBRARY_PATH
-export PYTHONPATH=$SEISCOMP_ROOT/lib/python:$PYTHONPATH
-export MANPATH=$SEISCOMP_ROOT/share/man:$MANPATH
+export PATH="$SEISCOMP_ROOT/bin:$PATH"
+export LD_LIBRARY_PATH="$SEISCOMP_ROOT/lib:$LD_LIBRARY_PATH"
+export PYTHONPATH="$SEISCOMP_ROOT/lib/python:$PYTHONPATH"
+export MANPATH="$SEISCOMP_ROOT/share/man:$MANPATH"
 export LC_ALL=C
 
 # The path of the Python executable is configured using cmake.
@@ -62,7 +70,7 @@ case $1 in
         exec "$@"
         ;;
     *)
-        exec $python_executable $SEISCOMP_ROOT/bin/seiscomp-control.py "$@"
+        exec "$python_executable" "$SEISCOMP_ROOT/bin/seiscomp-control.py" "$@"
         ;;
 esac
 """ % (PYTHON_EXECUTABLE,)
