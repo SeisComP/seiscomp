@@ -2,6 +2,10 @@
 
 ## 4.0.0
 
+* slinktool
+
+  * Add documentation and description XML
+
 * scqc
 
   * Add filtering to description XML for configuration in scconfig
