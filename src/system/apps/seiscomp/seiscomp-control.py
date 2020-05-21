@@ -602,7 +602,7 @@ def on_install_deps_linux(args, flags):
         if len(out) == 1:
             out = out[0].split()
 
-        out = [l.strip() for l in out]
+        out = [l.decode('utf-8').strip() for l in out]
     except:
         error("lsb_release is not installed")
         print("*********************************************************************")
@@ -620,8 +620,13 @@ def on_install_deps_linux(args, flags):
 
     print("Distribution: " + release + " " + version)
 
-    script_dir = os.path.join(
-        env.SEISCOMP_ROOT, "share", "deps", release.lower(), version.lower())
+    for n in range(version.count('.') + 1):
+        ver = version.rsplit('.', n)[0]
+        script_dir = os.path.join(
+            env.SEISCOMP_ROOT, "share", "deps", release.lower(), ver.lower())
+        if os.path.exists(script_dir):
+            break
+
     if not os.path.exists(script_dir):
         print("*********************************************************************")
         print("Sorry, the installed distribution is not supported.")
