@@ -16,7 +16,7 @@ Download these from `SeisComP`_.
 This section describes the installation of the binary packages of SeisComP on
 an
 
-* :program:`Ubuntu 16`, 64 bit system
+* :program:`Ubuntu 18`, 64 bit system
 * :program:`CentOS 7`, 64 bit system
 
 
@@ -133,7 +133,7 @@ give 'mysql-server' as parameter.
 .. code-block:: sh
 
    user@host:~$ seiscomp/bin/seiscomp install-deps base mysql-server
-   Distribution: Ubuntu 16.04
+   Distribution: Ubuntu 18.04
    [sudo] password for sysop:
    Reading package lists... Done
    Building dependency tree
@@ -141,8 +141,8 @@ give 'mysql-server' as parameter.
    ...
 
 
-If your distribution is not supported by :command:`install-deps`
-, install the above packages manually:
+If your distribution is not supported by :command:`install-deps`,
+install the above packages manually:
 
 :program:`Ubuntu` `version`
 
@@ -203,6 +203,12 @@ SQL configuration
 
   :file:`/etc/mysql/mariadb.conf.d/50-server.cnf`
 
+  :program:`Ubuntu 18`
+
+  :file:`/etc/mysql/my.cnf`
+
+  :file:`/etc/mysql/mariadb.conf.d/50-server.cnf`
+
   :program:`CentOS`
 
   :file:`/etc/my.cnf`
@@ -212,7 +218,7 @@ SQL configuration
 
 *  After adjusting the parameters, MySQL needs to be restarted. One can run
 
-  :program:`Ubuntu 16`
+  :program:`Ubuntu`
 
   .. code-block:: sh
 
@@ -227,7 +233,7 @@ SQL configuration
 
 * To start MySQL automatically during boot set
 
-  :program:`Ubuntu 16`
+  :program:`Ubuntu`
 
   .. code-block:: sh
 
@@ -299,7 +305,7 @@ following table.
 
 
 References
-##########
+==========
 
 .. target-notes::
 
