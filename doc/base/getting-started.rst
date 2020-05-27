@@ -29,7 +29,7 @@ As a wrapper to :program:`seiscomp setup`, a wizard can be started from
 
     .. code-block:: sh
 
-        user@host:~$ sudo systemctl enable mysql
+        user@host:~$ sudo systemctl enable mariadb
         user@host:~$ sudo mysql_secure_installation
             provide new root password
             answer all questions with yes [Enter]
