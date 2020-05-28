@@ -71,7 +71,7 @@ Then:
 .. code-block:: sh
  
    $ seiscomp update-config
-   $ seiscomp restart
+   $ seiscomp restart scautopick
 
 Check the station is used for processing
 ========================================

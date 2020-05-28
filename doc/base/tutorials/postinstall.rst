@@ -39,7 +39,7 @@ Get your Linux System ready
 ===========================
 
 First you need to get your Linux system ready.
-The following documentation refers to Ubuntu 18.04,
+The following documentation refers to Ubuntu 20.04,
 but the steps for other Ubuntu versions are similar.
 
 #. Add a new user. Throughout our documentation, this user is called `sysop`.
@@ -93,8 +93,8 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
 #. When getting packages from from `SeisComP package downloader`_ you should also download
 
-   * maps, e.g. from the `Jakarta release maps`_
-   * documentation, e.g. for `SeisComP3 in version jakarta-2018.327`_.
+   * maps, e.g. from the `SeisComP maps`_
+   * documentation, e.g. for `SeisComP in version 4.0.0`_.
 
    Make sure, the documentation matches your SeisComP version.
 
@@ -107,19 +107,19 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
    you will find in your home or downloads directory ::
 
      $ cd
-     $ tar xzf seiscomp3-jakarta-2018.327.15-ubuntu18.04-x86_64.tar.gz
-     $ tar xzf seiscomp3-jakarta-maps.tar.gz
-     $ tar xzf seiscomp3-jakarta-2018.327-doc.tar.gz
+     $ tar xzf seiscomp-4.0.0-ubuntu20.04-x86_64.tar.gz
+     $ tar xzf seiscomp-4.0.0-maps.tar.gz
+     $ tar xzf seiscomp-4.0.0-doc.tar.gz
      $ ls seiscomp
      bin  etc  include  lib  man  sbin  share
 
 #. Install all dependencies needed and prepare the environment.
 
    * This should be automatic for most distributions.
-     Simply run the install script: ::
+     Simply run the install script::
 
        $ ~/seiscomp/bin/seiscomp install-deps base
-       Distribution: Ubuntu 18.04
+       Distribution: Ubuntu 20.04
 
      This will generally prompt for your user's password to allow `sudo` to
      install packages on your system.
@@ -129,7 +129,12 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
        $ sudo apt-get install python libqtgui4
 
-   * Alternatively, for Ubuntu 16.04 and Mint 18:
+   * On Ubuntu 20 and newer, you may need libpython3-dev before you can use
+     "install-deps"::
+
+       $ sudo apt-get install libpython3-dev
+
+   * Alternatively, for Mint 18 (Ubuntu 16.04):
 
      .. code-block:: bash
 
@@ -137,8 +142,8 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
         $ sudo apt-get install libxml2 libboost-filesystem1.58.0
         libboost-iostreams1.58.0 libboost-thread1.58.0 libboost-program-options1.58.0
         libboost-regex1.58.0 libboost-signals1.58.0 libboost-system1.58.0 libssl1.0.0
-        libncurses5 libmysqlclient20 libpython2.7 python-m2crypto mysql-server
-        mysql-client libqtgui4 libqt4-xml
+        libncurses5 libmysqlclient20 libpq5 libpython2.7 python-numpy mysql-server
+        mysql-client libqtgui4 libqt4-xml libqt4-opengl libqt4-sql-sqlite
 
 
 #. *OPTIONAL*. You may set some environment variables.
@@ -147,7 +152,7 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
    .. code-block:: bash
 
-      $ seiscomp/bin/seiscomp print env
+      $ ~/seiscomp/bin/seiscomp print env
       export SEISCOMP_ROOT=/home/sysop/seiscomp
       export PATH=/home/sysop/seiscomp/bin:$PATH
       export LD_LIBRARY_PATH=/home/sysop/seiscomp/lib:$LD_LIBRARY_PATH
@@ -160,7 +165,7 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
    `/home/sysop` as shown above.
    Cut and paste your own output from the
    `seiscomp print env` command, not what is shown here.
-   Edit your :file:`.bashrc` file, inserting the commannd from the output. ::
+   Edit your :file:`.bashrc` file, inserting the command from the output. ::
 
      $ vi .bashrc
 
@@ -192,12 +197,12 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
 #. Database. For a MariaDB installation: ::
 
-     $ ~/seiscomp/bin/seiscomp install-deps mariadb-server
+     $ seiscomp install-deps mariadb-server
 
    or a MySQL installation: ::
 
 
-     $ ~/seiscomp/bin/seiscomp install-deps mysql-server
+     $ seiscomp install-deps mysql-server
 
    Also, for better performance with a MySQL database,
    adjust the memory pool size and restart MySQL, as described under
@@ -207,12 +212,24 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
    .. warning::
 
-     For Ubuntu 18.04, take care with MySQL installation.
+     For Ubuntu 18.04 and newer, take care with MySQL installation.
      Before the next step, you must set a root password *for MySQL or MariaDB*
-     (not the Linux root password!). See the Internet, or the SeisComP forum
-     `thread <https://forum.seiscomp3.org/t/upgraded-to-ubuntu-18-04-and-i-broke-my-seiscomp3/1139>`_
-     (for logged-in forum members).
+     (not the Linux root password!).
 
+     MySQL:
+
+     $ sudo mysql -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'Mypasswordisnottthis'; FLUSH PRIVILEGES;"
+
+     MariaDB:
+
+     $ sudo mysql -e "SET old_passwords=0; ALTER USER root@localhost IDENTIFIED BY 'Mypasswordisnottthis'; FLUSH PRIVILEGES;"
+
+     Substitute Mypasswordisnottthis by your own password and remember it --
+     you will need it in the next step.
+
+     In case of problems, see the Internet, or the SeisComP forum
+     `thread <https://forum.seiscomp.de/t/upgraded-to-ubuntu-18-04-and-i-broke-my-seiscomp3/1139>`_
+     (for logged-in forum members).
 
 #. Run `seiscomp setup` and enter your preferred IDs and password. For the other
    fields, you can always accept the default values. ::
@@ -226,7 +243,7 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
    See :ref:`system-management`.
    Run something by typing seiscomp followed by a command::
 
-     $ ~/seiscomp/bin/seiscomp help
+     $ seiscomp help
      Available commands:
       install-deps
       setup
@@ -238,38 +255,21 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
      Use 'help [command]' to get more help about a command
 
-#. Start spread and :program:`scmaster`.
+#. Start :program:`scmaster`.
    As described in the :ref:`overview`, these are needed for
    communication between the SeisComP database and the individual
    SeisComP modules. ::
 
-     $ seiscomp start scmaster spread
-     starting spread
+     $ seiscomp start scmaster
      starting scmaster
 
-#. Add license files.
-   Use of the :term:`GUI` programs in SeisComP3 requires your agreement to the
-   `SeisComP public license`_.
-   This requirement is dropped with the publication of the SeisComP in version 4 in 2020
-   and the `new SeisComP license scheme`_.
+#. Install all dependencies needed for the GUI::
 
-   Until SeisComP3 you will need to do the following:
-
-   #. Obtain the `SeisComP public license`_ files.
-
-   #. Un-pack these into the correct directory, e.g.:
-
-      .. code-block:: bash
-
-         $ cd ~
-         $ mkdir -p .seiscomp3/key
-         $ tar -xf temporary-license.tar
-         $ ls ~/.seiscomp3/key
-         License  License.key  License.signed
+     $ seiscomp install-deps gui
 
 #. Start the :program:`scconfig` GUI ::
 
-     $ scconfig
+     $ seiscomp exec scconfig
 
    Learn more about :ref:`scconfig` in this documentation.
    You should see a screen/window like this.
@@ -282,7 +282,7 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
 #. Run :program:`scrttv` ::
 
-     $ ~/seiscomp/bin/seiscomp exec scrttv
+     $ seiscomp exec scrttv
 
    After seeing the SeisComP splash screen,
    you'll likely get an error message "Could not read inventory (NULL)".
@@ -298,13 +298,6 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
       First view of the :ref:`scconfig` configuration tool.
 
-   .. warning::
-
-      If you receive a message like "You have no valid license to run
-      this software" you may not have installed the license files in the
-      correct directory, :file:`~/.seiscomp/key` (note the '.').
-      See above.
-
 
 Congratulations, you're done with this tutorial.
 
@@ -315,7 +308,6 @@ References
 
 .. _`SeisComP package downloader` : https://www.seiscomp.de/downloader/
 .. _`gempa GmbH` : https://www.gempa.de/
-.. _`Jakarta release maps` : https://www.seiscomp.de/downloader/seiscomp-jakarta-maps.tar.gz
-.. _`SeisComP3 in version jakarta-2018.327` : https://www.seiscomp.de/downloader/seiscomp3-jakarta-2018.327-doc.tar.gz
-.. _`SeisComP public license` : https://www.seiscomp3.org/license.html
+.. _`SeisComP maps` : https://www.seiscomp.de/downloader/seiscomp-4.0.0-maps.tar.gz
+.. _`SeisComP in version 4.0.0` : https://www.seiscomp.de/downloader/seiscomp-4.0.0-doc.tar.gz
 .. _`new SeisComP license scheme` : https://www.seiscomp.de/doc/base/license.html

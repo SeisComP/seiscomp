@@ -126,33 +126,32 @@ which they are known.
 For active stations, there must be an epoch (time span) with a start date
 but no end date shown for the desired channel.
 
+The inventory is not yet synchronized with the database. To finalize
+inventory configuration, run::
 
-Configuring processing
-======================
+  $ seiscomp update-config
 
-Now you can enable the station for processing.
-Follow the :ref:`tutorials_processing` tutorial.
+.. warning::
+
+  If you get an error, make sure that MySQL/MariaDB is running and the
+  database has been created correctly (see :ref:`tutorials_postinstall`).
 
 
 Configuring for acquisition
 ===========================
 
 If you've configured inventory above, you'll already have a top-level
-key file for the station.
-
-Otherwise, create a top-level key file for your station.
-Go to :file:`seiscomp/etc/key`, and using a text editor,
-create the empty file `station_GR_CLL` there.
-For a different station, replace "GR" and "CLL" with the appropriate
-network and station codes respectively.
+key file for the station in the :file:`~/seiscomp/etc/key` directory.
 
 - You will need to know the waveform source, channels to be acquired,
   location code used, if any.
   See :ref:`tutorials_waveforms` for the remaining details.
 
-If you don't want to process a station, you can leave out the "global"
-and "scautopick" lines in the top level key file, by editing the file,
-or removing the bindings for these modules using :program:`scconfig`.
+Configuring processing
+======================
+
+Now you can enable the station for processing.
+Follow the :ref:`tutorials_processing` tutorial.
 
 Configuring for archiving
 =========================
