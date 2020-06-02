@@ -22,6 +22,7 @@ Time range estimate:
 
 ----------
 
+
 Outline
 =======
 
@@ -36,8 +37,10 @@ get help to resolve them:
 * The :ref:`debugging options <sec_tutorial_help_debugging>`
 * :ref:`Commercial support <sec_tutorial_help_commercial>`
 
+
 Ways to diagnose and to get help
 ================================
+
 
 .. _sec_tutorial_help_documentation:
 
@@ -63,6 +66,7 @@ hovering over these reveals the full text.
 
 The HTML documentation is built regularly and available online, e.g. `gempa's documentation`_.
 
+
 .. _sec_tutorial_help_commandline:
 
 Commandline help
@@ -86,6 +90,7 @@ and help on command-line options:
    The command-line option *-h* can be used with almost all modules. No matter how many
    other command-line parameters were given, *-h* will stop the module and print
    the help on the command-line.
+
 
 .. _sec_tutorial_help_config-params:
 
@@ -116,6 +121,7 @@ section on configuration <concepts_configuration>` for a comprehensive overview.
 
   </div>
 
+
 .. _sec_tutorial_help_cmdline-params:
 
 Command-line parameters
@@ -127,6 +133,7 @@ To learn about them read the :ref:`sec_tutorial_help_documentation` or execute
 .. code-block:: sh
 
    [module name] -h
+
 
 .. _sec_tutorial_help_forum:
 
@@ -150,6 +157,7 @@ If you have specific technical problems, it helps to have tried
 some of the ideas below.
 Please include version information (the '-V' option described below)
 if you report a problem.
+
 
 .. _sec_tutorial_help_logging:
 
@@ -180,6 +188,7 @@ Default is 2.
 Setting `logging.level = 4` results in the most messages.
 
 For other modules such as :ref:`seedlink`, the log files are written to :file:`seiscomp/var/log/`
+
 
 .. _sec_tutorial_help_debugging:
 
@@ -287,6 +296,7 @@ The '-V' or '--version' option provides this for many SeisComP modules.
    Build system: Linux 4.15.0-20-generic
    OS: Ubuntu 18.04 LTS / Linux
 
+
 .. _sec_tutorial_help_commercial:
 
 Commercial support
@@ -295,11 +305,13 @@ Commercial support
 Professional commercial support to SeisComP users is available from
 `gempa GmbH`_.
 
+
 Next time you have a problem
 ============================
 
 * Try some of the above techniques.
 * If you find a solution, don't forget to share it at the Forum.
+
 
 References
 ==========

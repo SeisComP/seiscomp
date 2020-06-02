@@ -95,7 +95,7 @@ then it will be a longer time ago.
 
 
 Download station metadata
-##########################
+=========================
 
 There are several possible ways to obtain inventory.
 
@@ -110,8 +110,9 @@ There are several possible ways to obtain inventory.
   Before doing so, you will need to create
   an `SMP account`_.
 
+
 Option 1: Using FDSN web services
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------
 
 The FDSN web services are the standard adopted by the FDSN and have been
 deployed at almost every data centre [#FDSN_SVCS]_.
@@ -127,7 +128,7 @@ StationXML format. ::
 
 
 Option 2: Using WebDC3
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 WebDC3 is a graphical interface which allows you not only to send requests to
 FDSN webservice servers, but also to explore available stations
@@ -176,7 +177,7 @@ Now find where your web browser has saved the file.
 
 
 Import the inventory
-####################
+====================
 
 It is easiest to use the import function of the :program:`scconfig` GUI.
 Alternatively, you can import from the command line:
@@ -193,7 +194,7 @@ Either way, afterwards, inventory is in :file:`~/seiscomp/etc/inventory`.
 It now needs to be loaded in to the SeisComP database.
 
 Import the metadata for your stations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
 * Open :program:`scconfig` from the terminal.
   Click on the "Inventory" tab on the left side bar.
@@ -227,7 +228,7 @@ click on "Update configuration" and restart SeisComP (Stop and Start buttons).
 
 
 Configure bindings
-##################
+==================
 
 As for individual stations (see the :ref:`processing` tutorial),
 we will need to create bindings for every GE station to the
@@ -271,7 +272,7 @@ we will need to create bindings for every GE station to the
 
 
 Update the configuration
-########################
+========================
 
 The SeisComP database must be updated with the inventory and bindings.
 SeisComP's modules then require restarting to load the updated information.
@@ -290,7 +291,7 @@ SeisComP's modules then require restarting to load the updated information.
 
 
 Check it works
-##############
+==============
 
 * To confirm that you have waveform data for the station locally,
   run :program:`slinktool -Q`.
@@ -303,7 +304,7 @@ With this last step the configuration of these stations is considered to be fini
 
 
 Further steps
-#############
+=============
 
 At this point,
 you can follow the same procedure for other networks/stations, provided you
@@ -313,7 +314,7 @@ you can follow the same procedure for other networks/stations, provided you
 
 
 References
-##########
+==========
 
 .. target-notes::
 

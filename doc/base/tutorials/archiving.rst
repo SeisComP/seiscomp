@@ -48,6 +48,7 @@ The :program:`slarchive` collects data and archives it
 locally using a :term:`SDS` file system structure of
 nested subdirectories and systematically named files.
 
+
 In scconfig
 ===========
 
@@ -90,6 +91,7 @@ In scconfig
 #. Adjust the :ref:`concepts_RecordStream` for making use of the archived waveforms
    from within a :term:`GUI` or automatic data processing modules.
 
+
 Command line
 ============
 
@@ -126,7 +128,6 @@ This is a file with a name corresponding to the binding profile name; here: 'wee
   $ seiscomp restart slarchive
   slarchive is not running
   starting slarchive
-
 
 .. note::
 

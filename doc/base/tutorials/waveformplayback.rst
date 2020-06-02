@@ -169,7 +169,7 @@ by each module as fast as possible. The results can be communicated by
 
 * Messages: message-based playback
 * XML files in :term:`SCML` format: XML playback. They require the processing
-  modules to provide the *--ep* option.
+  modules to provide the *- -ep* option.
 
 .. warning::
 

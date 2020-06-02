@@ -74,6 +74,7 @@ You can limit the choice of stations shared to be less than what is in your
 SeisComP :ref:`inventory <concepts_inventory>` using the `allowRestricted`,
 `dataSelectFilter` and `stationFilter` options.
 
+
 .. _tutorials_servefdsnws-visit:
 
 Visiting the service
@@ -89,6 +90,7 @@ In your browser, visit http://localhost:8080/fdsnws/dataselect/1/
 
    Information screen shown by fdsnws-dataselect at
    http://localhost:8080/fdsnws/dataselect/1/
+
 
 Check it works
 ==============
@@ -130,6 +132,7 @@ Further information
 * The FDSN Web Services specification document [#FDSN_SPEC]_ provides the
   technical documentation and examples.
 
+
 Final tests
 ===========
 
@@ -146,8 +149,6 @@ Final tests
   actually present in your archive.
   The above example is just for the first hour of 2020.
 
-* The `fdsnws_fetch` client is a convenient tool for requesting waveforms
-  from a FDSN web service. :term:`GEOFON` maintains `scripts for FDSNWS`_.
 
 References
 ==========

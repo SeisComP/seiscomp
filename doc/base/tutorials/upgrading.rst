@@ -23,6 +23,7 @@ Time range estimate:
 
 ------------
 
+
 Background
 ==========
 
@@ -58,6 +59,7 @@ station connected to the processing system:
 
       seiscomp stop
 
+
 .. _tutorials_upgrade_changelog:
 
 Package download
@@ -65,6 +67,7 @@ Package download
 
 Get the latest or older SeisComP release packages from gempa GmbH or from the
 `SeisComP package downloader`_.
+
 
 Documentation of changes
 ========================
@@ -84,6 +87,7 @@ The change log can also be accessed from the Docs panel in :ref:`scconfig`.
 
    New features are regularly advertised and described in detail on the
    `News website of gempa GmbH`_ and on the `SeisComP forum`_.
+
 
 .. _tutorials_upgrade_number:
 
@@ -132,6 +136,7 @@ lines of mysql code from the changelog. In later versions we might add the optio
    Upgrading the database make take some time. Do no interrupt the process!
    During this time, the SeisComP messaging system is unavailable causing a downtime of the system.
 
+
 .. _tutorials_upgrade_v4:
 
 Migrate from SeisComP3 to version 4
@@ -140,6 +145,7 @@ Migrate from SeisComP3 to version 4
 SeisComP in version has some major differences to SeisComP3 which require adjustments.
 The main differences are in the :ref:`directories of the SeisComP installation <sec-tutorials_upgrading_path>`
 and the :ref:`messaging system <sec-tutorials_upgrading_messaging>`.
+
 
 .. _sec-tutorials_upgrading_path:
 
@@ -191,6 +197,7 @@ Configurations containing absolute paths, e.g. :file:`/home/sysop/seiscomp3/shar
 must be adjusted. Better use :ref:`internal SeisComP variables <concepts_configuration_variables>`
 such as *@DATADIR@* instead of *seiscomp3/share*.
 
+
 System variables
 ----------------
 
@@ -202,6 +209,7 @@ version execute
 
    seiscomp/bin/seiscomp print env >> $HOME/.bashrc
    source $HOME/.bashrc
+
 
 Pipelines
 ---------
@@ -216,12 +224,14 @@ When using pipelines or alias modules, create and enable the alias module names 
 Migrate the module and bindings configurations of the alias modules including all related additional files which are referred to
 in the configurations.
 
+
 Database
 --------
 
 After adjusting the structure and variables, check if the :ref:`database requires an upgrade <tutorials_upgrade_number>` as well.
 
 .. _sec-tutorials_upgrading_messaging:
+
 
 Messaging system
 ----------------
@@ -294,6 +304,7 @@ configuration. Migrate the legacy database parameters and configure the new one:
 
       If *production* shall be used, then no configuration is required.
 
+
 Crontab and system daemon
 -------------------------
 
@@ -302,7 +313,6 @@ Finally, adjust the system daemon startup script and crontab entries. For cronta
 .. code-block:: sh
 
    crontab -e
-
 
 
 References

@@ -27,6 +27,7 @@ You will enable processing by your existing local SeisComP system.
 
 -----------
 
+
 Create bindings
 ===============
 
@@ -69,9 +70,10 @@ Go to the "Bindings" tab on the left side bar of :program:`scconfig`.
 Then:
 
 .. code-block:: sh
- 
+
    $ seiscomp update-config
    $ seiscomp restart scautopick
+
 
 Check the station is used for processing
 ========================================

@@ -24,6 +24,7 @@ Time range estimate:
 
 -----------
 
+
 Set-up
 ======
 
@@ -80,6 +81,7 @@ Final tests
   .. code-block:: sh
 
      firefox build-doc/html/basetutorials.html
+
 
 References
 ==========

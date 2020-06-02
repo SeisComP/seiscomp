@@ -106,11 +106,9 @@ Scientific and technical terms
    array transfer function
       A synonym of :term:`ATF` or :term:`array response function`.
 
-
    ArcLink
-      `ArcLink <https://docs.gempa.de/seiscomp/current/apps/arclink.html>`_
-      complements :term:`SeedLink` by providing access to archived waveform
-      data.
+      ArcLink complements :term:`SeedLink` by providing access to archived waveform
+      data. Arclink was distributed with :term:`SeisComP` until version 3.0.
 
    arrival
       a) The appearance of seismic energy on a seismic record
@@ -242,6 +240,9 @@ Scientific and technical terms
    EDA
       Effective Design Acceleration
 
+   EIDA
+      European Integrated Data Archive: http://www.orfeus-eu.org/data/eida/
+
    epicenter
       Vertical projection of the hypocenter to the surface.
 
@@ -321,6 +322,10 @@ Scientific and technical terms
       `gempa GmbH <http://www.gempa.de/>`_ is a spin-off from :term:`GFZ`
       offering a range of services and products to monitor, process and analyze
       seismicity. It is the main development and service company for SeisComP.
+
+   GEOFON
+      GEOFON (https://geofon.gfz-potsdam.de) is part of the Modular Earth Science
+      Infrastructure (MESI) at :term:`GFZ`.
 
    geometrical spreading
       The component of reduction in wave amplitude due to the radial spreading of seismic energy with
@@ -580,14 +585,15 @@ Scientific and technical terms
 
          M_s = \log \left(\frac{A}{T}\right)max + 1.66 \log(\Delta) + 3.3
 
-      Here the maximum ground particle velocity (A/T)max is used instead of the AHmax to
+      Here, the maximum ground particle velocity, (A/T)max, is used instead of the AHmax to
       allow a broader spectrum of dominant periods. This formula is valid for distances of
       2° to 160° and source depths smaller than 50 km.
 
       * Amplitude unit in SeisComP is **meter per second** (m/s)
 
    magnitude, surface wave (Ms_20)
-      Ms_20 is the surface-wave magnitude at 20 s period based on the recommendations
+      Ms_20 is the :term:`Ms <magnitude, surface wave (Ms)>` surface-wave magnitude
+      at *T=20* s period based on the recommendations
       by the IASPEI magnitude working group issued on 27 March, 2013.
 
       Read the :ref:`technical documentation <global_ms_20>` for more details and the configuration.
@@ -762,10 +768,6 @@ Scientific and technical terms
       b) A pulse of seismic energy arriving at a definite time, which passed the Earth
          on a specific path.
       c) Attribute of the QuakeML object Arrival, see :term:`arrival`.
-
-   coda phase
-      A detection of a single phase of unknown path found within the coda signal envelope,
-      designated as tx, e.g. Px or Sx.
 
    P phase
       The P phase is the arrival of the direct P wave that traveled through the Earth's
@@ -967,9 +969,10 @@ Scientific and technical terms
       an earthquake.
 
    SCML
-      :term:`SeisComP3` Markup Language. SCML is a flavor of `QuakeML
+      :term:`SeisComP` Markup Language. SCML is a flavor of `QuakeML
       <https://quake.ethz.ch/quakeml/>`_  and is used by SeisComP and by
-      products of :term:`gempa GmbH` for exchange.
+      products of :term:`gempa GmbH` for exchange. For details read the
+      `UML diagram <https://geofon.gfz-potsdam.de/_uml/>`_.
 
    SDS
       SeisComP Data Structure which is used for archiving waveform data. Below the
@@ -1120,7 +1123,7 @@ Scientific and technical terms
       horizontal offset of geologic markers.
 
    slowness
-      The inverse of velocity, given in the unit seconds/° or s/km; a large
+      The inverse of velocity, given in the unit seconds/degree or s/km; a large
       slowness corresponds to a low velocity.
 
    SNR

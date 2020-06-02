@@ -89,7 +89,7 @@ right) will be very recent.
 
 
 Configure bindings
-##################
+==================
 
 In :program:`scconfig`, under the Bindings tab:
 
@@ -119,7 +119,7 @@ In :program:`scconfig`, under the Bindings tab:
 
 
 Update the configuration
-########################
+========================
 
 The SeisComP database must already be updated with the inventory
 (see Tutorial :ref:`tutorials_addstation`).
@@ -139,7 +139,7 @@ SeisComP's modules then require restarting to load the updated information.
 
 
 Check it works
-##############
+==============
 
 * To confirm that you have waveform data for the station locally,
   run ::
@@ -148,7 +148,7 @@ Check it works
 
 
 Further steps
-#############
+=============
 
 At this point,
 you can follow the same procedure for other networks/stations, provided you
