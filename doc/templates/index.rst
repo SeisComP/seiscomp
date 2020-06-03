@@ -47,6 +47,7 @@ Understanding SeisComP
    /base/history
    /base/glossary
    /base/license
+   /base/citation
 
 Operating a system
 ##################
