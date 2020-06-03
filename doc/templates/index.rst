@@ -4,8 +4,6 @@ Welcome
 
 This is the documentation for the SeisComP version |version| |release|.
 
-For examples and tutorials please check the
-`SeisComP wiki <http://seiscomp.de/>`_.
 Please consider :doc:`contributing</base/contributing-docs>` to this documentation.
 
 .. raw:: html
