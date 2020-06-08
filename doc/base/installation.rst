@@ -8,7 +8,8 @@ SeisComP is distributed in the form of tar files for different releases,
 Linux systems and architectures:
 
 * Acquisition, processing and GUIs (for each supported platform)
-* Maps (maps from the SeisComP releases Seattle and Zurich also work in Jakarta)
+* Maps (maps from the SeisComP releases Seattle and Zurich also work
+  in later releases)
 * Documentation
 * Station configuration files (optional)
 
@@ -85,7 +86,7 @@ The next steps describe the installation of SeisComP with the prepared
 tar.gz files.
 
 * Log in as user (e.g. sysop)
-* Copy one of the :file:`seiscomp-jakarta-[version]-[OS]-[arch].tar.gz` files to
+* Copy one of the :file:`seiscomp-[version]-[OS]-[arch].tar.gz` files to
   your home directory. Take care which is the right package (32 or 64-bit) for
   your operating system.
 
@@ -99,7 +100,7 @@ tar.gz files.
 
   .. code-block:: sh
 
-     user@host:~$ tar xzf seiscomp-jakarta-[version]-[OS]-[arch].tar.gz
+     user@host:~$ tar xzf seiscomp-[version]-[OS]-[arch].tar.gz
 
 * Un-tar the SeisComP map package into seiscomp/share/maps
 
@@ -111,7 +112,7 @@ tar.gz files.
 
   .. code-block:: sh
 
-     user@host:~$ tar xzf seiscomp-jakarta-[version]-doc.tar.gz
+     user@host:~$ tar xzf seiscomp-[version]-doc.tar.gz
 
 Unpacking these file creates the :ref:`SeisComP directory structure<directory_structure>`.
 
