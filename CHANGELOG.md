@@ -14,6 +14,11 @@
   * Fix bug when a magnitude is recalculated with a subset of
     station magnitudes
 
+* fdsnws
+
+  * Parse query filter parameters strictly. Thanks to Daniel
+    Armbruster for providing the patch.
+
 
 # 4.0.0
 
