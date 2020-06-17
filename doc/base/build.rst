@@ -52,11 +52,11 @@ Step-by-step instructions
       sysop@host:~/sc-src$
 
 
-2. Change into the desired branch (if not master) or checkout tag
+2. Change into the desired branch (if not master) or check out tag
 
    .. code-block:: sh
 
-      sysop@host:~/sc-src$ git checkout release/jakarta/2017.124.02
+      sysop@host:~/sc-src$ git checkout 4.0.0
 
 3. Configure the build.
 
