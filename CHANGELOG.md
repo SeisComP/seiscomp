@@ -1,3 +1,20 @@
+# X.Y.Z
+
+* LOCSAT
+
+  * Allow to override the tables directory with the environment
+    variable `SEISCOMP_LOCSAT_TABLE_DIR`
+
+* scconfig
+
+  * Add application icon
+
+* scolv
+
+  * Fix bug when a magnitude is recalculated with a subset of
+    station magnitudes
+
+
 # 4.0.0
 
 ```SC_API_VERSION 14.0.0```
