@@ -91,12 +91,11 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
    Get the package from the `SeisComP package downloader`_ or `gempa GmbH`_.
    Packages are available for Ubuntu and other Linux flavors such as CentOS and Debian.
 
-#. When getting packages from from `SeisComP package downloader`_ you should also download
+#. When getting packages from `SeisComP package downloader`_ you should also download
 
-   * maps, e.g. from the `SeisComP maps`_
-   * documentation, e.g. for `SeisComP in version 4.0.0`_.
-
-   Make sure, the documentation matches your SeisComP version.
+   * `maps`_
+   * the documentation package from the `SeisComP package downloader`_. Make sure,
+     the documentation matches your SeisComP version.
 
    .. note::
 
@@ -104,11 +103,11 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
       for the respective version and no separate download is required.
 
 #. Untar the :file:`seiscomp*` files (binary package, maps and documentation)
-   you will find in your home or downloads directory ::
+   you will find in your home or downloads directory. For SeisComP in version 4.0.0 this is: ::
 
      $ cd
      $ tar xzf seiscomp-4.0.0-ubuntu20.04-x86_64.tar.gz
-     $ tar xzf seiscomp-4.0.0-maps.tar.gz
+     $ tar xzf seiscomp-maps.tar.gz
      $ tar xzf seiscomp-4.0.0-doc.tar.gz
      $ ls seiscomp
      bin  etc  include  lib  man  sbin  share
@@ -308,6 +307,5 @@ References
 
 .. _`SeisComP package downloader` : https://www.seiscomp.de/downloader/
 .. _`gempa GmbH` : https://www.gempa.de/
-.. _`SeisComP maps` : https://www.seiscomp.de/downloader/seiscomp-4.0.0-maps.tar.gz
-.. _`SeisComP in version 4.0.0` : https://www.seiscomp.de/downloader/seiscomp-4.0.0-doc.tar.gz
+.. _`maps` : https://www.seiscomp.de/downloader/seiscomp-maps.tar.gz
 .. _`new SeisComP license scheme` : https://www.seiscomp.de/doc/base/license.html
