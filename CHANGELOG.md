@@ -1,3 +1,18 @@
+# 4.0.2
+
+* autoloc
+
+  * Correct station.conf
+
+* trunk
+
+  * Add ML/MLv magnitude calibration at 100km
+
+* dlsv2inv
+
+  * Fix crash for debug builds if a token is empty,
+    e.g. empty end time
+
 # 4.0.1
 
 * LOCSAT
