@@ -635,12 +635,6 @@ def on_install_deps_linux(args, flags):
         print("*********************************************************************")
         return 1
 
-    if len(args) == 0:
-        error("no packages given")
-        print("Give the packages you want to install dependencies for after")
-        print("install-deps.")
-        print("Example: seiscomp install-deps base gui mysql-server")
-
     for pkg in args:
         script = os.path.join(script_dir, "install-" + pkg + ".sh")
         if not os.path.exists(script):
@@ -655,6 +649,11 @@ def on_install_deps_linux(args, flags):
 
 
 def on_install_deps(args, flags):
+    if len(args) == 0:
+        error("expected package list: PKG1 [PKG2 [..]]")
+        print("Example: seiscomp install-deps base gui mysql-server")
+        print("For a list of available packages issue: seiscomp help install-deps")
+
     if sys.platform.startswith("linux"):
         return on_install_deps_linux(args, flags)
 
@@ -669,9 +668,16 @@ def on_install_deps(args, flags):
 
 
 def on_install_deps_help(args):
+    print("seiscomp install-deps PKG1 [PKG2 [..]]")
     print("Installs OS dependencies to run SeisComP. This requires either a 'sudo'")
-    print("or root account. Additional packages can be given as arguments.")
-    print("Packages: mysql, postgresql")
+    print("or root account. Available packages are:")
+    print("  base:   basic packages required by all installations")
+    print("  gui:    required by graphical user interfaces, e.g. on workstations")
+    print("  [mysql,mariadb,postgresql]-server:")
+    print("          database management system required by the machine running")
+    print("          the SeisComP messaging system (scmaster)")
+    print("  fdsnws: required for data sharing via the FDSN web services")
+
     return 0
 
 

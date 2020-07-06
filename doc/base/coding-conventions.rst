@@ -185,10 +185,10 @@ Return values
 While designing methods or functions these rules about return values should be kept in mind:
 
 - Functions returning an int or related types as status: 0 means success;
-  everything else is an error
+  everything else is an error [1]_
 - Functions returning a pointer:
   0 (or :code:`nullptr`) means an error and of course an
-  invalid pointer
+  invalid pointer [1]_
 - Functions returning a class object can throw an exception in case of an error.
   This is not obligatory and should be used with care.
 
@@ -197,8 +197,8 @@ While designing methods or functions these rules about return values should be k
 Exception specifications
 ========================
 
-According to [1]_ dynamic exception specifications are considered or proposed
-as deprecated feature. Don't use them in declaring a function prototype.
+According to [2]_ dynamic exception specifications are considered or proposed
+as deprecated feature and not recommended [3]_. Don't use them in declaring a function prototype.
 
 .. code-block:: c++
 
@@ -293,6 +293,6 @@ the signature of the function.
 Use the override keyword whenever you implement a virtual function in derived
 classes.
 
-.. [1] http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2010/n3051.html
-.. [2] http://www.gotw.ca/publications/mill22.htm
-.. [3] http://www.stroustrup.com/bs_faq2.html#null
+.. [1] http://www.stroustrup.com/bs_faq2.html#null
+.. [2] http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2010/n3051.html
+.. [3] http://www.gotw.ca/publications/mill22.htm
