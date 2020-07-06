@@ -1,3 +1,23 @@
+# 4.0.3
+
+* slmod
+
+  * Fix Python2 support
+
+* scolv
+
+  * Add origin depth type to event list and origins list
+
+* base
+
+  * Fix bug with decimation record stream which caused that
+    just a subset of input data was forwarded to the client
+  * Populate SNR values of Ms(BB) and ML amplitudes
+
+* gui
+
+  * Replace splash screen with latest logo and render text flat
+
 # 4.0.2
 
 * autoloc
