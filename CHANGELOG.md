@@ -1,3 +1,17 @@
+# 4.0.4
+
+* trunk
+
+  * Fix ML/MLv default magnitude calibration
+
+* gui
+
+  * Quit application if an error occurred during initialization
+    and if the setup dialog is cancelled or closed by hitting
+    the X icon
+  * Also accept `TP` for parameter `eventlist.visibleColumns`
+    but print a warning
+
 # 4.0.3
 
 * slmod
@@ -17,6 +31,8 @@
 * gui
 
   * Replace splash screen with latest logo and render text flat
+  * Rename item `TP` to `MType` of parameter
+    `eventlist.visibleColumns`
 
 # 4.0.2
 
