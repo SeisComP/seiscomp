@@ -12,6 +12,14 @@
   * Also accept `TP` for parameter `eventlist.visibleColumns`
     but print a warning
 
+* scmm
+
+  * Fix client disconnect handling
+
+* scimport
+
+  * Log error message if parameter `msggroups` is not defined
+
 # 4.0.3
 
 * slmod
