@@ -2,10 +2,21 @@
 
 ```SC_API_VERSION 14.1.0```
 
+* trunk
+
+  * The application class resets it locale to the initial
+    state at exit. Not doing so could have caused encoding
+    errors with init scripts
+
 * scevtstreams
 
   * Add `--fdsnws` command line option to export list of
     channels in FDSNWS dataselect POST format
+
+* gui
+
+  * Add option to define symbol images for layer points defined in
+    either BNA or FEP
 
 # 4.0.4
 
