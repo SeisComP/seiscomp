@@ -18,6 +18,12 @@
   * Add option to define symbol images for layer points defined in
     either BNA or FEP
 
+* seedlink
+
+  * Fix parsing of global `backfill_buffer` variable. Up to this
+    fix the variable was always considered out of bounds and apart from using
+    backfill buffer settings in the bindings the global value had no effect.
+
 # 4.0.4
 
 * trunk
