@@ -63,18 +63,28 @@ The guidelines for the design of SeisComP are:
   seismic crises)
 
 These design principles have given SeisComP much robustness and flexibility
-to respond to new developments.
+to respond to new developments. The SeisComP community is encouraged to contribute
+their SeisComP source code on `GitHub`_. Examples and guidelines for generating
+code are given in the :ref:`developer section <sec_index_developers>`.
+
 
 This Documentation
 ==================
 
 This documentation begins with an :ref:`overview` and a :ref:`concepts` section
 necessary for understanding and using SeisComP successfully.
-It then covers the :ref:`installation <installation>`, and how to configure and operate a working SeisComP system.
+The :ref:`Glossary section <glossary>` introduces technical terms.
+All important code changes are listed in the :ref:`change log <sc-changelog>`.
+When using SeisComP or contributing source code, you should understand the :ref:`license terms <license>`.
+If you actually make use of SeisComP and publish the results, we ask you to give
+appropriate reference as set out on the :ref:`Citation section <citation>`.
+
+In the following section the documentation covers the :ref:`installation <installation>`
+and how to configure and operate a working SeisComP system.
 A few :ref:`tutorials` will guide you through a first example set up and further operations.
 
-The tutorials are followed by :ref:`detailed technical descriptions <sec_index_modules>` of each individual SeisComP
-module, grouped by their general functionality:
+The tutorials are followed by :ref:`detailed technical descriptions <sec_index_modules>`
+of each individual SeisComP module, grouped by their general functionality:
 
 * Interactive analysis
 * Data acquisition
@@ -82,9 +92,11 @@ module, grouped by their general functionality:
 * Automatic processing
 * Utilities
 
-and many more :ref:`extensions <sec_index_extensions>`.
+and many more :ref:`extensions <sec_index_extensions>` like descriptions of the
+:term:`RecordStream`, magnitude types, locators, GUI customizations, waveform filters or plugins.
 
-The final part of the documentation relates to contributing your own code to SeisComP.
+The final part of the documentation relates to
+:ref:`contributing your own source code <sec_index_developers>` to SeisComP.
 This requires a deeper knowledge of the :ref:`SeisComP data model<api-datamodel-python>`
 and other details.
 This part also includes guidelines for developers such as
@@ -94,8 +106,7 @@ This part also includes guidelines for developers such as
 with programming for SeisComP.
 
 SeisComP is developed and distributed under the terms of the GNU
-`Affero General Public License`_,
-as set out in the :ref:`license` section.
+`Affero General Public License`_, as set out in the :ref:`license` section.
 
 
 References

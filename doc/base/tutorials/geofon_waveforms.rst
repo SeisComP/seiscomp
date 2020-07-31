@@ -230,7 +230,7 @@ click on "Update configuration" and restart SeisComP (Stop and Start buttons).
 Configure bindings
 ==================
 
-As for individual stations (see the :ref:`processing` tutorial),
+As for individual stations (see the :ref:`processing tutoriual <tutorials_processing>`),
 we will need to create bindings for every GE station to the
 "global", "scautopick" and "seedlink" applications, as follows:
 

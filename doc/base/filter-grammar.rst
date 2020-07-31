@@ -182,6 +182,20 @@ parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()
    :param timespan: The timespan in seconds.
 
 
+.. py:function:: MAX(timespan)
+
+   Computes the maximum within the timespan preceeding the sample.
+
+   :param timespan: The timespan in seconds
+
+
+.. py:function:: MIN(timespan)
+
+   Computes the minimum within the timespan preceeding the sample.
+
+   :param timespan: The timespan in seconds
+
+
 .. py:function:: RMHP(timespan)
 
    A high-pass filter realized as running mean high-pass filter. For a given time window in

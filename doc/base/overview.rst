@@ -77,7 +77,7 @@ Communication and database access
 =================================
 
 As modules run, they produce objects corresponding to geophysical concepts
-such as :term:`picks <pick> and :term:`origins <origin>`.
+such as :term:`picks <pick>` and :term:`origins <origin>`.
 These objects are exchanged with, and stored for later use by, other modules.
 Communication between these modules happens in two ways:
 
@@ -124,7 +124,7 @@ at geofon.gfz-potsdam.de.
 If you operate your own seismic network, you may collect data directly
 from your station's digitizer using one of the many plugins included with
 the :ref:`seedlink` module.
-You can configure SeisComP to obtain data for each station via :term:`bindings`.
+You can configure SeisComP to obtain data for each station via :term:`bindings <binding>`.
 This configuration is described in the :ref:`tutorial on seedlink <tutorials_geofon_waveforms>`.
 
 Waveform data can be saved locally, using SeisComP's :ref:`slarchive` module.

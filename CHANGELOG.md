@@ -1,4 +1,8 @@
-# 4.1.0
+# Change Log
+
+All notable changes to SeisComP are documented here.
+
+## 4.1.0
 
 ```SC_API_VERSION 14.1.0```
 
@@ -24,7 +28,7 @@
     fix the variable was always considered out of bounds and apart from using
     backfill buffer settings in the bindings the global value had no effect.
 
-# 4.0.4
+## 4.0.4
 
 * trunk
 
@@ -46,7 +50,7 @@
 
   * Log error message if parameter `msggroups` is not defined
 
-# 4.0.3
+## 4.0.3
 
 * slmod
 
@@ -68,7 +72,7 @@
   * Rename item `TP` to `MType` of parameter
     `eventlist.visibleColumns`
 
-# 4.0.2
+## 4.0.2
 
 * autoloc
 
@@ -83,7 +87,7 @@
   * Fix crash for debug builds if a token is empty,
     e.g. empty end time
 
-# 4.0.1
+## 4.0.1
 
 * LOCSAT
 
@@ -105,24 +109,23 @@
     Armbruster for providing the patch.
 
 
-# 4.0.0
+## 4.0.0
 
 ```SC_API_VERSION 14.0.0```
 
 This is the initial release of SeisComP under a new license and with a new
 versioning scheme. Instead of using a release name and a time based version
 tag semantic versioning is now being used with a sequence of three digits:
-Major.Minor.Patch. The following rules apply for assiging a new digit:
+Major.Minor.Patch. The following rules apply for assigning a new digit:
 
 * Major: Libraries introduce binary incompatible changes or there are very
-         significant application changes which justify a major version
-         bump.
+  significant application changes which justify a major version bump.
 * Minor: Libraries add new functionality and methods but binary
-         compatibility within the same major release is still maintained
-         with application built against a lower minor version. Significant
-         application changes can also justify a minor version bump.
+  compatibility within the same major release is still maintained
+  with application built against a lower minor version. Significant
+  application changes can also justify a minor version bump.
 * Patch: No changes in functionality but error corrections of existing
-         codes.
+  codes.
 
 Breaking changes:
 
@@ -139,4 +142,3 @@ Breaking changes:
 * The user configuration directory is now `.seiscomp` and not `.seiscomp3`.
 * C++ compilation requires a compiler that supports at least the C++11
   standard.
-

@@ -43,9 +43,14 @@ Understanding SeisComP
 
    /base/introduction
    /base/overview
-   /base/concepts
    /base/history
+   /base/concepts
    /base/glossary
+
+   :maxdepth: 1
+   /base/changelog
+
+   :maxdepth: 4
    /base/license
    /base/citation
 
@@ -92,6 +97,9 @@ Extensions
 
 ${generator.refs.extensions}
    /base/filter-grammar
+
+
+.. _sec_index_developers:
 
 For developers
 ##############
