@@ -4,11 +4,11 @@
 Contributing Documentation
 **************************
 
-This is the documentation for the core processing elements and utilities that make up the SeisComP system.
+This is the documentation for the core processing elements and utilities that make up the |scname| system.
 It aims to document the configuration and command line options for
-SeisComP in multiple formats (HTML, man, PDF, ePub etc) in a
-consistent way. The functionality of SeisComP differs between
-versions so the documentation is versioned along with SeisComP.
+|scname| in multiple formats (HTML, man, PDF, ePub etc) in a
+consistent way. The functionality of |scname| differs between
+versions so the documentation is versioned along with |scname|.
 For more general topics and tutorials please refer to the
 `SeisComP wiki`_.
 
@@ -110,7 +110,7 @@ Module
 
 A template for a description XML file can be found in :file:`doc/templates/app.xml`.
 
-The XML file describes the SeisComP :term:`module` with the configuration and command-line parameters.
+The XML file describes the |scname| :term:`module` with the configuration and command-line parameters.
 
 Element: **module**
 
@@ -175,7 +175,7 @@ Plugin
 
 A template for a description XML file can be found in :file:`doc/templates/plugin.xml`.
 
-The XML file describes the SeisComP :term:`plugin` with the configuration and command-line parameters. This is most likely the
+The XML file describes the |scname| :term:`plugin` with the configuration and command-line parameters. This is most likely the
 case when an application loads dynamically shared libraries also called plugins.
 
 Element: **plugin**
@@ -448,7 +448,7 @@ This element is used to describe the command-line options of a module. The eleme
 much simpler than the :ref:`configuration<xml-configuration>` element. The command-line only
 contains group elements which in turn have either option or optionReference elements. Through
 the optionReference element it is possible to refer to existing command-line options. This is
-important for all modules that are using the SeisComP libraries because they share a set of
+important for all modules that are using the |scname| libraries because they share a set of
 basic command-line options inherited from the Application class.
 
 Element: **command-line**

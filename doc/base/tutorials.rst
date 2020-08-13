@@ -4,7 +4,7 @@
 Tutorials
 *********
 
-This chapter provides some tutorials to help you get started with SeisComP.
+This chapter provides some tutorials to help you get started with |scname|.
 
 The material here is not the primary documentation.
 Rather, it attempts to explain what is to be done in a step-by-step way.

@@ -64,7 +64,7 @@ Commands
 
 **install-deps** [packages]
 
-  Installs 3rd party packages on which SeisComP depends such as MySQL. This is
+  Installs 3rd party packages on which |scname| depends such as MySQL. This is
   currently only supported for major Linux distributions. A list of packages
   needs to be given.
 
@@ -99,7 +99,7 @@ Commands
 
 **shell**
 
-  Starts the interactive :ref:`SeisComP shell <system-management-shell>`, an
+  Starts the interactive :ref:`seiscomp shell <system-management-shell>`, an
   approach to make configuration and manipulation of bindings more easy.
 
 **enable** [module list]
@@ -162,7 +162,7 @@ Commands
 Shell
 *****
 
-The SeisComP shell can be started with
+The seiscomp shell can be started with
 
 .. code-block:: sh
 
@@ -182,7 +182,7 @@ such as :command:`sed` in Bash scripts, shell can be used. It supports:
 .. code-block:: sh
 
    ================================================================================
-   SeisComP shell
+   seiscomp shell
    ================================================================================
 
    Welcome to the SeisComP interactive shell. You can get help about
@@ -278,14 +278,14 @@ isn't a general rule as stated before.
        seiscomp.Kernel.Module.__init__(self, env, env.moduleName(__file__))
 
 
-SeisComP provides a Python module (:py:mod:`seiscomp.Kernel`) that allows to
+|scname| provides a Python module (:py:mod:`seiscomp.Kernel`) that allows to
 write init scripts in an easy way.
 
 
 Python kernel module
 ====================
 
-The SeisComP setup kernel module provides interfaces to write init handlers
+The |scname| setup kernel module provides interfaces to write init handlers
 for modules used by :program:`seiscomp` in Python.
 
 .. py:module:: seiscomp.Kernel

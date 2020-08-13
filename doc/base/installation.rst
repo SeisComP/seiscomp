@@ -4,17 +4,17 @@
 Installation
 ************
 
-SeisComP is distributed in the form of tar files for different releases,
+|scname| is distributed in the form of tar files for different releases,
 Linux systems and architectures:
 
 * Acquisition, processing and GUIs (for each supported platform)
-* Maps (maps from the SeisComP releases Seattle and Zurich also work
+* Maps (maps from the |scname| releases Seattle and Zurich also work
   in later releases)
 * Documentation
 * Station configuration files (optional)
 
 Download these from `SeisComP`_.
-This section describes the installation of the binary packages of SeisComP on
+This section describes the installation of the binary packages of |scname| on
 an
 
 * :program:`Ubuntu 18`, 64 bit system
@@ -40,7 +40,7 @@ Minimum requirements are:
 +-----+----------------------------------------------------------------------------------------+
 
 In case large networks (>100 stations) are operated, a distributed system is
-recommended. Normally a SeisComP system is separated in several subsystems.
+recommended. Normally a |scname| system is separated in several subsystems.
 A separation of data acquisition, processing and graphical user interfaces is
 useful to permit stable performance.
 
@@ -78,11 +78,10 @@ GUI system:
 +-----+----------------------------------------------------------------+
 
 
-
 Installation procedure
 ======================
 
-The next steps describe the installation of SeisComP with the prepared
+The next steps describe the installation of |scname| with the prepared
 tar.gz files.
 
 * Log in as user (e.g. sysop)
@@ -96,13 +95,13 @@ tar.gz files.
 
      user@host:/tmp$ cd
 
-* Un-tar the SeisComP binary packagemake
+* Un-tar the |scname| binary packagemake
 
   .. code-block:: sh
 
      user@host:~$ tar xzf seiscomp-[version]-[OS]-[arch].tar.gz
 
-* Un-tar the SeisComP map package into seiscomp/share/maps
+* Un-tar the |scname| map package into seiscomp/share/maps
 
   .. code-block:: sh
 
@@ -114,12 +113,13 @@ tar.gz files.
 
      user@host:~$ tar xzf seiscomp-[version]-doc.tar.gz
 
-Unpacking these file creates the :ref:`SeisComP directory structure<directory_structure>`.
+Unpacking these file creates the |scname| :ref:`directory structure<directory_structure>`.
+
 
 Install dependencies
 --------------------
 
-SeisComP depends on a number of additional packages shipped with each Linux
+|scname| depends on a number of additional packages shipped with each Linux
 distribution. The following table gives an overview (the names of packages,
 files or commands may differ slightly for other Linux systems):
 
@@ -169,7 +169,8 @@ install the above packages manually:
    bash install-fdsnws.sh
    ...
 
-or contact the SeisComP developers to add support for your distribution.
+or contact the |scname| developers to add support for your distribution.
+
 
 SQL configuration
 -----------------
@@ -250,6 +251,7 @@ SQL configuration
 Now everything is installed and the system can be configured. The :ref:`next chapter<getting-started>`
 chapter explains the first steps.
 
+
 .. _directory_structure:
 
 Directory structure
@@ -302,7 +304,6 @@ following table.
 +---------------------+--------------------------------------------------------------------+
 | *etc/key*           | Station configurations and module bindings.                        |
 +---------------------+--------------------------------------------------------------------+
-
 
 
 References

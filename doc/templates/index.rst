@@ -2,7 +2,7 @@
 Welcome
 #######
 
-This is the documentation for the SeisComP version |version| |release|.
+This is the documentation for the |scname| version |version| |release|.
 
 Please consider :doc:`contributing</base/contributing-docs>` to this documentation.
 
@@ -34,7 +34,7 @@ Please consider :doc:`contributing</base/contributing-docs>` to this documentati
 
    </div>
 
-Understanding SeisComP
+Understanding |scname|
 ######################
 
 .. toctree::
@@ -46,11 +46,7 @@ Understanding SeisComP
    /base/history
    /base/concepts
    /base/glossary
-
-   :maxdepth: 1
    /base/changelog
-
-   :maxdepth: 4
    /base/license
    /base/citation
 

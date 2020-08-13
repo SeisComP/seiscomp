@@ -11,19 +11,19 @@ more deeply in the :ref:`next chapter<system-management>`.
 Initial configuration
 =====================
 
-To configure SeisComP initially, run :program:`seiscomp setup`. This is the
+To configure |scname| initially, run :program:`seiscomp setup`. This is the
 successor of the former :program:`./setup` script.
-The initial configuration also allows to setup the MySQL database for SeisComP.
+The initial configuration also allows to setup the MySQL database for |scname|.
 
 As a wrapper to :program:`seiscomp setup`, a wizard can be started from
 :ref:`scconfig<scconfig>` (Ctrl-N).
 
 .. note::
 
-    With **Ubuntu 16.04** MariaDB has become the standard flavour of MySQL in Ubuntu
+    With **Ubuntu 16.04** MariaDB has become the standard flavor of MySQL in Ubuntu
     and either MariaDB or MySQL can be installed. The implementation of MariaDB
     in Ubuntu requires additional steps. They must be taken in order to allow
-    SeisComP to make use of MariaDB.
+    |scname| to make use of MariaDB.
 
     The full procedure including database optimization is:
 
@@ -61,7 +61,7 @@ In :program:`seiscomp setup` default values are given in brackets [].
    user@host:~$ seiscomp/bin/seiscomp setup
 
    ====================================================================
-   SeisComP setup
+   seiscomp setup
    ====================================================================
 
    This initializes the configuration of your installation.
@@ -118,7 +118,7 @@ trunk modules and the default request handler of Arclink.
          your own. The database schema is installed under share/db/postgresql.sql.
    Database backend [0]:
 
-If the database is enable the database backend can be selected. SeisComP
+If the database is enable the database backend can be selected. |scname|
 supports two main backends: MySQL and PostgreSQL. Select the backend to be used
 here but be prepared that only for the MySQL backend the setup can help to
 create the database and tables for you. If you are using PostgreSQL you have
@@ -229,7 +229,7 @@ be provided and the configuration needs to be updated.
 Supply metadata for networks and stations
 =========================================
 
-SeisComP requires the metadata from seismic stations for data acquisition
+|scname| requires the metadata from seismic stations for data acquisition
 and processing. The metadata can be obtained from network operators or
 various other sources in different formats. The metadata include, e.g.:
 
@@ -239,10 +239,10 @@ various other sources in different formats. The metadata include, e.g.:
 - sensor and data logger specifications
 - data stream specifications
 
-SeisComP comes with various importers to add metadata
+|scname| comes with various importers to add metadata
 for networks and stations including full response information.
 
-:ref:`import_inv` is the tool to import inventory data into SeisComP.
+:ref:`import_inv` is the tool to import inventory data into |scname|.
 Alternatively can be used.
 
 .. code-block:: sh

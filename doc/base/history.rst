@@ -7,7 +7,7 @@ Historical information
 The first version of SeisComP was developed for the
 :term:`GEOFON` program operated by :term:`GFZ`.
 
-Originally, SeisComP was designed as a high-standard, fully automatic data acquisition and (near-)real-time
+Originally, |scname| was designed as a high-standard, fully automatic data acquisition and (near-)real-time
 data processing tool including quality control, event detection and location as well as dissemination
 of event alerts.
 

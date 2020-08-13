@@ -21,7 +21,7 @@ Use brackets *()* to apply the operations within before the one outside.
 
 .. note::
 
-   Filters in SeisComP are recursive allowing real-time application. Therefore,
+   Filters in |scname| are recursive allowing real-time application. Therefore,
    filter artefacts, e.g. ringing, are always visible at the beginning of the traces
    or after data gaps.
 

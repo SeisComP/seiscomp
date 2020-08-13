@@ -5,12 +5,12 @@ Overview
 ********
 
 This overview section is intended to quickly introduce the reader into
-key aspect of SeisComP and to provide the access points for further reading.
+key aspect of |scname| and to provide the access points for further reading.
 
 Modular structure
 =================
 
-A SeisComP system is not a single piece of software but it involves automatic and
+A |scname| system is not a single piece of software but it involves automatic and
 interactive modules working
 separately to process data and to analyze seismicity.
 Read the :ref:`concepts section on modules <concepts_modules>` for more conceptional details.
@@ -84,7 +84,7 @@ Communication between these modules happens in two ways:
 #. Via objects stored in, and retrieved from, a shared database.
 #. Via messages exchanged between modules.
 
-Managing the communication between the modules in SeisComP is the job of the :ref:`messaging
+Managing the communication between the modules in |scname| is the job of the :ref:`messaging
 system <concepts_messaging>`.
 The messaging system is controlled by :ref:`scmaster`. It acts as gatekeeper to the database,
 and only the module :ref:`scmaster` is allowed
@@ -95,12 +95,12 @@ Additional details are found under :ref:`concepts_messaging` in the :ref:`concep
    :width: 10cm
    :align: center
 
-   Modular organization of SeisComP with messaging system, RecordStream interface and database.
+   Modular organization of |scname| with messaging system, RecordStream interface and database.
 
 Waveform data
 =============
 
-Internally in SeisComP, most waveform data is currently handled as :term:`miniSEED` data (Data Only
+Internally in |scname|. most waveform data is currently handled as :term:`miniSEED` data (Data Only
 :term:`SEED` records).
 A time series of records is identified by its stream identifier,
 following the SEED naming convention, ::
@@ -124,20 +124,20 @@ at geofon.gfz-potsdam.de.
 If you operate your own seismic network, you may collect data directly
 from your station's digitizer using one of the many plugins included with
 the :ref:`seedlink` module.
-You can configure SeisComP to obtain data for each station via :term:`bindings <binding>`.
+You can configure |scname| to obtain data for each station via :term:`bindings <binding>`.
 This configuration is described in the :ref:`tutorial on seedlink <tutorials_geofon_waveforms>`.
 
-Waveform data can be saved locally, using SeisComP's :ref:`slarchive` module.
+Waveform data can be saved locally, using |scname|'s :ref:`slarchive` module.
 The waveform archive is organized in a structured way on your local file system,
 with one file for each channel and day, known as the :term:`SDS` archive.
-Thanks to SeisComP's :ref:`concepts_recordstream` concept, its modules
+Thanks to |scname|'s :ref:`concepts_recordstream` concept, its modules
 can be reconfigured to use the local data from an archive, a server or from files, allowing *playbacks*.
 This ability to replay old waveforms and re-analyze them, is very
 important for exploring your system configuration, and developing
-SeisComP.
+|scname|.
 
 Finally, being both a collector and a server of waveform data,
-:ref:`seedlink` allows you to chain SeisComP installations together to
+:ref:`seedlink` allows you to chain |scname| installations together to
 obtain waveform data from upstream sources and relay it to other data users.
 
 .. figure::  media/sc-acquisition-server.png
@@ -145,15 +145,15 @@ obtain waveform data from upstream sources and relay it to other data users.
    :align: center
 
    Data flow from data centers and stations via plugins to seedlink and the waveform archive
-   both providing the data to local or remote SeisComP modules or other clients.
+   both providing the data to local or remote |scname| modules or other clients.
 
 Access to waveform data
 =======================
 
-SeisComP modules can access waveform data from many difference sources,
+|scname| modules can access waveform data from many difference sources,
 such as a Seedlink server or an FDSN web service.
 
-In SeisComP terminology, the data from these sources are *record streams*.
+In |scname| terminology, the data from these sources are *record streams*.
 Access to the waveform data can be configured by setting an appropriate :term:`RecordStream`.
 Read the :ref:`concept description of the RecordStream<concepts_recordstream>`
 and :ref:`technical documentation of the various implementations <global_recordstream>` for many more details.
@@ -164,11 +164,11 @@ and :ref:`technical documentation of the various implementations <global_records
 
    The RecordStream interface provides flexible access to waveform data.
 
-Taken together, this design gives SeisComP operators much flexibility.
+Taken together, this design gives |scname| operators much flexibility.
 Since messages can be exchanged between different computers, and
 waveform data can be obtained from many sources, the different modules
 do not all have to be on a single computer.
-Multiple operators can connect to a single SeisComP installation from their own computers.
+Multiple operators can connect to a single |scname| installation from their own computers.
 
 Station metadata
 ================
@@ -177,7 +177,7 @@ By :term:`inventory` we mean all information about seismic streams and stations
 that is needed for processing the raw data obtained from sensors.
 They are therefore also referred to as *station metadata*.
 Read the :ref:`concepts section on inventory <concepts_inventory>` for more details
-on formats and configuration in SeisComP.
+on formats and configuration in |scname|.
 
 Inventories include
 
@@ -190,18 +190,18 @@ and other essential information.
 Today there are some common formats to store metadata:
 
 * FDSN StationXML
-* SeisComP inventory
+* |scname| inventory
 * Dataless SEED - the old *de facto* standard
 * ArcLink XML.
 
-Dataless SEED can be imported to, and exported from, SeisComP if needed.
+Dataless SEED can be imported to, and exported from, |scname| if needed.
 
 You can get inventory information from various public sources including `EIDA`_ or
 `IRIS`_ and many more. `SMP`_ allows you to create and share meta data from your own
 station network and to export an intentory in :term:`SCML` format.
 
 Inventories for all considered recording stations need to be imported
-into SeisComP, and loaded into its database, before data can be processed.
+into |scname|. and loaded into its database, before data can be processed.
 There are various tools to do this.
 The tools are described in the inventory section of this documentation.
 
@@ -213,7 +213,7 @@ The tools are described in the inventory section of this documentation.
 Configuration
 =============
 
-The basics of configuring a SeisComP system are described in the :ref:`concepts section <concepts_configuration>`.
+The basics of configuring a |scname| system are described in the :ref:`concepts section <concepts_configuration>`.
 The :ref:`tutorials` of this documentation provide step-by-step recipes.
 The modules documentation explains the modules functioning, their configuration and
 command-line parameters and give additional examples and links to related topics.
@@ -221,15 +221,15 @@ command-line parameters and give additional examples and links to related topics
 What next?
 ==========
 
-The following :ref:`installation` section of this manual will help you install SeisComP.
+The following :ref:`installation` section of this manual will help you install |scname|.
 You will then need to obtain some inventory and a source of waveform data.
-Configure bindings, enable the processing modules, and restart SeisComP.
+Configure bindings, enable the processing modules, and restart |scname|.
 If all has gone well, you should see some stations as colorful triangles in
 :ref:`scmv`,
 and their traces in
 :ref:`scrttv`.
 
-Eventually, your new SeisComP system will pick and create origins,
+Eventually, your new |scname| system will pick and create origins,
 should a locatable :term:`seismic event <event>` take place while it
 is running.
 
@@ -237,8 +237,8 @@ Where to go for more help
 =========================
 
 The :ref:`tutorial on help<tutorials_help>` provides comprehensive list of options
-to get help on SeisComP.
-Most SeisComP modules have built-in help messages and descriptive HTML documentation.
+to get help on |scname|.
+Most |scname| modules have built-in help messages and descriptive HTML documentation.
 Read the :ref:`tutorial on help<tutorials_help>` for a neat introduction.
 
 There are other sources of information beyond this documentation.
@@ -247,9 +247,9 @@ You are encouraged to register and post your own questions and comments there.
 
 Professional support including installation, training courses, maintenance, module development
 and modification is provided world-wide by `gempa GmbH`_, a software company out-sourced from GFZ
-and founded by the main SeisComP developers.
+and founded by the main |scname| developers.
 
-Enjoy SeisComP!
+Enjoy |scname|!
 
 References
 ==========

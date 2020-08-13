@@ -14,10 +14,10 @@ From Wikipedia:
   together with associated control data, usage procedures, and operating
   procedures, are tested to determine whether they are fit for use. [#WPUT]_
 
-This chapter targets programmers, either ones contributing to SeisComP or
+This chapter targets programmers, either ones contributing to |scname| or
 adding their extended set of modules / libraries.
 
-Since most of the SeisComP code is written in C++, this chapter focuses on
+Since most of the |scname| code is written in C++, this chapter focuses on
 C++ unit tests. For C++, we have evaluated three unit test frameworks:
 
 * CppUnit
@@ -27,9 +27,9 @@ C++ unit tests. For C++, we have evaluated three unit test frameworks:
 We found that Boost Test is the most appropriate, flexible and easy to
 understand unit test framework. Another important fact was the availability of
 Boost Test on all major Linux distributions via their package managers. That
-SeisComP makes already use of other Boost libraries was the icing on the cake.
+|scname| makes already use of other Boost libraries was the icing on the cake.
 
-So this chapter is about integrating unit tests into SeisComP with the Boost Test
+So this chapter is about integrating unit tests into |scname| with the Boost Test
 library.
 
 Apart from the availability of the Boost test libraries, cmake with version
@@ -43,7 +43,7 @@ added a shortcut to the CMake macro :code:`SC_ADD_LIBRARY`. It collects all .cpp
 files in the directory :code:`${CMAKE_CURRENT_SOURCE_DIR}/test/{libraryname}`
 and creates tests from them.
 
-An example is the SeisComP core library. It is located at
+An example is the |scname| core library. It is located at
 :code:`src/trunk/lib/seiscomp`. Following the above rule, the test files
 shall be located in :code:`src/trunk/lib/seiscomp/test/core/*.cpp`. For each
 found source file, the macro will create a test with the same name and link
@@ -68,7 +68,7 @@ Test implementation
 ===================
 
 The following section shows an example of a simple but in many cases sufficient
-test module. This example can be used as a template for an SeisComP unit test.
+test module. This example can be used as a template for an |scname| unit test.
 
 .. code-block:: cpp
 

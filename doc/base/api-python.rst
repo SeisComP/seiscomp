@@ -17682,7 +17682,7 @@ Reference
       Optional resource identifier for the waveform stream. QuakeML adopts
       in many places resource descriptors with a well\-defined syntax for
       unambiguous resource identification. Resource identifiers are designed
-      to be backward compatible with existing descriptors. In SeisComP this
+      to be backward compatible with existing descriptors. In |scname| this
       identifier is not used at all.
 
    .. py:method:: resourceURI()
