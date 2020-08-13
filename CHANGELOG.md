@@ -6,11 +6,16 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 14.1.0```
 
+* screloc
+
+  * Add option to allow processing of origins with mode MANUAL in daemon mode
+
 * trunk
 
   * The application class resets it locale to the initial
     state at exit. Not doing so could have caused encoding
     errors with init scripts
+  * Add fixed hypocenter locator
 
 * scevtstreams
 
@@ -27,6 +32,11 @@ All notable changes to SeisComP are documented here.
   * Fix parsing of global `backfill_buffer` variable. Up to this
     fix the variable was always considered out of bounds and apart from using
     backfill buffer settings in the bindings the global value had no effect.
+
+* scolv
+
+  * Fixed several segmentation faults in combination with offline
+    mode
 
 ## 4.0.4
 
