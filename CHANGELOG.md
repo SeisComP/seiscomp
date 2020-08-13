@@ -37,6 +37,7 @@ All notable changes to SeisComP are documented here.
 
   * Fixed several segmentation faults in combination with offline
     mode
+  * Add origin location method column to event origin table
 
 ## 4.0.4
 
