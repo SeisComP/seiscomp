@@ -60,9 +60,9 @@ was set. So configuring a RecordStream for an application requires some
 knowledge of the context and the supported features of the configured
 implementation.
 
-Although SeisComP ships with the Seedlink server, the processing application
+Although |scname| ships with the Seedlink server, the processing application
 are not aware of the fact that they connect to Seedlink. All time series
 retrieval is done with the RecordStream concept. There is no knowledge about
 the underlying implementation. This leads to a high flexibility and
-implementations can be added without the need to modify the base SeisComP
+implementations can be added without the need to modify the base |scname|
 sources.

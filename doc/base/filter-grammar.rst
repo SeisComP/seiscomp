@@ -64,11 +64,11 @@ Test filter strings
 
 Filters can be conveniently tested without much configuration. To perform such tests
 
-#. Open waveforms in :ref:`scrttv` or the picker window of :ref:`scolv`
+#. Open waveforms in :ref:`scrttv` or the picker window of :ref:`scolv`.
 #. Open a simple graphical text editor, e.g. gedit, pluma or kwrite and write down
-   the filter string
+   the filter string.
 #. Mark / highlight the filter string and use the mouse to drag the filter string
-   onto the waveforms
+   onto the waveforms.
 #. Observe the differences between filtered and unfiltered waveforms.
 
 
@@ -94,12 +94,29 @@ parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()
    :param timespan: Time span in seconds
 
 
-.. py:function:: BW_LP(order, hi-freq)
+.. py:function:: BW(order, lo-freq, hi-freq)
 
-   Butterworth low-pass filter realized as a causal recursive IIR (infinite impulse response) filter.
+   Alias for the :py:func:`Butterworth band-pass filter, BW_BP<BW_BP()>`.
+
+
+.. py:function:: BW_BP(order, lo-freq, hi-freq)
+
+   Butterworth bandpass filter (BW) realized as a causal recursive IIR (infinite impulse response)
+   filter. An arbitrary bandpass filter can be created for given order and corner frequencies.
 
    :param order: The filter order
-   :param hi-freq: The corner frequency
+   :param lo-freq: The lower corner frequency
+   :param hi-freq: The upper corner frequency
+
+
+.. py:function:: BW_BS(order, lo-freq, hi-freq)
+
+   Butterworth band stop filter realized as a causal recursive IIR (infinite impulse response) filter
+   suppressing amplitudes at frequencies between *lo-freq* and *hi-freq*.
+
+   :param order: The filter order
+   :param lo-freq: The lower corner frequency
+   :param hi-freq: The upper corner frequency
 
 
 .. py:function:: BW_HP(order, lo-freq)
@@ -119,19 +136,12 @@ parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()
    :param hi-freq: The upper corner frequency
 
 
-.. py:function:: BW(order, lo-freq, hi-freq)
+.. py:function:: BW_LP(order, hi-freq)
 
-   Alias for :py:func:`high-low-pass filter<BW_HLP()>`.
-
-
-.. py:function:: BW_BP(order, lo-freq, hi-freq)
-
-   Butterworth bandpass filter (BW) realized as a causal recursive IIR (infinite impulse response)
-   filter. An arbitrary bandpass filter can be created for given order and corner frequencies.
+   Butterworth low-pass filter realized as a causal recursive IIR (infinite impulse response) filter.
 
    :param order: The filter order
-   :param lo-freq: The lower corner frequency
-   :param hi-freq: The upper corner frequency
+   :param hi-freq: The corner frequency
 
 
 .. py:function:: DIFF
@@ -196,19 +206,9 @@ parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()
    :param timespan: The timespan in seconds
 
 
-.. py:function:: RMHP(timespan)
-
-   A high-pass filter realized as running mean high-pass filter. For a given time window in
-   seconds the running mean is subtracted from the single amplitude values. This is equivalent
-   to high-pass filtering the data.
-
-   Running mean high-pass of e.g. 10 seconds calculates the difference to the running mean of 10 seconds.
-
-   :param timespan: The timespan in seconds
-
 .. py:function:: RM(timespan)
 
-   A running mean filter. For a given time window in seconds the running mean is
+   A running mean filter computing the mean value within *timespan*. For a given time window in seconds the running mean is
    computed from the single amplitude values and set as output. This computation
    is equal to :py:func:`RHMP<RMHP()>` with the exception that the mean is not
    subtracted from single amplitudes but replaces them.
@@ -219,9 +219,22 @@ parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()
 
    :param timespan: The timespan in seconds
 
+
+.. py:function:: RMHP(timespan)
+
+   A high-pass filter realized as running mean high-pass filter. For a given time window in
+   seconds the running mean is subtracted from the single amplitude values. This is equivalent
+   to high-pass filtering the data.
+
+   Running mean high-pass of e.g. 10 seconds calculates the difference to the running mean of 10 seconds.
+
+   :param timespan: The timespan in seconds
+
+
 .. py:function:: self()
 
    The original data itself.
+
 
 .. py:function:: SM5([type = 1])
 
