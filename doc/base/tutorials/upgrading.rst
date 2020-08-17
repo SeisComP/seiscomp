@@ -237,8 +237,8 @@ When using pipelines or alias modules, create and enable the alias module names 
 Migrate the module and bindings configurations of the alias modules including all related additional files which are referred to
 in the configurations.
 
-.. _sec-tutorials_upgrading_messaging:
 
+.. _sec-tutorials_upgrading_messaging:
 
 Messaging system
 ----------------
@@ -249,7 +249,7 @@ the messaging system. :ref:`scmaster` allows to operate several queues in parall
 different databases. This flexibility comes with additional parameters which require
 configuration. Migrate the legacy database parameters and configure the new one:
 
-#. Setup the messaging queues to the configuration of :ref:`scmaster` in :file:`scmaster.cfg`.
+#. Set up the messaging queues in the configuration of :ref:`scmaster` in :file:`scmaster.cfg`.
 
    * Remove or comment the obsolete *dbplugin* plugin manually from :file:`scmaster.cfg`: ::
 
@@ -272,14 +272,22 @@ configuration. Migrate the legacy database parameters and configure the new one:
         queues.production.plugins = dbstore
 
    * Add non-default message groups to the list of default groups in
-     :confval:`defaultGroups` or to the queues, e.g.
+     :confval:`defaultGroups`, e.g. for adding the groups *L1PICK* and *L1LOCATION* set ::
 
-     .. code-block:: sh
+        defaultGroups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,SERVICE_REQUEST,SERVICE_PROVIDE
 
-        queues.production.groups = L1PICK, L1LOCATION
+     or use the configuration of queues, e.g. ::
 
-     These groups will be available for all other connected modules in this queue
+        queues.production.groups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,SERVICE_REQUEST,SERVICE_PROVIDE
+
+     The configured groups will be available for all other connected modules in this queue
      in addition to the default groups.
+
+     .. warning::
+
+        When setting groups in the queues all groups configured in
+        :confval:`defaultGroups` will be ignored. Add all groups from :confval:`defaultGroups`
+        to the queues to keep the default groups.
 
    * Add the interface name, currently only *dbstore* is supported. Example for
      a queue names *production*

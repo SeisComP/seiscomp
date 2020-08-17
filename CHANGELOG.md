@@ -16,6 +16,7 @@ All notable changes to SeisComP are documented here.
     state at exit. Not doing so could have caused encoding
     errors with init scripts
   * Add fixed hypocenter locator
+  * Fix combined recordstream for slinkMax|rtMax|1stMax units `s` and `h`
 
 * scevtstreams
 
