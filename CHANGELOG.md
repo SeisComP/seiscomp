@@ -6,16 +6,33 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 14.1.0```
 
+* scmaster
+
+  * Add IMPORT_GROUP to default group set
+
 * screloc
 
   * Add option to allow processing of origins with mode MANUAL in daemon mode
+  * When using --ep playbacks with origins defined by -O, then the processing
+    is limited to the defined origins.
+
+* scevent
+
+  * Update event agencyID and author on event update if it has
+    changed. This is important if scevent has been reconfigured
+    with a different agencyID or author.
 
 * trunk
 
-  * The application class resets it locale to the initial
+  * The application class resets its locale to the initial
     state at exit. Not doing so could have caused encoding
     errors with init scripts
   * Add fixed hypocenter locator
+  * Add external locator plugin (locext)
+  * Fix combined recordstream for slinkMax|rtMax|1stMax units `s` and `h`
+  * Fix LOCSAT travel time computation for phases which do not provide
+    a table file or with zero depth layers. Sometimes LOCSAT produced
+    fake travel times for non existing phases after switching tables.
 
 * scevtstreams
 
@@ -38,6 +55,8 @@ All notable changes to SeisComP are documented here.
   * Fixed several segmentation faults in combination with offline
     mode
   * Add origin location method column to event origin table
+  * Add shortcuts (ctrl+pgdown, ctrl+pgup) to select the previous and
+    next event of the event list from within the locator view
 
 ## 4.0.4
 
