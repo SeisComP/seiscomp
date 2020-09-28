@@ -16,6 +16,12 @@ All notable changes to SeisComP are documented here.
   * When using --ep playbacks with origins defined by -O, then the processing
     is limited to the defined origins.
 
+* scevent
+
+  * Update event agencyID and author on event update if it has
+    changed. This is important if scevent has been reconfigured
+    with a different agencyID or author.
+
 * trunk
 
   * The application class resets its locale to the initial
