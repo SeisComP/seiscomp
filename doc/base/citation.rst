@@ -4,8 +4,8 @@
 Citation
 ********
 
-Please give appropriate reference to SeisComP when publishing your work.
-You may cite the SeisComP software as:
+Please give appropriate reference to |scname| when publishing your work.
+You may cite the |scname| software as:
 
 Helmholtz-Centre Potsdam - GFZ German Research Centre for Geosciences and gempa GmbH (2008).
 The SeisComP seismological software package. GFZ Data Services.

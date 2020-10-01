@@ -1,5 +1,5 @@
-#ifndef __@LIBRARY@_API_H__
-#define __@LIBRARY@_API_H__
+#ifndef @LIBRARY@_API_H
+#define @LIBRARY@_API_H
 
 #if defined(WIN32) && (defined(@LIBRARY@_SHARED) || defined(SC_ALL_SHARED))
 # if defined(@LIBRARY@_EXPORTS)

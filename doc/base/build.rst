@@ -1,7 +1,7 @@
 .. _build:
 
 ***********************************
-Compiling SeisComP from source code
+Compiling |scname| from source code
 ***********************************
 
 To build from source you will need to clone from one or more repositories.
@@ -15,7 +15,7 @@ Here we describe the simplest case only.
 Before building, **install all the dependencies**,
 as described below in :ref:`build_dependencies`.
 
-The easiest way to compile SeisComP is to use the :file:`Makefile.cvs` file
+The easiest way to compile |scname| is to use the :file:`Makefile.cvs` file
 provide, which creates a build directory inside the source tree.
 
 .. code-block:: sh
@@ -43,7 +43,7 @@ a build directory, configure the build and start it:
 Step-by-step instructions
 =========================
 
-1. Check out SeisComP source code from Github
+1. Check out |scname| source code from Github
 
    .. code-block:: sh
 
@@ -60,7 +60,7 @@ Step-by-step instructions
 
 3. Configure the build.
 
-   SeisComP uses `cmake` as build environment. For users that are not experienced
+   |scname| uses `cmake` as build environment. For users that are not experienced
    with `cmake` it is recommended to use `ccmake`, an ncurses frontend which is launched
    by the default :file:`Makefile.cvs`.
 
@@ -87,7 +87,7 @@ Step-by-step instructions
       sysop@host:~/sc-src$ cd build
       sysop@host:~/sc-src/build$ make
 
-   If `make` finished without errors, install SeisComP with
+   If `make` finished without errors, install |scname| with
 
    .. code-block:: sh
 

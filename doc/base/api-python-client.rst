@@ -13,14 +13,14 @@ seiscomp.client package focuses on three main aspects:
 * Fetch waveform data
 
 Therefore a client package has been developed combining these concepts in an
-easy way with only a couple of API calls. Since SeisComP has been developed in
+easy way with only a couple of API calls. Since |scname| has been developed in
 C++ and uses the object oriented paradigm forcefully, modules build on the
 Application (C++: :class:`Seiscomp::Client::Application`, :class:`Python: seiscomp.client.Application`)
 class. It manages the messaging connection and waveform sources in a transparent
 way.
 
 The class :class:`Seiscomp::Client::Application` is the base class for
-all SeisComP applications. It manages messaging and database
+all |scname| applications. It manages messaging and database
 connections, provides access to command line options and configuration
 parameters and also handles and interprets notifier messages.
 

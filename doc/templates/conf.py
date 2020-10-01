@@ -38,7 +38,7 @@ extensions = [
     #    'rst2pdf.pdfbuilder',
     'sphinx.ext.ifconfig', 'sphinx.ext.todo',
     'sphinx.ext.autodoc', 'sphinx.ext.viewcode',
-    'sphinx.ext.graphviz']
+    'sphinx.ext.graphviz', 'm2r']
 
 if LooseVersion(sphinx.__version__) < LooseVersion('1.4'):
     extensions.append('sphinx.ext.pngmath')
@@ -253,3 +253,9 @@ pdf_toc_depth = 3
 pdf_use_index = False
 pdf_use_modindex = False
 html_toc_depth = 1
+
+rst_prolog = """
+.. |scbin| replace:: `seiscomp`
+.. |scname| replace:: `SeisComP`
+.. |gempa| replace:: `gempa`
+"""

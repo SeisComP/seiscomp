@@ -575,7 +575,6 @@ def on_print(args, flags):
 
         print('export PYTHONPATH="%s:$PYTHONPATH"' % PYTHONPATH)
         print('export MANPATH="%s:$MANPATH"' % MANPATH)
-        print('export LC_ALL=C')
         print('source "%s/share/shell-completion/seiscomp.bash"' % SEISCOMP_ROOT)
     else:
         error("wrong argument: {crontab|env} expected")
@@ -1169,7 +1168,6 @@ if not isWrapped:
     except:
         os.environ["MANPATH"] = MANPATH
 
-    os.environ["LC_ALL"] = "C"
     os.environ["SEISCOMP_WRAP"] = "TRUE"
 
     sys.exit(system(sys.argv))

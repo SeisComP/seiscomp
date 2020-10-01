@@ -7,7 +7,7 @@ Historical information
 The first version of SeisComP was developed for the
 :term:`GEOFON` program operated by :term:`GFZ`.
 
-Originally, SeisComP was designed as a high-standard, fully automatic data acquisition and (near-)real-time
+Originally, |scname| was designed as a high-standard, fully automatic data acquisition and (near-)real-time
 data processing tool including quality control, event detection and location as well as dissemination
 of event alerts.
 
@@ -21,7 +21,8 @@ were necessary and many new features resulted in the upgrade of SeisComP to vers
 Since 2008 SeisComP has been jointly developed by :term:`gempa GmbH`, a spin-off company of GFZ and GFZ.
 Nowadays, gempa GmbH is the main SeisComP developing and service company.
 
-Important SeisComP releases are shown below.
+Major SeisComP releases are shown below. The important changes as of version 4.0 are documented in
+the :ref:`change log <sc-changelog>`.
 
 
 +---------+-----------+--------------------+-----------------------------------------------------+
@@ -62,7 +63,7 @@ Important SeisComP releases are shown below.
 +---------+-----------+--------------------+-----------------------------------------------------+
 | 3.0     | Jakarta   | 2014               | Completely Open Source, including all GUIs          |
 +---------+-----------+--------------------+-----------------------------------------------------+
-| 4.0     | AGPL      | May 2020           | Adopts the GNU Affero General Public License v. 3.0,|
+| 4.0     |           | May 2020           | Adopts the GNU Affero General Public License v. 3.0,|
 |         |           |                    | (AGPL), support for Python3 and QT5                 |
 +---------+-----------+--------------------+-----------------------------------------------------+
 

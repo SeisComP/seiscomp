@@ -1,4 +1,64 @@
-# 4.0.4
+# Change Log
+
+All notable changes to SeisComP are documented here.
+
+## 4.1.0
+
+```SC_API_VERSION 14.1.0```
+
+* scmaster
+
+  * Add IMPORT_GROUP to default group set
+
+* screloc
+
+  * Add option to allow processing of origins with mode MANUAL in daemon mode
+  * When using --ep playbacks with origins defined by -O, then the processing
+    is limited to the defined origins.
+
+* scevent
+
+  * Update event agencyID and author on event update if it has
+    changed. This is important if scevent has been reconfigured
+    with a different agencyID or author.
+
+* trunk
+
+  * The application class resets its locale to the initial
+    state at exit. Not doing so could have caused encoding
+    errors with init scripts
+  * Add fixed hypocenter locator
+  * Add external locator plugin (locext)
+  * Fix combined recordstream for slinkMax|rtMax|1stMax units `s` and `h`
+  * Fix LOCSAT travel time computation for phases which do not provide
+    a table file or with zero depth layers. Sometimes LOCSAT produced
+    fake travel times for non existing phases after switching tables.
+
+* scevtstreams
+
+  * Add `--fdsnws` command line option to export list of
+    channels in FDSNWS dataselect POST format
+
+* gui
+
+  * Add option to define symbol images for layer points defined in
+    either BNA or FEP
+
+* seedlink
+
+  * Fix parsing of global `backfill_buffer` variable. Up to this
+    fix the variable was always considered out of bounds and apart from using
+    backfill buffer settings in the bindings the global value had no effect.
+
+* scolv
+
+  * Fixed several segmentation faults in combination with offline
+    mode
+  * Add origin location method column to event origin table
+  * Add shortcuts (ctrl+pgdown, ctrl+pgup) to select the previous and
+    next event of the event list from within the locator view
+
+## 4.0.4
 
 * trunk
 
@@ -20,7 +80,7 @@
 
   * Log error message if parameter `msggroups` is not defined
 
-# 4.0.3
+## 4.0.3
 
 * slmod
 
@@ -42,7 +102,7 @@
   * Rename item `TP` to `MType` of parameter
     `eventlist.visibleColumns`
 
-# 4.0.2
+## 4.0.2
 
 * autoloc
 
@@ -57,7 +117,7 @@
   * Fix crash for debug builds if a token is empty,
     e.g. empty end time
 
-# 4.0.1
+## 4.0.1
 
 * LOCSAT
 
@@ -79,24 +139,23 @@
     Armbruster for providing the patch.
 
 
-# 4.0.0
+## 4.0.0
 
 ```SC_API_VERSION 14.0.0```
 
 This is the initial release of SeisComP under a new license and with a new
 versioning scheme. Instead of using a release name and a time based version
 tag semantic versioning is now being used with a sequence of three digits:
-Major.Minor.Patch. The following rules apply for assiging a new digit:
+Major.Minor.Patch. The following rules apply for assigning a new digit:
 
 * Major: Libraries introduce binary incompatible changes or there are very
-         significant application changes which justify a major version
-         bump.
+  significant application changes which justify a major version bump.
 * Minor: Libraries add new functionality and methods but binary
-         compatibility within the same major release is still maintained
-         with application built against a lower minor version. Significant
-         application changes can also justify a minor version bump.
+  compatibility within the same major release is still maintained
+  with application built against a lower minor version. Significant
+  application changes can also justify a minor version bump.
 * Patch: No changes in functionality but error corrections of existing
-         codes.
+  codes.
 
 Breaking changes:
 
@@ -113,4 +172,3 @@ Breaking changes:
 * The user configuration directory is now `.seiscomp` and not `.seiscomp3`.
 * C++ compilation requires a compiler that supports at least the C++11
   standard.
-

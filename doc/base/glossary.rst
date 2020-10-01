@@ -7,7 +7,7 @@ Glossary
 The glossary is partly extracted from New Manual of Observatory Practice and some information
 is taken from Modern Global Seismology.
 
-SeisComP terms
+|scname| terms
 ==============
 
 .. glossary::
@@ -112,7 +112,7 @@ Scientific and technical terms
 
    arrival
       a) The appearance of seismic energy on a seismic record
-      b) QuakeML object. The detected phase onset associated to an origin in SeisComP.
+      b) QuakeML object. The detected phase onset associated to an origin in |scname|.
 
    arrival time
       The time at which a particular phase of a seismic wave arrives at a station.
@@ -273,7 +273,7 @@ Scientific and technical terms
       filtering can be accomplished electronically while recording or numerically in a computer. Filtering also
       occurs naturally as seismic energy passes through the Earth.
 
-      The available and integrated filters in SeisComP are documented in :ref:`filter-grammar`.
+      The available and integrated filters in |scname| are documented in :ref:`filter-grammar`.
 
    first motion
       The first noticeable displacement in a seismogram caused by the arrival of a P wave at the seismometer.
@@ -321,7 +321,7 @@ Scientific and technical terms
    gempa GmbH
       `gempa GmbH <http://www.gempa.de/>`_ is a spin-off from :term:`GFZ`
       offering a range of services and products to monitor, process and analyze
-      seismicity. It is the main development and service company for SeisComP.
+      seismicity. It is the main development and service company for |scname|.
 
    GEOFON
       GEOFON (https://geofon.gfz-potsdam.de) is part of the Modular Earth Science
@@ -333,7 +333,7 @@ Scientific and technical terms
 
    GFZ
       Helmholtz Centre Potsdam `German Research Centre for Geosciences <http://www.gfz-potsdam.de/>`_.
-      SeisComP was originally developed at GFZ.
+      |scname| was originally developed at GFZ.
 
    GMPE
       Ground Motion Prediction Equation
@@ -395,7 +395,7 @@ Scientific and technical terms
       the concepts section :ref:`concepts_inventory`.
 
    latency
-      The time difference between the current time and the arrival time of the record (SeisComP).
+      The time difference between the current time and the arrival time of the record (|scname|).
       The latency can be computed by :ref:`scqc`.
 
    lithosphere
@@ -470,10 +470,10 @@ Scientific and technical terms
       magnitudes around 7 because the maximum amplitudes of larger earthquakes occur at longer periods than
       the bandpass of 0.1 s and 3 s for the magnitude calculation.
 
-      In SeisComP a modified local magnitude :term:`MLv <magnitude, local vertical (MLv)>` is determined by simulation of a Wood-Anderson instrument and then measuring
+      In |scname| a modified local magnitude :term:`MLv <magnitude, local vertical (MLv)>` is determined by simulation of a Wood-Anderson instrument and then measuring
       the amplitude in a 150 s time window on the vertical component of station with distances smaller than 8°.
 
-      * Amplitude unit in SeisComP: **millimeter** (mm)
+      * Amplitude unit in |scname|: **millimeter** (mm)
 
       Read the :ref:`technical documentation <global_ml>` for the configuration.
 
@@ -481,7 +481,7 @@ Scientific and technical terms
      The :term:`ML <magnitude, local (ML)>` magnitude with amplitudes measured on
      the vertical component instead of the horizontals.
 
-     * Amplitude unit in SeisComP: **millimeter** (mm)
+     * Amplitude unit in |scname|: **millimeter** (mm)
 
      Read the :ref:`technical documentation <global_mlv>` for the configuration.
 
@@ -489,7 +489,7 @@ Scientific and technical terms
       The local magnitude measured on the horizontal components with
       a modified calibration functions as compared to :term:`ML <magnitude, local (ML)>`.
 
-      * Amplitude unit in SeisComP: **millimeter** (mm)
+      * Amplitude unit in |scname|: **millimeter** (mm)
 
       Read the :ref:`technical documentation <global_mlh>` for the configuration.
 
@@ -502,7 +502,7 @@ Scientific and technical terms
    magnitude, Nuttli (MN)
       Nuttli magnitude for Canada and other Cratonic regions.
 
-      * Amplitude unit in SeisComP: **meter/second** (m/s)
+      * Amplitude unit in |scname|: **meter/second** (m/s)
 
       Read the :ref:`technical documentation <global_mn>` for the configuration.
 
@@ -525,11 +525,11 @@ Scientific and technical terms
       earthquakes occur at lower frequencies than the frequency range between 0.7 Hz - 2 Hz used for the magnitude
       calculation.
 
-      In SeisComP mb amplitudes are measured on vertical-component seismograms
+      In |scname| mb amplitudes are measured on vertical-component seismograms
       in a 30 s time window after simulation of a :term:`WWSSN_SP` short-period
       seismometer. Amplitudes are used from stations with epicentral distances between 5° and 105°.
 
-      * Amplitude unit in SeisComP: **nanometer** (nm)
+      * Amplitude unit in |scname|: **nanometer** (nm)
       * Distance range: 5 - 105°
       * Time window: 0 - 30 s
 
@@ -543,7 +543,7 @@ Scientific and technical terms
       not PP. According to the long time window and broad frequency range used for amplitude
       measurements mB saturates not like mb.
 
-      In SeisComP a default time window of 60 s is actually taken for amplitude measurements
+      In |scname| a default time window of 60 s is actually taken for amplitude measurements
       at stations in the distance range of 5° to 105°. If the distance to the epicenter is
       known the time window is computed as
 
@@ -551,7 +551,7 @@ Scientific and technical terms
 
          t = min(11.5 \Delta, 60)
 
-      * Amplitude unit in SeisComP is **nanometer per second** (nm/s)
+      * Amplitude unit in |scname| is **nanometer per second** (nm/s)
       * Distance range: 5 - 105°
       * Time window: 60 s if set by :ref:`scautopick`, otherwise the minimum of 60 s and 11.5 s/° * distance in degree
 
@@ -589,7 +589,7 @@ Scientific and technical terms
       allow a broader spectrum of dominant periods. This formula is valid for distances of
       2° to 160° and source depths smaller than 50 km.
 
-      * Amplitude unit in SeisComP is **meter per second** (m/s)
+      * Amplitude unit in |scname| is **meter per second** (m/s)
 
    magnitude, surface wave (Ms_20)
       Ms_20 is the :term:`Ms <magnitude, surface wave (Ms)>` surface-wave magnitude
@@ -610,7 +610,7 @@ Scientific and technical terms
 
          M_s = \log \left(\frac{A}{2\pi}\right) + 1.66 \log(\Delta) + 3.3
 
-      * Amplitude unit in SeisComP: **meter per second** (m/s)
+      * Amplitude unit in |scname|: **meter per second** (m/s)
       * Period range: all
       * Distance range: 2 - 160°
       * Depth range: 0 - 100 km
@@ -633,7 +633,7 @@ Scientific and technical terms
       This equation is valid for local (< 2000 km) and shallow (< 80 km) earthquakes. For
       deeper earthquakes additional correction functions have to be applied (Katsumata, 1996).
 
-      * Amplitude unit in SeisComP: **micrometer** (um)
+      * Amplitude unit in |scname|: **micrometer** (um)
       * Time window: 150 s
       * Epicentral distance range: 0 - 20°
       * Depth range: 0 - 80 km
@@ -663,7 +663,7 @@ Scientific and technical terms
       of multiple records results in an estimation of the moment magnitude without correction
       for the source mechanism (Tsuboi et al., 1995).
 
-      * Amplitude unit in SeisComP: **nanometer times second** (nm*s)
+      * Amplitude unit in |scname|: **nanometer times second** (nm*s)
       * Time window: 95 s
       * Epicentral distance range: 5 - 105°
 
@@ -970,12 +970,12 @@ Scientific and technical terms
 
    SCML
       :term:`SeisComP` Markup Language. SCML is a flavor of `QuakeML
-      <https://quake.ethz.ch/quakeml/>`_  and is used by SeisComP and by
+      <https://quake.ethz.ch/quakeml/>`_  and is used by |scname| and by
       products of :term:`gempa GmbH` for exchange. For details read the
       `UML diagram <https://geofon.gfz-potsdam.de/_uml/>`_.
 
    SDS
-      SeisComP Data Structure which is used for archiving waveform data. Below the
+      |scname| Data Structure which is used for archiving waveform data. Below the
       base directory of the archive the SDS has the structure:
 
       .. code-block:: sh
@@ -1009,7 +1009,7 @@ Scientific and technical terms
       processing tool including quality control, event detection and location as
       well as dissemination of event alerts. In the context of the `GITEWS
       <http://www.gitews.de/>`_ project (German Indian Ocean Tsunami Early
-      Warning System) additional functionality were implemented to fulfil the
+      Warning System) additional functionality were implemented to fulfill the
       requirements of 24/7 early warning control centers. Major changes in the
       architecture of SeisComP were necessary and many new features result in
       the upgrade of SeisComP to version 3. Important SeisComP releases are

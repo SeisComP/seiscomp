@@ -1,16 +1,16 @@
 The scfruitmachine tool slices, dices and grates.
-This is just the thing for preparing a SeisComP fruit salad.
+This is just the thing for preparing a |scname| fruit salad.
 
 Slicing mode
 ============
 
-When the --slice option is given, all SeisComP are sliced.
+When the --slice option is given, all |scname| are sliced.
 
 
 From the left
 -------------
 
-By default, SeisComP starts processing on the left.
+By default, |scname| starts processing on the left.
 
 From the right
 --------------

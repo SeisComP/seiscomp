@@ -154,20 +154,20 @@ Other markup tools and conventions
 
   Result: :file:`$SEISCOMP_ROOT/etc/scautopick.cfg`
 
-- **Programs:** Use the reST :program: indicator for SeisComP programs: ::
+- **Programs:** Use the reST :program: indicator for |scname| programs: ::
 
      :program:`scautopick`
 
   Result: :program:`scautopick`
 
-- **References:** Use the reST :ref: indicator for cross referencing SeisComP3 documentation pages.
+- **References:** Use the reST :ref: indicator for cross referencing |scname|. documentation pages.
   Use :ref: if a cross reference to the documentation is needed: ::
 
      :ref:`scautopick`
 
   Result: :ref:`scautopick`
 
-- **Glossary:** Use the reST :term: indicator for referencing terms in the SeisComP :ref:`glossary`: ::
+- **Glossary:** Use the reST :term: indicator for referencing terms in the |scname| :ref:`glossary`: ::
 
      :term:`magnitude`
 
@@ -268,7 +268,7 @@ English Language
 ================
 
 - SeisComP (capital P), not SeisComP 3 or SC3.
-- SeisComP module names are proper nouns, even though written with lower case.
+- |scname| module names are proper nouns, even though written with lower case.
   Thus they do not need an article.
 
   * Correct: "Although :program:`scmaster` receives a message"
@@ -371,7 +371,7 @@ Image style and format
 * Images should have a frame, e.g. a window frame.
 * Avoid private information on images.
 * Do not show desktop background unless required.
-* Images from SeisComP GUIs can be screenshots.
+* Images from |scname| GUIs can be screenshots.
 * Do not create screenshots from applications started remotely with X-forwarding.
   X-forwarding may distort the application features.
 

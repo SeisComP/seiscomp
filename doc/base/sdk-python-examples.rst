@@ -21,19 +21,18 @@ Illustrate the basic messaging concepts.
 Script
 ------
 
-This script was demonstrated at the SeisComP workshop in Erice. It should be
+This script was demonstrated at the |scname| workshop in Erice. It should be
 relatively self-explanatory, but full understanding does require certain knowlege
 of Python.
 
 The script does nothing but
 
-* connect to a SeisComP messaging server
+* connect to a |scname| messaging server
 * subscribe to messages sent to messaging group "EVENT"
 * listen to these messages
 * dump the event IDs to the screen
 
-No actual real-world use case but a truly minimum example for a SeisComP
-application.
+No actual real-world use case but a truly minimum example for a |scname| application.
 
 
 .. code-block:: python
@@ -111,7 +110,7 @@ Scripts
 -------
 
 The scripts in this section all deal with inventory access. All need to be
-invoked with the :option:`-d` command line option to specify the SeisComP database
+invoked with the :option:`-d` command line option to specify the |scname| database
 from which the information is to be read. For example:
 
 .. code-block:: sh
@@ -121,7 +120,7 @@ from which the information is to be read. For example:
 configured-streams.py
 ^^^^^^^^^^^^^^^^^^^^^
 
-Print a list of all streams configured on a SeisComP system.
+Print a list of all streams configured on a |scname| system.
 
 .. code-block:: python
 
@@ -205,7 +204,7 @@ Print a list of all streams configured on a SeisComP system.
 station-coordinates.py
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Print the coordinates of all stations configured on a SeisComP system.
+Print the coordinates of all stations configured on a |scname| system.
 
 .. code-block:: python
 
@@ -282,7 +281,7 @@ Print the coordinates of all stations configured on a SeisComP system.
 channel-gains.py
 ^^^^^^^^^^^^^^^^
 
-Print channel gains for all streams configured on a SeisComP system.
+Print channel gains for all streams configured on a |scname| system.
 
 .. code-block:: python
 
@@ -469,7 +468,7 @@ Summary
 -------
 
 Example client that connects to a RecordStream service, filters the records
-with a given SeisComP filter and dumps the content to stdout.
+with a given |scname| filter and dumps the content to stdout.
 
 Goal
 ----
