@@ -81,6 +81,7 @@ The following packages should be installed to compile SeisComP:
 - libboost
 - libxml2-dev
 - flex
+- libfl-dev
 - libssl-dev
 - crypto-dev
 - python-dev (optional)
