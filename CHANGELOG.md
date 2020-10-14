@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## x.y.z
+
+* ew2sc
+
+  * Correct module name in description. E.g. scconfig has still displayed it
+    as `ew2sc3`.
+
 ## 4.1.0
 
 ```SC_API_VERSION 14.1.0```
