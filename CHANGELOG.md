@@ -2,7 +2,7 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 4.1.1
 
 * scmaster
 
