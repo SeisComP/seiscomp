@@ -2,12 +2,22 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 4.1.1
+
+* scmaster
+
+  * Fix reading the default configuration file in update-config
 
 * ew2sc
 
   * Correct module name in description. E.g. scconfig has still displayed it
     as `ew2sc3`.
+
+* GUI
+
+  * Add nodal planes and some more quality parameters to event edit focal
+    mechanism table
+  * Fix setting the depth type in the origin locator panel
 
 ## 4.1.0
 
