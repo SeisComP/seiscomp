@@ -93,7 +93,8 @@ can be found in the file
 
    $SEISCOMP_ROOT/share/doc/seiscomp/CHANGELOG
 
-The change log can also be accessed from the Docs panel in :ref:`scconfig`.
+The change log can be directly accessed from the |scname| :ref:`documentation <sc-changelog>`
+or from the *Docs* panel in :ref:`scconfig`.
 
 .. note::
 
@@ -106,49 +107,78 @@ The change log can also be accessed from the Docs panel in :ref:`scconfig`.
 Upgrade to a higher release number
 ==================================
 
-When installing a new SeisComP release upgrading the database may be required.
-**More actions** are required when :ref:`upgrading from SeisComP3 to SeisComP in version 4 <tutorials_upgrade_v4>`.
-The database version will be tested and the required actions will be shown when executing:
+Installing a new SeisComP release or version is simple. **More actions** are
+required when :ref:`upgrading from SeisComP3 to SeisComP in version 4 <tutorials_upgrade_v4>`.
+The normal upgrade takes only a few steps:
 
-.. code-block:: sh
+#. Download the SeisComP package
+#. Stop all SeisComP modules: ::
 
-   seiscomp update-config
+      seiscomp stop
 
-or when pressing the Update Configuration button in scconfig.
-An upgrade from version SeisComP3 jakarta-2017.334 to jakarta-2018.327 will give:
+#. Install the new packages
 
-.. code-block:: sh
+   .. note::
 
-   * starting kernel modules
-     spread is already running
-     starting scmaster
-     * configure scmaster
-       * check database write access ... OK
-       * database schema version is 0.10
-       * last migration version is 0.11
-       * migration to the current version is required. apply the following
-         scripts in exactly the given order:
-         * /home/sysop/seiscomp3/share/db/migrations/mysql/0_10_to_0_11.sql
-     error: updating configuration for scmaster failed
+      Users of external, e.g. |gempa| modules must ensure that the gempa modules
+      match the SeisComP release version if they depend on SeisComP libraries.
 
-The shown migration scripts can be used directly with the mysql command:
+#. When installing a new SeisComP release, upgrading the database may be required.
+   The database version will be tested and the required actions will be shown when executing:
 
-.. code-block:: sh
+   .. code-block:: sh
 
-   seiscomp stop
-   mysql -u sysop -p -D seiscomp -e 'source /home/sysop/seiscomp3/share/db/migrations/mysql/0_10_to_0_11.sql;'
-   seiscomp update-config
-   seiscomp start
+      seiscomp update-config
 
-Using the migration scripts provides a more user friendly way than copying the
-lines of mysql code from the changelog. In future versions we might add the option
-to automatically run the migrations.
+   or when pressing the Update Configuration button in scconfig.
+   An upgrade from version SeisComP3 jakarta-2017.334 to SeisComP in version 4.1.0
+   will give, e.g.:
 
-.. warning::
+   .. code-block:: sh
 
-   Upgrading the database make take some time. Do no interrupt the process!
-   During this time, the SeisComP messaging system is unavailable causing a downtime of the system.
+      seiscomp update-config
+      * starting kernel modules
+      starting scmaster
+      * configure kernel
+      * configure scmaster
+      INFO: checking DB schema version of queue: production
+        * check database write access ... OK
+        * database schema version is 0.10
+        * last migration version is 0.11
+        * migration to the current version is required. apply the following
+          scripts in exactly the given order:
+          * /home/sysop/seiscomp/share/db/migrations/mysql/0_10_to_0_11.sql
+      error: updating configuration for scmaster failed
 
+   The shown migration scripts can be used directly with the database command for upgrading:
+
+   * MySQL / MariaDB: ::
+
+        mysql -u sysop -p -D seiscomp -e 'source /home/sysop/seiscomp/share/db/migrations/mysql/0_10_to_0_11.sql;'
+
+   * PostgreSQL: ::
+
+        psql -U sysop -d seiscomp -h localhost -W
+        \i'seiscomp/share/db/migrations/postgresql/0_10_to_0_11.sql'
+
+   Using the migration scripts provides a more user friendly way than copying the
+   lines of MySQL code from the changelog. In future versions we might add the option
+   to automatically run the migrations.
+
+   .. warning::
+
+      Upgrading the database make take some time. Do no interrupt the process!
+      During this time, the SeisComP messaging system is unavailable causing a downtime of the system.
+
+   After applying the migration scripts the database should be at the correct version.
+   Test again with: ::
+
+      seiscomp update-config
+
+#. After a successful upgrade, start all modules again and observe the status: ::
+
+      seiscomp start
+      seiscomp status
 
 .. _tutorials_upgrade_v4:
 
@@ -204,11 +234,11 @@ includes:
 
           seiscomp/bin/seiscomp enable [module]
 
-     *   any file related to spread, arclink and arclinkproxy.
+     *   any file related to spread or the arclink and arclinkproxy servers.
 
 Configurations containing absolute paths, e.g. :file:`/home/sysop/seiscomp3/share/scautoloc/grid_custom.conf`,
 must be adjusted. Better use :ref:`internal SeisComP variables <concepts_configuration_variables>`
-such as *@DATADIR@* instead of *seiscomp3/share*.
+such as *@DATADIR@* instead of *seiscomp3/share* or *seiscomp/share*.
 
 
 System variables
