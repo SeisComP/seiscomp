@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.1.2
+
+* processing
+
+  * Fix crashing of processing modules such as scautopick if filter
+    parameters are out of range
+
 ## 4.1.1
 
 * scmaster
