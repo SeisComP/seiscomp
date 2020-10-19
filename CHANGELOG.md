@@ -2,6 +2,22 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.2.0
+
+* scalert
+
+  * Add option to listen to picks
+  * Fix configuration of agency filter
+
+* scevent
+
+  * Sort configuration of event association parameters by topic
+
+* fdsnxml2inv
+
+  * Fix conversion of polynomial responses with respect to
+    `approximationType`.
+
 ## 4.1.2
 
 * processing
