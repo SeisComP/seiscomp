@@ -18,6 +18,10 @@ All notable changes to SeisComP are documented here.
   * Fix conversion of polynomial responses with respect to
     `approximationType`.
 
+* scolv
+
+  * Reorder FM tab columns and allow switching visibility state
+
 ## 4.1.2
 
 * processing
