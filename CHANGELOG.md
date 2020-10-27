@@ -4,6 +4,10 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
+* documentation
+
+  * update installation and database procedures
+
 * eventlist in GUIs
 
   * add RMS column by default

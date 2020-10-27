@@ -1,10 +1,10 @@
 .. _installation:
 
-************
-Installation
-************
+*************************
+Installation and Database
+*************************
 
-|scname| is distributed in the form of tar files for different releases,
+|scname| is distributed in the form of packages (tar files) for different releases,
 Linux systems and architectures:
 
 * Acquisition, processing and GUIs (for each supported platform)
@@ -21,8 +21,8 @@ an
 * :program:`CentOS 7`, 64 bit system
 
 
-Requirements
-============
+Hardware requirements
+=====================
 
 The hardware requirements for a seismic system depend on the size of the
 station network to be operated.
@@ -41,12 +41,13 @@ Minimum requirements are:
 
 In case large networks (>100 stations) are operated, a distributed system is
 recommended. Normally a |scname| system is separated in several subsystems.
-A separation of data acquisition, processing and graphical user interfaces is
+A separation of data acquisition, processing and graphical user interfaces (GUI) is
 useful to permit stable performance.
 
-The minimum specifications of the system should be:
+The minimum specifications of |scname| systems depend on the setup and the
+applications.
 
-Data acquisition system:
+Data acquisition systems:
 
 +-----+----------------------------------------------------------------+
 | CPU | 2                                                              |
@@ -56,8 +57,7 @@ Data acquisition system:
 | HDD | Raid1/5/0+1 with >= 200GB                                      |
 +-----+----------------------------------------------------------------+
 
-
-Processing system:
+Processing systems:
 
 +-----+----------------------------------------------------------------+
 | CPU | 4                                                              |
@@ -78,187 +78,72 @@ GUI system:
 +-----+----------------------------------------------------------------+
 
 
-Installation procedure
-======================
+|scname| Installation
+=====================
 
-The next steps describe the installation of |scname| with the prepared
-tar.gz files.
+|scname| can be installed from source code or from packages. While the source code
+can be found on `GitHub`_, this documentation focuses on packages. For compilation
+from source code read the section :ref:`build`.
 
-* Log in as user (e.g. sysop)
-* Copy one of the :file:`seiscomp-[version]-[OS]-[arch].tar.gz` files to
-  your home directory. Take care which is the right package (32 or 64-bit) for
-  your operating system.
 
-* Go to home directory
+Installation from packages
+--------------------------
 
-  .. code-block:: sh
+The next steps describe the installation of |scname| with the compiled |scname|
+packages which ship as :file:`*.tar.gz` files.
 
-     user@host:/tmp$ cd
+#. Log in as user, e.g. sysop (the standard user in this documentation)
+#. Download the installation packages, e.g. from `SeisComP`_ or get the packages from |gempa|:
 
-* Un-tar the |scname| binary packagemake
+   * :file:`seiscomp-[version]-[OS]-[arch].tar.gz`: main |scname| package with binaries, etc.
+     Ensure to download the right package matching your operating system (OS) and
+     hardware architecture (arch: 32 or 64-bit).
+   * :file:`seiscomp-[version]-doc.tar.gz`: |scname| documentation.
 
-  .. code-block:: sh
+     .. note::
 
-     user@host:~$ tar xzf seiscomp-[version]-[OS]-[arch].tar.gz
+        When receiving the packages from |gempa|, the documentation is already
+        included in the main |scname| package to match the installed version. In this
+        case, the documentation does not need to be downloaded and installed separately.
 
-* Un-tar the |scname| map package into seiscomp/share/maps
+   * :file:`seiscomp-maps.tar.gz`: standard |scname| maps.
 
-  .. code-block:: sh
+#. Copy the downloaded files to your $HOME directory.
 
-     user@host:~$ tar xzf seiscomp-[release]-maps.tar.gz
+#. Navigate to the $HOME directory or any other place where to install |scname|
 
-* If desired, un-tar the documentation into seiscomp/share/doc
+   .. code-block:: sh
 
-  .. code-block:: sh
+      user@host:$ cd
 
-     user@host:~$ tar xzf seiscomp-[version]-doc.tar.gz
+#. Install the main |scname| package into :file:`seiscomp`
 
-Unpacking these file creates the |scname| :ref:`directory structure<directory_structure>`.
+   .. code-block:: sh
 
+      user@host:~$ tar xzf seiscomp-[version]-[OS]-[arch].tar.gz
 
-Install dependencies
---------------------
+#. Install the |scname| map package into :file:`seiscomp/share/maps`
 
-|scname| depends on a number of additional packages shipped with each Linux
-distribution. The following table gives an overview (the names of packages,
-files or commands may differ slightly for other Linux systems):
+   .. code-block:: sh
 
-:program:`Packages`
+      user@host:~$ tar xzf seiscomp-[release]-maps.tar.gz
 
-First the environment has to be set up. The :program:`seiscomp` tool comes with
-the command :command:`install-deps` which installs required packages.
-Read the section :ref:`System management<system-management>` for more detailed instructions.
-For example, to install the dependencies for using the MySQL database,
-give 'mysql-server' as parameter.
+#. Optional: Install the documentation package into :file:`seiscomp/share/doc`
 
-.. code-block:: sh
+   .. code-block:: sh
 
-   user@host:~$ seiscomp/bin/seiscomp install-deps base mysql-server
-   Distribution: Ubuntu 18.04
-   [sudo] password for sysop:
-   Reading package lists... Done
-   Building dependency tree
-   Reading state information... Done
-   ...
+      user@host:~$ tar xzf seiscomp-[version]-doc.tar.gz
 
-
-If your distribution is not supported by :command:`install-deps`,
-install the above packages manually:
-
-:program:`Ubuntu` `version`
-
-.. code-block:: sh
-
-   user@host:~$ cd seiscomp/share/deps/ubuntu/[version]
-   ...
-
-:program:`CentOS` `version`
-
-.. code-block:: sh
-
-   user@host:~$ cd seiscomp/share/deps/centos/[version]
-   ...
-
-.. code-block:: sh
-
-   su root
-   bash install-mysql-server.sh
-   bash install-postgresql-server.sh
-   bash install-base.sh
-   bash install-gui.sh
-   bash install-fdsnws.sh
-   ...
-
-or contact the |scname| developers to add support for your distribution.
-
-
-SQL configuration
------------------
-
-* For better performance with a MySQL database, adjust the memory pool size. Test
-  the default of the **buffer\_pool_size** before making the change:
-
-  .. code-block:: sh
-
-    mysql -u sysop -p
-    show variables like 'innodb_buffer_pool_size';
-
-  The optimum **buffer\_pool_size** depends on your system (RAM size) and only needs
-  to be set if required. Choose your preferred value:
-
-  * Recommended value: 512M
-  * Minimum value: 64M
-
-  Additionally, reduce the database hard drive synchronization and make both adjustments
-  in the section [mysqld]:
-
-  .. code-block:: sh
-
-    [mysqld]
-    innodb_buffer_pool_size = <your value>
-    innodb_flush_log_at_trx_commit = 2
-
-  **Note:** The location of the configuration can differ between distributions.
-  The locations are given below for different Linux distribution.
-
-  :program:`Ubuntu 16`
-
-  :file:`/etc/mysql/mariadb.conf.d/50-server.cnf`
-
-  :program:`Ubuntu 18`
-
-  :file:`/etc/mysql/my.cnf`
-
-  :file:`/etc/mysql/mariadb.conf.d/50-server.cnf`
-
-  :program:`CentOS`
-
-  :file:`/etc/my.cnf`
-
-  Please read the documentation of your distribution. root privileges may
-  be required to make the changes.
-
-*  After adjusting the parameters, MySQL needs to be restarted. One can run
-
-  :program:`Ubuntu`
-
-  .. code-block:: sh
-
-     user@host:~$ sudo systemctl restart mysql
-
-  :program:`CentOS`
-
-  .. code-block:: sh
-
-     user@host:~$ su root
-     user@host:~$ systemctl restart mariadb
-
-* To start MySQL automatically during boot set
-
-  :program:`Ubuntu`
-
-  .. code-block:: sh
-
-     user@host:~$ sudo update-rc.d mysql defaults
-
-  :program:`CentOS`
-
-  .. code-block:: sh
-
-     user@host:~$ su root
-     user@host:~$ systemctl enable mariadb
-
-Now everything is installed and the system can be configured. The :ref:`next chapter<getting-started>`
-chapter explains the first steps.
+Unpacking these files creates the |scname| :ref:`directory structure<directory_structure>`.
 
 
 .. _directory_structure:
 
 Directory structure
-===================
+-------------------
 
-The directory structure of the installed system is described with the
-following table.
+All installed files and directories are found below the *seiscomp* directory.
+The directory structure of the installed system is described the table below.
 
 +---------------------+--------------------------------------------------------------------+
 | Directory           | Description                                                        |
@@ -306,9 +191,161 @@ following table.
 +---------------------+--------------------------------------------------------------------+
 
 
+.. _software_dependencies:
+
+Software dependencies
+---------------------
+
+|scname| depends on a number of additional packages shipped with each Linux
+distribution. The :program:`seiscomp` tool comes with
+the command :command:`install-deps` which installs required packages.
+Read the section :ref:`System management<system-management>` for more detailed instructions.
+For example, to install the dependencies for using the MariaDB database,
+give 'mariadb-server' as parameter.
+
+.. code-block:: sh
+
+   user@host:~$ seiscomp/bin/seiscomp install-deps base mariadb-server
+   Distribution: Ubuntu 18.04
+   [sudo] password for sysop:
+   Reading package lists... Done
+   Building dependency tree
+   Reading state information... Done
+   ...
+
+More options for systems with GUIs and FDSNWS are: ::
+
+   user@host:~$ seiscomp/bin/seiscomp install-deps gui fdsnws
+
+
+If your distribution is not supported by :command:`install-deps`,
+install the above packages manually:
+
+:program:`Ubuntu` `version`
+
+.. code-block:: sh
+
+   user@host:~$ cd seiscomp/share/deps/ubuntu/[version]
+   ...
+
+:program:`CentOS` `version`
+
+.. code-block:: sh
+
+   user@host:~$ cd seiscomp/share/deps/centos/[version]
+   ...
+
+.. code-block:: sh
+
+   su root
+   bash install-mariadb-server.sh
+   bash install-postgresql-server.sh
+   bash install-base.sh
+   bash install-gui.sh
+   bash install-fdsnws.sh
+   ...
+
+or contact the |scname| developers to add support for your distribution.
+
+.. warning::
+
+   Either the MariaDB **or** the MySQL server can be installed; not both at the
+   same time. When replacing on by the other, ensure that all related files are
+   removed before installing the alternative server. For MySQL instead of MariaDB
+   use: ::
+
+      bash install-mysql-server.sh
+
+.. note ::
+
+   Linux systems develop dynamically and the installation of the dependencies
+   may be incomplete. |scname| modules will stop and indicate the missing software.
+   They can be installed manually.
+
+.. _database_configuration:
+
+Database configuration
+======================
+
+* For better performance with a MySQL/MariaDB database, adjust the memory pool size. Test
+  the default of the **buffer\_pool_size** before making the change:
+
+  .. code-block:: sh
+
+    mysql -u sysop -p
+    show variables like 'innodb_buffer_pool_size';
+
+  The optimum **buffer\_pool_size** depends on your system (RAM size) and only needs
+  to be set if required. Choose your preferred value:
+
+  * Recommended value: 512M or more
+  * Minimum value: 64M
+
+  Additionally, reduce the database hard drive synchronization and make both adjustments
+  in the section [mysqld]:
+
+  .. code-block:: sh
+
+    [mysqld]
+    innodb_buffer_pool_size = <your value>
+    innodb_flush_log_at_trx_commit = 2
+
+  .. note ::
+
+     The location of the configuration file can differ between distributions.
+
+     :program:`Ubuntu`:
+
+     :file:`/etc/mysql/mariadb.conf.d/50-server.cnf`
+
+     :program:`CentOS`:
+
+     :file:`/etc/my.cnf`
+
+  Please read the documentation of your distribution. root privileges may
+  be required to make the changes.
+
+* After adjusting the parameters, MariaDB needs to be restarted. One can run
+
+  :program:`Ubuntu`:
+
+  .. code-block:: sh
+
+     user@host:~$ sudo systemctl restart mariadb
+
+  :program:`CentOS`:
+
+  .. code-block:: sh
+
+     user@host:~$ su root
+     user@host:~$ systemctl restart mariadb
+
+* To start MariaDB automatically during boot set
+
+  :program:`Ubuntu`
+
+  .. code-block:: sh
+
+     user@host:~$ sudo systemctl enable mariadb
+
+  :program:`CentOS`
+
+  .. code-block:: sh
+
+     user@host:~$ su root
+     user@host:~$ systemctl enable mariadb
+
+.. note ::
+
+   Replace mariadb by mysql when using MySQL instead of MariaDB.
+
+Now everything is installed and the system can be configured. The :ref:`next chapter<getting-started>`
+chapter explains the first steps.
+
 References
 ==========
 
 .. target-notes::
 
 .. _`SeisComP` : https://www.seiscomp.de
+.. _`GitHub` : https://github.com/SeisComP
