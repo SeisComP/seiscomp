@@ -41,6 +41,7 @@ As a wrapper to :program:`seiscomp setup`, a wizard can be started from
             grant usage on seiscomp.* to sysop@'%' identified by 'sysop';
             grant all privileges on seiscomp.* to sysop@'%';
             flush privileges;
+            quit
 
         user@host:~$ sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
             [mysqld]

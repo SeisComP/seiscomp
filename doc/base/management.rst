@@ -7,7 +7,8 @@ System management
 The installation contains various modules for data acquisition, data
 archiving, processing, distribution and much more. To control all these
 module and to update their configuration the central program :program:`seiscomp`
-is used. This is a Python script and it is installed in :file:`bin/seiscomp`.
+is used with commands and options.
+:program:`seiscomp` is a Python script and it is installed in :file:`seiscomp/bin/seiscomp`.
 
 The graphical tool :ref:`scconfig<scconfig>` is a user-friendly wrapper
 tool for many commands in :program:`seiscomp`.
@@ -27,9 +28,7 @@ installations.
 
    :program:`seiscomp` refuses to work when run with root privileges and issues
    an error. To run it with root privileges the command line option
-   :option:`--asroot` must be given as first parameter, e.g.:
-
-   .. code-block:: sh
+   :option:`--asroot` must be given as first parameter, e.g.: ::
 
       seiscomp --asroot start seedlink
 
@@ -38,37 +37,40 @@ To get an overview of all available commands, issue
 
 .. code-block:: sh
 
-   /path/to/seiscomp/bin/seiscomp help
+   seiscomp/bin/seiscomp help
 
 This will print all commands. To get help for a particular command, append
 it to the ``help`` command.
 
 .. code-block:: sh
 
-   /path/to/seiscomp/bin/seiscomp help [command]
+   seiscomp/bin/seiscomp help [command]
+
 
 Commands
-********
+========
 
-**setup**
 
-  .. warning::
+* **help** [command]
 
-     Setup might overwrite previous settings with default values.
+* **setup**
 
   Initializes the configuration of all available modules. Each module implements
   its own setup handler which is called at this point. The initialization takes
   the installation directory into account and should be repeated when copying
   the system to another directory.
 
+  .. warning::
 
-**install-deps** [packages]
+     setup might overwrite previous settings with default values.
 
-  Installs 3rd party packages on which |scname| depends such as MySQL. This is
+* **install-deps** [packages]
+
+  Installs 3rd party packages on which |scname| depends such as MariaDB or MySQL. This is
   currently only supported for major Linux distributions. A list of packages
   needs to be given.
 
-  Packages: base, mysql-server, postgresql-server
+  Packages: base, mariadb-server, postgresql-server
 
   #. Install only base system dependencies
 
@@ -76,19 +78,26 @@ Commands
 
         seiscomp install-deps base
 
-  #. Install base system dependencies and MYSQL server
+  #. Install base system dependencies and MariaDB/MySQL/PostgreSQL server
 
-     .. code-block:: sh
+     MariaDB::
 
-        seiscomp install-deps mysql-server
+        seiscomp install-deps base mariadb-server
 
-  #. Install base system dependencies and PostgreSQL server
+     MySQL. Install either MariaDB or MySQL, not both at the same time! ::
 
-     .. code-block:: sh
+        seiscomp install-deps base mysql-server
 
-        seiscomp install-deps postgresql-server
+     PostgreSQL::
 
-**update-config** [module list]
+        seiscomp install-deps base postgresql-server
+
+     Additional dependencies may be installed, e.g.
+
+     * gui
+     * fdsnws
+
+* **update-config** [module list]
 
   Updates the configuration. Modules should be able to read the configuration
   files in :file:`etc` directly, but some modules such as Seedlink need an additional
@@ -97,72 +106,63 @@ Commands
   database. If no module list is given, update-config is called for all available
   modules. Otherwise only the modules passed are updated.
 
-**shell**
+* **shell**
 
   Starts the interactive :ref:`seiscomp shell <system-management-shell>`, an
   approach to make configuration and manipulation of bindings more easy.
 
-**enable** [module list]
+* **enable** [module list]
 
   Enables a module to be started and checked automatically when either :command:`start`
   or :command:`check` is called without arguments. This creates a file :file:`etc/init/[module].auto`
   for each module passed.
 
-**disable** [module list]
+* **disable** [module list]
 
   The opposite of enable. Removes the file :file:`etc/init/[module].auto` for
   each module passed.
 
-**start** [module-list]
+* **start** [module-list]
 
   Starts all modules in [module-list]. If no module is named, all enabled modules are
   started.
 
-
-**stop** [module-list]
+* **stop** [module-list]
 
   Stops all modules in [module-list]. If no module name is given, all running modules are
   stopped.
 
-
-**restart** [module-list]
+* **restart** [module-list]
 
   Restarts all the given modules. If no module is passed, all running and enabled modules
   are first stopped and then restarted.
 
-
-**check** [module-list]
+* **check** [module-list]
 
   Checks if all passed modules are still running if they have been started.
   If no modules are listed, all modules are checked.
 
-**status** [module-list]
+* **status** [module-list]
 
   Prints the status of some or all modules.
 
+* **list** modules|aliases|enabled|disabled
 
-**list** modules|aliases|enabled|disabled
+* **exec** [cmd]
 
+* **alias** create|remove new-name name
 
-**exec** [cmd]
+* **print** crontab|env
 
-
-**alias** create|remove new-name name
-
-
-**print** crontab|env
-
-
-**help** [command]
-
+* **shell** starts the |scname| :ref:`shell <system-management-shell>`
 
 
 .. _system-management-shell:
 
 Shell
-*****
+=====
 
-The seiscomp shell can be started with
+The |scname| shell can be started with
 
 .. code-block:: sh
 
@@ -194,7 +194,7 @@ Enter :command:`help` to get a list of supported commands. The results of all
 commands issued are written to disk immediately and **not buffered**.
 
 Examples
-========
+--------
 
 #. Assigning the scautopick global profile to all GE stations
 
@@ -250,7 +250,7 @@ Examples
 
 
 Init scripts
-************
+============
 
 All module init scripts are placed in :file:`etc/init`. :program:`seiscomp`
 loads all .py files and tries to find a class called Module. This class is
@@ -283,7 +283,7 @@ write init scripts in an easy way.
 
 
 Python kernel module
-====================
+--------------------
 
 The |scname| setup kernel module provides interfaces to write init handlers
 for modules used by :program:`seiscomp` in Python.

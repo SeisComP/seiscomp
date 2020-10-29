@@ -2,6 +2,21 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.2.1
+
+* documentation
+
+  * update installation and database procedures
+
+* eventlist in GUIs
+
+  * add RMS column by default
+
+* scolv
+
+  * Relabel strike/dip/rake columns in focal mechanism table
+    and resize content after loading
+
 ## 4.2.0
 
 * scalert
@@ -12,6 +27,11 @@ All notable changes to SeisComP are documented here.
 * scevent
 
   * Sort configuration of event association parameters by topic
+
+* solv
+
+  * expose picker phase profiles to scconfig
+  * adjust description of uncertainty profiles
 
 * fdsnxml2inv
 

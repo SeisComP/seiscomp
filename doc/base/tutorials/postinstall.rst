@@ -203,29 +203,28 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
      $ seiscomp install-deps mysql-server
 
-   Also, for better performance with a MySQL database,
-   adjust the memory pool size and restart MySQL, as described under
-   "SQL configuration" in the :ref:`installation` section.
+   Also, for better performance with a MariaDB/MySQL database,
+   adjust the memory pool size and the restart MariaDB/MySQL server, as described
+   in the :ref:`database_configuration` section.
 
    For PostgreSQL, also see the detailed :ref:`installation` instructions.
 
    .. warning::
 
-     For Ubuntu 18.04 and newer, take care with MySQL installation.
-     Before the next step, you must set a root password *for MySQL or MariaDB*
+     For Ubuntu 18.04 and newer, take care with MariaDB/MySQL installation.
+     Before the next step, you must set a root password *for MariaDB/MySQL*
      (not the Linux root password!).
 
-     MySQL:
+     MariaDB: ::
 
-     $ sudo mysql -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'Mypasswordisnottthis'; FLUSH PRIVILEGES;"
+        $ sudo mysql -e "SET old_passwords=0; ALTER USER root@localhost IDENTIFIED BY 'Mypasswordisnottthis'; FLUSH PRIVILEGES;"
 
-     MariaDB:
+    MySQL: ::
 
-     $ sudo mysql -e "SET old_passwords=0; ALTER USER root@localhost IDENTIFIED BY 'Mypasswordisnottthis'; FLUSH PRIVILEGES;"
+       $ sudo mysql -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'Mypasswordisnottthis'; FLUSH PRIVILEGES;"
 
      Substitute Mypasswordisnottthis by your own password and remember it --
      you will need it in the next step.
-
      In case of problems, see the Internet, or the SeisComP forum
      `thread <https://forum.seiscomp.de/t/upgraded-to-ubuntu-18-04-and-i-broke-my-seiscomp3/1139>`_
      (for logged-in forum members).
