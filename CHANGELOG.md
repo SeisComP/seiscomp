@@ -2,7 +2,7 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 4.2.1
 
 * documentation
 
@@ -11,6 +11,11 @@ All notable changes to SeisComP are documented here.
 * eventlist in GUIs
 
   * add RMS column by default
+
+* scolv
+
+  * Relabel strike/dip/rake columns in focal mechanism table
+    and resize content after loading
 
 ## 4.2.0
 
