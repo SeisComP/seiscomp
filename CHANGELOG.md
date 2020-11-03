@@ -4,9 +4,34 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
+* scautoloc
+
+  * Adjust configuration and parameters. The legacy parameters can still be used
+    but an error message will be printed:
+    * Added parameters to description:
+        - buffer.originKeep
+        - autoloc.useManualPicks
+        - autoloc.adoptManualDepth
+        - autoloc.tryDefaultDepth
+        - autoloc.stationLocations
+    * Renamed parameters:
+        - autoloc.maxAge -> buffer.pickKeep
+        - autoloc.cleanupInterval -> buffer.cleanupInterval
+        - autoloc.locator.profile -> locator.profile
+    * Removed parameters from description:
+        - autoloc.wakeupInterval
+
 * slarchive
 
   * Allow creation of aliases
+
+* scmag
+
+  * Add medianTrimmedMean average method
+
+* scolv
+
+  * Add median trimmed mean to magnitude average method
 
 ## 4.2.1
 
@@ -22,6 +47,16 @@ All notable changes to SeisComP are documented here.
 
   * Relabel strike/dip/rake columns in focal mechanism table
     and resize content after loading
+
+* scolv
+
+  * Relabel strike/dip/rake columns in focal mechanism table
+    and resize content after loading
+
+* evrc plugin
+
+  * Fix reading origin which have no depth
+  * Fix setting no event type for region 'world'
 
 ## 4.2.0
 
