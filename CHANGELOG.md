@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## x.y.z
+
+* slarchive
+
+  * Allow creation of aliases
+
 ## 4.2.1
 
 * documentation
