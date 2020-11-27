@@ -4,6 +4,11 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
+* scrttv
+
+  * Adjust default filter to filter below the Nyquist frequency of most BH? streams
+  * Add default values for streams configurations
+
 * scautoloc
 
   * Adjust configuration and parameters. The legacy parameters can still be used
