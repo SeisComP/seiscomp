@@ -4,6 +4,11 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
+* scheli
+
+  * Add configuration parameters to description XML allowing configuration in
+    scconfig
+
 * scrttv
 
   * Adjust default filter to filter below the Nyquist frequency of most BH? streams
