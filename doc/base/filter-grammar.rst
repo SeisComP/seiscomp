@@ -44,7 +44,7 @@ In this example a sample *s* is filtered to get the final sample *sf* passing th
 
 sf = final sample.
 
-The default filter applied by :ref:`scautopick` is
+The default filter applied by :ref:`scautopick` for making detections is
 
 :py:func:`RMHP(10)<RMHP()>` >> :py:func:`ITAPER(30)<ITAPER()>` >> :py:func:`BW(4,0.7,2)<BW()>` >> :py:func:`STALTA(2,80)<STALTA()>`
 
@@ -84,8 +84,15 @@ Filters can be conveniently tested without much configuration. To perform such t
 List of filters
 ===============
 
-The following filter functions are available. If a filter function has no
-parameters it can be given either with parentheses (e.g. :py:func:`DIFF()<DIFF()>`) or without (e.g. :py:func:`DIFF<DIFF()>`).
+Multiple filter functions are available. If a filter function has no
+parameter, it can be given either with parentheses, e.g. :py:func:`DIFF()<DIFF()>`,
+or without, e.g. :py:func:`DIFF<DIFF()>`.
+
+.. warning::
+
+   All frequencies given as parameters to filters must be below the Nyquist
+   frequency of the original signal. Otherwise, filtering may result in undesired
+   behavior of modules, e.g. stopping or showing of empty traces.
 
 .. py:function:: AVG(timespan)
 

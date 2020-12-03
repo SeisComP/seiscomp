@@ -241,6 +241,13 @@ must be adjusted. Better use :ref:`internal SeisComP variables <concepts_configu
 such as *@DATADIR@* instead of *seiscomp3/share* or *seiscomp/share*.
 
 
+Software dependencies
+---------------------
+
+The software dependencies may have changed.
+:ref:`Install the missing ones <software_dependencies>`.
+
+
 System variables
 ----------------
 
@@ -304,11 +311,11 @@ configuration. Migrate the legacy database parameters and configure the new one:
    * Add non-default message groups to the list of default groups in
      :confval:`defaultGroups`, e.g. for adding the groups *L1PICK* and *L1LOCATION* set ::
 
-        defaultGroups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,SERVICE_REQUEST,SERVICE_PROVIDE
+        defaultGroups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,IMPORT_GROUP,SERVICE_REQUEST,SERVICE_PROVIDE
 
      or use the configuration of queues, e.g. ::
 
-        queues.production.groups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,SERVICE_REQUEST,SERVICE_PROVIDE
+        queues.production.groups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,IMPORT_GROUP,SERVICE_REQUEST,SERVICE_PROVIDE
 
      The configured groups will be available for all other connected modules in this queue
      in addition to the default groups.
