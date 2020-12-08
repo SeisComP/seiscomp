@@ -107,8 +107,13 @@ or from the *Docs* panel in :ref:`scconfig`.
 Upgrade to a higher release number
 ==================================
 
-Installing a new SeisComP release or version is simple. **More actions** are
-required when :ref:`upgrading from SeisComP3 to SeisComP in version 4 <tutorials_upgrade_v4>`.
+Installing a new SeisComP release or version is typically simple. **More actions** are
+required when
+
+* Upgrading :ref:`from SeisComP3 to SeisComP in version 4 or higher <tutorials_upgrade_v4>`.
+* Upgrading :ref:`from SeisComP3 Jakarta-2018.327 or older to Jakarta-2020.330 or
+  SeisComP in version 4 or higher <tutorials_upgrade_seedlink>`.
+
 The normal upgrade takes only a few steps:
 
 #. Download the SeisComP package
@@ -179,6 +184,92 @@ The normal upgrade takes only a few steps:
 
       seiscomp start
       seiscomp status
+
+
+.. _tutorials_upgrade_seedlink:
+
+Upgrade from SeisComP3 Jakarta-2018.327 or before
+=================================================
+
+:ref:`seedlink`: In SeisComP3 prior to Jakarta-2020.330 two stations with the same
+station but different network code were mixed in one buffer directory.
+As of  Jakarta-2020.330 and SeisComP in version 4 the buffer directories are now unambiguous!
+Before upgrading :ref:`seedlink`, you should therefore rename the buffer directories
+accordingly.
+
+.. warning::
+
+   You may discover data gaps if you do not rename the buffer directories.
+
+**Example:**
+
+#. Check the current situation: ::
+
+      sysop@host:~/seiscomp3/var/lib/seedlink/buffer$ ls
+      PB02
+#. Rename the directories properly:
+
+   #. Stop seedlink: ::
+
+         sysop@host:seiscomp stop seedlink
+
+   #. Upgrade to SeisComP3-jakarta-2020.330 or SeisComP in version 4 or higher.
+   #. Rename all seedlink buffer directories to NET.STA, e.g. ::
+
+         sysop@host:~/seiscomp3/var/lib/seedlink/buffer$ mv PB02 CX.PB02
+         sysop@host:~/seiscomp3/var/lib/seedlink/buffer$ ls
+         CX.PB02
+
+      .. note:
+
+         The :ref:`script below <seedlink-buffer-script>` can be used for renaming the seedlink buffer directories.
+   #. Update configuration: ::
+
+         sysop@host:seiscomp update-config
+   #. Start SeedLink ::
+
+         sysop@host:seiscomp start seedlink
+
+.. _seedlink-buffer-script:
+
+Script for renaming the seedlink buffer directories:
+
+.. code-block:: bash
+
+   #!/bin/bash
+
+   if [ -z ${SEISCOMP_ROOT+x} ]; then
+           echo "Environment variable SEISCOMP_ROOT is not set."
+           echo "Either use 'seiscomp exec [script]' or set SEISCOMP_ROOT to the installation "
+        exit 1
+        echo "path of your SeisComP installation."
+   fi
+
+   grep -A 2 ^station $SEISCOMP_ROOT/var/lib/seedlink/seedlink.ini | while read a b c; do
+       if [ "$a" = station -a "$b" != .dummy ]; then
+                id=$b
+                sta=""
+                net=""
+                while read a b c; do
+                        case $a in
+                                --) break;;
+                                name) eval sta=$c;;
+                                network) eval net=$c;;
+                        esac
+                done
+                if [ -z "$id" -o -z "$sta" -o -z "$net" ]; then
+                        echo "Error parsing seedlink.ini"
+                        break
+                fi
+
+                if [ "$id" != "$net.$sta" ]; then
+                        mv -v "$SEISCOMP_ROOT/var/lib/seedlink/buffer/$id" "$SEISCOMP_ROOT/var/lib/seedlink/buffer/$net.$sta"
+                else
+                        echo "$id: No renaming required"
+                fi
+        fi
+   done
+
 
 .. _tutorials_upgrade_v4:
 
