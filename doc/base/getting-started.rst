@@ -4,26 +4,41 @@
 Getting started
 ***************
 
-Once the system is installed it needs to be configured. The central tool to
-configure and control the system is :program:`seiscomp` which is explained
-more deeply in the :ref:`next chapter<system-management>`.
+Once the Linux system is installed the |scname| modules need to be configured including
+the :ref:`initial configuration and the connection to the database <getting-started-initial>`.
+The central tool to configure and control the system is :program:`seiscomp` which
+is explained more deeply in the :ref:`next chapter<system-management>`. A user-friendly
+graphical frontend to :program:`seiscomp` is :ref:`scconfig`.
 
-Initial configuration
+
+.. _getting-started-initial:
+
+Initial Configuration
 =====================
 
-To configure |scname| initially, run :program:`seiscomp setup`. This is the
-successor of the former :program:`./setup` script.
-The initial configuration also allows to setup the MySQL database for |scname|.
+To configure |scname| with the database initially execute the steps listed in the
+section :ref:`Getting started <getting-started-setup>`. You will need to consider
+differences in the database:
 
-As a wrapper to :program:`seiscomp setup`, a wizard can be started from
-:ref:`scconfig<scconfig>` (Ctrl-N).
+* :ref:`MariaDB / MySQL <getting-started-mysql>`,
+* :ref:`PostgreSQL <getting-started-postgresql>`.
+
+
+.. _getting-started-mysql:
+
+MariaDB / MySQL
+---------------
+
+
+The initial configuration allows to create and configure the MariaDB/MySQL database
+for |scname|. Continue with the :ref:`general setup <getting-started-setup>`.
 
 .. note::
 
     With **Ubuntu 16.04** MariaDB has become the standard flavor of MySQL in Ubuntu
     and either MariaDB or MySQL can be installed. The implementation of MariaDB
-    in Ubuntu requires additional steps. They must be taken in order to allow
-    |scname| to make use of MariaDB.
+    in Ubuntu requires additional steps. They must be taken **before** the initial
+    configuration in order to allow |scname| to make use of MariaDB.
 
     The full procedure including database optimization is:
 
@@ -34,6 +49,13 @@ As a wrapper to :program:`seiscomp setup`, a wizard can be started from
             provide new root password
             answer all questions with yes [Enter]
 
+        user@host:~$ sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
+            [mysqld]
+            innodb_buffer_pool_size = <your value>
+            innodb_flush_log_at_trx_commit = 2
+
+        user@host:~$ sudo systemctl restart mysql
+
         user@host:~$ sudo mysql -u root -p
             CREATE DATABASE seiscomp CHARACTER SET utf8 COLLATE utf8_bin;
             grant usage on seiscomp.* to sysop@localhost identified by 'sysop';
@@ -43,21 +65,60 @@ As a wrapper to :program:`seiscomp setup`, a wizard can be started from
             flush privileges;
             quit
 
-        user@host:~$ sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
-            [mysqld]
-            innodb_buffer_pool_size = <your value>
-            innodb_flush_log_at_trx_commit = 2
-
-        user@host:~$ sudo systemctl restart mysql
         user@host:~$ mysql -u sysop -p seiscomp < ~/seiscomp/share/db/mysql.sql
 
     Currently, the :ref:`scconfig` wizard and :program:`seiscomp setup` cannot
-    be used to set up the MariaDB database. The option "Create database" must
-    therefore be unchecked or answered with "no".
+    be used to set up the MariaDB database. **The option "Create database" must
+    therefore be unchecked or answered with "no"**.
 
-In :program:`seiscomp setup` default values are given in brackets [].
 
-.. code-block:: none
+.. _getting-started-postgresql:
+
+PostgreSQL
+----------
+
+The initial configuration allows configuring the PostgreSQL database parameters for |scname|.
+It does not allow to :ref:`create the database <database_configuration_postgresql>`
+and the database tables. First :ref:`setup the database server<database_configuration_postgresql:>`,
+then create the user, the database and the tables.
+
+
+#. Create the user and the database
+
+   :program:`CentOS`:
+
+   .. code-block:: sh
+
+      sudo@host:~$ sudo su
+      root@host:~$ sudo -i -u postgres
+
+         postgres=# create database seiscomp;
+         postgres=# create user sysop with encrypted password 'sysop';
+         postgres=# grant all privileges on database seiscomp to sysop;
+         postgres=# exit
+
+      root@host:~$ exit
+
+#. Create the database tables
+
+   .. code-block:: sh
+
+      user@host:~$ psql -f seiscomp/share/db/postgres.sql -d seiscomp -U sysop
+
+Continue with the :ref:`general setup <getting-started-setup>` considering the
+created database but **do not create the database again**.
+
+
+.. _getting-started-setup:
+
+General |scname| setup
+----------------------
+
+Use :program:`seiscomp setup` or the wizard from within :ref:`scconfig` (:kbd:`Ctrl+N`) for the
+initial configuration including the database parameters. :program:`seiscomp setup` is the
+successor of the former :program:`./setup` script.
+
+In :program:`seiscomp setup` default values are given in brackets []: ::
 
    user@host:~$ seiscomp/bin/seiscomp setup
 
@@ -198,19 +259,20 @@ without doing anything.
    Command? [P]:
 
 
-Activate modules
+Activate Modules
 ================
 
 After the installation all module are disabled for auto start. If :program:`seiscomp start`
-is called, nothing will happen. To enable a set of modules,
+is called, nothing will happen until modules are enabled. To enable a set of modules,
 :program:`seiscomp enable` needs to be called with a list of modules.
 For example, for a processing system with Seedlink for data acquisition,
 you may use:
 
 .. code-block:: sh
 
-   user@host:~$ seiscomp/bin/seiscomp enable seedlink scautopick scautoloc scamp scmag scevent
+   user@host:~$ seiscomp/bin/seiscomp enable seedlink slarchive scautopick scautoloc scamp scmag scevent
    enabled seedlink
+   enabled slarchive
    enabled scautopick
    enabled scautoloc
    enabled scamp
@@ -227,18 +289,19 @@ However, before starting seiscomp, station information (metadata) need to
 be provided and the configuration needs to be updated.
 
 
-Supply metadata for networks and stations
-=========================================
+Supply Station Metadata
+=======================
 
-|scname| requires the metadata from seismic stations for data acquisition
+|scname| requires the metadata from seismic network and stations including full responses
+for data acquisition
 and processing. The metadata can be obtained from network operators or
 various other sources in different formats. The metadata include, e.g.:
 
-- network association
-- operation times
-- location
-- sensor and data logger specifications
-- data stream specifications
+- Network association
+- Operation times
+- Location
+- Sensor and data logger specifications with full response information
+- Data stream specifications
 
 |scname| comes with various importers to add metadata
 for networks and stations including full response information.
@@ -255,7 +318,7 @@ This will import a dataless SEED volume into `etc/inventory/inventory.dataless.x
 Repeat this step for all inventory data you want to import.
 
 
-Configure station bindings
+Configure Station Bindings
 ==========================
 
 The configuration of modules and bindings is explained in :ref:`global`. To
@@ -265,9 +328,20 @@ add bindings in a more convenient way, start :ref:`scconfig`.
 
    user@host:~$ seiscomp/bin/seiscomp exec scconfig
 
+Typical binding profiles or station bindings involve bindings configurations for
+data acquisition and processing modules:
 
-Update configuration and start everything
-=========================================
+* :ref:`seedlink`: Configure the plugin for the real-time data acquisition.
+* :ref:`slarchive`: Configure the data archiving.
+* :ref:`global <global>`: Configure :confval:`detecStream` and :confval:`detecLocid` to determine the
+  default streams for phase detection and for showing stations and streams in GUIs
+  like :ref:`scmv`, :ref:`scrttv` or :ref:`scolv`.
+* :ref:`scautopick`: Configure the automatic phase detection. You may overwrite global
+  binding parameters.
+
+
+Update Configuration, Start Everything
+======================================
 
 To update the configuration when new stations have been added or modified,
 :program:`seiscomp update-config` needs to be run. This creates configuration
@@ -286,6 +360,7 @@ call :program:`seiscomp start` to start all enabled modules:
 
    user@host:~$ seiscomp/bin/seiscomp start
    starting seedlink
+   starting slarchive
    starting scautopick
    starting scautoloc
    starting scamp
