@@ -194,7 +194,8 @@ Migrate from SeisComP3 to version 4
 SeisComP in version 4 has some major differences to SeisComP3 which require adjustments.
 The main differences are in the :ref:`directories of the SeisComP installation <sec-tutorials_upgrading_path>`
 and the :ref:`messaging system <sec-tutorials_upgrading_messaging>`.
-
+The changes and the required actions are explained below. They must be considered
+in addition to the steps set out in section :ref:`tutorials_upgrade_number`.
 
 .. _sec-tutorials_upgrading_path:
 
@@ -234,7 +235,7 @@ includes:
      and arclinkproxy are not part of SeisComP anymore. **Therefore, do not migrate:**
 
      * any default configuration, description and init files. Better enable the desired
-       daemon modules again.
+       daemon modules again:
 
        .. code-block:: sh
 
