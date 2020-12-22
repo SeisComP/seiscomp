@@ -2,7 +2,7 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 4.3.0
 
 * scheli
 
@@ -38,10 +38,17 @@ All notable changes to SeisComP are documented here.
 * scmag
 
   * Add medianTrimmedMean average method
+  * Remove internally cached objects if an objects has been removed
+    via messaging
 
 * scolv
 
   * Add median trimmed mean to magnitude average method
+  * Sort event types alphabetically and status by priority
+
+* scart
+
+  * Fix loading of plugins
 
 ## 4.2.1
 
