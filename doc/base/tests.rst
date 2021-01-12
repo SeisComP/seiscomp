@@ -44,8 +44,8 @@ files in the directory :code:`${CMAKE_CURRENT_SOURCE_DIR}/test/{libraryname}`
 and creates tests from them.
 
 An example is the |scname| core library. It is located at
-:code:`src/trunk/lib/seiscomp`. Following the above rule, the test files
-shall be located in :code:`src/trunk/lib/seiscomp/test/core/*.cpp`. For each
+:code:`src/base/common/libs/seiscomp`. Following the above rule, the test files
+shall be located in :code:`src/base/common/libs/seiscomp/test/core/*.cpp`. For each
 found source file, the macro will create a test with the same name and link
 its executable against the library the tests are built for.
 
