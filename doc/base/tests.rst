@@ -76,6 +76,8 @@ test module. This example can be used as a template for an |scname| unit test.
    #include <seiscomp/unittest/unittests.h>
    #include <seiscomp/core/datetime.h>
 
+   BOOST_AUTO_TEST_SUITE([domain]_[namespace]_[module])
+
    BOOST_AUTO_TEST_CASE(addition) {
        Seiscomp::Core::TimeSpan k = 5, l = 7;
        BOOST_CHECK(k + l  == Seiscomp::Core::TimeSpan(12));
@@ -86,6 +88,8 @@ test module. This example can be used as a template for an |scname| unit test.
        BOOST_WARN_EQUAL(tNegativeUsec.seconds(), 3000);
        BOOST_WARN_EQUAL(tNegativeUsec.microseconds(), -789);
    }
+
+   BOOST_AUTO_TEXT_SUITE_END()
 
 That was simple, wasn't it? For more complex examples and usages, visit the
 Boost Unit Test Framework documentation [#b1]_. Furthermore you have to link
