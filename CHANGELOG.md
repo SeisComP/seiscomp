@@ -2,7 +2,7 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 4.4.0
 
 * hypo71
 
