@@ -7,11 +7,11 @@ IF (SC_DOC_GENERATE)
 
 	IF(SC_ENABLE_CONTRIB)
 		ADD_CUSTOM_TARGET(scdoc ALL
-		                  COMMAND python ${CMAKE_CURRENT_SOURCE_DIR}/build-doc.py ${DOC_BUILD_DIR} --all
+		                  COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/build-doc.py ${DOC_BUILD_DIR} --all
 		                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 	ELSE()
 		ADD_CUSTOM_TARGET(scdoc ALL
-		                  COMMAND python ${CMAKE_CURRENT_SOURCE_DIR}/build-doc.py ${DOC_BUILD_DIR}
+		                  COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/build-doc.py ${DOC_BUILD_DIR}
 		                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 	ENDIF()
 

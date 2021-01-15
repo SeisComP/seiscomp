@@ -21,7 +21,7 @@ an
 * :program:`CentOS 7`, 64 bit system
 
 
-Hardware requirements
+Hardware Requirements
 =====================
 
 The hardware requirements for a seismic system depend on the size of the
@@ -264,8 +264,14 @@ or contact the |scname| developers to add support for your distribution.
 
 .. _database_configuration:
 
-Database configuration
-======================
+Database Server Configuration
+=============================
+
+
+.. _database_configuration_mysql:
+
+MariaDB / MySQL
+---------------
 
 * For better performance with a MySQL/MariaDB database, adjust the memory pool size. Test
   the default of the **buffer\_pool_size** before making the change:
@@ -305,21 +311,6 @@ Database configuration
   Please read the documentation of your distribution. root privileges may
   be required to make the changes.
 
-* After adjusting the parameters, MariaDB needs to be restarted. One can run
-
-  :program:`Ubuntu`:
-
-  .. code-block:: sh
-
-     user@host:~$ sudo systemctl restart mariadb
-
-  :program:`CentOS`:
-
-  .. code-block:: sh
-
-     user@host:~$ su root
-     user@host:~$ systemctl restart mariadb
-
 * To start MariaDB automatically during boot set
 
   :program:`Ubuntu`
@@ -333,11 +324,57 @@ Database configuration
   .. code-block:: sh
 
      user@host:~$ su root
-     user@host:~$ systemctl enable mariadb
+     root@host:~$ systemctl enable mariadb
+
+* If you make a fresh installation of MariaDB/MySQL, secure the database and set
+  a password for the root user
+
+  :program:`Ubuntu` ::
+
+     user@host:~$ sudo mysql_secure_installation
+
+  :program:`CentOS` ::
+
+     user@host:~$ su root
+     root@host:~$ mysql_secure_installation
+
+  .. warning ::
+
+     This step overrides database settings. Only execute the command
+
+     * After a fresh installation or
+     * If you are sure about the procedure.
+
+* After adjusting the parameters, MariaDB needs to be restarted. One can run
+
+  :program:`Ubuntu`:
+
+  .. code-block:: sh
+
+     user@host:~$ sudo systemctl restart mariadb
+
+  :program:`CentOS`:
+
+  .. code-block:: sh
+
+     user@host:~$ su root
+     root@host:~$ systemctl restart mariadb
 
 .. note ::
 
    Replace mariadb by mysql when using MySQL instead of MariaDB.
+
+
+.. _database_configuration_postgresql:
+
+PostgreSQL
+----------
+
+When using PostgreSQL, the database server must be initialized and secured.
+
+
+Next steps
+----------
 
 Now everything is installed and the system can be configured. The :ref:`next chapter<getting-started>`
 chapter explains the first steps.

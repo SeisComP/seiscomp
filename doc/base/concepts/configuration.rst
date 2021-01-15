@@ -145,7 +145,7 @@ configuration parameters.
 .. figure:: ../media/scconfig_config_modules.png
    :alt: scconfig: module configuration
    :align: center
-   :width: 10cm
+   :width: 18cm
 
    scconfig modules module configuration panel.
 
@@ -403,7 +403,7 @@ directory and it takes care that they synchronize with the database when process
 .. figure:: ../media/scconfig_config_bindings.png
    :alt: scconfig: bindings configuration
    :align: center
-   :width: 10cm
+   :width: 18cm
 
    scconfig modules bindings configuration panel.
 
@@ -703,7 +703,7 @@ panel of :ref:`scconfig`.
 .. figure:: ../media/scconfig_information.png
    :alt: scconfig: information panel
    :align: center
-   :width: 10cm
+   :width: 18cm
 
    scconfig information panel indicating the internal SeisComP variables.
 
