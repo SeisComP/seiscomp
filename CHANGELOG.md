@@ -2,6 +2,29 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.4.0
+
+* hypo71
+
+  * redirect locator output to SeisComP info output instead of stdout
+
+* seiscomp
+
+  * Fix inventory, trunk and access setup file to get the
+    configured local scmaster connection correctly especially
+    with encrypted connections.
+
+* GUI
+
+  * Add config support for color names according to
+    https://www.w3.org/TR/SVG11/types.html#ColorKeywords, e.g.
+    `scheme.colors.records.foreground = blue`
+
+* scrttv
+
+  * Add `streams.sort.mode` to set up the initial sort mode
+  * Add grouping of streams for sorting and coloring
+
 ## 4.3.0
 
 * scheli

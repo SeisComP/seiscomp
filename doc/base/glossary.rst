@@ -189,6 +189,14 @@ Scientific and technical terms
       be coherent if they are related to each other in time, amplitude and/or waveform because they
       come from the same seismic source.
 
+   color
+      Colors are given in hexadecimal representation or by :term:`color keyword names <color keyword name>`
+
+   color keyword name
+      Color keyword names allow the specification of color values by names
+      representing color codes in RGB or hexadecimal representation. Find examples
+      on the `website of W3C <https://www.w3.org/TR/SVG11/types.html#ColorKeywords>`_.
+
    convolution
       A mathematically equivalent operation that describes the action of a linear (mechanical
       and/or electronic) system on a signal, such as that of a filter on a seismic signal.
