@@ -63,7 +63,7 @@ the :ref:`change log <sc-changelog>`.
 +---------+-----------+--------------------+-----------------------------------------------------+
 | 3.0     | Jakarta   | 2014               | Completely Open Source, including all GUIs          |
 +---------+-----------+--------------------+-----------------------------------------------------+
-| 4.0     |           | May 2020           | Adopts the GNU Affero General Public License v. 3.0,|
+| 4.0.0   |           | May 2020           | Adopts the GNU Affero General Public License v. 3.0,|
 |         |           |                    | (AGPL), support for Python3 and QT5                 |
 +---------+-----------+--------------------+-----------------------------------------------------+
 
