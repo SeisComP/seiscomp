@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+* scinv
+
+  * allow a configurable distance between station and location coordinate
+    when calling scinv check
+
 ## 4.4.0
 
 * hypo71
