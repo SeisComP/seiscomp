@@ -49,6 +49,12 @@ is taken from Modern Global Seismology.
       which refers to ``etc/key/seedlink/profile_geofon`` and ``etc/key/scautopick/profile_teleseismic``.
       Changing the profile changes the bindings of all stations that use this profile.
 
+   RecordStream
+       Interface to access data records from data processing modules.
+       :term:`SeisComP` applications access waveform data through the
+       `RecordStream <https://docs.gempa.de/seiscomp/current/apps/global_recordstream.html>`_
+       interface.
+
    standalone module
 
       A module that needs to convert the configuration or do not use the default
@@ -190,12 +196,13 @@ Scientific and technical terms
       come from the same seismic source.
 
    color
-      Colors are given in hexadecimal representation or by :term:`color keyword names <color keyword name>`
+      Colors are given in hexadecimal representation or by :term:`color keyword names <color keyword name>`.
 
    color keyword name
       Color keyword names allow the specification of color values by names
-      representing color codes in RGB or hexadecimal representation. Find examples
+      representing color codes instead of RGB or hexadecimal representation. Find examples
       on the `website of W3C <https://www.w3.org/TR/SVG11/types.html#ColorKeywords>`_.
+      Color keyword names have been introduced in SeisComP in version 4.4.0.
 
    convolution
       A mathematically equivalent operation that describes the action of a linear (mechanical
@@ -604,6 +611,8 @@ Scientific and technical terms
       at *T=20* s period based on the recommendations
       by the IASPEI magnitude working group issued on 27 March, 2013.
 
+      * Distance range: 2 - 160°
+
       Read the :ref:`technical documentation <global_ms_20>` for more details and the configuration.
 
    magnitude, broadband surface wave (Ms(BB))
@@ -917,12 +926,6 @@ Scientific and technical terms
       bundles (Gauss beams) that leave the source and are reflected or refracted at velocity
       boundaries according to Snell's Law. The amplitudes of reflected and refracted waves
       at each boundary are recalculated according to the Law of Conservation of Energy.
-
-   RecordStream
-       Interface to access data records from data processing modules.
-       :term:`SeisComP` applications access waveform data through the
-       `RecordStream <https://docs.gempa.de/seiscomp/current/apps/global_recordstream.html>`_
-       interface.
 
    recurrence interval
       The average time span between large earthquakes at a particular site. Also
