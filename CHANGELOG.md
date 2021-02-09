@@ -2,10 +2,19 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.5.0
+
+```SC_API_VERSION 14.2.0```
+
 * scinv
 
   * allow a configurable distance between station and location coordinate
     when calling scinv check
+
+* trunk
+
+  * Add CAPS recordstream implementation with service "caps" and "capss".
+    The later establishes an SSL connection.
 
 ## 4.4.0
 
