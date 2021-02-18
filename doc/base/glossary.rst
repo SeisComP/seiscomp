@@ -90,10 +90,13 @@ Scientific and technical terms
       the mainshock, the larger and more numerous the aftershocks, and the longer they will continue.
 
    amplitude
-      a) General term used for an observation of a wave at a particular time.
-      b) QuakeML object. Amplitudes are computed, e.g. for computing :term:`magnitudes <magnitude>`
+      #. General term used for an observation of a wave at a particular time.
+      #. QuakeML object. Amplitudes are computed, e.g. for computing :term:`magnitudes <magnitude>`
          of different types. Another type is the :term:`SNR`.
          Amplitude computation depends on the type.
+
+      In |scname| magnitudes are computed automatically by :ref:`scautopick` and
+      :ref:`scamp` or interactively by :ref:`scolv`.
 
    array
       A set of observing sensors at which the observed and sought signal are mostly coherent.
@@ -119,8 +122,8 @@ Scientific and technical terms
       data. Arclink was distributed with :term:`SeisComP` until version 3.0.
 
    arrival
-      a) The appearance of seismic energy on a seismic record
-      b) QuakeML object. The detected phase onset associated to an origin in |scname|.
+      #. The appearance of seismic energy on a seismic record
+      #. QuakeML object. The detected phase onset associated to an origin in |scname|.
 
    arrival time
       The time at which a particular phase of a seismic wave arrives at a station.
@@ -264,8 +267,8 @@ Scientific and technical terms
       Vertical projection of the hypocenter to the surface.
 
    event
-      a) General term used for a localized disturbance (earthquake, explosion, etc.) which generates seismic waves.
-      b) QuakeML object. The event is the parent object of several :term:`origins <origin>`.
+      #. General term used for a localized disturbance (earthquake, explosion, etc.) which generates seismic waves.
+      #. QuakeML object. The event is the parent object of several :term:`origins <origin>`.
          Among these origins a preferred origin
          and its :term:`preferred magnitude` is selected to represent the event.
          An event can be seen as an earthquake folder
@@ -448,10 +451,10 @@ Scientific and technical terms
       (sometimes for waves of a particular frequency),
       corrected for the attenuation with distance. Several scales have been defined, but the most commonly used are:
 
-      1) local magnitude (ML), commonly referred to as "Richter magnitude"
-      2) surface-wave magnitude (Ms)
-      3) body-wave magnitude (mb)
-      4) moment magnitude (Mw).
+      #. local magnitude (ML), commonly referred to as "Richter magnitude"
+      #. surface-wave magnitude (Ms)
+      #. body-wave magnitude (mb)
+      #. moment magnitude (Mw).
 
       The magnitude scales 1-3 have limited range and applicability and do not satisfactorily measure the
       size of the largest earthquakes. The moment magnitude (Mw) scale, based on the concept of seismic moment,
@@ -461,6 +464,9 @@ Scientific and technical terms
       is needed to be specified.
 
       Additional or modified magnitudes can be computed by providing plugins.
+
+      In |scname| magnitudes are computed automatically by :ref:`scmag` or interactively
+      by :ref:`scolv`.
 
    magnitude, local (ML)
       Magnitude scale introduced by Richter in the early 1930s (Richter, 1935) to have a common scale for the
@@ -492,7 +498,7 @@ Scientific and technical terms
 
       * Amplitude unit in |scname|: **millimeter** (mm)
 
-      Read the :ref:`technical documentation <global_ml>` for the configuration.
+      Read the :ref:`technical documentation <global_ml>` for more details and the configuration.
 
    magnitude, local vertical (MLv)
      The :term:`ML <magnitude, local (ML)>` magnitude with amplitudes measured on
@@ -500,7 +506,7 @@ Scientific and technical terms
 
      * Amplitude unit in |scname|: **millimeter** (mm)
 
-     Read the :ref:`technical documentation <global_mlv>` for the configuration.
+     Read the :ref:`technical documentation <global_mlv>` for more details and the configuration.
 
    magnitude, local horizontal (MLh)
       The local magnitude measured on the horizontal components with
@@ -508,69 +514,41 @@ Scientific and technical terms
 
       * Amplitude unit in |scname|: **millimeter** (mm)
 
-      Read the :ref:`technical documentation <global_mlh>` for the configuration.
+      Read the :ref:`technical documentation <global_mlh>` for more details and the configuration.
 
    magnitude, local GNS/GEONET (MLr)
       Local magnitude calculated from :term:`MLv <magnitude, local vertical (MLv)>`
       amplitudes based on GNS/GEONET specifications for New Zealand.
 
-      Read the :ref:`technical documentation <global_mlr>` for the configuration.
+      Read the :ref:`technical documentation <global_mlr>` for more details and the configuration.
 
    magnitude, Nuttli (MN)
       Nuttli magnitude for Canada and other Cratonic regions.
 
       * Amplitude unit in |scname|: **meter/second** (m/s)
 
-      Read the :ref:`technical documentation <global_mn>` for the configuration.
+      Read the :ref:`technical documentation <global_mn>` for more details and the configuration.
 
    magnitude, body-wave (mb)
-      Magnitude developed for teleseismic body waves. mb is defined on the amplitude of the first few cycles of the P-wave,
-      typically a time window of 20 s - 30 s. Only the first few cycles are used to minimize the effects of radiation pattern
-      and depth phases, which result in complicate waveform signatures. The general formula is
-
-      .. math::
-
-         mb = \log \left(\frac{A}{T}\right) + Q(h,\Delta)
-
-      with A as the displacement amplitude in micrometers, T as the dominant period of the signal in seconds, Q as a
-      correction term for depth and distance. mb is usually determined at periods around 1s in adaptation to the use
-      of the World-Wide Standard Seismograph Network (WWSSN) short-period stations. A scatter in the order of +/- 0.3
-      for the station magnitudes is usual. Typically, mb is determined for stations with distances larger than 5° to
-      have a distinct direct P-wave phase. A correction term for the distance has to be determined empirically, which
-      is quite complicate for distances smaller than 20°. This reflects the complexity of the body waves that traverse
-      only in the upper mantle. mb saturates at about magnitude 5.5 to 6.0 because the maximum amplitudes of larger
-      earthquakes occur at lower frequencies than the frequency range between 0.7 Hz - 2 Hz used for the magnitude
-      calculation.
-
-      In |scname| mb amplitudes are measured on vertical-component seismograms
-      in a 30 s time window after simulation of a :term:`WWSSN_SP` short-period
-      seismometer. Amplitudes are used from stations with epicentral distances between 5° and 105°.
+      Magnitude developed for teleseismic body waves. mb is defined on the amplitude
+      of the first few cycles of the P-wave restituted to :term:`WWSSN_SP`.
 
       * Amplitude unit in |scname|: **nanometer** (nm)
-      * Distance range: 5 - 105°
-      * Time window: 0 - 30 s
+
+      Read the :ref:`technical documentation <global_mb>` for more details and the configuration.
+
+   magnitude, broadband body-wave (mB_BB)
+      mB_BB is the term recommended by the IASPEI commission for :term:`mB` which
+      is used in |scname|.
 
    magnitude, broadband body-wave (mB)
-      mB is a magnitude based on body waves like mb, but the amplitude is measured in a broad
-      frequency range and longer time windows. Instead of amplitude measurements on displacement
-      data together with the dominant period, the maximum velocity amplitude Vmax is taken
-      directly from velocity-proportional records with :math:`V = 2 \pi A/T`. The time window for the
-      measurement can be determined by the duration of the high-frequency (1-3 Hz) radiation
-      (Bormann & Saul, 2008). This time window usually contains the phases P, pP, sP, PcP, but
-      not PP. According to the long time window and broad frequency range used for amplitude
-      measurements mB saturates not like mb.
-
-      In |scname| a default time window of 60 s is actually taken for amplitude measurements
-      at stations in the distance range of 5° to 105°. If the distance to the epicenter is
-      known the time window is computed as
-
-      .. math::
-
-         t = min(11.5 \Delta, 60)
+      mB is a magnitude based on body waves like :term:`mb <magnitude, body-wave (mb)>`,
+      but with the amplitude measured in a broad frequency range and longer time windows.
+      mB is used as a synonym for :term:`mB_BB <magnitude, broadband body-wave (mB_BB)>`.
 
       * Amplitude unit in |scname| is **nanometer per second** (nm/s)
-      * Distance range: 5 - 105°
-      * Time window: 60 s if set by :ref:`scautopick`, otherwise the minimum of 60 s and 11.5 s/° * distance in degree
+
+      Read the :ref:`technical documentation <global_mb_bb>` for more details and the configuration.
 
    magnitude, cumulative body-wave (mBc)
       mBc is the cumulative body-wave magnitude. See Bormann and Wylegalla (2005)
@@ -613,7 +591,7 @@ Scientific and technical terms
       at *T=20* s period based on the recommendations
       by the IASPEI magnitude working group issued on 27 March, 2013.
 
-      * Distance range: 2 - 160°
+      * Amplitude unit in |scname|: nanometer (nm)
 
       Read the :ref:`technical documentation <global_ms_20>` for more details and the configuration.
 
@@ -638,7 +616,7 @@ Scientific and technical terms
    magnitude, duration (Md)
       The duration magnitude measured on the coda wave train.
 
-      Read the :ref:`technical documentation <global_md>` for the configuration.
+      Read the :ref:`technical documentation <global_md>` for more details and the configuration.
 
    magnitude, JMA (M_JMA)
       M(JMA) is a magnitude similar to the Ms, but the formula is calibrated for instruments
@@ -700,7 +678,7 @@ Scientific and technical terms
 
    magnitude, summary (M)
 
-      Summary magnitude derived from multiple other magnitudes.
+      Summary magnitude derived from multiple other magnitudes by :ref:`scmag`.
 
    mainshock
       The largest earthquake in a sequence, sometimes preceded by one or more foreshocks,
@@ -714,10 +692,10 @@ Scientific and technical terms
       Typically, a microearthquake has a magnitude of 2 or less on the Richter scale.
 
    microseism
-      a) In a broader sense: A more or less continuous motion in the Earth in a wide frequency
+      #. In a broader sense: A more or less continuous motion in the Earth in a wide frequency
          range that is unrelated to any earthquake and caused by a variety of usually uncorrelated
          (incoherent) natural and artificial (man-made) sources.
-      b) In a more specific sense: That part of seismic noise that is generated by wave motions
+      #. In a more specific sense: That part of seismic noise that is generated by wave motions
          on lakes and oceans and their interaction with shores, typically with periods between
          about 2 to 9 s (the stronger secondary microseisms), and 11 to 18 s (the weaker
          primary microseisms).
@@ -779,20 +757,20 @@ Scientific and technical terms
       The first appearance of a seismic signal on a record.
 
    origin
-      a) Location (hypocenter), Time and strength estimation of an earthquake based on seismic
+      #. Location (hypocenter), Time and strength estimation of an earthquake based on seismic
          phases and amplitudes
-      b) QuakeML object
+      #. QuakeML object
 
    origin time
       Estimated source time of an event belonging to a certain origin; describes the
       rupture start time. Attribute of the QuakeML object Origin, see :term:`origin`.
 
    phase
-      a) A stage in periodic motion, such as wave motion or the motion of an oscillator,
+      #. A stage in periodic motion, such as wave motion or the motion of an oscillator,
          measured with respect to a given initial point and expressed in angular measure.
-      b) A pulse of seismic energy arriving at a definite time, which passed the Earth
+      #. A pulse of seismic energy arriving at a definite time, which passed the Earth
          on a specific path.
-      c) Attribute of the QuakeML object Arrival, see :term:`arrival`.
+      #. Attribute of the QuakeML object Arrival, see :term:`arrival`.
 
    P phase
       The P phase is the arrival of the direct P wave that traveled through the Earth's
@@ -885,12 +863,12 @@ Scientific and technical terms
       for the path from hypocenter of the earthquake to the reflection point at the surface.
 
    pick
-      a) Automatic or manual determined phase onset
-      b) QuakeML object
+      #. Automatic or manual determined phase onset
+      #. QuakeML object
 
    polarity
-      In seismology the direction of first motion on a seismogram, either up (compression)
-      or down (dilatation or relaxation).
+      In seismology the direction of first motion on a seismogram, either up (positive, compression)
+      or down (negative, dilatation or relaxation).
 
    polarization
       The shape and orientation in space of the ground-motion particle trajectory. It differs
@@ -901,13 +879,15 @@ Scientific and technical terms
       by analyzing three-component seismic recordings.
 
    preferred magnitude
-      a) The network magnitude representing the strength of an event best.
-      b) Attribute of the QuakeML object Event, see :term:`event`.
+      #. The network magnitude representing the strength of an event best as
+         automatically selected by :ref:`scevent` or interactively.
+      #. Attribute of the QuakeML object Event, see :term:`event`.
 
    preferred origin
-      a) The origin representing the location of an event best; generally, the location based
-         on the most picks or reviewed/revised by an operator.
-      b) Attribute of the QuakeML object Event, see :term:`event`.
+      #. The origin representing the location of an event best; generally, the location based
+         on the most picks or reviewed/revised by an operator. The preferred origins
+         is automatically selected by :ref:`scevent` or interactively.
+      #. Attribute of the QuakeML object Event, see :term:`event`.
 
    QuakeML
       A XML scheme developed as an open standard for seismological meta data exchange (http://www.quakeml.org).
@@ -955,9 +935,9 @@ Scientific and technical terms
       during the slip along a fault until the adjacent fault blocks reach a new state of equilibrium.
 
    residual
-      a) The difference between the measured and predicted values of some quantity (e.g., theoretical
+      #. The difference between the measured and predicted values of some quantity (e.g., theoretical
          and measured phase arrival time).
-      b) Attribute of QuakeML object Arrival, see :term:`arrival`.
+      #. Attribute of QuakeML object Arrival, see :term:`arrival`.
 
    Ring of Fire
       The zone of volcanoes and earthquakes surrounding the Pacific Ocean which is called
@@ -1179,10 +1159,10 @@ Scientific and technical terms
       more dataloggers.
 
    station magnitude
-      a) The station magnitude is the magnitude value based on the amplitude measurements of a single station.
+      #. The station magnitude is the magnitude value based on the amplitude measurements of a single station.
          Due to radiation pattern, site and path effects and the calibration of the station the station magnitudes
          of one event can scatter significantly.
-      b) QuakeML object
+      #. QuakeML object
 
    stick-slip
       The rapid displacement that occurs between two sides of a fault when the shear stress
