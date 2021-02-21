@@ -7,6 +7,7 @@ Glossary
 The glossary is partly extracted from New Manual of Observatory Practice and some information
 is taken from Modern Global Seismology.
 
+
 |scname| terms
 ==============
 
@@ -70,6 +71,7 @@ is taken from Modern Global Seismology.
       collection with :ref:`scolv`, :ref:`scmv`, :ref:`scrttv` and :ref:`scesv`.
 
 ----
+
 
 Scientific and technical terms
 ==============================
@@ -410,7 +412,7 @@ Scientific and technical terms
       the concepts section :ref:`concepts_inventory`.
 
    latency
-      The time difference between the current time and the arrival time of the record (|scname|).
+      Time difference between the end times of consecutive records.
       The latency can be computed by :ref:`scqc`.
 
    lithosphere
@@ -737,6 +739,12 @@ Scientific and technical terms
       discovered it. The boundary is between 20 and 60 km deep beneath the continents and between
       5 and 10 km deep beneath the ocean floor.
 
+   moment tensor
+
+      Moment tensors or seismic moment tensors describe the equivalent forces
+      due to seismic point sources, e.g. earthquakes with rupture dimensions
+      much smaller than the distance at which they are observed.
+
    network
       A set of stations typically maintained by one or more institutions and
       tuned to record particular signals.
@@ -1052,7 +1060,8 @@ Scientific and technical terms
          M_0 = \mu D A
 
       with μ as rigidity of the rock at the fault, D as averaged displacement on the
-      fault and A as fault surface area.
+      fault and A as fault surface area. For pure shear sources, M\ :sub:`0` equals
+      the :term:`total seismic moment (MT)`.
       The seismic moment can be related to the released seismic energy ES that is
       proportional to the stress drop Δσ:
 
@@ -1217,6 +1226,15 @@ Scientific and technical terms
 
    Tm
       mean period
+
+   total seismic moment (MT)
+      A measure of the strength of the full :term:`moment tensor`:
+
+      .. math::
+
+         M_T = \sqrt{\sum_{ij}M_{ij}M_{ij}/2}
+
+      For pure shear sources M\ :sub:`T` equals :term:`seismic moment (M0)`.
 
    transfer function
       The transfer function of a seismic sensor-recorder system (or of the Earth
