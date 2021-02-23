@@ -15,6 +15,27 @@ All notable changes to SeisComP are documented here.
 
   * Add CAPS recordstream implementation with service "caps" and "capss".
     The later establishes an SSL connection.
+  * Fix crash of distance computation if distance is close to zero
+  * Add RecordStream to retrieve data from a CAPS server, e.g. `caps://localhost`
+  * Set Ms_20 minimum distance to 20 degree
+  * Fix SQLite3 database schema
+
+* GUI
+
+  * Make eventedit columns of origin and fm tables configurable
+
+    ```
+    eventedit.origin.visibleColumns = Phases, Lat, Lon, Depth, DType, RMS,\
+                                      Stat, Method, Agency, Author, Region
+    eventedit.fm.visibleColumns = Depth, M, Count, Misfit, STDR, Azi.\
+                                  Gap(°), Stat, DC(%), CLVD(%), ISO(%),\
+                                  S1(°), D1(°), R1(°), S2(°), D2(°), R2(°),\
+                                  Agency, Author
+    ```
+
+* scbulletin
+
+  * Allow to flag depth as fixed (thanks to Anthony Carapetis)
 
 ## 4.4.0
 
