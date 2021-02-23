@@ -31,16 +31,26 @@ Background
 SeisComP versions
 -----------------
 
-SeisComP has :ref:`developed over time <history>`. The versions can be distinguished:
+SeisComP has :ref:`developed over time <history>`. The versions can be distinguished
+by the name of the release:
 
-* SeisComP since version 4.0.0 uses release version numbers
-* SeisComP3 uses release versions, names, numbers and patch numbers:
+* **SeisComP since version 4.0.0** uses release version numbers
+* **SeisComP3** uses release versions, names, numbers and patch numbers.
+
+  Full example:  *SeisComP3-jakarta-2020.330.02*
+
+  * 3: release version
+  * jakarta: release name
+  * 2020.330: release number
+  * 02: patch number
+
+  Names are adjusted depending on changes in source code:
 
   * **Release version:** major changes in module groups, functionality, concepts, data model.
     Example: SeisComp3 is SeisComP in version 3.0
     in comparison to version 2.5 the GUIs were introduced.
   * **Release name:** major changes in functionality, concepts, data model.
-    Example: with SeisComP3-Seattle the new user friendly configuration GUI scconfig
+    Example: with SeisComP3-Seattle the new user friendly configuration GUI :ref:`scconfig`
     was introduced.
   * **Release number:** changes in data model version and/or major changes in applications and optimizations.
     The numbers include the year and the day of the year of the software release.
