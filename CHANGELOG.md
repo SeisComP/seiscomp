@@ -57,6 +57,7 @@ All notable changes to SeisComP are documented here.
 
   * allow a configurable distance between station and location coordinate
     when calling scinv check
+  * test existence of stations, locations and streams when calling scinv check
 
 * trunk
 
