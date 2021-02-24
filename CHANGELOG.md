@@ -6,6 +6,53 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 14.2.0```
 
+* magnitudes
+
+  * mb and mB: add configurable distance ranges in global bindings
+  * ML, MLv, MLh, md, MLr, Ms_20: unify the configuration in the magnitudes and amplitudes
+    sections of global bindings. The number of magnitude types has grown over time
+    and each magnitude had its own flavor of configuration. This made configurations
+    increasingly difficult. By this change the configuration becomes homogeneous and easier.
+    The corresponding parameters are deprecated and must be replaced by new ones either
+    pre-pending "magnitudes." or "amplitudes." to the respective parameter.
+    Warnings will be written to module logs if deprecated values are found. 
+  * deprecated bindings parameter values : new values:
+
+    * MLh.maxavg : amplitudes.MLh.params
+    * MLh.ClippingThreshold : amplitudes.MLh.ClippingThreshold
+    * MLh.params : magnitudes.MLh.params
+      
+    * md.maxavg : magnitudes.md.seismo
+    * md.taper : magnitudes.md.taper
+    * md.signal_length : magnitudes.md.signal_length
+    * md.butterworth : magnitudes.md.butterworth
+    * md.depthmax : magnitudes.md.depthmax
+    * md.deltamax : magnitudes.md.deltamax
+    * md.snrmin : magnitudes.md.snrmin
+    * md.mdmax : magnitudes.md.mdmax
+    * md.fma : magnitudes.md.fma
+    * md.fmb : magnitudes.md.fmb
+    * md.fmd : magnitudes.md.fmd
+    * md.fmf : magnitudes.md.fmf
+    * md.fmz : magnitudes.md.fmz
+    * md.linearcorrection : magnitudes.md.linearcorrection
+    * md.offset : magnitudes.md.offset
+    * md.stacor : magnitudes.md.stacor
+
+    * MLr.maxavg : magnitudes.MLr.params
+
+    * Ms_20.lowerPeriod : magnitudes.Ms_20.lowerPeriod
+    * Ms_20.upperPeriod : magnitudes.Ms_20.upperPeriod
+    * Ms_20.minDist : magnitudes.Ms_20.minDist
+    * Ms_20.maxDist : magnitudes.Ms_20.maxDist
+    * Ms_20.maxDepth : magnitudes.Ms_20.maxDepth
+
+    * MLv.logA0 : magnitudes.MLv.logA0
+    * MLv.maxDistanceKm : magnitudes.MLv.maxDistanceKm
+
+    * ML.logA0 : magnitudes.ML.logA0
+    * ML.maxDistanceKm : magnitudes.ML.maxDistanceKm
+
 * scinv
 
   * allow a configurable distance between station and location coordinate
