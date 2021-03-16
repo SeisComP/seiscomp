@@ -526,22 +526,34 @@ def on_list_help(args):
     print()
     print("Examples:")
     print("$ seiscomp list aliases")
-    print("scautopick2 -> scautopick")
+    print("l1autopick -> scautopick")
 
 
 def on_status(args, flags):
-    for mod in mods:
-        if mod.name in args or len(args) == 0:
-            mod.status(shouldModuleRun(mod.name))
+    if len(args) > 0 and args[0] == "enabled":
+        for mod in mods:
+            if env.isModuleEnabled(mod.name) or \
+               isinstance(mod, seiscomp.kernel.CoreModule):
+                   mod.status(shouldModuleRun(mod.name))
+    else:
+        for mod in mods:
+            if mod.name in args or len(args) == 0:
+                mod.status(shouldModuleRun(mod.name))
+
     return 0
 
 
 def on_status_help(args):
-    print("Prints the status of all or a list of modules and gives a ")
-    print("warning if a module should run but doesn't.")
+    print("Prints the status of ")
+    print(" * all modules")
+    print(" * all enabled modules")
+    print(" * a list of modules")
+    print("and gives a warning if a module should run but doesn't.")
     print("This command supports csv formatted output via '--csv' switch.")
     print()
     print("Examples:")
+    print("$ seiscomp status enabled")
+    print("scmaster             is not running [WARNING]")
     print("$ seiscomp status scautopick")
     print("scautopick           is not running")
     print("$ seiscomp --csv status scautopick")
@@ -589,7 +601,7 @@ def on_print_help(args):
     print(" env: prints environment variables necessary to run SeisComP modules.")
     print()
     print("Examples:")
-    print("Source SC3 environment into current bash session")
+    print("Source SC environment into current bash session")
     print("$ eval $(seiscomp/bin/seiscomp print env)")
 
 
