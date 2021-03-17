@@ -88,6 +88,10 @@ def error(msg):
     sys.stderr.write("error: %s\n" % msg)
     sys.stderr.flush()
 
+def warning(msg):
+    sys.stderr.write("warning: %s\n" % msg)
+    sys.stderr.flush()
+
 
 # Returns a seiscomp.kernel.Module instance
 # from a given path with a given name
@@ -824,13 +828,15 @@ def on_alias(args, flags):
             pass
 
         if has_alias:
-            error("%s is already an alias for %s" % (args[1], toks[1]))
-            return 1
+            warning("%s is already registered as alias for %s in $SEISCOMP_ROOT/etc/descriptions/aliases" % (args[1], toks[1]))
+            warning("  + do not register againg but trying to link the required files")
+        else:
+            print("registered alias '%s' in $SEISCOMP_ROOT/etc/descriptions/aliases" % (args[1]))
 
         # Check if target exists already
         if os.path.exists(os.path.join(SEISCOMP_ROOT, mod1)):
-            error("module '%s' exists already" % args[1])
-            return 1
+            warning("link '%s' to '%s' exists already in $SEISCOMP_ROOT%s/bin/" % (args[1], mod2, SEISCOMP_ROOT))
+            warning("  + do not link again")
 
         try:
             f = open(ALIAS_FILE, 'w')
@@ -896,6 +902,7 @@ def on_alias(args, flags):
             error("expected one argument for remove: alias-name")
             return 1
 
+        print("Remove alias '%s'" % args[1])
         #  check and remove alias line in etc/descriptions/aliases
         has_alias = False
         lines = []
@@ -921,14 +928,14 @@ def on_alias(args, flags):
             pass
 
         if not has_alias:
-            error("%s is not defined as an alias" % args[1])
+            error("  + %s is not defined as an alias" % args[1])
             if len(lines) == len(new_lines):
                 return 1
 
         try:
             f = open(ALIAS_FILE, 'w')
         except:
-            error("failed to open/create alias file: %s" % ALIAS_FILE)
+            error("  + failed to open/create alias file: %s" % ALIAS_FILE)
             return 1
 
         if len(lines) > 0:
@@ -940,11 +947,18 @@ def on_alias(args, flags):
 
         #  delete defaults etc/defaults/mod1.cfg
         default_cfg = os.path.join("etc", "defaults", args[1] + ".cfg")
-        print("Remove default configuration: %s" % default_cfg)
+        print("  + remove default configuration: %s" % default_cfg)
         try:
             os.remove(os.path.join(SEISCOMP_ROOT, default_cfg))
         except:
             pass
+
+        cfg = os.path.join("etc", args[1] + ".cfg")
+        if os.path.isfile(cfg):
+            warning("  + keep configuration file '%s/%s'" % (SEISCOMP_ROOT, cfg))
+        cfg = os.path.join(os.path.expanduser("~"), ".seiscomp", args[1] + ".cfg")
+        if os.path.isfile(cfg):
+            warning("  + keep configuration file '%s'" % (cfg))
 
         # remove symlink from bin/mod1
         if os.path.exists(os.path.join("bin", args[1])):
@@ -955,7 +969,7 @@ def on_alias(args, flags):
             sym_link = ""
 
         if sym_link:
-            print("Remove app symlink: %s" % sym_link)
+            print("  + remove app symlink: %s" % sym_link)
             try:
                 os.remove(os.path.join(SEISCOMP_ROOT, sym_link))
             except:
@@ -963,7 +977,7 @@ def on_alias(args, flags):
 
         # remove symlink from etc/init/mod1.py
         init_scr = os.path.join("etc", "init", args[1] + ".py")
-        print("Remove init script: %s" % init_scr)
+        print("  + remove init script: %s" % init_scr)
         try:
             os.remove(os.path.join(SEISCOMP_ROOT, init_scr))
         except:
@@ -971,7 +985,7 @@ def on_alias(args, flags):
 
         return 0
 
-    error("wrong command '%s': expected 'create' or 'remove'" % args[0])
+    error("Wrong command '%s': expected 'create' or 'remove'" % args[0])
     return 1
 
 
