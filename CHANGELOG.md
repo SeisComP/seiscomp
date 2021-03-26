@@ -4,6 +4,11 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
+* magntiudes
+
+  * Add ability to configure magnitudes with region-dependent
+    parameters in global module configuration
+
 * Events list, e.g. scolv, scesv
 
   * Add interactive filtering of events inside or outside defined regions
