@@ -83,6 +83,7 @@ class SC_CONFIG_API SymbolTable {
 	public:
 		void setCaseSensitivityCheck(bool);
 		void setLogger(Logger *);
+		Logger *logger();
 
 		void add(const std::string& name, const std::string &ns,
 		         const std::string& content,

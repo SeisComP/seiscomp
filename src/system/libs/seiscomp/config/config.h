@@ -170,8 +170,8 @@ class SC_CONFIG_API Config {
 		bool setBools(const std::string& name, const std::vector<bool>& values);
 
 		std::vector<std::string> getStrings(const std::string& name) const;
-
 		std::vector<std::string> getStrings(const std::string& name, bool* error) const;
+		bool getStrings(std::vector<std::string>& value, const std::string& name) const;
 
 		bool setStrings(const std::string& name, const std::vector<std::string>& values);
 
@@ -240,9 +240,9 @@ class SC_CONFIG_API Config {
 		std::string escape(const std::string &) const;
 
 
-		// ----------------------------------------------------------------------
-		// Protected interface
-		// ----------------------------------------------------------------------
+	// ----------------------------------------------------------------------
+	// Protected interface
+	// ----------------------------------------------------------------------
 	protected:
 		/** Parses the given file
 		 * @return true on success false on failure
@@ -250,9 +250,9 @@ class SC_CONFIG_API Config {
 		bool parseFile(std::istream &is); // virtual candidate
 
 
-		// ------------------------------------------------------------------------
-		// Private interface
-		// ------------------------------------------------------------------------
+	// ------------------------------------------------------------------------
+	// Private interface
+	// ------------------------------------------------------------------------
 	private:
 		void init();
 		bool handleEntry(const std::string& entry, const std::string& comment);
@@ -307,10 +307,12 @@ class SC_CONFIG_API Config {
 
 		inline void addVariable(const std::string &name, const char *type) const;
 
+		void releaseSymbolTable();
 
-		// ------------------------------------------------------------------------
-		// Private data members
-		// ------------------------------------------------------------------------
+
+	// ------------------------------------------------------------------------
+	// Private data members
+	// ------------------------------------------------------------------------
 	private:
 		typedef std::deque<std::string> Namespaces;
 		int          _stage;
