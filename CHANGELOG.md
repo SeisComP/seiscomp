@@ -2,6 +2,27 @@
 
 All notable changes to SeisComP are documented here.
 
+## X.Y.Z
+
+* Events list, e.g. scolv, scesv
+
+  * Add interactive filtering of events inside or outside defined regions
+
+* scmv
+
+  * Report erroneous configuration of `stations.groundMotionFilter` and stop
+    smoothly
+
+* scolv
+
+  * Add pick uncertainty bars to residual plots in Location tab
+
+* seiscomp
+
+  * Create aliases even if some links already exist
+  * List remaining configuration files after removing aliases
+  * Support requesting status of enabled modules
+
 ## 4.5.0
 
 ```SC_API_VERSION 14.2.0```
