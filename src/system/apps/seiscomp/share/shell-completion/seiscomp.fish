@@ -63,9 +63,12 @@ complete -f -c seiscomp -n "__fish_seiscomp_using_command print" -a "env crontab
 complete -f -c seiscomp -n "__fish_seiscomp_using_command alias" -a "create remove"
 
 # list
-complete -f -c seiscomp -n "__fish_seiscomp_using_command list" -a "modules aliases enabled disabled"
+complete -f -c seiscomp -n "__fish_seiscomp_using_command list" -a "modules aliases enabled disabled started"
+
+# status
+complete -f -c seiscomp -n "__fish_seiscomp_using_command status" -a "enabled started (__fish_seiscomp_modules)"
 
 # complete modules
-for mcmd in enable disable start stop restart reload check status update-config
+for mcmd in enable disable start stop restart reload check update-config
     complete -f -c seiscomp -n "__fish_seiscomp_using_command $mcmd" -a "(__fish_seiscomp_modules)"
 end

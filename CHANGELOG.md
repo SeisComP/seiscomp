@@ -4,7 +4,7 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
-* magntiudes
+* magnitudes
 
   * Add ability to configure magnitudes with region-dependent
     parameters in global module configuration
@@ -26,7 +26,8 @@ All notable changes to SeisComP are documented here.
 
   * Create aliases even if some links already exist
   * List remaining configuration files after removing aliases
-  * Support requesting status of enabled modules
+  * Support requesting status of enabled and of started modules
+  * Support requesting list of started modules
 
 ## 4.5.0
 

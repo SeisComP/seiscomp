@@ -473,7 +473,7 @@ def on_exec_help(args):
 
 def on_list(args, flags):
     if len(args) < 1:
-        error("expected argument: {modules|aliases|enabled|disabled}")
+        error("expected argument: {modules|aliases|enabled|disabled|started}")
         return 1
 
     if args[0] == "modules":
@@ -504,29 +504,45 @@ def on_list(args, flags):
         return 0
 
     if args[0] == "enabled":
+        found = 0
         for mod in mods:
             if env.isModuleEnabled(mod.name) or \
                isinstance(mod, seiscomp.kernel.CoreModule):
                 print(mod.name)
+                found += 1
+        print("Summary: %i modules enabled" % found)
         return 0
 
     if args[0] == "disabled":
+        found = 0
         for mod in mods:
             if not env.isModuleEnabled(mod.name) and \
                not isinstance(mod, seiscomp.kernel.CoreModule):
                 print(mod.name)
+                found += 1
+        print("Summary: %i modules disabled" % found)
         return 0
 
-    error("wrong argument: {modules|aliases|enabled|disabled} expected")
+    if args[0] == "started":
+        found = 0
+        for mod in mods:
+            if shouldModuleRun(mod.name):
+                print(mod.name)
+                found += 1
+        print("Summary: %i modules started" % found)
+        return 0
+
+    error("wrong argument: {modules|aliases|enabled|disabled|started} expected")
     return 1
 
 
 def on_list_help(args):
-    print("Prints the result of a query. 4 queries are currently supported:")
+    print("Prints the result of a query. 5 queries are currently supported:")
     print(" modules: lists all existing modules")
     print(" aliases: lists all existing aliases")
     print(" enabled: lists all enabled modules")
     print(" disabled: lists all disabled modules")
+    print(" started: lists all started modules")
     print()
     print("Examples:")
     print("$ seiscomp list aliases")
@@ -535,14 +551,27 @@ def on_list_help(args):
 
 def on_status(args, flags):
     if len(args) > 0 and args[0] == "enabled":
+        found = 0
         for mod in mods:
             if env.isModuleEnabled(mod.name) or \
                isinstance(mod, seiscomp.kernel.CoreModule):
                    mod.status(shouldModuleRun(mod.name))
-    else:
+                   found += 1
+        print("Summary: %i modules enabled" % found)
+        return 0
+
+    if len(args) > 0 and args[0] == "started":
+        found = 0
         for mod in mods:
-            if mod.name in args or len(args) == 0:
+            if shouldModuleRun(mod.name):
                 mod.status(shouldModuleRun(mod.name))
+                found += 1
+        print("Summary: %i modules started" % found)
+        return 0
+
+    for mod in mods:
+        if mod.name in args or len(args) == 0:
+            mod.status(shouldModuleRun(mod.name))
 
     return 0
 
@@ -551,11 +580,13 @@ def on_status_help(args):
     print("Prints the status of ")
     print(" * all modules")
     print(" * all enabled modules")
+    print(" * all started modules")
     print(" * a list of modules")
     print("and gives a warning if a module should run but doesn't.")
     print("This command supports csv formatted output via '--csv' switch.")
     print()
     print("Examples:")
+    print("$ seiscomp status started")
     print("$ seiscomp status enabled")
     print("scmaster             is not running [WARNING]")
     print("$ seiscomp status scautopick")
