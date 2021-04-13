@@ -662,7 +662,7 @@ Scientific and technical terms
 
       * Amplitude unit in |scname|: **nanometer times second** (nm*s)
       * Time window: 95 s
-      * Epicentral distance range: 3 - 105°
+      * Epicentral distance range: 5 - 105°
 
    magnitude, derived mB (Mw(mB))
       Moment magnitude derived from :term:`mB <magnitude, broadband body-wave (mB)>`
