@@ -4,6 +4,21 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
+* scevent
+
+  * Use application name for processing-info log
+  * evrc plugin provides more control options for setting and overwriting event types
+
+* scmssort
+
+  * Add new `list` option to filter miniSEED data by stream lists
+  * Add some statistics to stderr output in verbosity mode
+
+* scart
+
+  * Do not crash when requesting data for non-existing networks from SDS archive
+  * Add error output when attempting retrieve non-existing data from SDS archvie
+
 * magnitudes
 
   * Add ability to configure magnitudes with region-dependent
@@ -21,6 +36,20 @@ All notable changes to SeisComP are documented here.
 * scolv
 
   * Add pick uncertainty bars to residual plots in Location tab
+  * Add number of shown / loaded events in title of Events tab
+  * Add number of used / unused station magnitudes to Magnitudes tab
+
+* scesv
+
+  * Add number of shown / loaded events in title of Events tab
+
+* scheli
+
+  * Allow scaling of traces per maximum row amplitude
+
+* trunk
+
+  * Add support for permanent redirects to fdsnws recordstream
 
 * seiscomp
 
