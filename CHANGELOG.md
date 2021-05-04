@@ -4,6 +4,10 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
+* dependencies
+
+  * Change Debian 10 dependencies to Python3 and Qt5
+
 * scevent
 
   * Use application name for processing-info log
