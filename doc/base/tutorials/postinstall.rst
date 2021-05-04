@@ -194,14 +194,17 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
       commands to be run every time you log in.
 
 
-#. Database. For a MariaDB installation: ::
+#. Database. For a MariaDB installation:
 
-     $ seiscomp install-deps mariadb-server
+   .. code-block:: sh
 
-   or a MySQL installation: ::
+      $ seiscomp install-deps mariadb-server
 
+   or a MySQL installation:
 
-     $ seiscomp install-deps mysql-server
+   .. code-block:: sh
+
+      $ seiscomp install-deps mysql-server
 
    Also, for better performance with a MariaDB/MySQL database,
    adjust the memory pool size and the restart MariaDB/MySQL server, as described
@@ -209,25 +212,29 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
    For PostgreSQL, also see the detailed :ref:`installation` instructions.
 
-   .. warning::
+   .. warning ::
 
-     For Ubuntu 18.04 and newer, take care with MariaDB/MySQL installation.
-     Before the next step, you must set a root password *for MariaDB/MySQL*
-     (not the Linux root password!).
+      For Ubuntu 18.04 and newer, take care with MariaDB/MySQL installation.
+      Before the next step, you must set a root password *for MariaDB/MySQL*
+      (not the Linux root password!).
 
-     MariaDB: ::
+      MariaDB:
 
-        $ sudo mysql -e "SET old_passwords=0; ALTER USER root@localhost IDENTIFIED BY 'Mypasswordisnottthis'; FLUSH PRIVILEGES;"
+      .. code-block:: sh
 
-    MySQL: ::
+         $ sudo mysql -e "SET old_passwords=0; ALTER USER root@localhost IDENTIFIED BY 'MyNewPassword'; FLUSH PRIVILEGES;"
 
-       $ sudo mysql -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'Mypasswordisnottthis'; FLUSH PRIVILEGES;"
+      MySQL:
 
-     Substitute Mypasswordisnottthis by your own password and remember it --
-     you will need it in the next step.
-     In case of problems, see the Internet, or the SeisComP forum
-     `thread <https://forum.seiscomp.de/t/upgraded-to-ubuntu-18-04-and-i-broke-my-seiscomp3/1139>`_
-     (for logged-in forum members).
+      .. code-block:: sh
+
+         $ sudo mysql -e "ALTER USER root@localhost IDENTIFIED WITH mysql_native_password BY 'MyNewPassword'; FLUSH PRIVILEGES;"
+
+      Substitute *MyNewPassword* by your own password and remember it --
+      you will need it in the next step.
+      In case of problems, see the Internet, or the SeisComP forum
+      `thread <https://forum.seiscomp.de/t/upgraded-to-ubuntu-18-04-and-i-broke-my-seiscomp3/1139>`_
+      (for logged-in forum members).
 
 #. Run `seiscomp setup` and enter your preferred IDs and password. For the other
    fields, you can always accept the default values. ::
