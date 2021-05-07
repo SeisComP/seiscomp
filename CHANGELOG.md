@@ -4,6 +4,30 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
+* magnitudes
+
+  * Add ability to configure magnitudes with region-dependent
+    parameters in global module configuration
+
+* Events list, e.g. scolv, scesv
+
+  * Add interactive filtering of events inside or outside defined regions
+
+* scolv
+
+  * Add pick uncertainty bars to residual plots in Location tab
+  * Add number of shown / loaded events in title of Events tab
+
+* scesv
+
+  * Add number of shown / loaded events in title of Events tab
+
+* scevent
+
+  * evrc plugin provides more control options for setting and overwriting event types
+
+## 4.Y.Z
+
 * dependencies
 
   * Change Debian 10 dependencies to Python3 and Qt5
@@ -11,7 +35,6 @@ All notable changes to SeisComP are documented here.
 * scevent
 
   * Use application name for processing-info log
-  * evrc plugin provides more control options for setting and overwriting event types
 
 * scmssort
 
@@ -23,15 +46,6 @@ All notable changes to SeisComP are documented here.
   * Do not crash when requesting data for non-existing networks from SDS archive
   * Add error output when attempting retrieve non-existing data from SDS archvie
 
-* magnitudes
-
-  * Add ability to configure magnitudes with region-dependent
-    parameters in global module configuration
-
-* Events list, e.g. scolv, scesv
-
-  * Add interactive filtering of events inside or outside defined regions
-
 * scmv
 
   * Report erroneous configuration of `stations.groundMotionFilter` and stop
@@ -39,13 +53,7 @@ All notable changes to SeisComP are documented here.
 
 * scolv
 
-  * Add pick uncertainty bars to residual plots in Location tab
-  * Add number of shown / loaded events in title of Events tab
   * Add number of used / unused station magnitudes to Magnitudes tab
-
-* scesv
-
-  * Add number of shown / loaded events in title of Events tab
 
 * scheli
 
