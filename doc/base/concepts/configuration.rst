@@ -14,12 +14,12 @@ configuration, inventory (station metadata) and application station bindings.
 Overview
 ========
 
-The SeisComP framework defines a common schema to read configuration
+The |scname| framework defines a common schema to read configuration
 parameters. This schema is used by all :ref:`SeisComP modules <concepts_modules>` with names starting with
 **sc**, e.g. `scautopick`. Other applications might be available as well
 such as third party applications which use other naming conventions.
 
-A way to discover an application that uses the SeisComP configuration schema
+A way to discover an application that uses the |scname| configuration schema
 is to call it with ``--help``. The first lines of a typical output look
 like this:
 
@@ -31,7 +31,7 @@ like this:
      --config-file arg                     Use alternative configuration file
 
 The reason for that is that there are also other applications which do not
-use the SeisComP core and client libraries such Seedlink plugins, Seedlink
+use the |scname| core and client libraries such Seedlink plugins, Seedlink
 itself and some others which are not part of the trunk source package. Those
 applications need translators to generate their native configuration when
 the configuration is updated (``seiscomp update-config``).
@@ -61,28 +61,29 @@ in SCML format.
 
 .. _concepts_configuration-configs:
 
-Module and bindings configuration
-=================================
+Configuration of Modules
+========================
 
-Modules provide 2 types of configurations:
+|scname| modules provide 2 types of configurations:
 
 * :ref:`Module configurations <global_modules_config>` define module control parameters
   which are equally applied to all operations on waveforms, event parameters, etc.
 
-  *All* :ref:`daemon modules <concepts_modules_daemon>` *and some*
-  :ref:`command-line tools <concepts_modules_commandline>` *provide module configurations.*
+  **All** :ref:`daemon modules <concepts_modules_daemon>` and **some**
+  :ref:`command-line tools <concepts_modules_commandline>` provide module configurations.
+  *Module configurations are overridden by bindings configurations.*
 
-* :ref:`Bindings configurations <global_bindings_config>` define control parameters per
+* :ref:`Binding configurations <global_bindings_config>` define control parameters per
   station and even stream. They are used for station- and even stream-specific definitions, e.g. the data
   acquisition from a particular station or server using :ref:`seedlink` or the
   phase detection by :ref:`scautopick`.
 
-  *Only some* :ref:`daemon modules <concepts_modules>` *provide bindings.
-  Bindings configuratios override module configurations.*
+  In contrast to module configuration, **only some** :ref:`daemon modules <concepts_modules>`
+  and a very few :term:`GUI modules <GUI>` provide bindings.
+  *Binding configurations override module configurations.*
 
 Whether or not a module considers bindings configurations can be read in the module
-configuration panel of :ref:`scconfig`. Bindings are configured e.g. in the Bindings
-panel of scconfig.
+configuration panel of :ref:`scconfig`.
 
 .. raw:: html
 
@@ -123,7 +124,7 @@ The order of files also represents the order of loading. There are three
 directories involved:
 
 #. :file:`$SEISCOMP_ROOT/etc/defaults/`: This directory ships with the distribution
-   of SeisComP and should never be touched. All contained files might be
+   of |scname| and should never be touched. All contained files might be
    overwritten with the next software update.
 #. :file:`$SEISCOMP_ROOT/etc/`: This directory will never be populated by a software
    update and it is save to store global application configuration files there.
@@ -158,11 +159,15 @@ Bindings configuration
 Bindings configure parameters specific to stations and for a certain module or application.
 A station might require a custom set of parameters for e.g. data acquisition from
 a remote data logger or server, for processing or
-displaying. The SeisComP design is that bindings will be stored
+displaying. |scname| design is that bindings will be stored
 in the database. All applications requiring this information read the them from the
 database.
 In this way consistent inventory and its bindings will be distributed.
 
+.. hint ::
+
+   Bindings can be conveniently configured in the Bindings panel of :ref:`scconfig`.
+   Read the section :ref:`scconfig-bindings` for instructions.
 
 .. _config-fig-binding:
 
@@ -407,6 +412,7 @@ directory and it takes care that they synchronize with the database when process
 
    scconfig modules bindings configuration panel.
 
+
 Example: global bindings
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -439,6 +445,7 @@ The meta data of a binding are:
 * module name
 
 The actual binding data are the key value pairs.
+
 
 Reading bindings
 ~~~~~~~~~~~~~~~~
@@ -493,6 +500,7 @@ can be specified with ``--key-dir``:
 
    $ bindings2cfg --key-dir /tmp/key -o config.xml
 
+
 Summary
 ~~~~~~~
 
@@ -503,6 +511,7 @@ Summary
 * An application never reads ``etc/key``
 * Bindings are being read from the database or an XML file
 
+
 Related tools
 ~~~~~~~~~~~~~
 
@@ -512,20 +521,21 @@ Related tools
 * :ref:`scconfig`
 
 
-Format
-======
+Format of parameters
+--------------------
 
 The :term:`trunk` configuration files are simple text files where each line
 is a name-value pair.
 
 .. warning::
 
-   In contrast to previous versions of SeisComP the parameter names are now
+   In contrast to previous versions of |scname| the parameter names are now
    case-sensitive. To check configurations from previous versions regarding
    case-sensitivity, :program:`scchkcfg` can be used.
 
+
 Basic
------
+~~~~~
 
 Configuration files are simple text file where each line is a name-value pair
 for one parameter.
@@ -550,8 +560,9 @@ configuration file is important. The file is parsed top-down.
    an error if a string is assigned to a parameter that is expected to be an
    integer.
 
+
 Comments
---------
+~~~~~~~~
 
 Everything following an unescaped **#** (hash) is a comment and is going to
 be ignored. Blank lines and white spaces are ignored by the parser as well
@@ -571,7 +582,7 @@ string, two backslashes should be used (**\\\\\\\\**).
 
 
 Lists
------
+~~~~~
 
 Values can be either scalar values or lists. List items are separated by commas.
 
@@ -596,8 +607,9 @@ quotes ("). Whitespaces are removed in unquoted and unescaped values.
 
 The value of the parameter tuples is now `["1,2", "3,4"]`.
 
+
 Multi-line
-----------
+~~~~~~~~~~
 
 Values can extend over multiple lines if a backslash is appended to each line
 
@@ -615,8 +627,9 @@ Values can extend over multiple lines if a backslash is appended to each line
                    green, blue,\
                    indigo, violet
 
+
 Namespaces
-----------
+~~~~~~~~~~
 
 A basic usage of variable names is to organize them in namespaces. A common
 habit is to separate namespaces and variable names with a period character:
@@ -660,8 +673,9 @@ The final list of parameter names is:
 
 .. _concepts_configuration_variables:
 
+
 Variables
----------
+~~~~~~~~~
 
 Environment or preceding configuration variables can be used in the configuration of
 SeisComP modules with `${var}`, e.g.
@@ -672,13 +686,13 @@ SeisComP modules with `${var}`, e.g.
    myPath = ${homeDir}/test
    myseiscomp = ${SEISCOMP_ROOT}
 
-Internal SeisComP variables can be used with `@var@`, e.g.
+Internal |scname| variables can be used with `@var@`, e.g.
 
 .. code-block:: sh
 
    autoloc.stationConfig = @DATAGDIR@/autoloc/station.conf
 
-Available internal SeisComP variables are:
+Available internal |scname| variables are:
 
 +------------------+-----------------------------+
 | Variable         | Value                       |
@@ -696,7 +710,7 @@ Available internal SeisComP variables are:
 | LOGDIR           | $HOME/.seiscomp/log         |
 +------------------+-----------------------------+
 
-The list of internal SeisComP variables can also be read in the information
+The list of internal |scname| variables can also be read in the information
 panel of :ref:`scconfig`.
 
 
@@ -705,7 +719,8 @@ panel of :ref:`scconfig`.
    :align: center
    :width: 18cm
 
-   scconfig information panel indicating the internal SeisComP variables.
+   scconfig information panel indicating the internal |scname| variables.
+
 
 References
 ==========

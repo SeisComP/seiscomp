@@ -1,1 +1,1 @@
-apt install libqtgui4 libqt4-xml libqt4-opengl libqt4-sql-sqlite libqt4-svg
+apt install libqt5gui5 libqt5xml5 libqt5opengl5 libqt5sql5-sqlite libqt5svg5

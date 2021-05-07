@@ -110,7 +110,7 @@ std::string quote(const std::string &str) {
 
 struct DefaultLogger : Logger {
 	void log(LogLevel l, const char *filename, int line, const char *msg) {
-		if ( filename != NULL && *filename != '\0' )
+		if ( filename && *filename != '\0' )
 			std::cerr << filename << ":" << line << ": ";
 
 		switch ( l ) {
@@ -229,7 +229,7 @@ std::vector<bool> Config::getVec<bool>(const std::string& name) const {
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Config::Config()
-: _stage(0), _resolveReferences(true), _logger(&__logger__), _symbolTable(NULL),
+: _stage(0), _resolveReferences(true), _logger(&__logger__), _symbolTable(nullptr),
   _trackVariables(false) {
 	init();
 }
@@ -240,13 +240,7 @@ Config::Config()
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Config::~Config() {
-	if ( _symbolTable ) {
-		_symbolTable->decrementObjectCount();
-		if ( _symbolTable->objectCount() <= 0 ) {
-			delete _symbolTable;
-			_symbolTable = NULL;
-		}
-	}
+	releaseSymbolTable();
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -305,7 +299,7 @@ bool Config::readInternalConfig(const std::string &file,
 		_symbolTable->decrementObjectCount();
 		if ( _symbolTable->objectCount() <= 0 ) {
 			delete _symbolTable;
-			_symbolTable = NULL;
+			_symbolTable = nullptr;
 		}
 	}
 	_symbolTable = symbolTable;
@@ -431,7 +425,7 @@ void Config::writeContent(std::ostream &os, const Symbol *symbol,
 		std::vector<std::string> values;
 		std::string errorMsg;
 		if ( !multilineLists
-		  || !parseRValue(symbol->content, values, NULL, false, true, &errorMsg) )
+		  || !parseRValue(symbol->content, values, nullptr, false, true, &errorMsg) )
 			os << symbol->content;
 		else if ( !values.empty() ) {
 			os << values[0];
@@ -618,7 +612,7 @@ bool Config::parseFile(std::istream &is) {
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void Config::init() {
-	if ( _symbolTable == NULL ) {
+	if ( !_symbolTable ) {
 		_symbolTable = new SymbolTable;
 		_symbolTable->setLogger(_logger);
 	}
@@ -810,7 +804,7 @@ bool Config::reference(const std::string &name,
                        const SymbolTable *symtab)
 {
 	if ( symtab ) {
-		const Symbol* symbol = NULL;
+		const Symbol* symbol = nullptr;
 		try {
 			symbol = symtab->get(name);
 		}
@@ -825,7 +819,7 @@ bool Config::reference(const std::string &name,
 	}
 
 	char *env = getenv(name.c_str());
-	if ( env != NULL ) {
+	if ( env ) {
 		values.clear();
 		values.push_back(std::string(env));
 		return true;
@@ -1336,6 +1330,22 @@ std::vector<std::string> Config::getStrings(const std::string& name, bool* error
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+bool Config::getStrings(std::vector<std::string>& value, const std::string& name) const {
+	addVariable(name, "list:string");
+	try {
+		value = getStrings(name);
+		return true;
+	}
+	catch ( ... ) {
+		return false;
+	}
+}
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool Config::setInt(const std::string& name, int value) {
 	addVariable(name, "list:int");
 	return set<int>(name, value);
@@ -1438,6 +1448,21 @@ bool Config::remove(const std::string& name)
 inline void Config::addVariable(const std::string &name, const char *type) const {
 	if ( _trackVariables ) {
 		const_cast<Config*>(this)->_variables[name] = type;
+	}
+}
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+void Config::releaseSymbolTable() {
+	if ( _symbolTable ) {
+		_symbolTable->decrementObjectCount();
+		if ( _symbolTable->objectCount() <= 0 ) {
+			delete _symbolTable;
+			_symbolTable = nullptr;
+		}
 	}
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

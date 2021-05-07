@@ -102,7 +102,7 @@ Check it works
 
 * The fdsnws-station service should give a list of networks configured
   and served by the service, e.g. visiting
-  http://localhost:8080/fsdnws/station/1/query?level=network&format=text
+  http://localhost:8080/fdsnws/station/1/query?level=network&format=text
   produces::
 
     #Network|Description|StartTime|EndTime|TotalStations

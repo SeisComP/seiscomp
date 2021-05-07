@@ -71,6 +71,20 @@ for |scname|. Continue with the :ref:`general setup <getting-started-setup>`.
     be used to set up the MariaDB database. **The option "Create database" must
     therefore be unchecked or answered with "no"**.
 
+.. warning ::
+
+   As of MySQL 8.0 the password encryption and policy has changed resulting in
+   errors when connecting to a MySQL server. In 04/2021 this
+   does not seem to be fully supported in **Ubuntu 20.04**. Therefore, you need
+   to use a native password on the MySQL server.
+
+   .. code-block:: sh
+
+      $ sudo mysql -u root -p
+
+           ALTER USER 'sysop'@'%%' IDENTIFIED WITH mysql_native_password BY 'my_super_secret_password_matching_the_mysql_password_validation_policy';
+
+   Preferably use MariaDB instead of MySQL!
 
 .. _getting-started-postgresql:
 

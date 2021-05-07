@@ -83,7 +83,7 @@ A client can be directed to either the one or the other queue:
 
 .. code-block:: sh
 
-   connection.queue = localhost/production
+   connection.server = localhost/production
 
 or
 
@@ -136,13 +136,13 @@ database X. Modules running on computer A, use
 
 .. code-block:: sh
 
-   connection.queue = localhost/production
+   connection.server = localhost/production
 
 while modules running on computer B use
 
 .. code-block:: sh
 
-   connection.queue = computerA/production
+   connection.server = computerA/production
 
 The database connection which is used by scmaster will be sent to the clients
 when they connect so no explicit database configuration is necessary.

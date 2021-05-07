@@ -88,6 +88,10 @@ def error(msg):
     sys.stderr.write("error: %s\n" % msg)
     sys.stderr.flush()
 
+def warning(msg):
+    sys.stderr.write("warning: %s\n" % msg)
+    sys.stderr.flush()
+
 
 # Returns a seiscomp.kernel.Module instance
 # from a given path with a given name
@@ -469,7 +473,7 @@ def on_exec_help(args):
 
 def on_list(args, flags):
     if len(args) < 1:
-        error("expected argument: {modules|aliases|enabled|disabled}")
+        error("expected argument: {modules|aliases|enabled|disabled|started}")
         return 1
 
     if args[0] == "modules":
@@ -500,48 +504,91 @@ def on_list(args, flags):
         return 0
 
     if args[0] == "enabled":
+        found = 0
         for mod in mods:
             if env.isModuleEnabled(mod.name) or \
                isinstance(mod, seiscomp.kernel.CoreModule):
                 print(mod.name)
+                found += 1
+        print("Summary: %i modules enabled" % found)
         return 0
 
     if args[0] == "disabled":
+        found = 0
         for mod in mods:
             if not env.isModuleEnabled(mod.name) and \
                not isinstance(mod, seiscomp.kernel.CoreModule):
                 print(mod.name)
+                found += 1
+        print("Summary: %i modules disabled" % found)
         return 0
 
-    error("wrong argument: {modules|aliases|enabled|disabled} expected")
+    if args[0] == "started":
+        found = 0
+        for mod in mods:
+            if shouldModuleRun(mod.name):
+                print(mod.name)
+                found += 1
+        print("Summary: %i modules started" % found)
+        return 0
+
+    error("wrong argument: {modules|aliases|enabled|disabled|started} expected")
     return 1
 
 
 def on_list_help(args):
-    print("Prints the result of a query. 4 queries are currently supported:")
+    print("Prints the result of a query. 5 queries are currently supported:")
     print(" modules: lists all existing modules")
     print(" aliases: lists all existing aliases")
     print(" enabled: lists all enabled modules")
     print(" disabled: lists all disabled modules")
+    print(" started: lists all started modules")
     print()
     print("Examples:")
     print("$ seiscomp list aliases")
-    print("scautopick2 -> scautopick")
+    print("l1autopick -> scautopick")
 
 
 def on_status(args, flags):
+    if len(args) > 0 and args[0] == "enabled":
+        found = 0
+        for mod in mods:
+            if env.isModuleEnabled(mod.name) or \
+               isinstance(mod, seiscomp.kernel.CoreModule):
+                   mod.status(shouldModuleRun(mod.name))
+                   found += 1
+        print("Summary: %i modules enabled" % found)
+        return 0
+
+    if len(args) > 0 and args[0] == "started":
+        found = 0
+        for mod in mods:
+            if shouldModuleRun(mod.name):
+                mod.status(shouldModuleRun(mod.name))
+                found += 1
+        print("Summary: %i modules started" % found)
+        return 0
+
     for mod in mods:
         if mod.name in args or len(args) == 0:
             mod.status(shouldModuleRun(mod.name))
+
     return 0
 
 
 def on_status_help(args):
-    print("Prints the status of all or a list of modules and gives a ")
-    print("warning if a module should run but doesn't.")
+    print("Prints the status of ")
+    print(" * all modules")
+    print(" * all enabled modules")
+    print(" * all started modules")
+    print(" * a list of modules")
+    print("and gives a warning if a module should run but doesn't.")
     print("This command supports csv formatted output via '--csv' switch.")
     print()
     print("Examples:")
+    print("$ seiscomp status started")
+    print("$ seiscomp status enabled")
+    print("scmaster             is not running [WARNING]")
     print("$ seiscomp status scautopick")
     print("scautopick           is not running")
     print("$ seiscomp --csv status scautopick")
@@ -589,7 +636,7 @@ def on_print_help(args):
     print(" env: prints environment variables necessary to run SeisComP modules.")
     print()
     print("Examples:")
-    print("Source SC3 environment into current bash session")
+    print("Source SC environment into current bash session")
     print("$ eval $(seiscomp/bin/seiscomp print env)")
 
 
@@ -812,13 +859,15 @@ def on_alias(args, flags):
             pass
 
         if has_alias:
-            error("%s is already an alias for %s" % (args[1], toks[1]))
-            return 1
+            warning("%s is already registered as alias for %s in $SEISCOMP_ROOT/etc/descriptions/aliases" % (args[1], toks[1]))
+            warning("  + do not register againg but trying to link the required files")
+        else:
+            print("registered alias '%s' in $SEISCOMP_ROOT/etc/descriptions/aliases" % (args[1]))
 
         # Check if target exists already
         if os.path.exists(os.path.join(SEISCOMP_ROOT, mod1)):
-            error("module '%s' exists already" % args[1])
-            return 1
+            warning("link '%s' to '%s' exists already in $SEISCOMP_ROOT%s/bin/" % (args[1], mod2, SEISCOMP_ROOT))
+            warning("  + do not link again")
 
         try:
             f = open(ALIAS_FILE, 'w')
@@ -884,6 +933,7 @@ def on_alias(args, flags):
             error("expected one argument for remove: alias-name")
             return 1
 
+        print("Remove alias '%s'" % args[1])
         #  check and remove alias line in etc/descriptions/aliases
         has_alias = False
         lines = []
@@ -909,14 +959,14 @@ def on_alias(args, flags):
             pass
 
         if not has_alias:
-            error("%s is not defined as an alias" % args[1])
+            error("  + %s is not defined as an alias" % args[1])
             if len(lines) == len(new_lines):
                 return 1
 
         try:
             f = open(ALIAS_FILE, 'w')
         except:
-            error("failed to open/create alias file: %s" % ALIAS_FILE)
+            error("  + failed to open/create alias file: %s" % ALIAS_FILE)
             return 1
 
         if len(lines) > 0:
@@ -928,11 +978,18 @@ def on_alias(args, flags):
 
         #  delete defaults etc/defaults/mod1.cfg
         default_cfg = os.path.join("etc", "defaults", args[1] + ".cfg")
-        print("Remove default configuration: %s" % default_cfg)
+        print("  + remove default configuration: %s" % default_cfg)
         try:
             os.remove(os.path.join(SEISCOMP_ROOT, default_cfg))
         except:
             pass
+
+        cfg = os.path.join("etc", args[1] + ".cfg")
+        if os.path.isfile(cfg):
+            warning("  + keep configuration file '%s/%s'" % (SEISCOMP_ROOT, cfg))
+        cfg = os.path.join(os.path.expanduser("~"), ".seiscomp", args[1] + ".cfg")
+        if os.path.isfile(cfg):
+            warning("  + keep configuration file '%s'" % (cfg))
 
         # remove symlink from bin/mod1
         if os.path.exists(os.path.join("bin", args[1])):
@@ -943,7 +1000,7 @@ def on_alias(args, flags):
             sym_link = ""
 
         if sym_link:
-            print("Remove app symlink: %s" % sym_link)
+            print("  + remove app symlink: %s" % sym_link)
             try:
                 os.remove(os.path.join(SEISCOMP_ROOT, sym_link))
             except:
@@ -951,7 +1008,7 @@ def on_alias(args, flags):
 
         # remove symlink from etc/init/mod1.py
         init_scr = os.path.join("etc", "init", args[1] + ".py")
-        print("Remove init script: %s" % init_scr)
+        print("  + remove init script: %s" % init_scr)
         try:
             os.remove(os.path.join(SEISCOMP_ROOT, init_scr))
         except:
@@ -959,7 +1016,7 @@ def on_alias(args, flags):
 
         return 0
 
-    error("wrong command '%s': expected 'create' or 'remove'" % args[0])
+    error("Wrong command '%s': expected 'create' or 'remove'" % args[0])
     return 1
 
 

@@ -38,7 +38,11 @@ _seiscomp()
 			return 0
 		;;
 		list)
-			COMPREPLY=( $(compgen -W "modules aliases enabled disabled" -- ${cur}) )
+			COMPREPLY=( $(compgen -W "modules aliases enabled disabled started" -- ${cur}) )
+			return 0
+		;;
+		status)
+			COMPREPLY=( $(compgen -W "$(eval $bin list modules | cut -d " " -f1)" -- ${cur}) $(compgen -W "enabled started" -- ${cur}))
 			return 0
 		;;
 		print)

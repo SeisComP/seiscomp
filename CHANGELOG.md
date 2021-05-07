@@ -2,6 +2,77 @@
 
 All notable changes to SeisComP are documented here.
 
+## X.Y.Z
+
+* magnitudes
+
+  * Add ability to configure magnitudes with region-dependent
+    parameters in global module configuration
+
+* Events list, e.g. scolv, scesv
+
+  * Add interactive filtering of events inside or outside defined regions
+
+* scolv
+
+  * Add pick uncertainty bars to residual plots in Location tab
+  * Add number of shown / loaded events in title of Events tab
+
+* scesv
+
+  * Add number of shown / loaded events in title of Events tab
+
+* scevent
+
+  * evrc plugin provides more control options for setting and overwriting event types
+
+## 4.Y.Z
+
+* dependencies
+
+  * Change Debian 10 dependencies to Python3 and Qt5
+
+* scevent
+
+  * Use application name for processing-info log
+
+* scmssort
+
+  * Add new `list` option to filter miniSEED data by stream lists
+  * Add some statistics to stderr output in verbosity mode
+
+* scart
+
+  * Do not crash when requesting data for non-existing networks from SDS archive
+  * Add error output when attempting retrieve non-existing data from SDS archvie
+
+* scmv
+
+  * Report erroneous configuration of `stations.groundMotionFilter` and stop
+    smoothly
+
+* scolv
+
+  * Add number of used / unused station magnitudes to Magnitudes tab
+
+* scheli
+
+  * Allow scaling of traces per maximum row amplitude
+
+* trunk
+
+  * Add support for permanent redirects to fdsnws recordstream
+  * Fix MiniSEED reader for records without blockette 1000 and
+    for records with blockette 1000 at an offset beyond the
+    first 128 bytes
+
+* seiscomp
+
+  * Create aliases even if some links already exist
+  * List remaining configuration files after removing aliases
+  * Support requesting status of enabled and of started modules
+  * Support requesting list of started modules
+
 ## 4.5.0
 
 ```SC_API_VERSION 14.2.0```

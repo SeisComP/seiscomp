@@ -1,29 +1,78 @@
 .. _build:
 
-***********************************
-Compiling |scname| from source code
-***********************************
-
-To build from source you will need to clone from one or more repositories.
-Here we describe the simplest case only.
+*************************
+Checkout the repositories
+*************************
 
 .. caution ::
 
    For production systems only use the official releases
    from `SeisComP`_, `gempa GmbH`_ or compile from the corresponding release tags in this repository.
 
-Before building, **install all the dependencies**,
-as described below in :ref:`build_dependencies`.
+The SeisComP software collection is distributed among several repositories.
+For more information about compilation and build configuration head over to
+`Github`_.
 
-The easiest way to compile |scname| is to use the :file:`Makefile.cvs` file
-provide, which creates a build directory inside the source tree.
+To checkout all repositories to build a complete SeisComP distribution the
+following script can be used:
 
 .. code-block:: sh
 
-		$ make -f Makefile.cvs
-		$ cd build
-		$ make
-		$ make install
+   #!/bin/bash
+
+   if [ $# -eq 0 ]
+   then
+       echo "$0 <target-directory>"
+       exit 1
+   fi
+
+   target_dir=$1
+   repo_path=https://github.com/SeisComP
+
+   echo "Cloning base repository into $1"
+   git clone $repo_path/seiscomp.git $1
+
+   echo "Cloning base components"
+   cd $1/src/base
+   git clone $repo_path/seedlink.git
+   git clone $repo_path/common.git
+   git clone $repo_path/main.git
+   git clone $repo_path/extras.git
+
+   echo "Cloning external base components"
+   git clone $repo_path/contrib-gns.git
+   git clone $repo_path/contrib-ipgp.git
+   git clone $repo_path/contrib-sed.git
+
+   echo "Done"
+
+   cd ../../
+
+   echo "If you want to use 'mu', call 'mu register --recursive'"
+   echo "To initialize the build, run 'make'."
+
+
+***********************************
+Compiling |scname| from source code
+***********************************
+
+To build from source you will need to clone from one or more repositories (see
+above).
+
+Before building, **install all the dependencies**,
+as described below in :ref:`build_dependencies`.
+
+The easiest way to compile |scname| is to use the :file:`Makefile` file
+provided which creates a build directory inside the source tree.
+
+Perform the following steps:
+
+* Clone all required repositories (see above)
+* Run :file:`make`
+* Configure the build
+* Press 'c' as long as 'g' appears
+* Press 'g' to generate the Makefiles
+* Enter the build directory and run :file:`make install`
 
 By default all files are installed under :file:`$HOME/seiscomp`.
 This location can be changed with `cmake` or with its front end `ccmake`.
@@ -37,84 +86,42 @@ a build directory, configure the build and start it:
    $ cd sc-build
    $ ccmake /path/to/sc-src
    # Configure with ccmake
-   $ make
    $ make install
-
-Step-by-step instructions
-=========================
-
-1. Check out |scname| source code from Github
-
-   .. code-block:: sh
-
-      sysop@host:~$ git clone https://github.com/SeisComP/seiscomp.git sc-src  # FIXME
-      sysop@host:~$ cd sc-src
-      sysop@host:~/sc-src$
-
-
-2. Change into the desired branch (if not master) or check out tag
-
-   .. code-block:: sh
-
-      sysop@host:~/sc-src$ git checkout 4.0.0
-
-3. Configure the build.
-
-   |scname| uses `cmake` as build environment. For users that are not experienced
-   with `cmake` it is recommended to use `ccmake`, an ncurses frontend which is launched
-   by the default :file:`Makefile.cvs`.
-
-   .. code-block:: sh
-
-      sysop@host:~/sc-src$ make -f Makefile.cvs
-
-   This will bring up the `cmake` frontend. Press `c` to configure the build initially.
-   If `cmake` is being used, the variables can be passed as command line options:
-
-   .. code-block:: sh
-
-       sysop@host:~/sc-src/build$ cmake -DCMAKE_INSTALL_PREFIX=/path/to/install/dir ..
-
-   With `ccmake` some components can be activated and deactivated such as database
-   backends you want to compile support for. The default just enables MySQL. Once done
-   with options, press `c` again to apply the changes. If everything runs without errors,
-   press `g` to generate the Makefiles. `ccmake` will quit if the Makefiles have been
-   generated:
-
-   .. code-block:: sh
-
-      *** To build the sources change into the 'build' directory and enter make[ install] ***
-      sysop@host:~/sc-src$ cd build
-      sysop@host:~/sc-src/build$ make
-
-   If `make` finished without errors, install |scname| with
-
-   .. code-block:: sh
-
-      sysop@host:~/sc-src/build$ make install
-
-   All files are then installed under :file:`~/seiscomp` or
-   under the directory you have
-   specified with ```CMAKE_INSTALL_PREFIX```.
-
 
 .. _build_dependencies:
 
 Dependencies
 ============
 
-To compile the sources the following development packages are required (Redhat/CentOS package names):
+To compile the sources the following development packages are required
+(Debian/Ubuntu package names):
 
+- g++
+- git
+- cmake + cmake-gui
+- libboost
+- libxml2-dev
 - flex
-- libxml2-devel
-- boost-devel
-- openssl-devel
-- ncurses-devel
-- mysql-devel
-- postgresql-devel (optional)
-- python-devel
-- m2crypto-devel
-- qt4-devel
+- libfl-dev
+- libssl-dev
+- crypto-dev
+- python-dev (optional)
+- python-numpy (optional)
+- libqt4-dev (optional)
+- qtbase5-dev (optional)
+- libmysqlclient-dev (optional)
+- libpq-dev (optional)
+- libsqlite3-dev (optional)
+- ncurses-dev (optional)
+
+The Python development libraries are required if Python wrappers should be
+compiled which is the default configuration. The development files must
+match the used Python interpreter of the system. If the system uses Python3
+then Python3 development files must be present in exactly the same version
+as the used Python3 interpreter. The same holds for Python2.
+
+Python-numpy is required if Numpy support is enable which is also
+the default configuration.
 
 References
 ==========
@@ -123,3 +130,4 @@ References
 
 .. _`SeisComP` : https://www.seiscomp.de/downloader/
 .. _`gempa GmbH` : https://www.gempa.de
+   _`Github` : https://github.com/SeisComP/seiscomp/blob/master/README.md
