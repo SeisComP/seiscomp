@@ -54,6 +54,9 @@ All notable changes to SeisComP are documented here.
 * trunk
 
   * Add support for permanent redirects to fdsnws recordstream
+  * Fix MiniSEED reader for records without blockette 1000 and
+    for records with blockette 1000 at an offset beyond the
+    first 128 bytes
 
 * seiscomp
 
