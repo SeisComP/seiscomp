@@ -73,6 +73,10 @@ All notable changes to SeisComP are documented here.
   * Support requesting status of enabled and of started modules
   * Support requesting list of started modules
 
+* scconfig
+
+  * Add search for parameters in bindings panel: Ctrl + f
+
 ## 4.5.0
 
 ```SC_API_VERSION 14.2.0```
