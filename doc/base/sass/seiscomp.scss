@@ -622,6 +622,12 @@ dl {
 			margin-left: $contentSpacing/2;
 		}
 	}
+
+	&.method {
+		dt {
+			margin-bottom: $contentSpacing;
+		}
+	}
 }
 
 

@@ -130,4 +130,4 @@ References
 
 .. _`SeisComP` : https://www.seiscomp.de/downloader/
 .. _`gempa GmbH` : https://www.gempa.de
-   _`Github` : https://github.com/SeisComP/seiscomp/blob/master/README.md
+.. _`Github` : https://github.com/SeisComP/seiscomp/blob/master/README.md
