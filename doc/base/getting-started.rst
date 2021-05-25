@@ -13,25 +13,50 @@ graphical frontend to :program:`seiscomp` is :ref:`scconfig`.
 
 .. _getting-started-initial:
 
-Initial Configuration
+Database Configuration
 =====================
 
 To configure |scname| with the database initially execute the steps listed in the
 section :ref:`Getting started <getting-started-setup>`. You will need to consider
 differences in the database:
 
-* :ref:`MariaDB / MySQL <getting-started-mysql>`,
+* :ref:`MySQL <getting-started-mysql>` (not recommended),
+* :ref:`MariaDB <getting-started-mariadb>`,
 * :ref:`PostgreSQL <getting-started-postgresql>`.
 
 
 .. _getting-started-mysql:
 
-MariaDB / MySQL
----------------
+MySQL
+-----
+
+The initial configuration by the :program:`seiscomp` script or the
+wizard of :ref:`scconfig` allows to create and configure the MySQL database
+for |scname|. If you want to use MySQL continue with the
+:ref:`general setup <getting-started-setup>`.
+
+.. warning ::
+
+   * Using MySQL is currently not recommended. Preferably use MariaDB instead of MySQL
+     as MariaDB is the default SQL flavor of most supported Linux systems!
+   * As of MySQL 8.0 the password encryption and policy has changed resulting in
+     errors when connecting to a MySQL server. In 04/2021 this
+     does not seem to be fully supported in **Ubuntu 20.04**. Therefore, you need
+     to use a native password on the MySQL server.
+
+     .. code-block:: sh
+
+        $ sudo mysql -u root -p
+
+          ALTER USER 'sysop'@'%%' IDENTIFIED WITH mysql_native_password BY 'my_super_secret_password_matching_the_mysql_password_validation_policy';
 
 
-The initial configuration allows to create and configure the MariaDB/MySQL database
-for |scname|. Continue with the :ref:`general setup <getting-started-setup>`.
+.. _getting-started-mariadb:
+
+MariaDB
+-------
+
+For setting up the |scname| database with MariaDB follow the instructions below.
 
 .. note::
 
@@ -40,51 +65,37 @@ for |scname|. Continue with the :ref:`general setup <getting-started-setup>`.
     in Ubuntu requires additional steps. They must be taken **before** the initial
     configuration in order to allow |scname| to make use of MariaDB.
 
-    The full procedure including database optimization is:
+The full procedure to create the database including database optimization is:
 
-    .. code-block:: sh
+.. code-block:: sh
 
-        user@host:~$ sudo systemctl enable mariadb
-        user@host:~$ sudo mysql_secure_installation
-            provide new root password
-            answer all questions with yes [Enter]
+   user@host:~$ sudo systemctl enable mariadb
+   user@host:~$ sudo mysql_secure_installation
+        provide new root password
+        answer all questions with yes [Enter]
 
-        user@host:~$ sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
-            [mysqld]
-            innodb_buffer_pool_size = <your value>
-            innodb_flush_log_at_trx_commit = 2
+   user@host:~$ sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
+        [mysqld]
+        innodb_buffer_pool_size = <your value>
+        innodb_flush_log_at_trx_commit = 2
 
-        user@host:~$ sudo systemctl restart mysql
+   user@host:~$ sudo systemctl restart mysql
 
-        user@host:~$ sudo mysql -u root -p
-            CREATE DATABASE seiscomp CHARACTER SET utf8 COLLATE utf8_bin;
-            grant usage on seiscomp.* to sysop@localhost identified by 'sysop';
-            grant all privileges on seiscomp.* to sysop@localhost;
-            grant usage on seiscomp.* to sysop@'%' identified by 'sysop';
-            grant all privileges on seiscomp.* to sysop@'%';
-            flush privileges;
-            quit
+   user@host:~$ sudo mysql -u root -p
+        CREATE DATABASE seiscomp CHARACTER SET utf8 COLLATE utf8_bin;
+        grant usage on seiscomp.* to sysop@localhost identified by 'sysop';
+        grant all privileges on seiscomp.* to sysop@localhost;
+        grant usage on seiscomp.* to sysop@'%' identified by 'sysop';
+        grant all privileges on seiscomp.* to sysop@'%';
+        flush privileges;
+        quit
 
-        user@host:~$ mysql -u sysop -p seiscomp < ~/seiscomp/share/db/mysql.sql
+   user@host:~$ mysql -u sysop -p seiscomp < ~/seiscomp/share/db/mysql.sql
 
-    Currently, the :ref:`scconfig` wizard and :program:`seiscomp setup` cannot
-    be used to set up the MariaDB database. **The option "Create database" must
-    therefore be unchecked or answered with "no"**.
+Currently, the :ref:`scconfig` wizard and :command:`seiscomp setup` cannot
+be used to set up the MariaDB database. **The option "Create database" must
+therefore be unchecked or answered with "no"**.
 
-.. warning ::
-
-   As of MySQL 8.0 the password encryption and policy has changed resulting in
-   errors when connecting to a MySQL server. In 04/2021 this
-   does not seem to be fully supported in **Ubuntu 20.04**. Therefore, you need
-   to use a native password on the MySQL server.
-
-   .. code-block:: sh
-
-      $ sudo mysql -u root -p
-
-           ALTER USER 'sysop'@'%%' IDENTIFIED WITH mysql_native_password BY 'my_super_secret_password_matching_the_mysql_password_validation_policy';
-
-   Preferably use MariaDB instead of MySQL!
 
 .. _getting-started-postgresql:
 
@@ -125,14 +136,14 @@ created database but **do not create the database again**.
 
 .. _getting-started-setup:
 
-General |scname| setup
-----------------------
+General |scname| Setup
+======================
 
-Use :program:`seiscomp setup` or the wizard from within :ref:`scconfig` (:kbd:`Ctrl+N`) for the
-initial configuration including the database parameters. :program:`seiscomp setup` is the
+Use :command:`seiscomp setup` or the wizard from within :ref:`scconfig` (:kbd:`Ctrl+N`) for the
+initial configuration including the database parameters. :command:`seiscomp setup` is the
 successor of the former :program:`./setup` script.
 
-In :program:`seiscomp setup` default values are given in brackets []: ::
+In :command:`seiscomp setup` default values are given in brackets []: ::
 
    user@host:~$ seiscomp/bin/seiscomp setup
 
@@ -199,7 +210,7 @@ supports two main backends: MySQL and PostgreSQL. Select the backend to be used
 here but be prepared that only for the MySQL backend the setup can help to
 create the database and tables for you. If you are using PostgreSQL you have
 to provide a working database with the correct schema. The schema files are
-part of the distribution and can be found in :file:`share/db/postgresql.sql`.
+part of the distribution and can be found in :file:`seiscomp/share/db/postgresql.sql`.
 
 .. note::
 
@@ -218,9 +229,12 @@ part of the distribution and can be found in :file:`share/db/postgresql.sql`.
 
    Create database [yes]:
 
-If MySQL is selected it is possible to let :program:`seiscomp setup` to create
-the database and all tables for you. If the database has been created already,
-say 'no' here.
+.. warning ::
+
+   If MySQL is selected it is possible to let :command:`seiscomp setup` to create
+   the database and all tables for you. Otherwise currently not and you need to set up the
+   database manually following the :ref:`given instructions <getting-started-mysql>`.
+   If the database has been created already, answer 'no' here.
 
 ----
 
@@ -254,7 +268,7 @@ database with the same name, say 'yes' here.
    Database read-only password [sysop]:
 
 Setup the various database options valid for all database backends. Give
-:command:`.help` for more information.
+:command:`help` for more information.
 
 ----
 
@@ -273,13 +287,68 @@ without doing anything.
    Command? [P]:
 
 
-Activate Modules
-================
+Environment variables
+=====================
 
-After the installation all module are disabled for auto start. If :program:`seiscomp start`
+Commands can be used along with the :program:`seiscomp` script located in *seiscomp/bin/seiscomp*.
+Read the section :ref:`sec-management-commands` for more details on :program:`seiscomp`.
+E.g. |scname| modules can be executed like ::
+
+   user@host:~$ seiscomp/bin/seiscomp exec scrttv
+
+Calling :program:`seiscomp` with its full path, e.g.
+
+.. code-block:: sh
+
+   user@host:~$ seiscomp/bin/seiscomp [command]
+
+will load the full |scname| environment.
+Providing the full path allows starting other |scname| modules in a specific
+|scname| environment. Thus, multiple SeisComP installations can be maintained
+and referred to on the same machine.
+
+:program:`seiscomp` can also be used for printing the considered |scname| environment ::
+
+   user@host:~$ seiscomp/bin/seiscomp print env
+
+resulting in ::
+
+   export SEISCOMP_ROOT="/home/sysop/seiscomp"
+   export PATH="/home/sysop/seiscomp/bin:$PATH"
+   export LD_LIBRARY_PATH="/home/sysop/seiscomp/lib:$LD_LIBRARY_PATH"
+   export PYTHONPATH="/home/sysop/seiscomp/lib/python:$PYTHONPATH"
+   export MANPATH="/home/sysop/seiscomp/share/man:$MANPATH"
+   source "/home/sysop/seiscomp/share/shell-completion/seiscomp.bash"
+
+For convenience, the default |scname| installation can be referred to, when defining
+the required system variables, e.g. in :file:`~/.bashrc`. Then, the |scname| environment
+is known to the logged in user and |scname| modules can be
+executed without the :program:`seiscomp` script.
+
+For setting the environment
+
+#. Use the :program:`seiscomp` script itself to generate the parameters and write
+   the parameters to :file:`~/.bashrc` ::
+
+      user@host:~$ seiscomp/bin/seiscomp print env >> ~/.bashrc
+
+#. Load the environment or log out and in again ::
+
+      user@host:~$ source ~/.bashrc
+
+Thereafter, modules can be executed by their names without involving :program:`seiscomp`,
+e.g. ::
+
+   user@host:~$ scrttv
+
+
+Activate/Enable Modules
+=======================
+
+After the installation all module are disabled for auto start. If :command:`seiscomp start`
 is called, nothing will happen until modules are enabled. To enable a set of modules,
-:program:`seiscomp enable` needs to be called with a list of modules.
-For example, for a processing system with Seedlink for data acquisition,
+:command:`seiscomp enable` needs to be called with a list of modules.
+For example, for a processing system with SeedLink for data acquisition,
 you may use:
 
 .. code-block:: sh
@@ -293,8 +362,8 @@ you may use:
    enabled scmag
    enabled scevent
 
-A successive call of :program:`seiscomp start` will then start all enabled
-modules. This is also required to restart enabled modules with :program:`seiscomp check`.
+A successive call of :command:`seiscomp start` will then start all enabled
+modules. This is also required to restart enabled modules with :command:`seiscomp check`.
 
 Alternatively, :ref:`scconfig<scconfig>` can be used to enable/disable
 and to start/stop/restart modules.
@@ -358,7 +427,7 @@ Update Configuration, Start Everything
 ======================================
 
 To update the configuration when new stations have been added or modified,
-:program:`seiscomp update-config` needs to be run. This creates configuration
+:command:`seiscomp update-config` needs to be run. This creates configuration
 files of modules that do not use the configuration directly, writes the trunk
 bindings to the database and synchronizes the inventory with the database.
 
@@ -368,7 +437,7 @@ bindings to the database and synchronizes the inventory with the database.
    [output]
 
 After the configuration has been updated and the inventory has been synchronized,
-call :program:`seiscomp start` to start all enabled modules:
+call :command:`seiscomp start` to start all enabled modules:
 
 .. code-block:: sh
 
@@ -381,7 +450,7 @@ call :program:`seiscomp start` to start all enabled modules:
    starting scmag
    starting scevent
 
-Now the system should run. To check everything again, :program:`seiscomp check`
+Now the system should run. To check everything again, :command:`seiscomp check`
 can be run which should print *is running* for all started modules.
 If everything is working, the analysis tools can be started, e.g. MapView.
 

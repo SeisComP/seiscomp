@@ -254,7 +254,10 @@ or contact the |scname| developers to add support for your distribution.
    removed before installing the alternative server. For MySQL instead of MariaDB
    use: ::
 
-      bash install-mysql-server.sh
+      root@host:~$ sh install-mysql-server.sh
+
+   Preferably use MariaDB instead of MySQL as MariaDB is the default for the
+   supported Linux distributions!
 
 .. note ::
 
@@ -273,12 +276,12 @@ Database Server Configuration
 MariaDB / MySQL
 ---------------
 
-* For better performance with a MySQL/MariaDB database, adjust the memory pool size. Test
+* For better performance with a MariaDB/MySQL database, adjust the memory pool size. Test
   the default of the **buffer\_pool_size** before making the change:
 
   .. code-block:: sh
 
-    mysql -u sysop -p
+    $ mysql -u sysop -p
     show variables like 'innodb_buffer_pool_size';
 
   The optimum **buffer\_pool_size** depends on your system (RAM size) and only needs

@@ -145,55 +145,6 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
         mysql-client libqtgui4 libqt4-xml libqt4-opengl libqt4-sql-sqlite
 
 
-#. *OPTIONAL*. You may set some environment variables.
-   For bash users, print the environment variables and copy them to your
-   :file:`.bashrc`
-
-   .. code-block:: bash
-
-      $ ~/seiscomp/bin/seiscomp print env
-      export SEISCOMP_ROOT=/home/sysop/seiscomp
-      export PATH=/home/sysop/seiscomp/bin:$PATH
-      export LD_LIBRARY_PATH=/home/sysop/seiscomp/lib:$LD_LIBRARY_PATH
-      export PYTHONPATH=/home/sysop/seiscomp/lib/python:$PYTHONPATH
-      export MANPATH=/home/sysop/seiscomp/share/man:$MANPATH
-      export LC_ALL=C
-      source /home/sysop/seiscomp/share/shell-completion/seiscomp.bash
-
-   The path to your home directory will likely differ from
-   `/home/sysop` as shown above.
-   Cut and paste your own output from the
-   `seiscomp print env` command, not what is shown here.
-   Edit your :file:`.bashrc` file, inserting the command from the output. ::
-
-     $ vi .bashrc
-
-   Then reload the contents of :file:`.bashrc` in your current environment ::
-
-     $ source ~/.bashrc
-
-   After this, you won't have to type `~/seiscomp/bin/seiscomp` as
-   the `seiscomp` command will be added to your shell's path.
-
-   .. hint::
-
-      If, when you attempt to run a SeisComP command such as `scconfig` or `scolv`,
-      you receive an error message like::
-
-        scconfig: command not found
-
-      then the most likely explanation is that you have not set your SeisComP
-      environment variables correctly.
-
-      Run the `seiscomp` command with the full path to
-      where you installed.
-      The seven lines of output are not actually run by the 'seiscomp print env'
-      command; you need to cut and paste them into your shell to run them.
-      You can also add these to your :file:`.bashrc`, :file:`.profile`,
-      or equivalent file with
-      commands to be run every time you log in.
-
-
 #. Database. For a MariaDB installation:
 
    .. code-block:: sh
@@ -232,9 +183,61 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
       Substitute *MyNewPassword* by your own password and remember it --
       you will need it in the next step.
-      In case of problems, see the Internet, or the SeisComP forum
-      `thread <https://forum.seiscomp.de/t/upgraded-to-ubuntu-18-04-and-i-broke-my-seiscomp3/1139>`_
+      In case of problems, search the Internet, or the
+      `SeisComP forum thread <https://forum.seiscomp.de/t/upgraded-to-ubuntu-18-04-and-i-broke-my-seiscomp3/1139>`_
       (for logged-in forum members).
+
+
+Configuration
+=============
+
+Find a detailed description in section :ref:`getting-started` and short guide below.
+
+#. You may set some system environment variables.
+   For bash users, print the environment variables and copy them to your
+   :file:`.bashrc`
+
+   .. code-block:: bash
+
+      $ ~/seiscomp/bin/seiscomp print env
+      export SEISCOMP_ROOT=/home/sysop/seiscomp
+      export PATH=/home/sysop/seiscomp/bin:$PATH
+      export LD_LIBRARY_PATH=/home/sysop/seiscomp/lib:$LD_LIBRARY_PATH
+      export PYTHONPATH=/home/sysop/seiscomp/lib/python:$PYTHONPATH
+      export MANPATH=/home/sysop/seiscomp/share/man:$MANPATH
+      export LC_ALL=C
+      source /home/sysop/seiscomp/share/shell-completion/seiscomp.bash
+
+   The path to your home directory will likely differ from `/home/sysop` as shown above.
+   Cut and paste your own output from the
+   `seiscomp print env` command, not what is shown here.
+   Edit your :file:`~/.bashrc` file, inserting the command from the output. ::
+
+      $ vi ~/.bashrc
+
+   Then reload the contents of :file:`.bashrc` in your current environment ::
+
+   $ source ~/.bashrc
+
+   After this, you won't have to type `~/seiscomp/bin/seiscomp` as
+   the `seiscomp` command will be added to your shell's path.
+
+   .. hint::
+
+      If, when you attempt to run a SeisComP command such as `scconfig` or `scolv`,
+      you receive an error message like ::
+
+         scconfig: command not found
+
+      then the most likely explanation is that you have not set your SeisComP
+      environment variables correctly.
+
+      Run the `seiscomp` command with the full path to
+      where you installed.
+      The seven lines of output are not actually run by the 'seiscomp print env'
+      command; you need to cut and paste them into your shell to run them.
+      You can also add these to your :file:`.bashrc`, :file:`.profile`,
+      or equivalent file with commands to be run every time you log in.
 
 #. Run `seiscomp setup` and enter your preferred IDs and password. For the other
    fields, you can always accept the default values. ::
