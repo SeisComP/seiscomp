@@ -46,6 +46,11 @@ All notable changes to SeisComP are documented here.
   * Do not crash when requesting data for non-existing networks from SDS archive
   * Add error output when attempting retrieve non-existing data from SDS archvie
 
+* GUI
+
+  * Add number of origins per event to event list
+  * Add copy cell operation to context menu to all tables in event editor
+
 * scmv
 
   * Report erroneous configuration of `stations.groundMotionFilter` and stop
@@ -76,6 +81,11 @@ All notable changes to SeisComP are documented here.
 * scconfig
 
   * Add search for parameters in bindings panel: Ctrl + f
+
+* sccnv
+
+  * Include moment tensor derived origins into ouput document for
+    QuakeML 1.2
 
 ## 4.5.0
 
