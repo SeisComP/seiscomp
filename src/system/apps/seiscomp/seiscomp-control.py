@@ -866,7 +866,7 @@ def on_alias(args, flags):
 
         # Check if target exists already
         if os.path.exists(os.path.join(SEISCOMP_ROOT, mod1)):
-            warning("link '%s' to '%s' exists already in $SEISCOMP_ROOT%s/bin/" % (args[1], mod2, SEISCOMP_ROOT))
+            warning("link '%s' to '%s' exists already in %s/bin/" % (args[1], mod2, SEISCOMP_ROOT))
             warning("  + do not link again")
 
         try:
@@ -1168,7 +1168,7 @@ if os.path.islink(sys.argv[0]):
         sys.argv[0] = os.path.join(os.path.dirname(sys.argv[0]), target)
 
 # Guess SEISCOMP_ROOT from path of called script, directory links are not
-# resolved allowing to create separate SC3 environments
+# resolved allowing to create separate SeisComP environments
 if os.path.isabs(sys.argv[0]):
     root_path = sys.argv[0]
 else:

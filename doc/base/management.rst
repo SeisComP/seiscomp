@@ -47,8 +47,12 @@ it to the ``help`` command.
    seiscomp/bin/seiscomp help [command]
 
 
-Commands
-========
+.. _sec-management-commands:
+
+seiscomp Commands
+=================
+
+The *seiscomp* script can be executed with additional commands:
 
 
 * **help** [command]
@@ -159,8 +163,8 @@ Commands
 
 .. _system-management-shell:
 
-Shell
-=====
+SeisComP Shell
+==============
 
 The |scname| shell can be started with
 
@@ -249,10 +253,13 @@ Examples
    defined and what module the station is bound to.
 
 
-Init scripts
-============
+.. _system-management-init:
 
-All module init scripts are placed in :file:`etc/init`. :program:`seiscomp`
+Module Init Scripts
+===================
+
+All modules which can run in the background as daemon modules have init scripts.
+The init scripts are placed in :file:`etc/init`. :program:`seiscomp`
 loads all .py files and tries to find a class called Module. This class is
 then instantiated with the environment object passed as only parameter
 to the constructor. If no error occurred then the module is registered.
