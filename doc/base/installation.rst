@@ -373,7 +373,53 @@ MariaDB / MySQL
 PostgreSQL
 ----------
 
-When using PostgreSQL, the database server must be initialized and secured.
+* When using PostgreSQL, the database server must be initialized and secured.
+
+* By default PostgresSQL does not allow to login with username and password which leads
+to the fact that :program:`scmaster` can not connect to the database after SeisComP
+database initialization. Here an example how to enable user/password authentication
+for local and remote connections.
+
+
+.. code-block:: sh
+
+     # TYPE  DATABASE        USER            ADDRESS                 METHOD
+      # IPv4 local connections:
+      host    seiscomp        sysop           0.0.0.0/0               md5
+      host    all             all             127.0.0.1/32            ident
+
+.. note ::
+
+     The order of the rules matters and the location of the configuration file
+     can differ between distributions.
+
+     :program:`Ubuntu`:
+
+     :file:`/etc/postgresql/10/main/pg_hba.conf`
+
+     :program:`CentOS`:
+
+     :file:`/var/lib/pgsql/data/pg_hba.conf`
+
+* By default PostgresSQL accepts local connections only. If the database server
+and clients are on different machines please change the listen address as
+follows.
+
+.. code-block:: sh
+
+    listen_addresses = 0.0.0.0/0
+
+.. note ::
+
+     The location of the configuration file can differ between distributions.
+
+     :program:`Ubuntu`:
+
+     :file:`/etc/postgresql/10/main/postgresql.conf`
+
+     :program:`CentOS`:
+
+     :file:`/var/lib/pgsql/data/postgresql.conf`
 
 
 Next steps
