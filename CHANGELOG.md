@@ -26,7 +26,7 @@ All notable changes to SeisComP are documented here.
 
   * evrc plugin provides more control options for setting and overwriting event types
 
-## 4.Y.Z
+## 4.6.0
 
 * dependencies
 
