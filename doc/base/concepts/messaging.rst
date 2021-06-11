@@ -4,21 +4,23 @@
 Messaging system
 ****************
 
+
 Scope
 =====
 
 This chapter describes the messaging system used for exchanging parameter messages between
 different :ref:`SeisComP modules <concepts_modules>` during runtime.
 
+
 Overview
 ========
 
-A typical real-time SeisComP system consists of data processing and other modules (clients)
+A typical real-time |scname| system consists of data processing and other modules (clients)
 and a messaging bus.
 The messaging bus connects all the clients letting them exchange information by messages
 through this bus.
 The messaging system is a fundamental concept of SeisComP following the publish-subscribe
-pattern [#wppubsub]_.
+pattern [#wppubsub]_. It is provided by the |scname| module :ref:`scmaster`.
 
 Clients can be producers (sending messages) and/or consumers (receiving
 messages). The basic concept is really simple: A producer sends a message
@@ -26,7 +28,7 @@ messages). The basic concept is really simple: A producer sends a message
 process it. That's it. That is a very generic approach which requires clients
 to understand the message content of each other.
 
-In SeisComP this common messaging language consists of well defined message
+In |scname| this common messaging language consists of well defined message
 types and contents. The vast majority of messages sent around are so called
 **notifiers**.
 
@@ -63,6 +65,9 @@ notifier).
 
    Schematic view on a distributed SeisComP system.
 
+
+.. _messaging-queue :
+
 Queues
 ======
 
@@ -91,6 +96,9 @@ or
 
    scautopick -H localhost/production
 
+
+.. _messaging-groups :
+
 Groups
 ======
 
@@ -109,15 +117,67 @@ A consumer of the PICK group messages is :ref:`scautoloc`. Whenever it receives
 a new pick it will try to associate it or to locate a seismic event. After it
 succeeded it will send an origin to the LOCATION group and so on.
 
+
+.. _messaging-scheme :
+
+Scheme
+======
+
+The messaging allows unencrypted or encrypted connections which are specified by
+the scheme parameter of the connection:
+
+* `scmp` (default): unencrypted,
+* `scmps`: encrypted.
+
+Scheme, host, port and :ref:`queue <messaging-scheme>` together form the connection URL of the messaging
+system which is configurable in :confval:`connection.server` or set by the
+command-line option ``-H``.
+
+Examples:
+
+* Connect to the production queue of the messaging on localhost with default port.
+  Not using encryption `scmp` can be assumed implicitly in global configuration ::
+
+     connection.server = localhost/production
+
+  On the command line use, e.g. ::
+
+     $ scolv -H localhost
+
+* Connect to the production queue of the messaging on localhost with default port.
+  Using non-default secure encryption and port the scheme and the port must be
+  provided explicitly  in global configuration ::
+
+     connection.server = scmps://localhost18181/production
+
+  On the command line use, e.g. ::
+
+     $ scolv -H scmps://localhost:18181/production
+
+
+.. _messaging-db :
+
 Database
 ========
 
-The :ref:`database <concepts_database>` is populated with all kind of information which might depend on
+The :ref:`database <concepts_database>` is populated by :ref:`scmaster` with all
+kind of information which might depend on
 each other. It is crucial for operations that write operations are well
 synchronized. Part of the messaging contract is that clients get read-only
 database access from :ref:`scmaster` and that they will never attempt to write
-into the database. In a fully-fledged SeisComP system the only instance that is
-allowed to populate the database is the dbstore plugin of scmaster.
+into the database. In a fully-fledged |scname| system the only instance that is
+allowed to populate the database is the dbstore plugin of :ref:`scmaster`.
+
+When connecting from a client to the messaging, the database connection parameters
+are reported by :ref:`scmaster`. They can be overridden by the global configuration
+or command-line option ``-d``.
+
+Example: ::
+
+   scolv -H localhost -d mysql://sysop:sysop@localhost/seiscomp-test
+
+
+.. _messaging-distribution :
 
 Module distribution
 ===================
@@ -144,14 +204,23 @@ while modules running on computer B use
 
    connection.server = computerA/production
 
-The database connection which is used by scmaster will be sent to the clients
+The database connection which is used by :ref:`scmaster` will be reported to the clients
 when they connect so no explicit database configuration is necessary.
+
+The messaging connection can be explicitly provided on the command line using the
+option ``-H`` considering the comments on the :ref:`scheme <messaging-scheme>` and
+:ref:`queue <messaging-queue>`, e.g.
+
+.. code-block:: sh
+
+   scolv -H computerA/production
+
 
 Web frontend
 ============
 
-When running scmaster a web frontend is available which can be adjusted to provide system information.
-The default port to access the web frontend is 18180:
+When running :ref:`scmaster` a web frontend is available which can be adjusted to
+provide system information. The default port to access the web frontend is 18180:
 
 .. code-block:: sh
 
@@ -162,7 +231,8 @@ The default port to access the web frontend is 18180:
    :align: center
    :width: 10cm
 
-   scmaster: web frontend
+   scmaster: Web frontend
+
 
 Related modules
 ===============
@@ -170,6 +240,7 @@ Related modules
 * :ref:`scmaster`
 * :ref:`scm`
 * :ref:`scmm`
+
 
 References
 ==========
