@@ -79,7 +79,7 @@ The full procedure to create the database including database optimization is:
         innodb_buffer_pool_size = <your value>
         innodb_flush_log_at_trx_commit = 2
 
-   user@host:~$ sudo systemctl restart mysql
+   user@host:~$ sudo systemctl restart mariadb
 
    user@host:~$ sudo mysql -u root -p
         CREATE DATABASE seiscomp CHARACTER SET utf8 COLLATE utf8_bin;
