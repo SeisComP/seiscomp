@@ -281,7 +281,7 @@ MariaDB / MySQL
 
   .. code-block:: sh
 
-    $ mysql -u sysop -p
+    $ mysql -u root -p
     show variables like 'innodb_buffer_pool_size';
 
   The optimum **buffer\_pool_size** depends on your system (RAM size) and only needs
