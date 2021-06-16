@@ -26,6 +26,12 @@ All notable changes to SeisComP are documented here.
 
   * evrc plugin provides more control options for setting and overwriting event types
 
+## 4.6.1
+
+* scolv
+
+  * Add number of used / unused station magnitudes to Magnitudes tab (missing from 4.6.0)
+
 ## 4.6.0
 
 * dependencies
