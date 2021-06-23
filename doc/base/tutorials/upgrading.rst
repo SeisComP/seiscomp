@@ -497,6 +497,39 @@ Script for renaming the seedlink buffer directories:
    done
 
 
+Downsampling data with chain_plugin
+-----------------------------------
+
+Since SeisComP3 in version Jakarta-2020.030 and SeisComP in version 4.0.0, SeedLink stream processors ("proc" parameter) can be attached to both, stations and plugin instances. In order to distinguish between the two cases, either ``proc`` (attach to station) or ``sources.*.proc`` (attach to plugin instance) parameter (or both) can be used in SeedLink bindings.
+
+Stream processor is an object defined in XML, which is used to create MiniSEED from raw data and optionally downsample the data. What is the difference between attaching a stream processor to station and plugin instance?
+
+Let's take a look at the following stream processor definition in $SEISCOMP_ROOT/share/templates/seedlink/streams_stream100.tpl:
+
+.. code-block:: XML
+
+   <proc name="stream100">
+     <tree>
+       <input name="Z" channel="Z" location="" rate="100"/>
+       <input name="N" channel="N" location="" rate="100"/>
+       <input name="E" channel="E" location="" rate="100"/>
+       <node filter="FS2D5" stream="BH">
+         <node filter="F96C">
+           <node filter="ULP" stream="LH">
+             <node filter="VLP" stream="VH"/>
+           </node>
+         </node>
+       </node>
+     </tree>
+   </proc>
+
+This creates 20Hz BH\*, 1Hz LH\* and 0.1Hz VH\* streams from 100Hz Z, N, E raw data. If one plugin instance is used for the station, it does not make a difference whether this is attached to station or plugin instance. But suppose the station is using two plugin instances—one for broad-band and the other for strong-motion data—, both sending Z, N and E channels. Now if the stream processor is attached to station, data from both plugin instances would mixed up. We must attach a different stream processor to each plugin instance—one producing BH\*, LH\* and VH\* and the other one producing BN\* and so on.
+
+In case of chain_plugin, there is normally just one instance, so stream processors attached to this instance apply to all stations, which is normally not what we want. Therefore the chain_plugin does not support the ``sources.*.proc`` option.
+
+Before SeisComP3 in version Jakarta-2020.030 and SeisComP in version 4.0.0, stream processors were always attached to stations, even when ``sources.*.proc`` was used. This means when upgrading, ``sources.chain.proc`` must be renamed to ``proc`` and streams\_\*.tpl templates must be moved one level up, from $SEISCOMP_ROOT/seiscomp/share/templates/seedlink/chain/ to $SEISCOMP_ROOT/seiscomp/share/templates/seedlink/. Note that using a stream processor with chain_plugin makes sense only when raw data is generated (:ref:`sources.chain.channels.unpack`).
+
+
 References
 ==========
 
