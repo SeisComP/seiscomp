@@ -26,6 +26,14 @@ All notable changes to SeisComP are documented here.
 
   * evrc plugin provides more control options for setting and overwriting event types
 
+## 4.7.0
+
+```SC_API_VERSION 14.3.0```
+
+* scolv
+
+  * Fix display of tooltips in origin map and magnitude map
+
 ## 4.6.1
 
 * scolv
