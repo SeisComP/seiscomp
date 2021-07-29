@@ -20,7 +20,7 @@ All notable changes to SeisComP are documented here.
 
 * scesv
 
-     * Add number of shown / loaded events in title of Events tab
+    * Add number of shown / loaded events in title of Events tab
 
 * scevent
 
@@ -30,9 +30,17 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 14.3.0```
 
+* documentation
+
+    * Update SDK Python examples
+
 * scolv
 
     * Fix display of tooltips in origin map and magnitude map
+
+* scquery
+
+    * Add --print-header option for generating information on the query as a header of the output
 
 ## 4.6.1
 
@@ -49,6 +57,8 @@ All notable changes to SeisComP are documented here.
 * scevent
 
     * Use application name for processing-info log
+    * Add new journal action EvRefresh: Select the preferred origin, the preferred
+      magnitude, update the region, call processors loaded with plugins.
 
 * scmssort
 
@@ -100,6 +110,10 @@ All notable changes to SeisComP are documented here.
 
     * Include moment tensor derived origins into ouput document for
       QuakeML 1.2
+
+* scxmldump
+
+    * Add -J, --journal option allowing to export the journal
 
 ## 4.5.0
 
