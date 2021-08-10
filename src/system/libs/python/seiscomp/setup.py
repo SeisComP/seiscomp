@@ -71,19 +71,19 @@ def block(txt, width=80):
 
 
 class SetupNode:
-    def __init__(self, parent, left, right, inp):
+    def __init__(self, parent, inp, next = None):
         self.parent = parent
-        self.prev = left
-        self.next = right
-        self.input = inp
+        self.next = next
         self.child = None
         self.activeChild = None
 
         self.modname = ""
         self.groupname = ""
-        self.path = ""
+        self.input = inp
         self.value = ""
-        self.lastInGroup = False
+        self.path = ""
+        self.optionValue = None
+        self.isOption = False
 
 
 class Option:
@@ -117,8 +117,12 @@ def dumpTree(cfg, node):
         cfg.setString(node.modname + "." + node.path, node.value)
 
     if node.activeChild:
-        dumpTree(cfg, node.activeChild)
-    if not node.lastInGroup and not node.next is None:
+        if node.isOption:
+            dumpTree(cfg, node.activeChild.child)
+        else:
+            dumpTree(cfg, node.activeChild)
+
+    if not node.next is None:
         dumpTree(cfg, node.next)
 
 
@@ -131,7 +135,7 @@ class Simple:
     """
 
     def __init__(self):
-        self.setupTree = SetupNode(None, None, None, None)
+        self.setupTree = SetupNode(None, None)
         self.paths = []
         self.currentNode = None
 
@@ -257,13 +261,10 @@ Hint: Entered values starting with a dot (.) are handled
                 'name'), g, g.get('name', "") + ".")
 
     def addInputs(self, obj, parent, modname, group, xml, prefix):
-        last = parent.child
-
-        # find the last child and add the current list to it
-        while not last is None:
-            if last.next is None:
-                break
-            last = last.next
+        childs = parent.child;
+        if not childs is None:
+            while childs.next:
+                childs = childs.next
 
         inputs = xml.findall("input")
         for inp in inputs:
@@ -287,24 +288,35 @@ Hint: Entered values starting with a dot (.) are handled
             if obj:
                 obj.inputs.append(input_)
 
-            node = SetupNode(parent, last, None, input_)
+            opts = inp.findall("option")
+
+            node = SetupNode(parent, input_)
             node.path = prefix + input_.name
             node.value = input_.default_value
             node.modname = modname
             node.groupname = group
+            node.isOption = len(opts) > 0
 
-            if not last is None:
-                last.next = node
-            last = node
+            if childs is None:
+                childs = node
+                parent.child = childs
+            else:
+                childs.next = node
+                childs = childs.next;
 
-            if parent.child is None:
-                parent.child = last
+            options = node.child
 
-            opts = inp.findall("option")
             for opt in opts:
                 value = opt.get('value')
                 if not value:
                     raise Exception("%s: option without value" % prefix)
+
+                optionNode = SetupNode(parent, input_)
+                optionNode.path = node.path + "." + value
+                optionNode.modname = modname
+                optionNode.groupname = group
+                optionNode.isOption = False
+                optionNode.optionValue = value
 
                 option = Option(value)
                 try:
@@ -312,11 +324,16 @@ Hint: Entered values starting with a dot (.) are handled
                 except Exception:
                     pass
                 input_.options.append(option)
-                self.addInputs(option, node, modname,
-                               group, opt, node.path + ".")
 
-        if not obj is None and not last is None:
-            last.lastInGroup = True
+                if options is None:
+                    options = optionNode
+                    node.child = options
+                else:
+                    options.next = optionNode
+                    options = options.next
+
+                self.addInputs(option, optionNode, modname,
+                               group, opt, node.path + ".")
 
     def fillTree(self):
         while True:
@@ -454,48 +471,26 @@ Hint: Entered values starting with a dot (.) are handled
 
     def nextStep(self):
         self.currentNode.activeChild = None
-        step = True
+        self.paths.append(self.currentNode)
 
         # Choice?
-        if len(self.currentNode.input.options) > 0:
-            for opt in self.currentNode.input.options:
-                if opt.value == self.currentNode.value:
-                    if len(opt.inputs) > 0:
-                        # Found new path to descend
-                        child = self.currentNode.child
-
-                        # Search corresponding child in the three
-                        while child:
-                            if child.input == opt.inputs[0]:
-                                self.paths.append(self.currentNode)
-                                self.currentNode.activeChild = child
-                                self.currentNode = self.currentNode.activeChild
-                                step = False
-                                break
-
-                            child = child.next
+        if self.currentNode.isOption:
+            child = self.currentNode.child
+            while not child is None:
+                if child.optionValue == self.currentNode.value:
+                    if not child.child is None:
+                        self.currentNode.activeChild = child
+                        self.currentNode = child.child
+                        return
 
                     break
+                child = child.next
 
-        if step:
-            pushed = False
-            if self.currentNode.next is None:
-                parent = self.currentNode.parent
+        next = self.currentNode.next
+        while next is None and not self.currentNode.parent is None:
+            self.currentNode = self.currentNode.parent
+            if not self.currentNode.optionValue is None:
+                continue
+            next = self.currentNode.next
 
-                while not parent is None:
-                    if not parent.next is None:
-                        self.paths.append(self.currentNode)
-                        pushed = True
-                        self.currentNode = parent
-                        break
-
-                    parent = parent.parent
-
-                if parent is None:
-                    self.paths.append(self.currentNode)
-                    self.currentNode = None
-                    return
-
-            if not pushed:
-                self.paths.append(self.currentNode)
-            self.currentNode = self.currentNode.next
+        self.currentNode = next
