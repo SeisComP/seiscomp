@@ -18,6 +18,15 @@ All notable changes to SeisComP are documented here.
 
     * Add --print-header option for generating information on the query as a header of the output
 
+* GUI
+
+    * Add azimuthal gap column to event list which is initially hidden. To activate it, add
+      `"Azi. Gap(°)"` to `eventlist.visibleColumns` (note the double quotes)
+
+* scesv
+
+    * Add azimuthal gap to hypocenter panel
+
 ## 4.6.1
 
 * scolv
