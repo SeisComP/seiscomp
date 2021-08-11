@@ -8036,7 +8036,7 @@ Reference
 
       Describes the type of magnitude. This is a free\-text field because
       it is impossible to cover all existing magnitude type designations
-      with an enumeration. Possible values are unspecified magitude \(M\),
+      with an enumeration. Possible values are unspecified magnitude \(M\),
       local magnitude \(ML\), body wave magnitude \(Mb\),
       surface wave magnitude \(MS\), moment magnitude \(Mw\),
       duration magnitude \(Md\), coda magnitude \(Mc\), MH, Mwp, M50, M100, etc.
@@ -16239,7 +16239,7 @@ Reference
 
       :param passedQC: boolean
 
-      An optional flag that indiciates whether a station magnitude has passed
+      An optional flag that indicates whether a station magnitude has passed
       the quality control or not. For example, if a station magnitude is
       out of the defined distance range but should be associated to a network
       magnitude for further analysis then this flag can be set to false.
