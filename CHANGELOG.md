@@ -26,6 +26,14 @@ All notable changes to SeisComP are documented here.
 
     * evrc plugin provides more control options for setting and overwriting event types
 
+* FixedHypocenter
+
+    * Allow adjusting the hypocenter coordinates interactively in the locator
+      settings of scolv
+
+* GUI
+    * Allow configuration of precision of origin time
+
 ## 4.7.0
 
 ```SC_API_VERSION 14.3.0```
@@ -40,12 +48,14 @@ All notable changes to SeisComP are documented here.
 
 * scquery
 
-    * Add --print-header option for generating information on the query as a header of the output
+    * Add --print-header option for generating information on the query as a
+      header of the output
 
 * GUI
 
-    * Add azimuthal gap column to event list which is initially hidden. To activate it, add
-      `"Azi. Gap(°)"` to `eventlist.visibleColumns` (note the double quotes)
+    * Add azimuthal gap column to event list which is initially hidden. To
+      activate it, add `AzGap"` to `eventlist.visibleColumns`
+    * Add units to columns of tables: Events, Events, Magnitudes
 
 * scesv
 
