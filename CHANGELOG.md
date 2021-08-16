@@ -16,12 +16,14 @@ All notable changes to SeisComP are documented here.
 
 * scquery
 
-    * Add --print-header option for generating information on the query as a header of the output
+    * Add --print-header option for generating information on the query as a
+      header of the output
 
 * GUI
 
-    * Add azimuthal gap column to event list which is initially hidden. To activate it, add
-      `"Azi. Gap(°)"` to `eventlist.visibleColumns` (note the double quotes)
+    * Add azimuthal gap column to event list which is initially hidden. To
+      activate it, add `AzGap"` to `eventlist.visibleColumns`
+    * Add units to columns of tables: Events, Events, Magnitudes
 
 * scesv
 
