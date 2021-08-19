@@ -42,11 +42,11 @@ fi
 target_dir=$1
 repo_path=https://github.com/SeisComP
 
-echo "Cloning base repository into $1"
-git clone $repo_path/seiscomp.git $1
+echo "Cloning base repository into $target_dir"
+git clone $repo_path/seiscomp.git $target_dir
 
 echo "Cloning base components"
-cd $1/src/base
+cd $target_dir/src/base
 git clone $repo_path/seedlink.git
 git clone $repo_path/common.git
 git clone $repo_path/main.git
