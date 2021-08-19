@@ -134,3 +134,7 @@ the following global options are available:
 
 1. Enter the build directory and run ```make install```
    to install SeisComP
+
+## Contributing improvements and bug fixes
+
+Please consider [contributing](CONTRIBUTING.md) to the code.
