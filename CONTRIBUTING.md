@@ -57,7 +57,7 @@ in addition to the code a
 
 ## Documentation
 
-1. Follow out [documentation style](doc/base/style-guide.rst).
+1. Follow our [documentation style](doc/base/style-guide.rst).
 
 We appreciate your contributions and we are looking forward to starting
 discussions about new features and existing workflows.
