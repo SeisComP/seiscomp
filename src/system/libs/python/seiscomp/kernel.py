@@ -190,8 +190,16 @@ class Environment(seiscomp.config.Config):
     def stop(self, module, timeout):
         return self.killWait(module, timeout)
 
-    def tryLock(self, module):
-        return subprocess.call("trylock " + self.lockFile(module), shell=True) == 0
+    def tryLock(self, module, timeout = None):
+        if timeout is None:
+            return subprocess.call("trylock " + self.lockFile(module), shell=True) == 0
+        else:
+            try:
+                timeoutSeconds = int(timeout)
+            except:
+                print("Invalid timeout parameter, expected positive integer")
+                raise
+            return subprocess.call("waitlock %d \"%s\"" % (timeoutSeconds, self.lockFile(module)), shell=True) == 0
 
     def killWait(self, module, timeout):
         lockfile = self.lockFile(module)
