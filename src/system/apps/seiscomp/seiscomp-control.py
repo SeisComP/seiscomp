@@ -1114,6 +1114,7 @@ def on_csv_help(args):
 # ------------------------------------------------------------------------------
 useCSV = False
 asRoot = False
+lockTimeout = None
 
 argv = sys.argv[1:]
 argflags = []
@@ -1125,6 +1126,20 @@ while argv:
         argv = argv[1:]
     elif argv[0] == "--asroot":
         asRoot = True
+        argv = argv[1:]
+    elif argv[0] == "--wait":
+        argv = argv[1:]
+        if not argv:
+            print("--wait expects an integer value in seconds")
+            sys.exit(1)
+        try:
+            lockTimeout = int(argv[0])
+        except:
+            print("Wait timeout is not an integer: %s" % argv[0])
+            sys.exit(1)
+        if lockTimeout < 0:
+            print("Wait timeout must be positive: %s" % argv[0])
+            sys.exit(1)
         argv = argv[1:]
     elif argv[0].startswith("--"):
         argflags.append(argv[0][2:])
@@ -1249,7 +1264,7 @@ else:
         pass
 
 if not isChild:
-    if not env.tryLock("seiscomp"):
+    if not env.tryLock("seiscomp", lockTimeout):
         error("Could not get lock %s - is another process using it?" %
               env.lockFile("seiscomp"))
         sys.exit(1)
