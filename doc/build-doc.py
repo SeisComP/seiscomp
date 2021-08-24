@@ -1,20 +1,18 @@
 from __future__ import print_function
-import sys
-import os
-import glob
-import shutil
+
 import codecs
+import getopt
+import glob
+import os
 import re
+import shutil
+import sys
 try:
     # Python 2.5
     from xml.etree import ElementTree
-    from xml.etree.ElementTree import Element
-    from xml.parsers.expat import ExpatError as ParseError
 
 except ImportError:
     from elementtree import ElementTree
-    from elementtree.ElementTree import Element
-    from xml.parsers.expat import ExpatError as ParseError
 
 
 cmdline_templates = {}
@@ -25,6 +23,7 @@ def escapeString(string):
 
 
 def tagname(element):
+    # pylint: disable=W0621
     names = element.tag.split("}")
     if len(names) == 0:
         return ""
@@ -37,6 +36,7 @@ def escape(txt):
 
 
 def xml_desc_lines(n):
+    # pylint: disable=W0621
     desc_node = n.find('description')
     if desc_node is not None and desc_node.text is not None:
         return [l.strip() for l in desc_node.text.strip().replace("\r", "").split('\n')]
@@ -44,13 +44,14 @@ def xml_desc_lines(n):
 
 
 def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
+    # pylint: disable=W0621
     if param_nodes is None and group_nodes is None:
         return ""
     options = ""
 
     for param_node in param_nodes:
         name = param_node.get('name')
-        type = param_node.get('type')
+        type_ = param_node.get('type')
         unit = param_node.get('unit')
 
         # If name is not defined, remove the trailing dot and set name
@@ -61,8 +62,8 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
 
         options += "\n.. confval:: %s%s\n\n" % (prefix, name)
         default = param_node.get('default')
-        if type:
-            options += "   Type: *%s*\n\n" % type
+        if type_:
+            options += "   Type: *%s*\n\n" % type_
         if unit:
             options += "   Unit: *%s*\n\n" % unit
 
@@ -83,17 +84,17 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
         options += "\n"
 
     for struct_node in struct_nodes:
-        struct_prefix = prefix + '\$name.'
+        struct_prefix = prefix + '\$name.' # pylint: disable=W1401
         options += "\n"
         options += ".. note::\n\n"
-        options += "   **%s\***\n" % struct_prefix
+        options += "   **%s\***\n" % struct_prefix # pylint: disable=W1401
 
         desc = xml_desc_lines(struct_node)
         if len(desc) > 0:
             for l in desc:
                 options += "   *" + l + "*\n"
 
-        options += "   \$name is a placeholder for the name to be used"
+        options += "   \$name is a placeholder for the name to be used" # pylint: disable=W1401
         link = struct_node.get('link')
         if link:
             options += " and needs to be added to :confval:`%s` to become active.\n\n" % link
@@ -127,7 +128,7 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
         if len(desc) > 0:
             options += "\n"
             options += ".. note::\n"
-            options += "   **%s\***\n" % group_prefix
+            options += "   **%s\***\n" % group_prefix # pylint: disable=W1401
             for l in desc:
                 options += "   *" + l + "*\n"
             options += "\n\n"
@@ -142,6 +143,7 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
 
 
 def xml_collect_options(mod_node, prefix=""):
+    # pylint: disable=W0621
     cfg_node = mod_node.find('configuration')
     if cfg_node is None:
         return ""
@@ -156,6 +158,7 @@ def xml_collect_options(mod_node, prefix=""):
 
 
 def xml_collect_cmdline(mod_node, publicids_only):
+    # pylint: disable=W0621
     cmd_node = mod_node.find("command-line")
     if cmd_node is None:
         return ""
@@ -201,12 +204,12 @@ Command-line
             for optionref_node in optionref_nodes:
                 try:
                     publicID = optionref_node.text.strip()
-                except:
-                    sys.stderr.write("WARNING: publicID is empty\n")
+                except BaseException:
+                    print("WARNING: publicID is empty", file=sys.stderr)
                     continue
                 if publicID not in cmdline_templates:
-                    sys.stderr.write(
-                        "WARNING: option with publicID '%s' is not available\n" % publicID)
+                    print("WARNING: option with publicID '{}' is not " \
+                          "available".format(publicID), file=sys.stderr)
                     continue
                 options += cmdline_templates[publicID]
 
@@ -250,17 +253,18 @@ Command-line
 
 
 def find_doc_dirs(directory):
+    # pylint: disable=W0621
     visited = set()
     # The followlinks option has been added with Python 2.6
     if sys.version_info >= (2, 6):
-        for root, dirs, files in os.walk(directory, followlinks=True):
+        for root, _, _ in os.walk(directory, followlinks=True):
             if os.path.basename(root) == "descriptions":
                 abs_root = os.path.abspath(os.path.realpath(root))
                 if not abs_root in visited:
                     visited.add(abs_root)
                     yield abs_root
     else:
-        for root, dirs, files in os.walk(directory):
+        for root, _, _ in os.walk(directory):
             if os.path.basename(root) == "descriptions":
                 abs_root = os.path.abspath(os.path.realpath(root))
                 if not abs_root in visited:
@@ -269,6 +273,7 @@ def find_doc_dirs(directory):
 
 
 def get_app_rst(searchpaths, appname):
+    # pylint: disable=W0621
     for path in searchpaths:
         if os.path.exists(os.path.join(path, appname + ".rst")):
             return os.path.join(path, appname + ".rst")
@@ -277,6 +282,7 @@ def get_app_rst(searchpaths, appname):
 
 
 def get_app_binding_rst(searchpaths, appname):
+    # pylint: disable=W0621
     for path in searchpaths:
         if os.path.exists(os.path.join(path, appname + "_binding.rst")):
             return os.path.join(path, appname + "_binding.rst")
@@ -286,6 +292,7 @@ def get_app_binding_rst(searchpaths, appname):
 
 # Copies the contents of src to dst.
 def copy_dir(src, dst):
+    # pylint: disable=W0621
     for f in glob.glob(os.path.join(src, "*")):
         if os.path.isdir(f):
             shutil.copytree(f, os.path.join(dst, os.path.basename(f)))
@@ -294,6 +301,7 @@ def copy_dir(src, dst):
 
 
 def struct_has_named_parameters(node):
+    # pylint: disable=W0621
     param_nodes = node.findall('parameter')
     struct_nodes = node.findall('struct')
     group_nodes = node.findall('group')
@@ -315,35 +323,88 @@ def struct_has_named_parameters(node):
 
     return False
 
+def print_usage(appname, output):
+    print("""usage: {} [options] <build dir>
+
+options:
+    -h [ --help ]       print this help message
+       [ --all ]        include documentation of contributions
+       [ --html ]       generate HTML pages
+       [ --man ]        generate MAN pages
+       [ --pdf ]        generate PDF manual
+""".format(appname), file=output)
+
 
 # MAIN goes here ...
+base_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
+print("Building configuration from '{}'".format(base_dir), file=sys.stderr)
+
+out_build_dir = "build-doc"
+
+
+try:
+    opts, args = getopt.getopt(
+        sys.argv[1:], 'h', ['help', 'all', 'html', 'man', 'pdf'])
+except getopt.GetoptError as e:
+    print("error: {}\n".format(e), file=sys.stderr)
+    print_usage(sys.argv[0], sys.stderr)
+    sys.exit(1)
 
 # By default the contrib directory is ignored when building the
 # documentation. If contrib directories should be included in the
 # build then pass "--all".
 allowContrib = False
+build_html = False
+build_man = False
+build_pdf = False
 
-base_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
-sys.stderr.write("Building configuration from '%s'\n" % base_dir)
+for o, arg in opts:
+    if o in ('-h', '--help'):
+        print_usage(sys.argv[0], sys.stdout)
+        sys.exit(0)
+    if o == '--html':
+        build_html = True
+    if o == '--man':
+        build_man = True
+    if o == '--pdf':
+        build_pdf = True
 
-out_build_dir = "build-doc"
+if not args:
+    print("error: build directory not specified\n", file=sys.stderr)
+    print_usage(sys.argv[0], sys.stderr)
+    sys.exit(1)
+elif len(args) > 1:
+    print("error: to many remaining parameters\n", file=sys.stderr)
+    print_usage(sys.argv[0], sys.stderr)
+    sys.exit(1)
+elif not any([build_html, build_man, build_pdf]):
+    print("error: no build target specified\n", file=sys.stderr)
+    print_usage(sys.argv[0], sys.stderr)
+    sys.exit(1)
 
-for i in range(1, len(sys.argv)):
-    opt = sys.argv[i]
-    if opt == "--all": allowContrib = True
-    else: out_build_dir = sys.argv[i]
+out_build_dir = args[0]
 
-
-# Source directory of all applications
-source_dir = os.path.abspath(os.path.join(base_dir, "..", "src", "base"))
-sys.stderr.write("Using source code repo from '%s'\n" % source_dir)
+print("""Build params
+    output build dir    : {}
+    include contrib dirs: {}
+    build HTML          : {}
+    build MAN           : {}
+    build PDF           : {}""".format(
+        out_build_dir, allowContrib, build_html, build_man, build_pdf),
+      file=sys.stderr)
 
 # Collect doc directories from source tree
-doc_dirs = [dir for dir in find_doc_dirs(source_dir)]
+source_dir = os.path.abspath(os.path.join(base_dir, "..", "src", "base"))
+doc_dirs = list(find_doc_dirs(source_dir))
+print("Using source code repo from '{}' (#doc dirs: {})".format(
+    source_dir, doc_dirs), file=sys.stderr)
 
 if allowContrib:
     source_dir = os.path.abspath(os.path.join(base_dir, "..", "src", "extras"))
-    doc_dirs += [dir for dir in find_doc_dirs(source_dir)]
+    contrib_dirs = list(find_doc_dirs(source_dir))
+    doc_dirs += contrib_dirs
+    print("Using source code repo from '{}' (#doc dirs: {})".format(
+        source_dir, contrib_dirs), file=sys.stderr)
 
 toc_tmp_dir = "toc"
 
@@ -359,8 +420,8 @@ if not os.path.exists(out_struct_dir):
     try:
         os.makedirs(out_struct_dir)
     except Exception as e:
-        sys.stderr.write("ERROR: creating build directory '%s' failed: %s\n" % (
-            out_struct_dir, str(e)))
+        print("ERROR: creating build directory '{}' failed: {}".format(
+            out_struct_dir, e), file=sys.stderr)
         sys.exit(1)
 
 
@@ -377,17 +438,17 @@ for doc_dir in doc_dirs:
         try:
             xmlTree = ElementTree.parse(f)
         except Exception as e:
-            sys.stderr.write("ERROR: %s: parsing failed: %s\n" % (f, str(e)))
+            print("ERROR: {}: parsing failed: {}".format(f, e), file=sys.stderr)
             sys.exit(1)
 
         root = xmlTree.getroot()
         if root is None:
-            sys.stderr.write("ERROR: %s: no root tag defined\n" % f)
+            print("ERROR: {}: no root tag defined".format(f), file=sys.stderr)
             sys.exit(1)
 
         if tagname(root) != "seiscomp":
-            sys.stderr.write(
-                "ERROR: %s: invalid root tag: expected 'seiscomp'\n" % f)
+            print("ERROR: {}: invalid root tag: expected 'seiscomp'".format(f),
+                  file=sys.stderr)
             sys.exit(1)
 
         for node in root:
@@ -395,8 +456,8 @@ for doc_dir in doc_dirs:
             if tag == "module":
                 name = node.get('name')
                 if not name:
-                    sys.stderr.write(
-                        "ERROR: %s: module name not defined\n" % f)
+                    print("ERROR: {}: module name not defined".format(f),
+                          file=sys.stderr)
                     sys.exit(1)
 
                 # The global configuration will be handled differently
@@ -418,7 +479,7 @@ for doc_dir in doc_dirs:
                 # Add node to category map
                 try:
                     categories[category].append(node)
-                except:
+                except BaseException:
                     categories[category] = [node]
 
                 app_nodes.append(node)
@@ -426,39 +487,39 @@ for doc_dir in doc_dirs:
             elif tag == "plugin":
                 name = node.get('name')
                 if not name:
-                    sys.stderr.write(
-                        "ERROR: %s: plugin name not defined\n" % f)
+                    print("ERROR: {}: plugin name not defined".format(f),
+                          file=sys.stderr)
                     sys.exit(1)
 
                 try:
                     extends = node.find('extends').text.strip()
-                except:
-                    sys.stderr.write(
-                        "ERROR: %s: plugin extends not defined\n" % f)
+                except BaseException:
+                    print("ERROR: {}: plugin extends not defined".format(f),
+                          file=sys.stderr)
                     sys.exit(1)
 
                 # Save all plugins of a module
                 try:
                     app_plugin_nodes[extends].append(node)
-                except:
+                except BaseException:
                     app_plugin_nodes[extends] = [node]
 
             elif tag == "binding":
                 modname = node.get('module')
                 if not modname:
-                    sys.stderr.write(
-                        "ERROR: %s: binding module not defined\n" % f)
+                    print("ERROR: {}: binding module not defined".format(f),
+                          file=sys.stderr)
                     sys.exit(1)
 
                 if node.get('category') and not node.get('name'):
-                    sys.stderr.write(
-                        "ERROR: %s: binding category defined but no name given\n" % f)
+                    print("ERROR: {}: binding category defined but no name " \
+                          "given".format(f), file=sys.stderr)
                     sys.exit(1)
 
                 # Save all plugins of a module
                 try:
                     app_binding_nodes[modname].append(node)
-                except:
+                except BaseException:
                     app_binding_nodes[modname] = [node]
 
 
@@ -479,8 +540,8 @@ for key, value in sorted(categories.items()):
             try:
                 os.makedirs(path)
             except Exception as e:
-                sys.stderr.write(
-                    "ERROR: creating path '%s' failed: %s\n" % (path, str(e)))
+                print("ERROR: creating path '{}' failed: {}".format(path, e),
+                      file=sys.stderr)
                 sys.exit(1)
         link = os.path.join(link, section.lower())
     else:
@@ -499,8 +560,8 @@ if not os.path.exists(app_path):
     try:
         os.makedirs(app_path)
     except Exception as e:
-        sys.stderr.write("ERROR: creating path '%s' failed: %s\n" %
-                         (app_path, str(e)))
+        print("ERROR: creating path '{}' failed: {}".format(app_path, e),
+              file=sys.stderr)
         sys.exit(1)
 
 
@@ -523,9 +584,9 @@ out_struct_plugin_dir = os.path.join(out_struct_dir, "extensions")
 if not os.path.exists(out_struct_plugin_dir):
     try:
         os.makedirs(out_struct_plugin_dir)
-    except:
-        sys.stderr.write("ERROR: creating build directory '%s' failed: %s\n" % (
-            out_struct_plugin_dir, str(e)))
+    except BaseException as e:
+        print("ERROR: creating build directory '{}' failed: {}".format(
+            out_struct_plugin_dir, e), file=sys.stderr)
         sys.exit(1)
 
 # Save the global reference for each plugin
@@ -604,15 +665,16 @@ for ref, nodes in sorted(app_refs.items()):
         for n in sorted(xml_nodes, key=lambda n: n.get('name')):
             placeholder_gui_refs += "   /apps/" + n.get('name').lower() + "\n"
         continue
-    elif len(section_path) == 1 and section_path[0].lower() == "gui":
+    if len(section_path) == 1 and section_path[0].lower() == "gui":
         placeholder_gui_refs += "   /" + ref + "\n"
     elif len(section_path) == 0:
         placeholder_app_refs += "   /" + ref + "\n"
 
     try:
         f = open(os.path.join(out_dir, ref) + ".rst", "w")
-    except:
-        sys.stderr.write("ERROR: unable to create index file: %s\n" % ref)
+    except BaseException:
+        print("ERROR: unable to create index file: {}".format(ref),
+              file=sys.stderr)
         sys.exit(1)
 
     # Create section files
@@ -686,7 +748,7 @@ for doc_dir in doc_dirs:
         if not os.path.exists(out_media_dir):
             try:
                 os.makedirs(out_media_dir)
-            except:
+            except BaseException:
                 pass
         copy_dir(os.path.join(doc_dir, "media"), out_media_dir)
 
@@ -695,12 +757,14 @@ for doc_dir in doc_dirs:
 print("Generate index.rst")
 t = open(os.path.join(base_dir, "templates", "index.rst")).read()
 open(os.path.join(out_dir, "index.rst"), "w").write(t.replace(
-    "${generator.refs.apps}", placeholder_app_refs).replace("${generator.refs.extensions}", placeholder_plugins_refs))
+    "${generator.refs.apps}", placeholder_app_refs).replace(
+        "${generator.refs.extensions}", placeholder_plugins_refs))
 
 print("Generate modules.rst")
 t = open(os.path.join(base_dir, "templates", "modules.rst")).read()
 open(os.path.join(out_dir, "modules.rst"), "w").write(t.replace(
-    "${generator.refs.apps}", placeholder_app_refs).replace("${generator.refs.extensions}", placeholder_plugins_refs))
+    "${generator.refs.apps}", placeholder_app_refs).replace(
+        "${generator.refs.extensions}", placeholder_plugins_refs))
 
 print("Generate gui.rst")
 t = open(os.path.join(base_dir, "templates", "gui.rst")).read()
@@ -728,8 +792,8 @@ for n in node_list:
     try:
         f = codecs.open(filename, "w", "utf-8")
     except Exception as e:
-        sys.stderr.write(
-            "ERROR: unable to create app rst '%s': %s\n" % (filename, str(e)))
+        print("ERROR: unable to create app rst '{}': {}".format(filename, e),
+              file=sys.stderr)
         sys.exit(1)
 
     desc = "\n".join(xml_desc_lines(n))
@@ -740,7 +804,8 @@ for n in node_list:
     if app_rst:
         doc = codecs.open(app_rst, "r", "utf-8").read()
         # Copy original .rst to .doc
-        #shutil.copyfile(os.path.join(base_dir, "apps", app_name + ".rst"), os.path.join(out_dir, "apps", app_name + ".doc"))
+        #shutil.copyfile(os.path.join(base_dir, "apps", app_name + ".rst"),
+        #                os.path.join(out_dir, "apps", app_name + ".doc"))
     else:
         doc = None
 
@@ -878,7 +943,7 @@ Configuration
                 # Just remember category bindings and add them afterwards
                 try:
                     category_map[category].append(b)
-                except:
+                except BaseException:
                     category_map[category] = [b]
                 continue
             bindings_options += xml_collect_options(b)
@@ -913,7 +978,8 @@ Configuration
                     cat, names[1])
                 bindings_options += "\n"
             bindings_options += "      # To use the same binding twice, aliases must be used.\n"
-            bindings_options += "      # Aliases are created by prepending a unique name followed by a colon\n"
+            bindings_options += "      # Aliases are created by prepending a unique name " \
+                                "followed by a colon\n"
             bindings_options += "      %s = %s, %s_2:%s\n" % (
                 cat, names[0], names[0], names[0])
             bindings_options += "      %s.%s.param1 = value11\n" % (
@@ -971,7 +1037,8 @@ filename = os.path.join(out_base_dir, "extensions.doc")
 try:
     f = codecs.open(filename, "w", "utf-8")
 except Exception as e:
-    sys.stderr.write("ERROR: unable to create _extensions.rst: %s\n" % str(e))
+    print("ERROR: unable to create _extensions.rst: {}".format(e),
+          file=sys.stderr)
     sys.exit(1)
 
 if len(app_plugin_nodes) > 0:
@@ -1020,25 +1087,39 @@ print("]", file=f)
 print("", file=f)
 f.close()
 
-print("Clean-up HTML build dir")
-try:
-    shutil.rmtree(os.path.join(out_build_dir, "html"))
-except:
-    pass
 
-print("Clean-up MAN build dir")
-try:
-    shutil.rmtree(os.path.join(out_build_dir, "man1"))
-except:
-    pass
+if build_html:
+    print("Clean-up HTML build dir")
+    try:
+        shutil.rmtree(os.path.join(out_build_dir, "html"))
+    except BaseException:
+        pass
 
-os.system("sphinx-build -b html %s %s" %
-          (out_dir, os.path.join(out_build_dir, "html")))
-os.system("sphinx-build -b man %s %s" %
-          (out_dir, os.path.join(out_build_dir, "man1")))
+    os.system("sphinx-build -b html %s %s" % (
+        out_dir, os.path.join(out_build_dir, "html")))
 
-print("Clean-up MAN temporary files")
-try:
-    shutil.rmtree(os.path.join(out_build_dir, "man1", ".doctrees"))
-except:
-    pass
+if build_man:
+    print("Clean-up MAN build dir")
+    try:
+        shutil.rmtree(os.path.join(out_build_dir, "man1"))
+    except BaseException:
+        pass
+
+    os.system("sphinx-build -b man %s %s" % (
+        out_dir, os.path.join(out_build_dir, "man1")))
+
+    print("Clean-up MAN temporary files")
+    try:
+        shutil.rmtree(os.path.join(out_build_dir, "man1", ".doctrees"))
+    except BaseException:
+        pass
+
+if build_pdf:
+    print("Clean-up PDF build dir")
+    try:
+        shutil.rmtree(os.path.join(out_build_dir, "pdf"))
+    except BaseException:
+        pass
+
+    os.system("sphinx-build -M latexpdf %s %s" % (
+        out_dir, os.path.join(out_build_dir, "pdf")))
