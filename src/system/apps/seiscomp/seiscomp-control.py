@@ -860,7 +860,7 @@ def on_alias(args, flags):
 
         if has_alias:
             warning("%s is already registered as alias for %s in $SEISCOMP_ROOT/etc/descriptions/aliases" % (args[1], toks[1]))
-            warning("  + do not register againg but trying to link the required files")
+            warning("  + do not register again but trying to link the required files")
         else:
             print("registered alias '%s' in $SEISCOMP_ROOT/etc/descriptions/aliases" % (args[1]))
 
