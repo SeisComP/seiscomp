@@ -51,13 +51,15 @@ def is_string(variable):
 
     return isinstance(variable, string_class)
 
+
 # ------------------------------------------------------------------------------
 # Helper functions
 # ------------------------------------------------------------------------------
 SIGTERM_SENT = False
 
 
-def sigterm_handler(signum, frame):
+def sigterm_handler(_signum, _):
+    # pylint: disable=W0603
     global SIGTERM_SENT
     if not SIGTERM_SENT:
         SIGTERM_SENT = True
@@ -88,6 +90,7 @@ def error(msg):
     sys.stderr.write("error: %s\n" % msg)
     sys.stderr.flush()
 
+
 def warning(msg):
     sys.stderr.write("warning: %s\n" % msg)
     sys.stderr.flush()
@@ -115,12 +118,16 @@ def load_module(path):
     return module
 
 
-def module_key(m):
-    return (m.order, m.name)
+def module_key(module):
+    return (module.order, module.name)
 
 
 def load_init_modules(path):
-    mods = []
+    modules = []
+
+    if not os.path.exists(path):
+        error("Cannot load any module - path not existing: %s" % path)
+        return modules
 
     files = glob.glob(os.path.join(path, "*.py"))
     for f in files:
@@ -136,18 +143,18 @@ def load_init_modules(path):
             error(("%s: " % f) + str(exc))
             continue
 
-        mods.append(mod)
+        modules.append(mod)
 
     #mods = sorted(mods, key=lambda mod: mod.order)
-    mods = sorted(mods, key=module_key)
+    modules = sorted(modules, key=module_key)
 
-    return mods
+    return modules
 
 
 def get_module(name):
-    for m in mods:
-        if m.name == name:
-            return m
+    for module in mods:
+        if module.name == name:
+            return module
     return None
 
 
@@ -161,7 +168,10 @@ def dump_paths():
     print('PATH="%s"' % os.environ["PATH"])
     print('%s="%s"' % (SysLibraryPathVar, os.environ[SysLibraryPathVar]))
     if SysFrameworkPathVar:
-        print('%s="%s"' % (SysFrameworkPathVar, os.environ[SysFrameworkPathVar]))
+        print(
+            '%s="%s"' %
+            (SysFrameworkPathVar,
+             os.environ[SysFrameworkPathVar]))
     print('PYTHONPATH="%s"' % sys.path)
     print('CWD="%s"' % os.getcwd())
     print('--------------------')
@@ -198,7 +208,7 @@ def stop_module(mod):
     # Delete runfile
     try:
         os.remove(env.runFile(mod.name))
-    except:
+    except BaseException:
         pass
 
     return 0
@@ -220,6 +230,7 @@ def stop_kernel_modules():
 # Commandline action handler
 # ------------------------------------------------------------------------------
 def on_setup(args, flags):
+    # pylint: disable=W0621
     import seiscomp.setup
 
     if "stdin" in flags:
@@ -237,7 +248,7 @@ def on_setup(args, flags):
         if len(args) == 0 or mod.name in args:
             try:
                 hasSetupHandler = callable(getattr(mod, 'setup'))
-            except:
+            except BaseException:
                 hasSetupHandler = False
 
             if hasSetupHandler:
@@ -251,20 +262,20 @@ def on_setup(args, flags):
         if not os.path.exists(runpath):
             try:
                 os.makedirs(runpath)
-            except:
+            except BaseException:
                 error("failed to create directory: %s" % runpath)
 
         statfile = os.path.join(runpath, "seiscomp.init")
         if not os.path.exists(statfile):
             try:
                 open(statfile, "w").close()
-            except:
+            except BaseException:
                 error("failed to create status file: %s" % statfile)
 
     return retCode
 
 
-def on_setup_help(args):
+def on_setup_help(_):
     print("Initializes the configuration of all available modules. Each module")
     print("implements its own setup handler which is called at this point. The")
     print("initialization takes the installation directory into account and")
@@ -274,7 +285,8 @@ def on_setup_help(args):
     return 0
 
 
-def on_shell(args, flags):
+def on_shell(_args, _):
+    # pylint: disable=W0621
     import seiscomp.shell
 
     shell = seiscomp.shell.CLI()
@@ -286,29 +298,29 @@ def on_shell(args, flags):
     return 0
 
 
-def on_shell_help(args):
+def on_shell_help(_):
     print("Launches the SeisComP shell, a commandline interface which allows")
     print("to manage modules configurations and bindings.")
     return 0
 
 
-def on_enable(args, flags):
-    if len(args) == 0:
+def on_enable(args, _):
+    if not args:
         error("module name required")
         return 1
 
     for name in args:
-        m = get_module(name)
-        if m is None:
+        modName = get_module(name)
+        if modName is None:
             error("%s is not available" % name)
-        elif isinstance(m, seiscomp.kernel.CoreModule):
+        elif isinstance(modName, seiscomp.kernel.CoreModule):
             error("%s is a kernel module and is enabled automatically" % name)
         else:
             env.enableModule(name)
     return 0
 
 
-def on_enable_help(args):
+def on_enable_help(_):
     print("Enables all given modules to be started when 'seiscomp start' is")
     print("invoked without a module list.")
     print()
@@ -316,31 +328,31 @@ def on_enable_help(args):
     print("seiscomp enable seedlink slarchive")
 
 
-def on_disable(args, flags):
-    if len(args) == 0:
+def on_disable(args, _):
+    if not args:
         error("module name required")
         return 1
 
     for name in args:
-        m = get_module(name)
-        if m is None:
-            error("%s is not available" % m)
-        elif isinstance(m, seiscomp.kernel.CoreModule):
+        modName = get_module(name)
+        if modName is None:
+            error("%s is not available" % modName)
+        elif isinstance(modName, seiscomp.kernel.CoreModule):
             error("%s is a kernel module and cannot be disabled" % name)
         else:
             env.disableModule(name)
     return 0
 
 
-def on_disable_help(args):
+def on_disable_help(_):
     print("Disables all given modules. See 'enable'.")
     print()
     print("Examples:")
     print("seiscomp disable seedlink slarchive")
 
 
-def on_start(args, flags):
-    if len(args) == 0:
+def on_start(args, _):
+    if not args:
         start_kernel_modules()
         for mod in mods:
             # Kernel modules have been started already
@@ -357,7 +369,7 @@ def on_start(args, flags):
     return 0
 
 
-def on_start_help(args):
+def on_start_help(_):
     print("Starts all enabled modules or a list of modules given.")
     print()
     print("Examples:")
@@ -365,13 +377,15 @@ def on_start_help(args):
     print("seiscomp start seedlink slarchive")
 
 
-def on_stop(args, flags):
-    if len(args) == 0:
+def on_stop(args, _):
+    cntStopped = 0
+    if not args:
         for mod in reversed(mods):
             # Kernel modules will be stopped latter
             if isinstance(mod, seiscomp.kernel.CoreModule):
                 continue
             stop_module(mod)
+            cntStopped += 1
 
         # Stop all kernel modules
         stop_kernel_modules()
@@ -379,11 +393,15 @@ def on_stop(args, flags):
         for mod in reversed(mods):
             if mod.name in args or len(args) == 0:
                 stop_module(mod)
+                cntStopped += 1
+
+    if not useCSV:
+        print("Summary: {:d} modules stopped".format(cntStopped))
 
     return 0
 
 
-def on_stop_help(args):
+def on_stop_help(_):
     print("Stops all enabled modules or a list of modules given.")
     print()
     print("Examples:")
@@ -397,7 +415,7 @@ def on_restart(args, flags):
     return 0
 
 
-def on_restart_help(args):
+def on_restart_help(_):
     print("Restarts all enabled modules or a list of modules given.")
     print("This command is equal to:")
     print("seiscomp stop {args}")
@@ -408,8 +426,8 @@ def on_restart_help(args):
     print("seiscomp restart seedlink slarchive")
 
 
-def on_reload(args, flags):
-    if len(args) == 0:
+def on_reload(args, _):
+    if not args:
         for mod in mods:
             # Reload not supported by kernel modules
             if isinstance(mod, seiscomp.kernel.CoreModule):
@@ -425,7 +443,7 @@ def on_reload(args, flags):
     return 0
 
 
-def on_reload_help(args):
+def on_reload_help(_):
     print("Reloads all enabled modules or a list of modules given.")
     print("This operation is module specific and implemented only for some")
     print("modules.")
@@ -435,15 +453,21 @@ def on_reload_help(args):
     print("seiscomp reload fdsnws")
 
 
-def on_check(args, flags):
+def on_check(args, _):
+    cntStarted = 0
     for mod in mods:
         if mod.name in args or len(args) == 0:
             if shouldModuleRun(mod.name):
+                cntStarted += 1
                 mod.check()
+
+    if not useCSV:
+        print("Summary: {:d} started modules checked".format(cntStarted))
+
     return 0
 
 
-def on_check_help(args):
+def on_check_help(_):
     print("Checks if a started module is still running. If not, it is")
     print("restarted. If no modules are given, all started modules are")
     print("checked.")
@@ -453,7 +477,7 @@ def on_check_help(args):
     print("seedlink is already running")
 
 
-def on_exec(args, flags):
+def on_exec(args, _):
     if len(args) < 1:
         error("no module name given")
         return False
@@ -463,7 +487,7 @@ def on_exec(args, flags):
     return system(args)
 
 
-def on_exec_help(args):
+def on_exec_help(_):
     print("Executes a command like calling a command from commandline.")
     print("It will setup all paths and execute the command.")
     print("'seiscomp run' will block until the command terminates.")
@@ -471,7 +495,7 @@ def on_exec_help(args):
     print("seiscomp exec scolv")
 
 
-def on_list(args, flags):
+def on_list(args, _):
     if len(args) < 1:
         error("expected argument: {modules|aliases|enabled|disabled|started}")
         return 1
@@ -510,7 +534,10 @@ def on_list(args, flags):
                isinstance(mod, seiscomp.kernel.CoreModule):
                 print(mod.name)
                 found += 1
-        print("Summary: %i modules enabled" % found)
+
+        if not useCSV:
+            print("Summary: {:d} modules enabled".format(found))
+
         return 0
 
     if args[0] == "disabled":
@@ -520,7 +547,10 @@ def on_list(args, flags):
                not isinstance(mod, seiscomp.kernel.CoreModule):
                 print(mod.name)
                 found += 1
-        print("Summary: %i modules disabled" % found)
+
+        if not useCSV:
+            print("Summary: {:d} modules disabled".format(found))
+
         return 0
 
     if args[0] == "started":
@@ -529,14 +559,18 @@ def on_list(args, flags):
             if shouldModuleRun(mod.name):
                 print(mod.name)
                 found += 1
-        print("Summary: %i modules started" % found)
+
+        if not useCSV:
+            print("Summary: {:d} modules started".format(found))
+
         return 0
 
-    error("wrong argument: {modules|aliases|enabled|disabled|started} expected")
+    error(
+        "wrong argument: {modules|aliases|enabled|disabled|started} expected")
     return 1
 
 
-def on_list_help(args):
+def on_list_help(_):
     print("Prints the result of a query. 5 queries are currently supported:")
     print(" modules: lists all existing modules")
     print(" aliases: lists all existing aliases")
@@ -549,15 +583,18 @@ def on_list_help(args):
     print("l1autopick -> scautopick")
 
 
-def on_status(args, flags):
+def on_status(args, _):
     if len(args) > 0 and args[0] == "enabled":
         found = 0
         for mod in mods:
-            if env.isModuleEnabled(mod.name) or \
-               isinstance(mod, seiscomp.kernel.CoreModule):
-                   mod.status(shouldModuleRun(mod.name))
-                   found += 1
-        print("Summary: %i modules enabled" % found)
+            if env.isModuleEnabled(mod.name) or isinstance(
+                    mod, seiscomp.kernel.CoreModule):
+                mod.status(shouldModuleRun(mod.name))
+                found += 1
+
+        if not useCSV:
+            print("Summary: {:d} modules enabled".format(found))
+
         return 0
 
     if len(args) > 0 and args[0] == "started":
@@ -566,7 +603,10 @@ def on_status(args, flags):
             if shouldModuleRun(mod.name):
                 mod.status(shouldModuleRun(mod.name))
                 found += 1
-        print("Summary: %i modules started" % found)
+
+        if not useCSV:
+            print("Summary: {:d} modules started".format(found))
+
         return 0
 
     for mod in mods:
@@ -576,7 +616,7 @@ def on_status(args, flags):
     return 0
 
 
-def on_status_help(args):
+def on_status_help(_):
     print("Prints the status of ")
     print(" * all modules")
     print(" * all enabled modules")
@@ -601,7 +641,7 @@ def on_status_help(args):
     print(" column 4: enabled flag")
 
 
-def on_print(args, flags):
+def on_print(args, _):
     if len(args) < 1:
         error("expected argument: {crontab|env}")
         return 1
@@ -617,12 +657,17 @@ def on_print(args, flags):
         print('export %s="%s:$%s"' %
               (SysLibraryPathVar, get_library_path(), SysLibraryPathVar))
         if sys.platform == "darwin":
-            print('export %s="%s:$%s"' % (
-                SysFrameworkPathVar, get_framework_path(), SysFrameworkPathVar))
+            print(
+                'export %s="%s:$%s"' %
+                (SysFrameworkPathVar,
+                 get_framework_path(),
+                 SysFrameworkPathVar))
 
         print('export PYTHONPATH="%s:$PYTHONPATH"' % PYTHONPATH)
         print('export MANPATH="%s:$MANPATH"' % MANPATH)
-        print('source "%s/share/shell-completion/seiscomp.bash"' % SEISCOMP_ROOT)
+        print(
+            'source "%s/share/shell-completion/seiscomp.bash"' %
+            SEISCOMP_ROOT)
     else:
         error("wrong argument: {crontab|env} expected")
         return 1
@@ -630,7 +675,7 @@ def on_print(args, flags):
     return 0
 
 
-def on_print_help(args):
+def on_print_help(_):
     print("seiscomp print {crontab|env}")
     print(" crontab: prints crontab entries of all registered or given modules.")
     print(" env: prints environment variables necessary to run SeisComP modules.")
@@ -640,7 +685,7 @@ def on_print_help(args):
     print("$ eval $(seiscomp/bin/seiscomp print env)")
 
 
-def on_install_deps_linux(args, flags):
+def on_install_deps_linux(args, _):
     try:
         out = subprocess.Popen(['lsb_release', '-sir'],
                                stdout=subprocess.PIPE).communicate()[0].splitlines()
@@ -649,7 +694,7 @@ def on_install_deps_linux(args, flags):
             out = out[0].split()
 
         out = [l.decode('utf-8').strip() for l in out]
-    except:
+    except BaseException:
         error("lsb_release is not installed")
         print("*********************************************************************")
         print("seiscomp was not able to figure out the installed distribution")
@@ -660,7 +705,7 @@ def on_install_deps_linux(args, flags):
 
     try:
         release, version = out
-    except:
+    except BaseException:
         error("unexpected version result")
         return 1
 
@@ -695,7 +740,7 @@ def on_install_deps_linux(args, flags):
 
 
 def on_install_deps(args, flags):
-    if len(args) == 0:
+    if not args:
         error("expected package list: PKG1 [PKG2 [..]]")
         print("Example: seiscomp install-deps base gui mysql-server")
         print("For a list of available packages issue: seiscomp help install-deps")
@@ -713,7 +758,7 @@ def on_install_deps(args, flags):
     return 1
 
 
-def on_install_deps_help(args):
+def on_install_deps_help(_):
     print("seiscomp install-deps PKG1 [PKG2 [..]]")
     print("Installs OS dependencies to run SeisComP. This requires either a 'sudo'")
     print("or root account. Available packages are:")
@@ -727,12 +772,12 @@ def on_install_deps_help(args):
     return 0
 
 
-def on_update_config(args, flags):
+def on_update_config(args, _):
     kernelModsStarted = False
     configuredMods = {}
 
     listOfMods = args
-    if len(listOfMods) == 0:
+    if not listOfMods:
         listOfMods = []
         for mod in config_mods:
             listOfMods.append(mod.name)
@@ -752,7 +797,7 @@ def on_update_config(args, flags):
                     proxy = mod.updateConfigProxy()
                     if is_string(proxy):
                         configuredMods.setdefault(proxy, False)
-                except Exception as e:
+                except Exception:
                     pass
 
                 if proxy is None:
@@ -760,13 +805,14 @@ def on_update_config(args, flags):
 
                     try:
                         error_code = int(result)
-                    except Exception as e:
-                        error("unexpected return type when updating " \
+                    except ValueError:
+                        error("unexpected return type when updating "
                               "configuration of %s" % mod.name)
                         return 1
 
                     if error_code != 0:
-                        error("updating configuration for %s failed" % mod.name)
+                        error(
+                            "updating configuration for %s failed" % mod.name)
                         return 1
 
                 configuredMods[mod.name] = True
@@ -780,14 +826,14 @@ def on_update_config(args, flags):
     return 0
 
 
-def on_update_config_help(args):
+def on_update_config_help(_):
     print("Updates the configuration of all available modules. This command")
     print("will convert the etc/*.cfg to the modules native configuration")
     print("including its bindings.")
     return 0
 
 
-def on_alias(args, flags):
+def on_alias(args, _):
     if len(args) < 2:
         error("expected arguments: {create|remove} ALIAS_NAME APP_NAME")
         return 1
@@ -798,9 +844,9 @@ def on_alias(args, flags):
             return 1
 
         mod = None
-        for m in mods:
-            if m.name == args[2]:
-                mod = m
+        for module in mods:
+            if module.name == args[2]:
+                mod = module
                 break
 
         if not mod:
@@ -810,7 +856,7 @@ def on_alias(args, flags):
         supportsAliases = False
         try:
             supportsAliases = mod.supportsAliases()
-        except:
+        except BaseException:
             pass
 
         if not supportsAliases:
@@ -830,7 +876,7 @@ def on_alias(args, flags):
         if not os.path.exists(DESC_PATH):
             try:
                 os.makedirs(DESC_PATH)
-            except Exception as e:
+            except Exception:
                 error("failed to create directory: %s" % DESC_PATH)
                 return 1
 
@@ -855,23 +901,28 @@ def on_alias(args, flags):
 
                 new_lines.append(line)
             f.close()
-        except:
+        except BaseException:
             pass
 
         if has_alias:
-            warning("%s is already registered as alias for %s in $SEISCOMP_ROOT/etc/descriptions/aliases" % (args[1], toks[1]))
+            warning("%s is already registered as alias for %s in "\
+                    "$SEISCOMP_ROOT/etc/descriptions/aliases"  % (args[1], toks[1]))
             warning("  + do not register again but trying to link the required files")
         else:
-            print("registered alias '%s' in $SEISCOMP_ROOT/etc/descriptions/aliases" % (args[1]))
+            print(
+                "registered alias '%s' in $SEISCOMP_ROOT/etc/descriptions/aliases" %
+                (args[1]))
 
         # Check if target exists already
         if os.path.exists(os.path.join(SEISCOMP_ROOT, mod1)):
-            warning("link '%s' to '%s' exists already in %s/bin/" % (args[1], mod2, SEISCOMP_ROOT))
+            warning(
+                "link '%s' to '%s' exists already in %s/bin/" %
+                (args[1], mod2, SEISCOMP_ROOT))
             warning("  + do not link again")
 
         try:
             f = open(ALIAS_FILE, 'w')
-        except:
+        except BaseException:
             error("failed to open/create alias file: %s" % ALIAS_FILE)
             return 1
 
@@ -882,7 +933,7 @@ def on_alias(args, flags):
 
         # create symlink of defaults from etc/defaults/mod1.cfg to etc/defaults/mod2.cfg
         # use relative path to default_cfg2
-        cwd = os.getcwd()
+        cwdAlias = os.getcwd()
         os.chdir(os.path.join(SEISCOMP_ROOT, "etc", "defaults"))
         default_cfg1 = args[1] + ".cfg"
         default_cfg2 = args[2] + ".cfg"
@@ -892,26 +943,26 @@ def on_alias(args, flags):
             # - first: remove target
             try:
                 os.remove(default_cfg1)
-            except:
+            except BaseException:
                 pass
             # create symlink
             os.symlink(os.path.relpath(default_cfg2), default_cfg1)
         else:
             print("No default configuration to link")
         # return to initial directory
-        os.chdir(cwd)
+        os.chdir(cwdAlias)
 
         # create symlink from bin/mod1 to bin/mod2
         # - first: remove target
         try:
             os.remove(os.path.join(SEISCOMP_ROOT, mod1))
-        except:
+        except BaseException:
             pass
         print("Create app symlink: %s -> %s" % (mod2, mod1))
         os.symlink(mod2, os.path.join(SEISCOMP_ROOT, mod1))
 
         # create symlink from etc/init/mod1.py to etc/init/mod2.py
-        cwd = os.getcwd()
+        cwdAlias = os.getcwd()
         os.chdir(os.path.join(SEISCOMP_ROOT, "etc", "init"))
         init1 = args[1] + ".py"
         init2 = args[2] + ".py"
@@ -919,12 +970,12 @@ def on_alias(args, flags):
         # - first: remove target
         try:
             os.remove(init1)
-        except:
+        except BaseException:
             pass
         # create symlink with relative path
         os.symlink(os.path.relpath(init2), init1)
         # return to initial directory
-        os.chdir(cwd)
+        os.chdir(cwdAlias)
 
         return 0
 
@@ -955,7 +1006,7 @@ def on_alias(args, flags):
                 else:
                     new_lines.append(line)
             f.close()
-        except:
+        except BaseException:
             pass
 
         if not has_alias:
@@ -965,7 +1016,7 @@ def on_alias(args, flags):
 
         try:
             f = open(ALIAS_FILE, 'w')
-        except:
+        except BaseException:
             error("  + failed to open/create alias file: %s" % ALIAS_FILE)
             return 1
 
@@ -981,13 +1032,18 @@ def on_alias(args, flags):
         print("  + remove default configuration: %s" % default_cfg)
         try:
             os.remove(os.path.join(SEISCOMP_ROOT, default_cfg))
-        except:
+        except BaseException:
             pass
 
         cfg = os.path.join("etc", args[1] + ".cfg")
         if os.path.isfile(cfg):
-            warning("  + keep configuration file '%s/%s'" % (SEISCOMP_ROOT, cfg))
-        cfg = os.path.join(os.path.expanduser("~"), ".seiscomp", args[1] + ".cfg")
+            warning(
+                "  + keep configuration file '%s/%s'" %
+                (SEISCOMP_ROOT, cfg))
+        cfg = os.path.join(
+            os.path.expanduser("~"),
+            ".seiscomp",
+            args[1] + ".cfg")
         if os.path.isfile(cfg):
             warning("  + keep configuration file '%s'" % (cfg))
 
@@ -1003,7 +1059,7 @@ def on_alias(args, flags):
             print("  + remove app symlink: %s" % sym_link)
             try:
                 os.remove(os.path.join(SEISCOMP_ROOT, sym_link))
-            except:
+            except BaseException:
                 pass
 
         # remove symlink from etc/init/mod1.py
@@ -1011,7 +1067,7 @@ def on_alias(args, flags):
         print("  + remove init script: %s" % init_scr)
         try:
             os.remove(os.path.join(SEISCOMP_ROOT, init_scr))
-        except:
+        except BaseException:
             pass
 
         return 0
@@ -1020,7 +1076,7 @@ def on_alias(args, flags):
     return 1
 
 
-def on_alias_help(args):
+def on_alias_help(_):
     print("seiscomp alias {create|remove} ALIAS_NAME APP_NAME")
     print("Creates/removes symlinks to applications. Symlinks to symlinks are not allowed.")
     print()
@@ -1067,31 +1123,31 @@ actions_without_lock = [
 ]
 
 
-def on_help(args, flags):
-    if len(args) == 0:
+def on_help(args, _):
+    if not args:
         print("Available commands:")
-        for action in allowed_actions:
-            print("  %s" % action)
-        print()
-        print("Use 'help [command]' to get more help about a command")
+        for helpAction in allowed_actions:
+            print("  %s" % helpAction)
+
+        print("\nUse 'help [command]' to get more help about a command")
         return 0
 
     cmd = args[0]
     try:
         func = globals()["on_" + cmd.replace("-", "_") + "_help"]
-    except:
+    except BaseException:
         print("Sorry, no help available for %s" % cmd)
         return 1
     func(args[1:])
     return 0
 
 
-def run_action(action, args, flags):
+def run_action(runAction, args, flags):
     try:
-        func = globals()["on_" + action.replace("-", "_")]
+        func = globals()["on_" + runAction.replace("-", "_")]
         return func(args, flags)
     except Exception as exc:
-        error("command '%s' failed: %s" % (action, str(exc)))
+        error("command '%s' failed: %s" % (runAction, str(exc)))
         if "debug" in flags:
             info = traceback.format_exception(*sys.exc_info())
             for i in info:
@@ -1099,7 +1155,7 @@ def run_action(action, args, flags):
         return 2
 
 
-def on_csv_help(args):
+def on_csv_help(_):
     print("If --csv is prepended to a usual command the internal output is")
     print("set to comma separated values. The only command that currently")
     print("uses this output format is 'status'.")
@@ -1134,7 +1190,7 @@ while argv:
             sys.exit(1)
         try:
             lockTimeout = int(argv[0])
-        except:
+        except BaseException:
             print("Wait timeout is not an integer: %s" % argv[0])
             sys.exit(1)
         if lockTimeout < 0:
@@ -1154,7 +1210,7 @@ if len(argv) < 1:
 action = argv[0]
 arguments = argv[1:]
 
-if not action in allowed_actions:
+if action not in allowed_actions:
     print("seiscomp [flags] {%s} [args]" % "|".join(allowed_actions))
     sys.exit(1)
 
@@ -1209,7 +1265,7 @@ isWrapped = False
 try:
     if os.environ["SEISCOMP_WRAP"] == "TRUE":
         isWrapped = True
-except:
+except BaseException:
     pass
 
 
@@ -1219,13 +1275,13 @@ except:
 if not isWrapped:
     try:
         os.environ["PATH"] = BIN_PATH + ":" + os.environ["PATH"]
-    except:
+    except BaseException:
         os.environ["PATH"] = BIN_PATH
 
     try:
         os.environ[SysLibraryPathVar] = get_library_path() + ":" + \
             os.environ[SysLibraryPathVar]
-    except:
+    except BaseException:
         os.environ[SysLibraryPathVar] = get_library_path()
 
     if sys.platform == "darwin":
@@ -1233,11 +1289,11 @@ if not isWrapped:
 
     try:
         os.environ["PYTHONPATH"] = PYTHONPATH + ":" + os.environ["PYTHONPATH"]
-    except:
+    except BaseException:
         os.environ["PYTHONPATH"] = PYTHONPATH
     try:
         os.environ["MANPATH"] = MANPATH + ":" + os.environ["MANPATH"]
-    except:
+    except BaseException:
         os.environ["MANPATH"] = MANPATH
 
     os.environ["SEISCOMP_WRAP"] = "TRUE"
