@@ -68,6 +68,17 @@ All notable changes to SeisComP are documented here.
 
     * Add azimuthal gap to hypocenter panel
 
+* scqcv
+
+    * Make many configuration parameters available in scconfig and documentation
+
+* scautoloc
+
+    * Disable pick logging by default to optimize disk space consumption.
+      Can be enabled by new option `autoloc.pickLogEnable`.
+    * Added documentation of parameters
+    * Send a journal message when setting the origin evaluation status
+
 ## 4.6.1
 
 * scolv
