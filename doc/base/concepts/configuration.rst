@@ -433,7 +433,7 @@ e.g. 00 and 10. To process a station an application needs to know which channel
 it should process. To display a representative data channel a viewer needs to
 know which channel to show. Global bindings solve that issue by defining the
 "preferred" location code and channel code with the two parameters `detecLocid`
-and `detecStream`. The TraceViewe, :ref:`scrttv` can read all available station bindings,
+and `detecStream`. The TraceView, :ref:`scrttv` can read all available station bindings,
 compose a fully qualified channel name from network code (part of the binding),
 station code, detecLocid and detecStream. It will then lookup the inventory
 information for that channel and display it.
