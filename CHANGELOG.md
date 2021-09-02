@@ -42,6 +42,11 @@ All notable changes to SeisComP are documented here.
 
     * Update SDK Python examples
 
+* seiscomp
+
+    * Add --wait parameter to set the timeout when acquiring
+      the seiscomp lock
+
 * scolv
 
     * Fix display of tooltips in origin map and magnitude map
@@ -56,6 +61,8 @@ All notable changes to SeisComP are documented here.
     * Add azimuthal gap column to event list which is initially hidden. To
       activate it, add `AzGap"` to `eventlist.visibleColumns`
     * Add units to columns of tables: Events, Events, Magnitudes
+    * Remove number of origins column in event list if origins should not be
+      listed
 
 * scesv
 
