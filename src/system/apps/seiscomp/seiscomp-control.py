@@ -6,6 +6,7 @@ import glob
 import importlib
 import os
 import signal
+import socket
 import subprocess
 import sys
 import traceback
@@ -668,6 +669,9 @@ def on_print(args, _):
         print(
             'source "%s/share/shell-completion/seiscomp.bash"' %
             SEISCOMP_ROOT)
+        hostenv = os.path.join(SEISCOMP_ROOT, "etc", "env", "by-hostname", socket.gethostname())
+        if os.path.isfile(hostenv):
+            print('source %s' % hostenv)
     else:
         error("wrong argument: {crontab|env} expected")
         return 1
