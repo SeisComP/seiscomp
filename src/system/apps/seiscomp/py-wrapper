@@ -82,6 +82,9 @@ export LD_LIBRARY_PATH="$SEISCOMP_ROOT/lib:$LD_LIBRARY_PATH"
 export PYTHONPATH="$SEISCOMP_ROOT/lib/python:$PYTHONPATH"
 export MANPATH="$SEISCOMP_ROOT/share/man:$MANPATH"
 
+HOSTENV=$SEISCOMP_ROOT/etc/env/by-hostname/$(hostname)
+test -f $HOSTENV && source $HOSTENV
+
 # The path of the Python executable is configured using cmake.
 python_executable="%s"
 
