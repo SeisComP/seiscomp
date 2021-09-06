@@ -6,6 +6,11 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 14.3.0```
 
+* seiscomp
+
+    * Add support for additional host environment which is sourced from
+      `$SEISCOMP_ROOT/etc/env/$(hostname)` if present
+
 * documentation
 
     * Update SDK Python examples
