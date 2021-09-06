@@ -75,9 +75,6 @@ normalized_dirname() {
 # Determine the root directory of the 'seiscomp' utility.
 d="$(normalized_dirname "$d")"
 SEISCOMP_ROOT="$(realpath "${d%%/bin}")"
-# FIXME:
-# - Any portability issues with 'realpath'?
-# - Is there a more portable alternative?
 
 export SEISCOMP_ROOT
 export PATH="$SEISCOMP_ROOT/bin:$PATH"
