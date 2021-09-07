@@ -1144,6 +1144,11 @@ def on_help(args, _):
             print("  %s" % helpAction)
 
         print("\nUse 'help [command]' to get more help about a command")
+        print("\nExamples:")
+        print("  seiscomp help update-config          Show help for update-config")
+        print("  seiscomp update-config               Run update-config for allmodules")
+        print("  seiscomp update-config trunk         Run update-config for all trunk modules")
+        print("  seiscomp update-config scautopick    Run update-config for scautopick")
         return 0
 
     cmd = args[0]
@@ -1218,8 +1223,8 @@ while argv:
         break
 
 if len(argv) < 1:
-    print("seiscomp [flags] {%s} [args]\n" % "|".join(allowed_actions))
-    on_help("","")
+    print("seiscomp [flags] {%s} [args]" % "|".join(allowed_actions))
+    print("\nUse 'seiscomp help' to get more help")
     sys.exit(1)
 
 action = argv[0]
