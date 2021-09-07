@@ -1129,7 +1129,17 @@ actions_without_lock = [
 
 def on_help(args, _):
     if not args:
-        print("Available commands:")
+        print("Name:")
+        print("  seiscomp - Load the environment of the SeisComP installation from " \
+              "where seiscomp is executed and run a command")
+        print("\nSynopsis:")
+        print("  seiscomp [flags] [commands] [arguments]")
+        print("\nFlags:")
+        print("  --asroot      Allow running a command as root")
+        print("  --csv         Print output as csv in machine-readable format")
+        print("  --wait arg    Define a timeout in seconds for acquiring the seiscomp " \
+              "lock file, e.g. `seiscomp --wait 10 update-config`")
+        print("\nAvailable commands:")
         for helpAction in allowed_actions:
             print("  %s" % helpAction)
 
@@ -1208,7 +1218,8 @@ while argv:
         break
 
 if len(argv) < 1:
-    print("seiscomp [flags] {%s} [args]" % "|".join(allowed_actions))
+    print("seiscomp [flags] {%s} [args]\n" % "|".join(allowed_actions))
+    on_help("","")
     sys.exit(1)
 
 action = argv[0]
