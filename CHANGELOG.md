@@ -84,6 +84,10 @@ All notable changes to SeisComP are documented here.
     * Added documentation of parameters
     * Send a journal message when setting the origin evaluation status
 
+* iLoc
+
+    * Update iLoc code to version 3.3
+
 ## 4.6.1
 
 * scolv
