@@ -1,0 +1,55 @@
+#!/bin/sh -e
+
+# Resolve softlink to seiscomp executable first
+if test -L "$0"
+then
+    # $0 is a link
+    target="$(readlink "$0")"
+    case "$target" in
+        /*)
+            d="$target"
+            ;;
+        *)
+            d="$(dirname "$0")/$target"
+            ;;
+    esac
+else
+    # $0 is NOT a link
+    case "$0" in
+        */* | /*)
+            d="$0"
+            ;;
+        *)
+            d="$(command -v "$0")"
+            ;;
+    esac
+fi
+
+normalized_dirname() {
+    # Normalize directory name without following symlinks.
+    # Brute-force but portable.
+    cd "${1%/*}" && pwd || exit 1
+}
+
+# Determine the root directory of the 'seiscomp' utility.
+d="$(normalized_dirname "$d")"
+SEISCOMP_ROOT="$(realpath "${d%/bin}")"
+
+export SEISCOMP_ROOT
+export PATH="$SEISCOMP_ROOT/bin:$PATH"
+export LD_LIBRARY_PATH="$SEISCOMP_ROOT/lib:$LD_LIBRARY_PATH"
+export PYTHONPATH="$SEISCOMP_ROOT/lib/python:$PYTHONPATH"
+export MANPATH="$SEISCOMP_ROOT/share/man:$MANPATH"
+
+HOSTENV=$SEISCOMP_ROOT/etc/env/by-hostname/$(hostname)
+test -f $HOSTENV && . $HOSTENV
+
+case $1 in
+    exec)
+        shift
+        exec "$@"
+        ;;
+    *)
+        exec $SEISCOMP_ROOT/bin/seiscomp-python "$SEISCOMP_ROOT/bin/seiscomp-control.py" "$@"
+        ;;
+esac

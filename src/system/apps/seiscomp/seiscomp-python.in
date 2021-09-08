@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# This is a shell script that executes the Python interpreter as
+# configured using cmake.
+#
+# In order to use this in your Python programs use this
+# shebang line:
+
+#!/usr/bin/env seiscomp-python
+
+# Please note that this wrapper does *not* set the environment
+# variables for you. To ensure that you run your script in the
+# proper environment, please use 'seiscomp exec'. Alternatively
+# you can also set your environment variables according to the
+# output of 'seiscomp print env'.
+
+python_executable="@PYTHON_EXECUTABLE@"
+
+exec $python_executable "$@"
