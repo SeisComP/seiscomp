@@ -5,6 +5,8 @@ from __future__ import division, print_function
 import glob
 import importlib
 import os
+import seiscomp.shell
+import shutil
 import signal
 import socket
 import subprocess
@@ -22,6 +24,53 @@ import seiscomp._config
 
 import seiscomp.config
 import seiscomp.kernel
+
+# Python version depended string conversion
+if sys.version_info[0] < 3:
+    py3ustr = str
+else:
+    py3ustr = lambda s: s.decode('utf-8', 'replace')
+
+try:
+    real_raw_input = raw_input
+except NameError:
+    real_raw_input = input
+
+
+# request and optionally enforce user input
+# @param question The question to be answered.
+# @param default The default value to use if no input was made
+# @param options List or string of available options. If defined the input must
+#        match one of the options (unless a default is specified). If the input
+#        is invalid the question is repeated.
+def getInput(question, default=None, options=None):
+
+    def _default(text):
+        # print default value to previous line if no input was made
+        if default:
+            print("\033[F\033[{}G{}".format(len(text)+1, default))
+        return default
+
+    # no options: accept any type of input
+    if not options:
+        defaultStr = "" if default is None else " [{}]".format(default)
+        question = "{}{}: ".format(question, defaultStr)
+        return real_raw_input(question) or _default(question)
+
+    if default is not None:
+        default = str(default).lower()
+
+    # options supplied: check and enforce input
+    opts = [str(o).lower() for o in options]
+    optStr = "/".join(o.upper() if o == default else o for o in opts)
+    question = "{} [{}]: ".format(question, optStr)
+    while True:
+        res = real_raw_input(question)
+        if not res and default:
+            return _default(question)
+
+        if res.lower() in opts:
+            return res.lower()
 
 
 if sys.platform == "darwin":
@@ -287,9 +336,6 @@ def on_setup_help(_):
 
 
 def on_shell(_args, _):
-    # pylint: disable=W0621
-    import seiscomp.shell
-
     shell = seiscomp.shell.CLI()
     try:
         shell.run(env)
@@ -353,6 +399,7 @@ def on_disable_help(_):
 
 
 def on_start(args, _):
+    found = 0
     if not args:
         start_kernel_modules()
         for mod in mods:
@@ -362,10 +409,15 @@ def on_start(args, _):
             # Module in autorun?
             if env.isModuleEnabled(mod.name):
                 start_module(mod)
+                found += 1
     else:
         for mod in mods:
             if mod.name in args or len(args) == 0:
                 start_module(mod)
+                found += 1
+
+    if not useCSV:
+        print("Summary: {} modules started".format(found))
 
     return 0
 
@@ -397,7 +449,7 @@ def on_stop(args, _):
                 cntStopped += 1
 
     if not useCSV:
-        print("Summary: {:d} modules stopped".format(cntStopped))
+        print("Summary: {} modules stopped".format(cntStopped))
 
     return 0
 
@@ -463,7 +515,7 @@ def on_check(args, _):
                 mod.check()
 
     if not useCSV:
-        print("Summary: {:d} started modules checked".format(cntStarted))
+        print("Summary: {} started modules checked".format(cntStarted))
 
     return 0
 
@@ -502,13 +554,19 @@ def on_list(args, _):
         return 1
 
     if args[0] == "modules":
+        found = 0
         for mod in mods:
             if env.isModuleEnabled(mod.name) or \
                isinstance(mod, seiscomp.kernel.CoreModule):
                 state = "enabled"
             else:
                 state = "disabled"
+            found += 1
             print("%s is %s" % (mod.name, state))
+
+        if not useCSV:
+            print("Summary: {} modules reported".format(found))
+
         return 0
 
     if args[0] == "aliases":
@@ -537,7 +595,7 @@ def on_list(args, _):
                 found += 1
 
         if not useCSV:
-            print("Summary: {:d} modules enabled".format(found))
+            print("Summary: {} modules enabled".format(found))
 
         return 0
 
@@ -550,7 +608,7 @@ def on_list(args, _):
                 found += 1
 
         if not useCSV:
-            print("Summary: {:d} modules disabled".format(found))
+            print("Summary: {} modules disabled".format(found))
 
         return 0
 
@@ -562,7 +620,7 @@ def on_list(args, _):
                 found += 1
 
         if not useCSV:
-            print("Summary: {:d} modules started".format(found))
+            print("Summary: {} modules started".format(found))
 
         return 0
 
@@ -585,8 +643,8 @@ def on_list_help(_):
 
 
 def on_status(args, _):
+    found = 0
     if len(args) > 0 and args[0] == "enabled":
-        found = 0
         for mod in mods:
             if env.isModuleEnabled(mod.name) or isinstance(
                     mod, seiscomp.kernel.CoreModule):
@@ -594,26 +652,28 @@ def on_status(args, _):
                 found += 1
 
         if not useCSV:
-            print("Summary: {:d} modules enabled".format(found))
+            print("Summary: {} modules enabled".format(found))
 
         return 0
 
     if len(args) > 0 and args[0] == "started":
-        found = 0
         for mod in mods:
             if shouldModuleRun(mod.name):
                 mod.status(shouldModuleRun(mod.name))
                 found += 1
 
         if not useCSV:
-            print("Summary: {:d} modules started".format(found))
+            print("Summary: {} modules started".format(found))
 
         return 0
 
     for mod in mods:
         if mod.name in args or len(args) == 0:
             mod.status(shouldModuleRun(mod.name))
+            found += 1
 
+    if not useCSV:
+        print("Summary: {} modules reported".format(found))
     return 0
 
 
@@ -842,6 +902,8 @@ def on_alias(args, _):
         error("expected arguments: {create|remove} ALIAS_NAME APP_NAME")
         return 1
 
+    aliasName = args[1]
+
     if args[0] == "create":
         if len(args) != 3:
             error("expected two arguments for create: ALIAS_NAME APP_NAME")
@@ -869,9 +931,9 @@ def on_alias(args, _):
 
         mod2 = args[2]
         if os.path.exists(os.path.join("bin", mod2)):
-            mod1 = os.path.join("bin", args[1])
+            mod1 = os.path.join("bin", aliasName)
         elif os.path.exists(os.path.join("sbin", mod2)):
-            mod1 = os.path.join("sbin", args[1])
+            mod1 = os.path.join("sbin", aliasName)
         else:
             error("no %s binary found (neither bin nor sbin)")
             return 1
@@ -899,7 +961,7 @@ def on_alias(args, _):
                 # Remove invalid lines
                 if len(toks) != 2:
                     continue
-                if toks[0] == args[1]:
+                if toks[0] == aliasName:
                     has_alias = True
                     break
 
@@ -909,19 +971,19 @@ def on_alias(args, _):
             pass
 
         if has_alias:
-            warning("%s is already registered as alias for %s in "\
-                    "$SEISCOMP_ROOT/etc/descriptions/aliases"  % (args[1], toks[1]))
+            warning("%s is already registered as alias for %s in " \
+                    "$SEISCOMP_ROOT/etc/descriptions/aliases"  % (aliasName, toks[1]))
             warning("  + do not register again but trying to link the required files")
         else:
             print(
-                "registered alias '%s' in $SEISCOMP_ROOT/etc/descriptions/aliases" %
-                (args[1]))
+                "Registered alias '%s' in $SEISCOMP_ROOT/etc/descriptions/aliases" %
+                (aliasName))
 
         # Check if target exists already
         if os.path.exists(os.path.join(SEISCOMP_ROOT, mod1)):
             warning(
                 "link '%s' to '%s' exists already in %s/bin/" %
-                (args[1], mod2, SEISCOMP_ROOT))
+                (aliasName, mod2, SEISCOMP_ROOT))
             warning("  + do not link again")
 
         try:
@@ -930,7 +992,7 @@ def on_alias(args, _):
             error("failed to open/create alias file: %s" % ALIAS_FILE)
             return 1
 
-        new_lines.append("%s = %s" % (args[1], args[2]))
+        new_lines.append("%s = %s" % (aliasName, args[2]))
 
         f.write("\n".join(new_lines) + "\n")
         f.close()
@@ -939,7 +1001,7 @@ def on_alias(args, _):
         # use relative path to default_cfg2
         cwdAlias = os.getcwd()
         os.chdir(os.path.join(SEISCOMP_ROOT, "etc", "defaults"))
-        default_cfg1 = args[1] + ".cfg"
+        default_cfg1 = aliasName + ".cfg"
         default_cfg2 = args[2] + ".cfg"
         if os.path.exists(default_cfg2):
             print("Linking default configuration: %s -> %s" %
@@ -962,15 +1024,15 @@ def on_alias(args, _):
             os.remove(os.path.join(SEISCOMP_ROOT, mod1))
         except BaseException:
             pass
-        print("Create app symlink: %s -> %s" % (mod2, mod1))
+        print("Creating app symlink: %s -> %s" % (mod2, mod1))
         os.symlink(mod2, os.path.join(SEISCOMP_ROOT, mod1))
 
         # create symlink from etc/init/mod1.py to etc/init/mod2.py
         cwdAlias = os.getcwd()
         os.chdir(os.path.join(SEISCOMP_ROOT, "etc", "init"))
-        init1 = args[1] + ".py"
+        init1 = aliasName + ".py"
         init2 = args[2] + ".py"
-        print("Link init script: %s -> %s" % (init2, init1))
+        print("Linking init script: %s -> %s" % (init2, init1))
         # - first: remove target
         try:
             os.remove(init1)
@@ -988,7 +1050,7 @@ def on_alias(args, _):
             error("expected one argument for remove: alias-name")
             return 1
 
-        print("Remove alias '%s'" % args[1])
+        print("Removing alias '%s'" % aliasName)
         #  check and remove alias line in etc/descriptions/aliases
         has_alias = False
         lines = []
@@ -1005,7 +1067,7 @@ def on_alias(args, _):
                 # Remove invalid lines
                 if len(toks) != 2:
                     continue
-                if toks[0] == args[1]:
+                if toks[0] == aliasName:
                     has_alias = True
                 else:
                     new_lines.append(line)
@@ -1014,7 +1076,7 @@ def on_alias(args, _):
             pass
 
         if not has_alias:
-            error("  + %s is not defined as an alias" % args[1])
+            error("  + %s is not defined as an alias" % aliasName)
             if len(lines) == len(new_lines):
                 return 1
 
@@ -1031,48 +1093,106 @@ def on_alias(args, _):
         if not has_alias:
             return 1
 
-        #  delete defaults etc/defaults/mod1.cfg
-        default_cfg = os.path.join("etc", "defaults", args[1] + ".cfg")
-        print("  + remove default configuration: %s" % default_cfg)
-        try:
-            os.remove(os.path.join(SEISCOMP_ROOT, default_cfg))
-        except BaseException:
-            pass
-
-        cfg = os.path.join("etc", args[1] + ".cfg")
-        if os.path.isfile(cfg):
-            warning(
-                "  + keep configuration file '%s/%s'" %
-                (SEISCOMP_ROOT, cfg))
-        cfg = os.path.join(
-            os.path.expanduser("~"),
-            ".seiscomp",
-            args[1] + ".cfg")
-        if os.path.isfile(cfg):
-            warning("  + keep configuration file '%s'" % (cfg))
-
         # remove symlink from bin/mod1
-        if os.path.exists(os.path.join("bin", args[1])):
-            sym_link = os.path.join("bin", args[1])
-        elif os.path.exists(os.path.join("sbin", args[1])):
-            sym_link = os.path.join("sbin", args[1])
+        if os.path.exists(os.path.join("bin", aliasName)):
+            sym_link = os.path.join("bin", aliasName)
+        elif os.path.exists(os.path.join("sbin", aliasName)):
+            sym_link = os.path.join("sbin", aliasName)
         else:
             sym_link = ""
 
         if sym_link:
-            print("  + remove app symlink: %s" % sym_link)
+            print("  + removing app symlink: %s" % sym_link)
             try:
                 os.remove(os.path.join(SEISCOMP_ROOT, sym_link))
             except BaseException:
                 pass
 
         # remove symlink from etc/init/mod1.py
-        init_scr = os.path.join("etc", "init", args[1] + ".py")
-        print("  + remove init script: %s" % init_scr)
+        init_scr = os.path.join("etc", "init", aliasName + ".py")
+        print("  + removing init script: %s" % init_scr)
         try:
             os.remove(os.path.join(SEISCOMP_ROOT, init_scr))
         except BaseException:
             pass
+
+        #  delete defaults etc/defaults/mod1.cfg
+        default_cfg = os.path.join("etc", "defaults", aliasName + ".cfg")
+        print("  + removing default configuration: {}/{}".format(SEISCOMP_ROOT, default_cfg))
+        try:
+            os.remove(os.path.join(SEISCOMP_ROOT, default_cfg))
+        except BaseException as e:
+            error("    + could not remove" % e)
+
+        if not interactiveMode:
+            warning("No other configurations were deleted for %s - interactive removal is supported by '--interactive'" % aliasName)
+            return 0
+
+        # test module configuration files
+        # SYSTEMCONFIGDIR
+        cfg = os.path.join("etc", aliasName + ".cfg")
+        if os.path.isfile(cfg):
+            print("  + found module configuration file: {}/{}".format(SEISCOMP_ROOT, cfg))
+            answer = getInput("    + do you wish to remove it?", 'n', 'yn')
+            if answer == "y":
+                try:
+                    os.remove(cfg)
+                except Exception as e:
+                    error("    + could not remove the file: %s - try manually" % e)
+
+        # CONFIGDIR
+        cfg = os.path.join(
+            os.path.expanduser("~"),
+            ".seiscomp",
+            aliasName + ".cfg")
+        if os.path.isfile(cfg):
+            print("  + found module configuration file: {}".format(cfg))
+            answer = getInput("    + do you wish to remove it?", 'n', 'yn')
+            if answer == "y":
+                try:
+                    os.remove(cfg)
+                except Exception as e:
+                    error("  + could not remove the file: %s - try manually" % e)
+
+        # test module binding files
+        bindingDir = os.path.join(SEISCOMP_ROOT, "etc", "key", aliasName)
+        if os.path.exists(bindingDir):
+            print("  + found binding directory: {}".format(bindingDir))
+            answer = getInput("    + do you wish to remove it?", 'n', 'yn')
+            if answer == "y":
+                try:
+                    shutil.rmtree(bindingDir)
+                except Exception as e:
+                    error("    + could not remove the directory: %s - try manually" % e)
+
+        # test key files
+        keyDir = os.path.join(SEISCOMP_ROOT, 'etc', 'key')
+        dirContent = os.listdir(keyDir)
+        keyFiles = []
+        print("  + testing key files")
+        for f in dirContent:
+            if not os.path.isfile(os.path.join(keyDir, f)) or \
+                    not f.startswith("station_"):
+                continue
+
+            keyFile = os.path.join(keyDir, f)
+            with open(keyFile, 'r') as fp:
+                # Read all lines in the file one by one
+                for line in fp:
+                    # check if the line starts with the module name
+                    if line.startswith(aliasName):
+                        keyFiles.append(keyFile)
+                        print("    + found binding for '{}' in: {}".format(aliasName, keyFile))
+
+        if keyFiles:
+            print("    + found {} bindings for '{}' in key files".format(len(keyFiles), aliasName))
+            question = "    + remove all '{}' bindings from key files?".format(aliasName)
+            answer = getInput(question, 'n', 'yn')
+            if answer == "y":
+                shell = seiscomp.shell.CLI(env)
+                shell.commandRemove(["module", aliasName, "*.*"])
+        else:
+            print("    + found no key files")
 
         return 0
 
@@ -1135,9 +1255,11 @@ def on_help(args, _):
         print("\nSynopsis:")
         print("  seiscomp [flags] [commands] [arguments]")
         print("\nFlags:")
-        print("  --asroot      Allow running a command as root")
-        print("  --csv         Print output as csv in machine-readable format")
-        print("  --wait arg    Define a timeout in seconds for acquiring the seiscomp " \
+        print("  --asroot              Allow running a command as root")
+        print("  --csv                 Print output as csv in machine-readable format")
+        print("  -i, [--interactive]   Interactive mode: Allow deleting files " \
+              "interactively when removing aliases")
+        print("  --wait arg            Define a timeout in seconds for acquiring the seiscomp " \
               "lock file, e.g. `seiscomp --wait 10 update-config`")
         print("\nAvailable commands:")
         for helpAction in allowed_actions:
@@ -1190,6 +1312,7 @@ def on_csv_help(_):
 useCSV = False
 asRoot = False
 lockTimeout = None
+interactiveMode = False
 
 argv = sys.argv[1:]
 argflags = []
@@ -1201,6 +1324,9 @@ while argv:
         argv = argv[1:]
     elif argv[0] == "--asroot":
         asRoot = True
+        argv = argv[1:]
+    if argv[0] == "--interactive" or argv[0] == "-i":
+        interactiveMode = True
         argv = argv[1:]
     elif argv[0] == "--wait":
         argv = argv[1:]

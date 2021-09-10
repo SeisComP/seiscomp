@@ -51,8 +51,8 @@ class CLI:
     Simple console shell.
     """
 
-    def __init__(self):
-        self.env = None
+    def __init__(self, env = None):
+        self.env = env
 
     def run(self, env):
         self.env = env
