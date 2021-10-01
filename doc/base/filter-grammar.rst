@@ -206,6 +206,14 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
    :param timespan: The timespan in seconds
 
 
+.. py:function:: MEDIAN(timespan)
+
+   Computes the median within the timespan preceeding the sample. Useful, e.g.
+   for despiking. The delay due to the filter may be up to its timespan.
+
+   :param timespan: The timespan in seconds
+
+
 .. py:function:: MIN(timespan)
 
    Computes the minimum within the timespan preceeding the sample.
