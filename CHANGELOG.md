@@ -38,11 +38,6 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 14.3.0```
 
-* seiscomp
-
-    * Add support for additional host environment which is sourced from
-      `$SEISCOMP_ROOT/etc/env/$(hostname)` if present
-
 * documentation
 
     * Update SDK Python examples
@@ -51,6 +46,10 @@ All notable changes to SeisComP are documented here.
 
     * Add --wait parameter to set the timeout when acquiring
       the seiscomp lock
+    * Add dialog for removing obsolete configuration after
+      removing alias modules
+    * Add support for additional host environment which is sourced from
+      `$SEISCOMP_ROOT/etc/env/$(hostname)` if present
 
 * scolv
 
@@ -60,6 +59,12 @@ All notable changes to SeisComP are documented here.
 
     * Add --print-header option for generating information on the query as a
       header of the output
+
+* trunk
+
+    * Add data scheme version information to output when starting
+      a module with the option `-V`
+    * Add MEDIAN() filter
 
 * GUI
 
@@ -87,6 +92,11 @@ All notable changes to SeisComP are documented here.
 * iLoc
 
     * Update iLoc code to version 3.3
+
+* scdispatch
+
+    * Add option '-e' as a wrapper for removing the EVENT group from
+      routing table
 
 ## 4.6.1
 
