@@ -27,6 +27,7 @@ All notable changes to SeisComP are documented here.
 
     * Add --print-header option for generating information on the query as a
       header of the output
+    * Add examples for PostgreSQL
 
 * trunk
 
@@ -41,6 +42,8 @@ All notable changes to SeisComP are documented here.
     * Add units to columns of tables: Events, Events, Magnitudes
     * Remove number of origins column in event list if origins should not be
       listed
+    * Correct issue with magnitude view map which does not show symbols
+      for stations which have a magnitude but no arrival
 
 * scesv
 
@@ -56,6 +59,7 @@ All notable changes to SeisComP are documented here.
       Can be enabled by new option `autoloc.pickLogEnable`.
     * Added documentation of parameters
     * Send a journal message when setting the origin evaluation status
+    * Add IM network to default station.conf
 
 * iLoc
 
