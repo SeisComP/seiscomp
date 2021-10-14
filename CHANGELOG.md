@@ -19,9 +19,24 @@ All notable changes to SeisComP are documented here.
     * Add support for additional host environment which is sourced from
       `$SEISCOMP_ROOT/etc/env/$(hostname)` if present
 
+* trunk
+
+    * Add HTTP proxy support for FDSNWS recordstream. `http_proxy`,
+      `https_proxy` and `no_proxy` environment are being read and
+      evaluated. Only proxy servers available with http are supported
+      currently.
+    * Add new geo feature directory  `@DATADIR@/spatial/vector` or
+      `@CONFIGDIR@/spatial/vector`. Load  BNA files from new geo
+      feature directory. The old BNA directories are still
+      supported but cause a warning which is logged.
+    * Add support for GeoJSON files (*.geojson) in the new geo
+      feature directory.
+
 * scolv
 
     * Fix display of tooltips in origin map and magnitude map
+    * Fix loading configured streams from either scolv or global
+      bindings instead of the first bindings found
 
 * scquery
 
@@ -157,40 +172,40 @@ All notable changes to SeisComP are documented here.
       The corresponding parameters are deprecated and must be replaced by new ones either
       pre-pending "magnitudes." or "amplitudes." to the respective parameter.
       Warnings will be written to module logs if deprecated values are found. 
-    * deprecated bindings parameter values : new values:
+    * deprecated bindings parameter values , new values:
 
-        * MLh.maxavg : amplitudes.MLh.params
-        * MLh.ClippingThreshold : amplitudes.MLh.ClippingThreshold
-        * MLh.params : magnitudes.MLh.params
-          
-        * md.maxavg : magnitudes.md.seismo
-        * md.taper : magnitudes.md.taper
-        * md.signal_length : magnitudes.md.signal_length
-        * md.butterworth : magnitudes.md.butterworth
-        * md.depthmax : magnitudes.md.depthmax
-        * md.deltamax : magnitudes.md.deltamax
-        * md.snrmin : magnitudes.md.snrmin
-        * md.mdmax : magnitudes.md.mdmax
-        * md.fma : magnitudes.md.fma
-        * md.fmb : magnitudes.md.fmb
-        * md.fmd : magnitudes.md.fmd
-        * md.fmf : magnitudes.md.fmf
-        * md.fmz : magnitudes.md.fmz
-        * md.linearcorrection : magnitudes.md.linearcorrection
-        * md.offset : magnitudes.md.offset
-        * md.stacor : magnitudes.md.stacor
-        
+        * MLh.maxavg , amplitudes.MLh.params
+        * MLh.ClippingThreshold , amplitudes.MLh.ClippingThreshold
+        * MLh.params , magnitudes.MLh.params
+
+        * md.maxavg , magnitudes.md.seismo
+        * md.taper , magnitudes.md.taper
+        * md.signal_length , magnitudes.md.signal_length
+        * md.butterworth , magnitudes.md.butterworth
+        * md.depthmax , magnitudes.md.depthmax
+        * md.deltamax , magnitudes.md.deltamax
+        * md.snrmin , magnitudes.md.snrmin
+        * md.mdmax , magnitudes.md.mdmax
+        * md.fma , magnitudes.md.fma
+        * md.fmb , magnitudes.md.fmb
+        * md.fmd , magnitudes.md.fmd
+        * md.fmf , magnitudes.md.fmf
+        * md.fmz , magnitudes.md.fmz
+        * md.linearcorrection , magnitudes.md.linearcorrection
+        * md.offset , magnitudes.md.offset
+        * md.stacor , magnitudes.md.stacor
+
         * MLr.maxavg : magnitudes.MLr.params
-        
+
         * Ms_20.lowerPeriod : magnitudes.Ms_20.lowerPeriod
         * Ms_20.upperPeriod : magnitudes.Ms_20.upperPeriod
         * Ms_20.minDist : magnitudes.Ms_20.minDist
         * Ms_20.maxDist : magnitudes.Ms_20.maxDist
         * Ms_20.maxDepth : magnitudes.Ms_20.maxDepth
-        
+
         * MLv.logA0 : magnitudes.MLv.logA0
         * MLv.maxDistanceKm : magnitudes.MLv.maxDistanceKm
-        
+
         * ML.logA0 : magnitudes.ML.logA0
         * ML.maxDistanceKm : magnitudes.ML.maxDistanceKm
 
