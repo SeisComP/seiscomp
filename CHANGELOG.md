@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.7.1
+
+* trunk
+
+    * Fix test compilation for some distributions
+    * Update changelog
+
 ## 4.7.0
 
 ```SC_API_VERSION 14.3.0```
