@@ -263,7 +263,7 @@ Hint: Entered values starting with a dot (.) are handled
     def addInputs(self, obj, parent, modname, group, xml, prefix):
         childs = parent.child;
         if not childs is None:
-            while childs.next:
+            while not childs.next is None:
                 childs = childs.next
 
         inputs = xml.findall("input")
@@ -311,7 +311,7 @@ Hint: Entered values starting with a dot (.) are handled
                 if not value:
                     raise Exception("%s: option without value" % prefix)
 
-                optionNode = SetupNode(parent, input_)
+                optionNode = SetupNode(node, input_)
                 optionNode.path = node.path + "." + value
                 optionNode.modname = modname
                 optionNode.groupname = group
