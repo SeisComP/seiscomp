@@ -46,6 +46,11 @@ All notable changes to SeisComP are documented here.
       settings of scolv
 - GUI
     - Allow configuration of precision of origin time
+- trunk
+    - Add event certainties "felt", "damaging" in line with IASPEI event type
+      leading character
+    - Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
+      "submarine landslide"
 
 ## 4.7.2
 
