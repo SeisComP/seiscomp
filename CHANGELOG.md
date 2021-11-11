@@ -52,6 +52,12 @@ All notable changes to SeisComP are documented here.
     - Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
       "submarine landslide"
 
+## 4.7.3
+
+- trunk
+    - Fix MYSQL database setup script to create
+      ro and rw user accounts correctly
+
 ## 4.7.2
 
 - trunk
