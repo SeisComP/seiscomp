@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.7.3
+
+- trunk
+    - Fix MYSQL database setup script to create
+      ro and rw user accounts correctly
+
 ## 4.7.2
 
 - trunk
