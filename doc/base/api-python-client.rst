@@ -15,9 +15,9 @@ seiscomp.client package focuses on three main aspects:
 Therefore a client package has been developed combining these concepts in an
 easy way with only a couple of API calls. Since |scname| has been developed in
 C++ and uses the object oriented paradigm forcefully, modules build on the
-Application (C++: :class:`Seiscomp::Client::Application`, :class:`Python: seiscomp.client.Application`)
-class. It manages the messaging connection and waveform sources in a transparent
-way.
+Application (C++: :class:`Seiscomp::Client::Application`, Python:
+:class:`seiscomp.client.Application`) class. It manages the messaging connection
+and waveform sources in a transparent way.
 
 The class :class:`Seiscomp::Client::Application` is the base class for
 all |scname| applications. It manages messaging and database
@@ -57,7 +57,8 @@ run it in a Python main method.
 
 .. code-block:: python
 
-   import seiscomp.client, sys
+   import sys
+   import seiscomp.client
 
    # Class definition
    class MyApp(seiscomp.client.Application):
@@ -74,9 +75,9 @@ run it in a Python main method.
        sys.exit(main(len(sys.argv), sys.argv))
 
 
-An application can be called with the parenthesis operator () which returns
-the applications result code and serves as input to :func:`sys.exit`. Operator()
-is a wrapper for :func:`Application.exec`.
+An application can be called with the parenthesis operator :func:`()` which
+returns the applications result code and serves as input to :func:`sys.exit`.
+Operator() is a wrapper for :func:`Application.exec`.
 
 
 The workflow of :func:`Application.exec` looks as follows:
@@ -86,16 +87,10 @@ The workflow of :func:`Application.exec` looks as follows:
    def exec(self):
        self.returnCode = 1
 
-       if self.init():
+       if self.init() and self.run():
            self.returnCode = 0
 
-           if !self.run() and self.returnCode == 0:
-               self.returnCode = 1
-
-           self.done()
-       }
-       else
-          self.done()
+       self.done()
 
        return self.returnCode
 
@@ -186,7 +181,7 @@ and :func:`validateParameters`.
 
 :func:`initConfiguration` is used to read parameters of the configuration files
 and to populate the internal state. If something fails or if configured values
-are out of bounds, False can be returned which causes to :func:`init` to return
+are out of bounds, False can be returned which causes :func:`init` to return
 False and to exit the application with a non-zero result code.
 
 An example is show below:
@@ -197,8 +192,10 @@ An example is show below:
        if not seiscomp.client.Application.initConfiguration(self):
            return False
 
-       try: self._directory = self.configGetString("directory")
-       except: pass
+       try:
+           self._directory = self.configGetString("directory")
+       except:
+           pass
 
        return True
 
@@ -230,8 +227,10 @@ application is aborted with a non-zero result code.
 .. code-block:: python
 
    def validateParameters(self):
-       try: self._directory = self.commandline().optionString("directory")
-       except: pass
+       try:
+           self._directory = self.commandline().optionString("directory")
+       except:
+           pass
 
        # The directory validity is checked to avoid duplicate checks in
        # initConfiguration.
@@ -240,8 +239,8 @@ application is aborted with a non-zero result code.
            return False
 
        if not exists(self._directory):
-           seiscomp.logging.error("directory %s does not exist" %\
-                                   self._directory)
+           seiscomp.logging.error(
+               "directory {} does not exist".format(self._directory))
            return False
 
        return True
@@ -253,7 +252,7 @@ overridden method :func:`init`.
 .. code-block: python
 
    def init(self):
-       if seiscomp.client.Application.init(self) == False:
+       if not seiscomp.client.Application.init(self):
            return False
 
        # Custom initialization code runs here.
@@ -287,7 +286,7 @@ The workflow of the run method looks like this:
                handleTimeout (virtual)
                handleAutoShutdown (virtual)
 
-The run method starts the event loop and wait for new events in the queue.
+The run method starts the event loop and waits for new events in the queue.
 In case of messaging a thread is started that sits and waits for messages
 and feeds them to the queue and to the event loop in :func:`run`. Without
 messaging the run loop would do nothing but waiting for SIGTERM or
@@ -340,8 +339,8 @@ void function.
        seiscomp.client.Application.done()
 
        # Custom clean ups
-       closeMyDataFiles();
-       closeCustomConnections();
+       closeMyDataFiles()
+       closeCustomConnections()
 
 
 
@@ -385,7 +384,7 @@ returns the RecordStream instance which can be used to add stream requests.
 .. code-block:: python
 
    def init(self):
-       if seiscomp.client.StreamApplication.init(self) == False:
+       if not seiscomp.client.StreamApplication.init(self):
            return False
 
        # Subscribe to some streams
