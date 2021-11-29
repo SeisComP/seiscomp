@@ -5,393 +5,2352 @@ seiscomp.datamodel
 
 .. py:module:: seiscomp.datamodel
 
-
-Classes
--------
+Base Objects
+------------
 
 * :ref:`Object <api-python-datamodel-object>`
 * :ref:`PublicObject <api-python-datamodel-publicobject>`
 * :ref:`Notifier <api-python-datamodel-notifier>`
 
 
-* :ref:`EventParameters <api-python-datamodel-eventparameters>`
+Domain Overview
+---------------
 
-  * :ref:`Amplitude <api-python-datamodel-amplitude>`
-  * :ref:`AmplitudeReference <api-python-datamodel-amplitudereference>`
-  * :ref:`Arrival <api-python-datamodel-arrival>`
-  * :ref:`Axis <api-python-datamodel-axis>`
-  * :ref:`Comment <api-python-datamodel-comment>`
-  * :ref:`CompositeTime <api-python-datamodel-compositetime>`
-  * :ref:`ConfidenceEllipsoid <api-python-datamodel-confidenceellipsoid>`
-  * :ref:`CreationInfo <api-python-datamodel-creationinfo>`
-  * :ref:`DataUsed <api-python-datamodel-dataused>`
-  * :ref:`Event <api-python-datamodel-event>`
-  * :ref:`EventDescription <api-python-datamodel-eventdescription>`
-  * :ref:`FocalMechanism <api-python-datamodel-focalmechanism>`
-  * :ref:`FocalMechanismReference <api-python-datamodel-focalmechanismreference>`
-  * :ref:`IntegerQuantity <api-python-datamodel-integerquantity>`
-  * :ref:`Magnitude <api-python-datamodel-magnitude>`
-  * :ref:`MomentTensor <api-python-datamodel-momenttensor>`
-  * :ref:`MomentTensorComponentContribution <api-python-datamodel-momenttensorcomponentcontribution>`
-  * :ref:`MomentTensorPhaseSetting <api-python-datamodel-momenttensorphasesetting>`
-  * :ref:`MomentTensorStationContribution <api-python-datamodel-momenttensorstationcontribution>`
-  * :ref:`NodalPlane <api-python-datamodel-nodalplane>`
-  * :ref:`NodalPlanes <api-python-datamodel-nodalplanes>`
-  * :ref:`Origin <api-python-datamodel-origin>`
-  * :ref:`OriginQuality <api-python-datamodel-originquality>`
-  * :ref:`OriginReference <api-python-datamodel-originreference>`
-  * :ref:`OriginUncertainty <api-python-datamodel-originuncertainty>`
-  * :ref:`Phase <api-python-datamodel-phase>`
-  * :ref:`Pick <api-python-datamodel-pick>`
-  * :ref:`PickReference <api-python-datamodel-pickreference>`
-  * :ref:`PrincipalAxes <api-python-datamodel-principalaxes>`
-  * :ref:`Reading <api-python-datamodel-reading>`
-  * :ref:`RealArray <api-python-datamodel-realarray>`
-  * :ref:`RealPDF1D <api-python-datamodel-realpdf1d>`
-  * :ref:`RealQuantity <api-python-datamodel-realquantity>`
-  * :ref:`SourceTimeFunction <api-python-datamodel-sourcetimefunction>`
-  * :ref:`StationMagnitude <api-python-datamodel-stationmagnitude>`
-  * :ref:`StationMagnitudeContribution <api-python-datamodel-stationmagnitudecontribution>`
-  * :ref:`Tensor <api-python-datamodel-tensor>`
-  * :ref:`TimeArray <api-python-datamodel-timearray>`
-  * :ref:`TimePDF1D <api-python-datamodel-timepdf1d>`
-  * :ref:`TimeQuantity <api-python-datamodel-timequantity>`
-  * :ref:`TimeWindow <api-python-datamodel-timewindow>`
-  * :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
 
-  .. graphviz::
-     :caption: EventParameters object connections from parent to child.
+EventParameters
+............................................................
 
-     digraph G {
-        graph [size="8, 100"]
-        node [fontname=Verdana,fontsize=8]
-        node [shape=plaintext]
-        node [penwidth=0.5]
-        node [style="rounded,filled"]
-        node [fillcolor="#fcf2e3"]
-        node [color="#000000"]
-        edge [color="#000000"]
-        layout="dot"
-        Pick [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Pick</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="time"><font color="#8b0000">+ time: TimeQuantity</font></td></tr><tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID</font></td></tr><tr><td align="left" port="filterID"><font color="#8b0000">+ filterID: string</font></td></tr><tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr><tr><td align="left" port="horizontalSlowness"><font color="#8b0000">+ horizontalSlowness: RealQuantity  [0..1]</font></td></tr><tr><td align="left" port="backazimuth"><font color="#8b0000">+ backazimuth: RealQuantity  [0..1]</font></td></tr><tr><td align="left" port="slownessMethodID"><font color="#8b0000">+ slownessMethodID: string</font></td></tr><tr><td align="left" port="onset"><font color="#8b0000">+ onset: PickOnset  [0..1]</font></td></tr><tr><td align="left" port="phaseHint"><font color="#8b0000">+ phaseHint: Phase  [0..1]</font></td></tr><tr><td align="left" port="polarity"><font color="#8b0000">+ polarity: PickPolarity  [0..1]</font></td></tr><tr><td align="left" port="evaluationMode"><font color="#8b0000">+ evaluationMode: EvaluationMode  [0..1]</font></td></tr><tr><td align="left" port="evaluationStatus"><font color="#8b0000">+ evaluationStatus: EvaluationStatus  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr></table>>]
-        Comment [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Comment</td></tr><tr><td align="left" port="text"><font color="#8b0000">+ text: string</font></td></tr><tr><td align="left" port="id"><font color="#8b0000">+ id: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime  [0..1]</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr></table>>]
-        Amplitude [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Amplitude</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="amplitude"><font color="#8b0000">+ amplitude: RealQuantity  [0..1]</font></td></tr><tr><td align="left" port="timeWindow"><font color="#8b0000">+ timeWindow: TimeWindow  [0..1]</font></td></tr><tr><td align="left" port="period"><font color="#8b0000">+ period: RealQuantity  [0..1]</font></td></tr><tr><td align="left" port="snr"><font color="#8b0000">+ snr: float  [0..1]</font></td></tr><tr><td align="left" port="unit"><font color="#8b0000">+ unit: string</font></td></tr><tr><td align="left" port="pickID"><font color="#8b0000">+ pickID: string</font></td></tr><tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID  [0..1]</font></td></tr><tr><td align="left" port="filterID"><font color="#8b0000">+ filterID: string</font></td></tr><tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr><tr><td align="left" port="scalingTime"><font color="#8b0000">+ scalingTime: TimeQuantity  [0..1]</font></td></tr><tr><td align="left" port="magnitudeHint"><font color="#8b0000">+ magnitudeHint: string</font></td></tr><tr><td align="left" port="evaluationMode"><font color="#8b0000">+ evaluationMode: EvaluationMode  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr></table>>]
-        Reading [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Reading</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left"><font color="#8b0000">+ pickReference: PickReference [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ amplitudeReference: AmplitudeReference [0..*]</font></td></tr></table>>]
-        PickReference [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>PickReference</td></tr><tr><td align="left" port="pickID"><font color="#8b0000">+ pickID: string</font></td></tr></table>>]
-        AmplitudeReference [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>AmplitudeReference</td></tr><tr><td align="left" port="amplitudeID"><font color="#8b0000">+ amplitudeID: string</font></td></tr></table>>]
-        Origin [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Origin</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="time"><font color="#8b0000">+ time: TimeQuantity</font></td></tr><tr><td align="left" port="latitude"><font color="#8b0000">+ latitude: RealQuantity</font></td></tr><tr><td align="left" port="longitude"><font color="#8b0000">+ longitude: RealQuantity</font></td></tr><tr><td align="left" port="depth"><font color="#8b0000">+ depth: RealQuantity  [0..1]</font></td></tr><tr><td align="left" port="depthType"><font color="#8b0000">+ depthType: OriginDepthType  [0..1]</font></td></tr><tr><td align="left" port="timeFixed"><font color="#8b0000">+ timeFixed: boolean  [0..1]</font></td></tr><tr><td align="left" port="epicenterFixed"><font color="#8b0000">+ epicenterFixed: boolean  [0..1]</font></td></tr><tr><td align="left" port="referenceSystemID"><font color="#8b0000">+ referenceSystemID: string</font></td></tr><tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr><tr><td align="left" port="earthModelID"><font color="#8b0000">+ earthModelID: string</font></td></tr><tr><td align="left" port="quality"><font color="#8b0000">+ quality: OriginQuality  [0..1]</font></td></tr><tr><td align="left" port="uncertainty"><font color="#8b0000">+ uncertainty: OriginUncertainty  [0..1]</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: OriginType  [0..1]</font></td></tr><tr><td align="left" port="evaluationMode"><font color="#8b0000">+ evaluationMode: EvaluationMode  [0..1]</font></td></tr><tr><td align="left" port="evaluationStatus"><font color="#8b0000">+ evaluationStatus: EvaluationStatus  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ compositeTime: CompositeTime [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ arrival: Arrival [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ stationMagnitude: StationMagnitude [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ magnitude: Magnitude [0..*]</font></td></tr></table>>]
-        CompositeTime [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>CompositeTime</td></tr><tr><td align="left" port="year"><font color="#8b0000">+ year: IntegerQuantity  [0..1]</font></td></tr><tr><td align="left" port="month"><font color="#8b0000">+ month: IntegerQuantity  [0..1]</font></td></tr><tr><td align="left" port="day"><font color="#8b0000">+ day: IntegerQuantity  [0..1]</font></td></tr><tr><td align="left" port="hour"><font color="#8b0000">+ hour: IntegerQuantity  [0..1]</font></td></tr><tr><td align="left" port="minute"><font color="#8b0000">+ minute: IntegerQuantity  [0..1]</font></td></tr><tr><td align="left" port="second"><font color="#8b0000">+ second: RealQuantity  [0..1]</font></td></tr></table>>]
-        Arrival [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Arrival</td></tr><tr><td align="left" port="pickID"><font color="#8b0000">+ pickID: string</font></td></tr><tr><td align="left" port="phase"><font color="#8b0000">+ phase: Phase</font></td></tr><tr><td align="left" port="timeCorrection"><font color="#8b0000">+ timeCorrection: float  [0..1]</font></td></tr><tr><td align="left" port="azimuth"><font color="#8b0000">+ azimuth: float  [0..1]</font></td></tr><tr><td align="left" port="distance"><font color="#8b0000">+ distance: float  [0..1]</font></td></tr><tr><td align="left" port="takeOffAngle"><font color="#8b0000">+ takeOffAngle: float  [0..1]</font></td></tr><tr><td align="left" port="timeResidual"><font color="#8b0000">+ timeResidual: float  [0..1]</font></td></tr><tr><td align="left" port="horizontalSlownessResidual"><font color="#8b0000">+ horizontalSlownessResidual: float  [0..1]</font></td></tr><tr><td align="left" port="backazimuthResidual"><font color="#8b0000">+ backazimuthResidual: float  [0..1]</font></td></tr><tr><td align="left" port="timeUsed"><font color="#8b0000">+ timeUsed: boolean  [0..1]</font></td></tr><tr><td align="left" port="horizontalSlownessUsed"><font color="#8b0000">+ horizontalSlownessUsed: boolean  [0..1]</font></td></tr><tr><td align="left" port="backazimuthUsed"><font color="#8b0000">+ backazimuthUsed: boolean  [0..1]</font></td></tr><tr><td align="left" port="weight"><font color="#8b0000">+ weight: float  [0..1]</font></td></tr><tr><td align="left" port="earthModelID"><font color="#8b0000">+ earthModelID: string</font></td></tr><tr><td align="left" port="preliminary"><font color="#8b0000">+ preliminary: boolean  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr></table>>]
-        StationMagnitude [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>StationMagnitude</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="originID"><font color="#8b0000">+ originID: string</font></td></tr><tr><td align="left" port="magnitude"><font color="#8b0000">+ magnitude: RealQuantity</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="amplitudeID"><font color="#8b0000">+ amplitudeID: string</font></td></tr><tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr><tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID  [0..1]</font></td></tr><tr><td align="left" port="passedQC"><font color="#8b0000">+ passedQC: boolean  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr></table>>]
-        Magnitude [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Magnitude</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="magnitude"><font color="#8b0000">+ magnitude: RealQuantity</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="originID"><font color="#8b0000">+ originID: string</font></td></tr><tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr><tr><td align="left" port="stationCount"><font color="#8b0000">+ stationCount: int  [0..1]</font></td></tr><tr><td align="left" port="azimuthalGap"><font color="#8b0000">+ azimuthalGap: float  [0..1]</font></td></tr><tr><td align="left" port="evaluationStatus"><font color="#8b0000">+ evaluationStatus: EvaluationStatus  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ stationMagnitudeContribution: StationMagnitudeContribution [0..*]</font></td></tr></table>>]
-        StationMagnitudeContribution [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>StationMagnitudeContribution</td></tr><tr><td align="left" port="stationMagnitudeID"><font color="#8b0000">+ stationMagnitudeID: string</font></td></tr><tr><td align="left" port="residual"><font color="#8b0000">+ residual: float  [0..1]</font></td></tr><tr><td align="left" port="weight"><font color="#8b0000">+ weight: float  [0..1]</font></td></tr></table>>]
-        FocalMechanism [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>FocalMechanism</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="triggeringOriginID"><font color="#8b0000">+ triggeringOriginID: string</font></td></tr><tr><td align="left" port="nodalPlanes"><font color="#8b0000">+ nodalPlanes: NodalPlanes  [0..1]</font></td></tr><tr><td align="left" port="principalAxes"><font color="#8b0000">+ principalAxes: PrincipalAxes  [0..1]</font></td></tr><tr><td align="left" port="azimuthalGap"><font color="#8b0000">+ azimuthalGap: float  [0..1]</font></td></tr><tr><td align="left" port="stationPolarityCount"><font color="#8b0000">+ stationPolarityCount: int  [0..1]</font></td></tr><tr><td align="left" port="misfit"><font color="#8b0000">+ misfit: float  [0..1]</font></td></tr><tr><td align="left" port="stationDistributionRatio"><font color="#8b0000">+ stationDistributionRatio: float  [0..1]</font></td></tr><tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr><tr><td align="left" port="evaluationMode"><font color="#8b0000">+ evaluationMode: EvaluationMode  [0..1]</font></td></tr><tr><td align="left" port="evaluationStatus"><font color="#8b0000">+ evaluationStatus: EvaluationStatus  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ momentTensor: MomentTensor [0..*]</font></td></tr></table>>]
-        MomentTensor [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>MomentTensor</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="derivedOriginID"><font color="#8b0000">+ derivedOriginID: string</font></td></tr><tr><td align="left" port="momentMagnitudeID"><font color="#8b0000">+ momentMagnitudeID: string</font></td></tr><tr><td align="left" port="scalarMoment"><font color="#8b0000">+ scalarMoment: RealQuantity  [0..1]</font></td></tr><tr><td align="left" port="tensor"><font color="#8b0000">+ tensor: Tensor  [0..1]</font></td></tr><tr><td align="left" port="variance"><font color="#8b0000">+ variance: float  [0..1]</font></td></tr><tr><td align="left" port="varianceReduction"><font color="#8b0000">+ varianceReduction: float  [0..1]</font></td></tr><tr><td align="left" port="doubleCouple"><font color="#8b0000">+ doubleCouple: float  [0..1]</font></td></tr><tr><td align="left" port="clvd"><font color="#8b0000">+ clvd: float  [0..1]</font></td></tr><tr><td align="left" port="iso"><font color="#8b0000">+ iso: float  [0..1]</font></td></tr><tr><td align="left" port="greensFunctionID"><font color="#8b0000">+ greensFunctionID: string</font></td></tr><tr><td align="left" port="filterID"><font color="#8b0000">+ filterID: string</font></td></tr><tr><td align="left" port="sourceTimeFunction"><font color="#8b0000">+ sourceTimeFunction: SourceTimeFunction  [0..1]</font></td></tr><tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr><tr><td align="left" port="method"><font color="#8b0000">+ method: MomentTensorMethod  [0..1]</font></td></tr><tr><td align="left" port="status"><font color="#8b0000">+ status: MomentTensorStatus  [0..1]</font></td></tr><tr><td align="left" port="cmtName"><font color="#8b0000">+ cmtName: string</font></td></tr><tr><td align="left" port="cmtVersion"><font color="#8b0000">+ cmtVersion: string</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ dataUsed: DataUsed [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ momentTensorPhaseSetting: MomentTensorPhaseSetting [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ momentTensorStationContribution: MomentTensorStationContribution [0..*]</font></td></tr></table>>]
-        DataUsed [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>DataUsed</td></tr><tr><td align="left" port="waveType"><font color="#8b0000">+ waveType: DataUsedWaveType</font></td></tr><tr><td align="left" port="stationCount"><font color="#8b0000">+ stationCount: int</font></td></tr><tr><td align="left" port="componentCount"><font color="#8b0000">+ componentCount: int</font></td></tr><tr><td align="left" port="shortestPeriod"><font color="#8b0000">+ shortestPeriod: float  [0..1]</font></td></tr></table>>]
-        MomentTensorPhaseSetting [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>MomentTensorPhaseSetting</td></tr><tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr><tr><td align="left" port="lowerPeriod"><font color="#8b0000">+ lowerPeriod: float</font></td></tr><tr><td align="left" port="upperPeriod"><font color="#8b0000">+ upperPeriod: float</font></td></tr><tr><td align="left" port="minimumSNR"><font color="#8b0000">+ minimumSNR: float  [0..1]</font></td></tr><tr><td align="left" port="maximumTimeShift"><font color="#8b0000">+ maximumTimeShift: float  [0..1]</font></td></tr></table>>]
-        MomentTensorStationContribution [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>MomentTensorStationContribution</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="active"><font color="#8b0000">+ active: boolean</font></td></tr><tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID  [0..1]</font></td></tr><tr><td align="left" port="weight"><font color="#8b0000">+ weight: float  [0..1]</font></td></tr><tr><td align="left" port="timeShift"><font color="#8b0000">+ timeShift: float  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ momentTensorComponentContribution: MomentTensorComponentContribution [0..*]</font></td></tr></table>>]
-        MomentTensorComponentContribution [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>MomentTensorComponentContribution</td></tr><tr><td align="left" port="phaseCode"><font color="#8b0000">+ phaseCode: string</font></td></tr><tr><td align="left" port="component"><font color="#8b0000">+ component: int</font></td></tr><tr><td align="left" port="active"><font color="#8b0000">+ active: boolean</font></td></tr><tr><td align="left" port="weight"><font color="#8b0000">+ weight: float</font></td></tr><tr><td align="left" port="timeShift"><font color="#8b0000">+ timeShift: float</font></td></tr><tr><td align="left" port="dataTimeWindow"><font color="#8b0000">+ dataTimeWindow: float</font></td></tr><tr><td align="left" port="misfit"><font color="#8b0000">+ misfit: float  [0..1]</font></td></tr><tr><td align="left" port="snr"><font color="#8b0000">+ snr: float  [0..1]</font></td></tr></table>>]
-        Event [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Event</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="preferredOriginID"><font color="#8b0000">+ preferredOriginID: string</font></td></tr><tr><td align="left" port="preferredMagnitudeID"><font color="#8b0000">+ preferredMagnitudeID: string</font></td></tr><tr><td align="left" port="preferredFocalMechanismID"><font color="#8b0000">+ preferredFocalMechanismID: string</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: EventType  [0..1]</font></td></tr><tr><td align="left" port="typeCertainty"><font color="#8b0000">+ typeCertainty: EventTypeCertainty  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ eventDescription: EventDescription [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ originReference: OriginReference [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ focalMechanismReference: FocalMechanismReference [0..*]</font></td></tr></table>>]
-        EventDescription [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>EventDescription</td></tr><tr><td align="left" port="text"><font color="#8b0000">+ text: string</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: EventDescriptionType</font></td></tr></table>>]
-        OriginReference [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>OriginReference</td></tr><tr><td align="left" port="originID"><font color="#8b0000">+ originID: string</font></td></tr></table>>]
-        FocalMechanismReference [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>FocalMechanismReference</td></tr><tr><td align="left" port="focalMechanismID"><font color="#8b0000">+ focalMechanismID: string</font></td></tr></table>>]
-        EventParameters -> Pick
-        MomentTensor -> Comment
-        FocalMechanism -> Comment
-        Amplitude -> Comment
-        Magnitude -> Comment
-        StationMagnitude -> Comment
-        Pick -> Comment
-        Event -> Comment
-        Origin -> Comment
-        EventParameters -> Amplitude
-        EventParameters -> Reading
-        Reading -> PickReference
-        Reading -> AmplitudeReference
-        EventParameters -> Origin
-        Origin -> CompositeTime
-        Origin -> Arrival
-        Origin -> StationMagnitude
-        Origin -> Magnitude
-        Magnitude -> StationMagnitudeContribution
-        EventParameters -> FocalMechanism
-        FocalMechanism -> MomentTensor
-        MomentTensor -> DataUsed
-        MomentTensor -> MomentTensorPhaseSetting
-        MomentTensor -> MomentTensorStationContribution
-        MomentTensorStationContribution -> MomentTensorComponentContribution
-        EventParameters -> Event
-        Event -> EventDescription
-        Event -> OriginReference
-        Event -> FocalMechanismReference
-     }
+.. graphviz::
+   :name: EventParameters
+   :caption: EventParameters object connections from parent to child.
+   :align: center
 
-* :ref:`Config <api-python-datamodel-config>`
+   digraph "EventParameters hierarchy" {
+      node [fontname=Verdana fontsize=8 shape=plaintext penwidth=0.5 style="rounded,filled" fillcolor="#fcf2e3" color="#000000"]
+      edge [color="#000000"]
+      layout="dot"
+      Pick [label="Pick", href="../base/api-python.html#api-python-datamodel-pick", target="_top"]
+      Comment [label="Comment", href="../base/api-python.html#api-python-datamodel-comment", target="_top"]
+      Amplitude [label="Amplitude", href="../base/api-python.html#api-python-datamodel-amplitude", target="_top"]
+      Reading [label="Reading", href="../base/api-python.html#api-python-datamodel-reading", target="_top"]
+      PickReference [label="PickReference", href="../base/api-python.html#api-python-datamodel-pickreference", target="_top"]
+      AmplitudeReference [label="AmplitudeReference", href="../base/api-python.html#api-python-datamodel-amplitudereference", target="_top"]
+      Origin [label="Origin", href="../base/api-python.html#api-python-datamodel-origin", target="_top"]
+      CompositeTime [label="CompositeTime", href="../base/api-python.html#api-python-datamodel-compositetime", target="_top"]
+      Arrival [label="Arrival", href="../base/api-python.html#api-python-datamodel-arrival", target="_top"]
+      StationMagnitude [label="StationMagnitude", href="../base/api-python.html#api-python-datamodel-stationmagnitude", target="_top"]
+      Magnitude [label="Magnitude", href="../base/api-python.html#api-python-datamodel-magnitude", target="_top"]
+      StationMagnitudeContribution [label="StationMagnitudeContribution", href="../base/api-python.html#api-python-datamodel-stationmagnitudecontribution", target="_top"]
+      FocalMechanism [label="FocalMechanism", href="../base/api-python.html#api-python-datamodel-focalmechanism", target="_top"]
+      MomentTensor [label="MomentTensor", href="../base/api-python.html#api-python-datamodel-momenttensor", target="_top"]
+      DataUsed [label="DataUsed", href="../base/api-python.html#api-python-datamodel-dataused", target="_top"]
+      MomentTensorPhaseSetting [label="MomentTensorPhaseSetting", href="../base/api-python.html#api-python-datamodel-momenttensorphasesetting", target="_top"]
+      MomentTensorStationContribution [label="MomentTensorStationContribution", href="../base/api-python.html#api-python-datamodel-momenttensorstationcontribution", target="_top"]
+      MomentTensorComponentContribution [label="MomentTensorComponentContribution", href="../base/api-python.html#api-python-datamodel-momenttensorcomponentcontribution", target="_top"]
+      Event [label="Event", href="../base/api-python.html#api-python-datamodel-event", target="_top"]
+      EventDescription [label="EventDescription", href="../base/api-python.html#api-python-datamodel-eventdescription", target="_top"]
+      OriginReference [label="OriginReference", href="../base/api-python.html#api-python-datamodel-originreference", target="_top"]
+      FocalMechanismReference [label="FocalMechanismReference", href="../base/api-python.html#api-python-datamodel-focalmechanismreference", target="_top"]
+      EventParameters [label="EventParameters", href="../base/api-python.html#api-python-datamodel-eventparameters", target="_top"]
+      EventParameters -> Pick [dir=back arrowtail=diamond]
+      MomentTensor -> Comment [dir=back arrowtail=diamond]
+      FocalMechanism -> Comment [dir=back arrowtail=diamond]
+      Amplitude -> Comment [dir=back arrowtail=diamond]
+      Magnitude -> Comment [dir=back arrowtail=diamond]
+      StationMagnitude -> Comment [dir=back arrowtail=diamond]
+      Pick -> Comment [dir=back arrowtail=diamond]
+      Event -> Comment [dir=back arrowtail=diamond]
+      Origin -> Comment [dir=back arrowtail=diamond]
+      EventParameters -> Amplitude [dir=back arrowtail=diamond]
+      EventParameters -> Reading [dir=back arrowtail=diamond]
+      Reading -> PickReference [dir=back arrowtail=diamond]
+      Reading -> AmplitudeReference [dir=back arrowtail=diamond]
+      EventParameters -> Origin [dir=back arrowtail=diamond]
+      Origin -> CompositeTime [dir=back arrowtail=diamond]
+      Origin -> Arrival [dir=back arrowtail=diamond]
+      Origin -> StationMagnitude [dir=back arrowtail=diamond]
+      Origin -> Magnitude [dir=back arrowtail=diamond]
+      Magnitude -> StationMagnitudeContribution [dir=back arrowtail=diamond]
+      EventParameters -> FocalMechanism [dir=back arrowtail=diamond]
+      FocalMechanism -> MomentTensor [dir=back arrowtail=diamond]
+      MomentTensor -> DataUsed [dir=back arrowtail=diamond]
+      MomentTensor -> MomentTensorPhaseSetting [dir=back arrowtail=diamond]
+      MomentTensor -> MomentTensorStationContribution [dir=back arrowtail=diamond]
+      MomentTensorStationContribution -> MomentTensorComponentContribution [dir=back arrowtail=diamond]
+      EventParameters -> Event [dir=back arrowtail=diamond]
+      Event -> EventDescription [dir=back arrowtail=diamond]
+      Event -> OriginReference [dir=back arrowtail=diamond]
+      Event -> FocalMechanismReference [dir=back arrowtail=diamond]
+   }
 
-  * :ref:`Comment <api-python-datamodel-comment>`
-  * :ref:`ConfigModule <api-python-datamodel-configmodule>`
-  * :ref:`ConfigStation <api-python-datamodel-configstation>`
-  * :ref:`CreationInfo <api-python-datamodel-creationinfo>`
-  * :ref:`Parameter <api-python-datamodel-parameter>`
-  * :ref:`ParameterSet <api-python-datamodel-parameterset>`
-  * :ref:`Setup <api-python-datamodel-setup>`
+.. graphviz::
+   :name: EventParameters
+   :caption: EventParameters object connections from parent to child including attributes and elements.
+   :align: center
 
-  .. graphviz::
-     :caption: Config object connections from parent to child.
+   digraph "EventParameters hierarchy" {
+      node [fontname=Verdana fontsize=8 shape=plaintext penwidth=0.5 style="rounded,filled" fillcolor="#fcf2e3" color="#000000"]
+      edge [color="#000000"]
+      layout = "dot"
+      Pick [
+          labeltooltip = "Pick"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Pick</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="time"><font color="#8b0000">+ time: TimeQuantity</font></td></tr>
+                  <tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID</font></td></tr>
+                  <tr><td align="left" port="filterID"><font color="#8b0000">+ filterID: string</font></td></tr>
+                  <tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr>
+                  <tr><td align="left" port="horizontalSlowness"><font color="#8b0000">+ horizontalSlowness: RealQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="backazimuth"><font color="#8b0000">+ backazimuth: RealQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="slownessMethodID"><font color="#8b0000">+ slownessMethodID: string</font></td></tr>
+                  <tr><td align="left" port="onset"><font color="#8b0000">+ onset: PickOnset  [0..1]</font></td></tr>
+                  <tr><td align="left" port="phaseHint"><font color="#8b0000">+ phaseHint: Phase  [0..1]</font></td></tr>
+                  <tr><td align="left" port="polarity"><font color="#8b0000">+ polarity: PickPolarity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="evaluationMode"><font color="#8b0000">+ evaluationMode: EvaluationMode  [0..1]</font></td></tr>
+                  <tr><td align="left" port="evaluationStatus"><font color="#8b0000">+ evaluationStatus: EvaluationStatus  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-pick"
+          target = "_top"
+      ]
+      Comment [
+          labeltooltip = "Comment"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Comment</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="text"><font color="#8b0000">+ text: string</font></td></tr>
+                  <tr><td align="left" port="id"><font color="#8b0000">+ id: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-comment"
+          target = "_top"
+      ]
+      Amplitude [
+          labeltooltip = "Amplitude"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Amplitude</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="amplitude"><font color="#8b0000">+ amplitude: RealQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="timeWindow"><font color="#8b0000">+ timeWindow: TimeWindow  [0..1]</font></td></tr>
+                  <tr><td align="left" port="period"><font color="#8b0000">+ period: RealQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="snr"><font color="#8b0000">+ snr: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="unit"><font color="#8b0000">+ unit: string</font></td></tr>
+                  <tr><td align="left" port="pickID"><font color="#8b0000">+ pickID: string</font></td></tr>
+                  <tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID  [0..1]</font></td></tr>
+                  <tr><td align="left" port="filterID"><font color="#8b0000">+ filterID: string</font></td></tr>
+                  <tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr>
+                  <tr><td align="left" port="scalingTime"><font color="#8b0000">+ scalingTime: TimeQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="magnitudeHint"><font color="#8b0000">+ magnitudeHint: string</font></td></tr>
+                  <tr><td align="left" port="evaluationMode"><font color="#8b0000">+ evaluationMode: EvaluationMode  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-amplitude"
+          target = "_top"
+      ]
+      Reading [
+          labeltooltip = "Reading"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Reading</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ pickReference: PickReference [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ amplitudeReference: AmplitudeReference [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-reading"
+          target = "_top"
+      ]
+      PickReference [
+          labeltooltip = "PickReference"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>PickReference</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="pickID"><font color="#8b0000">+ pickID: string</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-pickreference"
+          target = "_top"
+      ]
+      AmplitudeReference [
+          labeltooltip = "AmplitudeReference"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>AmplitudeReference</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="amplitudeID"><font color="#8b0000">+ amplitudeID: string</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-amplitudereference"
+          target = "_top"
+      ]
+      Origin [
+          labeltooltip = "Origin"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Origin</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="time"><font color="#8b0000">+ time: TimeQuantity</font></td></tr>
+                  <tr><td align="left" port="latitude"><font color="#8b0000">+ latitude: RealQuantity</font></td></tr>
+                  <tr><td align="left" port="longitude"><font color="#8b0000">+ longitude: RealQuantity</font></td></tr>
+                  <tr><td align="left" port="depth"><font color="#8b0000">+ depth: RealQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="depthType"><font color="#8b0000">+ depthType: OriginDepthType  [0..1]</font></td></tr>
+                  <tr><td align="left" port="timeFixed"><font color="#8b0000">+ timeFixed: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="epicenterFixed"><font color="#8b0000">+ epicenterFixed: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="referenceSystemID"><font color="#8b0000">+ referenceSystemID: string</font></td></tr>
+                  <tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr>
+                  <tr><td align="left" port="earthModelID"><font color="#8b0000">+ earthModelID: string</font></td></tr>
+                  <tr><td align="left" port="quality"><font color="#8b0000">+ quality: OriginQuality  [0..1]</font></td></tr>
+                  <tr><td align="left" port="uncertainty"><font color="#8b0000">+ uncertainty: OriginUncertainty  [0..1]</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: OriginType  [0..1]</font></td></tr>
+                  <tr><td align="left" port="evaluationMode"><font color="#8b0000">+ evaluationMode: EvaluationMode  [0..1]</font></td></tr>
+                  <tr><td align="left" port="evaluationStatus"><font color="#8b0000">+ evaluationStatus: EvaluationStatus  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ compositeTime: CompositeTime [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ arrival: Arrival [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ stationMagnitude: StationMagnitude [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ magnitude: Magnitude [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-origin"
+          target = "_top"
+      ]
+      CompositeTime [
+          labeltooltip = "CompositeTime"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>CompositeTime</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="year"><font color="#8b0000">+ year: IntegerQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="month"><font color="#8b0000">+ month: IntegerQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="day"><font color="#8b0000">+ day: IntegerQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="hour"><font color="#8b0000">+ hour: IntegerQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="minute"><font color="#8b0000">+ minute: IntegerQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="second"><font color="#8b0000">+ second: RealQuantity  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-compositetime"
+          target = "_top"
+      ]
+      Arrival [
+          labeltooltip = "Arrival"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Arrival</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="pickID"><font color="#8b0000">+ pickID: string</font></td></tr>
+                  <tr><td align="left" port="phase"><font color="#8b0000">+ phase: Phase</font></td></tr>
+                  <tr><td align="left" port="timeCorrection"><font color="#8b0000">+ timeCorrection: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="azimuth"><font color="#8b0000">+ azimuth: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="distance"><font color="#8b0000">+ distance: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="takeOffAngle"><font color="#8b0000">+ takeOffAngle: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="timeResidual"><font color="#8b0000">+ timeResidual: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="horizontalSlownessResidual"><font color="#8b0000">+ horizontalSlownessResidual: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="backazimuthResidual"><font color="#8b0000">+ backazimuthResidual: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="timeUsed"><font color="#8b0000">+ timeUsed: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="horizontalSlownessUsed"><font color="#8b0000">+ horizontalSlownessUsed: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="backazimuthUsed"><font color="#8b0000">+ backazimuthUsed: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="weight"><font color="#8b0000">+ weight: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="earthModelID"><font color="#8b0000">+ earthModelID: string</font></td></tr>
+                  <tr><td align="left" port="preliminary"><font color="#8b0000">+ preliminary: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-arrival"
+          target = "_top"
+      ]
+      StationMagnitude [
+          labeltooltip = "StationMagnitude"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>StationMagnitude</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="originID"><font color="#8b0000">+ originID: string</font></td></tr>
+                  <tr><td align="left" port="magnitude"><font color="#8b0000">+ magnitude: RealQuantity</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="amplitudeID"><font color="#8b0000">+ amplitudeID: string</font></td></tr>
+                  <tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr>
+                  <tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID  [0..1]</font></td></tr>
+                  <tr><td align="left" port="passedQC"><font color="#8b0000">+ passedQC: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-stationmagnitude"
+          target = "_top"
+      ]
+      Magnitude [
+          labeltooltip = "Magnitude"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Magnitude</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="magnitude"><font color="#8b0000">+ magnitude: RealQuantity</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="originID"><font color="#8b0000">+ originID: string</font></td></tr>
+                  <tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr>
+                  <tr><td align="left" port="stationCount"><font color="#8b0000">+ stationCount: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="azimuthalGap"><font color="#8b0000">+ azimuthalGap: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="evaluationStatus"><font color="#8b0000">+ evaluationStatus: EvaluationStatus  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ stationMagnitudeContribution: StationMagnitudeContribution [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-magnitude"
+          target = "_top"
+      ]
+      StationMagnitudeContribution [
+          labeltooltip = "StationMagnitudeContribution"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>StationMagnitudeContribution</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="stationMagnitudeID"><font color="#8b0000">+ stationMagnitudeID: string</font></td></tr>
+                  <tr><td align="left" port="residual"><font color="#8b0000">+ residual: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="weight"><font color="#8b0000">+ weight: float  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-stationmagnitudecontribution"
+          target = "_top"
+      ]
+      FocalMechanism [
+          labeltooltip = "FocalMechanism"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>FocalMechanism</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="triggeringOriginID"><font color="#8b0000">+ triggeringOriginID: string</font></td></tr>
+                  <tr><td align="left" port="nodalPlanes"><font color="#8b0000">+ nodalPlanes: NodalPlanes  [0..1]</font></td></tr>
+                  <tr><td align="left" port="principalAxes"><font color="#8b0000">+ principalAxes: PrincipalAxes  [0..1]</font></td></tr>
+                  <tr><td align="left" port="azimuthalGap"><font color="#8b0000">+ azimuthalGap: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="stationPolarityCount"><font color="#8b0000">+ stationPolarityCount: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="misfit"><font color="#8b0000">+ misfit: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="stationDistributionRatio"><font color="#8b0000">+ stationDistributionRatio: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr>
+                  <tr><td align="left" port="evaluationMode"><font color="#8b0000">+ evaluationMode: EvaluationMode  [0..1]</font></td></tr>
+                  <tr><td align="left" port="evaluationStatus"><font color="#8b0000">+ evaluationStatus: EvaluationStatus  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ momentTensor: MomentTensor [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-focalmechanism"
+          target = "_top"
+      ]
+      MomentTensor [
+          labeltooltip = "MomentTensor"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>MomentTensor</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="derivedOriginID"><font color="#8b0000">+ derivedOriginID: string</font></td></tr>
+                  <tr><td align="left" port="momentMagnitudeID"><font color="#8b0000">+ momentMagnitudeID: string</font></td></tr>
+                  <tr><td align="left" port="scalarMoment"><font color="#8b0000">+ scalarMoment: RealQuantity  [0..1]</font></td></tr>
+                  <tr><td align="left" port="tensor"><font color="#8b0000">+ tensor: Tensor  [0..1]</font></td></tr>
+                  <tr><td align="left" port="variance"><font color="#8b0000">+ variance: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="varianceReduction"><font color="#8b0000">+ varianceReduction: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="doubleCouple"><font color="#8b0000">+ doubleCouple: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="clvd"><font color="#8b0000">+ clvd: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="iso"><font color="#8b0000">+ iso: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="greensFunctionID"><font color="#8b0000">+ greensFunctionID: string</font></td></tr>
+                  <tr><td align="left" port="filterID"><font color="#8b0000">+ filterID: string</font></td></tr>
+                  <tr><td align="left" port="sourceTimeFunction"><font color="#8b0000">+ sourceTimeFunction: SourceTimeFunction  [0..1]</font></td></tr>
+                  <tr><td align="left" port="methodID"><font color="#8b0000">+ methodID: string</font></td></tr>
+                  <tr><td align="left" port="method"><font color="#8b0000">+ method: MomentTensorMethod  [0..1]</font></td></tr>
+                  <tr><td align="left" port="status"><font color="#8b0000">+ status: MomentTensorStatus  [0..1]</font></td></tr>
+                  <tr><td align="left" port="cmtName"><font color="#8b0000">+ cmtName: string</font></td></tr>
+                  <tr><td align="left" port="cmtVersion"><font color="#8b0000">+ cmtVersion: string</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ dataUsed: DataUsed [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ momentTensorPhaseSetting: MomentTensorPhaseSetting [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ momentTensorStationContribution: MomentTensorStationContribution [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-momenttensor"
+          target = "_top"
+      ]
+      DataUsed [
+          labeltooltip = "DataUsed"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>DataUsed</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="waveType"><font color="#8b0000">+ waveType: DataUsedWaveType</font></td></tr>
+                  <tr><td align="left" port="stationCount"><font color="#8b0000">+ stationCount: int</font></td></tr>
+                  <tr><td align="left" port="componentCount"><font color="#8b0000">+ componentCount: int</font></td></tr>
+                  <tr><td align="left" port="shortestPeriod"><font color="#8b0000">+ shortestPeriod: float  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-dataused"
+          target = "_top"
+      ]
+      MomentTensorPhaseSetting [
+          labeltooltip = "MomentTensorPhaseSetting"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>MomentTensorPhaseSetting</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr>
+                  <tr><td align="left" port="lowerPeriod"><font color="#8b0000">+ lowerPeriod: float</font></td></tr>
+                  <tr><td align="left" port="upperPeriod"><font color="#8b0000">+ upperPeriod: float</font></td></tr>
+                  <tr><td align="left" port="minimumSNR"><font color="#8b0000">+ minimumSNR: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="maximumTimeShift"><font color="#8b0000">+ maximumTimeShift: float  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-momenttensorphasesetting"
+          target = "_top"
+      ]
+      MomentTensorStationContribution [
+          labeltooltip = "MomentTensorStationContribution"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>MomentTensorStationContribution</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="active"><font color="#8b0000">+ active: boolean</font></td></tr>
+                  <tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID  [0..1]</font></td></tr>
+                  <tr><td align="left" port="weight"><font color="#8b0000">+ weight: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="timeShift"><font color="#8b0000">+ timeShift: float  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ momentTensorComponentContribution: MomentTensorComponentContribution [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-momenttensorstationcontribution"
+          target = "_top"
+      ]
+      MomentTensorComponentContribution [
+          labeltooltip = "MomentTensorComponentContribution"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>MomentTensorComponentContribution</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="phaseCode"><font color="#8b0000">+ phaseCode: string</font></td></tr>
+                  <tr><td align="left" port="component"><font color="#8b0000">+ component: int</font></td></tr>
+                  <tr><td align="left" port="active"><font color="#8b0000">+ active: boolean</font></td></tr>
+                  <tr><td align="left" port="weight"><font color="#8b0000">+ weight: float</font></td></tr>
+                  <tr><td align="left" port="timeShift"><font color="#8b0000">+ timeShift: float</font></td></tr>
+                  <tr><td align="left" port="dataTimeWindow"><font color="#8b0000">+ dataTimeWindow: float</font></td></tr>
+                  <tr><td align="left" port="misfit"><font color="#8b0000">+ misfit: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="snr"><font color="#8b0000">+ snr: float  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-momenttensorcomponentcontribution"
+          target = "_top"
+      ]
+      Event [
+          labeltooltip = "Event"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Event</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="preferredOriginID"><font color="#8b0000">+ preferredOriginID: string</font></td></tr>
+                  <tr><td align="left" port="preferredMagnitudeID"><font color="#8b0000">+ preferredMagnitudeID: string</font></td></tr>
+                  <tr><td align="left" port="preferredFocalMechanismID"><font color="#8b0000">+ preferredFocalMechanismID: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: EventType  [0..1]</font></td></tr>
+                  <tr><td align="left" port="typeCertainty"><font color="#8b0000">+ typeCertainty: EventTypeCertainty  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ eventDescription: EventDescription [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ originReference: OriginReference [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ focalMechanismReference: FocalMechanismReference [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-event"
+          target = "_top"
+      ]
+      EventDescription [
+          labeltooltip = "EventDescription"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>EventDescription</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="text"><font color="#8b0000">+ text: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: EventDescriptionType</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-eventdescription"
+          target = "_top"
+      ]
+      OriginReference [
+          labeltooltip = "OriginReference"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>OriginReference</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="originID"><font color="#8b0000">+ originID: string</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-originreference"
+          target = "_top"
+      ]
+      FocalMechanismReference [
+          labeltooltip = "FocalMechanismReference"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>FocalMechanismReference</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="focalMechanismID"><font color="#8b0000">+ focalMechanismID: string</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-focalmechanismreference"
+          target = "_top"
+      ]
+      EventParameters [
+          labeltooltip = "EventParameters"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>EventParameters</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ pick: Pick [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ amplitude: Amplitude [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ reading: Reading [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ origin: Origin [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ focalMechanism: FocalMechanism [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ event: Event [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-eventparameters"
+          target = "_top"
+      ]
+      EventParameters -> Pick [dir=back arrowtail=diamond]
+      MomentTensor -> Comment [dir=back arrowtail=diamond]
+      FocalMechanism -> Comment [dir=back arrowtail=diamond]
+      Amplitude -> Comment [dir=back arrowtail=diamond]
+      Magnitude -> Comment [dir=back arrowtail=diamond]
+      StationMagnitude -> Comment [dir=back arrowtail=diamond]
+      Pick -> Comment [dir=back arrowtail=diamond]
+      Event -> Comment [dir=back arrowtail=diamond]
+      Origin -> Comment [dir=back arrowtail=diamond]
+      EventParameters -> Amplitude [dir=back arrowtail=diamond]
+      EventParameters -> Reading [dir=back arrowtail=diamond]
+      Reading -> PickReference [dir=back arrowtail=diamond]
+      Reading -> AmplitudeReference [dir=back arrowtail=diamond]
+      EventParameters -> Origin [dir=back arrowtail=diamond]
+      Origin -> CompositeTime [dir=back arrowtail=diamond]
+      Origin -> Arrival [dir=back arrowtail=diamond]
+      Origin -> StationMagnitude [dir=back arrowtail=diamond]
+      Origin -> Magnitude [dir=back arrowtail=diamond]
+      Magnitude -> StationMagnitudeContribution [dir=back arrowtail=diamond]
+      EventParameters -> FocalMechanism [dir=back arrowtail=diamond]
+      FocalMechanism -> MomentTensor [dir=back arrowtail=diamond]
+      MomentTensor -> DataUsed [dir=back arrowtail=diamond]
+      MomentTensor -> MomentTensorPhaseSetting [dir=back arrowtail=diamond]
+      MomentTensor -> MomentTensorStationContribution [dir=back arrowtail=diamond]
+      MomentTensorStationContribution -> MomentTensorComponentContribution [dir=back arrowtail=diamond]
+      EventParameters -> Event [dir=back arrowtail=diamond]
+      Event -> EventDescription [dir=back arrowtail=diamond]
+      Event -> OriginReference [dir=back arrowtail=diamond]
+      Event -> FocalMechanismReference [dir=back arrowtail=diamond]
+   }
 
-     digraph G {
-        graph [size="8, 100"]
-        node [fontname=Verdana,fontsize=8]
-        node [shape=plaintext]
-        node [penwidth=0.5]
-        node [style="rounded,filled"]
-        node [fillcolor="#fcf2e3"]
-        node [color="#000000"]
-        edge [color="#000000"]
-        layout="dot"
-        ParameterSet [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ParameterSet</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="baseID"><font color="#8b0000">+ baseID: string</font></td></tr><tr><td align="left" port="moduleID"><font color="#8b0000">+ moduleID: string</font></td></tr><tr><td align="left" port="created"><font color="#8b0000">+ created: datetime  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ parameter: Parameter [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr></table>>]
-        Parameter [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Parameter</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="value"><font color="#8b0000">+ value: string</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr></table>>]
-        Comment [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Comment</td></tr><tr><td align="left" port="text"><font color="#8b0000">+ text: string</font></td></tr><tr><td align="left" port="id"><font color="#8b0000">+ id: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime  [0..1]</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr></table>>]
-        ConfigModule [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ConfigModule</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="parameterSetID"><font color="#8b0000">+ parameterSetID: string</font></td></tr><tr><td align="left" port="enabled"><font color="#8b0000">+ enabled: boolean</font></td></tr><tr><td align="left"><font color="#8b0000">+ configStation: ConfigStation [0..*]</font></td></tr></table>>]
-        ConfigStation [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ConfigStation</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="networkCode"><font color="#8b0000">+ networkCode: string</font></td></tr><tr><td align="left" port="stationCode"><font color="#8b0000">+ stationCode: string</font></td></tr><tr><td align="left" port="enabled"><font color="#8b0000">+ enabled: boolean</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ setup: Setup [0..*]</font></td></tr></table>>]
-        Setup [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Setup</td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="parameterSetID"><font color="#8b0000">+ parameterSetID: string</font></td></tr><tr><td align="left" port="enabled"><font color="#8b0000">+ enabled: boolean</font></td></tr></table>>]
-        Config -> ParameterSet
-        ParameterSet -> Parameter
-        Parameter -> Comment
-        ParameterSet -> Comment
-        Config -> ConfigModule
-        ConfigModule -> ConfigStation
-        ConfigStation -> Setup
-     }
 
-* :ref:`QualityControl <api-python-datamodel-qualitycontrol>`
+Config
+............................................................
 
-  * :ref:`Outage <api-python-datamodel-outage>`
-  * :ref:`QCLog <api-python-datamodel-qclog>`
-  * :ref:`WaveformQuality <api-python-datamodel-waveformquality>`
-  * :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
 
-  .. graphviz::
-     :caption: QualityControl object connections from parent to child.
+.. graphviz::
+   :name: Config
+   :caption: Config object connections from parent to child including attributes and elements.
+   :align: center
 
-     digraph G {
-        graph [size="8, 100"]
-        node [fontname=Verdana,fontsize=8]
-        node [shape=plaintext]
-        node [penwidth=0.5]
-        node [style="rounded,filled"]
-        node [fillcolor="#fcf2e3"]
-        node [color="#000000"]
-        edge [color="#000000"]
-        layout="dot"
-        QCLog [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>QCLog</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID</font></td></tr><tr><td align="left" port="creatorID"><font color="#8b0000">+ creatorID: string</font></td></tr><tr><td align="left" port="created"><font color="#8b0000">+ created: datetime</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime</font></td></tr><tr><td align="left" port="message"><font color="#8b0000">+ message: string</font></td></tr></table>>]
-        WaveformQuality [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>WaveformQuality</td></tr><tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID</font></td></tr><tr><td align="left" port="creatorID"><font color="#8b0000">+ creatorID: string</font></td></tr><tr><td align="left" port="created"><font color="#8b0000">+ created: datetime</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="parameter"><font color="#8b0000">+ parameter: string</font></td></tr><tr><td align="left" port="value"><font color="#8b0000">+ value: float</font></td></tr><tr><td align="left" port="lowerUncertainty"><font color="#8b0000">+ lowerUncertainty: float  [0..1]</font></td></tr><tr><td align="left" port="upperUncertainty"><font color="#8b0000">+ upperUncertainty: float  [0..1]</font></td></tr><tr><td align="left" port="windowLength"><font color="#8b0000">+ windowLength: float  [0..1]</font></td></tr></table>>]
-        Outage [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Outage</td></tr><tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID</font></td></tr><tr><td align="left" port="creatorID"><font color="#8b0000">+ creatorID: string</font></td></tr><tr><td align="left" port="created"><font color="#8b0000">+ created: datetime</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr></table>>]
-        QualityControl -> QCLog
-        QualityControl -> WaveformQuality
-        QualityControl -> Outage
-     }
+   digraph "Config hierarchy" {
+      node [fontname=Verdana fontsize=8 shape=plaintext penwidth=0.5 style="rounded,filled" fillcolor="#fcf2e3" color="#000000"]
+      edge [color="#000000"]
+      layout = "dot"
+      ParameterSet [
+          labeltooltip = "ParameterSet"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ParameterSet</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="baseID"><font color="#8b0000">+ baseID: string</font></td></tr>
+                  <tr><td align="left" port="moduleID"><font color="#8b0000">+ moduleID: string</font></td></tr>
+                  <tr><td align="left" port="created"><font color="#8b0000">+ created: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ parameter: Parameter [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-parameterset"
+          target = "_top"
+      ]
+      Parameter [
+          labeltooltip = "Parameter"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Parameter</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="value"><font color="#8b0000">+ value: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-parameter"
+          target = "_top"
+      ]
+      Comment [
+          labeltooltip = "Comment"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Comment</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="text"><font color="#8b0000">+ text: string</font></td></tr>
+                  <tr><td align="left" port="id"><font color="#8b0000">+ id: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-comment"
+          target = "_top"
+      ]
+      ConfigModule [
+          labeltooltip = "ConfigModule"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ConfigModule</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="parameterSetID"><font color="#8b0000">+ parameterSetID: string</font></td></tr>
+                  <tr><td align="left" port="enabled"><font color="#8b0000">+ enabled: boolean</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ configStation: ConfigStation [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-configmodule"
+          target = "_top"
+      ]
+      ConfigStation [
+          labeltooltip = "ConfigStation"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ConfigStation</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="networkCode"><font color="#8b0000">+ networkCode: string</font></td></tr>
+                  <tr><td align="left" port="stationCode"><font color="#8b0000">+ stationCode: string</font></td></tr>
+                  <tr><td align="left" port="enabled"><font color="#8b0000">+ enabled: boolean</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ setup: Setup [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-configstation"
+          target = "_top"
+      ]
+      Setup [
+          labeltooltip = "Setup"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Setup</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="parameterSetID"><font color="#8b0000">+ parameterSetID: string</font></td></tr>
+                  <tr><td align="left" port="enabled"><font color="#8b0000">+ enabled: boolean</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-setup"
+          target = "_top"
+      ]
+      Config [
+          labeltooltip = "Config"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Config</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ parameterSet: ParameterSet [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ configModule: ConfigModule [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-config"
+          target = "_top"
+      ]
+      Config -> ParameterSet [dir=back arrowtail=diamond]
+      ParameterSet -> Parameter [dir=back arrowtail=diamond]
+      Parameter -> Comment [dir=back arrowtail=diamond]
+      ParameterSet -> Comment [dir=back arrowtail=diamond]
+      Config -> ConfigModule [dir=back arrowtail=diamond]
+      ConfigModule -> ConfigStation [dir=back arrowtail=diamond]
+      ConfigStation -> Setup [dir=back arrowtail=diamond]
+   }
 
-* :ref:`Inventory <api-python-datamodel-inventory>`
 
-  * :ref:`AuxDevice <api-python-datamodel-auxdevice>`
-  * :ref:`AuxSource <api-python-datamodel-auxsource>`
-  * :ref:`AuxStream <api-python-datamodel-auxstream>`
-  * :ref:`Blob <api-python-datamodel-blob>`
-  * :ref:`Comment <api-python-datamodel-comment>`
-  * :ref:`ComplexArray <api-python-datamodel-complexarray>`
-  * :ref:`CreationInfo <api-python-datamodel-creationinfo>`
-  * :ref:`Datalogger <api-python-datamodel-datalogger>`
-  * :ref:`DataloggerCalibration <api-python-datamodel-dataloggercalibration>`
-  * :ref:`Decimation <api-python-datamodel-decimation>`
-  * :ref:`Network <api-python-datamodel-network>`
-  * :ref:`RealArray <api-python-datamodel-realarray>`
-  * :ref:`ResponseFAP <api-python-datamodel-responsefap>`
-  * :ref:`ResponseFIR <api-python-datamodel-responsefir>`
-  * :ref:`ResponseIIR <api-python-datamodel-responseiir>`
-  * :ref:`ResponsePAZ <api-python-datamodel-responsepaz>`
-  * :ref:`ResponsePolynomial <api-python-datamodel-responsepolynomial>`
-  * :ref:`Sensor <api-python-datamodel-sensor>`
-  * :ref:`SensorCalibration <api-python-datamodel-sensorcalibration>`
-  * :ref:`SensorLocation <api-python-datamodel-sensorlocation>`
-  * :ref:`Station <api-python-datamodel-station>`
-  * :ref:`StationGroup <api-python-datamodel-stationgroup>`
-  * :ref:`StationReference <api-python-datamodel-stationreference>`
-  * :ref:`Stream <api-python-datamodel-stream>`
+QualityControl
+............................................................
 
-  .. graphviz::
-     :caption: Inventory object connections from parent to child.
 
-     digraph G {
-        graph [size="8, 100"]
-        node [fontname=Verdana,fontsize=8]
-        node [shape=plaintext]
-        node [penwidth=0.5]
-        node [style="rounded,filled"]
-        node [fillcolor="#fcf2e3"]
-        node [color="#000000"]
-        edge [color="#000000"]
-        layout="dot"
-        StationGroup [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>StationGroup</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: StationGroupType  [0..1]</font></td></tr><tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime  [0..1]</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr><tr><td align="left" port="latitude"><font color="#8b0000">+ latitude: float  [0..1]</font></td></tr><tr><td align="left" port="longitude"><font color="#8b0000">+ longitude: float  [0..1]</font></td></tr><tr><td align="left" port="elevation"><font color="#8b0000">+ elevation: float  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ stationReference: StationReference [0..*]</font></td></tr></table>>]
-        StationReference [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>StationReference</td></tr><tr><td align="left" port="stationID"><font color="#8b0000">+ stationID: string</font></td></tr></table>>]
-        AuxDevice [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>AuxDevice</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr><tr><td align="left" port="model"><font color="#8b0000">+ model: string</font></td></tr><tr><td align="left" port="manufacturer"><font color="#8b0000">+ manufacturer: string</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ auxSource: AuxSource [0..*]</font></td></tr></table>>]
-        AuxSource [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>AuxSource</td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr><tr><td align="left" port="unit"><font color="#8b0000">+ unit: string</font></td></tr><tr><td align="left" port="conversion"><font color="#8b0000">+ conversion: string</font></td></tr><tr><td align="left" port="sampleRateNumerator"><font color="#8b0000">+ sampleRateNumerator: int  [0..1]</font></td></tr><tr><td align="left" port="sampleRateDenominator"><font color="#8b0000">+ sampleRateDenominator: int  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr></table>>]
-        Sensor [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Sensor</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr><tr><td align="left" port="model"><font color="#8b0000">+ model: string</font></td></tr><tr><td align="left" port="manufacturer"><font color="#8b0000">+ manufacturer: string</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="unit"><font color="#8b0000">+ unit: string</font></td></tr><tr><td align="left" port="lowFrequency"><font color="#8b0000">+ lowFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="highFrequency"><font color="#8b0000">+ highFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="response"><font color="#8b0000">+ response: string</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ sensorCalibration: SensorCalibration [0..*]</font></td></tr></table>>]
-        SensorCalibration [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>SensorCalibration</td></tr><tr><td align="left" port="serialNumber"><font color="#8b0000">+ serialNumber: string</font></td></tr><tr><td align="left" port="channel"><font color="#8b0000">+ channel: int</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr><tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr></table>>]
-        Datalogger [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Datalogger</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr><tr><td align="left" port="digitizerModel"><font color="#8b0000">+ digitizerModel: string</font></td></tr><tr><td align="left" port="digitizerManufacturer"><font color="#8b0000">+ digitizerManufacturer: string</font></td></tr><tr><td align="left" port="recorderModel"><font color="#8b0000">+ recorderModel: string</font></td></tr><tr><td align="left" port="recorderManufacturer"><font color="#8b0000">+ recorderManufacturer: string</font></td></tr><tr><td align="left" port="clockModel"><font color="#8b0000">+ clockModel: string</font></td></tr><tr><td align="left" port="clockManufacturer"><font color="#8b0000">+ clockManufacturer: string</font></td></tr><tr><td align="left" port="clockType"><font color="#8b0000">+ clockType: string</font></td></tr><tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr><tr><td align="left" port="maxClockDrift"><font color="#8b0000">+ maxClockDrift: float  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ dataloggerCalibration: DataloggerCalibration [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ decimation: Decimation [0..*]</font></td></tr></table>>]
-        DataloggerCalibration [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>DataloggerCalibration</td></tr><tr><td align="left" port="serialNumber"><font color="#8b0000">+ serialNumber: string</font></td></tr><tr><td align="left" port="channel"><font color="#8b0000">+ channel: int</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr><tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr></table>>]
-        Decimation [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Decimation</td></tr><tr><td align="left" port="sampleRateNumerator"><font color="#8b0000">+ sampleRateNumerator: int</font></td></tr><tr><td align="left" port="sampleRateDenominator"><font color="#8b0000">+ sampleRateDenominator: int</font></td></tr><tr><td align="left" port="analogueFilterChain"><font color="#8b0000">+ analogueFilterChain: Blob  [0..1]</font></td></tr><tr><td align="left" port="digitalFilterChain"><font color="#8b0000">+ digitalFilterChain: Blob  [0..1]</font></td></tr></table>>]
-        ResponsePAZ [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ResponsePAZ</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr><tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="normalizationFactor"><font color="#8b0000">+ normalizationFactor: float  [0..1]</font></td></tr><tr><td align="left" port="normalizationFrequency"><font color="#8b0000">+ normalizationFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="numberOfZeros"><font color="#8b0000">+ numberOfZeros: int  [0..1]</font></td></tr><tr><td align="left" port="numberOfPoles"><font color="#8b0000">+ numberOfPoles: int  [0..1]</font></td></tr><tr><td align="left" port="zeros"><font color="#8b0000">+ zeros: ComplexArray  [0..1]</font></td></tr><tr><td align="left" port="poles"><font color="#8b0000">+ poles: ComplexArray  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr><tr><td align="left" port="decimationFactor"><font color="#8b0000">+ decimationFactor: int  [0..1]</font></td></tr><tr><td align="left" port="delay"><font color="#8b0000">+ delay: float  [0..1]</font></td></tr><tr><td align="left" port="correction"><font color="#8b0000">+ correction: float  [0..1]</font></td></tr></table>>]
-        ResponseFIR [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ResponseFIR</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr><tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="decimationFactor"><font color="#8b0000">+ decimationFactor: int  [0..1]</font></td></tr><tr><td align="left" port="delay"><font color="#8b0000">+ delay: float  [0..1]</font></td></tr><tr><td align="left" port="correction"><font color="#8b0000">+ correction: float  [0..1]</font></td></tr><tr><td align="left" port="numberOfCoefficients"><font color="#8b0000">+ numberOfCoefficients: int  [0..1]</font></td></tr><tr><td align="left" port="symmetry"><font color="#8b0000">+ symmetry: string</font></td></tr><tr><td align="left" port="coefficients"><font color="#8b0000">+ coefficients: RealArray  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr></table>>]
-        ResponseIIR [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ResponseIIR</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr><tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="decimationFactor"><font color="#8b0000">+ decimationFactor: int  [0..1]</font></td></tr><tr><td align="left" port="delay"><font color="#8b0000">+ delay: float  [0..1]</font></td></tr><tr><td align="left" port="correction"><font color="#8b0000">+ correction: float  [0..1]</font></td></tr><tr><td align="left" port="numberOfNumerators"><font color="#8b0000">+ numberOfNumerators: int  [0..1]</font></td></tr><tr><td align="left" port="numberOfDenominators"><font color="#8b0000">+ numberOfDenominators: int  [0..1]</font></td></tr><tr><td align="left" port="numerators"><font color="#8b0000">+ numerators: RealArray  [0..1]</font></td></tr><tr><td align="left" port="denominators"><font color="#8b0000">+ denominators: RealArray  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr></table>>]
-        ResponsePolynomial [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ResponsePolynomial</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr><tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="frequencyUnit"><font color="#8b0000">+ frequencyUnit: string</font></td></tr><tr><td align="left" port="approximationType"><font color="#8b0000">+ approximationType: string</font></td></tr><tr><td align="left" port="approximationLowerBound"><font color="#8b0000">+ approximationLowerBound: float  [0..1]</font></td></tr><tr><td align="left" port="approximationUpperBound"><font color="#8b0000">+ approximationUpperBound: float  [0..1]</font></td></tr><tr><td align="left" port="approximationError"><font color="#8b0000">+ approximationError: float  [0..1]</font></td></tr><tr><td align="left" port="numberOfCoefficients"><font color="#8b0000">+ numberOfCoefficients: int  [0..1]</font></td></tr><tr><td align="left" port="coefficients"><font color="#8b0000">+ coefficients: RealArray  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr></table>>]
-        ResponseFAP [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ResponseFAP</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr><tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="numberOfTuples"><font color="#8b0000">+ numberOfTuples: int  [0..1]</font></td></tr><tr><td align="left" port="tuples"><font color="#8b0000">+ tuples: RealArray  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr></table>>]
-        Network [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Network</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr><tr><td align="left" port="institutions"><font color="#8b0000">+ institutions: string</font></td></tr><tr><td align="left" port="region"><font color="#8b0000">+ region: string</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="netClass"><font color="#8b0000">+ netClass: string</font></td></tr><tr><td align="left" port="archive"><font color="#8b0000">+ archive: string</font></td></tr><tr><td align="left" port="restricted"><font color="#8b0000">+ restricted: boolean  [0..1]</font></td></tr><tr><td align="left" port="shared"><font color="#8b0000">+ shared: boolean  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ station: Station [0..*]</font></td></tr></table>>]
-        Comment [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Comment</td></tr><tr><td align="left" port="text"><font color="#8b0000">+ text: string</font></td></tr><tr><td align="left" port="id"><font color="#8b0000">+ id: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime  [0..1]</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr></table>>]
-        Station [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Station</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr><tr><td align="left" port="latitude"><font color="#8b0000">+ latitude: float  [0..1]</font></td></tr><tr><td align="left" port="longitude"><font color="#8b0000">+ longitude: float  [0..1]</font></td></tr><tr><td align="left" port="elevation"><font color="#8b0000">+ elevation: float  [0..1]</font></td></tr><tr><td align="left" port="place"><font color="#8b0000">+ place: string</font></td></tr><tr><td align="left" port="country"><font color="#8b0000">+ country: string</font></td></tr><tr><td align="left" port="affiliation"><font color="#8b0000">+ affiliation: string</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="archive"><font color="#8b0000">+ archive: string</font></td></tr><tr><td align="left" port="archiveNetworkCode"><font color="#8b0000">+ archiveNetworkCode: string</font></td></tr><tr><td align="left" port="restricted"><font color="#8b0000">+ restricted: boolean  [0..1]</font></td></tr><tr><td align="left" port="shared"><font color="#8b0000">+ shared: boolean  [0..1]</font></td></tr><tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ sensorLocation: SensorLocation [0..*]</font></td></tr></table>>]
-        SensorLocation [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>SensorLocation</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="latitude"><font color="#8b0000">+ latitude: float  [0..1]</font></td></tr><tr><td align="left" port="longitude"><font color="#8b0000">+ longitude: float  [0..1]</font></td></tr><tr><td align="left" port="elevation"><font color="#8b0000">+ elevation: float  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ auxStream: AuxStream [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ stream: Stream [0..*]</font></td></tr></table>>]
-        AuxStream [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>AuxStream</td></tr><tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="device"><font color="#8b0000">+ device: string</font></td></tr><tr><td align="left" port="deviceSerialNumber"><font color="#8b0000">+ deviceSerialNumber: string</font></td></tr><tr><td align="left" port="source"><font color="#8b0000">+ source: string</font></td></tr><tr><td align="left" port="format"><font color="#8b0000">+ format: string</font></td></tr><tr><td align="left" port="flags"><font color="#8b0000">+ flags: string</font></td></tr><tr><td align="left" port="restricted"><font color="#8b0000">+ restricted: boolean  [0..1]</font></td></tr><tr><td align="left" port="shared"><font color="#8b0000">+ shared: boolean  [0..1]</font></td></tr></table>>]
-        Stream [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Stream</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="datalogger"><font color="#8b0000">+ datalogger: string</font></td></tr><tr><td align="left" port="dataloggerSerialNumber"><font color="#8b0000">+ dataloggerSerialNumber: string</font></td></tr><tr><td align="left" port="dataloggerChannel"><font color="#8b0000">+ dataloggerChannel: int  [0..1]</font></td></tr><tr><td align="left" port="sensor"><font color="#8b0000">+ sensor: string</font></td></tr><tr><td align="left" port="sensorSerialNumber"><font color="#8b0000">+ sensorSerialNumber: string</font></td></tr><tr><td align="left" port="sensorChannel"><font color="#8b0000">+ sensorChannel: int  [0..1]</font></td></tr><tr><td align="left" port="clockSerialNumber"><font color="#8b0000">+ clockSerialNumber: string</font></td></tr><tr><td align="left" port="sampleRateNumerator"><font color="#8b0000">+ sampleRateNumerator: int  [0..1]</font></td></tr><tr><td align="left" port="sampleRateDenominator"><font color="#8b0000">+ sampleRateDenominator: int  [0..1]</font></td></tr><tr><td align="left" port="depth"><font color="#8b0000">+ depth: float  [0..1]</font></td></tr><tr><td align="left" port="azimuth"><font color="#8b0000">+ azimuth: float  [0..1]</font></td></tr><tr><td align="left" port="dip"><font color="#8b0000">+ dip: float  [0..1]</font></td></tr><tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr><tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr><tr><td align="left" port="gainUnit"><font color="#8b0000">+ gainUnit: string</font></td></tr><tr><td align="left" port="format"><font color="#8b0000">+ format: string</font></td></tr><tr><td align="left" port="flags"><font color="#8b0000">+ flags: string</font></td></tr><tr><td align="left" port="restricted"><font color="#8b0000">+ restricted: boolean  [0..1]</font></td></tr><tr><td align="left" port="shared"><font color="#8b0000">+ shared: boolean  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr></table>>]
-        Inventory -> StationGroup
-        StationGroup -> StationReference
-        Inventory -> AuxDevice
-        AuxDevice -> AuxSource
-        Inventory -> Sensor
-        Sensor -> SensorCalibration
-        Inventory -> Datalogger
-        Datalogger -> DataloggerCalibration
-        Datalogger -> Decimation
-        Inventory -> ResponsePAZ
-        Inventory -> ResponseFIR
-        Inventory -> ResponseIIR
-        Inventory -> ResponsePolynomial
-        Inventory -> ResponseFAP
-        Inventory -> Network
-        Stream -> Comment
-        SensorLocation -> Comment
-        Station -> Comment
-        Network -> Comment
-        Network -> Station
-        Station -> SensorLocation
-        SensorLocation -> AuxStream
-        SensorLocation -> Stream
-     }
+.. graphviz::
+   :name: QualityControl
+   :caption: QualityControl object connections from parent to child including attributes and elements.
+   :align: center
 
-* :ref:`Routing <api-python-datamodel-routing>`
+   digraph "QualityControl hierarchy" {
+      node [fontname=Verdana fontsize=8 shape=plaintext penwidth=0.5 style="rounded,filled" fillcolor="#fcf2e3" color="#000000"]
+      edge [color="#000000"]
+      layout = "dot"
+      QCLog [
+          labeltooltip = "QCLog"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>QCLog</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID</font></td></tr>
+                  <tr><td align="left" port="creatorID"><font color="#8b0000">+ creatorID: string</font></td></tr>
+                  <tr><td align="left" port="created"><font color="#8b0000">+ created: datetime</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime</font></td></tr>
+                  <tr><td align="left" port="message"><font color="#8b0000">+ message: string</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-qclog"
+          target = "_top"
+      ]
+      WaveformQuality [
+          labeltooltip = "WaveformQuality"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>WaveformQuality</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID</font></td></tr>
+                  <tr><td align="left" port="creatorID"><font color="#8b0000">+ creatorID: string</font></td></tr>
+                  <tr><td align="left" port="created"><font color="#8b0000">+ created: datetime</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="parameter"><font color="#8b0000">+ parameter: string</font></td></tr>
+                  <tr><td align="left" port="value"><font color="#8b0000">+ value: float</font></td></tr>
+                  <tr><td align="left" port="lowerUncertainty"><font color="#8b0000">+ lowerUncertainty: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="upperUncertainty"><font color="#8b0000">+ upperUncertainty: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="windowLength"><font color="#8b0000">+ windowLength: float  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-waveformquality"
+          target = "_top"
+      ]
+      Outage [
+          labeltooltip = "Outage"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Outage</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID</font></td></tr>
+                  <tr><td align="left" port="creatorID"><font color="#8b0000">+ creatorID: string</font></td></tr>
+                  <tr><td align="left" port="created"><font color="#8b0000">+ created: datetime</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-outage"
+          target = "_top"
+      ]
+      QualityControl [
+          labeltooltip = "QualityControl"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>QualityControl</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ qCLog: QCLog [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ waveformQuality: WaveformQuality [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ outage: Outage [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-qualitycontrol"
+          target = "_top"
+      ]
+      QualityControl -> QCLog [dir=back arrowtail=diamond]
+      QualityControl -> WaveformQuality [dir=back arrowtail=diamond]
+      QualityControl -> Outage [dir=back arrowtail=diamond]
+   }
 
-  * :ref:`Access <api-python-datamodel-access>`
-  * :ref:`Route <api-python-datamodel-route>`
-  * :ref:`RouteArclink <api-python-datamodel-routearclink>`
-  * :ref:`RouteSeedlink <api-python-datamodel-routeseedlink>`
 
-  .. graphviz::
-     :caption: Routing object connections from parent to child.
+Inventory
+............................................................
 
-     digraph G {
-        graph [size="8, 100"]
-        node [fontname=Verdana,fontsize=8]
-        node [shape=plaintext]
-        node [penwidth=0.5]
-        node [style="rounded,filled"]
-        node [fillcolor="#fcf2e3"]
-        node [color="#000000"]
-        edge [color="#000000"]
-        layout="dot"
-        Route [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Route</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="networkCode"><font color="#8b0000">+ networkCode: string</font></td></tr><tr><td align="left" port="stationCode"><font color="#8b0000">+ stationCode: string</font></td></tr><tr><td align="left" port="locationCode"><font color="#8b0000">+ locationCode: string</font></td></tr><tr><td align="left" port="streamCode"><font color="#8b0000">+ streamCode: string</font></td></tr><tr><td align="left"><font color="#8b0000">+ routeArclink: RouteArclink [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ routeSeedlink: RouteSeedlink [0..*]</font></td></tr></table>>]
-        RouteArclink [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>RouteArclink</td></tr><tr><td align="left" port="address"><font color="#8b0000">+ address: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr><tr><td align="left" port="priority"><font color="#8b0000">+ priority: int  [0..1]</font></td></tr></table>>]
-        RouteSeedlink [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>RouteSeedlink</td></tr><tr><td align="left" port="address"><font color="#8b0000">+ address: string</font></td></tr><tr><td align="left" port="priority"><font color="#8b0000">+ priority: int  [0..1]</font></td></tr></table>>]
-        Access [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>Access</td></tr><tr><td align="left" port="networkCode"><font color="#8b0000">+ networkCode: string</font></td></tr><tr><td align="left" port="stationCode"><font color="#8b0000">+ stationCode: string</font></td></tr><tr><td align="left" port="locationCode"><font color="#8b0000">+ locationCode: string</font></td></tr><tr><td align="left" port="streamCode"><font color="#8b0000">+ streamCode: string</font></td></tr><tr><td align="left" port="user"><font color="#8b0000">+ user: string</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr></table>>]
-        Routing -> Route
-        Route -> RouteArclink
-        Route -> RouteSeedlink
-        Routing -> Access
-     }
+.. graphviz::
+   :name: Inventory
+   :caption: Inventory object connections from parent to child.
+   :align: center
 
-* :ref:`Journaling <api-python-datamodel-journaling>`
+   digraph "Inventory hierarchy" {
+      node [fontname=Verdana fontsize=8 shape=plaintext penwidth=0.5 style="rounded,filled" fillcolor="#fcf2e3" color="#000000"]
+      edge [color="#000000"]
+      layout="dot"
+      StationGroup [label="StationGroup", href="../base/api-python.html#api-python-datamodel-stationgroup", target="_top"]
+      StationReference [label="StationReference", href="../base/api-python.html#api-python-datamodel-stationreference", target="_top"]
+      AuxDevice [label="AuxDevice", href="../base/api-python.html#api-python-datamodel-auxdevice", target="_top"]
+      AuxSource [label="AuxSource", href="../base/api-python.html#api-python-datamodel-auxsource", target="_top"]
+      Sensor [label="Sensor", href="../base/api-python.html#api-python-datamodel-sensor", target="_top"]
+      SensorCalibration [label="SensorCalibration", href="../base/api-python.html#api-python-datamodel-sensorcalibration", target="_top"]
+      Datalogger [label="Datalogger", href="../base/api-python.html#api-python-datamodel-datalogger", target="_top"]
+      DataloggerCalibration [label="DataloggerCalibration", href="../base/api-python.html#api-python-datamodel-dataloggercalibration", target="_top"]
+      Decimation [label="Decimation", href="../base/api-python.html#api-python-datamodel-decimation", target="_top"]
+      ResponsePAZ [label="ResponsePAZ", href="../base/api-python.html#api-python-datamodel-responsepaz", target="_top"]
+      ResponseFIR [label="ResponseFIR", href="../base/api-python.html#api-python-datamodel-responsefir", target="_top"]
+      ResponseIIR [label="ResponseIIR", href="../base/api-python.html#api-python-datamodel-responseiir", target="_top"]
+      ResponsePolynomial [label="ResponsePolynomial", href="../base/api-python.html#api-python-datamodel-responsepolynomial", target="_top"]
+      ResponseFAP [label="ResponseFAP", href="../base/api-python.html#api-python-datamodel-responsefap", target="_top"]
+      Network [label="Network", href="../base/api-python.html#api-python-datamodel-network", target="_top"]
+      Comment [label="Comment", href="../base/api-python.html#api-python-datamodel-comment", target="_top"]
+      Station [label="Station", href="../base/api-python.html#api-python-datamodel-station", target="_top"]
+      SensorLocation [label="SensorLocation", href="../base/api-python.html#api-python-datamodel-sensorlocation", target="_top"]
+      AuxStream [label="AuxStream", href="../base/api-python.html#api-python-datamodel-auxstream", target="_top"]
+      Stream [label="Stream", href="../base/api-python.html#api-python-datamodel-stream", target="_top"]
+      Inventory [label="Inventory", href="../base/api-python.html#api-python-datamodel-inventory", target="_top"]
+      Inventory -> StationGroup [dir=back arrowtail=diamond]
+      StationGroup -> StationReference [dir=back arrowtail=diamond]
+      Inventory -> AuxDevice [dir=back arrowtail=diamond]
+      AuxDevice -> AuxSource [dir=back arrowtail=diamond]
+      Inventory -> Sensor [dir=back arrowtail=diamond]
+      Sensor -> SensorCalibration [dir=back arrowtail=diamond]
+      Inventory -> Datalogger [dir=back arrowtail=diamond]
+      Datalogger -> DataloggerCalibration [dir=back arrowtail=diamond]
+      Datalogger -> Decimation [dir=back arrowtail=diamond]
+      Inventory -> ResponsePAZ [dir=back arrowtail=diamond]
+      Inventory -> ResponseFIR [dir=back arrowtail=diamond]
+      Inventory -> ResponseIIR [dir=back arrowtail=diamond]
+      Inventory -> ResponsePolynomial [dir=back arrowtail=diamond]
+      Inventory -> ResponseFAP [dir=back arrowtail=diamond]
+      Inventory -> Network [dir=back arrowtail=diamond]
+      Stream -> Comment [dir=back arrowtail=diamond]
+      SensorLocation -> Comment [dir=back arrowtail=diamond]
+      Station -> Comment [dir=back arrowtail=diamond]
+      Network -> Comment [dir=back arrowtail=diamond]
+      Network -> Station [dir=back arrowtail=diamond]
+      Station -> SensorLocation [dir=back arrowtail=diamond]
+      SensorLocation -> AuxStream [dir=back arrowtail=diamond]
+      SensorLocation -> Stream [dir=back arrowtail=diamond]
+   }
 
-  * :ref:`JournalEntry <api-python-datamodel-journalentry>`
+.. graphviz::
+   :name: Inventory
+   :caption: Inventory object connections from parent to child including attributes and elements.
+   :align: center
 
-  .. graphviz::
-     :caption: Journaling object connections from parent to child.
+   digraph "Inventory hierarchy" {
+      node [fontname=Verdana fontsize=8 shape=plaintext penwidth=0.5 style="rounded,filled" fillcolor="#fcf2e3" color="#000000"]
+      edge [color="#000000"]
+      layout = "dot"
+      StationGroup [
+          labeltooltip = "StationGroup"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>StationGroup</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: StationGroupType  [0..1]</font></td></tr>
+                  <tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr>
+                  <tr><td align="left" port="latitude"><font color="#8b0000">+ latitude: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="longitude"><font color="#8b0000">+ longitude: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="elevation"><font color="#8b0000">+ elevation: float  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ stationReference: StationReference [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-stationgroup"
+          target = "_top"
+      ]
+      StationReference [
+          labeltooltip = "StationReference"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>StationReference</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="stationID"><font color="#8b0000">+ stationID: string</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-stationreference"
+          target = "_top"
+      ]
+      AuxDevice [
+          labeltooltip = "AuxDevice"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>AuxDevice</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr>
+                  <tr><td align="left" port="model"><font color="#8b0000">+ model: string</font></td></tr>
+                  <tr><td align="left" port="manufacturer"><font color="#8b0000">+ manufacturer: string</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ auxSource: AuxSource [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-auxdevice"
+          target = "_top"
+      ]
+      AuxSource [
+          labeltooltip = "AuxSource"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>AuxSource</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr>
+                  <tr><td align="left" port="unit"><font color="#8b0000">+ unit: string</font></td></tr>
+                  <tr><td align="left" port="conversion"><font color="#8b0000">+ conversion: string</font></td></tr>
+                  <tr><td align="left" port="sampleRateNumerator"><font color="#8b0000">+ sampleRateNumerator: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="sampleRateDenominator"><font color="#8b0000">+ sampleRateDenominator: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-auxsource"
+          target = "_top"
+      ]
+      Sensor [
+          labeltooltip = "Sensor"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Sensor</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr>
+                  <tr><td align="left" port="model"><font color="#8b0000">+ model: string</font></td></tr>
+                  <tr><td align="left" port="manufacturer"><font color="#8b0000">+ manufacturer: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="unit"><font color="#8b0000">+ unit: string</font></td></tr>
+                  <tr><td align="left" port="lowFrequency"><font color="#8b0000">+ lowFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="highFrequency"><font color="#8b0000">+ highFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="response"><font color="#8b0000">+ response: string</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ sensorCalibration: SensorCalibration [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-sensor"
+          target = "_top"
+      ]
+      SensorCalibration [
+          labeltooltip = "SensorCalibration"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>SensorCalibration</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="serialNumber"><font color="#8b0000">+ serialNumber: string</font></td></tr>
+                  <tr><td align="left" port="channel"><font color="#8b0000">+ channel: int</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-sensorcalibration"
+          target = "_top"
+      ]
+      Datalogger [
+          labeltooltip = "Datalogger"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Datalogger</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr>
+                  <tr><td align="left" port="digitizerModel"><font color="#8b0000">+ digitizerModel: string</font></td></tr>
+                  <tr><td align="left" port="digitizerManufacturer"><font color="#8b0000">+ digitizerManufacturer: string</font></td></tr>
+                  <tr><td align="left" port="recorderModel"><font color="#8b0000">+ recorderModel: string</font></td></tr>
+                  <tr><td align="left" port="recorderManufacturer"><font color="#8b0000">+ recorderManufacturer: string</font></td></tr>
+                  <tr><td align="left" port="clockModel"><font color="#8b0000">+ clockModel: string</font></td></tr>
+                  <tr><td align="left" port="clockManufacturer"><font color="#8b0000">+ clockManufacturer: string</font></td></tr>
+                  <tr><td align="left" port="clockType"><font color="#8b0000">+ clockType: string</font></td></tr>
+                  <tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="maxClockDrift"><font color="#8b0000">+ maxClockDrift: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ dataloggerCalibration: DataloggerCalibration [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ decimation: Decimation [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-datalogger"
+          target = "_top"
+      ]
+      DataloggerCalibration [
+          labeltooltip = "DataloggerCalibration"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>DataloggerCalibration</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="serialNumber"><font color="#8b0000">+ serialNumber: string</font></td></tr>
+                  <tr><td align="left" port="channel"><font color="#8b0000">+ channel: int</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-dataloggercalibration"
+          target = "_top"
+      ]
+      Decimation [
+          labeltooltip = "Decimation"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Decimation</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="sampleRateNumerator"><font color="#8b0000">+ sampleRateNumerator: int</font></td></tr>
+                  <tr><td align="left" port="sampleRateDenominator"><font color="#8b0000">+ sampleRateDenominator: int</font></td></tr>
+                  <tr><td align="left" port="analogueFilterChain"><font color="#8b0000">+ analogueFilterChain: Blob  [0..1]</font></td></tr>
+                  <tr><td align="left" port="digitalFilterChain"><font color="#8b0000">+ digitalFilterChain: Blob  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-decimation"
+          target = "_top"
+      ]
+      ResponsePAZ [
+          labeltooltip = "ResponsePAZ"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ResponsePAZ</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="normalizationFactor"><font color="#8b0000">+ normalizationFactor: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="normalizationFrequency"><font color="#8b0000">+ normalizationFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="numberOfZeros"><font color="#8b0000">+ numberOfZeros: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="numberOfPoles"><font color="#8b0000">+ numberOfPoles: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="zeros"><font color="#8b0000">+ zeros: ComplexArray  [0..1]</font></td></tr>
+                  <tr><td align="left" port="poles"><font color="#8b0000">+ poles: ComplexArray  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+                  <tr><td align="left" port="decimationFactor"><font color="#8b0000">+ decimationFactor: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="delay"><font color="#8b0000">+ delay: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="correction"><font color="#8b0000">+ correction: float  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-responsepaz"
+          target = "_top"
+      ]
+      ResponseFIR [
+          labeltooltip = "ResponseFIR"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ResponseFIR</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="decimationFactor"><font color="#8b0000">+ decimationFactor: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="delay"><font color="#8b0000">+ delay: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="correction"><font color="#8b0000">+ correction: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="numberOfCoefficients"><font color="#8b0000">+ numberOfCoefficients: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="symmetry"><font color="#8b0000">+ symmetry: string</font></td></tr>
+                  <tr><td align="left" port="coefficients"><font color="#8b0000">+ coefficients: RealArray  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-responsefir"
+          target = "_top"
+      ]
+      ResponseIIR [
+          labeltooltip = "ResponseIIR"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ResponseIIR</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="decimationFactor"><font color="#8b0000">+ decimationFactor: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="delay"><font color="#8b0000">+ delay: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="correction"><font color="#8b0000">+ correction: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="numberOfNumerators"><font color="#8b0000">+ numberOfNumerators: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="numberOfDenominators"><font color="#8b0000">+ numberOfDenominators: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="numerators"><font color="#8b0000">+ numerators: RealArray  [0..1]</font></td></tr>
+                  <tr><td align="left" port="denominators"><font color="#8b0000">+ denominators: RealArray  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-responseiir"
+          target = "_top"
+      ]
+      ResponsePolynomial [
+          labeltooltip = "ResponsePolynomial"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ResponsePolynomial</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="frequencyUnit"><font color="#8b0000">+ frequencyUnit: string</font></td></tr>
+                  <tr><td align="left" port="approximationType"><font color="#8b0000">+ approximationType: string</font></td></tr>
+                  <tr><td align="left" port="approximationLowerBound"><font color="#8b0000">+ approximationLowerBound: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="approximationUpperBound"><font color="#8b0000">+ approximationUpperBound: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="approximationError"><font color="#8b0000">+ approximationError: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="numberOfCoefficients"><font color="#8b0000">+ numberOfCoefficients: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="coefficients"><font color="#8b0000">+ coefficients: RealArray  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-responsepolynomial"
+          target = "_top"
+      ]
+      ResponseFAP [
+          labeltooltip = "ResponseFAP"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ResponseFAP</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="numberOfTuples"><font color="#8b0000">+ numberOfTuples: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="tuples"><font color="#8b0000">+ tuples: RealArray  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-responsefap"
+          target = "_top"
+      ]
+      Network [
+          labeltooltip = "Network"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Network</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr>
+                  <tr><td align="left" port="institutions"><font color="#8b0000">+ institutions: string</font></td></tr>
+                  <tr><td align="left" port="region"><font color="#8b0000">+ region: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="netClass"><font color="#8b0000">+ netClass: string</font></td></tr>
+                  <tr><td align="left" port="archive"><font color="#8b0000">+ archive: string</font></td></tr>
+                  <tr><td align="left" port="restricted"><font color="#8b0000">+ restricted: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="shared"><font color="#8b0000">+ shared: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ station: Station [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-network"
+          target = "_top"
+      ]
+      Comment [
+          labeltooltip = "Comment"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Comment</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="text"><font color="#8b0000">+ text: string</font></td></tr>
+                  <tr><td align="left" port="id"><font color="#8b0000">+ id: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-comment"
+          target = "_top"
+      ]
+      Station [
+          labeltooltip = "Station"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Station</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr>
+                  <tr><td align="left" port="latitude"><font color="#8b0000">+ latitude: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="longitude"><font color="#8b0000">+ longitude: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="elevation"><font color="#8b0000">+ elevation: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="place"><font color="#8b0000">+ place: string</font></td></tr>
+                  <tr><td align="left" port="country"><font color="#8b0000">+ country: string</font></td></tr>
+                  <tr><td align="left" port="affiliation"><font color="#8b0000">+ affiliation: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="archive"><font color="#8b0000">+ archive: string</font></td></tr>
+                  <tr><td align="left" port="archiveNetworkCode"><font color="#8b0000">+ archiveNetworkCode: string</font></td></tr>
+                  <tr><td align="left" port="restricted"><font color="#8b0000">+ restricted: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="shared"><font color="#8b0000">+ shared: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="remark"><font color="#8b0000">+ remark: Blob  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ sensorLocation: SensorLocation [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-station"
+          target = "_top"
+      ]
+      SensorLocation [
+          labeltooltip = "SensorLocation"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>SensorLocation</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="latitude"><font color="#8b0000">+ latitude: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="longitude"><font color="#8b0000">+ longitude: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="elevation"><font color="#8b0000">+ elevation: float  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ auxStream: AuxStream [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ stream: Stream [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-sensorlocation"
+          target = "_top"
+      ]
+      AuxStream [
+          labeltooltip = "AuxStream"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>AuxStream</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="device"><font color="#8b0000">+ device: string</font></td></tr>
+                  <tr><td align="left" port="deviceSerialNumber"><font color="#8b0000">+ deviceSerialNumber: string</font></td></tr>
+                  <tr><td align="left" port="source"><font color="#8b0000">+ source: string</font></td></tr>
+                  <tr><td align="left" port="format"><font color="#8b0000">+ format: string</font></td></tr>
+                  <tr><td align="left" port="flags"><font color="#8b0000">+ flags: string</font></td></tr>
+                  <tr><td align="left" port="restricted"><font color="#8b0000">+ restricted: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="shared"><font color="#8b0000">+ shared: boolean  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-auxstream"
+          target = "_top"
+      ]
+      Stream [
+          labeltooltip = "Stream"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Stream</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="code"><font color="#8b0000">+ code: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="datalogger"><font color="#8b0000">+ datalogger: string</font></td></tr>
+                  <tr><td align="left" port="dataloggerSerialNumber"><font color="#8b0000">+ dataloggerSerialNumber: string</font></td></tr>
+                  <tr><td align="left" port="dataloggerChannel"><font color="#8b0000">+ dataloggerChannel: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="sensor"><font color="#8b0000">+ sensor: string</font></td></tr>
+                  <tr><td align="left" port="sensorSerialNumber"><font color="#8b0000">+ sensorSerialNumber: string</font></td></tr>
+                  <tr><td align="left" port="sensorChannel"><font color="#8b0000">+ sensorChannel: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="clockSerialNumber"><font color="#8b0000">+ clockSerialNumber: string</font></td></tr>
+                  <tr><td align="left" port="sampleRateNumerator"><font color="#8b0000">+ sampleRateNumerator: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="sampleRateDenominator"><font color="#8b0000">+ sampleRateDenominator: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="depth"><font color="#8b0000">+ depth: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="azimuth"><font color="#8b0000">+ azimuth: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="dip"><font color="#8b0000">+ dip: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gain"><font color="#8b0000">+ gain: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gainFrequency"><font color="#8b0000">+ gainFrequency: float  [0..1]</font></td></tr>
+                  <tr><td align="left" port="gainUnit"><font color="#8b0000">+ gainUnit: string</font></td></tr>
+                  <tr><td align="left" port="format"><font color="#8b0000">+ format: string</font></td></tr>
+                  <tr><td align="left" port="flags"><font color="#8b0000">+ flags: string</font></td></tr>
+                  <tr><td align="left" port="restricted"><font color="#8b0000">+ restricted: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="shared"><font color="#8b0000">+ shared: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-stream"
+          target = "_top"
+      ]
+      Inventory [
+          labeltooltip = "Inventory"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Inventory</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ stationGroup: StationGroup [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ auxDevice: AuxDevice [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ sensor: Sensor [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ datalogger: Datalogger [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ responsePAZ: ResponsePAZ [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ responseFIR: ResponseFIR [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ responseIIR: ResponseIIR [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ responsePolynomial: ResponsePolynomial [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ responseFAP: ResponseFAP [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ network: Network [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-inventory"
+          target = "_top"
+      ]
+      Inventory -> StationGroup [dir=back arrowtail=diamond]
+      StationGroup -> StationReference [dir=back arrowtail=diamond]
+      Inventory -> AuxDevice [dir=back arrowtail=diamond]
+      AuxDevice -> AuxSource [dir=back arrowtail=diamond]
+      Inventory -> Sensor [dir=back arrowtail=diamond]
+      Sensor -> SensorCalibration [dir=back arrowtail=diamond]
+      Inventory -> Datalogger [dir=back arrowtail=diamond]
+      Datalogger -> DataloggerCalibration [dir=back arrowtail=diamond]
+      Datalogger -> Decimation [dir=back arrowtail=diamond]
+      Inventory -> ResponsePAZ [dir=back arrowtail=diamond]
+      Inventory -> ResponseFIR [dir=back arrowtail=diamond]
+      Inventory -> ResponseIIR [dir=back arrowtail=diamond]
+      Inventory -> ResponsePolynomial [dir=back arrowtail=diamond]
+      Inventory -> ResponseFAP [dir=back arrowtail=diamond]
+      Inventory -> Network [dir=back arrowtail=diamond]
+      Stream -> Comment [dir=back arrowtail=diamond]
+      SensorLocation -> Comment [dir=back arrowtail=diamond]
+      Station -> Comment [dir=back arrowtail=diamond]
+      Network -> Comment [dir=back arrowtail=diamond]
+      Network -> Station [dir=back arrowtail=diamond]
+      Station -> SensorLocation [dir=back arrowtail=diamond]
+      SensorLocation -> AuxStream [dir=back arrowtail=diamond]
+      SensorLocation -> Stream [dir=back arrowtail=diamond]
+   }
 
-     digraph G {
-        graph [size="8, 100"]
-        node [fontname=Verdana,fontsize=8]
-        node [shape=plaintext]
-        node [penwidth=0.5]
-        node [style="rounded,filled"]
-        node [fillcolor="#fcf2e3"]
-        node [color="#000000"]
-        edge [color="#000000"]
-        layout="dot"
-        JournalEntry [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>JournalEntry</td></tr><tr><td align="left" port="created"><font color="#8b0000">+ created: datetime  [0..1]</font></td></tr><tr><td align="left" port="objectID"><font color="#8b0000">+ objectID: string</font></td></tr><tr><td align="left" port="sender"><font color="#8b0000">+ sender: string</font></td></tr><tr><td align="left" port="action"><font color="#8b0000">+ action: string</font></td></tr><tr><td align="left" port="parameters"><font color="#8b0000">+ parameters: string</font></td></tr></table>>]
-        Journaling -> JournalEntry
-     }
 
-* :ref:`ArclinkLog <api-python-datamodel-arclinklog>`
+Routing
+............................................................
 
-  * :ref:`ArclinkRequest <api-python-datamodel-arclinkrequest>`
-  * :ref:`ArclinkRequestLine <api-python-datamodel-arclinkrequestline>`
-  * :ref:`ArclinkRequestSummary <api-python-datamodel-arclinkrequestsummary>`
-  * :ref:`ArclinkStatusLine <api-python-datamodel-arclinkstatusline>`
-  * :ref:`ArclinkUser <api-python-datamodel-arclinkuser>`
-  * :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
 
-  .. graphviz::
-     :caption: ArclinkLog object connections from parent to child.
+.. graphviz::
+   :name: Routing
+   :caption: Routing object connections from parent to child including attributes and elements.
+   :align: center
 
-     digraph G {
-        graph [size="8, 100"]
-        node [fontname=Verdana,fontsize=8]
-        node [shape=plaintext]
-        node [penwidth=0.5]
-        node [style="rounded,filled"]
-        node [fillcolor="#fcf2e3"]
-        node [color="#000000"]
-        edge [color="#000000"]
-        layout="dot"
-        ArclinkRequest [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ArclinkRequest</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="requestID"><font color="#8b0000">+ requestID: string</font></td></tr><tr><td align="left" port="userID"><font color="#8b0000">+ userID: string</font></td></tr><tr><td align="left" port="userIP"><font color="#8b0000">+ userIP: string</font></td></tr><tr><td align="left" port="clientID"><font color="#8b0000">+ clientID: string</font></td></tr><tr><td align="left" port="clientIP"><font color="#8b0000">+ clientIP: string</font></td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="created"><font color="#8b0000">+ created: datetime</font></td></tr><tr><td align="left" port="status"><font color="#8b0000">+ status: string</font></td></tr><tr><td align="left" port="message"><font color="#8b0000">+ message: string</font></td></tr><tr><td align="left" port="label"><font color="#8b0000">+ label: string</font></td></tr><tr><td align="left" port="header"><font color="#8b0000">+ header: string</font></td></tr><tr><td align="left" port="summary"><font color="#8b0000">+ summary: ArclinkRequestSummary  [0..1]</font></td></tr><tr><td align="left"><font color="#8b0000">+ arclinkStatusLine: ArclinkStatusLine [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ arclinkRequestLine: ArclinkRequestLine [0..*]</font></td></tr></table>>]
-        ArclinkStatusLine [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ArclinkStatusLine</td></tr><tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr><tr><td align="left" port="status"><font color="#8b0000">+ status: string</font></td></tr><tr><td align="left" port="size"><font color="#8b0000">+ size: int  [0..1]</font></td></tr><tr><td align="left" port="message"><font color="#8b0000">+ message: string</font></td></tr><tr><td align="left" port="volumeID"><font color="#8b0000">+ volumeID: string</font></td></tr></table>>]
-        ArclinkRequestLine [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ArclinkRequestLine</td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime</font></td></tr><tr><td align="left" port="streamID"><font color="#8b0000">+ streamID: WaveformStreamID</font></td></tr><tr><td align="left" port="restricted"><font color="#8b0000">+ restricted: boolean  [0..1]</font></td></tr><tr><td align="left" port="shared"><font color="#8b0000">+ shared: boolean  [0..1]</font></td></tr><tr><td align="left" port="netClass"><font color="#8b0000">+ netClass: string</font></td></tr><tr><td align="left" port="constraints"><font color="#8b0000">+ constraints: string</font></td></tr><tr><td align="left" port="status"><font color="#8b0000">+ status: ArclinkStatusLine</font></td></tr></table>>]
-        ArclinkUser [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>ArclinkUser</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr><tr><td align="left" port="email"><font color="#8b0000">+ email: string</font></td></tr><tr><td align="left" port="password"><font color="#8b0000">+ password: string</font></td></tr></table>>]
-        ArclinkLog -> ArclinkRequest
-        ArclinkRequest -> ArclinkStatusLine
-        ArclinkRequest -> ArclinkRequestLine
-        ArclinkLog -> ArclinkUser
-     }
+   digraph "Routing hierarchy" {
+      node [fontname=Verdana fontsize=8 shape=plaintext penwidth=0.5 style="rounded,filled" fillcolor="#fcf2e3" color="#000000"]
+      edge [color="#000000"]
+      layout = "dot"
+      Route [
+          labeltooltip = "Route"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Route</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="networkCode"><font color="#8b0000">+ networkCode: string</font></td></tr>
+                  <tr><td align="left" port="stationCode"><font color="#8b0000">+ stationCode: string</font></td></tr>
+                  <tr><td align="left" port="locationCode"><font color="#8b0000">+ locationCode: string</font></td></tr>
+                  <tr><td align="left" port="streamCode"><font color="#8b0000">+ streamCode: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ routeArclink: RouteArclink [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ routeSeedlink: RouteSeedlink [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-route"
+          target = "_top"
+      ]
+      RouteArclink [
+          labeltooltip = "RouteArclink"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>RouteArclink</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="address"><font color="#8b0000">+ address: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="priority"><font color="#8b0000">+ priority: int  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-routearclink"
+          target = "_top"
+      ]
+      RouteSeedlink [
+          labeltooltip = "RouteSeedlink"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>RouteSeedlink</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="address"><font color="#8b0000">+ address: string</font></td></tr>
+                  <tr><td align="left" port="priority"><font color="#8b0000">+ priority: int  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-routeseedlink"
+          target = "_top"
+      ]
+      Access [
+          labeltooltip = "Access"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Access</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="networkCode"><font color="#8b0000">+ networkCode: string</font></td></tr>
+                  <tr><td align="left" port="stationCode"><font color="#8b0000">+ stationCode: string</font></td></tr>
+                  <tr><td align="left" port="locationCode"><font color="#8b0000">+ locationCode: string</font></td></tr>
+                  <tr><td align="left" port="streamCode"><font color="#8b0000">+ streamCode: string</font></td></tr>
+                  <tr><td align="left" port="user"><font color="#8b0000">+ user: string</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-access"
+          target = "_top"
+      ]
+      Routing [
+          labeltooltip = "Routing"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Routing</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ route: Route [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ access: Access [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-routing"
+          target = "_top"
+      ]
+      Routing -> Route [dir=back arrowtail=diamond]
+      Route -> RouteArclink [dir=back arrowtail=diamond]
+      Route -> RouteSeedlink [dir=back arrowtail=diamond]
+      Routing -> Access [dir=back arrowtail=diamond]
+   }
 
-* :ref:`DataAvailability <api-python-datamodel-dataavailability>`
 
-  * :ref:`DataAttributeExtent <api-python-datamodel-dataattributeextent>`
-  * :ref:`DataExtent <api-python-datamodel-dataextent>`
-  * :ref:`DataSegment <api-python-datamodel-datasegment>`
-  * :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
+Journaling
+............................................................
 
-  .. graphviz::
-     :caption: DataAvailability object connections from parent to child.
 
-     digraph G {
-        graph [size="8, 100"]
-        node [fontname=Verdana,fontsize=8]
-        node [shape=plaintext]
-        node [penwidth=0.5]
-        node [style="rounded,filled"]
-        node [fillcolor="#fcf2e3"]
-        node [color="#000000"]
-        edge [color="#000000"]
-        layout="dot"
-        DataExtent [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>DataExtent</td></tr><tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr><tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID</font></td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime</font></td></tr><tr><td align="left" port="updated"><font color="#8b0000">+ updated: datetime</font></td></tr><tr><td align="left" port="lastScan"><font color="#8b0000">+ lastScan: datetime</font></td></tr><tr><td align="left" port="segmentOverflow"><font color="#8b0000">+ segmentOverflow: boolean</font></td></tr><tr><td align="left"><font color="#8b0000">+ dataSegment: DataSegment [0..*]</font></td></tr><tr><td align="left"><font color="#8b0000">+ dataAttributeExtent: DataAttributeExtent [0..*]</font></td></tr></table>>]
-        DataSegment [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>DataSegment</td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime</font></td></tr><tr><td align="left" port="updated"><font color="#8b0000">+ updated: datetime</font></td></tr><tr><td align="left" port="sampleRate"><font color="#8b0000">+ sampleRate: double</font></td></tr><tr><td align="left" port="quality"><font color="#8b0000">+ quality: string</font></td></tr><tr><td align="left" port="outOfOrder"><font color="#8b0000">+ outOfOrder: boolean</font></td></tr></table>>]
-        DataAttributeExtent [label = <<table border="0" cellpadding="0" cellspacing="2"><tr><td>DataAttributeExtent</td></tr><tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr><tr><td align="left" port="end"><font color="#8b0000">+ end: datetime</font></td></tr><tr><td align="left" port="sampleRate"><font color="#8b0000">+ sampleRate: double</font></td></tr><tr><td align="left" port="quality"><font color="#8b0000">+ quality: string</font></td></tr><tr><td align="left" port="updated"><font color="#8b0000">+ updated: datetime</font></td></tr><tr><td align="left" port="segmentCount"><font color="#8b0000">+ segmentCount: int</font></td></tr></table>>]
-        DataAvailability -> DataExtent
-        DataExtent -> DataSegment
-        DataExtent -> DataAttributeExtent
-     }
+.. graphviz::
+   :name: Journaling
+   :caption: Journaling object connections from parent to child including attributes and elements.
+   :align: center
+
+   digraph "Journaling hierarchy" {
+      node [fontname=Verdana fontsize=8 shape=plaintext penwidth=0.5 style="rounded,filled" fillcolor="#fcf2e3" color="#000000"]
+      edge [color="#000000"]
+      layout = "dot"
+      JournalEntry [
+          labeltooltip = "JournalEntry"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>JournalEntry</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="created"><font color="#8b0000">+ created: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="objectID"><font color="#8b0000">+ objectID: string</font></td></tr>
+                  <tr><td align="left" port="sender"><font color="#8b0000">+ sender: string</font></td></tr>
+                  <tr><td align="left" port="action"><font color="#8b0000">+ action: string</font></td></tr>
+                  <tr><td align="left" port="parameters"><font color="#8b0000">+ parameters: string</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-journalentry"
+          target = "_top"
+      ]
+      Journaling [
+          labeltooltip = "Journaling"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Journaling</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ journalEntry: JournalEntry [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-journaling"
+          target = "_top"
+      ]
+      Journaling -> JournalEntry [dir=back arrowtail=diamond]
+   }
+
+
+ArclinkLog
+............................................................
+
+
+.. graphviz::
+   :name: ArclinkLog
+   :caption: ArclinkLog object connections from parent to child including attributes and elements.
+   :align: center
+
+   digraph "ArclinkLog hierarchy" {
+      node [fontname=Verdana fontsize=8 shape=plaintext penwidth=0.5 style="rounded,filled" fillcolor="#fcf2e3" color="#000000"]
+      edge [color="#000000"]
+      layout = "dot"
+      ArclinkRequest [
+          labeltooltip = "ArclinkRequest"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ArclinkRequest</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="requestID"><font color="#8b0000">+ requestID: string</font></td></tr>
+                  <tr><td align="left" port="userID"><font color="#8b0000">+ userID: string</font></td></tr>
+                  <tr><td align="left" port="userIP"><font color="#8b0000">+ userIP: string</font></td></tr>
+                  <tr><td align="left" port="clientID"><font color="#8b0000">+ clientID: string</font></td></tr>
+                  <tr><td align="left" port="clientIP"><font color="#8b0000">+ clientIP: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="created"><font color="#8b0000">+ created: datetime</font></td></tr>
+                  <tr><td align="left" port="status"><font color="#8b0000">+ status: string</font></td></tr>
+                  <tr><td align="left" port="message"><font color="#8b0000">+ message: string</font></td></tr>
+                  <tr><td align="left" port="label"><font color="#8b0000">+ label: string</font></td></tr>
+                  <tr><td align="left" port="header"><font color="#8b0000">+ header: string</font></td></tr>
+                  <tr><td align="left" port="summary"><font color="#8b0000">+ summary: ArclinkRequestSummary  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ arclinkStatusLine: ArclinkStatusLine [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ arclinkRequestLine: ArclinkRequestLine [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-arclinkrequest"
+          target = "_top"
+      ]
+      ArclinkStatusLine [
+          labeltooltip = "ArclinkStatusLine"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ArclinkStatusLine</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: string</font></td></tr>
+                  <tr><td align="left" port="status"><font color="#8b0000">+ status: string</font></td></tr>
+                  <tr><td align="left" port="size"><font color="#8b0000">+ size: int  [0..1]</font></td></tr>
+                  <tr><td align="left" port="message"><font color="#8b0000">+ message: string</font></td></tr>
+                  <tr><td align="left" port="volumeID"><font color="#8b0000">+ volumeID: string</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-arclinkstatusline"
+          target = "_top"
+      ]
+      ArclinkRequestLine [
+          labeltooltip = "ArclinkRequestLine"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ArclinkRequestLine</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime</font></td></tr>
+                  <tr><td align="left" port="streamID"><font color="#8b0000">+ streamID: WaveformStreamID</font></td></tr>
+                  <tr><td align="left" port="restricted"><font color="#8b0000">+ restricted: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="shared"><font color="#8b0000">+ shared: boolean  [0..1]</font></td></tr>
+                  <tr><td align="left" port="netClass"><font color="#8b0000">+ netClass: string</font></td></tr>
+                  <tr><td align="left" port="constraints"><font color="#8b0000">+ constraints: string</font></td></tr>
+                  <tr><td align="left" port="status"><font color="#8b0000">+ status: ArclinkStatusLine</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-arclinkrequestline"
+          target = "_top"
+      ]
+      ArclinkUser [
+          labeltooltip = "ArclinkUser"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ArclinkUser</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="email"><font color="#8b0000">+ email: string</font></td></tr>
+                  <tr><td align="left" port="password"><font color="#8b0000">+ password: string</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-arclinkuser"
+          target = "_top"
+      ]
+      ArclinkLog [
+          labeltooltip = "ArclinkLog"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>ArclinkLog</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ arclinkRequest: ArclinkRequest [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ arclinkUser: ArclinkUser [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-arclinklog"
+          target = "_top"
+      ]
+      ArclinkLog -> ArclinkRequest [dir=back arrowtail=diamond]
+      ArclinkRequest -> ArclinkStatusLine [dir=back arrowtail=diamond]
+      ArclinkRequest -> ArclinkRequestLine [dir=back arrowtail=diamond]
+      ArclinkLog -> ArclinkUser [dir=back arrowtail=diamond]
+   }
+
+
+DataAvailability
+............................................................
+
+
+.. graphviz::
+   :name: DataAvailability
+   :caption: DataAvailability object connections from parent to child including attributes and elements.
+   :align: center
+
+   digraph "DataAvailability hierarchy" {
+      node [fontname=Verdana fontsize=8 shape=plaintext penwidth=0.5 style="rounded,filled" fillcolor="#fcf2e3" color="#000000"]
+      edge [color="#000000"]
+      layout = "dot"
+      DataExtent [
+          labeltooltip = "DataExtent"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>DataExtent</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="waveformID"><font color="#8b0000">+ waveformID: WaveformStreamID</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime</font></td></tr>
+                  <tr><td align="left" port="updated"><font color="#8b0000">+ updated: datetime</font></td></tr>
+                  <tr><td align="left" port="lastScan"><font color="#8b0000">+ lastScan: datetime</font></td></tr>
+                  <tr><td align="left" port="segmentOverflow"><font color="#8b0000">+ segmentOverflow: boolean</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ dataSegment: DataSegment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ dataAttributeExtent: DataAttributeExtent [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-dataextent"
+          target = "_top"
+      ]
+      DataSegment [
+          labeltooltip = "DataSegment"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>DataSegment</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime</font></td></tr>
+                  <tr><td align="left" port="updated"><font color="#8b0000">+ updated: datetime</font></td></tr>
+                  <tr><td align="left" port="sampleRate"><font color="#8b0000">+ sampleRate: double</font></td></tr>
+                  <tr><td align="left" port="quality"><font color="#8b0000">+ quality: string</font></td></tr>
+                  <tr><td align="left" port="outOfOrder"><font color="#8b0000">+ outOfOrder: boolean</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-datasegment"
+          target = "_top"
+      ]
+      DataAttributeExtent [
+          labeltooltip = "DataAttributeExtent"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>DataAttributeExtent</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime</font></td></tr>
+                  <tr><td align="left" port="sampleRate"><font color="#8b0000">+ sampleRate: double</font></td></tr>
+                  <tr><td align="left" port="quality"><font color="#8b0000">+ quality: string</font></td></tr>
+                  <tr><td align="left" port="updated"><font color="#8b0000">+ updated: datetime</font></td></tr>
+                  <tr><td align="left" port="segmentCount"><font color="#8b0000">+ segmentCount: int</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-dataattributeextent"
+          target = "_top"
+      ]
+      DataAvailability [
+          labeltooltip = "DataAvailability"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>DataAvailability</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ dataExtent: DataExtent [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-dataavailability"
+          target = "_top"
+      ]
+      DataAvailability -> DataExtent [dir=back arrowtail=diamond]
+      DataExtent -> DataSegment [dir=back arrowtail=diamond]
+      DataExtent -> DataAttributeExtent [dir=back arrowtail=diamond]
+   }
+
+
+
+Enumerations
+------------
+
+* :ref:`DataUsedWaveType <api-python-datamodel-datausedwavetype>`
+* :ref:`EvaluationMode <api-python-datamodel-evaluationmode>`
+* :ref:`EvaluationStatus <api-python-datamodel-evaluationstatus>`
+* :ref:`EventDescriptionType <api-python-datamodel-eventdescriptiontype>`
+* :ref:`EventType <api-python-datamodel-eventtype>`
+* :ref:`EventTypeCertainty <api-python-datamodel-eventtypecertainty>`
+* :ref:`MomentTensorMethod <api-python-datamodel-momenttensormethod>`
+* :ref:`MomentTensorStatus <api-python-datamodel-momenttensorstatus>`
+* :ref:`OriginDepthType <api-python-datamodel-origindepthtype>`
+* :ref:`OriginType <api-python-datamodel-origintype>`
+* :ref:`OriginUncertaintyDescription <api-python-datamodel-originuncertaintydescription>`
+* :ref:`PickOnset <api-python-datamodel-pickonset>`
+* :ref:`PickPolarity <api-python-datamodel-pickpolarity>`
+* :ref:`SourceTimeFunctionType <api-python-datamodel-sourcetimefunctiontype>`
+* :ref:`StationGroupType <api-python-datamodel-stationgrouptype>`
+
+.. _api-python-datamodel-datausedwavetype:
+
+**DataUsedWaveType**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``BODY_WAVES``
+     - 0
+     - body waves
+   * - ``P_BODY_WAVES``
+     - 1
+     - P body waves
+   * - ``LONG_PERIOD_BODY_WAVES``
+     - 2
+     - long-period body waves
+   * - ``SURFACE_WAVES``
+     - 3
+     - surface waves
+   * - ``INTERMEDIATE_PERIOD_SURFACE_WAVES``
+     - 4
+     - intermediate-period surface waves
+   * - ``LONG_PERIOD_MANTLE_WAVES``
+     - 5
+     - long-period mantle waves
+   * - ``UNKNOWN_WAVETYPE``
+     - 6
+     - unknown
+
+Used by:
+
+* :func:`DataUsed.waveType`
+
+.. _api-python-datamodel-evaluationmode:
+
+**EvaluationMode**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``MANUAL``
+     - 0
+     - manual
+   * - ``AUTOMATIC``
+     - 1
+     - automatic
+
+Used by:
+
+* :func:`Amplitude.evaluationMode`
+* :func:`FocalMechanism.evaluationMode`
+* :func:`Origin.evaluationMode`
+* :func:`Pick.evaluationMode`
+
+.. _api-python-datamodel-evaluationstatus:
+
+**EvaluationStatus**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``PRELIMINARY``
+     - 0
+     - preliminary
+   * - ``CONFIRMED``
+     - 1
+     - confirmed
+   * - ``REVIEWED``
+     - 2
+     - reviewed
+   * - ``FINAL``
+     - 3
+     - final
+   * - ``REJECTED``
+     - 4
+     - rejected
+   * - ``REPORTED``
+     - 5
+     - reported
+
+Used by:
+
+* :func:`FocalMechanism.evaluationStatus`
+* :func:`Magnitude.evaluationStatus`
+* :func:`Origin.evaluationStatus`
+* :func:`Pick.evaluationStatus`
+
+.. _api-python-datamodel-eventdescriptiontype:
+
+**EventDescriptionType**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``FELT_REPORT``
+     - 0
+     - felt report
+   * - ``FLINN_ENGDAHL_REGION``
+     - 1
+     - Flinn-Engdahl region
+   * - ``LOCAL_TIME``
+     - 2
+     - local time
+   * - ``TECTONIC_SUMMARY``
+     - 3
+     - tectonic summary
+   * - ``NEAREST_CITIES``
+     - 4
+     - nearest cities
+   * - ``EARTHQUAKE_NAME``
+     - 5
+     - earthquake name
+   * - ``REGION_NAME``
+     - 6
+     - region name
+
+Used by:
+
+* :func:`EventDescription.type`
+
+.. _api-python-datamodel-eventtype:
+
+**EventType**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``NOT_EXISTING``
+     - 0
+     - not existing
+   * - ``NOT_LOCATABLE``
+     - 1
+     - not locatable
+   * - ``OUTSIDE_OF_NETWORK_INTEREST``
+     - 2
+     - outside of network interest
+   * - ``EARTHQUAKE``
+     - 3
+     - earthquake
+   * - ``INDUCED_EARTHQUAKE``
+     - 4
+     - induced earthquake
+   * - ``QUARRY_BLAST``
+     - 5
+     - quarry blast
+   * - ``EXPLOSION``
+     - 6
+     - explosion
+   * - ``CHEMICAL_EXPLOSION``
+     - 7
+     - chemical explosion
+   * - ``NUCLEAR_EXPLOSION``
+     - 8
+     - nuclear explosion
+   * - ``LANDSLIDE``
+     - 9
+     - landslide
+   * - ``ROCKSLIDE``
+     - 10
+     - rockslide
+   * - ``SNOW_AVALANCHE``
+     - 11
+     - snow avalanche
+   * - ``DEBRIS_AVALANCHE``
+     - 12
+     - debris avalanche
+   * - ``MINE_COLLAPSE``
+     - 13
+     - mine collapse
+   * - ``BUILDING_COLLAPSE``
+     - 14
+     - building collapse
+   * - ``VOLCANIC_ERUPTION``
+     - 15
+     - volcanic eruption
+   * - ``METEOR_IMPACT``
+     - 16
+     - meteor impact
+   * - ``PLANE_CRASH``
+     - 17
+     - plane crash
+   * - ``SONIC_BOOM``
+     - 18
+     - sonic boom
+   * - ``DUPLICATE``
+     - 19
+     - duplicate
+   * - ``OTHER_EVENT``
+     - 20
+     - other
+   * - ``NOT_REPORTED``
+     - 21
+     - not reported
+   * - ``ANTHROPOGENIC_EVENT``
+     - 22
+     - anthropogenic event
+   * - ``COLLAPSE``
+     - 23
+     - collapse
+   * - ``CAVITY_COLLAPSE``
+     - 24
+     - cavity collapse
+   * - ``ACCIDENTAL_EXPLOSION``
+     - 25
+     - accidental explosion
+   * - ``CONTROLLED_EXPLOSION``
+     - 26
+     - controlled explosion
+   * - ``EXPERIMENTAL_EXPLOSION``
+     - 27
+     - experimental explosion
+   * - ``INDUSTRIAL_EXPLOSION``
+     - 28
+     - industrial explosion
+   * - ``MINING_EXPLOSION``
+     - 29
+     - mining explosion
+   * - ``ROAD_CUT``
+     - 30
+     - road cut
+   * - ``BLASTING_LEVEE``
+     - 31
+     - blasting levee
+   * - ``INDUCED_OR_TRIGGERED_EVENT``
+     - 32
+     - induced or triggered event
+   * - ``ROCK_BURST``
+     - 33
+     - rock burst
+   * - ``RESERVOIR_LOADING``
+     - 34
+     - reservoir loading
+   * - ``FLUID_INJECTION``
+     - 35
+     - fluid injection
+   * - ``FLUID_EXTRACTION``
+     - 36
+     - fluid extraction
+   * - ``CRASH``
+     - 37
+     - crash
+   * - ``TRAIN_CRASH``
+     - 38
+     - train crash
+   * - ``BOAT_CRASH``
+     - 39
+     - boat crash
+   * - ``ATMOSPHERIC_EVENT``
+     - 40
+     - atmospheric event
+   * - ``SONIC_BLAST``
+     - 41
+     - sonic blast
+   * - ``ACOUSTIC_NOISE``
+     - 42
+     - acoustic noise
+   * - ``THUNDER``
+     - 43
+     - thunder
+   * - ``AVALANCHE``
+     - 44
+     - avalanche
+   * - ``HYDROACOUSTIC_EVENT``
+     - 45
+     - hydroacoustic event
+   * - ``ICE_QUAKE``
+     - 46
+     - ice quake
+   * - ``SLIDE``
+     - 47
+     - slide
+   * - ``METEORITE``
+     - 48
+     - meteorite
+   * - ``CALVING``
+     - 49
+     - calving
+   * - ``FROST_QUAKE``
+     - 50
+     - frost quake
+   * - ``TREMOR_PULSE``
+     - 51
+     - temor pulse
+   * - ``SUBMARINE_LANDSLIDE``
+     - 52
+     - submarine landslide
+
+Used by:
+
+* :func:`Event.type`
+
+.. _api-python-datamodel-eventtypecertainty:
+
+**EventTypeCertainty**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``KNOWN``
+     - 0
+     - known
+   * - ``SUSPECTED``
+     - 1
+     - suspected
+   * - ``DAMAGING``
+     - 2
+     - damaging
+   * - ``FELT``
+     - 3
+     - felt
+
+Used by:
+
+* :func:`Event.typeCertainty`
+
+.. _api-python-datamodel-momenttensormethod:
+
+**MomentTensorMethod**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``CMT_0``
+     - 0
+     - CMT - general moment tensor
+   * - ``CMT_1``
+     - 1
+     - CMT - moment tensor with zero trace
+   * - ``CMT_2``
+     - 2
+     - CMT - double-couple source
+   * - ``TELESEISMIC``
+     - 3
+     - teleseismic
+   * - ``REGIONAL``
+     - 4
+     - regional
+
+Used by:
+
+* :func:`MomentTensor.method`
+
+.. _api-python-datamodel-momenttensorstatus:
+
+**MomentTensorStatus**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``CMT_S``
+     - 0
+     - standard CMT solution
+   * - ``CMT_Q``
+     - 1
+     - quick CMT solution
+
+Used by:
+
+* :func:`MomentTensor.status`
+
+.. _api-python-datamodel-origindepthtype:
+
+**OriginDepthType**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``FROM_LOCATION``
+     - 0
+     - from location
+   * - ``FROM_MOMENT_TENSOR_INVERSION``
+     - 1
+     - from moment tensor inversion
+   * - ``BROAD_BAND_P_WAVEFORMS``
+     - 2
+     - from modeling of broad-band P waveforms
+   * - ``CONSTRAINED_BY_DEPTH_PHASES``
+     - 3
+     - constrained by depth phases
+   * - ``CONSTRAINED_BY_DIRECT_PHASES``
+     - 4
+     - constrained by direct phases
+   * - ``OPERATOR_ASSIGNED``
+     - 5
+     - operator assigned
+   * - ``OTHER_ORIGIN_DEPTH``
+     - 6
+     - other
+
+Used by:
+
+* :func:`Origin.depthType`
+
+.. _api-python-datamodel-origintype:
+
+**OriginType**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``HYPOCENTER``
+     - 0
+     - hypocenter
+   * - ``CENTROID``
+     - 1
+     - centroid
+   * - ``AMPLITUDE``
+     - 2
+     - amplitude
+   * - ``MACROSEISMIC``
+     - 3
+     - macroseismic
+   * - ``RUPTURE_START``
+     - 4
+     - rupture start
+   * - ``RUPTURE_END``
+     - 5
+     - rupture end
+
+Used by:
+
+* :func:`Origin.type`
+
+.. _api-python-datamodel-originuncertaintydescription:
+
+**OriginUncertaintyDescription**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``HORIZONTAL``
+     - 0
+     - horizontal uncertainty
+   * - ``ELLIPSE``
+     - 1
+     - uncertainty ellipse
+   * - ``ELLIPSOID``
+     - 2
+     - confidence ellipsoid
+   * - ``PDF``
+     - 3
+     - probability density function
+
+Used by:
+
+* :func:`OriginUncertainty.preferredDescription`
+
+.. _api-python-datamodel-pickonset:
+
+**PickOnset**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``EMERGENT``
+     - 0
+     - emergent
+   * - ``IMPULSIVE``
+     - 1
+     - impulsive
+   * - ``QUESTIONABLE``
+     - 2
+     - questionable
+
+Used by:
+
+* :func:`Pick.onset`
+
+.. _api-python-datamodel-pickpolarity:
+
+**PickPolarity**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``POSITIVE``
+     - 0
+     - positive
+   * - ``NEGATIVE``
+     - 1
+     - negative
+   * - ``UNDECIDABLE``
+     - 2
+     - undecidable
+
+Used by:
+
+* :func:`Pick.polarity`
+
+.. _api-python-datamodel-sourcetimefunctiontype:
+
+**SourceTimeFunctionType**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``BOX_CAR``
+     - 0
+     - box car
+   * - ``TRIANGLE``
+     - 1
+     - triangle
+   * - ``TRAPEZOID``
+     - 2
+     - trapezoid
+   * - ``UNKNOWN_FUNCTION``
+     - 3
+     - unknown
+
+Used by:
+
+* :func:`SourceTimeFunction.type`
+
+.. _api-python-datamodel-stationgrouptype:
+
+**StationGroupType**
+
+.. list-table::
+   :header-rows: 1
+
+   * - ID
+     - Numeric value
+     - String value
+   * - ``DEPLOYMENT``
+     - 0
+     - deployment
+   * - ``ARRAY``
+     - 1
+     - array
+
+Used by:
+
+* :func:`StationGroup.type`
 
 
 Reference
 ---------
 
 .. _api-python-datamodel-object:
+
+Object
+............................................................
 
 .. py:class:: Object
 
@@ -464,6 +2423,9 @@ Reference
 
 .. _api-python-datamodel-publicobject:
 
+PublicObject
+............................................................
+
 .. py:class:: PublicObject
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -478,6 +2440,9 @@ Reference
 
 
 .. _api-python-datamodel-notifier:
+
+Notifier
+........
 
 .. py:class:: Notifier(parentID, operation, object)
 
@@ -591,11 +2556,30 @@ Reference
 
 .. _api-python-datamodel-access:
 
+Access
+............................................................
+
 .. py:class:: Access
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    This type describes an ArcLink access rule
+
+   **Parents**:
+
+   - ``routing`` -- :ref:`Routing <api-python-datamodel-routing>`
+
+   **Attributes**:
+
+   - ``networkCode`` -- string
+   - ``stationCode`` -- string
+   - ``locationCode`` -- string
+   - ``streamCode`` -- string
+   - ``user`` -- string
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -612,7 +2596,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Access <api-python-datamodel-access>`
+      :param other: Another object of type Access to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -621,7 +2606,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type AccessIndex.
+      :rtype: The object's index of type AccessIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -747,6 +2732,9 @@ Reference
 
 .. _api-python-datamodel-amplitude:
 
+Amplitude
+............................................................
+
 .. py:class:: Amplitude
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
@@ -754,6 +2742,39 @@ Reference
    This class represents a quantification of the waveform anomaly, usually
    a single amplitude measurement or a measurement of the visible signal
    duration for duration magnitudes.
+
+   **Parents**:
+
+   - ``eventParameters`` -- :ref:`EventParameters <api-python-datamodel-eventparameters>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``type`` -- string
+   - ``amplitude`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>` (optional)
+   - ``timeWindow`` -- :ref:`TimeWindow <api-python-datamodel-timewindow>` (optional)
+   - ``period`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>` (optional)
+   - ``snr`` -- float (optional)
+   - ``unit`` -- string
+   - ``pickID`` -- string
+   - ``waveformID`` -- :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>` (optional)
+   - ``filterID`` -- string
+   - ``methodID`` -- string
+   - ``scalingTime`` -- :ref:`TimeQuantity <api-python-datamodel-timequantity>` (optional)
+   - ``magnitudeHint`` -- string
+   - ``evaluationMode`` -- :ref:`EvaluationMode <api-python-datamodel-evaluationmode>` (optional)
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Referenced by**:
+
+   - :func:`AmplitudeReference.amplitudeID`
+   - :func:`StationMagnitude.amplitudeID`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -770,21 +2791,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Amplitude.
+      :rtype: A new object of type Amplitude.
 
       Creates and registers (if enabled) a Amplitude instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Amplitude.
+      :rtype: A new object of type Amplitude.
 
       Creates and registers (if enabled) a Amplitude instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Amplitude <api-python-datamodel-amplitude>`
+      :param other: Another object of type Amplitude to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -1094,10 +3116,23 @@ Reference
 
 .. _api-python-datamodel-amplitudereference:
 
+AmplitudeReference
+............................................................
+
 .. py:class:: AmplitudeReference
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``reading`` -- :ref:`Reading <api-python-datamodel-reading>`
+
+   **Attributes**:
+
+   - ``amplitudeID`` -- string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -1114,7 +3149,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`AmplitudeReference <api-python-datamodel-amplitudereference>`
+      :param other: Another object of type AmplitudeReference to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -1123,7 +3159,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type AmplitudeReferenceIndex.
+      :rtype: The object's index of type AmplitudeReferenceIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -1182,10 +3218,24 @@ Reference
 
 .. _api-python-datamodel-arclinklog:
 
+ArclinkLog
+............................................................
+
 .. py:class:: ArclinkLog
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Children**:
+
+   - ``arclinkRequest`` -- :ref:`ArclinkRequest <api-python-datamodel-arclinkrequest>`
+   - ``arclinkUser`` -- :ref:`ArclinkUser <api-python-datamodel-arclinkuser>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -1202,7 +3252,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ArclinkLog <api-python-datamodel-arclinklog>`
+      :param other: Another object of type ArclinkLog to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -1364,10 +3415,40 @@ Reference
 
 .. _api-python-datamodel-arclinkrequest:
 
+ArclinkRequest
+............................................................
+
 .. py:class:: ArclinkRequest
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Parents**:
+
+   - ``arclinkLog`` -- :ref:`ArclinkLog <api-python-datamodel-arclinklog>`
+
+   **Children**:
+
+   - ``arclinkStatusLine`` -- :ref:`ArclinkStatusLine <api-python-datamodel-arclinkstatusline>`
+   - ``arclinkRequestLine`` -- :ref:`ArclinkRequestLine <api-python-datamodel-arclinkrequestline>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``requestID`` -- string
+   - ``userID`` -- string
+   - ``userIP`` -- string
+   - ``clientID`` -- string
+   - ``clientIP`` -- string
+   - ``type`` -- string
+   - ``created`` -- seiscomp.core.Time
+   - ``status`` -- string
+   - ``message`` -- string
+   - ``label`` -- string
+   - ``header`` -- string
+   - ``summary`` -- :ref:`ArclinkRequestSummary <api-python-datamodel-arclinkrequestsummary>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -1384,21 +3465,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type ArclinkRequest.
+      :rtype: A new object of type ArclinkRequest.
 
       Creates and registers (if enabled) a ArclinkRequest instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type ArclinkRequest.
+      :rtype: A new object of type ArclinkRequest.
 
       Creates and registers (if enabled) a ArclinkRequest instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ArclinkRequest <api-python-datamodel-arclinkrequest>`
+      :param other: Another object of type ArclinkRequest to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -1407,7 +3489,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ArclinkRequestIndex.
+      :rtype: The object's index of type ArclinkRequestIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -1668,10 +3750,30 @@ Reference
 
 .. _api-python-datamodel-arclinkrequestline:
 
+ArclinkRequestLine
+............................................................
+
 .. py:class:: ArclinkRequestLine
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``arclinkRequest`` -- :ref:`ArclinkRequest <api-python-datamodel-arclinkrequest>`
+
+   **Attributes**:
+
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time
+   - ``streamID`` -- :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
+   - ``restricted`` -- boolean (optional)
+   - ``shared`` -- boolean (optional)
+   - ``netClass`` -- string
+   - ``constraints`` -- string
+   - ``status`` -- :ref:`ArclinkStatusLine <api-python-datamodel-arclinkstatusline>`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -1688,7 +3790,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ArclinkRequestLine <api-python-datamodel-arclinkrequestline>`
+      :param other: Another object of type ArclinkRequestLine to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -1697,7 +3800,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ArclinkRequestLineIndex.
+      :rtype: The object's index of type ArclinkRequestLineIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -1822,10 +3925,25 @@ Reference
 
 .. _api-python-datamodel-arclinkrequestsummary:
 
+ArclinkRequestSummary
+............................................................
+
 .. py:class:: ArclinkRequestSummary
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Attributes**:
+
+   - ``okLineCount`` -- int
+   - ``totalLineCount`` -- int
+   - ``averageTimeWindow`` -- int
+
+   **Used by**:
+
+   - :func:`ArclinkRequest.summary`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -1842,7 +3960,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ArclinkRequestSummary <api-python-datamodel-arclinkrequestsummary>`
+      :param other: Another object of type ArclinkRequestSummary to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -1875,10 +3994,31 @@ Reference
 
 .. _api-python-datamodel-arclinkstatusline:
 
+ArclinkStatusLine
+............................................................
+
 .. py:class:: ArclinkStatusLine
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``arclinkRequest`` -- :ref:`ArclinkRequest <api-python-datamodel-arclinkrequest>`
+
+   **Attributes**:
+
+   - ``type`` -- string
+   - ``status`` -- string
+   - ``size`` -- int (optional)
+   - ``message`` -- string
+   - ``volumeID`` -- string
+
+   **Used by**:
+
+   - :func:`ArclinkRequestLine.status`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -1895,7 +4035,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ArclinkStatusLine <api-python-datamodel-arclinkstatusline>`
+      :param other: Another object of type ArclinkStatusLine to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -1904,7 +4045,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ArclinkStatusLineIndex.
+      :rtype: The object's index of type ArclinkStatusLineIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -2000,10 +4141,26 @@ Reference
 
 .. _api-python-datamodel-arclinkuser:
 
+ArclinkUser
+............................................................
+
 .. py:class:: ArclinkUser
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Parents**:
+
+   - ``arclinkLog`` -- :ref:`ArclinkLog <api-python-datamodel-arclinklog>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``email`` -- string
+   - ``password`` -- string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -2020,21 +4177,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type ArclinkUser.
+      :rtype: A new object of type ArclinkUser.
 
       Creates and registers (if enabled) a ArclinkUser instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type ArclinkUser.
+      :rtype: A new object of type ArclinkUser.
 
       Creates and registers (if enabled) a ArclinkUser instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ArclinkUser <api-python-datamodel-arclinkuser>`
+      :param other: Another object of type ArclinkUser to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -2043,7 +4201,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ArclinkUserIndex.
+      :rtype: The object's index of type ArclinkUserIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -2131,6 +4289,9 @@ Reference
 
 .. _api-python-datamodel-arrival:
 
+Arrival
+............................................................
+
 .. py:class:: Arrival
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -2144,6 +4305,31 @@ Reference
    or the residual, respectively. Additional pick attributes like the
    horizontal slowness and backazimuth of the observed wave\-especially if
    derived from array data\-may further constrain the nature of the arrival.
+
+   **Parents**:
+
+   - ``origin`` -- :ref:`Origin <api-python-datamodel-origin>`
+
+   **Attributes**:
+
+   - ``pickID`` -- string
+   - ``phase`` -- :ref:`Phase <api-python-datamodel-phase>`
+   - ``timeCorrection`` -- float (optional)
+   - ``azimuth`` -- float (optional)
+   - ``distance`` -- float (optional)
+   - ``takeOffAngle`` -- float (optional)
+   - ``timeResidual`` -- float (optional)
+   - ``horizontalSlownessResidual`` -- float (optional)
+   - ``backazimuthResidual`` -- float (optional)
+   - ``timeUsed`` -- boolean (optional)
+   - ``horizontalSlownessUsed`` -- boolean (optional)
+   - ``backazimuthUsed`` -- boolean (optional)
+   - ``weight`` -- float (optional)
+   - ``earthModelID`` -- string
+   - ``preliminary`` -- boolean (optional)
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -2160,7 +4346,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Arrival <api-python-datamodel-arrival>`
+      :param other: Another object of type Arrival to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -2169,7 +4356,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ArrivalIndex.
+      :rtype: The object's index of type ArrivalIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -2454,11 +4641,37 @@ Reference
 
 .. _api-python-datamodel-auxdevice:
 
+AuxDevice
+............................................................
+
 .. py:class:: AuxDevice
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes an auxilliary device
+
+   **Parents**:
+
+   - ``inventory`` -- :ref:`Inventory <api-python-datamodel-inventory>`
+
+   **Children**:
+
+   - ``auxSource`` -- :ref:`AuxSource <api-python-datamodel-auxsource>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``description`` -- string
+   - ``model`` -- string
+   - ``manufacturer`` -- string
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Referenced by**:
+
+   - :func:`AuxStream.device`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -2475,21 +4688,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type AuxDevice.
+      :rtype: A new object of type AuxDevice.
 
       Creates and registers (if enabled) a AuxDevice instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type AuxDevice.
+      :rtype: A new object of type AuxDevice.
 
       Creates and registers (if enabled) a AuxDevice instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`AuxDevice <api-python-datamodel-auxdevice>`
+      :param other: Another object of type AuxDevice to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -2498,7 +4712,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type AuxDeviceIndex.
+      :rtype: The object's index of type AuxDeviceIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -2663,11 +4877,30 @@ Reference
 
 .. _api-python-datamodel-auxsource:
 
+AuxSource
+............................................................
+
 .. py:class:: AuxSource
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    This type describes a channel of an auxilliary device
+
+   **Parents**:
+
+   - ``auxDevice`` -- :ref:`AuxDevice <api-python-datamodel-auxdevice>`
+
+   **Attributes**:
+
+   - ``name`` -- string
+   - ``description`` -- string
+   - ``unit`` -- string
+   - ``conversion`` -- string
+   - ``sampleRateNumerator`` -- int (optional)
+   - ``sampleRateDenominator`` -- int (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -2684,7 +4917,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`AuxSource <api-python-datamodel-auxsource>`
+      :param other: Another object of type AuxSource to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -2693,7 +4927,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type AuxSourceIndex.
+      :rtype: The object's index of type AuxSourceIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -2829,11 +5063,33 @@ Reference
 
 .. _api-python-datamodel-auxstream:
 
+AuxStream
+............................................................
+
 .. py:class:: AuxStream
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    This type describes a stream \(channel\) without defined frequency response
+
+   **Parents**:
+
+   - ``sensorLocation`` -- :ref:`SensorLocation <api-python-datamodel-sensorlocation>`
+
+   **Attributes**:
+
+   - ``code`` -- string
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``device`` -- string
+   - ``deviceSerialNumber`` -- string
+   - ``source`` -- string
+   - ``format`` -- string
+   - ``flags`` -- string
+   - ``restricted`` -- boolean (optional)
+   - ``shared`` -- boolean (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -2850,7 +5106,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`AuxStream <api-python-datamodel-auxstream>`
+      :param other: Another object of type AuxStream to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -2859,7 +5116,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type AuxStreamIndex.
+      :rtype: The object's index of type AuxStreamIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -3026,6 +5283,9 @@ Reference
 
 .. _api-python-datamodel-axis:
 
+Axis
+............................................................
+
 .. py:class:: Axis
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -3033,6 +5293,20 @@ Reference
    This class describes an eigenvector of a moment tensor expressed in its
    principal\-axes system. It uses the angles azimuth, plunge, and the
    eigenvalue length.
+
+   **Attributes**:
+
+   - ``azimuth`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``plunge`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``length`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+
+   **Used by**:
+
+   - :func:`PrincipalAxes.tAxis`
+   - :func:`PrincipalAxes.pAxis`
+   - :func:`PrincipalAxes.nAxis`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -3049,7 +5323,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Axis <api-python-datamodel-axis>`
+      :param other: Another object of type Axis to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -3092,10 +5367,37 @@ Reference
 
 .. _api-python-datamodel-blob:
 
+Blob
+............................................................
+
 .. py:class:: Blob
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Attributes**:
+
+   - ``content`` -- string
+
+   **Used by**:
+
+   - :func:`AuxDevice.remark`
+   - :func:`AuxSource.remark`
+   - :func:`Datalogger.remark`
+   - :func:`DataloggerCalibration.remark`
+   - :func:`Decimation.analogueFilterChain`
+   - :func:`Decimation.digitalFilterChain`
+   - :func:`Network.remark`
+   - :func:`ResponseFAP.remark`
+   - :func:`ResponseFIR.remark`
+   - :func:`ResponseIIR.remark`
+   - :func:`ResponsePAZ.remark`
+   - :func:`ResponsePolynomial.remark`
+   - :func:`Sensor.remark`
+   - :func:`SensorCalibration.remark`
+   - :func:`Station.remark`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -3112,7 +5414,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Blob <api-python-datamodel-blob>`
+      :param other: Another object of type Blob to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -3129,12 +5432,42 @@ Reference
 
 .. _api-python-datamodel-comment:
 
+Comment
+............................................................
+
 .. py:class:: Comment
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    Comment holds information on comments to a resource as well as author and
    creation time information.
+
+   **Parents**:
+
+   - ``momentTensor`` -- :ref:`MomentTensor <api-python-datamodel-momenttensor>`
+   - ``focalMechanism`` -- :ref:`FocalMechanism <api-python-datamodel-focalmechanism>`
+   - ``amplitude`` -- :ref:`Amplitude <api-python-datamodel-amplitude>`
+   - ``magnitude`` -- :ref:`Magnitude <api-python-datamodel-magnitude>`
+   - ``stationMagnitude`` -- :ref:`StationMagnitude <api-python-datamodel-stationmagnitude>`
+   - ``pick`` -- :ref:`Pick <api-python-datamodel-pick>`
+   - ``event`` -- :ref:`Event <api-python-datamodel-event>`
+   - ``origin`` -- :ref:`Origin <api-python-datamodel-origin>`
+   - ``parameter`` -- :ref:`Parameter <api-python-datamodel-parameter>`
+   - ``parameterSet`` -- :ref:`ParameterSet <api-python-datamodel-parameterset>`
+   - ``stream`` -- :ref:`Stream <api-python-datamodel-stream>`
+   - ``sensorLocation`` -- :ref:`SensorLocation <api-python-datamodel-sensorlocation>`
+   - ``station`` -- :ref:`Station <api-python-datamodel-station>`
+   - ``network`` -- :ref:`Network <api-python-datamodel-network>`
+
+   **Attributes**:
+
+   - ``text`` -- string
+   - ``id`` -- string
+   - ``start`` -- seiscomp.core.Time (optional)
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -3151,7 +5484,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Comment <api-python-datamodel-comment>`
+      :param other: Another object of type Comment to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -3160,7 +5494,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type CommentIndex.
+      :rtype: The object's index of type CommentIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -3380,10 +5714,24 @@ Reference
 
 .. _api-python-datamodel-complexarray:
 
+ComplexArray
+............................................................
+
 .. py:class:: ComplexArray
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Attributes**:
+
+   - ``content`` -- complex (optional)
+
+   **Used by**:
+
+   - :func:`ResponsePAZ.zeros`
+   - :func:`ResponsePAZ.poles`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -3400,7 +5748,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ComplexArray <api-python-datamodel-complexarray>`
+      :param other: Another object of type ComplexArray to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -3421,6 +5770,9 @@ Reference
          the value of the attribute is not set.
 
 .. _api-python-datamodel-compositetime:
+
+CompositeTime
+............................................................
 
 .. py:class:: CompositeTime
 
@@ -3443,6 +5795,21 @@ Reference
    the origin, however, UTC has to be used. If the unknown time components
    are assumed to be zero, the value is 1730\-02\-28T08:00:00Z.
 
+   **Parents**:
+
+   - ``origin`` -- :ref:`Origin <api-python-datamodel-origin>`
+
+   **Attributes**:
+
+   - ``year`` -- :ref:`IntegerQuantity <api-python-datamodel-integerquantity>` (optional)
+   - ``month`` -- :ref:`IntegerQuantity <api-python-datamodel-integerquantity>` (optional)
+   - ``day`` -- :ref:`IntegerQuantity <api-python-datamodel-integerquantity>` (optional)
+   - ``hour`` -- :ref:`IntegerQuantity <api-python-datamodel-integerquantity>` (optional)
+   - ``minute`` -- :ref:`IntegerQuantity <api-python-datamodel-integerquantity>` (optional)
+   - ``second`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>` (optional)
+
+   **Methods**:
+
    .. py:staticmethod:: Cast(obj)
 
       :param obj: The object to be casted.
@@ -3458,7 +5825,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`CompositeTime <api-python-datamodel-compositetime>`
+      :param other: Another object of type CompositeTime to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -3596,6 +5964,9 @@ Reference
 
 .. _api-python-datamodel-confidenceellipsoid:
 
+ConfidenceEllipsoid
+............................................................
+
 .. py:class:: ConfidenceEllipsoid
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -3630,6 +6001,21 @@ Reference
    majorAxisPlunge: elevation \(pitch, phi\), majorAxisAzimuth: heading \(yaw,
    psi\), majorAxisRotation: bank \(roll, theta\)
 
+   **Attributes**:
+
+   - ``semiMajorAxisLength`` -- float
+   - ``semiMinorAxisLength`` -- float
+   - ``semiIntermediateAxisLength`` -- float
+   - ``majorAxisPlunge`` -- float
+   - ``majorAxisAzimuth`` -- float
+   - ``majorAxisRotation`` -- float
+
+   **Used by**:
+
+   - :func:`OriginUncertainty.confidenceEllipsoid`
+
+   **Methods**:
+
    .. py:staticmethod:: Cast(obj)
 
       :param obj: The object to be casted.
@@ -3645,7 +6031,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ConfidenceEllipsoid <api-python-datamodel-confidenceellipsoid>`
+      :param other: Another object of type ConfidenceEllipsoid to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -3725,10 +6112,24 @@ Reference
 
 .. _api-python-datamodel-config:
 
+Config
+............................................................
+
 .. py:class:: Config
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Children**:
+
+   - ``parameterSet`` -- :ref:`ParameterSet <api-python-datamodel-parameterset>`
+   - ``configModule`` -- :ref:`ConfigModule <api-python-datamodel-configmodule>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -3745,7 +6146,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Config <api-python-datamodel-config>`
+      :param other: Another object of type Config to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -3879,10 +6281,34 @@ Reference
 
 .. _api-python-datamodel-configmodule:
 
+ConfigModule
+............................................................
+
 .. py:class:: ConfigModule
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Parents**:
+
+   - ``config`` -- :ref:`Config <api-python-datamodel-config>`
+
+   **Children**:
+
+   - ``configStation`` -- :ref:`ConfigStation <api-python-datamodel-configstation>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``parameterSetID`` -- string
+   - ``enabled`` -- boolean
+
+   **Referenced by**:
+
+   - :func:`ParameterSet.moduleID`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -3899,21 +6325,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type ConfigModule.
+      :rtype: A new object of type ConfigModule.
 
       Creates and registers (if enabled) a ConfigModule instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type ConfigModule.
+      :rtype: A new object of type ConfigModule.
 
       Creates and registers (if enabled) a ConfigModule instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ConfigModule <api-python-datamodel-configmodule>`
+      :param other: Another object of type ConfigModule to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -4052,10 +6479,31 @@ Reference
 
 .. _api-python-datamodel-configstation:
 
+ConfigStation
+............................................................
+
 .. py:class:: ConfigStation
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Parents**:
+
+   - ``configModule`` -- :ref:`ConfigModule <api-python-datamodel-configmodule>`
+
+   **Children**:
+
+   - ``setup`` -- :ref:`Setup <api-python-datamodel-setup>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``networkCode`` -- string
+   - ``stationCode`` -- string
+   - ``enabled`` -- boolean
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -4072,21 +6520,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type ConfigStation.
+      :rtype: A new object of type ConfigStation.
 
       Creates and registers (if enabled) a ConfigStation instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type ConfigStation.
+      :rtype: A new object of type ConfigStation.
 
       Creates and registers (if enabled) a ConfigStation instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ConfigStation <api-python-datamodel-configstation>`
+      :param other: Another object of type ConfigStation to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -4095,7 +6544,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ConfigStationIndex.
+      :rtype: The object's index of type ConfigStationIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -4246,12 +6695,41 @@ Reference
 
 .. _api-python-datamodel-creationinfo:
 
+CreationInfo
+............................................................
+
 .. py:class:: CreationInfo
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    CreationInfo is used to describe creation metadata \(author, version, and
    creation time\) of a resource.
+
+   **Attributes**:
+
+   - ``agencyID`` -- string
+   - ``agencyURI`` -- string
+   - ``author`` -- string
+   - ``authorURI`` -- string
+   - ``creationTime`` -- seiscomp.core.Time (optional)
+   - ``modificationTime`` -- seiscomp.core.Time (optional)
+   - ``version`` -- string
+
+   **Used by**:
+
+   - :func:`Amplitude.creationInfo`
+   - :func:`Arrival.creationInfo`
+   - :func:`Comment.creationInfo`
+   - :func:`ConfigStation.creationInfo`
+   - :func:`Event.creationInfo`
+   - :func:`FocalMechanism.creationInfo`
+   - :func:`Magnitude.creationInfo`
+   - :func:`MomentTensor.creationInfo`
+   - :func:`Origin.creationInfo`
+   - :func:`Pick.creationInfo`
+   - :func:`StationMagnitude.creationInfo`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -4268,7 +6746,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`CreationInfo <api-python-datamodel-creationinfo>`
+      :param other: Another object of type CreationInfo to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -4361,10 +6840,28 @@ Reference
 
 .. _api-python-datamodel-dataattributeextent:
 
+DataAttributeExtent
+............................................................
+
 .. py:class:: DataAttributeExtent
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``dataExtent`` -- :ref:`DataExtent <api-python-datamodel-dataextent>`
+
+   **Attributes**:
+
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time
+   - ``sampleRate`` -- double
+   - ``quality`` -- string
+   - ``updated`` -- seiscomp.core.Time
+   - ``segmentCount`` -- int
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -4381,7 +6878,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`DataAttributeExtent <api-python-datamodel-dataattributeextent>`
+      :param other: Another object of type DataAttributeExtent to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -4390,7 +6888,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type DataAttributeExtentIndex.
+      :rtype: The object's index of type DataAttributeExtentIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -4501,11 +6999,24 @@ Reference
 
 .. _api-python-datamodel-dataavailability:
 
+DataAvailability
+............................................................
+
 .. py:class:: DataAvailability
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type can hold data availability related objects \(extent and segment\).
+
+   **Children**:
+
+   - ``dataExtent`` -- :ref:`DataExtent <api-python-datamodel-dataextent>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -4522,7 +7033,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`DataAvailability <api-python-datamodel-dataavailability>`
+      :param other: Another object of type DataAvailability to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -4629,10 +7141,34 @@ Reference
 
 .. _api-python-datamodel-dataextent:
 
+DataExtent
+............................................................
+
 .. py:class:: DataExtent
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Parents**:
+
+   - ``dataAvailability`` -- :ref:`DataAvailability <api-python-datamodel-dataavailability>`
+
+   **Children**:
+
+   - ``dataSegment`` -- :ref:`DataSegment <api-python-datamodel-datasegment>`
+   - ``dataAttributeExtent`` -- :ref:`DataAttributeExtent <api-python-datamodel-dataattributeextent>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``waveformID`` -- :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time
+   - ``updated`` -- seiscomp.core.Time
+   - ``lastScan`` -- seiscomp.core.Time
+   - ``segmentOverflow`` -- boolean
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -4649,21 +7185,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type DataExtent.
+      :rtype: A new object of type DataExtent.
 
       Creates and registers (if enabled) a DataExtent instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type DataExtent.
+      :rtype: A new object of type DataExtent.
 
       Creates and registers (if enabled) a DataExtent instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`DataExtent <api-python-datamodel-dataextent>`
+      :param other: Another object of type DataExtent to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -4672,7 +7209,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type DataExtentIndex.
+      :rtype: The object's index of type DataExtentIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -4890,10 +7427,28 @@ Reference
 
 .. _api-python-datamodel-datasegment:
 
+DataSegment
+............................................................
+
 .. py:class:: DataSegment
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``dataExtent`` -- :ref:`DataExtent <api-python-datamodel-dataextent>`
+
+   **Attributes**:
+
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time
+   - ``updated`` -- seiscomp.core.Time
+   - ``sampleRate`` -- double
+   - ``quality`` -- string
+   - ``outOfOrder`` -- boolean
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -4910,7 +7465,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`DataSegment <api-python-datamodel-datasegment>`
+      :param other: Another object of type DataSegment to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -4919,7 +7475,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type DataSegmentIndex.
+      :rtype: The object's index of type DataSegmentIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -5030,12 +7586,28 @@ Reference
 
 .. _api-python-datamodel-dataused:
 
+DataUsed
+............................................................
+
 .. py:class:: DataUsed
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    The DataUsed class describes the type of data that has been used for a
    moment\-tensor inversion.
+
+   **Parents**:
+
+   - ``momentTensor`` -- :ref:`MomentTensor <api-python-datamodel-momenttensor>`
+
+   **Attributes**:
+
+   - ``waveType`` -- :ref:`DataUsedWaveType <api-python-datamodel-datausedwavetype>`
+   - ``stationCount`` -- int
+   - ``componentCount`` -- int
+   - ``shortestPeriod`` -- float (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -5052,7 +7624,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`DataUsed <api-python-datamodel-dataused>`
+      :param other: Another object of type DataUsed to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -5144,11 +7717,45 @@ Reference
 
 .. _api-python-datamodel-datalogger:
 
+Datalogger
+............................................................
+
 .. py:class:: Datalogger
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a datalogger \(digitizer and recorder\)
+
+   **Parents**:
+
+   - ``inventory`` -- :ref:`Inventory <api-python-datamodel-inventory>`
+
+   **Children**:
+
+   - ``dataloggerCalibration`` -- :ref:`DataloggerCalibration <api-python-datamodel-dataloggercalibration>`
+   - ``decimation`` -- :ref:`Decimation <api-python-datamodel-decimation>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``description`` -- string
+   - ``digitizerModel`` -- string
+   - ``digitizerManufacturer`` -- string
+   - ``recorderModel`` -- string
+   - ``recorderManufacturer`` -- string
+   - ``clockModel`` -- string
+   - ``clockManufacturer`` -- string
+   - ``clockType`` -- string
+   - ``gain`` -- float (optional)
+   - ``maxClockDrift`` -- float (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Referenced by**:
+
+   - :func:`Stream.datalogger`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -5165,21 +7772,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Datalogger.
+      :rtype: A new object of type Datalogger.
 
       Creates and registers (if enabled) a Datalogger instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Datalogger.
+      :rtype: A new object of type Datalogger.
 
       Creates and registers (if enabled) a Datalogger instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Datalogger <api-python-datamodel-datalogger>`
+      :param other: Another object of type Datalogger to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -5188,7 +7796,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type DataloggerIndex.
+      :rtype: The object's index of type DataloggerIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -5482,11 +8090,30 @@ Reference
 
 .. _api-python-datamodel-dataloggercalibration:
 
+DataloggerCalibration
+............................................................
+
 .. py:class:: DataloggerCalibration
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    This type describes a datalogger calibration
+
+   **Parents**:
+
+   - ``datalogger`` -- :ref:`Datalogger <api-python-datamodel-datalogger>`
+
+   **Attributes**:
+
+   - ``serialNumber`` -- string
+   - ``channel`` -- int
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``gain`` -- float (optional)
+   - ``gainFrequency`` -- float (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -5503,7 +8130,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`DataloggerCalibration <api-python-datamodel-dataloggercalibration>`
+      :param other: Another object of type DataloggerCalibration to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -5512,7 +8140,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type DataloggerCalibrationIndex.
+      :rtype: The object's index of type DataloggerCalibrationIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -5651,11 +8279,27 @@ Reference
 
 .. _api-python-datamodel-decimation:
 
+Decimation
+............................................................
+
 .. py:class:: Decimation
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    This type describes a decimation to a certain sample rate
+
+   **Parents**:
+
+   - ``datalogger`` -- :ref:`Datalogger <api-python-datamodel-datalogger>`
+
+   **Attributes**:
+
+   - ``sampleRateNumerator`` -- int
+   - ``sampleRateDenominator`` -- int
+   - ``analogueFilterChain`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+   - ``digitalFilterChain`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -5672,7 +8316,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Decimation <api-python-datamodel-decimation>`
+      :param other: Another object of type Decimation to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -5681,7 +8326,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type DecimationIndex.
+      :rtype: The object's index of type DecimationIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -5787,6 +8432,9 @@ Reference
 
 .. _api-python-datamodel-event:
 
+Event
+............................................................
+
 .. py:class:: Event
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
@@ -5799,6 +8447,29 @@ Reference
    with different location programs and earth models, etc. Furthermore, an event
    is usually associated with one or more magnitudes, and with one or more focal
    mechanism determinations.
+
+   **Parents**:
+
+   - ``eventParameters`` -- :ref:`EventParameters <api-python-datamodel-eventparameters>`
+
+   **Children**:
+
+   - ``eventDescription`` -- :ref:`EventDescription <api-python-datamodel-eventdescription>`
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+   - ``originReference`` -- :ref:`OriginReference <api-python-datamodel-originreference>`
+   - ``focalMechanismReference`` -- :ref:`FocalMechanismReference <api-python-datamodel-focalmechanismreference>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``preferredOriginID`` -- string
+   - ``preferredMagnitudeID`` -- string
+   - ``preferredFocalMechanismID`` -- string
+   - ``type`` -- :ref:`EventType <api-python-datamodel-eventtype>` (optional)
+   - ``typeCertainty`` -- :ref:`EventTypeCertainty <api-python-datamodel-eventtypecertainty>` (optional)
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -5815,21 +8486,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Event.
+      :rtype: A new object of type Event.
 
       Creates and registers (if enabled) a Event instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Event.
+      :rtype: A new object of type Event.
 
       Creates and registers (if enabled) a Event instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Event <api-python-datamodel-event>`
+      :param other: Another object of type Event to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -6157,6 +8829,9 @@ Reference
 
 .. _api-python-datamodel-eventdescription:
 
+EventDescription
+............................................................
+
 .. py:class:: EventDescription
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -6164,6 +8839,17 @@ Reference
    Free\-form string with additional event description. This can be a
    well\-known name, like 1906 San Francisco Earthquake. A number of
    categories can be given in type.
+
+   **Parents**:
+
+   - ``event`` -- :ref:`Event <api-python-datamodel-event>`
+
+   **Attributes**:
+
+   - ``text`` -- string
+   - ``type`` -- :ref:`EventDescriptionType <api-python-datamodel-eventdescriptiontype>`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -6180,7 +8866,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`EventDescription <api-python-datamodel-eventdescription>`
+      :param other: Another object of type EventDescription to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -6189,7 +8876,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type EventDescriptionIndex.
+      :rtype: The object's index of type EventDescriptionIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -6260,12 +8947,30 @@ Reference
 
 .. _api-python-datamodel-eventparameters:
 
+EventParameters
+............................................................
+
 .. py:class:: EventParameters
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type can hold objects of type Event, Origin, Magnitude, StationMagnitude,
    FocalMechanism, Reading, Amplitude, and Pick.
+
+   **Children**:
+
+   - ``pick`` -- :ref:`Pick <api-python-datamodel-pick>`
+   - ``amplitude`` -- :ref:`Amplitude <api-python-datamodel-amplitude>`
+   - ``reading`` -- :ref:`Reading <api-python-datamodel-reading>`
+   - ``origin`` -- :ref:`Origin <api-python-datamodel-origin>`
+   - ``focalMechanism`` -- :ref:`FocalMechanism <api-python-datamodel-focalmechanism>`
+   - ``event`` -- :ref:`Event <api-python-datamodel-event>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -6282,7 +8987,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`EventParameters <api-python-datamodel-eventparameters>`
+      :param other: Another object of type EventParameters to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -6580,6 +9286,9 @@ Reference
 
 .. _api-python-datamodel-focalmechanism:
 
+FocalMechanism
+............................................................
+
 .. py:class:: FocalMechanism
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
@@ -6588,6 +9297,37 @@ Reference
    descriptions like nodal planes, principal axes, and a moment tensor.
    The moment tensor description is provided by objects of the class
    MomentTensor which can be specified as child elements of FocalMechanism.
+
+   **Parents**:
+
+   - ``eventParameters`` -- :ref:`EventParameters <api-python-datamodel-eventparameters>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+   - ``momentTensor`` -- :ref:`MomentTensor <api-python-datamodel-momenttensor>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``triggeringOriginID`` -- string
+   - ``nodalPlanes`` -- :ref:`NodalPlanes <api-python-datamodel-nodalplanes>` (optional)
+   - ``principalAxes`` -- :ref:`PrincipalAxes <api-python-datamodel-principalaxes>` (optional)
+   - ``azimuthalGap`` -- float (optional)
+   - ``stationPolarityCount`` -- int (optional)
+   - ``misfit`` -- float (optional)
+   - ``stationDistributionRatio`` -- float (optional)
+   - ``methodID`` -- string
+   - ``evaluationMode`` -- :ref:`EvaluationMode <api-python-datamodel-evaluationmode>` (optional)
+   - ``evaluationStatus`` -- :ref:`EvaluationStatus <api-python-datamodel-evaluationstatus>` (optional)
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Referenced by**:
+
+   - :func:`Event.preferredFocalMechanismID`
+   - :func:`FocalMechanismReference.focalMechanismID`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -6604,21 +9344,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type FocalMechanism.
+      :rtype: A new object of type FocalMechanism.
 
       Creates and registers (if enabled) a FocalMechanism instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type FocalMechanism.
+      :rtype: A new object of type FocalMechanism.
 
       Creates and registers (if enabled) a FocalMechanism instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`FocalMechanism <api-python-datamodel-focalmechanism>`
+      :param other: Another object of type FocalMechanism to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -6926,10 +9667,23 @@ Reference
 
 .. _api-python-datamodel-focalmechanismreference:
 
+FocalMechanismReference
+............................................................
+
 .. py:class:: FocalMechanismReference
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``event`` -- :ref:`Event <api-python-datamodel-event>`
+
+   **Attributes**:
+
+   - ``focalMechanismID`` -- string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -6946,7 +9700,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`FocalMechanismReference <api-python-datamodel-focalmechanismreference>`
+      :param other: Another object of type FocalMechanismReference to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -6955,7 +9710,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type FocalMechanismReferenceIndex.
+      :rtype: The object's index of type FocalMechanismReferenceIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -7014,6 +9769,9 @@ Reference
 
 .. _api-python-datamodel-integerquantity:
 
+IntegerQuantity
+............................................................
+
 .. py:class:: IntegerQuantity
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -7028,6 +9786,24 @@ Reference
    Note that uncertainty, upperUncertainty, and lowerUncertainty are given as
    absolute values of the deviation
    from the main value.
+
+   **Attributes**:
+
+   - ``value`` -- int
+   - ``uncertainty`` -- int (optional)
+   - ``lowerUncertainty`` -- int (optional)
+   - ``upperUncertainty`` -- int (optional)
+   - ``confidenceLevel`` -- float (optional)
+
+   **Used by**:
+
+   - :func:`CompositeTime.year`
+   - :func:`CompositeTime.month`
+   - :func:`CompositeTime.day`
+   - :func:`CompositeTime.hour`
+   - :func:`CompositeTime.minute`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -7044,7 +9820,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`IntegerQuantity <api-python-datamodel-integerquantity>`
+      :param other: Another object of type IntegerQuantity to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -7126,10 +9903,32 @@ Reference
 
 .. _api-python-datamodel-inventory:
 
+Inventory
+............................................................
+
 .. py:class:: Inventory
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Children**:
+
+   - ``stationGroup`` -- :ref:`StationGroup <api-python-datamodel-stationgroup>`
+   - ``auxDevice`` -- :ref:`AuxDevice <api-python-datamodel-auxdevice>`
+   - ``sensor`` -- :ref:`Sensor <api-python-datamodel-sensor>`
+   - ``datalogger`` -- :ref:`Datalogger <api-python-datamodel-datalogger>`
+   - ``responsePAZ`` -- :ref:`ResponsePAZ <api-python-datamodel-responsepaz>`
+   - ``responseFIR`` -- :ref:`ResponseFIR <api-python-datamodel-responsefir>`
+   - ``responseIIR`` -- :ref:`ResponseIIR <api-python-datamodel-responseiir>`
+   - ``responsePolynomial`` -- :ref:`ResponsePolynomial <api-python-datamodel-responsepolynomial>`
+   - ``responseFAP`` -- :ref:`ResponseFAP <api-python-datamodel-responsefap>`
+   - ``network`` -- :ref:`Network <api-python-datamodel-network>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -7146,7 +9945,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Inventory <api-python-datamodel-inventory>`
+      :param other: Another object of type Inventory to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -7748,10 +10548,27 @@ Reference
 
 .. _api-python-datamodel-journalentry:
 
+JournalEntry
+............................................................
+
 .. py:class:: JournalEntry
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``journaling`` -- :ref:`Journaling <api-python-datamodel-journaling>`
+
+   **Attributes**:
+
+   - ``created`` -- seiscomp.core.Time (optional)
+   - ``objectID`` -- string
+   - ``sender`` -- string
+   - ``action`` -- string
+   - ``parameters`` -- string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -7768,7 +10585,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`JournalEntry <api-python-datamodel-journalentry>`
+      :param other: Another object of type JournalEntry to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -7860,10 +10678,23 @@ Reference
 
 .. _api-python-datamodel-journaling:
 
+Journaling
+............................................................
+
 .. py:class:: Journaling
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Children**:
+
+   - ``journalEntry`` -- :ref:`JournalEntry <api-python-datamodel-journalentry>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -7880,7 +10711,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Journaling <api-python-datamodel-journaling>`
+      :param other: Another object of type Journaling to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -7973,6 +10805,9 @@ Reference
 
 .. _api-python-datamodel-magnitude:
 
+Magnitude
+............................................................
+
 .. py:class:: Magnitude
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
@@ -7981,6 +10816,35 @@ Reference
    an origin. Association with an origin is expressed with the optional
    attribute originID. It is either a combination of different magnitude
    estimations, or it represents the reported magnitude for the given event.
+
+   **Parents**:
+
+   - ``origin`` -- :ref:`Origin <api-python-datamodel-origin>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+   - ``stationMagnitudeContribution`` -- :ref:`StationMagnitudeContribution <api-python-datamodel-stationmagnitudecontribution>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``magnitude`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``type`` -- string
+   - ``originID`` -- string
+   - ``methodID`` -- string
+   - ``stationCount`` -- int (optional)
+   - ``azimuthalGap`` -- float (optional)
+   - ``evaluationStatus`` -- :ref:`EvaluationStatus <api-python-datamodel-evaluationstatus>` (optional)
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Referenced by**:
+
+   - :func:`Event.preferredMagnitudeID`
+   - :func:`MomentTensor.momentMagnitudeID`
+   - :func:`StationMagnitudeContribution.stationMagnitudeID`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -7997,21 +10861,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Magnitude.
+      :rtype: A new object of type Magnitude.
 
       Creates and registers (if enabled) a Magnitude instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Magnitude.
+      :rtype: A new object of type Magnitude.
 
       Creates and registers (if enabled) a Magnitude instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Magnitude <api-python-datamodel-magnitude>`
+      :param other: Another object of type Magnitude to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -8275,12 +11140,50 @@ Reference
 
 .. _api-python-datamodel-momenttensor:
 
+MomentTensor
+............................................................
+
 .. py:class:: MomentTensor
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This class represents a moment tensor solution for an event. It is an
    optional part of a FocalMechanism description.
+
+   **Parents**:
+
+   - ``focalMechanism`` -- :ref:`FocalMechanism <api-python-datamodel-focalmechanism>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+   - ``dataUsed`` -- :ref:`DataUsed <api-python-datamodel-dataused>`
+   - ``momentTensorPhaseSetting`` -- :ref:`MomentTensorPhaseSetting <api-python-datamodel-momenttensorphasesetting>`
+   - ``momentTensorStationContribution`` -- :ref:`MomentTensorStationContribution <api-python-datamodel-momenttensorstationcontribution>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``derivedOriginID`` -- string
+   - ``momentMagnitudeID`` -- string
+   - ``scalarMoment`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>` (optional)
+   - ``tensor`` -- :ref:`Tensor <api-python-datamodel-tensor>` (optional)
+   - ``variance`` -- float (optional)
+   - ``varianceReduction`` -- float (optional)
+   - ``doubleCouple`` -- float (optional)
+   - ``clvd`` -- float (optional)
+   - ``iso`` -- float (optional)
+   - ``greensFunctionID`` -- string
+   - ``filterID`` -- string
+   - ``sourceTimeFunction`` -- :ref:`SourceTimeFunction <api-python-datamodel-sourcetimefunction>` (optional)
+   - ``methodID`` -- string
+   - ``method`` -- :ref:`MomentTensorMethod <api-python-datamodel-momenttensormethod>` (optional)
+   - ``status`` -- :ref:`MomentTensorStatus <api-python-datamodel-momenttensorstatus>` (optional)
+   - ``cmtName`` -- string
+   - ``cmtVersion`` -- string
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -8297,21 +11200,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type MomentTensor.
+      :rtype: A new object of type MomentTensor.
 
       Creates and registers (if enabled) a MomentTensor instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type MomentTensor.
+      :rtype: A new object of type MomentTensor.
 
       Creates and registers (if enabled) a MomentTensor instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`MomentTensor <api-python-datamodel-momenttensor>`
+      :param other: Another object of type MomentTensor to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -8789,10 +11693,30 @@ Reference
 
 .. _api-python-datamodel-momenttensorcomponentcontribution:
 
+MomentTensorComponentContribution
+............................................................
+
 .. py:class:: MomentTensorComponentContribution
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``momentTensorStationContribution`` -- :ref:`MomentTensorStationContribution <api-python-datamodel-momenttensorstationcontribution>`
+
+   **Attributes**:
+
+   - ``phaseCode`` -- string
+   - ``component`` -- int
+   - ``active`` -- boolean
+   - ``weight`` -- float
+   - ``timeShift`` -- float
+   - ``dataTimeWindow`` -- float
+   - ``misfit`` -- float (optional)
+   - ``snr`` -- float (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -8809,7 +11733,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`MomentTensorComponentContribution <api-python-datamodel-momenttensorcomponentcontribution>`
+      :param other: Another object of type MomentTensorComponentContribution to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -8818,7 +11743,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type MomentTensorComponentContributionIndex.
+      :rtype: The object's index of type MomentTensorComponentContributionIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -8943,10 +11868,27 @@ Reference
 
 .. _api-python-datamodel-momenttensorphasesetting:
 
+MomentTensorPhaseSetting
+............................................................
+
 .. py:class:: MomentTensorPhaseSetting
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``momentTensor`` -- :ref:`MomentTensor <api-python-datamodel-momenttensor>`
+
+   **Attributes**:
+
+   - ``code`` -- string
+   - ``lowerPeriod`` -- float
+   - ``upperPeriod`` -- float
+   - ``minimumSNR`` -- float (optional)
+   - ``maximumTimeShift`` -- float (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -8963,7 +11905,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`MomentTensorPhaseSetting <api-python-datamodel-momenttensorphasesetting>`
+      :param other: Another object of type MomentTensorPhaseSetting to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -8972,7 +11915,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type MomentTensorPhaseSettingIndex.
+      :rtype: The object's index of type MomentTensorPhaseSettingIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -9073,10 +12016,31 @@ Reference
 
 .. _api-python-datamodel-momenttensorstationcontribution:
 
+MomentTensorStationContribution
+............................................................
+
 .. py:class:: MomentTensorStationContribution
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Parents**:
+
+   - ``momentTensor`` -- :ref:`MomentTensor <api-python-datamodel-momenttensor>`
+
+   **Children**:
+
+   - ``momentTensorComponentContribution`` -- :ref:`MomentTensorComponentContribution <api-python-datamodel-momenttensorcomponentcontribution>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``active`` -- boolean
+   - ``waveformID`` -- :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>` (optional)
+   - ``weight`` -- float (optional)
+   - ``timeShift`` -- float (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -9093,21 +12057,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type MomentTensorStationContribution.
+      :rtype: A new object of type MomentTensorStationContribution.
 
       Creates and registers (if enabled) a MomentTensorStationContribution instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type MomentTensorStationContribution.
+      :rtype: A new object of type MomentTensorStationContribution.
 
       Creates and registers (if enabled) a MomentTensorStationContribution instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`MomentTensorStationContribution <api-python-datamodel-momenttensorstationcontribution>`
+      :param other: Another object of type MomentTensorStationContribution to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -9262,11 +12227,41 @@ Reference
 
 .. _api-python-datamodel-network:
 
+Network
+............................................................
+
 .. py:class:: Network
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a network of seismic stations
+
+   **Parents**:
+
+   - ``inventory`` -- :ref:`Inventory <api-python-datamodel-inventory>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+   - ``station`` -- :ref:`Station <api-python-datamodel-station>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``code`` -- string
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``description`` -- string
+   - ``institutions`` -- string
+   - ``region`` -- string
+   - ``type`` -- string
+   - ``netClass`` -- string
+   - ``archive`` -- string
+   - ``restricted`` -- boolean (optional)
+   - ``shared`` -- boolean (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -9283,21 +12278,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Network.
+      :rtype: A new object of type Network.
 
       Creates and registers (if enabled) a Network instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Network.
+      :rtype: A new object of type Network.
 
       Creates and registers (if enabled) a Network instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Network <api-python-datamodel-network>`
+      :param other: Another object of type Network to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -9306,7 +12302,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type NetworkIndex.
+      :rtype: The object's index of type NetworkIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -9614,12 +12610,28 @@ Reference
 
 .. _api-python-datamodel-nodalplane:
 
+NodalPlane
+............................................................
+
 .. py:class:: NodalPlane
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    This class describes a nodal plane using the attributes strike, dip, and
    rake. For a definition of the angles see Aki and Richards \(1980\).
+
+   **Attributes**:
+
+   - ``strike`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``dip`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``rake`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+
+   **Used by**:
+
+   - :func:`NodalPlanes.nodalPlane1`
+   - :func:`NodalPlanes.nodalPlane2`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -9636,7 +12648,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`NodalPlane <api-python-datamodel-nodalplane>`
+      :param other: Another object of type NodalPlane to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -9675,6 +12688,9 @@ Reference
 
 .. _api-python-datamodel-nodalplanes:
 
+NodalPlanes
+............................................................
+
 .. py:class:: NodalPlanes
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -9682,6 +12698,18 @@ Reference
    This class describes the nodal planes of a double\-couple moment\-tensor
    solution. The attribute preferredPlane
    can be used to define which plane is the preferred one.
+
+   **Attributes**:
+
+   - ``nodalPlane1`` -- :ref:`NodalPlane <api-python-datamodel-nodalplane>` (optional)
+   - ``nodalPlane2`` -- :ref:`NodalPlane <api-python-datamodel-nodalplane>` (optional)
+   - ``preferredPlane`` -- int (optional)
+
+   **Used by**:
+
+   - :func:`FocalMechanism.nodalPlanes`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -9698,7 +12726,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`NodalPlanes <api-python-datamodel-nodalplanes>`
+      :param other: Another object of type NodalPlanes to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -9753,6 +12782,9 @@ Reference
 
 .. _api-python-datamodel-origin:
 
+Origin
+............................................................
+
 .. py:class:: Origin
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
@@ -9760,6 +12792,49 @@ Reference
    This class represents the focal time and geographical location of an
    earthquake hypocenter, as well as additional meta\-information. Origin
    can have objects of type OriginUncertainty and Arrival as child elements.
+
+   **Parents**:
+
+   - ``eventParameters`` -- :ref:`EventParameters <api-python-datamodel-eventparameters>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+   - ``compositeTime`` -- :ref:`CompositeTime <api-python-datamodel-compositetime>`
+   - ``arrival`` -- :ref:`Arrival <api-python-datamodel-arrival>`
+   - ``stationMagnitude`` -- :ref:`StationMagnitude <api-python-datamodel-stationmagnitude>`
+   - ``magnitude`` -- :ref:`Magnitude <api-python-datamodel-magnitude>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``time`` -- :ref:`TimeQuantity <api-python-datamodel-timequantity>`
+   - ``latitude`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``longitude`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``depth`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>` (optional)
+   - ``depthType`` -- :ref:`OriginDepthType <api-python-datamodel-origindepthtype>` (optional)
+   - ``timeFixed`` -- boolean (optional)
+   - ``epicenterFixed`` -- boolean (optional)
+   - ``referenceSystemID`` -- string
+   - ``methodID`` -- string
+   - ``earthModelID`` -- string
+   - ``quality`` -- :ref:`OriginQuality <api-python-datamodel-originquality>` (optional)
+   - ``uncertainty`` -- :ref:`OriginUncertainty <api-python-datamodel-originuncertainty>` (optional)
+   - ``type`` -- :ref:`OriginType <api-python-datamodel-origintype>` (optional)
+   - ``evaluationMode`` -- :ref:`EvaluationMode <api-python-datamodel-evaluationmode>` (optional)
+   - ``evaluationStatus`` -- :ref:`EvaluationStatus <api-python-datamodel-evaluationstatus>` (optional)
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Referenced by**:
+
+   - :func:`Event.preferredOriginID`
+   - :func:`FocalMechanism.triggeringOriginID`
+   - :func:`Magnitude.originID`
+   - :func:`MomentTensor.derivedOriginID`
+   - :func:`OriginReference.originID`
+   - :func:`StationMagnitude.originID`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -9776,21 +12851,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Origin.
+      :rtype: A new object of type Origin.
 
       Creates and registers (if enabled) a Origin instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Origin.
+      :rtype: A new object of type Origin.
 
       Creates and registers (if enabled) a Origin instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Origin <api-python-datamodel-origin>`
+      :param other: Another object of type Origin to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -10292,6 +13368,9 @@ Reference
 
 .. _api-python-datamodel-originquality:
 
+OriginQuality
+............................................................
+
 .. py:class:: OriginQuality
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -10300,6 +13379,27 @@ Reference
    an origin, e. g., errors, azimuthal
    coverage, etc. Origin objects have an optional attribute of the type
    OriginQuality.
+
+   **Attributes**:
+
+   - ``associatedPhaseCount`` -- int (optional)
+   - ``usedPhaseCount`` -- int (optional)
+   - ``associatedStationCount`` -- int (optional)
+   - ``usedStationCount`` -- int (optional)
+   - ``depthPhaseCount`` -- int (optional)
+   - ``standardError`` -- float (optional)
+   - ``azimuthalGap`` -- float (optional)
+   - ``secondaryAzimuthalGap`` -- float (optional)
+   - ``groundTruthLevel`` -- string
+   - ``maximumDistance`` -- float (optional)
+   - ``minimumDistance`` -- float (optional)
+   - ``medianDistance`` -- float (optional)
+
+   **Used by**:
+
+   - :func:`Origin.quality`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -10316,7 +13416,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`OriginQuality <api-python-datamodel-originquality>`
+      :param other: Another object of type OriginQuality to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -10509,10 +13610,23 @@ Reference
 
 .. _api-python-datamodel-originreference:
 
+OriginReference
+............................................................
+
 .. py:class:: OriginReference
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``event`` -- :ref:`Event <api-python-datamodel-event>`
+
+   **Attributes**:
+
+   - ``originID`` -- string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -10529,7 +13643,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`OriginReference <api-python-datamodel-originreference>`
+      :param other: Another object of type OriginReference to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -10538,7 +13653,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type OriginReferenceIndex.
+      :rtype: The object's index of type OriginReferenceIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -10597,6 +13712,9 @@ Reference
 
 .. _api-python-datamodel-originuncertainty:
 
+OriginUncertainty
+............................................................
+
 .. py:class:: OriginUncertainty
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -10606,6 +13724,22 @@ Reference
    uncertainty ellipse according to IMS1.0, or a confidence ellipsoid. If
    multiple uncertainty models are given, the preferred variant can be
    specified in the attribute preferredDescription.
+
+   **Attributes**:
+
+   - ``horizontalUncertainty`` -- float (optional)
+   - ``minHorizontalUncertainty`` -- float (optional)
+   - ``maxHorizontalUncertainty`` -- float (optional)
+   - ``azimuthMaxHorizontalUncertainty`` -- float (optional)
+   - ``confidenceEllipsoid`` -- :ref:`ConfidenceEllipsoid <api-python-datamodel-confidenceellipsoid>` (optional)
+   - ``preferredDescription`` -- :ref:`OriginUncertaintyDescription <api-python-datamodel-originuncertaintydescription>` (optional)
+   - ``confidenceLevel`` -- float (optional)
+
+   **Used by**:
+
+   - :func:`Origin.uncertainty`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -10622,7 +13756,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`OriginUncertainty <api-python-datamodel-originuncertainty>`
+      :param other: Another object of type OriginUncertainty to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -10738,10 +13873,27 @@ Reference
 
 .. _api-python-datamodel-outage:
 
+Outage
+............................................................
+
 .. py:class:: Outage
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``qualityControl`` -- :ref:`QualityControl <api-python-datamodel-qualitycontrol>`
+
+   **Attributes**:
+
+   - ``waveformID`` -- :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
+   - ``creatorID`` -- string
+   - ``created`` -- seiscomp.core.Time
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -10758,7 +13910,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Outage <api-python-datamodel-outage>`
+      :param other: Another object of type Outage to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -10767,7 +13920,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type OutageIndex.
+      :rtype: The object's index of type OutageIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -10863,10 +14016,29 @@ Reference
 
 .. _api-python-datamodel-parameter:
 
+Parameter
+............................................................
+
 .. py:class:: Parameter
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Parents**:
+
+   - ``parameterSet`` -- :ref:`ParameterSet <api-python-datamodel-parameterset>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``value`` -- string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -10883,21 +14055,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Parameter.
+      :rtype: A new object of type Parameter.
 
       Creates and registers (if enabled) a Parameter instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Parameter.
+      :rtype: A new object of type Parameter.
 
       Creates and registers (if enabled) a Parameter instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Parameter <api-python-datamodel-parameter>`
+      :param other: Another object of type Parameter to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -11021,10 +14194,37 @@ Reference
 
 .. _api-python-datamodel-parameterset:
 
+ParameterSet
+............................................................
+
 .. py:class:: ParameterSet
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Parents**:
+
+   - ``config`` -- :ref:`Config <api-python-datamodel-config>`
+
+   **Children**:
+
+   - ``parameter`` -- :ref:`Parameter <api-python-datamodel-parameter>`
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``baseID`` -- string
+   - ``moduleID`` -- string
+   - ``created`` -- seiscomp.core.Time (optional)
+
+   **Referenced by**:
+
+   - :func:`ConfigModule.parameterSetID`
+   - :func:`ParameterSet.baseID`
+   - :func:`Setup.parameterSetID`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -11041,21 +14241,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type ParameterSet.
+      :rtype: A new object of type ParameterSet.
 
       Creates and registers (if enabled) a ParameterSet instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type ParameterSet.
+      :rtype: A new object of type ParameterSet.
 
       Creates and registers (if enabled) a ParameterSet instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ParameterSet <api-python-datamodel-parameterset>`
+      :param other: Another object of type ParameterSet to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -11233,12 +14434,26 @@ Reference
 
 .. _api-python-datamodel-phase:
 
+Phase
+............................................................
+
 .. py:class:: Phase
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    Generic and extensible phase description that currently contains the phase code
    only.
+
+   **Attributes**:
+
+   - ``code`` -- string
+
+   **Used by**:
+
+   - :func:`Arrival.phase`
+   - :func:`Pick.phaseHint`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -11255,7 +14470,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Phase <api-python-datamodel-phase>`
+      :param other: Another object of type Phase to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -11275,12 +14491,48 @@ Reference
 
 .. _api-python-datamodel-pick:
 
+Pick
+............................................................
+
 .. py:class:: Pick
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    A pick is the observation of an amplitude anomaly in a seismogram at a
    specific point in time. It is not necessarily related to a seismic event.
+
+   **Parents**:
+
+   - ``eventParameters`` -- :ref:`EventParameters <api-python-datamodel-eventparameters>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``time`` -- :ref:`TimeQuantity <api-python-datamodel-timequantity>`
+   - ``waveformID`` -- :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
+   - ``filterID`` -- string
+   - ``methodID`` -- string
+   - ``horizontalSlowness`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>` (optional)
+   - ``backazimuth`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>` (optional)
+   - ``slownessMethodID`` -- string
+   - ``onset`` -- :ref:`PickOnset <api-python-datamodel-pickonset>` (optional)
+   - ``phaseHint`` -- :ref:`Phase <api-python-datamodel-phase>` (optional)
+   - ``polarity`` -- :ref:`PickPolarity <api-python-datamodel-pickpolarity>` (optional)
+   - ``evaluationMode`` -- :ref:`EvaluationMode <api-python-datamodel-evaluationmode>` (optional)
+   - ``evaluationStatus`` -- :ref:`EvaluationStatus <api-python-datamodel-evaluationstatus>` (optional)
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Referenced by**:
+
+   - :func:`Amplitude.pickID`
+   - :func:`Arrival.pickID`
+   - :func:`PickReference.pickID`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -11297,21 +14549,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Pick.
+      :rtype: A new object of type Pick.
 
       Creates and registers (if enabled) a Pick instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Pick.
+      :rtype: A new object of type Pick.
 
       Creates and registers (if enabled) a Pick instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Pick <api-python-datamodel-pick>`
+      :param other: Another object of type Pick to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -11594,10 +14847,23 @@ Reference
 
 .. _api-python-datamodel-pickreference:
 
+PickReference
+............................................................
+
 .. py:class:: PickReference
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``reading`` -- :ref:`Reading <api-python-datamodel-reading>`
+
+   **Attributes**:
+
+   - ``pickID`` -- string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -11614,7 +14880,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`PickReference <api-python-datamodel-pickreference>`
+      :param other: Another object of type PickReference to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -11623,7 +14890,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type PickReferenceIndex.
+      :rtype: The object's index of type PickReferenceIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -11682,6 +14949,9 @@ Reference
 
 .. _api-python-datamodel-principalaxes:
 
+PrincipalAxes
+............................................................
+
 .. py:class:: PrincipalAxes
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -11689,6 +14959,18 @@ Reference
    This class describes the principal axes of a double\-couple moment tensor
    solution. tAxis and pAxis are required,
    while nAxis is optional.
+
+   **Attributes**:
+
+   - ``tAxis`` -- :ref:`Axis <api-python-datamodel-axis>`
+   - ``pAxis`` -- :ref:`Axis <api-python-datamodel-axis>`
+   - ``nAxis`` -- :ref:`Axis <api-python-datamodel-axis>` (optional)
+
+   **Used by**:
+
+   - :func:`FocalMechanism.principalAxes`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -11705,7 +14987,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`PrincipalAxes <api-python-datamodel-principalaxes>`
+      :param other: Another object of type PrincipalAxes to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -11749,10 +15032,29 @@ Reference
 
 .. _api-python-datamodel-qclog:
 
+QCLog
+............................................................
+
 .. py:class:: QCLog
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Parents**:
+
+   - ``qualityControl`` -- :ref:`QualityControl <api-python-datamodel-qualitycontrol>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``waveformID`` -- :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
+   - ``creatorID`` -- string
+   - ``created`` -- seiscomp.core.Time
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time
+   - ``message`` -- string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -11769,21 +15071,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type QCLog.
+      :rtype: A new object of type QCLog.
 
       Creates and registers (if enabled) a QCLog instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type QCLog.
+      :rtype: A new object of type QCLog.
 
       Creates and registers (if enabled) a QCLog instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`QCLog <api-python-datamodel-qclog>`
+      :param other: Another object of type QCLog to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -11792,7 +15095,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type QCLogIndex.
+      :rtype: The object's index of type QCLogIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -11904,10 +15207,25 @@ Reference
 
 .. _api-python-datamodel-qualitycontrol:
 
+QualityControl
+............................................................
+
 .. py:class:: QualityControl
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Children**:
+
+   - ``qCLog`` -- :ref:`QCLog <api-python-datamodel-qclog>`
+   - ``waveformQuality`` -- :ref:`WaveformQuality <api-python-datamodel-waveformquality>`
+   - ``outage`` -- :ref:`Outage <api-python-datamodel-outage>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -11924,7 +15242,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`QualityControl <api-python-datamodel-qualitycontrol>`
+      :param other: Another object of type QualityControl to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -12127,12 +15446,30 @@ Reference
 
 .. _api-python-datamodel-reading:
 
+Reading
+............................................................
+
 .. py:class:: Reading
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This class groups Pick and Amplitude elements which are thought to belong
    to the same event, but for which the event identification is not known.
+
+   **Parents**:
+
+   - ``eventParameters`` -- :ref:`EventParameters <api-python-datamodel-eventparameters>`
+
+   **Children**:
+
+   - ``pickReference`` -- :ref:`PickReference <api-python-datamodel-pickreference>`
+   - ``amplitudeReference`` -- :ref:`AmplitudeReference <api-python-datamodel-amplitudereference>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -12149,21 +15486,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Reading.
+      :rtype: A new object of type Reading.
 
       Creates and registers (if enabled) a Reading instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Reading.
+      :rtype: A new object of type Reading.
 
       Creates and registers (if enabled) a Reading instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Reading <api-python-datamodel-reading>`
+      :param other: Another object of type Reading to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -12319,10 +15657,30 @@ Reference
 
 .. _api-python-datamodel-realarray:
 
+RealArray
+............................................................
+
 .. py:class:: RealArray
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Attributes**:
+
+   - ``content`` -- float (optional)
+
+   **Used by**:
+
+   - :func:`RealPDF1D.variable`
+   - :func:`RealPDF1D.probability`
+   - :func:`ResponseFAP.tuples`
+   - :func:`ResponseFIR.coefficients`
+   - :func:`ResponseIIR.numerators`
+   - :func:`ResponseIIR.denominators`
+   - :func:`ResponsePolynomial.coefficients`
+   - :func:`TimePDF1D.probability`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -12339,7 +15697,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`RealArray <api-python-datamodel-realarray>`
+      :param other: Another object of type RealArray to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -12360,6 +15719,9 @@ Reference
          the value of the attribute is not set.
 
 .. _api-python-datamodel-realpdf1d:
+
+RealPDF1D
+............................................................
 
 .. py:class:: RealPDF1D
 
@@ -12384,6 +15746,17 @@ Reference
    variable has length N+1, probability has length N. variable values
    describe bin edges \(upper bin edge is lower edge of next bin\).
 
+   **Attributes**:
+
+   - ``variable`` -- :ref:`RealArray <api-python-datamodel-realarray>`
+   - ``probability`` -- :ref:`RealArray <api-python-datamodel-realarray>`
+
+   **Used by**:
+
+   - :func:`RealQuantity.pdf`
+
+   **Methods**:
+
    .. py:staticmethod:: Cast(obj)
 
       :param obj: The object to be casted.
@@ -12399,7 +15772,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`RealPDF1D <api-python-datamodel-realpdf1d>`
+      :param other: Another object of type RealPDF1D to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -12428,6 +15802,9 @@ Reference
 
 .. _api-python-datamodel-realquantity:
 
+RealQuantity
+............................................................
+
 .. py:class:: RealQuantity
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -12442,6 +15819,43 @@ Reference
    Note that uncertainty, upperUncertainty, and lowerUncertainty are given as
    absolute values of the deviation
    from the main value.
+
+   **Attributes**:
+
+   - ``value`` -- float
+   - ``uncertainty`` -- float (optional)
+   - ``lowerUncertainty`` -- float (optional)
+   - ``upperUncertainty`` -- float (optional)
+   - ``confidenceLevel`` -- float (optional)
+   - ``pdf`` -- :ref:`RealPDF1D <api-python-datamodel-realpdf1d>` (optional)
+
+   **Used by**:
+
+   - :func:`Amplitude.amplitude`
+   - :func:`Amplitude.period`
+   - :func:`Axis.azimuth`
+   - :func:`Axis.plunge`
+   - :func:`Axis.length`
+   - :func:`CompositeTime.second`
+   - :func:`Magnitude.magnitude`
+   - :func:`MomentTensor.scalarMoment`
+   - :func:`NodalPlane.strike`
+   - :func:`NodalPlane.dip`
+   - :func:`NodalPlane.rake`
+   - :func:`Origin.latitude`
+   - :func:`Origin.longitude`
+   - :func:`Origin.depth`
+   - :func:`Pick.horizontalSlowness`
+   - :func:`Pick.backazimuth`
+   - :func:`StationMagnitude.magnitude`
+   - :func:`Tensor.Mrr`
+   - :func:`Tensor.Mtt`
+   - :func:`Tensor.Mpp`
+   - :func:`Tensor.Mrt`
+   - :func:`Tensor.Mrp`
+   - :func:`Tensor.Mtp`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -12458,7 +15872,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`RealQuantity <api-python-datamodel-realquantity>`
+      :param other: Another object of type RealQuantity to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -12555,6 +15970,9 @@ Reference
 
 .. _api-python-datamodel-responsefap:
 
+ResponseFAP
+............................................................
+
 .. py:class:: ResponseFAP
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
@@ -12562,6 +15980,22 @@ Reference
    This type describes a sensor response composed of frequency\/amplitude\/phase
    angle tuples. According to the SEED manual \(blockette 55\) this description
    alone is not an acceptable response description.
+
+   **Parents**:
+
+   - ``inventory`` -- :ref:`Inventory <api-python-datamodel-inventory>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``gain`` -- float (optional)
+   - ``gainFrequency`` -- float (optional)
+   - ``numberOfTuples`` -- int (optional)
+   - ``tuples`` -- :ref:`RealArray <api-python-datamodel-realarray>` (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -12578,21 +16012,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type ResponseFAP.
+      :rtype: A new object of type ResponseFAP.
 
       Creates and registers (if enabled) a ResponseFAP instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type ResponseFAP.
+      :rtype: A new object of type ResponseFAP.
 
       Creates and registers (if enabled) a ResponseFAP instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ResponseFAP <api-python-datamodel-responsefap>`
+      :param other: Another object of type ResponseFAP to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -12601,7 +16036,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ResponseFAPIndex.
+      :rtype: The object's index of type ResponseFAPIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -12752,11 +16187,34 @@ Reference
 
 .. _api-python-datamodel-responsefir:
 
+ResponseFIR
+............................................................
+
 .. py:class:: ResponseFIR
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a finite impulse response filter
+
+   **Parents**:
+
+   - ``inventory`` -- :ref:`Inventory <api-python-datamodel-inventory>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``gain`` -- float (optional)
+   - ``gainFrequency`` -- float (optional)
+   - ``decimationFactor`` -- int (optional)
+   - ``delay`` -- float (optional)
+   - ``correction`` -- float (optional)
+   - ``numberOfCoefficients`` -- int (optional)
+   - ``symmetry`` -- string
+   - ``coefficients`` -- :ref:`RealArray <api-python-datamodel-realarray>` (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -12773,21 +16231,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type ResponseFIR.
+      :rtype: A new object of type ResponseFIR.
 
       Creates and registers (if enabled) a ResponseFIR instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type ResponseFIR.
+      :rtype: A new object of type ResponseFIR.
 
       Creates and registers (if enabled) a ResponseFIR instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ResponseFIR <api-python-datamodel-responsefir>`
+      :param other: Another object of type ResponseFIR to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -12796,7 +16255,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ResponseFIRIndex.
+      :rtype: The object's index of type ResponseFIRIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -12998,11 +16457,36 @@ Reference
 
 .. _api-python-datamodel-responseiir:
 
+ResponseIIR
+............................................................
+
 .. py:class:: ResponseIIR
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a infinite impulse response filter
+
+   **Parents**:
+
+   - ``inventory`` -- :ref:`Inventory <api-python-datamodel-inventory>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``type`` -- string
+   - ``gain`` -- float (optional)
+   - ``gainFrequency`` -- float (optional)
+   - ``decimationFactor`` -- int (optional)
+   - ``delay`` -- float (optional)
+   - ``correction`` -- float (optional)
+   - ``numberOfNumerators`` -- int (optional)
+   - ``numberOfDenominators`` -- int (optional)
+   - ``numerators`` -- :ref:`RealArray <api-python-datamodel-realarray>` (optional)
+   - ``denominators`` -- :ref:`RealArray <api-python-datamodel-realarray>` (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -13019,21 +16503,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type ResponseIIR.
+      :rtype: A new object of type ResponseIIR.
 
       Creates and registers (if enabled) a ResponseIIR instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type ResponseIIR.
+      :rtype: A new object of type ResponseIIR.
 
       Creates and registers (if enabled) a ResponseIIR instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ResponseIIR <api-python-datamodel-responseiir>`
+      :param other: Another object of type ResponseIIR to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -13042,7 +16527,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ResponseIIRIndex.
+      :rtype: The object's index of type ResponseIIRIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -13276,11 +16761,38 @@ Reference
 
 .. _api-python-datamodel-responsepaz:
 
+ResponsePAZ
+............................................................
+
 .. py:class:: ResponsePAZ
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a sensor response using poles and zeros
+
+   **Parents**:
+
+   - ``inventory`` -- :ref:`Inventory <api-python-datamodel-inventory>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``type`` -- string
+   - ``gain`` -- float (optional)
+   - ``gainFrequency`` -- float (optional)
+   - ``normalizationFactor`` -- float (optional)
+   - ``normalizationFrequency`` -- float (optional)
+   - ``numberOfZeros`` -- int (optional)
+   - ``numberOfPoles`` -- int (optional)
+   - ``zeros`` -- :ref:`ComplexArray <api-python-datamodel-complexarray>` (optional)
+   - ``poles`` -- :ref:`ComplexArray <api-python-datamodel-complexarray>` (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+   - ``decimationFactor`` -- int (optional)
+   - ``delay`` -- float (optional)
+   - ``correction`` -- float (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -13297,21 +16809,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type ResponsePAZ.
+      :rtype: A new object of type ResponsePAZ.
 
       Creates and registers (if enabled) a ResponsePAZ instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type ResponsePAZ.
+      :rtype: A new object of type ResponsePAZ.
 
       Creates and registers (if enabled) a ResponsePAZ instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ResponsePAZ <api-python-datamodel-responsepaz>`
+      :param other: Another object of type ResponsePAZ to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -13320,7 +16833,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ResponsePAZIndex.
+      :rtype: The object's index of type ResponsePAZIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -13584,11 +17097,35 @@ Reference
 
 .. _api-python-datamodel-responsepolynomial:
 
+ResponsePolynomial
+............................................................
+
 .. py:class:: ResponsePolynomial
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a sensor response using a polynomial
+
+   **Parents**:
+
+   - ``inventory`` -- :ref:`Inventory <api-python-datamodel-inventory>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``gain`` -- float (optional)
+   - ``gainFrequency`` -- float (optional)
+   - ``frequencyUnit`` -- string
+   - ``approximationType`` -- string
+   - ``approximationLowerBound`` -- float (optional)
+   - ``approximationUpperBound`` -- float (optional)
+   - ``approximationError`` -- float (optional)
+   - ``numberOfCoefficients`` -- int (optional)
+   - ``coefficients`` -- :ref:`RealArray <api-python-datamodel-realarray>` (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -13605,21 +17142,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type ResponsePolynomial.
+      :rtype: A new object of type ResponsePolynomial.
 
       Creates and registers (if enabled) a ResponsePolynomial instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type ResponsePolynomial.
+      :rtype: A new object of type ResponsePolynomial.
 
       Creates and registers (if enabled) a ResponsePolynomial instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`ResponsePolynomial <api-python-datamodel-responsepolynomial>`
+      :param other: Another object of type ResponsePolynomial to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -13628,7 +17166,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type ResponsePolynomialIndex.
+      :rtype: The object's index of type ResponsePolynomialIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -13844,12 +17382,34 @@ Reference
 
 .. _api-python-datamodel-route:
 
+Route
+............................................................
+
 .. py:class:: Route
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes an ArcLink route \(collection of servers that provide
    specific datastreams\)
+
+   **Parents**:
+
+   - ``routing`` -- :ref:`Routing <api-python-datamodel-routing>`
+
+   **Children**:
+
+   - ``routeArclink`` -- :ref:`RouteArclink <api-python-datamodel-routearclink>`
+   - ``routeSeedlink`` -- :ref:`RouteSeedlink <api-python-datamodel-routeseedlink>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``networkCode`` -- string
+   - ``stationCode`` -- string
+   - ``locationCode`` -- string
+   - ``streamCode`` -- string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -13866,21 +17426,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Route.
+      :rtype: A new object of type Route.
 
       Creates and registers (if enabled) a Route instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Route.
+      :rtype: A new object of type Route.
 
       Creates and registers (if enabled) a Route instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Route <api-python-datamodel-route>`
+      :param other: Another object of type Route to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -13889,7 +17450,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type RouteIndex.
+      :rtype: The object's index of type RouteIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -14089,11 +17650,27 @@ Reference
 
 .. _api-python-datamodel-routearclink:
 
+RouteArclink
+............................................................
+
 .. py:class:: RouteArclink
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    This type describes an ArcLink route \(data source\)
+
+   **Parents**:
+
+   - ``route`` -- :ref:`Route <api-python-datamodel-route>`
+
+   **Attributes**:
+
+   - ``address`` -- string
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``priority`` -- int (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -14110,7 +17687,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`RouteArclink <api-python-datamodel-routearclink>`
+      :param other: Another object of type RouteArclink to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -14119,7 +17697,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type RouteArclinkIndex.
+      :rtype: The object's index of type RouteArclinkIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -14220,11 +17798,25 @@ Reference
 
 .. _api-python-datamodel-routeseedlink:
 
+RouteSeedlink
+............................................................
+
 .. py:class:: RouteSeedlink
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    This type describes an SeedLink route \(data source\)
+
+   **Parents**:
+
+   - ``route`` -- :ref:`Route <api-python-datamodel-route>`
+
+   **Attributes**:
+
+   - ``address`` -- string
+   - ``priority`` -- int (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -14241,7 +17833,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`RouteSeedlink <api-python-datamodel-routeseedlink>`
+      :param other: Another object of type RouteSeedlink to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -14250,7 +17843,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type RouteSeedlinkIndex.
+      :rtype: The object's index of type RouteSeedlinkIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -14326,10 +17919,24 @@ Reference
 
 .. _api-python-datamodel-routing:
 
+Routing
+............................................................
+
 .. py:class:: Routing
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
+
+   **Children**:
+
+   - ``route`` -- :ref:`Route <api-python-datamodel-route>`
+   - ``access`` -- :ref:`Access <api-python-datamodel-access>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -14346,7 +17953,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Routing <api-python-datamodel-routing>`
+      :param other: Another object of type Routing to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -14501,11 +18109,42 @@ Reference
 
 .. _api-python-datamodel-sensor:
 
+Sensor
+............................................................
+
 .. py:class:: Sensor
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a sensor
+
+   **Parents**:
+
+   - ``inventory`` -- :ref:`Inventory <api-python-datamodel-inventory>`
+
+   **Children**:
+
+   - ``sensorCalibration`` -- :ref:`SensorCalibration <api-python-datamodel-sensorcalibration>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``description`` -- string
+   - ``model`` -- string
+   - ``manufacturer`` -- string
+   - ``type`` -- string
+   - ``unit`` -- string
+   - ``lowFrequency`` -- float (optional)
+   - ``highFrequency`` -- float (optional)
+   - ``response`` -- string
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Referenced by**:
+
+   - :func:`Stream.sensor`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -14522,21 +18161,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Sensor.
+      :rtype: A new object of type Sensor.
 
       Creates and registers (if enabled) a Sensor instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Sensor.
+      :rtype: A new object of type Sensor.
 
       Creates and registers (if enabled) a Sensor instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Sensor <api-python-datamodel-sensor>`
+      :param other: Another object of type Sensor to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -14545,7 +18185,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type SensorIndex.
+      :rtype: The object's index of type SensorIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -14771,11 +18411,30 @@ Reference
 
 .. _api-python-datamodel-sensorcalibration:
 
+SensorCalibration
+............................................................
+
 .. py:class:: SensorCalibration
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    This type describes a sensor calibration
+
+   **Parents**:
+
+   - ``sensor`` -- :ref:`Sensor <api-python-datamodel-sensor>`
+
+   **Attributes**:
+
+   - ``serialNumber`` -- string
+   - ``channel`` -- int
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``gain`` -- float (optional)
+   - ``gainFrequency`` -- float (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -14792,7 +18451,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`SensorCalibration <api-python-datamodel-sensorcalibration>`
+      :param other: Another object of type SensorCalibration to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -14801,7 +18461,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type SensorCalibrationIndex.
+      :rtype: The object's index of type SensorCalibrationIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -14940,11 +18600,36 @@ Reference
 
 .. _api-python-datamodel-sensorlocation:
 
+SensorLocation
+............................................................
+
 .. py:class:: SensorLocation
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a sensor location
+
+   **Parents**:
+
+   - ``station`` -- :ref:`Station <api-python-datamodel-station>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+   - ``auxStream`` -- :ref:`AuxStream <api-python-datamodel-auxstream>`
+   - ``stream`` -- :ref:`Stream <api-python-datamodel-stream>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``code`` -- string
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``latitude`` -- float (optional)
+   - ``longitude`` -- float (optional)
+   - ``elevation`` -- float (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -14961,21 +18646,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type SensorLocation.
+      :rtype: A new object of type SensorLocation.
 
       Creates and registers (if enabled) a SensorLocation instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type SensorLocation.
+      :rtype: A new object of type SensorLocation.
 
       Creates and registers (if enabled) a SensorLocation instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`SensorLocation <api-python-datamodel-sensorlocation>`
+      :param other: Another object of type SensorLocation to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -14984,7 +18670,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type SensorLocationIndex.
+      :rtype: The object's index of type SensorLocationIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -15279,10 +18965,25 @@ Reference
 
 .. _api-python-datamodel-setup:
 
+Setup
+............................................................
+
 .. py:class:: Setup
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``configStation`` -- :ref:`ConfigStation <api-python-datamodel-configstation>`
+
+   **Attributes**:
+
+   - ``name`` -- string
+   - ``parameterSetID`` -- string
+   - ``enabled`` -- boolean
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -15299,7 +19000,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Setup <api-python-datamodel-setup>`
+      :param other: Another object of type Setup to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -15308,7 +19010,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type SetupIndex.
+      :rtype: The object's index of type SetupIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -15383,11 +19085,27 @@ Reference
 
 .. _api-python-datamodel-sourcetimefunction:
 
+SourceTimeFunction
+............................................................
+
 .. py:class:: SourceTimeFunction
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    Source time function used in moment\-tensor inversion.
+
+   **Attributes**:
+
+   - ``type`` -- :ref:`SourceTimeFunctionType <api-python-datamodel-sourcetimefunctiontype>`
+   - ``duration`` -- float
+   - ``riseTime`` -- float (optional)
+   - ``decayTime`` -- float (optional)
+
+   **Used by**:
+
+   - :func:`MomentTensor.sourceTimeFunction`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -15404,7 +19122,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`SourceTimeFunction <api-python-datamodel-sourcetimefunction>`
+      :param other: Another object of type SourceTimeFunction to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -15464,11 +19183,49 @@ Reference
 
 .. _api-python-datamodel-station:
 
+Station
+............................................................
+
 .. py:class:: Station
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a seismic station
+
+   **Parents**:
+
+   - ``network`` -- :ref:`Network <api-python-datamodel-network>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+   - ``sensorLocation`` -- :ref:`SensorLocation <api-python-datamodel-sensorlocation>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``code`` -- string
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``description`` -- string
+   - ``latitude`` -- float (optional)
+   - ``longitude`` -- float (optional)
+   - ``elevation`` -- float (optional)
+   - ``place`` -- string
+   - ``country`` -- string
+   - ``affiliation`` -- string
+   - ``type`` -- string
+   - ``archive`` -- string
+   - ``archiveNetworkCode`` -- string
+   - ``restricted`` -- boolean (optional)
+   - ``shared`` -- boolean (optional)
+   - ``remark`` -- :ref:`Blob <api-python-datamodel-blob>` (optional)
+
+   **Referenced by**:
+
+   - :func:`StationReference.stationID`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -15485,21 +19242,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Station.
+      :rtype: A new object of type Station.
 
       Creates and registers (if enabled) a Station instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Station.
+      :rtype: A new object of type Station.
 
       Creates and registers (if enabled) a Station instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Station <api-python-datamodel-station>`
+      :param other: Another object of type Station to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -15508,7 +19266,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type StationIndex.
+      :rtype: The object's index of type StationIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -15870,11 +19628,36 @@ Reference
 
 .. _api-python-datamodel-stationgroup:
 
+StationGroup
+............................................................
+
 .. py:class:: StationGroup
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a group of stations, an array or a virtual network
+
+   **Parents**:
+
+   - ``inventory`` -- :ref:`Inventory <api-python-datamodel-inventory>`
+
+   **Children**:
+
+   - ``stationReference`` -- :ref:`StationReference <api-python-datamodel-stationreference>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``type`` -- :ref:`StationGroupType <api-python-datamodel-stationgrouptype>` (optional)
+   - ``code`` -- string
+   - ``start`` -- seiscomp.core.Time (optional)
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``description`` -- string
+   - ``latitude`` -- float (optional)
+   - ``longitude`` -- float (optional)
+   - ``elevation`` -- float (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -15891,21 +19674,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type StationGroup.
+      :rtype: A new object of type StationGroup.
 
       Creates and registers (if enabled) a StationGroup instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type StationGroup.
+      :rtype: A new object of type StationGroup.
 
       Creates and registers (if enabled) a StationGroup instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`StationGroup <api-python-datamodel-stationgroup>`
+      :param other: Another object of type StationGroup to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -15914,7 +19698,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type StationGroupIndex.
+      :rtype: The object's index of type StationGroupIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -16136,11 +19920,36 @@ Reference
 
 .. _api-python-datamodel-stationmagnitude:
 
+StationMagnitude
+............................................................
+
 .. py:class:: StationMagnitude
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This class describes the magnitude derived from a single waveform stream.
+
+   **Parents**:
+
+   - ``origin`` -- :ref:`Origin <api-python-datamodel-origin>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``originID`` -- string
+   - ``magnitude`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``type`` -- string
+   - ``amplitudeID`` -- string
+   - ``methodID`` -- string
+   - ``waveformID`` -- :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>` (optional)
+   - ``passedQC`` -- boolean (optional)
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -16157,21 +19966,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type StationMagnitude.
+      :rtype: A new object of type StationMagnitude.
 
       Creates and registers (if enabled) a StationMagnitude instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type StationMagnitude.
+      :rtype: A new object of type StationMagnitude.
 
       Creates and registers (if enabled) a StationMagnitude instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`StationMagnitude <api-python-datamodel-stationmagnitude>`
+      :param other: Another object of type StationMagnitude to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -16385,6 +20195,9 @@ Reference
 
 .. _api-python-datamodel-stationmagnitudecontribution:
 
+StationMagnitudeContribution
+............................................................
+
 .. py:class:: StationMagnitudeContribution
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -16392,6 +20205,18 @@ Reference
    This class describes the weighting of magnitude values from several
    StationMagnitude objects for computing a
    network magnitude estimation.
+
+   **Parents**:
+
+   - ``magnitude`` -- :ref:`Magnitude <api-python-datamodel-magnitude>`
+
+   **Attributes**:
+
+   - ``stationMagnitudeID`` -- string
+   - ``residual`` -- float (optional)
+   - ``weight`` -- float (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -16408,7 +20233,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`StationMagnitudeContribution <api-python-datamodel-stationmagnitudecontribution>`
+      :param other: Another object of type StationMagnitudeContribution to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -16417,7 +20243,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type StationMagnitudeContributionIndex.
+      :rtype: The object's index of type StationMagnitudeContributionIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -16512,11 +20338,24 @@ Reference
 
 .. _api-python-datamodel-stationreference:
 
+StationReference
+............................................................
+
 .. py:class:: StationReference
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
    This type describes a station reference within a station group
+
+   **Parents**:
+
+   - ``stationGroup`` -- :ref:`StationGroup <api-python-datamodel-stationgroup>`
+
+   **Attributes**:
+
+   - ``stationID`` -- string
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -16533,7 +20372,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`StationReference <api-python-datamodel-stationreference>`
+      :param other: Another object of type StationReference to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -16542,7 +20382,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type StationReferenceIndex.
+      :rtype: The object's index of type StationReferenceIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -16603,11 +20443,50 @@ Reference
 
 .. _api-python-datamodel-stream:
 
+Stream
+............................................................
+
 .. py:class:: Stream
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
    This type describes a stream \(channel\) with defined frequency response
+
+   **Parents**:
+
+   - ``sensorLocation`` -- :ref:`SensorLocation <api-python-datamodel-sensorlocation>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``code`` -- string
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``datalogger`` -- string
+   - ``dataloggerSerialNumber`` -- string
+   - ``dataloggerChannel`` -- int (optional)
+   - ``sensor`` -- string
+   - ``sensorSerialNumber`` -- string
+   - ``sensorChannel`` -- int (optional)
+   - ``clockSerialNumber`` -- string
+   - ``sampleRateNumerator`` -- int (optional)
+   - ``sampleRateDenominator`` -- int (optional)
+   - ``depth`` -- float (optional)
+   - ``azimuth`` -- float (optional)
+   - ``dip`` -- float (optional)
+   - ``gain`` -- float (optional)
+   - ``gainFrequency`` -- float (optional)
+   - ``gainUnit`` -- string
+   - ``format`` -- string
+   - ``flags`` -- string
+   - ``restricted`` -- boolean (optional)
+   - ``shared`` -- boolean (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -16624,21 +20503,22 @@ Reference
 
    .. py:staticmethod:: Create()
 
-      :rtype: a new object of type Stream.
+      :rtype: A new object of type Stream.
 
       Creates and registers (if enabled) a Stream instance. The
       publicID is auto-generated.
 
    .. py:staticmethod:: Create(publicID)
 
-      :rtype: a new object of type Stream.
+      :rtype: A new object of type Stream.
 
       Creates and registers (if enabled) a Stream instance with
       passed publicID.
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Stream <api-python-datamodel-stream>`
+      :param other: Another object of type Stream to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -16647,7 +20527,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type StreamIndex.
+      :rtype: The object's index of type StreamIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -17040,6 +20920,9 @@ Reference
 
 .. _api-python-datamodel-tensor:
 
+Tensor
+............................................................
+
 .. py:class:: Tensor
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -17048,6 +20931,21 @@ Reference
    Mpp , Mrt , Mrp , Mtp in the spherical coordinate system defined by local
    upward vertical \(r\), North\-South \(t\), and West\-East \(p\) directions. See
    Aki and Richards \(1980\) for conversions to other coordinate systems.
+
+   **Attributes**:
+
+   - ``Mrr`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``Mtt`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``Mpp`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``Mrt`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``Mrp`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+   - ``Mtp`` -- :ref:`RealQuantity <api-python-datamodel-realquantity>`
+
+   **Used by**:
+
+   - :func:`MomentTensor.tensor`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -17064,7 +20962,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`Tensor <api-python-datamodel-tensor>`
+      :param other: Another object of type Tensor to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -17133,10 +21032,23 @@ Reference
 
 .. _api-python-datamodel-timearray:
 
+TimeArray
+............................................................
+
 .. py:class:: TimeArray
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Attributes**:
+
+   - ``content`` -- seiscomp.core.Time (optional)
+
+   **Used by**:
+
+   - :func:`TimePDF1D.variable`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -17153,7 +21065,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`TimeArray <api-python-datamodel-timearray>`
+      :param other: Another object of type TimeArray to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -17174,6 +21087,9 @@ Reference
          the value of the attribute is not set.
 
 .. _api-python-datamodel-timepdf1d:
+
+TimePDF1D
+............................................................
 
 .. py:class:: TimePDF1D
 
@@ -17198,6 +21114,17 @@ Reference
    variable has length N+1, probability has length N. variable values
    describe bin edges \(upper bin edge is lower edge of next bin\).
 
+   **Attributes**:
+
+   - ``variable`` -- :ref:`TimeArray <api-python-datamodel-timearray>`
+   - ``probability`` -- :ref:`RealArray <api-python-datamodel-realarray>`
+
+   **Used by**:
+
+   - :func:`TimeQuantity.pdf`
+
+   **Methods**:
+
    .. py:staticmethod:: Cast(obj)
 
       :param obj: The object to be casted.
@@ -17213,7 +21140,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`TimePDF1D <api-python-datamodel-timepdf1d>`
+      :param other: Another object of type TimePDF1D to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -17242,6 +21170,9 @@ Reference
 
 .. _api-python-datamodel-timequantity:
 
+TimeQuantity
+............................................................
+
 .. py:class:: TimeQuantity
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -17249,6 +21180,23 @@ Reference
    This type describes a point in time, given in ISO 8601 format, with
    optional symmetric or asymmetric uncertainties given in seconds. The
    time has to be specified in UTC.
+
+   **Attributes**:
+
+   - ``value`` -- seiscomp.core.Time
+   - ``uncertainty`` -- float (optional)
+   - ``lowerUncertainty`` -- float (optional)
+   - ``upperUncertainty`` -- float (optional)
+   - ``confidenceLevel`` -- float (optional)
+   - ``pdf`` -- :ref:`TimePDF1D <api-python-datamodel-timepdf1d>` (optional)
+
+   **Used by**:
+
+   - :func:`Amplitude.scalingTime`
+   - :func:`Origin.time`
+   - :func:`Pick.time`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -17265,7 +21213,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`TimeQuantity <api-python-datamodel-timequantity>`
+      :param other: Another object of type TimeQuantity to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -17359,6 +21308,9 @@ Reference
 
 .. _api-python-datamodel-timewindow:
 
+TimeWindow
+............................................................
+
 .. py:class:: TimeWindow
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -17367,6 +21319,18 @@ Reference
    time, and points in time
    before and after this central point. Both points before and after may coincide
    with the central point.
+
+   **Attributes**:
+
+   - ``reference`` -- seiscomp.core.Time
+   - ``begin`` -- float
+   - ``end`` -- float
+
+   **Used by**:
+
+   - :func:`Amplitude.timeWindow`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -17383,7 +21347,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`TimeWindow <api-python-datamodel-timewindow>`
+      :param other: Another object of type TimeWindow to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -17425,10 +21390,33 @@ Reference
 
 .. _api-python-datamodel-waveformquality:
 
+WaveformQuality
+............................................................
+
 .. py:class:: WaveformQuality
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
+
+   **Parents**:
+
+   - ``qualityControl`` -- :ref:`QualityControl <api-python-datamodel-qualitycontrol>`
+
+   **Attributes**:
+
+   - ``waveformID`` -- :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
+   - ``creatorID`` -- string
+   - ``created`` -- seiscomp.core.Time
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``type`` -- string
+   - ``parameter`` -- string
+   - ``value`` -- float
+   - ``lowerUncertainty`` -- float (optional)
+   - ``upperUncertainty`` -- float (optional)
+   - ``windowLength`` -- float (optional)
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -17445,7 +21433,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`WaveformQuality <api-python-datamodel-waveformquality>`
+      :param other: Another object of type WaveformQuality to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -17454,7 +21443,7 @@ Reference
 
    .. py:method:: index()
 
-      :rtype: The objects index of type WaveformQualityIndex.
+      :rtype: The object's index of type WaveformQualityIndex.
 
        Returns the objects index which is also used for the database as unique
        constraint.
@@ -17613,6 +21602,9 @@ Reference
 
 .. _api-python-datamodel-waveformstreamid:
 
+WaveformStreamID
+............................................................
+
 .. py:class:: WaveformStreamID
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
@@ -17627,6 +21619,28 @@ Reference
    legacy identifiers \(network, station, channel, and location codes\).
    However, for operation in the context of legacy systems, the classical
    identifier components are supported.
+
+   **Attributes**:
+
+   - ``networkCode`` -- string
+   - ``stationCode`` -- string
+   - ``locationCode`` -- string
+   - ``channelCode`` -- string
+   - ``resourceURI`` -- string
+
+   **Used by**:
+
+   - :func:`Amplitude.waveformID`
+   - :func:`ArclinkRequestLine.streamID`
+   - :func:`DataExtent.waveformID`
+   - :func:`MomentTensorStationContribution.waveformID`
+   - :func:`Outage.waveformID`
+   - :func:`Pick.waveformID`
+   - :func:`QCLog.waveformID`
+   - :func:`StationMagnitude.waveformID`
+   - :func:`WaveformQuality.waveformID`
+
+   **Methods**:
 
    .. py:staticmethod:: Cast(obj)
 
@@ -17643,7 +21657,8 @@ Reference
 
    .. py:method:: equal(other)
 
-      :param other: :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
+      :param other: Another object of type WaveformStreamID to compare this
+                    instance to
       :rtype: A Boolean value indicating True if both objects are equal or
               False otherwise.
 
@@ -17703,3 +21718,35 @@ Reference
    .. py:method:: resourceURI()
 
       :rtype: string
+
+.. raw:: html
+
+   <script>
+   window.onload = function() {
+       let graphvizs = document.getElementsByClassName("graphviz");
+       for ( let graphviz of graphvizs ) {
+           obj = graphviz.firstElementChild;
+           if ( obj === undefined || obj.tagName !== "OBJECT" ) {
+               continue;
+           }
+           let url = obj.data;
+           let div = obj.parentElement;
+           console.log(div.tagName);
+           if ( url === undefined || div === undefined || div.tagName !== "DIV" ) {
+               continue;
+           }
+
+           let caption = div.nextElementSibling;
+           if ( caption === undefined ) {
+               continue;
+           }
+
+           let svg = document.createElement("a");
+           svg.appendChild(document.createTextNode("[SVG]"));
+           svg.setAttribute("href", "#")
+           svg.onclick = function() { window.open(url); };
+           caption.appendChild(svg);
+       }
+   }
+   </script>
+
