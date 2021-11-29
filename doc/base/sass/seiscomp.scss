@@ -465,15 +465,16 @@ blockquote {
 			padding: 0;
 			list-style: none;
 			line-height: 1.3em;
+			word-wrap: break-word;
 
 			ul {
 				padding-left: 1em;
 				li {
 					&:before {
-						content: "\0BB";
+						content: "\0BB\00a0";
 						color: $invertedBackground2;
-						display: inline-block;
-						width: 1em;
+						display: inline;
+						width: 2em;
 						margin-left: -1em
 					}
 				}
