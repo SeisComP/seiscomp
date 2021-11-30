@@ -52,6 +52,24 @@ All notable changes to SeisComP are documented here.
     - Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
       "submarine landslide"
 
+## 4.7.4
+
+- scolv
+    - Change text "(Un)fix" buttons to be more explicit
+        - Unfix -> Unfix type
+        - Fix -> Fix FM
+        - Fix Mw -> Fix Mw type
+    - Use configured magnitude digits to display Mw magnitude value
+- trunk
+    - Fix segmentation fault when reading malformed GeoJSON features
+- scorgls
+    - Add option to filter for author (thanks to Fred Massin / ETHZ)
+- sdmssort
+    - Fix error when two or more files are passed
+- seedlink
+    - Fix typo in setup script
+    - Add misc plugin
+
 ## 4.7.3
 
 - trunk
