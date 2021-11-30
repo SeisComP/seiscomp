@@ -54,6 +54,8 @@ All notable changes to SeisComP are documented here.
 
 ## 4.7.4
 
+```SC_API_VERSION 14.4.0```
+
 - scolv
     - Change text "(Un)fix" buttons to be more explicit
         - Unfix -> Unfix type
