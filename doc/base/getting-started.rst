@@ -116,10 +116,12 @@ then create the user, the database and the tables.
 
       sudo@host:~$ sudo su
       root@host:~$ sudo -i -u postgres
+      postgres@host:~$ psql
 
          postgres=# create database seiscomp;
          postgres=# create user sysop with encrypted password 'sysop';
          postgres=# grant all privileges on database seiscomp to sysop;
+         postgres=# alter database seiscomp owner to sysop;
          postgres=# exit
 
       root@host:~$ exit
