@@ -12,6 +12,8 @@ All notable changes to SeisComP are documented here.
         - Fix -> Fix FM
         - Fix Mw -> Fix Mw type
     - Use configured magnitude digits to display Mw magnitude value
+    - Only enable creation of artifical origin in zoom trace if picking
+      is disabled
 - trunk
     - Fix segmentation fault when reading malformed GeoJSON features
 - scorgls
