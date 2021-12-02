@@ -14,6 +14,7 @@ All notable changes to SeisComP are documented here.
     - Use configured magnitude digits to display Mw magnitude value
     - Only enable creation of artifical origin in zoom trace if picking
       is disabled
+    - Fix committing of manual amplitudes in the amplitude picker
 - scmag
     - Fix bug that caused multiple occurrences of magnitudes of the same
       type when a new set of manually computed amplitutes has been received
