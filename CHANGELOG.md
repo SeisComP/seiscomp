@@ -2,7 +2,7 @@
 
 All notable changes to SeisComP are documented here.
 
-## 4.7.4
+## 4.8.0
 
 ```SC_API_VERSION 14.4.0```
 
@@ -14,6 +14,9 @@ All notable changes to SeisComP are documented here.
     - Use configured magnitude digits to display Mw magnitude value
     - Only enable creation of artifical origin in zoom trace if picking
       is disabled
+- scmag
+    - Fix bug that caused multiple occurrences of magnitudes of the same
+      type when a new set of manually computed amplitutes has been received
 - trunk
     - Fix segmentation fault when reading malformed GeoJSON features
 - scorgls
