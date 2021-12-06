@@ -52,6 +52,12 @@ All notable changes to SeisComP are documented here.
     - Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
       "submarine landslide"
 
+## 4.8.1
+
+- fdsnws
+    - Fix return of empty event publicID in event service when a
+      PostgreSQL database is being used
+
 ## 4.8.0
 
 ```SC_API_VERSION 14.4.0```
