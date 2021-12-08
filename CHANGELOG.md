@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.8.2
+
+- scart
+    - Fix date in error output
+
 ## 4.8.1
 
 - fdsnws
