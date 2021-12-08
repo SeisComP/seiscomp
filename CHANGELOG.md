@@ -52,6 +52,11 @@ All notable changes to SeisComP are documented here.
     - Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
       "submarine landslide"
 
+## 4.8.2
+
+- scart
+    - Fix date in error output
+
 ## 4.8.1
 
 - fdsnws
