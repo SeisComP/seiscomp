@@ -51,6 +51,7 @@ All notable changes to SeisComP are documented here.
       leading character
     - Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
       "submarine landslide"
+    - Add MLc amplitude and magnitude
 
 ## 4.8.2
 
