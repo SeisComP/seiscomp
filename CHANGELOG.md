@@ -4,6 +4,8 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
+- New module scquery_qc including documentation replacing legacy scqcquery for
+  querying the database for waveform quality control parameters
 - Clean up event list and event edit parameters in global configuration. A warning
   is printed when using deprecated parameters.
   Deprecated global configuration parameter -> new parameter:
@@ -26,6 +28,12 @@ All notable changes to SeisComP are documented here.
       by the trigger receive the evaluation status `rejected` allowing discrimination
       from picks by the re-picker. Use evaluation mode `automatic` for both.
 - Magnitudes
+    - Add new magnitude type MLc - like ML with customization:
+        - Parametric calibration
+        - Configurable distance measure
+        - Amplitude pre-filtering
+        - Optional Wood-Anderson instrument simulation
+        - Configurable scaling for input unit conversion
     - Add ability to configure magnitudes with region-dependent
       parameters in global module configuration
 - Event list, e.g. scolv, scesv
@@ -34,6 +42,9 @@ All notable changes to SeisComP are documented here.
     - Add pick uncertainty bars to residual plots in Location tab
     - Add number of shown / loaded events in title of Events tab
     - Allow showing station annotations in maps of Location tab
+    - Show time window of re-picker on traces after re-picking
+    - Add "Fix FM + Mw" button to fix the focal mechanism and the Mw
+      with one click
 - scmv
     - Improve visibility of station annotations
 - scesv
@@ -41,6 +52,9 @@ All notable changes to SeisComP are documented here.
 - scevent
     - evrc plugin provides more control options for setting and overwriting event
       types
+- LOCSAT
+    - Add global configuration parameters for using backazimuth and slowness,
+      `LOCSAT.usePickBackazimuth` and `LOCSAT.usePickSlowness`
 - FixedHypocenter
     - Allow adjusting the hypocenter coordinates interactively in the locator
       settings of scolv
@@ -51,7 +65,6 @@ All notable changes to SeisComP are documented here.
       leading character
     - Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
       "submarine landslide"
-    - Add MLc amplitude and magnitude
 
 ## 4.8.2
 
