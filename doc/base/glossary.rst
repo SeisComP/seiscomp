@@ -493,34 +493,49 @@ Scientific and technical terms
       magnitudes around 7 because the maximum amplitudes of larger earthquakes occur at longer periods than
       the bandpass of 0.1 s and 3 s for the magnitude calculation.
 
-      In |scname| a modified local magnitude :term:`MLv <magnitude, local vertical (MLv)>` is determined by simulation of a Wood-Anderson instrument and then measuring
-      the amplitude in a 150 s time window on the vertical component of station with distances smaller than 8°.
+      In |scname| a modified local magnitude
+      :term:`MLv <magnitude, local vertical (MLv)>` is determined by simulation
+      of a Wood-Anderson instrument and then measuring the amplitude in a 150 s
+      time window on the vertical component of station with distances smaller than 8°.
 
       * Amplitude unit in |scname|: **millimeter** (mm)
 
-      Read the :ref:`technical documentation <global_ml>` for more details and the configuration.
+      Read the :ref:`technical documentation <global_ml>` for more details and
+      the configuration.
 
-   magnitude, local vertical (MLv)
-     The :term:`ML <magnitude, local (ML)>` magnitude with amplitudes measured on
-     the vertical component instead of the horizontals.
+   magnitude, local custom (MLc)
+      The local magnitude measured on the horizontal components with
+      a custom parametric calibration functions, amplitude filtering and distance
+      measures.
 
-     * Amplitude unit in |scname|: **millimeter** (mm)
+      * Amplitude unit in |scname|: **millimeter** (mm)
 
-     Read the :ref:`technical documentation <global_mlv>` for more details and the configuration.
+      Read the :ref:`technical documentation <global_mlc>` for more details and
+      the configuration.
 
    magnitude, local horizontal (MLh)
       The local magnitude measured on the horizontal components with
-      a modified calibration functions as compared to :term:`ML <magnitude, local (ML)>`.
+      a modified calibration function as compared to
+      :term:`ML <magnitude, local (ML)>`.
 
       * Amplitude unit in |scname|: **millimeter** (mm)
 
-      Read the :ref:`technical documentation <global_mlh>` for more details and the configuration.
+      Read the :ref:`technical documentation <global_mlh>` for more details and
+      the configuration.
 
    magnitude, local GNS/GEONET (MLr)
       Local magnitude calculated from :term:`MLv <magnitude, local vertical (MLv)>`
       amplitudes based on GNS/GEONET specifications for New Zealand.
 
       Read the :ref:`technical documentation <global_mlr>` for more details and the configuration.
+
+   magnitude, local vertical (MLv)
+      The :term:`ML <magnitude, local (ML)>` magnitude with amplitudes measured on
+      the vertical component instead of the horizontals.
+
+      * Amplitude unit in |scname|: **millimeter** (mm)
+
+      Read the :ref:`technical documentation <global_mlv>` for more details and the configuration.
 
    magnitude, Nuttli (MN)
       Nuttli magnitude for Canada and other Cratonic regions.
