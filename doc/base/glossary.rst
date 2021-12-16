@@ -469,28 +469,37 @@ Scientific and technical terms
       by :ref:`scolv`.
 
    magnitude, local (ML)
-      Magnitude scale introduced by Richter in the early 1930s (Richter, 1935) to have a common scale for the
-      strength of earthquakes. The basic observation is the systematic decay of the logarithm of the maximum
+      Magnitude scale introduced by Richter in the early 1930s (Richter, 1935)
+      to have a common scale for the strength of earthquakes. The basic observation
+      is the systematic decay of the logarithm of the maximum
       amplitudes with increasing distance for different earthquakes described by:
 
       .. math::
 
          ML = \log A_{max} - \log A_0
 
-      with A\ :sub:`0` as amplitude of a reference event. For the reference event ML = 0 the formula can be rewritten to
+      with A\ :sub:`0` as amplitude of a reference event. For the reference event
+      ML = 0 the formula can be rewritten to
 
       .. math::
 
          ML = \log A_{max} - 2.48 + 2.76 \log \Delta
 
-      with Δ being the distance of the station to the earthquake location. ML is a magnitude scale for
-      recordings of earthquakes smaller than ML 7 at regional stations. It is usually a measure of the
+      with Δ being the distance of the station to the earthquake location. ML is a
+      magnitude scale for
+      recordings of earthquakes smaller than ML 7 at regional stations. It is
+      usually a measure of the
       regional-distance S-wave on horizontal component records.
-      The original formula is only valid for records from a Wood-Anderson torsion seismometer with a natural period of
-      0.8 s and shallow earthquakes in California. Therefore calibration functions for other regions and wider
-      depth ranges are necessary. A Wood-Anderson seismometer has to be simulated. For amplitudes measurements
-      on the vertical component records additional correction factors has to be applied. ML saturates at
-      magnitudes around 7 because the maximum amplitudes of larger earthquakes occur at longer periods than
+      The original formula is only valid for records from a Wood-Anderson torsion
+      seismometer with a natural period of
+      0.8 s and shallow earthquakes in California. Therefore calibration functions
+      for other regions and wider depth ranges are necessary.
+      A Wood-Anderson seismometer is simulated.
+
+      For amplitudes measured on the vertical component records, additional
+      correction factors have to be applied. ML saturates at
+      magnitudes around 7 because the maximum amplitudes of larger earthquakes
+      occur at longer periods than
       the bandpass of 0.1 s and 3 s for the magnitude calculation.
 
       In |scname| a modified local magnitude
@@ -505,8 +514,8 @@ Scientific and technical terms
 
    magnitude, local custom (MLc)
       The local magnitude measured on the horizontal components with
-      a custom parametric calibration functions, amplitude filtering and distance
-      measures.
+      custom parametric calibration function, configurable amplitude filtering,
+      Wood-Anderson simulation and distance measure.
 
       * Amplitude unit in |scname|: **millimeter** (mm)
 
@@ -514,8 +523,8 @@ Scientific and technical terms
       the configuration.
 
    magnitude, local horizontal (MLh)
-      The local magnitude measured on the horizontal components with
-      a modified calibration function as compared to
+      The local magnitude computed from amplitudes measured on the horizontal
+      components with a modified parametric calibration function as compared to
       :term:`ML <magnitude, local (ML)>`.
 
       * Amplitude unit in |scname|: **millimeter** (mm)
