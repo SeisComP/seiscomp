@@ -65,6 +65,9 @@ All notable changes to SeisComP are documented here.
       leading character
     - Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
       "submarine landslide"
+    - Add new routing recordstream which allows to route specific network,
+      station, location or channel codes to fixed proxy streams (thanks to
+      Luca Scarabello / ETH for this contribution)
 
 ## 4.8.2
 
