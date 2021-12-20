@@ -113,14 +113,6 @@ Commands:
   list modules {sta}
     Lists all bound modules of a station incl. profiles (if used).
 
-  add profile {mod} {profile}
-    Adds a new profile for given module. If the profile exists already an error
-    is raised.
-
-  add binding {mod} {sta}
-    Adds a new binding for given module and station. If the binding already
-    exists an error is raised.
-
   delete profile {mod} {profile}
     Deletes the given profile of given module. If the profile does not exist an
     error is raised.
@@ -131,19 +123,6 @@ Commands:
     to module mod using a profile the binding is kept, removed otherwise.
     An existing binding file (etc/key/[mod]/station_[sta]) is deleted in any
     case.
-
-  edit profile {mod} {profile}
-    Starts the interactive configuration wizard for the profile if a description
-    exists. Otherwise an error is raised. Changes to the profile have effect
-    on all stations using this profile.
-
-  edit binding {mod} {sta}
-    Starts the interactive configuration wizard for the binding if a description
-    exists. Otherwise an error is raised.
-
-  edit module {mod}
-    Starts the interactive configuration wizard for the given module if a
-    description exists. Otherwise an error is raised.
 
   print station {sta}
     Dumps all set binding parameters for the given station.
