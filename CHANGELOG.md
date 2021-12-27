@@ -4,196 +4,199 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
-- New module scquery_qc including documentation replacing legacy scqcquery for
-  querying the database for waveform quality control parameters
-- Clean up event list and event edit parameters in global configuration. A warning
-  is printed when using deprecated parameters.
-  Deprecated global configuration parameter -> new parameter:
+-   scevtstreams
+    -   New command-line parameter `--net-sta` for filtering streams my network
+        and station codes
+-   New module scquery_qc including documentation replacing legacy scqcquery for
+    querying the database for waveform quality control parameters
+-   Clean up event list and event edit parameters in global configuration. A warning
+    is printed when using deprecated parameters.
+    Deprecated global configuration parameter -> new parameter:
 
-  ```conf
-  eventlist.customColumn                 -> eventlist.customColumn.name
-  eventlist.regions                      -> eventlist.filter.regions.profiles
-  eventlist.region.$name.name            -> eventlist.filter.regions.region.$name.name
-  eventlist.region.$name.rect            -> eventlist.filter.regions.region.$name.rect
+    ```conf
+    eventlist.customColumn                 -> eventlist.customColumn.name
+    eventlist.regions                      -> eventlist.filter.regions.profiles
+    eventlist.region.$name.name            -> eventlist.filter.regions.region.$name.name
+    eventlist.region.$name.rect            -> eventlist.filter.regions.region.$name.rect
 
-  eventedit.customColumn                 -> eventedit.origin.customColumn.name
-  eventedit.customColumn.default         -> eventedit.origin.customColumn.default
-  eventedit.customColumn.originCommentID -> eventedit.origin.customColumn.originCommentID
-  eventedit.customColumn.pos             -> eventedit.origin.customColumn.pos
-  eventedit.customColumn.colors          -> eventedit.origin.customColumn.colors
-  ```
+    eventedit.customColumn                 -> eventedit.origin.customColumn.name
+    eventedit.customColumn.default         -> eventedit.origin.customColumn.default
+    eventedit.customColumn.originCommentID -> eventedit.origin.customColumn.originCommentID
+    eventedit.customColumn.pos             -> eventedit.origin.customColumn.pos
+    eventedit.customColumn.colors          -> eventedit.origin.customColumn.colors
+    ```
 
-- scautopick
-    - When configuring `sendDetections = true` and `picker`, initial picks made
-      by the trigger receive the evaluation status `rejected` allowing discrimination
-      from picks by the re-picker. Use evaluation mode `automatic` for both.
-- Magnitudes
-    - Add new magnitude type MLc - like ML with customization:
-        - Parametric calibration
-        - Configurable distance measure
-        - Amplitude pre-filtering
-        - Optional Wood-Anderson instrument simulation
-        - Configurable scaling for input unit conversion
-    - Add ability to configure magnitudes with region-dependent
-      parameters in global module configuration
-- Event list, e.g. scolv, scesv
-    - Add interactive filtering of events inside or outside defined regions
-- scolv
-    - Add pick uncertainty bars to residual plots in Location tab
-    - Add number of shown / loaded events in title of Events tab
-    - Allow showing station annotations in maps of Location tab
-    - Show time window of re-picker on traces after re-picking
-    - Add "Fix FM + Mw" button to fix the focal mechanism and the Mw
-      with one click
-- scmv
-    - Improve visibility of station annotations
-- scesv
-    - Add number of listed / loaded events in title of Events tab
-- scevent
-    - evrc plugin provides more control options for setting and overwriting event
-      types
-- LOCSAT
-    - Add global configuration parameters for using backazimuth and slowness,
-      `LOCSAT.usePickBackazimuth` and `LOCSAT.usePickSlowness`
-- FixedHypocenter
-    - Allow adjusting the hypocenter coordinates interactively in the locator
-      settings of scolv
-- GUI
-    - Allow configuration of precision of origin time
-- trunk
-    - Add event certainties "felt", "damaging" in line with IASPEI event type
-      leading character
-    - Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
-      "submarine landslide"
-    - Add new routing recordstream which allows to route specific network,
-      station, location or channel codes to fixed proxy streams (thanks to
-      Luca Scarabello / ETH for this contribution)
+-   scautopick
+    -   When configuring `sendDetections = true` and `picker`, initial picks made
+        by the trigger receive the evaluation status `rejected` allowing discrimination
+        from picks by the re-picker. Use evaluation mode `automatic` for both.
+-   Magnitudes
+    -   Add new magnitude type MLc - like ML with customization:
+        -   Parametric calibration
+        -   Configurable distance measure
+        -   Amplitude pre-filtering
+        -   Optional Wood-Anderson instrument simulation
+        -   Configurable scaling for input unit conversion
+    -   Add ability to configure magnitudes with region-dependent
+        parameters in global module configuration
+-   Event list, e.g. scolv, scesv
+    -   Add interactive filtering of events inside or outside defined regions
+-   scolv
+    -   Add pick uncertainty bars to residual plots in Location tab
+    -   Add number of shown / loaded events in title of Events tab
+    -   Allow showing station annotations in maps of Location tab
+    -   Show time window of re-picker on traces after re-picking
+    -   Add "Fix FM + Mw" button to fix the focal mechanism and the Mw
+        with one click
+-   scmv
+    -   Improve visibility of station annotations
+-   scesv
+    -   Add number of listed / loaded events in title of Events tab
+-   scevent
+    -   evrc plugin provides more control options for setting and overwriting event
+        types
+-   LOCSAT
+    -   Add global configuration parameters for using backazimuth and slowness,
+        `LOCSAT.usePickBackazimuth` and `LOCSAT.usePickSlowness`
+-   FixedHypocenter
+    -   Allow adjusting the hypocenter coordinates interactively in the locator
+        settings of scolv
+-   GUI
+    -   Allow configuration of precision of origin time
+-   trunk
+    -   Add event certainties "felt", "damaging" in line with IASPEI event type
+        leading character
+    -   Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
+        "submarine landslide"
+    -   Add new routing recordstream which allows to route specific network,
+        station, location or channel codes to fixed proxy streams (thanks to
+        Luca Scarabello / ETH for this contribution)
 
 ## 4.8.2
 
-- scart
-    - Fix date in error output
+-   scart
+    -   Fix date in error output
 
 ## 4.8.1
 
-- fdsnws
-    - Fix return of empty event publicID in event service when a
-      PostgreSQL database is being used
+-   fdsnws
+    -   Fix return of empty event publicID in event service when a
+        PostgreSQL database is being used
 
 ## 4.8.0
 
 ```SC_API_VERSION 14.4.0```
 
-- scolv
-    - Change text "(Un)fix" buttons to be more explicit
-        - Unfix -> Unfix type
-        - Fix -> Fix FM
-        - Fix Mw -> Fix Mw type
-    - Use configured magnitude digits to display Mw magnitude value
-    - Only enable creation of artifical origin in zoom trace if picking
-      is disabled
-    - Fix committing of manual amplitudes in the amplitude picker
-- scmag
-    - Fix bug that caused multiple occurrences of magnitudes of the same
-      type when a new set of manually computed amplitutes has been received
-- trunk
-    - Fix segmentation fault when reading malformed GeoJSON features
-- scorgls
-    - Add option to filter for author (thanks to Fred Massin / ETHZ)
-- sdmssort
-    - Fix error when two or more files are passed
-- seedlink
-    - Fix typo in setup script
-    - Add misc plugin
+-   scolv
+    -   Change text "(Un)fix" buttons to be more explicit
+        -   Unfix -> Unfix type
+        -   Fix -> Fix FM
+        -   Fix Mw -> Fix Mw type
+    -   Use configured magnitude digits to display Mw magnitude value
+    -   Only enable creation of artifical origin in zoom trace if picking
+        is disabled
+    -   Fix committing of manual amplitudes in the amplitude picker
+-   scmag
+    -   Fix bug that caused multiple occurrences of magnitudes of the same
+        type when a new set of manually computed amplitutes has been received
+-   trunk
+    -   Fix segmentation fault when reading malformed GeoJSON features
+-   scorgls
+    -   Add option to filter for author (thanks to Fred Massin / ETHZ)
+-   sdmssort
+-   Fix error when two or more files are passed
+-   seedlink
+    -   Fix typo in setup script
+    -   Add misc plugin
 
 ## 4.7.3
 
-- trunk
-    - Fix MYSQL database setup script to create
-      ro and rw user accounts correctly
+-   trunk
+    -   Fix MYSQL database setup script to create
+        ro and rw user accounts correctly
 
 ## 4.7.2
 
-- trunk
-    - Update changelog
-    - Fix `seiscomp setup trunk` with respect to database initialization
-- scart
-    - Do not require archive directory when writing records to stdout
-- iLoc
-    - Allow configuration of local models
-    - Add comprehensive documentation on iLoc and integration / configuration
-      in SeisComP
+-   trunk
+    -   Update changelog
+    -   Fix `seiscomp setup trunk` with respect to database initialization
+-   scart
+    -   Do not require archive directory when writing records to stdout
+-   iLoc
+    -   Allow configuration of local models
+    -   Add comprehensive documentation on iLoc and integration / configuration
+        in SeisComP
 
 ## 4.7.1
 
-- trunk
-    - Fix test compilation for some distributions
-    - Update changelog
+-   trunk
+    -   Fix test compilation for some distributions
+    -   Update changelog
 
 ## 4.7.0
 
 ```SC_API_VERSION 14.3.0```
 
-- Documentation
-    - Update SDK Python examples
-- seiscomp
-    - Add --wait parameter to set the timeout when acquiring
-      the seiscomp lock
-    - Add dialog for removing obsolete configuration after
-      removing alias modules
-    - Add support for additional host environment which is sourced from
-      `$SEISCOMP_ROOT/etc/env/$(hostname)` if present
-- trunk
-    - Add HTTP proxy support for FDSNWS recordstream. `http_proxy`,
-      `https_proxy` and `no_proxy` environment are being read and
-      evaluated. Only proxy servers available with http are supported
-      currently.
-    - Add new geo feature directory  `@DATADIR@/spatial/vector` or
-      `@CONFIGDIR@/spatial/vector`. Load  BNA files from new geo
-      feature directory. The old BNA directories are still
-      supported but cause a warning which is logged.
-    - Add support for GeoJSON files (*.geojson) in the new geo
-      feature directory.
-    - Add data scheme version information to output when starting
-      a module with the option `-V`
-    - Add MEDIAN() filter
-- scolv
-    - Fix display of tooltips in origin map and magnitude map
-    - Fix loading configured streams from either scolv or global
-      bindings instead of the first bindings found
-    - Allow modifying origins and creating artificial origins on zoom trace
-      in picker window
-- scquery
-    - Add --print-header option for generating information on the query as a
-      header of the output
-    - Add examples for PostgreSQL
-- GUI
-    - Add azimuthal gap column to event list which is initially hidden. To
-      activate it, add `AzGap"` to `eventlist.visibleColumns`
-    - Add units to columns of tables: Events, Events, Magnitudes
-    - Remove number of origins column in event list if origins should not be
-      listed
-    - Correct issue with magnitude view map which does not show symbols
-      for stations which have a magnitude but no arrival
-- scesv
-    - Add azimuthal gap to hypocenter panel
-- scqcv
-    - Make many configuration parameters available in scconfig and documentation
-- scautoloc
-    - Disable pick logging by default to optimize disk space consumption.
-      Can be enabled by new option `autoloc.pickLogEnable`.
-    - Added documentation of parameters
-    - Send a journal message when setting the origin evaluation status
-    - Add IM network to default station.conf
-- iLoc
-    - Update iLoc code to version 3.3
-- scdispatch
-    - Add command-line option `-e` as a wrapper for removing the EVENT group from
-      routing table
+-   Documentation
+    -   Update SDK Python examples
+-   seiscomp
+    -   Add --wait parameter to set the timeout when acquiring
+        the seiscomp lock
+    -   Add dialog for removing obsolete configuration after
+        removing alias modules
+    -   Add support for additional host environment which is sourced from
+        `$SEISCOMP_ROOT/etc/env/$(hostname)` if present
+-   trunk
+    -   Add HTTP proxy support for FDSNWS recordstream. `http_proxy`,
+        `https_proxy` and `no_proxy` environment are being read and
+        evaluated. Only proxy servers available with http are supported
+        currently.
+    -   Add new geo feature directory  `@DATADIR@/spatial/vector` or
+        `@CONFIGDIR@/spatial/vector`. Load  BNA files from new geo
+        feature directory. The old BNA directories are still
+        supported but cause a warning which is logged.
+    -   Add support for GeoJSON files (*.geojson) in the new geo
+        feature directory.
+    -   Add data scheme version information to output when starting
+        a module with the option `-V`
+    -   Add MEDIAN() filter
+-   scolv
+    -   Fix display of tooltips in origin map and magnitude map
+    -   Fix loading configured streams from either scolv or global
+        bindings instead of the first bindings found
+    -   Allow modifying origins and creating artificial origins on zoom trace
+        in picker window
+-   scquery
+    -   Add --print-header option for generating information on the query as a
+        header of the output
+    -   Add examples for PostgreSQL
+-   GUI
+    -   Add azimuthal gap column to event list which is initially hidden. To
+        activate it, add `AzGap"` to `eventlist.visibleColumns`
+    -   Add units to columns of tables: Events, Events, Magnitudes
+    -   Remove number of origins column in event list if origins should not be
+        listed
+    -   Correct issue with magnitude view map which does not show symbols
+        for stations which have a magnitude but no arrival
+-   scesv
+    -   Add azimuthal gap to hypocenter panel
+-   scqcv
+    -   Make many configuration parameters available in scconfig and documentation
+-   scautoloc
+    -   Disable pick logging by default to optimize disk space consumption.
+        Can be enabled by new option `autoloc.pickLogEnable`.
+    -   Added documentation of parameters
+    -   Send a journal message when setting the origin evaluation status
+    -   Add IM network to default station.conf
+-   iLoc
+    -   Update iLoc code to version 3.3
+-   scdispatch
+    -   Add command-line option `-e` as a wrapper for removing the EVENT group from
+        routing table
 
 ## 4.6.1
 
-- scolv
+-   scolv
     - Add number of used / unused station magnitudes to Magnitudes tab (missing
       from 4.6.0)
 
