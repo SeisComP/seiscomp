@@ -12887,10 +12887,9 @@ Origin
 
       :param latitude: :ref:`RealQuantity <api-python-datamodel-realquantity>`
 
-      Hypocenter longitude, with respect to the World Geodetic System 1984
-      \(WGS84\) reference system
-      \(National Imagery and Mapping Agency 2000\) in degrees. The uncertainties
-      are given in kilometers.
+      Hypocenter latitude with respect to the World Geodetic System 1984
+      \(WGS84\) reference system \(National Imagery and Mapping Agency 2000\)
+      in degrees. Uncertainties are given in kilometers.
 
    .. py:method:: latitude()
 
@@ -12900,8 +12899,9 @@ Origin
 
       :param longitude: :ref:`RealQuantity <api-python-datamodel-realquantity>`
 
-      Hypocenter latitude, with respect to the WGS84 reference system in degrees.
-      The uncertainties are given in kilometers.
+      Hypocenter longitude with respect to the World Geodetic System 1984
+      \(WGS84\) reference system \(National Imagery and Mapping Agency 2000\)
+      in degrees. Uncertainties are given in kilometers.
 
    .. py:method:: longitude()
 
@@ -18705,7 +18705,9 @@ SensorLocation
 
       :param latitude: float
 
-      Sensor latitude \(52.10\)
+      Sensor latitude \(52.10\) with respect to the World Geodetic System
+      1984 \(WGS84\) reference system \(National Imagery and Mapping Agency
+      2000\) in degrees.
 
    .. py:method:: latitude()
 
@@ -18720,7 +18722,9 @@ SensorLocation
 
       :param longitude: float
 
-      Sensor longitude \(52.11\)
+      Sensor longitude \(52.11\) with respect to the World Geodetic System
+      1984 \(WGS84\) reference system \(National Imagery and Mapping Agency
+      2000\) in degrees.
 
    .. py:method:: longitude()
 
@@ -18735,7 +18739,9 @@ SensorLocation
 
       :param elevation: float
 
-      Sensor elevation \(52.12\)
+      Sensor elevation \(52.12\) with respect to the World Geodetic System
+      1984 \(WGS84\) reference system \(National Imagery and Mapping Agency
+      2000\) in meters.
 
    .. py:method:: elevation()
 
@@ -19311,7 +19317,9 @@ Station
 
       :param latitude: float
 
-      Station latitude \(50.04\)
+      Station latitude \(50.04\) with respect to the World Geodetic System
+      1984 \(WGS84\) reference system \(National Imagery and Mapping Agency
+      2000\) in degrees.
 
    .. py:method:: latitude()
 
@@ -19326,7 +19334,9 @@ Station
 
       :param longitude: float
 
-      Station longitude \(50.05\)
+      Station longitude \(50.05\) with respect to the World Geodetic System
+      1984 \(WGS84\) reference system \(National Imagery and Mapping Agency
+      2000\) in degrees.
 
    .. py:method:: longitude()
 
@@ -19341,7 +19351,9 @@ Station
 
       :param elevation: float
 
-      Station elevation \(50.06\)
+      Station elevation \(50.06\) with respect to the World Geodetic System
+      1984 \(WGS84\) reference system \(National Imagery and Mapping Agency
+      2000\) in meters.
 
    .. py:method:: elevation()
 
@@ -19763,7 +19775,10 @@ StationGroup
 
       :param latitude: float
 
-      Optional latitude \(eg., of the central station\)
+      Optional latitude \(eg., of the central station\) with respect to the
+      World Geodetic System 1984 \(WGS84\) reference system \(National
+      Imagery and Mapping Agency 2000\) in degrees. The uncertainties are
+      given in kilometers.
 
    .. py:method:: latitude()
 
@@ -19778,7 +19793,9 @@ StationGroup
 
       :param longitude: float
 
-      Optional longitude \(eg., of the central station\)
+      Optional longitude \(eg., of the central station\) with respect to the
+      World Geodetic System 1984 \(WGS84\) reference system \(National
+      Imagery and Mapping Agency 2000\) in degrees.
 
    .. py:method:: longitude()
 
@@ -19793,7 +19810,9 @@ StationGroup
 
       :param elevation: float
 
-      Optional elevation \(eg., of the central station\)
+      Optional elevation \(eg., of the central station\) with respect to the
+      World Geodetic System 1984 \(WGS84\) reference system \(National Imagery
+      and Mapping Agency 2000\) in meters.
 
    .. py:method:: elevation()
 
@@ -20672,7 +20691,7 @@ Stream
 
       :param depth: float
 
-      Depth \(52.13\)
+      Depth \(52.13\) of the sensor below sensorLocation in meters
 
    .. py:method:: depth()
 
