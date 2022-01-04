@@ -72,6 +72,23 @@ All notable changes to SeisComP are documented here.
         station, location or channel codes to fixed proxy streams (thanks to
         Luca Scarabello / ETH for this contribution)
 
+## 4.8.3
+
+-   seiscomp shell
+    -   Remove unimplmemented "add" and "edit" commands
+-   seiscomp setup
+    -   In newer versions (at least >=13) of PostgreSQL, some of the commands that
+        are run to initiate the seiscomp database need to be run as the database owner.
+        Thanks to Morten Sickel for fixing it.
+-   documentation
+    -   Fix Datamodel diagrams
+    -   Add object cross references
+-   trunk
+    -   Fix XML encoding issue with text in CDATA, e.g. `Pick.phaseHint`. This only
+        affects strings which contain special XML characters such as ampersand.
+    -   Report correct module name with messaging for Python applications. Previous
+        versions only reported `python` or `python3.8`.
+
 ## 4.8.2
 
 -   scart
