@@ -2,131 +2,152 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.8.3
+
+-   seiscomp shell
+    -   Remove unimplmemented "add" and "edit" commands
+-   seiscomp setup
+    -   In newer versions (at least >=13) of PostgreSQL, some of the commands that
+        are run to initiate the seiscomp database need to be run as the database owner.
+        Thanks to Morten Sickel for fixing it.
+-   documentation
+    -   Fix Datamodel diagrams
+    -   Add object cross references
+-   trunk
+    -   Fix XML encoding issue with text in CDATA, e.g. `Pick.phaseHint`. This only
+        affects strings which contain special XML characters such as ampersand.
+    -   Report correct module name with messaging for Python applications. Previous
+        versions only reported `python` or `python3.8`.
+-   scsohlog
+    -   Port to Python3
+-   sh2proc
+    -   Port to Python3
+
 ## 4.8.2
 
-- scart
-    - Fix date in error output
+-   scart
+    -   Fix date in error output
 
 ## 4.8.1
 
-- fdsnws
-    - Fix return of empty event publicID in event service when a
-      PostgreSQL database is being used
+-   fdsnws
+    -   Fix return of empty event publicID in event service when a
+        PostgreSQL database is being used
 
 ## 4.8.0
 
 ```SC_API_VERSION 14.4.0```
 
-- scolv
-    - Change text "(Un)fix" buttons to be more explicit
-        - Unfix -> Unfix type
-        - Fix -> Fix FM
-        - Fix Mw -> Fix Mw type
-    - Use configured magnitude digits to display Mw magnitude value
-    - Only enable creation of artifical origin in zoom trace if picking
-      is disabled
-    - Fix committing of manual amplitudes in the amplitude picker
-- scmag
-    - Fix bug that caused multiple occurrences of magnitudes of the same
-      type when a new set of manually computed amplitutes has been received
-- trunk
-    - Fix segmentation fault when reading malformed GeoJSON features
-- scorgls
-    - Add option to filter for author (thanks to Fred Massin / ETHZ)
-- sdmssort
-    - Fix error when two or more files are passed
-- seedlink
-    - Fix typo in setup script
-    - Add misc plugin
+-   scolv
+    -   Change text "(Un)fix" buttons to be more explicit
+        -   Unfix -> Unfix type
+        -   Fix -> Fix FM
+        -   Fix Mw -> Fix Mw type
+    -   Use configured magnitude digits to display Mw magnitude value
+    -   Only enable creation of artifical origin in zoom trace if picking
+        is disabled
+    -   Fix committing of manual amplitudes in the amplitude picker
+-   scmag
+    -   Fix bug that caused multiple occurrences of magnitudes of the same
+        type when a new set of manually computed amplitutes has been received
+-   trunk
+    -   Fix segmentation fault when reading malformed GeoJSON features
+-   scorgls
+    -   Add option to filter for author (thanks to Fred Massin / ETHZ)
+-   sdmssort
+-   Fix error when two or more files are passed
+-   seedlink
+    -   Fix typo in setup script
+    -   Add misc plugin
 
 ## 4.7.3
 
-- trunk
-    - Fix MYSQL database setup script to create
-      ro and rw user accounts correctly
+-   trunk
+    -   Fix MYSQL database setup script to create
+        ro and rw user accounts correctly
 
 ## 4.7.2
 
-- trunk
-    - Update changelog
-    - Fix `seiscomp setup trunk` with respect to database initialization
-- scart
-    - Do not require archive directory when writing records to stdout
-- iLoc
-    - Allow configuration of local models
-    - Add comprehensive documentation on iLoc and integration / configuration
-      in SeisComP
+-   trunk
+    -   Update changelog
+    -   Fix `seiscomp setup trunk` with respect to database initialization
+-   scart
+    -   Do not require archive directory when writing records to stdout
+-   iLoc
+    -   Allow configuration of local models
+    -   Add comprehensive documentation on iLoc and integration / configuration
+        in SeisComP
 
 ## 4.7.1
 
-- trunk
-    - Fix test compilation for some distributions
-    - Update changelog
+-   trunk
+    -   Fix test compilation for some distributions
+    -   Update changelog
 
 ## 4.7.0
 
 ```SC_API_VERSION 14.3.0```
 
-- Documentation
-    - Update SDK Python examples
-- seiscomp
-    - Add --wait parameter to set the timeout when acquiring
-      the seiscomp lock
-    - Add dialog for removing obsolete configuration after
-      removing alias modules
-    - Add support for additional host environment which is sourced from
-      `$SEISCOMP_ROOT/etc/env/$(hostname)` if present
-- trunk
-    - Add HTTP proxy support for FDSNWS recordstream. `http_proxy`,
-      `https_proxy` and `no_proxy` environment are being read and
-      evaluated. Only proxy servers available with http are supported
-      currently.
-    - Add new geo feature directory  `@DATADIR@/spatial/vector` or
-      `@CONFIGDIR@/spatial/vector`. Load  BNA files from new geo
-      feature directory. The old BNA directories are still
-      supported but cause a warning which is logged.
-    - Add support for GeoJSON files (*.geojson) in the new geo
-      feature directory.
-    - Add data scheme version information to output when starting
-      a module with the option `-V`
-    - Add MEDIAN() filter
-- scolv
-    - Fix display of tooltips in origin map and magnitude map
-    - Fix loading configured streams from either scolv or global
-      bindings instead of the first bindings found
-    - Allow modifying origins and creating artificial origins on zoom trace
-      in picker window
-- scquery
-    - Add --print-header option for generating information on the query as a
-      header of the output
-    - Add examples for PostgreSQL
-- GUI
-    - Add azimuthal gap column to event list which is initially hidden. To
-      activate it, add `AzGap"` to `eventlist.visibleColumns`
-    - Add units to columns of tables: Events, Events, Magnitudes
-    - Remove number of origins column in event list if origins should not be
-      listed
-    - Correct issue with magnitude view map which does not show symbols
-      for stations which have a magnitude but no arrival
-- scesv
-    - Add azimuthal gap to hypocenter panel
-- scqcv
-    - Make many configuration parameters available in scconfig and documentation
-- scautoloc
-    - Disable pick logging by default to optimize disk space consumption.
-      Can be enabled by new option `autoloc.pickLogEnable`.
-    - Added documentation of parameters
-    - Send a journal message when setting the origin evaluation status
-    - Add IM network to default station.conf
-- iLoc
-    - Update iLoc code to version 3.3
-- scdispatch
-    - Add command-line option `-e` as a wrapper for removing the EVENT group from
-      routing table
+-   Documentation
+    -   Update SDK Python examples
+-   seiscomp
+    -   Add --wait parameter to set the timeout when acquiring
+        the seiscomp lock
+    -   Add dialog for removing obsolete configuration after
+        removing alias modules
+    -   Add support for additional host environment which is sourced from
+        `$SEISCOMP_ROOT/etc/env/$(hostname)` if present
+-   trunk
+    -   Add HTTP proxy support for FDSNWS recordstream. `http_proxy`,
+        `https_proxy` and `no_proxy` environment are being read and
+        evaluated. Only proxy servers available with http are supported
+        currently.
+    -   Add new geo feature directory  `@DATADIR@/spatial/vector` or
+        `@CONFIGDIR@/spatial/vector`. Load  BNA files from new geo
+        feature directory. The old BNA directories are still
+        supported but cause a warning which is logged.
+    -   Add support for GeoJSON files (*.geojson) in the new geo
+        feature directory.
+    -   Add data scheme version information to output when starting
+        a module with the option `-V`
+    -   Add MEDIAN() filter
+-   scolv
+    -   Fix display of tooltips in origin map and magnitude map
+    -   Fix loading configured streams from either scolv or global
+        bindings instead of the first bindings found
+    -   Allow modifying origins and creating artificial origins on zoom trace
+        in picker window
+-   scquery
+    -   Add --print-header option for generating information on the query as a
+        header of the output
+    -   Add examples for PostgreSQL
+-   GUI
+    -   Add azimuthal gap column to event list which is initially hidden. To
+        activate it, add `AzGap"` to `eventlist.visibleColumns`
+    -   Add units to columns of tables: Events, Events, Magnitudes
+    -   Remove number of origins column in event list if origins should not be
+        listed
+    -   Correct issue with magnitude view map which does not show symbols
+        for stations which have a magnitude but no arrival
+-   scesv
+    -   Add azimuthal gap to hypocenter panel
+-   scqcv
+    -   Make many configuration parameters available in scconfig and documentation
+-   scautoloc
+    -   Disable pick logging by default to optimize disk space consumption.
+        Can be enabled by new option `autoloc.pickLogEnable`.
+    -   Added documentation of parameters
+    -   Send a journal message when setting the origin evaluation status
+    -   Add IM network to default station.conf
+-   iLoc
+    -   Update iLoc code to version 3.3
+-   scdispatch
+    -   Add command-line option `-e` as a wrapper for removing the EVENT group from
+        routing table
 
 ## 4.6.1
 
-- scolv
+-   scolv
     - Add number of used / unused station magnitudes to Magnitudes tab (missing
       from 4.6.0)
 
