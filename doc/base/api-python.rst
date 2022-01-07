@@ -13733,7 +13733,6 @@ OriginUncertainty
    - ``azimuthMaxHorizontalUncertainty`` -- float (optional)
    - ``confidenceEllipsoid`` -- :ref:`ConfidenceEllipsoid <api-python-datamodel-confidenceellipsoid>` (optional)
    - ``preferredDescription`` -- :ref:`OriginUncertaintyDescription <api-python-datamodel-originuncertaintydescription>` (optional)
-   - ``confidenceLevel`` -- float (optional)
 
    **Used by**:
 
@@ -21716,7 +21715,7 @@ WaveformStreamID
       Optional resource identifier for the waveform stream. QuakeML adopts
       in many places resource descriptors with a well\-defined syntax for
       unambiguous resource identification. Resource identifiers are designed
-      to be backward compatible with existing descriptors. In |scname| this
+      to be backward compatible with existing descriptors. In SeisComP this
       identifier is not used at all.
 
    .. py:method:: resourceURI()
