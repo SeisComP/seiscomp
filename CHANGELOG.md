@@ -88,6 +88,10 @@ All notable changes to SeisComP are documented here.
         affects strings which contain special XML characters such as ampersand.
     -   Report correct module name with messaging for Python applications. Previous
         versions only reported `python` or `python3.8`.
+-   scsohlog
+    -   Port to Python3
+-   sh2proc 
+    -   Port to Python3
 
 ## 4.8.2
 
