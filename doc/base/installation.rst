@@ -29,15 +29,16 @@ station network to be operated.
 
 Minimum requirements are:
 
-+-----+----------------------------------------------------------------------------------------+
-| CPU | 2                                                                                      |
-+-----+----------------------------------------------------------------------------------------+
-| RAM | 4 GB                                                                                   |
-+-----+----------------------------------------------------------------------------------------+
-| HDD | 20 GB                                                                                  |
-+-----+----------------------------------------------------------------------------------------+
-| OS  | Ubuntu 16 64bit, Debian 8.0 64bit, CentOS 7 64bit                                      |
-+-----+----------------------------------------------------------------------------------------+
+
+.. csv-table::
+   :widths: 10 90
+   :align: left
+   :delim: ;
+
+   CPU; 2
+   RAM; 4 GB
+   HDD; 20 GB
+   OS; Ubuntu last 3 major LTS versions, 64bit, Debian 8.0 64bit, RHEL 7, CentOS 7 64bit
 
 In case large networks (>100 stations) are operated, a distributed system is
 recommended. Normally a |scname| system is separated in several subsystems.
@@ -145,50 +146,29 @@ Directory structure
 All installed files and directories are found below the *seiscomp* directory.
 The directory structure of the installed system is described the table below.
 
-+---------------------+--------------------------------------------------------------------+
-| Directory           | Description                                                        |
-+=====================+====================================================================+
-| *bin*               | The user module binaries.                                          |
-+---------------------+--------------------------------------------------------------------+
-| *lib*               | The base library directory used by all modules.                    |
-+---------------------+--------------------------------------------------------------------+
-| *lib/python*        | The Python library directory.                                      |
-+---------------------+--------------------------------------------------------------------+
-| *man*               | The manual pages.                                                  |
-+---------------------+--------------------------------------------------------------------+
-| *sbin*              | The system/service/server binaries such as seedlink.               |
-+---------------------+--------------------------------------------------------------------+
-| *var*               | Variable files whose content is expected to continually change.    |
-+---------------------+--------------------------------------------------------------------+
-| *var/log*           | Log files of started modules. Usually modules log either to syslog |
-|                     | or ~/.seiscomp/log. This directory contains the logs of the start  |
-|                     | of each module.                                                    |
-+---------------------+--------------------------------------------------------------------+
-| *var/lib*           | Default directory for files created by modules such as the         |
-|                     | waveform ringbuffer of SeedLink or the waveform archive created    |
-|                     | by slarchive.                                                      |
-+---------------------+--------------------------------------------------------------------+
-| *var/run*           | Contains the .run and .pid files of modules started by             |
-|                     | :program:`seiscomp`.                                               |
-+---------------------+--------------------------------------------------------------------+
-| *include*           | SDK header files for all libraries.                                |
-+---------------------+--------------------------------------------------------------------+
-| *share*             | Application data such as maps, cities.xml and others.              |
-+---------------------+--------------------------------------------------------------------+
-| *share/templates*   | Template files used by e.g. SeedLink to create its native          |
-|                     | configuration.                                                     |
-+---------------------+--------------------------------------------------------------------+
-| *etc*               | Configuration directory.                                           |
-+---------------------+--------------------------------------------------------------------+
-| *etc/descriptions*  | Contains all XML module descriptions.                              |
-+---------------------+--------------------------------------------------------------------+
-| *etc/defaults*      | The default configuration files. This directory is read as first   |
-|                     | when a module starts.                                              |
-+---------------------+--------------------------------------------------------------------+
-| *etc/init*          | Module init scripts called by :program:`seiscomp`.                 |
-+---------------------+--------------------------------------------------------------------+
-| *etc/key*           | Station configurations and module bindings.                        |
-+---------------------+--------------------------------------------------------------------+
+.. csv-table::
+   :widths: 10 90
+   :header: Directory, Description
+   :align: left
+   :delim: ;
+
+   *bin*;              The user module binaries.
+   *lib*;              The base library directory used by all modules.
+   *lib/python*;       The Python library directory.
+   *man*;              The manual pages.
+   *sbin*;             The system/service/server binaries such as :ref:`seedlink`.
+   *var*;              Variable files whose content is expected to continually change.
+   *var/log*;          Log files of started modules. Usually modules log either to syslog or ~/.seiscomp/log. This directory contains the logs of the start of each module.
+   *var/lib*;          Default directory for files created by modules such as the waveform ringbuffer of :ref:`seedlink` or the waveform archive created by :ref:`slarchive`.
+   *var/run*;          Contains the .run and .pid files of modules started by :program:`seiscomp`.
+   *include*;          SDK header files for all libraries.
+   *share*;            Application data such as maps, cities.xml and others.
+   *share/templates*;  Template files used by e.g. :ref:`seedlink` to create its native configuration.
+   *etc*;              Configuration directory.
+   *etc/descriptions*; Contains all XML module descriptions.
+   *etc/defaults*;     The default configuration files. This directory is read as first when a module starts.
+   *etc/init*;         Module init scripts called by :program:`seiscomp`.
+   *etc/key*;          Station configurations and module bindings.
 
 
 .. _software_dependencies:
