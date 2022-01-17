@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.8.4
+
+-   scautoloc
+    -   Fix picklog configuration.
+
 ## 4.8.3
 
 -   seiscomp shell
