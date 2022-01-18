@@ -7,8 +7,12 @@ All notable changes to SeisComP are documented here.
 -   scevtstreams
     -   New command-line parameter `--net-sta` for filtering streams my network
         and station codes
--   New module scquery_qc including documentation replacing legacy scqcquery for
-    querying the database for waveform quality control parameters
+-   scquery_qc
+    -   Added as new module including HTML documentation for querying the data
+        base for waveform quality control (QC) parameters.
+    -   Allows filtering by QC parameter, stream and time.
+-   scqcquery
+    -   Removed module. It is replaced by new module scquery_qc.
 -   Clean up event list and event edit parameters in global configuration. A warning
     is printed when using deprecated parameters.
     Deprecated global configuration parameter -> new parameter:
