@@ -36,11 +36,12 @@ All notable changes to SeisComP are documented here.
         from picks by the re-picker. Use evaluation mode `automatic` for both.
 -   Magnitudes
     -   Add new magnitude type MLc - like ML with customization:
-        -   Parametric calibration
-        -   Configurable distance measure
         -   Amplitude pre-filtering
         -   Optional Wood-Anderson instrument simulation
         -   Configurable scaling for input unit conversion
+        -   Parametric calibration, optional non-parametric
+        -   Optional regionalization of calibration
+        -   Configurable distance measure
     -   Add ability to configure magnitudes with region-dependent
         parameters in global module configuration
 -   Event list, e.g. scolv, scesv
