@@ -5,13 +5,13 @@ from __future__ import division, print_function
 import glob
 import importlib
 import os
-import seiscomp.shell
 import shutil
 import signal
 import socket
 import subprocess
 import sys
 import traceback
+import seiscomp.shell
 
 # Problem: if
 # import seiscomp.config
@@ -326,7 +326,7 @@ def on_setup(args, flags):
 
 
 def on_setup_help(_):
-    print("Initializes the configuration of all available modules. Each module")
+    print("Initialize the configuration of all available modules. Each module")
     print("implements its own setup handler which is called at this point. The")
     print("initialization takes the installation directory into account and")
     print("should be repeated when copying the system to another directory.")
@@ -729,7 +729,8 @@ def on_print(args, _):
         print(
             'source "%s/share/shell-completion/seiscomp.bash"' %
             SEISCOMP_ROOT)
-        hostenv = os.path.join(SEISCOMP_ROOT, "etc", "env", "by-hostname", socket.gethostname())
+        hostenv = os.path.join(SEISCOMP_ROOT, "etc", "env", "by-hostname",
+                               socket.gethostname())
         if os.path.isfile(hostenv):
             print('source %s' % hostenv)
     else:
@@ -1076,9 +1077,11 @@ def on_alias(args, _):
             pass
 
         if not has_alias:
-            error("  + %s is not defined as an alias" % aliasName)
-            if len(lines) == len(new_lines):
-                return 1
+            print("  + {} is not defined as an alias".format(aliasName))
+            if not interactiveMode:
+                print("  + remove related configuration with '--interactive'")
+                if len(lines) == len(new_lines):
+                    return 1
 
         try:
             f = open(ALIAS_FILE, 'w')
@@ -1091,7 +1094,8 @@ def on_alias(args, _):
         f.close()
 
         if not has_alias:
-            return 1
+            if not interactiveMode:
+                return 1
 
         # remove symlink from bin/mod1
         if os.path.exists(os.path.join("bin", aliasName)):
@@ -1118,27 +1122,30 @@ def on_alias(args, _):
 
         #  delete defaults etc/defaults/mod1.cfg
         default_cfg = os.path.join("etc", "defaults", aliasName + ".cfg")
-        print("  + removing default configuration: {}/{}".format(SEISCOMP_ROOT, default_cfg))
+        print("  + removing default configuration: {}/{}"
+              .format(SEISCOMP_ROOT, default_cfg))
         try:
             os.remove(os.path.join(SEISCOMP_ROOT, default_cfg))
         except BaseException as e:
-            error("    + could not remove" % e)
+            error("    + could not remove %s" % e)
 
         if not interactiveMode:
-            warning("No other configurations were deleted for %s - interactive removal is supported by '--interactive'" % aliasName)
+            warning("No other configuration removed for '%s' - interactive"
+                    " removal is supported by '--interactive'" % aliasName)
             return 0
 
         # test module configuration files
         # SYSTEMCONFIGDIR
         cfg = os.path.join("etc", aliasName + ".cfg")
         if os.path.isfile(cfg):
-            print("  + found module configuration file: {}/{}".format(SEISCOMP_ROOT, cfg))
+            print("  + found module configuration file: {}/{}"
+                  .format(SEISCOMP_ROOT, cfg))
             answer = getInput("    + do you wish to remove it?", 'n', 'yn')
             if answer == "y":
                 try:
                     os.remove(cfg)
                 except Exception as e:
-                    error("    + could not remove the file: %s - try manually" % e)
+                    error("    + could not remove '%s' - try manually" % e)
 
         # CONFIGDIR
         cfg = os.path.join(
