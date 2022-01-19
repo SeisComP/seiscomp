@@ -214,7 +214,7 @@ All notable changes to SeisComP are documented here.
       Warnings will be written to module logs if deprecated values are found.
     - deprecated bindings parameter values -> new values:
 
-      ```conf
+      ```
       MLh.maxavg            -> amplitudes.MLh.params
       MLh.ClippingThreshold -> amplitudes.MLh.ClippingThreshold
       MLh.params            -> magnitudes.MLh.params
@@ -306,7 +306,7 @@ All notable changes to SeisComP are documented here.
       but an error message will be printed:
         - Added parameters to description:
 
-            ```conf
+            ```
             buffer.originKeep
             autoloc.useManualPicks
             autoloc.adoptManualDepth
@@ -316,7 +316,7 @@ All notable changes to SeisComP are documented here.
 
         - Renamed parameters (old -> new):
 
-            ```conf
+            ```
             autoloc.maxAge          -> buffer.pickKeep
             autoloc.cleanupInterval -> buffer.cleanupInterval
             autoloc.locator.profile -> locator.profile
@@ -324,7 +324,7 @@ All notable changes to SeisComP are documented here.
 
         - Removed parameters from description:
 
-            ```conf
+            ```
             autoloc.wakeupInterval
             ```
 
