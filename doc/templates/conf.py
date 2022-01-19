@@ -38,7 +38,7 @@ extensions = [
     #    'rst2pdf.pdfbuilder',
     'sphinx.ext.ifconfig', 'sphinx.ext.todo',
     'sphinx.ext.autodoc', 'sphinx.ext.viewcode',
-    'sphinx.ext.graphviz', 'm2r']
+    'sphinx.ext.graphviz', 'm2r2']
 
 if LooseVersion(sphinx.__version__) < LooseVersion('1.4'):
     extensions.append('sphinx.ext.pngmath')
