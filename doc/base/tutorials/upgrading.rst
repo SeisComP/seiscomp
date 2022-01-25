@@ -198,14 +198,15 @@ The normal upgrade takes only a few steps:
 
 .. _tutorials_upgrade_v4:
 
-Migrate from SeisComP3 to version 4
-===================================
+Migrate from SeisComP3 to version >=4
+=====================================
 
 SeisComP in version 4 has some major differences to SeisComP3 which require adjustments.
 The main differences are in the :ref:`directories of the SeisComP installation <sec-tutorials_upgrading_path>`
 and the :ref:`messaging system <sec-tutorials_upgrading_messaging>`.
 The changes and the required actions are explained below. They must be considered
 in addition to the steps set out in section :ref:`tutorials_upgrade_number`.
+
 
 .. _sec-tutorials_upgrading_path:
 
@@ -303,73 +304,97 @@ the messaging system. :ref:`scmaster` allows to operate several queues in parall
 different databases. This flexibility comes with additional parameters which require
 configuration. Migrate the legacy database parameters and configure the new one:
 
-#. Set up the messaging queues in the configuration of :ref:`scmaster` in :file:`scmaster.cfg`.
 
-   * Remove or comment the obsolete *dbplugin* plugin manually from :file:`scmaster.cfg`: ::
+#. Remove or comment the obsolete *dbplugin* plugin manually from
+   :file:`scmaster.cfg` and :file:`global.cfg` ::
 
-        #plugins = dbplugin
+   # plugins = dbplugin
 
-   * Add new queue or stay with the default queues.
+#. Set up the messaging queues in the configuration of :ref:`scmaster` in
+   :file:`scmaster.cfg`.
 
-     .. note::
+   * Add and configure a new queue or stay with the default ones.
 
-        The **default queue is production** used by default by all modules connected
-        to the messaging system. When removing this queue, another queue must exist
-        and the queue name must be configured for all modules in the connection parameters.
-        See below for an example.
+     * *production* considers a database by default.
+     * *playback* considers no database by default. Here, parameters can be
+       exchanged through the messaging without storing in the database.
 
-   * Add the required plugins, currently only *dbstore* is supported. Example for
-     a queue named *production*:
-
-     .. code-block:: sh
-
-        queues.production.plugins = dbstore
-
-   * Add non-default message groups to the list of default groups in
-     :confval:`defaultGroups`, e.g. for adding the groups *L1PICK* and *L1LOCATION* set ::
-
-        defaultGroups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,IMPORT_GROUP,SERVICE_REQUEST,SERVICE_PROVIDE
-
-     or use the configuration of queues, e.g. ::
-
-        queues.production.groups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,IMPORT_GROUP,SERVICE_REQUEST,SERVICE_PROVIDE
-
-     The configured groups will be available for all other connected modules in this queue
-     in addition to the default groups.
-
-     .. warning::
-
-        When setting groups in the queues all groups configured in
-        :confval:`defaultGroups` will be ignored. Add all groups from :confval:`defaultGroups`
-        to the queues to keep the default groups.
-
-   * Add the interface name, currently only *dbstore* is supported. Example for
-     a queue names *production*
-
-     .. code-block:: sh
-
-        queues.production.processors.messages = dbstore
-
-   * Add the database parameters which can be used from the legacy configuration. E.g.
-
-     .. code-block:: sh
-
-        queues.production.processors.messages.dbstore.driver = mysql
-        queues.production.processors.messages.dbstore.read = sysop:sysop@localhost/seiscomp3
-        queues.production.processors.messages.dbstore.write = sysop:sysop@localhost/seiscomp3
+     In the following examples, the *production* queue shall be assumed.
 
      .. note::
 
-        The name of the database can be freely chosen. The example assumes that
-        the database named *seiscomp3* exists already and that it shall be continued
-        to be used with the new SeisComP.
+        The *production* queue is used by default by all modules connected
+        to the messaging system. When removing this queue and a database shall be
+        used, another queue must exist
+        and the queue name must be configured for all modules in the global
+        :confval:`connection.server` parameter. See below for an example.
 
-   * Add the names of the queues to the :confval:`queues` parameter.
+     * Add the required plugins per queue. Currently only *dbstore* is supported.
+       Example for the *production* queue:
+     
+       .. code-block:: sh
+     
+          queues.production.plugins = dbstore
+     
+     * Add non-default message groups, e.g. *L1PICK* and *L1LOCATION* to the list
+       of groups **in one of the ways**:
+     
+       * Set :confval:`defaultGroups` ::
+     
+            defaultGroups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,IMPORT_GROUP,SERVICE_REQUEST,SERVICE_PROVIDE
+     
+       * Set groups per queue in :confval:`queues.$name.groups`,
+         ignoring groups in :confval:`defaultGroups` ::
+     
+          queues.production.groups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,IMPORT_GROUP,SERVICE_REQUEST,SERVICE_PROVIDE
+     
+       * Add groups per queues to defaults in :confval:`queues.$name.groups`, e.g.
+         for the *production* group.
+         This convenient configuration per queue
+         considers the default groups in :confval:`defaultGroups` and simply adds
+         new groups in the configuration of queues ::
+     
+            queues.production.groups = ${defaultGroups}, L1PICK, L1LOCATION
+     
+       .. warning::
+     
+          When setting groups in the queues all groups configured in
+          :confval:`defaultGroups` will be ignored unless `${defaultGroups}` is used.
+          Add all groups from :confval:`defaultGroups` to the queues to keep the
+          default groups.
+     
+     * Add the interface name, currently only *dbstore* is supported. Example for
+       a queue names *production*
+     
+       .. code-block:: sh
+     
+          queues.production.processors.messages = dbstore
+     
+     * Add the database parameters which can be used from the legacy configuration
+     
+       .. code-block:: sh
+     
+          queues.production.processors.messages.dbstore.driver = mysql
+          queues.production.processors.messages.dbstore.read = sysop:sysop@localhost/seiscomp3
+          queues.production.processors.messages.dbstore.write = sysop:sysop@localhost/seiscomp3
+     
+       .. note::
+     
+          The name of the database can be freely chosen. The example assumes that
+          the database named *seiscomp3* exists already and that it shall be continued
+          to be used with the new SeisComP.
+
+   * Add one or more of the queues to the :confval:`queues` parameter to register
+     them by their names ::
+
+        queues = production, playback
+
 
 #. Configure the connection parameters of all modules connecting to the messaging
    system in the global configuration, e.g. in :file:`global.cfg`.
    As in SeisComP3 the connection server is
-   localhost. The queue is added to the host by "/". The default queue is *production*, e.g.
+   localhost. The queue name is added to the host by "/". The default queue
+   is *production*, e.g.
 
    .. code-block:: sh
 
@@ -390,8 +415,9 @@ After adjusting the structure, variables and configuration parameters, check if 
 Seedlink
 --------
 
-When upgrading from SeisComp3 Jakrata-2018.327 or older and using :ref:`seedlink`, consider the section
-:ref:`tutorials_upgrade_seedlink`.
+When upgrading from SeisComp3 Jakrata-2018.327 or older and using :ref:`seedlink`,
+consider the sections :ref:`tutorials_upgrade_seedlink` and
+:ref:`tutorials_proc_seedlink`.
 
 
 Automatic module check
@@ -408,18 +434,24 @@ For crontab use:
 System daemon
 -------------
 
-If SeisComP is controlled by the system daemon, e.g. to start SeisComP automatically
-during computer startup, then the startup script must be adjusted.
+If |scname| is controlled by the system daemon, e.g. to start enabled |scname|
+modules automatically during computer startup, then the startup script must be
+adjusted.
 
-
-.. _tutorials_upgrade_seedlink:
 
 Upgrade from SeisComP3 Jakarta-2018.327 or before
 =================================================
 
-:ref:`seedlink`: In SeisComP3 prior to Jakarta-2020.330 two stations with the same
+
+.. _tutorials_upgrade_seedlink:
+
+SeedLink buffer
+---------------
+
+In SeisComP3 prior to Jakarta-2020.330 two stations with the same
 station but different network code were mixed in one buffer directory.
-As of  Jakarta-2020.330 and SeisComP in version 4 the buffer directories are now unambiguous!
+As of  Jakarta-2020.330 and SeisComP in version 4 the buffer directories are now
+unique!
 Before upgrading :ref:`seedlink`, you should therefore rename the buffer directories
 accordingly.
 
@@ -497,14 +529,50 @@ Script for renaming the seedlink buffer directories:
    done
 
 
-Downsampling data with chain_plugin
------------------------------------
+.. _tutorials_proc_seedlink:
 
-Since SeisComP3 in version Jakarta-2020.030 and SeisComP in version 4.0.0, SeedLink stream processors ("proc" parameter) can be attached to both, stations and plugin instances. In order to distinguish between the two cases, either ``proc`` (attach to station) or ``sources.*.proc`` (attach to plugin instance) parameter (or both) can be used in SeedLink bindings.
+SeedLink stream processor
+-------------------------
 
-Stream processor is an object defined in XML, which is used to create MiniSEED from raw data and optionally downsample the data. What is the difference between attaching a stream processor to station and plugin instance?
+Since SeisComP3 in version Jakarta-2020.030 and SeisComP in version 4.0.0,
+SeedLink stream processors (``proc`` parameter) can be attached to both, stations
+and plugin instances. In order to distinguish between the two cases, either
+``proc`` (attach to station) or ``sources.*.proc`` (attach to plugin instance)
+parameter (or both) can be used in SeedLink bindings.
 
-Let's take a look at the following stream processor definition in $SEISCOMP_ROOT/share/templates/seedlink/streams_stream100.tpl:
+
+chain plugin
+~~~~~~~~~~~~
+
+In case of ``chain_plugin``, there is normally just one instance, so stream
+processors attached to this instance apply to all stations. **This is normally
+not what we want.** Therefore the chain_plugin does not support the
+``sources.*.proc`` option.
+
+Before SeisComP3 in version Jakarta-2020.030 and SeisComP in version 4.0.0,
+stream processors were always attached to stations, even when ``sources.*.proc``
+was used. This means when upgrading:
+
+#. ``sources.chain.proc`` must be renamed to ``proc``
+#. streams\_\*.tpl templates must be moved one level up, from
+   :file:`$SEISCOMP_ROOT/seiscomp/share/templates/seedlink/chain/` to
+   :file:`$SEISCOMP_ROOT/seiscomp/share/templates/seedlink/`.
+
+.. note::
+
+   Using a stream processor with chain_plugin makes only sense when raw
+   data is generated (:confval:`sources.chain.channels.unpack`).
+
+
+Background
+~~~~~~~~~~
+
+A stream processor is an object defined in XML, which is used to create MiniSEED
+from raw data and optionally downsample the data. What is the difference between
+attaching a stream processor to station and plugin instance?
+
+Let's take a look at the following stream processor definition in
+:file:`$SEISCOMP_ROOT/share/templates/seedlink/streams_stream100.tpl`:
 
 .. code-block:: XML
 
@@ -523,11 +591,14 @@ Let's take a look at the following stream processor definition in $SEISCOMP_ROOT
      </tree>
    </proc>
 
-This creates 20Hz BH\*, 1Hz LH\* and 0.1Hz VH\* streams from 100Hz Z, N, E raw data. If one plugin instance is used for the station, it does not make a difference whether this is attached to station or plugin instance. But suppose the station is using two plugin instances—one for broad-band and the other for strong-motion data—, both sending Z, N and E channels. Now if the stream processor is attached to station, data from both plugin instances would mixed up. We must attach a different stream processor to each plugin instance—one producing BH\*, LH\* and VH\* and the other one producing BN\* and so on.
-
-In case of chain_plugin, there is normally just one instance, so stream processors attached to this instance apply to all stations, which is normally not what we want. Therefore the chain_plugin does not support the ``sources.*.proc`` option.
-
-Before SeisComP3 in version Jakarta-2020.030 and SeisComP in version 4.0.0, stream processors were always attached to stations, even when ``sources.*.proc`` was used. This means when upgrading, ``sources.chain.proc`` must be renamed to ``proc`` and streams\_\*.tpl templates must be moved one level up, from $SEISCOMP_ROOT/seiscomp/share/templates/seedlink/chain/ to $SEISCOMP_ROOT/seiscomp/share/templates/seedlink/. Note that using a stream processor with chain_plugin makes sense only when raw data is generated (:ref:`sources.chain.channels.unpack`).
+This creates 20Hz BH\*, 1Hz LH\* and 0.1Hz VH\* streams from 100Hz Z, N, E raw
+data. If one plugin instance is used for the station, it does not make a
+difference whether this is attached to station or plugin instance. But suppose
+the station is using two plugin instances—one for broad-band and the other for
+strong-motion data—, both sending Z, N and E channels. Now if the stream processor
+is attached to station, data from both plugin instances would mixed up. We must
+attach a different stream processor to each plugin instance—one producing BH\*,
+LH\* and VH\* and the other one producing BN\* and so on.
 
 
 References
