@@ -53,6 +53,7 @@ All notable changes to SeisComP are documented here.
     -   Show time window of re-picker on traces after re-picking
     -   Add "Fix FM + Mw" button to fix the focal mechanism and the Mw
         with one click
+    -   Show predicted phase arrival times in amplitude picker
 -   scmv
     -   Improve visibility of station annotations
 -   scesv
@@ -85,7 +86,7 @@ All notable changes to SeisComP are documented here.
     -   In newer versions (at least >=13) of PostgreSQL, some of the commands that
         are run to initiate the seiscomp database need to be run as the database owner.
         Thanks to Morten Sickel for fixing it.
--   documentation
+-   Documentation
     -   Fix Datamodel diagrams
     -   Add object cross references
 -   trunk
