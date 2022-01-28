@@ -55,6 +55,7 @@ All notable changes to SeisComP are documented here.
     -   Add "Fix FM + Mw" button to fix the focal mechanism and the Mw
         with one click
     -   Show predicted phase arrival times in amplitude picker
+    -   Select locator type and profile from loaded origin if possible
 -   scmv
     -   Improve visibility of station annotations
 -   scesv
