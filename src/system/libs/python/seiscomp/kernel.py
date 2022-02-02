@@ -42,7 +42,7 @@ class Environment(seiscomp.config.Config):
         self.data_dir = os.path.join(self.root, "share")
         self.etc_dir = os.path.join(self.root, "etc")
         self.etc_defaults_dir = os.path.join(self.root, "etc", "defaults")
-        self.escriptions_dir = os.path.join(self.root, "etc", "descriptions")
+        self.descriptions_dir = os.path.join(self.root, "etc", "descriptions")
         self.key_dir = os.path.join(self.root, "etc", "key")
         self.var_dir = os.path.join(self.root, "var")
         self.log_dir = os.path.join(self.local_config_dir, "log")
