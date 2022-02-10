@@ -331,55 +331,55 @@ configuration. Migrate the legacy database parameters and configure the new one:
 
      * Add the required plugins per queue. Currently only *dbstore* is supported.
        Example for the *production* queue:
-     
+
        .. code-block:: sh
-     
+
           queues.production.plugins = dbstore
-     
+
      * Add non-default message groups, e.g. *L1PICK* and *L1LOCATION* to the list
        of groups **in one of the ways**:
-     
+
        * Set :confval:`defaultGroups` ::
-     
+
             defaultGroups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,IMPORT_GROUP,SERVICE_REQUEST,SERVICE_PROVIDE
-     
+
        * Set groups per queue in :confval:`queues.$name.groups`,
          ignoring groups in :confval:`defaultGroups` ::
-     
+
           queues.production.groups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,IMPORT_GROUP,SERVICE_REQUEST,SERVICE_PROVIDE
-     
+
        * Add groups per queues to defaults in :confval:`queues.$name.groups`, e.g.
          for the *production* group.
          This convenient configuration per queue
          considers the default groups in :confval:`defaultGroups` and simply adds
          new groups in the configuration of queues ::
-     
+
             queues.production.groups = ${defaultGroups}, L1PICK, L1LOCATION
-     
+
        .. warning::
-     
+
           When setting groups in the queues all groups configured in
           :confval:`defaultGroups` will be ignored unless `${defaultGroups}` is used.
           Add all groups from :confval:`defaultGroups` to the queues to keep the
           default groups.
-     
+
      * Add the interface name, currently only *dbstore* is supported. Example for
        a queue names *production*
-     
+
        .. code-block:: sh
-     
+
           queues.production.processors.messages = dbstore
-     
+
      * Add the database parameters which can be used from the legacy configuration
-     
+
        .. code-block:: sh
-     
+
           queues.production.processors.messages.dbstore.driver = mysql
           queues.production.processors.messages.dbstore.read = sysop:sysop@localhost/seiscomp3
           queues.production.processors.messages.dbstore.write = sysop:sysop@localhost/seiscomp3
-     
+
        .. note::
-     
+
           The name of the database can be freely chosen. The example assumes that
           the database named *seiscomp3* exists already and that it shall be continued
           to be used with the new SeisComP.

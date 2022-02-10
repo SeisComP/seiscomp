@@ -1,8 +1,8 @@
 .. _getting-started:
 
-***************
-Getting started
-***************
+*****************************
+Getting Started with |scname|
+*****************************
 
 Once the Linux system is installed the |scname| modules need to be configured including
 the :ref:`initial configuration and the connection to the database <getting-started-initial>`.
@@ -14,11 +14,12 @@ graphical frontend to :program:`seiscomp` is :ref:`scconfig`.
 .. _getting-started-initial:
 
 Database Configuration
-=====================
+======================
 
-To configure |scname| with the database initially execute the steps listed in the
-section :ref:`Getting started <getting-started-setup>`. You will need to consider
-differences in the database:
+Once the database server is defined and optimized as described in the section
+:ref:`database_configuration` you may configure |scname| with the database.
+Initially execute the steps listed in this section. You will need to consider
+differences in databases:
 
 * :ref:`MySQL <getting-started-mysql>` (not recommended),
 * :ref:`MariaDB <getting-started-mariadb>`,
@@ -56,30 +57,28 @@ for |scname|. If you want to use MySQL continue with the
 MariaDB
 -------
 
-For setting up the |scname| database with MariaDB follow the instructions below.
+The initial configuration by the :program:`seiscomp` script or the
+wizard of :ref:`scconfig` allows to create and configure the MySQL database
+for |scname|.
+
+For setting up the database manually with MariaDB follow the instructions
+below.
 
 .. note::
 
-    With **Ubuntu 16.04** MariaDB has become the standard flavor of MySQL in Ubuntu
-    and either MariaDB or MySQL can be installed. The implementation of MariaDB
-    in Ubuntu requires additional steps. They must be taken **before** the initial
-    configuration in order to allow |scname| to make use of MariaDB.
+    With **Ubuntu 16.04** MariaDB has become the standard flavor of MySQL in
+    Ubuntu and either MariaDB or MySQL can be installed. The implementation
+    of MariaDB in Ubuntu requires additional steps. They must be taken
+    **before** the initial configuration in order to allow |scname| to make
+    use of MariaDB. Previously, the :ref:`scconfig` wizard and
+    :command:`seiscomp setup` could not be used to set up the MariaDB database.
+    **The option "Create database" had to be unchecked or answered with "no"**.
+    The issue is resolved in this release and both, :ref:`scconfig` wizard and
+    :command:`seiscomp setup` are now fully capable of the required actions.
 
-The full procedure to create the database including database optimization is:
+The full procedure to create the seiscomp database:
 
 .. code-block:: sh
-
-   user@host:~$ sudo systemctl enable mariadb
-   user@host:~$ sudo mysql_secure_installation
-        provide new root password
-        answer all questions with yes [Enter]
-
-   user@host:~$ sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
-        [mysqld]
-        innodb_buffer_pool_size = <your value>
-        innodb_flush_log_at_trx_commit = 2
-
-   user@host:~$ sudo systemctl restart mariadb
 
    user@host:~$ sudo mysql -u root -p
         CREATE DATABASE seiscomp CHARACTER SET utf8 COLLATE utf8_bin;
@@ -92,20 +91,20 @@ The full procedure to create the database including database optimization is:
 
    user@host:~$ mysql -u sysop -p seiscomp < ~/seiscomp/share/db/mysql.sql
 
-Currently, the :ref:`scconfig` wizard and :command:`seiscomp setup` cannot
-be used to set up the MariaDB database. **The option "Create database" must
-therefore be unchecked or answered with "no"**.
-
 
 .. _getting-started-postgresql:
 
 PostgreSQL
 ----------
 
-The initial configuration allows configuring the PostgreSQL database parameters for |scname|.
-It does not allow to :ref:`create the database <database_configuration_postgresql>`
-and the database tables. First :ref:`setup the database server<database_configuration_postgresql:>`,
-then create the user, the database and the tables.
+The initial configuration allows configuring the PostgreSQL database parameters
+for |scname|.
+It also allows :ref:`creating the database <database_configuration_postgresql>`
+and the database tables.
+
+For a manual setup of the PostgreSQL database first :ref:`setup the database
+server<database_configuration_postgresql>`, then create the user, the database
+and the tables.
 
 
 #. Create the user and the database
