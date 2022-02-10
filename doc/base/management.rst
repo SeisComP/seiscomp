@@ -4,12 +4,13 @@
 System management
 *****************
 
-The installation contains various modules for data acquisition, data
+The installation contains modules for data acquisition, data
 archiving, processing, distribution and much more. To control all these
-module and to update their configuration the central program :program:`seiscomp`
+modules and to update their configuration the central program :program:`seiscomp`
 is used with commands and options.
-:program:`seiscomp` is a Python script and it is installed in :file:`seiscomp/bin/seiscomp`.
 
+:program:`seiscomp` is a Python script installed in
+:file:`seiscomp/bin/seiscomp`.
 The graphical tool :ref:`scconfig<scconfig>` is a user-friendly wrapper
 tool for many commands in :program:`seiscomp`.
 
@@ -17,9 +18,10 @@ The entire management framework is built upon Python which is portable to differ
 platforms. To make :program:`seiscomp` work, ensure that Python is installed on
 your system.
 
-:program:`seiscomp` can be called from anywhere in the file system and will source the environment
-of its installation automatically. So it is possible to control different
-installations.
+:program:`seiscomp` of a particular installation can be called from anywhere in
+the file system with its full path. It will source the environment of the
+installation automatically. Thus, it is possible to control different
+installations on one computer.
 
 .. warning::
 
@@ -54,8 +56,79 @@ seiscomp Commands
 
 The *seiscomp* script can be executed with additional commands:
 
+* **alias** create|remove [new-name] [module name]
+
+  Manages module aliases.
+
+* **check** [module list]
+
+  Checks if all passed modules are still running if they have been started.
+  If no modules are listed, all modules are checked.
+
+* **disable** [module list]
+
+  The opposite of enable. Removes the file :file:`etc/init/[module].auto` for
+  each module passed.
+
+* **enable** [module list]
+
+  Enables a module to be started and checked automatically when either :command:`start`
+  or :command:`check` is called without arguments. This creates a file :file:`etc/init/[module].auto`
+  for each module passed.
+
+* **exec** [cmd]
+
+  Executes a module.
 
 * **help** [command]
+
+  Prints help on commands.
+
+* **install-deps** [packages]
+
+  Installs 3rd party packages on which |scname| depends such as MariaDB or MySQL.
+  This is currently only supported for major Linux distributions. A list of packages
+  needs to be given. Available packages are: **base**, **GUI**,
+  **mariadb-server**, **postgresql-server**, **fdsnws**.
+
+  #. Install only base system dependencies:
+
+     .. code-block:: sh
+
+        seiscomp install-deps base
+
+  #. Install base system dependencies and MariaDB/MySQL/PostgreSQL server:
+
+     MariaDB ::
+
+        seiscomp install-deps base mariadb-server
+
+     MySQL. Install either MariaDB or MySQL, not both at the same time! ::
+
+        seiscomp install-deps base mysql-server
+
+     PostgreSQL::
+
+        seiscomp install-deps base postgresql-server
+
+  #. Install also gui and fdsnws dependencies:
+
+     .. code-block:: sh
+
+        seiscomp install-deps gui fdsnws
+
+* **list** modules|aliases|enabled|disabled
+
+  Lists items.
+
+* **print** crontab|env
+
+  Prints pre-defined parameters.
+
+* **restart** [module list]
+
+  Restarts all the given modules. If no module is passed, all running and enabled modules
+  are first stopped and then restarted.
 
 * **setup**
 
@@ -68,38 +141,25 @@ The *seiscomp* script can be executed with additional commands:
 
      setup might overwrite previous settings with default values.
 
-* **install-deps** [packages]
+* **shell**
 
-  Installs 3rd party packages on which |scname| depends such as MariaDB or MySQL. This is
-  currently only supported for major Linux distributions. A list of packages
-  needs to be given.
+  Starts the interactive |scname| :ref:`shell <system-management-shell>`, an
+  approach to make configuration and manipulation of bindings more easy on the
+  command line.
 
-  Packages: base, mariadb-server, postgresql-server
+* **start** [module list]
 
-  #. Install only base system dependencies
+  Starts all modules in [module list]. If no module is named, all enabled modules are
+  started.
 
-     .. code-block:: sh
+* **status** [module list]
 
-        seiscomp install-deps base
+  Prints the status of some, started, enabled or all modules.
 
-  #. Install base system dependencies and MariaDB/MySQL/PostgreSQL server
+* **stop** [module list]
 
-     MariaDB::
-
-        seiscomp install-deps base mariadb-server
-
-     MySQL. Install either MariaDB or MySQL, not both at the same time! ::
-
-        seiscomp install-deps base mysql-server
-
-     PostgreSQL::
-
-        seiscomp install-deps base postgresql-server
-
-     Additional dependencies may be installed, e.g.
-
-     * gui
-     * fdsnws
+  Stops all modules in [module list]. If no module name is given, all running modules are
+  stopped.
 
 * **update-config** [module list]
 
@@ -109,57 +169,6 @@ The *seiscomp* script can be executed with additional commands:
   trunk station bindings and the inventory need to be synchronized with the
   database. If no module list is given, update-config is called for all available
   modules. Otherwise only the modules passed are updated.
-
-* **shell**
-
-  Starts the interactive :ref:`seiscomp shell <system-management-shell>`, an
-  approach to make configuration and manipulation of bindings more easy.
-
-* **enable** [module list]
-
-  Enables a module to be started and checked automatically when either :command:`start`
-  or :command:`check` is called without arguments. This creates a file :file:`etc/init/[module].auto`
-  for each module passed.
-
-* **disable** [module list]
-
-  The opposite of enable. Removes the file :file:`etc/init/[module].auto` for
-  each module passed.
-
-* **start** [module-list]
-
-  Starts all modules in [module-list]. If no module is named, all enabled modules are
-  started.
-
-* **stop** [module-list]
-
-  Stops all modules in [module-list]. If no module name is given, all running modules are
-  stopped.
-
-* **restart** [module-list]
-
-  Restarts all the given modules. If no module is passed, all running and enabled modules
-  are first stopped and then restarted.
-
-* **check** [module-list]
-
-  Checks if all passed modules are still running if they have been started.
-  If no modules are listed, all modules are checked.
-
-* **status** [module-list]
-
-  Prints the status of some or all modules.
-
-* **list** modules|aliases|enabled|disabled
-
-* **exec** [cmd]
-
-* **alias** create|remove new-name name
-
-* **print** crontab|env
-
-* **shell** starts the |scname| :ref:`shell <system-management-shell>`
-
 
 .. _system-management-shell:
 

@@ -1,5 +1,5 @@
 #########################
-Graphical user interfaces
+Graphical User Interfaces
 #########################
 
 .. toctree::

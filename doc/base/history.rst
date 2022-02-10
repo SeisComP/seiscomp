@@ -1,7 +1,7 @@
 .. _history:
 
 **********************
-Historical information
+Historical Information
 **********************
 
 The first version of SeisComP was developed for the

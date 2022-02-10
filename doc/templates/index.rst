@@ -50,7 +50,7 @@ Understanding |scname|
    /base/license
    /base/citation
 
-Operating a system
+Operating |scname|
 ##################
 
 .. toctree::

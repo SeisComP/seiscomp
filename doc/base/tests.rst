@@ -1,7 +1,7 @@
 .. _unittests:
 
 ************
-Unit testing
+Unit Testing
 ************
 
 Introduction

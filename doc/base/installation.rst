@@ -1,24 +1,37 @@
 .. _installation:
 
-*************************
-Installation and Database
-*************************
+*********************
+|scname| Installation
+*********************
 
-|scname| is distributed in the form of packages (tar files) for different releases,
-Linux systems and architectures:
+|scname| requires a modern Linux operating system as it is developed and tested
+only under Linux. For production systems we recommend Linux distributions with
+long-term support (LTS). The Linux flavors under which |scname| has been tested
+are given along with the |scname| package names on the download sites of
+`SeisComP`_ and `gempa`_.
 
-* Acquisition, processing and GUIs (for each supported platform)
-* Maps (maps from the |scname| releases Seattle and Zurich also work
-  in later releases)
-* Documentation
-* Station configuration files (optional)
+The software can be obtained and installed from
 
-Download these from `SeisComP`_.
-This section describes the installation of the binary packages of |scname| on
-an
+* Officially released packages (TAR files) for different release versions,
+  Linux systems and architectures,
+* :ref:`Source code available on GitHub <build>`.
 
-* :program:`Ubuntu 18`, 64 bit system
-* :program:`CentOS 7`, 64 bit system
+Packages may include
+
+* Software for data acquisition, processing and :term:`GUIs <GUI>` for each
+  supported platform,
+* Maps. Maps from the |scname| releases Seattle and Zurich also work
+  in later releases
+* Documentation,
+* Station configuration files (optional).
+
+Download these packages from `SeisComP`_ or `gempa`_.
+
+The next sections describe the installation of the binary packages of |scname|
+on
+
+* :program:`Ubuntu 18`, 64 bit system,
+* :program:`CentOS 7`, 64 bit system.
 
 
 Hardware Requirements
@@ -28,7 +41,6 @@ The hardware requirements for a seismic system depend on the size of the
 station network to be operated.
 
 Minimum requirements are:
-
 
 .. csv-table::
    :widths: 10 90
@@ -79,22 +91,23 @@ GUI system:
 +-----+----------------------------------------------------------------+
 
 
-|scname| Installation
-=====================
+.. _installation-packages:
 
-|scname| can be installed from source code or from packages. While the source code
-can be found on `GitHub`_, this documentation focuses on packages. For compilation
-from source code read the section :ref:`build`.
+Installation from Packages
+==========================
 
-
-Installation from packages
---------------------------
-
-The next steps describe the installation of |scname| with the compiled |scname|
+This section describes the installation of |scname| from compiled |scname|
 packages which ship as :file:`*.tar.gz` files.
 
-#. Log in as user, e.g. sysop (the standard user in this documentation)
-#. Download the installation packages, e.g. from `SeisComP`_ or get the packages from |gempa|:
+
+Steps to take
+-------------
+
+Simply follow a few steps to complete your installation of |scname|:
+
+#. Log in to your Linux system as user, e.g. sysop, the standard user in this
+   documentation.
+#. Download the installation packages, e.g. from `SeisComP`_ or from `gempa`_:
 
    * :file:`seiscomp-[version]-[OS]-[arch].tar.gz`: main |scname| package with binaries, etc.
      Ensure to download the right package matching your operating system (OS) and
@@ -103,11 +116,12 @@ packages which ship as :file:`*.tar.gz` files.
 
      .. note::
 
-        When receiving the packages from |gempa|, the documentation is already
+        When receiving the packages from `gempa`_, the documentation is already
         included in the main |scname| package to match the installed version. In this
         case, the documentation does not need to be downloaded and installed separately.
 
-   * :file:`seiscomp-maps.tar.gz`: standard |scname| maps.
+   * :file:`seiscomp-maps.tar.gz`: standard |scname| maps available on the
+     download site of `SeisComP`_.
 
 #. Copy the downloaded files to your $HOME directory.
 
@@ -176,8 +190,11 @@ The directory structure of the installed system is described the table below.
 Software dependencies
 ---------------------
 
-|scname| depends on a number of additional packages shipped with each Linux
-distribution. The :program:`seiscomp` tool comes with
+|scname| depends on a number of additional software packages shipped with each
+Linux distribution.
+After installation of |scname| these packages can be installed using the
+:program:`seiscomp`.
+The :program:`seiscomp` tool comes with
 the command :command:`install-deps` which installs required packages.
 Read the section :ref:`System management<system-management>` for more detailed instructions.
 For example, to install the dependencies for using the MariaDB database,
@@ -245,10 +262,17 @@ or contact the |scname| developers to add support for your distribution.
    may be incomplete. |scname| modules will stop and indicate the missing software.
    They can be installed manually.
 
+
 .. _database_configuration:
 
+*****************************
 Database Server Configuration
-=============================
+*****************************
+
+|scname| is typically operated with a :ref:`database <concepts_database>` which
+should be optimized. This section describes how to setup and optimize the
+database server. For the setup of the database itself read the section
+:ref:`getting-started`.
 
 
 .. _database_configuration_mysql:
@@ -413,5 +437,6 @@ References
 
 .. target-notes::
 
+.. _`gempa` : https://data.gempa.de/packages/Public/seiscomp/
 .. _`SeisComP` : https://www.seiscomp.de
 .. _`GitHub` : https://github.com/SeisComP

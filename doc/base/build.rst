@@ -1,20 +1,22 @@
 .. _build:
 
-*************************
-Checkout the repositories
-*************************
+***********************
+Getting the Source Code
+***********************
 
 .. caution ::
 
-   For production systems only use the official releases
-   from `SeisComP`_, `gempa GmbH`_ or compile from the corresponding release tags in this repository.
+   For production systems only
+   :ref:`install the officially released packages <installation-packages>`
+   from `SeisComP`_, `gempa GmbH`_ or compile from the corresponding release
+   tags in this repository.
 
-The SeisComP software collection is distributed among several repositories.
+The |scname| software collection is distributed among several repositories.
 For more information about compilation and build configuration head over to
 `Github`_.
 
-To checkout all repositories to build a complete SeisComP distribution the
-following script can be used:
+For building a complete |scname| distribution checkout all repositories using
+the following script:
 
 .. code-block:: sh
 
@@ -52,12 +54,14 @@ following script can be used:
    echo "To initialize the build, run 'make'."
 
 
+.. _compiling_source:
+
 ***********************************
-Compiling |scname| from source code
+Compiling |scname| from Source Code
 ***********************************
 
-To build from source you will need to clone from one or more repositories (see
-above).
+To build from source you will need to clone from one or more repositories as
+described in :ref:`build`.
 
 Before building, **install all the dependencies**,
 as described below in :ref:`build_dependencies`.
