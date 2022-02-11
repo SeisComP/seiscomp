@@ -84,7 +84,7 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
         options += "\n"
 
     for struct_node in struct_nodes:
-        struct_prefix = prefix + '\$name.' # pylint: disable=W1401
+        struct_prefix = prefix + '$name.' # pylint: disable=W1401
         options += "\n"
         options += ".. note::\n\n"
         options += "   **%s\***\n" % struct_prefix # pylint: disable=W1401
@@ -94,7 +94,7 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
             for l in desc:
                 options += "   *" + l + "*\n"
 
-        options += "   \$name is a placeholder for the name to be used" # pylint: disable=W1401
+        options += "   $name is a placeholder for the name to be used" # pylint: disable=W1401
         link = struct_node.get('link')
         if link:
             options += " and needs to be added to :confval:`%s` to become active.\n\n" % link

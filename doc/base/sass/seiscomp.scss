@@ -590,16 +590,16 @@ table.highlighttable {
 
 dl {
 	&.option, &.confval {
-		code {
+		dt {
 			color: $primaryForeground;
 			background: initial;
 			padding: 0;
 			/*letter-spacing: -0.02em;*/
-			&.descname {
+			.descname {
 				font-size: 1.1em;
 				font-weight: bold;
 			}
-			&.descclassname {
+			.descclassname {
 				font-size: 1.1em;
 			}
 		}
