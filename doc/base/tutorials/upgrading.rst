@@ -169,12 +169,11 @@ The normal upgrade takes only a few steps:
 
    * MySQL / MariaDB: ::
 
-        mysql -u sysop -p -D seiscomp -e 'source /home/sysop/seiscomp/share/db/migrations/mysql/0_10_to_0_11.sql;'
+        mysql -u sysop -p -D seiscomp -h localhost < /home/sysop/seiscomp/share/db/migrations/mysql/0_10_to_0_11.sql
 
    * PostgreSQL: ::
 
-        psql -U sysop -d seiscomp -h localhost -W
-        \i'seiscomp/share/db/migrations/postgresql/0_10_to_0_11.sql'
+        psql -U sysop -d seiscomp -h localhost -W -f /home/sysop/seiscomp/share/db/migrations/postgresql/0_10_to_0_11.sql
 
    Using the migration scripts provides a more user friendly way than copying the
    lines of MySQL code from the changelog. In future versions we might add the option
@@ -183,7 +182,7 @@ The normal upgrade takes only a few steps:
    .. warning::
 
       Upgrading the database make take some time. Do no interrupt the process!
-      During this time, the SeisComP messaging system is unavailable causing a downtime of the system.
+      During this time, the |scname| messaging system is unavailable causing a downtime of the system.
 
    After applying the migration scripts the database should be at the correct version.
    Test again with: ::
@@ -243,7 +242,7 @@ includes:
   .. warning::
 
      Some configuration default and description files have changed. Spread, arclink
-     and arclinkproxy are not part of SeisComP anymore. **Therefore, do not migrate:**
+     and arclinkproxy are not part of |scname| anymore. **Therefore, do not migrate:**
 
      * any default configuration, description and init files. Better enable the desired
        daemon modules again:
@@ -382,7 +381,7 @@ configuration. Migrate the legacy database parameters and configure the new one:
 
           The name of the database can be freely chosen. The example assumes that
           the database named *seiscomp3* exists already and that it shall be continued
-          to be used with the new SeisComP.
+          to be used with the new SeisComP in version 4.x.x.
 
    * Add one or more of the queues to the :confval:`queues` parameter to register
      them by their names ::
