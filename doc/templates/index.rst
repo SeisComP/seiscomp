@@ -46,6 +46,7 @@ Understanding |scname|
    /base/history
    /base/concepts
    /base/glossary
+   /base/references
    /base/changelog
    /base/license
    /base/citation
