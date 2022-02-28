@@ -38,12 +38,17 @@ extensions = [
     #    'rst2pdf.pdfbuilder',
     'sphinx.ext.ifconfig', 'sphinx.ext.todo',
     'sphinx.ext.autodoc', 'sphinx.ext.viewcode',
-    'sphinx.ext.graphviz', 'm2r2']
+    'sphinx.ext.graphviz', 'm2r2',
+    'sphinxcontrib.bibtex']
 
 if LooseVersion(sphinx.__version__) < LooseVersion('1.4'):
     extensions.append('sphinx.ext.pngmath')
 else:
     extensions.append('sphinx.ext.imgmath')
+
+# bibliography
+bibtex_bibfiles = ['base/references.bib']
+bibtex_default_style = 'plain'
 
 graphviz_output_format = 'svg'
 
