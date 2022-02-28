@@ -7,8 +7,8 @@ References
 
 Potentially uncited but relevant sources of information include:
 
-:ref:`global_iLoc`
-------------------
+:ref:`iLoc <global_iLoc>`
+-------------------------
 
 #. Bondár, I., K. McLaughlin and H. Israelsson, Improved event location uncertainty
    estimates, Science Applications International Corp., Final Report,
