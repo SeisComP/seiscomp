@@ -278,7 +278,7 @@ database server. For the setup of the database itself read the section
 .. _database_configuration_mysql:
 
 MariaDB / MySQL
----------------
+===============
 
 * For better performance with a MariaDB/MySQL database, adjust the memory pool size. Test
   the default of the **buffer\_pool_size** before making the change:
@@ -375,7 +375,7 @@ MariaDB / MySQL
 .. _database_configuration_postgresql:
 
 PostgreSQL
-----------
+==========
 
 * When using PostgreSQL, the database server must be initialized and secured.
 
@@ -427,7 +427,7 @@ follows.
 
 
 Next steps
-----------
+==========
 
 Now everything is installed and the system can be configured. The :ref:`next chapter<getting-started>`
 chapter explains the first steps.

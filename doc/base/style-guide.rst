@@ -176,38 +176,43 @@ Other markup tools and conventions
 
 .. _documentation_style_guide_links:
 
-Links and references
---------------------
+Internal links
+--------------
 
-* Create links to sections and subsections within and to figures  the text which can be referenced.
-  Use unique link names, e.g. including the upper-level section name or the module name.
-  Use appropriate short names to fit within the texts.
+Create links to sections and subsections within and to figures  the text which can be referenced.
+Use unique link names, e.g. including the upper-level section name or the module name.
+Use appropriate short names to fit within the texts.
 
-  Link with in this documentation to the section on headings: ::
+Link with in this documentation to the section on headings: ::
 
-    .. _documentation_style_guide_headings:
+   .. _documentation_style_guide_headings:
 
-  Reference: ::
+Reference: ::
 
-    :ref:`short name <documentation_style_guide_headings>`
+   :ref:`short name <documentation_style_guide_headings>`
 
-  Result: :ref:`short name <documentation_style_guide_headings>`
+Result: :ref:`short name <documentation_style_guide_headings>`
 
-* Create a reference list for external URLs at the end of the document.
-  Do not show the URL for external web sites within the text.  ::
 
-    References
-    ==========
+External references
+-------------------
 
-    .. target-notes::
+Do not show full citations or URLs for
+external web sites within the text but make references which
+are listed in the section :ref:`sec-references`. Procedure:
 
-    .. _`gempa GmbH`: https://www.gempa.de
+#. Add publications, external URLs, etc. as complete citation
+   entries to the reference list :file:`doc/base/references.bib`
+   in the base |scname| :ref:`repository on Github <build>`.
+#. Cite documents within the RST file using the *cite*
+   directive ::
 
-  and cite the URL within the text: ::
+      :cite:p:`seiscomp`
+      :cite:t:`seiscomp`
 
-     `gempa GmbH`_
+   which results in :cite:p:`seiscomp` and
+   :cite:t:`seiscomp` within the documentation HTML text.
 
-  Result: `gempa GmbH`_
 
 Text boxes
 ----------

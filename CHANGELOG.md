@@ -4,6 +4,9 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
+-   Documentation
+    -   Use a single BibTex file and a References section for most external
+        references
 -   scevtstreams
     -   New command-line parameter `--net-sta` for filtering streams my network
         and station codes
