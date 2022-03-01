@@ -41,3 +41,14 @@ Potentially uncited but relevant sources of information include:
    Applied to Array Processing, SnT conference, Abstract: T3.5-P54, Vienna/Austria,
    2019,
    `abstract: T3.5-P54 <https://events.ctbto.org/sites/default/files/2020-05/20190614-2019%20Book%20Of%20Abstracts%20Web%20Version%20with%20front%20cover%20-%20edited.pdf>`_
+
+:ref:`FixedHypocenter <global_fixedhypocenter>`
+-----------------------------------------------
+
+#. R. Le Bras, J. Wuster (2002). IDC Processing of Seismic, Hydroacoustic,
+   and Infrasonic Data [IDC5.2.1Rev1]. Angewandte Wissenschaft, Software und
+   Technologie GmbH.
+#. J.F. Evernden (1969). Precision of epicenters obtained by small numbers of
+   world-wide stations. Bull. Seism. Soc. Am., 59(3), 1365-1398.
+#. E.A. Flinn (1965). Confidence regions and error determinations for seismic
+   event location. Rev. Geophys., 3(1), 157-185.
