@@ -38,6 +38,8 @@ All notable changes to SeisComP are documented here.
         by the trigger receive the evaluation status `rejected` allowing discrimination
         from picks by the re-picker. Use evaluation mode `automatic` for both.
 -   Magnitudes
+	-   Mwp: Fix correction for radiation pattern. The change systematically
+	    reduces Mwp by 0.28
     -   Add new magnitude type MLc - like ML with customization:
         -   Amplitude pre-filtering
         -   Optional Wood-Anderson instrument simulation
