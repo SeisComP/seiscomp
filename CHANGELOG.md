@@ -6,6 +6,12 @@ All notable changes to SeisComP are documented here.
 
 -   scautoloc
     -   Fix picklog configuration.
+-   Documentation
+    -   Use a single BibTex file and a References section for most external
+        references
+-   Magnitudes
+    -   Mwp: Fix correction for radiation pattern. The change systematically
+        reduces Mwp by 0.28
 
 ## 4.8.3
 
