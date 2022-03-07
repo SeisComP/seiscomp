@@ -11,6 +11,7 @@ This chapter describes the configuration of a processing system and how all
 the pieces gear into each other. It will cover application specific
 configuration, inventory (station metadata) and application station bindings.
 
+
 Overview
 ========
 
@@ -52,12 +53,14 @@ A typical configuration requires the following steps:
 
    :ref:`Standalone modules <concepts_modules>` can also run without inventory.
 
+
 Inventory
 =========
 
 A correct inventory is fundamental to SeisComP. Read the :ref:`inventory section <concepts_inventory>`
 in concepts for a description. `SMP`_ can be used to generate the required files
 in SCML format.
+
 
 .. _concepts_configuration-configs:
 
@@ -102,6 +105,7 @@ configuration panel of :ref:`scconfig`.
 .. raw:: html
 
    </div>
+
 
 .. _global_modules_config:
 
@@ -512,8 +516,8 @@ Summary
 * Bindings are being read from the database or an XML file
 
 
-Related tools
-~~~~~~~~~~~~~
+Related Tools
+=============
 
 * :ref:`scdumpcfg`
 * :ref:`scxmldump`

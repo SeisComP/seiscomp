@@ -130,7 +130,7 @@ enabling a messaging connection and enabling database access.
 
 Messaging, database and daemon mode is enabled by default. The daemon mode is
 important if the application should be started as service and therefore should
-support the :option:`-D, --daemon` option. Utilities and non daemon applications
+support the option ``-D, --daemon``. Utilities and non daemon applications
 should disable that mode.
 
 Example calls to this options are shown in the highlighted lines of the above
@@ -394,7 +394,7 @@ returns the RecordStream instance which can be used to add stream requests.
 
 The record stream service is configured either with configuration files
 (:confval:`recordstream.service`, :confval:`recordstream.source`) or
-via command line (:option:`-I, --record-url`).
+via command-line options ``-I`, ``--record-url``.
 
 The application finishes if the record stream read EOF. Running a :class:`StreamApplication`
 with :ref:`Seedlink<seedlink>` would probably never terminate since it is a

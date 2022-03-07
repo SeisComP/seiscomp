@@ -148,7 +148,7 @@ Examples:
   Using non-default secure encryption and port the scheme and the port must be
   provided explicitly  in global configuration ::
 
-     connection.server = scmps://localhost:18181/production
+     connection.server = scmps://localhost18181/production
 
   On the command line use, e.g. ::
 

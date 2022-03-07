@@ -68,7 +68,7 @@ Scripts
 -------
 
 The scripts in this section all deal with inventory access. All need to be
-invoked with the :option:`-d` command line option to specify the |scname| database
+invoked with the command-line ``-d`` option to specify the |scname| database
 from which the information is to be read. For example:
 
 .. code-block:: sh
@@ -119,7 +119,7 @@ waveform-client.py
 
 .. literalinclude:: sdk-examples/waveform-client.py
 
-The :option:`-I` command line option can be used to configure the record
+The command-line option ``-I`` can be used to configure the record
 stream backend when running the test application.
 
 .. code-block:: sh

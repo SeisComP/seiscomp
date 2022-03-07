@@ -538,8 +538,8 @@ Scientific and technical terms
       Read the :ref:`technical documentation <global_mb>` for more details and the configuration.
 
    magnitude, broadband body-wave (mB_BB)
-      mB_BB is the term recommended by the IASPEI commission for :term:`mB` which
-      is used in |scname|.
+      mB_BB is the term recommended by the IASPEI commission for
+      :term:`magnitude, broadband body-wave (mB)` which is used in |scname|.
 
    magnitude, broadband body-wave (mB)
       mB is a magnitude based on body waves like :term:`mb <magnitude, body-wave (mb)>`,
@@ -837,11 +837,6 @@ Scientific and technical terms
       See the `SEED Reference Manual <http://www.fdsn.org/pdf/SEEDManual_V2.4.pdf>`_
       for details.
 
-   sP phase
-      Another depth phase. The sP is a :term:`S wave` with a takeoff angle of greater than 90° at
-      the source that is reflected and converted to :term:`P wave` at the reflection point at the
-      surface near the epicenter.
-
    S phase
       The S phase is the arrival of the direct :term:`S wave` that traveled through the Earth's
       crust and mantle observed in epicentral distances up to 100°.
@@ -855,12 +850,13 @@ Scientific and technical terms
       100 km (depending on the crustal thickness). Sn has usually smaller amplitudes than Sg.
 
    sP phase
-      A P wave starting as an :term:`S phase` at the source and arriving as .
+      A P wave starting as an :term:`S phase` at the source and arriving as P.
       The S phase has a takeoff angle greater than 90° at the source and therefore
       is first reflected at the surface near the epicenter and then converted into
-      a P phase. The sP is a depth phase. For shallow events and at teleseismic
-      distances sP has nearly the same path as the P wave except
-      for the path from hypocenter of the earthquake to the reflection point at the surface.
+      a :term:`P wave` phase. The sP is therefore a depth phase. For shallow
+      events and at teleseismic distances sP has nearly the same path as the P
+      wave except for the path from hypocenter of the earthquake to the
+      reflection point at the surface.
 
    pick
       #. Automatic or manual determined phase onset

@@ -379,10 +379,10 @@ PostgreSQL
 
 * When using PostgreSQL, the database server must be initialized and secured.
 
-* By default PostgresSQL does not allow to login with username and password which leads
-to the fact that :program:`scmaster` can not connect to the database after SeisComP
-database initialization. Here an example how to enable user/password authentication
-for local and remote connections.
+* By default PostgresSQL does not allow to login with username and password which
+  leads to the fact that :program:`scmaster` can not connect to the database
+  after |scname| database initialization. Here an example how to enable
+  user/password authentication for local and remote connections.
 
 
 .. code-block:: sh
@@ -406,14 +406,14 @@ for local and remote connections.
      :file:`/var/lib/pgsql/data/pg_hba.conf`
 
 * By default PostgresSQL accepts local connections only. If the database server
-and clients are on different machines please change the listen address as
-follows.
+  and clients are on different machines please change the listen address as
+  follows.
 
-.. code-block:: sh
+  .. code-block:: sh
 
-    listen_addresses = 0.0.0.0/0
+     listen_addresses = 0.0.0.0/0
 
-.. note ::
+  .. note ::
 
      The location of the configuration file can differ between distributions.
 

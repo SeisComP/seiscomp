@@ -64,7 +64,7 @@ the :ref:`documentation of the data model <api-datamodel-python>`.
    in files.
 
 The currently supported version of the database schema can be queried by any
-module connecting to the data base using the option :option:`-V`, e.g.: ::
+module connecting to the data base using the option ``-V``, e.g.: ::
 
    $ scolv -V
 
@@ -77,7 +77,7 @@ module connecting to the data base using the option :option:`-V`, e.g.: ::
      OS: Ubuntu 18.04.6 LTS / Linux
 
 
-Related modules
+Related Modules
 ===============
 
 * :ref:`scardac`

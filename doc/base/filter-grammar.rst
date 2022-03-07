@@ -100,11 +100,11 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
 
    :param timespan: Time span in seconds
 
+.. _filter-bw:
 
 .. py:function:: BW(order, lo-freq, hi-freq)
 
    Alias for the :py:func:`Butterworth band-pass filter, BW_BP<BW_BP()>`.
-
 
 .. py:function:: BW_BP(order, lo-freq, hi-freq)
 

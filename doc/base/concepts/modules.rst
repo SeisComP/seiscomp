@@ -4,10 +4,12 @@
 SeisComP modules
 ****************
 
+
 Scope
 =====
 
 This document describes the difference between command-line and daemon modules.
+
 
 Overview
 ========
@@ -24,6 +26,7 @@ use the default configuration options (see below) are called :term:`standalone m
 All other modules are called :term:`trunk` modules.
 
 Examples for standalone modules are :ref:`seedlink`, :ref:`slarchive` and :ref:`slmon`.
+
 
 .. _concepts_modules_commandline:
 
@@ -64,6 +67,7 @@ Debugging information can be obtained during runtime using the --debug option:
 
       /home/sysop/seiscomp/bin/seiscomp print env
 
+
 .. _concepts_modules_daemon:
 
 Daemon tools
@@ -84,6 +88,7 @@ Daemon modules can be started to run in the background:
 
 When starting a daemon module all verbosity output is stored in @LOGDIR@ or $SEISCOMP_ROOT/var/log.
 Daemon modules can also be executed as :ref:`command-line tools <concepts_modules_commandline>`.
+
 
 .. _concepts_modules_config:
 
