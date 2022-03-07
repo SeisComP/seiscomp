@@ -12,6 +12,9 @@ All notable changes to SeisComP are documented here.
 -   Magnitudes
     -   Mwp: Fix correction for radiation pattern. The change systematically
         reduces Mwp by 0.28
+-   scquery
+    -   Add command-line option `--print-column-name` for printing column names
+        as a header of the output
 
 ## 4.8.3
 
@@ -129,7 +132,7 @@ All notable changes to SeisComP are documented here.
     -   Allow modifying origins and creating artificial origins on zoom trace
         in picker window
 -   scquery
-    -   Add --print-header option for generating information on the query as a
+    -   Add `--print-header` option for generating information on the query as a
         header of the output
     -   Add examples for PostgreSQL
 -   GUI
