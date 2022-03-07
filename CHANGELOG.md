@@ -10,6 +10,9 @@ All notable changes to SeisComP are documented here.
 -   scevtstreams
     -   New command-line parameter `--net-sta` for filtering streams my network
         and station codes
+-   scquery
+    -   Add command-line option `--print-column-name` for printing column names
+        as a header of the output
 -   scquery_qc
     -   Added as new module including HTML documentation for querying the data
         base for waveform quality control (QC) parameters.
@@ -38,8 +41,8 @@ All notable changes to SeisComP are documented here.
         by the trigger receive the evaluation status `rejected` allowing discrimination
         from picks by the re-picker. Use evaluation mode `automatic` for both.
 -   Magnitudes
-	-   Mwp: Fix correction for radiation pattern. The change systematically
-	    reduces Mwp by 0.28
+    -   Mwp: Fix correction for radiation pattern. The change systematically
+        reduces Mwp by 0.28
     -   Add new magnitude type MLc - like ML with customization:
         -   Amplitude pre-filtering
         -   Optional Wood-Anderson instrument simulation
@@ -201,7 +204,7 @@ All notable changes to SeisComP are documented here.
     -   Allow modifying origins and creating artificial origins on zoom trace
         in picker window
 -   scquery
-    -   Add --print-header option for generating information on the query as a
+    -   Add `--print-header` option for generating information on the query as a
         header of the output
     -   Add examples for PostgreSQL
 -   GUI
