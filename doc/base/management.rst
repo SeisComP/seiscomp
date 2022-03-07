@@ -29,8 +29,8 @@ installations on one computer.
    you are doing.
 
    :program:`seiscomp` refuses to work when run with root privileges and issues
-   an error. To run it with root privileges the command line option
-   :option:`--asroot` must be given as first parameter, e.g.: ::
+   an error. To run it with root privileges the command-line option
+   ``--asroot`` must be given as first parameter, e.g.: ::
 
       seiscomp --asroot start seedlink
 

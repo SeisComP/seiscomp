@@ -4,10 +4,12 @@
 SeisComP plugins
 ****************
 
+
 Scope
 =====
 
 This chapter describes the general use of plugins in SeisComP.
+
 
 Overview
 ========
@@ -67,3 +69,20 @@ can be added. An incomplete list of SeisComP C++ interfaces:
 
 This is just a subset of available extensible interface factories. The
 emphasized entries refer to the factories which are most commonly extended.
+
+
+Location and Configuration
+==========================
+
+Plugins are located in :file:`$SEISCOMP_ROOT/share/pugins`. In order to make a
+plugins available for a module it must be added to the configuration of
+:confval:`plugins` of the global parameters of a module or in
+:ref:`global_configuration`.
+
+Configuring :confval:`plugins` with the name of a plugin will let the exclusively
+use this plugin and no other ones, e.g. default plugins. Example: ::
+
+   plugins = evrc
+
+In order to add a plugin to the default plugins or plugins loaded by before, e.g.
+by the global configuration, load these 

@@ -22,7 +22,7 @@ by default. To insert or update the inventory in the database, this information
 needs to be created or downloaded and converted. The following sections will
 describe the process of populating the database and how applications get access
 to it. All |scname| applications work the the internal inventory format also
-known as SCML.
+known as :term:`SCML`.
 
 The inventory shall contain all meta data describing the full recording system
 and the
@@ -49,6 +49,7 @@ out-sourced to external applications. The inventory synchronization is a
 
 .. figure:: ../media/inventory-sync.png
    :align: center
+   :width: 12cm
 
    Inventory synchronization as a two-stage process
 
@@ -68,16 +69,16 @@ The |scname| :ref:`configuration <concepts_modules>` does not deal with station 
 It only configures parameters for modules and module-station associations.
 The management of the inventory can and should be handled by external tools, e.g. `SMP`_.
 
-The |scname| documentation describes the data model including the
-:ref:`inventory <api-python-datamodel>`.
+The |scname| documentation describes the
+:ref:`data model including the inventory <api-datamodel-python>`.
 
 
 .. _concepts_inventory_format:
 
-Inventory format
+Inventory Format
 ================
 
-A typical inventory file in SCML looks like this:
+A typical inventory file in :term:`SCML` looks like this:
 
 .. code-block:: xml
 
@@ -94,15 +95,6 @@ The version attribute of the ``seiscomp`` tag represents the schema version of
 the |scname| data model which is consistent with the database schema version
 and the version of all other representations.
 
-Inventories must be provided to |scname| in XML files in :term:`SCML` format. A
-convenient way to generate clean and correct inventory files in SCML format is
-`SMP`_. Tools are provided to convert between other formats:
-
-* :ref:`arclink2inv`: from Arclink XML to SeisComPML
-* :ref:`dlsv2inv`: from dataless SEED to SeisComPML
-* :ref:`inv2dlsv`: from SeisComPML to dataless SEED
-* :ref:`fdsnxml2inv`: from FDSN StationXML to SeisComPML and back
-
 .. note::
 
    All geographic coordinates (latitudes, longitudes, elevation) are assumed in the
@@ -110,9 +102,24 @@ convenient way to generate clean and correct inventory files in SCML format is
    Mapping Agency 2000). Latitudes, longitudes are provided in degrees but
    elevations are given in meters.
 
+Inventories must be provided to |scname| in XML files in :term:`SCML` format. A
+convenient way to generate clean and correct inventory files in :term:`SCML` format is
+`SMP`_. Tools are provided to convert between other formats:
 
-Adding/updating inventory
-=========================
+
+.. csv-table::
+   :widths: 1 1
+   :header: Module namespace, Conversion
+   :align: left
+
+   arclink2inv, Arclink XML to SeisComPML
+   :ref:`dlsv2inv`, dataless SEED to SeisComPML
+   :ref:`inv2dlsv`, SeisComPML to dataless SEED
+   :ref:`fdsnxml2inv`, FDSN StationXML to SeisComPML and back
+
+
+Adding / Updating Inventory
+===========================
 
 To add inventory information to the |scname| database one either has to write directly
 to the database with custom script (not recommended) or place :term:`SCML` files
@@ -146,7 +153,7 @@ several import formats.
 
 This will automatically place the output SC ML file in :file:`@SYSTEMCONFIGDIR@/inventory`.
 ``seiscomp update-config inventory`` must be called afterwards to synchronize
-the changes with the database. If ``scconfig`` is being used then either the
+the changes with the database. If :program:`scconfig`` is used, then either the
 ``Sync`` button of the `Inventory` panel or the ``Update configuration`` button of
 the ``System`` panel must pressed.
 
@@ -155,43 +162,50 @@ the ``System`` panel must pressed.
 In order to populate the database with inventory information, the following
 steps have to be performed:
 
-* Convert existing station meta data formats to :term:`SCML`
-* Place all :term:`SCML` files at :file:`@SYSTEMCONFIGDIR@/inventory`
-* Run ``scinv sync`` or ``seiscomp update-config inventory``
+#. Convert existing station meta data formats to :term:`SCML`
+#. Place all :term:`SCML` files at :file:`@SYSTEMCONFIGDIR@/inventory`
+#. Run ``scinv sync`` or ``seiscomp update-config inventory``
 
 
-Reading inventory
+Reading Inventory
 =================
 
-Application usually connect to the database and read the necessary inventory
+Applications usually connect to the database and read the necessary inventory
 information. An application can decide whether it requires full response
-information (sensor and data logger response functions) or just channel
-information (without instrument descriptions). The latter performs faster and
-some applications do not full instrument information.
+information including sensor and data logger response functions or just channel
+information without instrument descriptions. The latter performs faster and
+some applications do not require full instrument information.
 
-An application does not require special configuration to read
-inventory information. A database connection is enough and it comes usually
-along with the handshake message of the messaging server.
+An application usually does not require special configuration to read inventory
+information. A database connection is enough and it comes usually along with the
+handshake message of the messaging server.
+
+If the messaging is not involved, the database can be specified by the
+command-line option ``-d``:
+
+.. code-block:: sh
+
+   $ myapp -d [type]://[user]:[password]@[host]:[port]
 
 There are cases when an application should be run without a database connection
 but requires inventory information, particularly in combination with the
 ``--ep`` command line argument. To direct an application to an inventory XML file
-(again in SC ML format), ``--inventory-db`` must be used:
+(again in :term:`SCML` format), `--inventory-db` must be used:
 
 .. code-block:: sh
 
-   $ myapp --inventory-db inv.xml
+   $ myapp --inventory-db inventory.xml
 
-That will completely bypass the database (even if used for event information)
-for reading inventory information. The file *inv.xml* can be created from the database
+The option ``--inventory-db`` will cause the module to completely bypass
+the database for reading inventory information even if used for event
+information. The file :file:`inventory.xml` can be created from the database
 using :ref:`scxmldump`.
 
 
-Related tools
+Related Tools
 =============
 
-
-* :ref:`arclink2inv`
+* arclink2inv
 * :ref:`dlsv2inv`
 * :ref:`fdsnxml2inv`
 * :ref:`import_inv`
