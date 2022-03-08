@@ -2,21 +2,6 @@
 
 All notable changes to SeisComP are documented here.
 
-## 4.9.0
-
--   Documentation
-    -   Use a single BibTex file and a References section for most external
-        references
--   Magnitudes
-    -   Mwp: Fix correction for radiation pattern. The change systematically
-        reduces Mwp by 0.28
--   scquery
-    -   Add command-line option `--print-column-name` for printing column names
-        as a header of the output
-    -   Add option `--delimiter` for defining the field delimiter
--   scolv
-    -   Select locator type and profile from loaded origin if possible
-
 ## X.Y.Z
 
 -   scevtstreams
@@ -93,6 +78,21 @@ All notable changes to SeisComP are documented here.
     -   Add new routing recordstream which allows to route specific network,
         station, location or channel codes to fixed proxy streams (thanks to
         Luca Scarabello / ETH for this contribution)
+
+## 4.9.0
+
+-   Documentation
+    -   Use a single BibTex file and a References section for most external
+        references
+-   Magnitudes
+    -   Mwp: Fix correction for radiation pattern. The change systematically
+        reduces Mwp by 0.28
+-   scquery
+    -   Add command-line option `--print-column-name` for printing column names
+        as a header of the output
+    -   Add option `--delimiter` for defining the field delimiter
+-   scolv
+    -   Select locator type and profile from loaded origin if possible
 
 ## 4.8.4
 
