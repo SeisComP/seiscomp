@@ -2,10 +2,8 @@
 
 All notable changes to SeisComP are documented here.
 
-## 4.8.4
+## 4.9.0
 
--   scautoloc
-    -   Fix picklog configuration.
 -   Documentation
     -   Use a single BibTex file and a References section for most external
         references
@@ -15,6 +13,13 @@ All notable changes to SeisComP are documented here.
 -   scquery
     -   Add command-line option `--print-column-name` for printing column names
         as a header of the output
+-   scolv
+    -   Select locator type and profile from loaded origin if possible
+
+## 4.8.4
+
+-   scautoloc
+    -   Fix picklog configuration.
 
 ## 4.8.3
 
