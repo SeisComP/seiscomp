@@ -2,17 +2,25 @@
 
 All notable changes to SeisComP are documented here.
 
-## X.Y.Z
+## 4.9.0
 
 -   Documentation
     -   Use a single BibTex file and a References section for most external
         references
--   scevtstreams
-    -   New command-line parameter `--net-sta` for filtering streams my network
-        and station codes
+-   Magnitudes
+    -   Mwp: Fix correction for radiation pattern. The change systematically
+        reduces Mwp by 0.28
 -   scquery
     -   Add command-line option `--print-column-name` for printing column names
         as a header of the output
+-   scolv
+    -   Select locator type and profile from loaded origin if possible
+
+## X.Y.Z
+
+-   scevtstreams
+    -   New command-line parameter `--net-sta` for filtering streams my network
+        and station codes
 -   scquery_qc
     -   Added as new module including HTML documentation for querying the data
         base for waveform quality control (QC) parameters.
@@ -41,8 +49,6 @@ All notable changes to SeisComP are documented here.
         by the trigger receive the evaluation status `rejected` allowing discrimination
         from picks by the re-picker. Use evaluation mode `automatic` for both.
 -   Magnitudes
-    -   Mwp: Fix correction for radiation pattern. The change systematically
-        reduces Mwp by 0.28
     -   Add new magnitude type MLc - like ML with customization:
         -   Amplitude pre-filtering
         -   Optional Wood-Anderson instrument simulation
@@ -63,7 +69,6 @@ All notable changes to SeisComP are documented here.
     -   Add "Fix FM + Mw" button to fix the focal mechanism and the Mw
         with one click
     -   Show predicted phase arrival times in amplitude picker
-    -   Select locator type and profile from loaded origin if possible
 -   scmv
     -   Improve visibility of station annotations
 -   scesv
@@ -87,6 +92,11 @@ All notable changes to SeisComP are documented here.
     -   Add new routing recordstream which allows to route specific network,
         station, location or channel codes to fixed proxy streams (thanks to
         Luca Scarabello / ETH for this contribution)
+
+## 4.8.4
+
+-   scautoloc
+    -   Fix picklog configuration.
 
 ## 4.8.3
 
