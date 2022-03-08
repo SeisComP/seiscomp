@@ -13,6 +13,7 @@ All notable changes to SeisComP are documented here.
 -   scquery
     -   Add command-line option `--print-column-name` for printing column names
         as a header of the output
+    -   Add option `--delimiter` for defining the field delimiter
 -   scolv
     -   Select locator type and profile from loaded origin if possible
 
