@@ -47,14 +47,14 @@ is taken from Modern Global Seismology.
          seedlink:geofon
          scautopick:teleseismic
 
-      which refers to ``etc/key/seedlink/profile_geofon`` and ``etc/key/scautopick/profile_teleseismic``.
+      which refers to :file:`etc/key/seedlink/profile_geofon` and
+      :file:`etc/key/scautopick/profile_teleseismic`.
       Changing the profile changes the bindings of all stations that use this profile.
 
    RecordStream
        Interface to access data records from data processing modules.
        :term:`SeisComP` applications access waveform data through the
-       `RecordStream <https://docs.gempa.de/seiscomp/current/apps/global_recordstream.html>`_
-       interface.
+       :ref:`RecordStream interface <concepts_RecordStream>`.
 
    standalone module
 
@@ -180,8 +180,7 @@ Scientific and technical terms
    channel code
       Description of characteristics of data related to the recording sensor and
       data logger as well as instrument responses, sampling frequencies, etc.
-      The standard codes are defined in the
-      `SEED manual <https://www.fdsn.org/seed_manual/SEEDManual_V2.4.pdf>`_.
+      The standard codes are defined in the :cite:t:`seed-2012`.
 
    Circum-Pacific belt
       The zone surrounding the Pacific Ocean that is characterized by frequent and strong
@@ -426,7 +425,7 @@ Scientific and technical terms
 
    location code
       Description of particular sensor location associated to a station. The standard
-      location codes are defined in the `SEED manual <https://www.fdsn.org/seed_manual/SEEDManual_V2.4.pdf>`_.
+      location codes are defined in the :cite:t:`seed-2012`.
 
    Love wave
       A major type of surface waves having a horizontal motion that is transverse (or perpendicular)
@@ -456,12 +455,16 @@ Scientific and technical terms
       #. body-wave magnitude (mb)
       #. moment magnitude (Mw).
 
-      The magnitude scales 1-3 have limited range and applicability and do not satisfactorily measure the
-      size of the largest earthquakes. The moment magnitude (Mw) scale, based on the concept of seismic moment,
-      is uniformly applicable to all earthquake sizes but is more difficult to compute than the other types. In
-      principal, all magnitude scales could be cross calibrated to yield the same value for any given earthquake, but
-      this expectation has proven to be only approximately true, thus the magnitude type as well as its value
-      is needed to be specified.
+      The magnitude scales 1-3 have limited range and applicability and do not
+      satisfactorily measure the
+      size of the largest earthquakes. The moment magnitude (Mw) scale, based on
+      the concept of seismic moment,
+      is uniformly applicable to all earthquake sizes but is more difficult to
+      compute than the other types. In
+      principal, all magnitude scales could be cross calibrated to yield the same
+      value for any given earthquake, but
+      this expectation has proven to be only approximately true, thus the
+      magnitude type as well as its value is needed to be specified.
 
       Additional or modified magnitudes can be computed by providing plugins.
 
@@ -469,7 +472,7 @@ Scientific and technical terms
       by :ref:`scolv`.
 
    magnitude, local (ML)
-      Magnitude scale introduced by Richter in the early 1930s (Richter, 1935)
+      Magnitude scale introduced by Richter in the early 1930s (:cite:t:`richter-1935`)
       to have a common scale for the strength of earthquakes. The basic observation
       is the systematic decay of the logarithm of the maximum
       amplitudes with increasing distance for different earthquakes described by:
@@ -575,8 +578,8 @@ Scientific and technical terms
       Read the :ref:`technical documentation <global_mb_bb>` for more details and the configuration.
 
    magnitude, cumulative body-wave (mBc)
-      mBc is the cumulative body-wave magnitude. See Bormann and Wylegalla (2005)
-      and  Bormann and Saul (2009) for details.
+      mBc is the cumulative body-wave magnitude. See :cite:t:`bormann-2005`
+      and :cite:t:`bormann-2009` for details.
 
    magnitude, surface wave (Ms)
       Ms is a magnitude scale based on teleseismic surface waves. Historically, Ms
@@ -651,8 +654,9 @@ Scientific and technical terms
 
          M(JMA) = \log \sqrt{{A_N}^2 + {A_E}^2} + 1.73 \log\Delta - 0.83
 
-      This equation is valid for local (< 2000 km) and shallow (< 80 km) earthquakes. For
-      deeper earthquakes additional correction functions have to be applied (Katsumata, 1996).
+      This equation is valid for local (< 2000 km) and shallow (< 80 km)
+      earthquakes. For deeper earthquakes additional correction functions have
+      to be applied (:cite:t:`katsumata-1996`).
 
       * Amplitude unit in |scname|: **micrometer** (um)
       * Time window: 150 s
@@ -677,12 +681,13 @@ Scientific and technical terms
       Moment magnitude derived as a weighted average of other magnitudes.
 
    magnitude, broadband P-wave moment (Mwp)
-      The Mwp is a rapid estimate of the moment magnitude based on the first-arrival P waves
-      on broadband seismograph records. The displacement seismograms of the P wave
-      portion are considered as source time function approximation. The seismic moment
-      is estimated for each station by integrating the displacement records. The combination
-      of multiple records results in an estimation of the moment magnitude without correction
-      for the source mechanism (Tsuboi et al., 1995).
+      The Mwp is a rapid estimate of the moment magnitude based on the
+      first-arrival P waves on broadband seismograph records. The displacement
+      seismograms of the P wave portion are considered as source time function
+      approximation. The seismic moment is estimated for each station by
+      integrating the displacement records. The combination of multiple records
+      results in an estimation of the moment magnitude without correction
+      for the source mechanism (:cite:t:`tsuboi-1995`).
 
       * Amplitude unit in |scname|: **nanometer times second** (nm*s)
       * Time window: 95 s
@@ -696,7 +701,7 @@ Scientific and technical terms
 
    magnitude, derived Mwp (Mw(Mwp))
       Moment magnitude derived from :term:`Mwp <magnitude, broadband P-wave moment (Mwp)>`
-      magnitudes using linear conversion after Whitmore et al. (2002):
+      magnitudes using linear conversion after :cite:t:`whitmore-2002`:
 
       Mw(Mwp) = 1.31 Mwp - 1.91
 
@@ -725,9 +730,9 @@ Scientific and technical terms
          primary microseisms).
 
    miniSeed
-      `miniSeed <http://www.iris.edu/data/miniseed.htm>`_ is the standard for
-      the exchange of seismic time series. It uses a fixed record length and
-      applies data compression.
+      miniSEED is the
+      standard for the exchange of seismic time series. It uses a fixed record
+      length and applies data compression as defined in :cite:t:`seed-2012`.
 
    MMI
       Modified Mercalli Intensity
@@ -858,8 +863,7 @@ Scientific and technical terms
       It is controlled as a standard by the International Federation
       of Digital Seismograph Networks (FDSN).
       The current version is 2.4, updated August 2012.
-      See the `SEED Reference Manual <http://www.fdsn.org/pdf/SEEDManual_V2.4.pdf>`_
-      for details.
+      Read :cite:t:`seed-2012` for details.
 
    S phase
       The S phase is the arrival of the direct :term:`S wave` that traveled through the Earth's
@@ -910,7 +914,8 @@ Scientific and technical terms
       #. Attribute of the QuakeML object Event, see :term:`event`.
 
    QuakeML
-      A XML scheme developed as an open standard for seismological meta data exchange (http://www.quakeml.org).
+      A XML scheme developed as an open standard for seismological meta data
+      exchange (http://www.quakeml.org).
 
    radiation pattern
       Dependence of the amplitudes of seismic :term:`P<P wave>` and :term:`S waves<S wave>` on the direction and take-off
@@ -1010,7 +1015,7 @@ Scientific and technical terms
       Specific Energy Density
 
    SeedLink
-      `SeedLink <https://docs.gempa.de/seiscomp/current/apps/seedlink.html>`_ is a
+      SeedLink :cite:p:`seedlink` is a
       real-time data acquisition protocol and a client-server software that
       implements this protocol
 
@@ -1081,7 +1086,7 @@ Scientific and technical terms
       moment tensor inversion. Assuming reasonable values for the rigidity of the
       rock (3-6 x 104 MPa in crust and upper mantle) and the stress drop (2-6 MPa)
       the seismic moment can be related to the surface wave magnitude Ms by the
-      empirical relationship found by Gutenberg and Richter (1956) (units in cgs):
+      empirical relationship found by :cite:t:`gutenberg-1956` (units in cgs):
 
       .. math::
 
