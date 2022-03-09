@@ -92,7 +92,8 @@ All notable changes to SeisComP are documented here.
         as a header of the output
     -   Add option `--delimiter` for defining the field delimiter
 -   scolv
-    -   Select locator type and profile from loaded origin if possible
+    -   Select locator type and profile from loaded origin if possible if
+        enabled with option `olv.locator.presetFromOrigin` (default: false)
 
 ## 4.8.4
 
