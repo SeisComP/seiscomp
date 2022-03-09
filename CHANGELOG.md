@@ -94,6 +94,9 @@ All notable changes to SeisComP are documented here.
 -   scolv
     -   Select locator type and profile from loaded origin if possible if
         enabled with option `olv.locator.presetFromOrigin` (default: false)
+-   scdbstrip
+    -   Fix compatibility with latest PostgreSQL versions. Thanks for
+        Luca Scarabello for the fix.
 
 ## 4.8.4
 
