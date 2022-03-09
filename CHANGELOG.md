@@ -19,6 +19,9 @@ All notable changes to SeisComP are documented here.
 -   scdbstrip
     -   Fix compatibility with latest PostgreSQL versions. Thanks for
         Luca Scarabello for the fix.
+-   trunk
+    -   Fix crash if a spatial map layer has no configured legend items but
+        wants to show a legend
 
 ## 4.8.4
 
