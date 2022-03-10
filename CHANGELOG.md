@@ -79,6 +79,12 @@ All notable changes to SeisComP are documented here.
         station, location or channel codes to fixed proxy streams (thanks to
         Luca Scarabello / ETH for this contribution)
 
+## 4.9.1
+
+-   scmaster
+    -   Fix setup stage if a database port has been specified explicitly
+
+
 ## 4.9.0
 
 -   Documentation
