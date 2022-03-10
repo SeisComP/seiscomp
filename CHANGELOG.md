@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.9.1
+
+-   scmaster
+    -   Fix setup stage if a database port has been specified explicitly
+
 ## 4.9.0
 
 -   Documentation
