@@ -129,7 +129,7 @@ and the tables.
 
    .. code-block:: sh
 
-      user@host:~$ psql -f seiscomp/share/db/postgres.sql -d seiscomp -U sysop
+      user@host:~$ psql -f ~/seiscomp/share/db/postgres.sql -t seiscomp -U sysop
 
 Continue with the :ref:`general setup <getting-started-setup>` considering the
 created database but **do not create the database again**.
