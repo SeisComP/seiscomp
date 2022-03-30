@@ -52,37 +52,64 @@ There are two types of playbacks:
 * :ref:`Real-time playbacks <tutorials_rtplayback>`.
 * :ref:`Non-real-time playbacks <tutorials_nonrtplayback>`.
 
+
 Data preparation
 ================
 
-First extract the data. Make sure the miniSEED records are sorted by end-time.
+First extract the data. Make sure the miniSEED records are sorted by end time.
 The data extraction depends on the data source.
 
-* Extract the data from your own SDS archive using :ref:`scart` and save in new
-  miniSEED file, sorted by end-time. The resulting
-  file :file:`[your miniSEED file]` can be used for the playback.
+Examples:
 
-  Example:
+* **SDS archive:** Extract the data from your own SDS archive using :ref:`scart`
+  and save it in a new miniSEED file :file:`[your miniSEED file]`, sorted by
+  end time of the records.
 
-  .. code-block:: sh
-
-     scart -dsEv -t '[start-time]~[end-time]' $SEISCOMP_ROOT/var/lib/archive > [your miniSEED file]
-
-* Get the miniSEED data from an external FDSNWS server. The obtained data are
-  initially sorted by station and must therefore be sorted by end time. The resulting
-  file :file:`[your miniSEED file]` can be used for the playback.
-
-  Example for 1 hour of data from the GE network from `FDSNWS at GEOFON`_:
+  Examples:
 
   .. code-block:: sh
 
-     wget -O data.mseed "https://geofon.gfz-potsdam.de/fdsnws/dataselect/1/query?net=GE&cha=BH*&starttime=2020-04-01T06:00:00Z&endtime=2012-06-04T07:00:00Z"
+     scart -dsE -l [list file] $SEISCOMP_ROOT/var/lib/archive > [your miniSEED file]
+
+* **FDSNWS:** Get the miniSEED data from an external FDSNWS server. The obtained
+  data are initially sorted by station and must therefore be sorted by end time
+  using :ref:`scmssort`. Use the resulting file :file:`[your miniSEED file]`
+  for your playback.
+
+  Example for one hour of data from the GE network from
+  `FDSNWS at GEOFON <https://geofon.gfz-potsdam.de/waveform/webservices/fdsnws.php>`_:
+
+  .. code-block:: sh
+
+     wget -O data.mseed "http://geofon.gfz-potsdam.de/fdsnws/dataselect/1/query?net=GE&cha=BH*&starttime=2021-04-01T06:00:00Z&endtime=2021-04-01T07:00:00Z"
      scmssort -u -E data.mseed > [your miniSEED file]
 
-* To extract the data from gempa's `CAPS server`_ use `capstool`_ together with :ref:`scmssort`.
+* **CAPS server:** Extract the data from gempa's CAPS server :cite:p:`caps`
+  using :cite:t:`capstool`:
+
+  .. code-block:: sh
+
+     capstool -H [host]:[port] [request file] > data.mseed
+
+  or :ref:`scart` with the *caps* :term:`recordstream`:
+
+  .. code-block:: sh
+
+     scart -I caps://[host]:[port] -l [list file] --stdout > data.mseed
+
+  Eventually, sort the downloaded data by end time with :ref:`scmssort` creating
+  a new file, :file:`[your miniSEED file]`:
+
+  .. code-block:: sh
+
+     scmssort -u -E data.mseed > [your miniSEED file]
+
+Use the resulting file :file:`[your miniSEED file]` for your playback.
+
 
 Playbacks
 =========
+
 
 .. _tutorials_rtplayback:
 
@@ -159,6 +186,7 @@ data acquisition.
 
    Better use separate test systems for real-time playbacks.
 
+
 .. _tutorials_nonrtplayback:
 
 Non-real-time playbacks
@@ -175,6 +203,7 @@ by each module as fast as possible. The results can be communicated by
 
    In non-real-time playbacks scheduling and the creation history are not representative of
    real-time situations.
+
 
 Reviewing results
 =================
@@ -213,12 +242,3 @@ Use :ref:`scolv` or other :term:`GUIs <GUI>` to review the results:
 
    Adjust the arguments to match your configuration. Use your own values for arguments enclosed by
    brackets, e.g. [your file]
-
-References
-==========
-
-.. target-notes::
-
-.. _`FDSNWS at GEOFON` : https://geofon.gfz-potsdam.de/waveform/webservices.php
-.. _`CAPS server` : https://www.gempa.de/products/caps/
-.. _`capstool` : https://docs.gempa.de/caps/current/apps/capstool.html

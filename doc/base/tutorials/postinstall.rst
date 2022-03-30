@@ -35,6 +35,7 @@ You may install SeisComP by:
 #. :ref:`Installing pre-compiled release packages <tutorials_postinstall_package>`
    including binaries, maps and documentation.
 
+
 Get your Linux System ready
 ===========================
 
@@ -308,6 +309,7 @@ Find a detailed description in section :ref:`getting-started` and short guide be
 
 
 Congratulations, you're done with this tutorial.
+
 
 References
 ==========

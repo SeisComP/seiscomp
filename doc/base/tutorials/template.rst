@@ -56,6 +56,7 @@ To use this template, you'll need to:
    * Push the new branch to GitHub
    * Create a merge request to get your branch merged into the master branch
 
+
 .. _tutorials_template_testing:
 
 Final tests
