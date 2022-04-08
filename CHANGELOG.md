@@ -79,6 +79,18 @@ All notable changes to SeisComP are documented here.
         station, location or channel codes to fixed proxy streams (thanks to
         Luca Scarabello / ETH for this contribution)
 
+## 4.9.2
+
+```SC_API_VERSION 14.4.1```
+
+-   scolv
+    -   Fix magnitude tab header update if the represented magnitude updates.
+        It prints the current station magnitude counts rather than "0/0".
+-   scmaster
+    -   Get rid of distutils in setup script
+-   fdsnws
+    -   Fix broken unicode XML responses
+
 ## 4.9.1
 
 -   scmaster
