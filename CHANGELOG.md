@@ -4,6 +4,13 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
+-   scart
+    -   New command-line parameter `--check` for new check mode checking miniSEED
+        files in directories for out-o-order records.
+    -   New command-line parameter `--with-filecheck` for checking generated
+        miniSEED files for out-o-order records after writing them.
+    -   New command-line parameter `--nslc` for filtering streams in dump mode
+        by a list of streams.
 -   scevtstreams
     -   New command-line parameter `--net-sta` for filtering streams my network
         and station codes
