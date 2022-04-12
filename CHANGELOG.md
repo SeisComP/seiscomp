@@ -69,6 +69,11 @@ All notable changes to SeisComP are documented here.
         eventedit.customColumn.pos             -> eventedit.origin.customColumn.pos
         eventedit.customColumn.colors          -> eventedit.origin.customColumn.colors
         ```
+    -   Add support for event list filters based on polygons defined in either
+        the fep or bna/geojson directories.
+        ```
+        eventlist.filter.regions.region.Test.poly = "my polygon"
+        ```
 
 -   trunk
     -   Add event certainties "felt", "damaging" in line with IASPEI event type
