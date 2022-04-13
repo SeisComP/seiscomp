@@ -11,8 +11,6 @@ All notable changes to SeisComP are documented here.
         It prints the current station magnitude counts rather than "0/0".
 -   scmaster
     -   Get rid of distutils in setup script
--   fdsnws
-    -   Fix broken unicode XML responses
 
 ## 4.9.1
 
