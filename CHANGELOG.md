@@ -104,6 +104,9 @@ All notable changes to SeisComP are documented here.
     -   Get rid of distutils in setup script
 -   scqcv
     -   Allow unordered stream list
+-   screloc
+    -   Optionally keep track of the triggering origin ID of a relocation storing
+        it as comment in the relocated origin.
 
 ## 4.9.1
 
