@@ -4,6 +4,8 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
+-   fdsnws
+    -   Fix broken unicode XML responses
 -   scart
     -   New command-line parameter `--check` for new check mode checking miniSEED
         files in directories for out-o-order records.
@@ -100,8 +102,6 @@ All notable changes to SeisComP are documented here.
         It prints the current station magnitude counts rather than "0/0".
 -   scmaster
     -   Get rid of distutils in setup script
--   fdsnws
-    -   Fix broken unicode XML responses
 
 ## 4.9.1
 
