@@ -85,8 +85,8 @@ Modules and tools
 
 .. _sec_index_extensions:
 
-Extensions
-##########
+Extensions and filters
+######################
 
 .. toctree::
    :maxdepth: 4
