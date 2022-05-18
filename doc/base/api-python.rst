@@ -2064,7 +2064,7 @@ Used by:
      - frost quake
    * - ``TREMOR_PULSE``
      - 51
-     - temor pulse
+     - tremor pulse
    * - ``SUBMARINE_LANDSLIDE``
      - 52
      - submarine landslide
