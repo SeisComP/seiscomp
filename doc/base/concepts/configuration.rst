@@ -548,8 +548,7 @@ The parameter names are case-sensitive. The format is a simple as:
 .. code-block:: sh
 
    agencyID = gempa
-   recordstream.service = slink
-   recordstream.source = localhost:18000
+   recordstream = slink://localhost:18000
 
 In parameter groups indicated by a separating dot (".") the dot separates the group
 from the parameter name.

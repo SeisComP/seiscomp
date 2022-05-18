@@ -393,7 +393,7 @@ returns the RecordStream instance which can be used to add stream requests.
 
 
 The record stream service is configured either with configuration files
-(:confval:`recordstream.service`, :confval:`recordstream.source`) or
+(:confval:`recordstream`) or
 via command-line options ``-I`, ``--record-url``.
 
 The application finishes if the record stream read EOF. Running a :class:`StreamApplication`
