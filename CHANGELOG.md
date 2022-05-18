@@ -4,13 +4,16 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
+-   hypo71
+    -   Do not crash when Hypo71 cannot compute the arrival time for a given
+        phaseHint.
 -   fdsnws
     -   Fix broken unicode XML responses
 -   scart
-    -   New command-line parameter `--check` for new check mode checking miniSEED
-        files in directories for out-o-order records.
+    -   New command-line parameter `--check` for new check mode checking
+        miniSEED files in directories for out-of-order records.
     -   New command-line parameter `--with-filecheck` for checking generated
-        miniSEED files for out-o-order records after writing them.
+        miniSEED files for out-of-order records after writing them.
     -   New command-line parameter `--nslc` for filtering streams in dump mode
         by a list of streams.
 -   scevtstreams
@@ -23,9 +26,10 @@ All notable changes to SeisComP are documented here.
 -   scqcquery
     -   Removed module. It is replaced by new module scquery_qc.
 -   scautopick
-    -   When configuring `sendDetections = true` and `picker`, initial picks made
-        by the trigger receive the evaluation status `rejected` allowing discrimination
-        from picks by the re-picker. Use evaluation mode `automatic` for both.
+    -   When configuring `sendDetections = true` and `picker`, initial picks
+        made by the trigger receive the evaluation status `rejected` allowing
+        discrimination from picks by the re-picker. Use evaluation mode
+        `automatic` for both.
 -   Magnitudes
     -   Add new magnitude type MLc - like ML with customization:
         -   Amplitude pre-filtering
@@ -50,8 +54,14 @@ All notable changes to SeisComP are documented here.
 -   scesv
     -   Add number of listed / loaded events in title of Events tab
 -   scevent
-    -   evrc plugin provides more control options for setting and overwriting event
-        types
+    -   evrc plugin provides more control options for setting and overwriting
+        event types
+    -   Add option to populate Flinn-Engdahl region name event description
+-   scevtls
+    -   Add option `-p` allowing to print the ID of the preferred origin along
+        with the event ID.
+-   scbulletin
+    -   Filter events in XML files by event ID if provided with option `-E`
 -   LOCSAT
     -   Add global configuration parameters for using backazimuth and slowness,
         `LOCSAT.usePickBackazimuth` and `LOCSAT.usePickSlowness`
@@ -85,6 +95,10 @@ All notable changes to SeisComP are documented here.
         ```
 
 -   trunk
+    -   Remove application configuration support for `recordstream.service` and
+        `recordstream.source` which has been completely replaced with `recordstream`
+    -   Remove application configuration support for `database.type` and
+        `database.parameters` which has been completely replaced with `database`
     -   Add event certainties "felt", "damaging" in line with IASPEI event type
         leading character
     -   Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
@@ -92,6 +106,7 @@ All notable changes to SeisComP are documented here.
     -   Add new routing recordstream which allows to route specific network,
         station, location or channel codes to fixed proxy streams (thanks to
         Luca Scarabello / ETH for this contribution)
+    -   Add usage and examples to command-line help for many Python utilities
 
 ## 4.9.2
 
