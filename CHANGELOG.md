@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 4.9.3
+
+-   scolv
+    -   Fix lat/lon order of modify origin dialog opened from zoomtrace of
+        the picker
+
 ## 4.9.2
 
 -   scolv
