@@ -4,7 +4,9 @@ from __future__ import division, print_function
 
 import glob
 import importlib
+import math
 import os
+import platform
 import shutil
 import signal
 import socket
@@ -278,6 +280,41 @@ def stop_kernel_modules():
             return stop_module(mod)
 
     return 1
+
+def detectOS():
+    OSReleaseMap = {
+        'centos': 'rhel',
+        'rocky': 'rhel',
+        'raspbian': 'debian'
+    }
+
+    try:
+        arch = platform.machine()
+    except BaseException:
+        arch = 'x86_64'
+
+    data = {}
+    with open('/etc/os-release', 'r') as f:
+        for line in f:
+            toks = line.split("=")
+            if len(toks) != 2:
+                continue
+
+            data[toks[0].strip().upper()] = toks[1].strip()
+
+    osID = OSReleaseMap.get(data['ID'].strip('"'))
+    if not osID:
+        osID = data['ID'].strip('"')
+
+    version = data['VERSION_ID'].strip('"')
+    if osID == 'rhel':
+        try:
+            version = str(math.floor(float(version)))
+        except Exception:
+            pass
+
+    name = data['NAME'].strip('"')
+    return name, osID, version, arch
 
 # ------------------------------------------------------------------------------
 # Commandline action handler
@@ -756,30 +793,20 @@ def on_print_help(_):
 
 
 def on_install_deps_linux(args, _):
-    try:
-        out = subprocess.Popen(['lsb_release', '-sir'],
-                               stdout=subprocess.PIPE).communicate()[0].splitlines()
-        # some OS return release and version in one line
-        if len(out) == 1:
-            out = out[0].split()
 
-        out = [l.decode('utf-8').strip() for l in out]
-    except BaseException:
-        error("lsb_release is not installed")
+    try:
+        name, release, version, arch = detectOS()
+    except BaseException as err:
         print("*********************************************************************")
         print("seiscomp was not able to figure out the installed distribution")
         print("You need to check the documentation for required packages and install")
         print("them manually.")
+        print("Error: {}".format(err))
         print("*********************************************************************")
+
         return 1
 
-    try:
-        release, version = out
-    except BaseException:
-        error("unexpected version result")
-        return 1
-
-    print("Distribution: " + release + " " + version)
+    print("Distribution: {}-{}-{}({}-{})".format(name, version, arch, release, version))
 
     for n in range(version.count('.') + 1):
         ver = version.rsplit('.', n)[0]
