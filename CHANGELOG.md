@@ -8,7 +8,7 @@ All notable changes to SeisComP are documented here.
     -   Do not crash when Hypo71 cannot compute the arrival time for a given
         phaseHint.
 -   fdsnws
-    -   Fix broken unicode XML responses
+    -   Fix broken unicode XML responses.
 -   scart
     -   New command-line parameter `--check` for new check mode checking
         miniSEED files in directories for out-of-order records.
@@ -16,9 +16,28 @@ All notable changes to SeisComP are documented here.
         miniSEED files for out-of-order records after writing them.
     -   New command-line parameter `--nslc` for filtering streams in dump mode
         by a list of streams.
+-   scautopick
+    -   When configuring `sendDetections = true` and `picker`, initial picks
+        made by the trigger receive the evaluation status `rejected` allowing
+        discrimination from picks by the re-picker. Use evaluation mode
+        `automatic` for both.
+-   scbulletin
+    -   Filter events in XML files by event ID if provided with option `-E`.
+-   scdbstrip
+    -   Do no add a default number of days to time span if any other time value
+        is given.
+-   scevent
+    -   evrc plugin provides more control options for setting and overwriting
+        event types.
+    -   Add option to populate Flinn-Engdahl region name event description.
+-   scevtls
+    -   Add option `-p` allowing to print the ID of the preferred origin along
+        with the event ID.
 -   scevtstreams
     -   New command-line parameter `--net-sta` for filtering streams my network
-        and station codes
+        and station codes.
+-   scqcquery
+    -   Removed module. It is replaced by new module scquery_qc.
 -   scquery_qc
     -   Added as new module including HTML documentation for querying the data
         base for waveform quality control (QC) parameters.
@@ -37,9 +56,11 @@ All notable changes to SeisComP are documented here.
         -   Configurable scaling for input unit conversion
         -   Parametric calibration, optional non-parametric
         -   Optional regionalization of calibration
-        -   Configurable distance measure
+        -   Configurable distance measure.
+    -   ML, MLv, MLc: logA0 parameters take the new value format:
+        dist1:correction1,dist2:correction2,...
     -   Add ability to configure magnitudes with region-dependent
-        parameters in global module configuration
+        parameters in global module configuration.
     -   Add amplitude pre-filtering to ML, MLv and MLs
 -   scolv
     -   Add pick uncertainty bars to residual plots in Location tab
@@ -48,9 +69,9 @@ All notable changes to SeisComP are documented here.
     -   Show time window of re-picker on traces after re-picking
     -   Add "Fix FM + Mw" button to fix the focal mechanism and the Mw
         with one click
-    -   Show predicted phase arrival times in amplitude picker
+    -   Show predicted phase arrival times in amplitude picker.
 -   scmv
-    -   Improve visibility of station annotations
+    -   Improve visibility of station annotations.
 -   scesv
     -   Add number of listed / loaded events in title of Events tab
 -   scevent
@@ -62,16 +83,20 @@ All notable changes to SeisComP are documented here.
         with the event ID.
 -   scbulletin
     -   Filter events in XML files by event ID if provided with option `-E`
+    -   Add number of listed / loaded events in title of Events tab.
 -   LOCSAT
     -   Add global configuration parameters for using backazimuth and slowness,
-        `LOCSAT.usePickBackazimuth` and `LOCSAT.usePickSlowness`
+        `LOCSAT.usePickBackazimuth` and `LOCSAT.usePickSlowness`.
 -   FixedHypocenter
     -   Allow adjusting the hypocenter coordinates interactively in the locator
-        settings of scolv
+        settings of scolv.
+-   hypo71
+    -   Do not crash when Hypo71 cannot compute the arrival time for a given
+        phaseHint.
 -   GUI
-    -   Allow configuration of precision of origin time
+    -   Allow configuration of precision of origin time.
     -   Add to events list interactive filtering of events inside or outside
-        defined regions
+        defined regions.
     -   Clean up event list and event edit parameters in global configuration.
         A warning is printed when using deprecated parameters.
         Deprecated global configuration parameter -> new parameter:
@@ -96,17 +121,21 @@ All notable changes to SeisComP are documented here.
 
 -   trunk
     -   Remove application configuration support for `recordstream.service` and
-        `recordstream.source` which has been completely replaced with `recordstream`
+        `recordstream.source` which has been completely replaced with
+        `recordstream`.
     -   Remove application configuration support for `database.type` and
-        `database.parameters` which has been completely replaced with `database`
+        `database.parameters` which has been completely replaced with
+        `database`.
     -   Add event certainties "felt", "damaging" in line with IASPEI event type
-        leading character
+        leading character.
     -   Add non-QuakeML event types "calving", "frost quake", "tremor pulse",
-        "submarine landslide"
+        "submarine landslide", "rocket launch", "rocket", "rocket impact",
+        "artillery strike", "bomb detonation", "moving aircraft",
+        "atmospheric meteor explosion".
     -   Add new routing recordstream which allows to route specific network,
         station, location or channel codes to fixed proxy streams (thanks to
         Luca Scarabello / ETH for this contribution)
-    -   Add usage and examples to command-line help for many Python utilities
+    -   Add usage and examples to command-line help for many Python utilities.
 
 ## 4.9.2
 
@@ -125,7 +154,6 @@ All notable changes to SeisComP are documented here.
 
 -   scmaster
     -   Fix setup stage if a database port has been specified explicitly
-
 
 ## 4.9.0
 
