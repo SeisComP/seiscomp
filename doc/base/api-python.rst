@@ -2068,6 +2068,27 @@ Used by:
    * - ``SUBMARINE_LANDSLIDE``
      - 52
      - submarine landslide
+   * - ``ROCKET_LAUNCH``
+     - 53
+     - rocket launch
+   * - ``ROCKET``
+     - 54
+     - rocket
+   * - ``ROCKET_IMPACT``
+     - 55
+     - rocket impact
+   * - ``ARTILLERY_STRIKE``
+     - 56
+     - artillery strike
+   * - ``BOMB_DETONATION``
+     - 57
+     - bomb detonation
+   * - ``MOVING_AIRCRAFT``
+     - 58
+     - moving aircraft
+   * - ``ATMOSPHERIC_METEOR_EXPLOSION``
+     - 59
+     - atmospheric meteor explosion
 
 Used by:
 
