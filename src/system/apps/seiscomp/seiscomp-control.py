@@ -259,7 +259,7 @@ def stop_module(mod):
     try:
         os.remove(env.runFile(mod.name))
     except BaseException:
-        pass
+        return 1
 
     return 0
 
@@ -267,14 +267,17 @@ def stop_module(mod):
 def start_kernel_modules():
     for mod in mods:
         if isinstance(mod, seiscomp.kernel.CoreModule):
-            start_module(mod)
+            return start_module(mod)
+
+    return 1
 
 
 def stop_kernel_modules():
     for mod in reversed(mods):
         if isinstance(mod, seiscomp.kernel.CoreModule):
-            stop_module(mod)
+            return stop_module(mod)
 
+    return 1
 
 # ------------------------------------------------------------------------------
 # Commandline action handler
@@ -399,25 +402,26 @@ def on_disable_help(_):
 
 
 def on_start(args, _):
-    found = 0
+    cntStarted = 0
     if not args:
-        start_kernel_modules()
+        if start_kernel_modules() == 0:
+            cntStarted += 1
         for mod in mods:
             # Kernel modules have been started already
             if isinstance(mod, seiscomp.kernel.CoreModule):
                 continue
             # Module in autorun?
             if env.isModuleEnabled(mod.name):
-                start_module(mod)
-                found += 1
+                if start_module(mod) == 0:
+                    cntStarted += 1
     else:
         for mod in mods:
             if mod.name in args or len(args) == 0:
-                start_module(mod)
-                found += 1
+                if start_module(mod) == 0:
+                    cntStarted += 1
 
     if not useCSV:
-        print("Summary: {} modules started".format(found))
+        print("Summary: {} modules started".format(cntStarted))
 
     return 0
 
@@ -437,16 +441,17 @@ def on_stop(args, _):
             # Kernel modules will be stopped latter
             if isinstance(mod, seiscomp.kernel.CoreModule):
                 continue
-            stop_module(mod)
-            cntStopped += 1
+            if stop_module(mod) == 0:
+                cntStopped += 1
 
         # Stop all kernel modules
-        stop_kernel_modules()
+        if stop_kernel_modules() == 0:
+            cntStopped += 1
     else:
         for mod in reversed(mods):
             if mod.name in args or len(args) == 0:
-                stop_module(mod)
-                cntStopped += 1
+                if stop_module(mod) == 0:
+                    cntStopped += 1
 
     if not useCSV:
         print("Summary: {} modules stopped".format(cntStopped))
