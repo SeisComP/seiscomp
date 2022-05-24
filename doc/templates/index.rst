@@ -63,7 +63,7 @@ Operating |scname|
    /base/management
    /base/tutorials
 
-Interactive analysis
+Interactive Analysis
 ####################
 
 .. toctree::
@@ -74,7 +74,7 @@ Interactive analysis
 
 .. _sec_index_modules:
 
-Modules and tools
+Modules and Tools
 #################
 
 .. toctree::
@@ -83,9 +83,15 @@ Modules and tools
 
    /modules
 
+   .. toctree::
+      :maxdepth: 4
+      :titlesonly:
+
+   /base/addons
+
 .. _sec_index_extensions:
 
-Extensions and filters
+Extensions and Filters
 ######################
 
 .. toctree::
@@ -98,7 +104,7 @@ ${generator.refs.extensions}
 
 .. _sec_index_developers:
 
-For developers
+For Developers
 ##############
 
 .. toctree::
