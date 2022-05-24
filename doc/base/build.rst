@@ -8,12 +8,12 @@ Getting the Source Code
 
    For production systems only
    :ref:`install the officially released packages <installation-packages>`
-   from `SeisComP`_, `gempa GmbH`_ or compile from the corresponding release
+   from :cite:t:`seiscomp`, :cite:t:`gempa` or compile from the corresponding release
    tags in this repository.
 
 The |scname| software collection is distributed among several repositories.
 For more information about compilation and build configuration head over to
-`Github`_.
+:cite:t:`seiscomp-github`.
 
 For building a complete |scname| distribution checkout all repositories using
 the following script:
@@ -92,6 +92,7 @@ a build directory, configure the build and start it:
    # Configure with ccmake
    $ make install
 
+
 .. _build_dependencies:
 
 Dependencies
@@ -126,12 +127,3 @@ as the used Python3 interpreter. The same holds for Python2.
 
 Python-numpy is required if Numpy support is enable which is also
 the default configuration.
-
-References
-==========
-
-.. target-notes::
-
-.. _`SeisComP` : https://www.seiscomp.de/downloader/
-.. _`gempa GmbH` : https://www.gempa.de
-.. _`Github` : https://github.com/SeisComP/seiscomp/blob/master/README.md
