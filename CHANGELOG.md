@@ -4,9 +4,6 @@ All notable changes to SeisComP are documented here.
 
 ## X.Y.Z
 
--   hypo71
-    -   Do not crash when Hypo71 cannot compute the arrival time for a given
-        phaseHint.
 -   fdsnws
     -   Fix broken unicode XML responses.
 -   scart
@@ -23,6 +20,7 @@ All notable changes to SeisComP are documented here.
         `automatic` for both.
 -   scbulletin
     -   Filter events in XML files by event ID if provided with option `-E`.
+    -   Add number of listed / loaded events in title of Events tab.
 -   scdbstrip
     -   Do no add a default number of days to time span if any other time value
         is given.
@@ -42,13 +40,6 @@ All notable changes to SeisComP are documented here.
     -   Added as new module including HTML documentation for querying the data
         base for waveform quality control (QC) parameters.
     -   Allows filtering by QC parameter, stream and time.
--   scqcquery
-    -   Removed module. It is replaced by new module scquery_qc.
--   scautopick
-    -   When configuring `sendDetections = true` and `picker`, initial picks
-        made by the trigger receive the evaluation status `rejected` allowing
-        discrimination from picks by the re-picker. Use evaluation mode
-        `automatic` for both.
 -   Magnitudes
     -   Add new magnitude type MLc - like ML with customization:
         -   Amplitude pre-filtering
@@ -73,16 +64,6 @@ All notable changes to SeisComP are documented here.
 -   scmv
     -   Improve visibility of station annotations.
 -   scesv
-    -   Add number of listed / loaded events in title of Events tab
--   scevent
-    -   evrc plugin provides more control options for setting and overwriting
-        event types
-    -   Add option to populate Flinn-Engdahl region name event description
--   scevtls
-    -   Add option `-p` allowing to print the ID of the preferred origin along
-        with the event ID.
--   scbulletin
-    -   Filter events in XML files by event ID if provided with option `-E`
     -   Add number of listed / loaded events in title of Events tab.
 -   LOCSAT
     -   Add global configuration parameters for using backazimuth and slowness,
