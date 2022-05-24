@@ -40,7 +40,7 @@ All notable changes to SeisComP are documented here.
         -   Configurable distance measure
     -   Add ability to configure magnitudes with region-dependent
         parameters in global module configuration
-    -   Add amplitude pre-fitlering to ML, MLv and MLs
+    -   Add amplitude pre-filtering to ML, MLv and MLs
 -   scolv
     -   Add pick uncertainty bars to residual plots in Location tab
     -   Add number of shown / loaded events in title of Events tab
