@@ -55,7 +55,7 @@ git clone $repo_path/extras.git
 echo "Cloning external base components"
 git clone $repo_path/contrib-gns.git
 git clone $repo_path/contrib-ipgp.git
-git clone $repo_path/contrib-sed.git
+git clone https://github.com/swiss-seismological-service/sed-SeisComP-contributions.git contrib-sed
 
 echo "Done"
 
