@@ -18,9 +18,17 @@ All notable changes to SeisComP are documented here.
         made by the trigger receive the evaluation status `rejected` allowing
         discrimination from picks by the re-picker. Use evaluation mode
         `automatic` for both.
+    -   Add support for an additional processing stage called FX which means
+        feature extraction and is applied on top of an existing pick. A
+        first implementation ported from CTBTO/IDC's DFX code has been added
+        to extract back azimuth and slowness for three-component stations.
+
+        ```
+        fx = DFX
+        ```
+
 -   scbulletin
     -   Filter events in XML files by event ID if provided with option `-E`.
-    -   Add number of listed / loaded events in title of Events tab.
 -   scdbstrip
     -   Do no add a default number of days to time span if any other time value
         is given.
@@ -32,7 +40,7 @@ All notable changes to SeisComP are documented here.
     -   Add option `-p` allowing to print the ID of the preferred origin along
         with the event ID.
 -   scevtstreams
-    -   New command-line parameter `--net-sta` for filtering streams my network
+    -   New command-line parameter `--net-sta` for filtering streams by network
         and station codes.
 -   scqcquery
     -   Removed module. It is replaced by new module scquery_qc.
@@ -40,6 +48,18 @@ All notable changes to SeisComP are documented here.
     -   Added as new module including HTML documentation for querying the data
         base for waveform quality control (QC) parameters.
     -   Allows filtering by QC parameter, stream and time.
+-   scesv
+    -   Add number of listed / loaded events in title of Events tab.
+-   scmv
+    -   Improve visibility of station annotations.
+-   scolv
+    -   Add pick uncertainty bars to residual plots in Location tab
+    -   Add number of shown / loaded events in title of Events tab
+    -   Allow showing station annotations in maps of Location tab
+    -   Show time window of re-picker on traces after re-picking
+    -   Add "Fix FM + Mw" button to fix the focal mechanism and the Mw
+        with one click
+    -   Show predicted phase arrival times in amplitude picker.
 -   Magnitudes
     -   Add new magnitude type MLc - like ML with customization:
         -   Amplitude pre-filtering
@@ -52,19 +72,7 @@ All notable changes to SeisComP are documented here.
         dist1:correction1,dist2:correction2,...
     -   Add ability to configure magnitudes with region-dependent
         parameters in global module configuration.
-    -   Add amplitude pre-filtering to ML, MLv and MLs
--   scolv
-    -   Add pick uncertainty bars to residual plots in Location tab
-    -   Add number of shown / loaded events in title of Events tab
-    -   Allow showing station annotations in maps of Location tab
-    -   Show time window of re-picker on traces after re-picking
-    -   Add "Fix FM + Mw" button to fix the focal mechanism and the Mw
-        with one click
-    -   Show predicted phase arrival times in amplitude picker.
--   scmv
-    -   Improve visibility of station annotations.
--   scesv
-    -   Add number of listed / loaded events in title of Events tab.
+    -   Add amplitude pre-filtering to ML, MLv and MLc
 -   LOCSAT
     -   Add global configuration parameters for using backazimuth and slowness,
         `LOCSAT.usePickBackazimuth` and `LOCSAT.usePickSlowness`.
