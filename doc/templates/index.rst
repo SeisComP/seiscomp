@@ -82,11 +82,6 @@ Modules and Tools
    :titlesonly:
 
    /modules
-
-   .. toctree::
-      :maxdepth: 4
-      :titlesonly:
-
    /base/addons
 
 .. _sec_index_extensions:

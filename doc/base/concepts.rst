@@ -18,4 +18,4 @@ the :term:`trunk` package.
    Waveform archive: Storing raw waveform data </base/concepts/waveformarchives>
    RecordStream: Access to data from real-time servers or archives </base/concepts/recordstream>
    Inventory: Station meta data </base/concepts/inventory>
-   Configuration: Meta data, module configuration and bindings </base/concepts/configuration>
+   Configuration: Inventory, module and binding configurations </base/concepts/configuration>
