@@ -47,9 +47,9 @@ schema are:
 A typical configuration requires the following steps:
 
 #. Generation and import of an inventory (station meta data): Read the concept
-   section :ref:`<concepts_inventory>`,
-#. Configuration of :ref:`modules <global_modules_config>`,
-#. Configuration of :ref:`bindings <global_bindings_config>`.
+   section :ref:`concepts_inventory`,
+#. :ref:`Configuration of modules <global_modules_config>`,
+#. :ref:`Configuration of bindings <global_bindings_config>`.
 
 .. note::
 

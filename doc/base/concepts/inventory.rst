@@ -60,14 +60,15 @@ The update script
 
 .. code-block:: xml
 
-   scinv sync
+   $ scinv sync
 
 loads the existing inventory from the database and merges each file in :file:`etc/inventory`.
 Finally it removes all unreferenced objects and sends all updates to the database.
 
 The |scname| :ref:`configuration <concepts_modules>` does not deal with station meta-data anymore.
 It only configures parameters for modules and module-station associations.
-The management of the inventory can and should be handled by external tools, e.g. `SMP`_.
+The management of the inventory can and should be handled by external tools
+e.g. :cite:t:`smp`.
 
 The |scname| documentation describes the
 :ref:`data model including the inventory <api-datamodel-python>`.
@@ -103,8 +104,8 @@ and the version of all other representations.
    elevations are given in meters.
 
 Inventories must be provided to |scname| in XML files in :term:`SCML` format. A
-convenient way to generate clean and correct inventory files in :term:`SCML` format is
-`SMP`_. Tools are provided to convert between other formats:
+convenient way to generate clean and correct inventory files in :term:`SCML`
+format is :cite:t:`smp`. Tools are provided to convert between other formats:
 
 
 .. csv-table::
@@ -137,8 +138,8 @@ the source code of :ref:`scinv`. The bottom line is that inventory data is creat
 from :term:`SCML` files.
 
 Because nobody will ever create such XML files by hand, tools are necessary.
-A quite popular tools is the online station management portal `SMP`_.
-This tool will output XML in version of :term:`SCML` directly.
+A quite popular tools is the online station management portal (SMP)
+:cite:p:`smp`. SMP will output XML in version of :term:`SCML` directly.
 
 Another source is the FDSN station webservice (FDSNWS). If the |scname|
 implementation of FDSNWS is used, the SeisComP XML format can be requested
@@ -151,11 +152,16 @@ several import formats.
 
    $ import_inv fdsnxml download-1234.xml
 
-This will automatically place the output SC ML file in :file:`@SYSTEMCONFIGDIR@/inventory`.
-``seiscomp update-config inventory`` must be called afterwards to synchronize
-the changes with the database. If :program:`scconfig`` is used, then either the
-``Sync`` button of the `Inventory` panel or the ``Update configuration`` button of
-the ``System`` panel must pressed.
+This will automatically place the output XML file in
+:file:`@SYSTEMCONFIGDIR@/inventory`. Afterwards call
+
+.. code-block:: sh
+
+   $ seiscomp update-config inventory
+
+to synchronize the changes with the database. If :program:`scconfig` is used,
+then either the ``Sync`` button of the `Inventory` panel or the
+``Update configuration`` button of the ``System`` panel must pressed.
 
 **Summary**
 
@@ -164,7 +170,17 @@ steps have to be performed:
 
 #. Convert existing station meta data formats to :term:`SCML`
 #. Place all :term:`SCML` files at :file:`@SYSTEMCONFIGDIR@/inventory`
-#. Run ``scinv sync`` or ``seiscomp update-config inventory``
+#. Synchronize the inventory files and write the meta data to the database. Run
+
+   .. code-block:: sh
+
+      $ scinv sync
+
+   or
+
+   .. code-block:: sh
+
+      $ seiscomp update-config inventory
 
 
 Reading Inventory
@@ -190,7 +206,7 @@ command-line option ``-d``:
 There are cases when an application should be run without a database connection
 but requires inventory information, particularly in combination with the
 ``--ep`` command line argument. To direct an application to an inventory XML file
-(again in :term:`SCML` format), `--inventory-db` must be used:
+(again in :term:`SCML` format), ``--inventory-db`` must be used:
 
 .. code-block:: sh
 
@@ -216,11 +232,3 @@ Related Tools
 * :ref:`scxmldump`
 * :ref:`tab2inv`
 * :ref:`tabinvmodifier`
-
-
-References
-==========
-
-.. target-notes::
-
-.. _`SMP`: https://smp.gempa.de/
