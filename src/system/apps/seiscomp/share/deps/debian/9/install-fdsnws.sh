@@ -1,1 +1,1 @@
-apt install python-twisted-web python-dateutil
+apt install python3-twisted python3-dateutil
