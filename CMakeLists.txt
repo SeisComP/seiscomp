@@ -27,21 +27,18 @@ ENDIF (WIN32)
 FIND_PACKAGE(LibXml2 REQUIRED)
 
 OPTION(SC_GLOBAL_UNITTESTS "Enable unit tests" ON)
-OPTION(SC_GLOBAL_PYTHON_WRAPPER "Create Python wrappers" ON)
-OPTION(SC_GLOBAL_PYTHON_WRAPPER_NUMPY "Add Numpy support for Python wrapper" ON)
-OPTION(SC_GLOBAL_PYTHON_WRAPPER_PYTHON3 "Require Python3 interpreter" OFF)
+OPTION(SC_GLOBAL_PYTHON_WRAPPER "Create Python 3 wrapper" ON)
+OPTION(SC_GLOBAL_PYTHON_WRAPPER_NUMPY "Add Numpy support for Python 3 wrapper" ON)
 OPTION(SC_ENABLE_CONTRIB "Enables descending into the contrib directory" ON)
 
-IF(SC_GLOBAL_PYTHON_WRAPPER_PYTHON3)
-	SET(PythonInterp_FIND_VERSION 3)
-	SET(PythonInterp_FIND_VERSION_MAJOR 3)
-	SET(PythonInterp_FIND_VERSION_EXACT 0)
-ENDIF()
+SET(PythonInterp_FIND_VERSION 3)
+SET(PythonInterp_FIND_VERSION_MAJOR 3)
+SET(PythonInterp_FIND_VERSION_EXACT 0)
 
 FIND_PACKAGE(PythonInterp)
 EXEC_PROGRAM(
 	${PYTHON_EXECUTABLE}
-	ARGS "-c \"from __future__ import print_function;import sys;print(sys.version[:3])\""
+	ARGS "-c \"import sys;print(sys.version[:3])\""
 	OUTPUT_VARIABLE PYTHON_VERSION
 )
 
