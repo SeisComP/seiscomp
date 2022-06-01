@@ -98,6 +98,7 @@ to 0.12.
     -   Do not crash when Hypo71 cannot compute the arrival time for a given
         phaseHint.
 -   GUI
+    -   Use triangles as station symbols on all maps.
     -   Allow configuration of precision of origin time.
     -   Add to events list interactive filtering of events inside or outside
         defined regions.
