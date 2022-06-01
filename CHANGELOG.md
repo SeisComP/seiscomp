@@ -2,7 +2,22 @@
 
 All notable changes to SeisComP are documented here.
 
-## X.Y.Z
+## 5.0.0
+
+```SC_API_VERSION 15.0.0```
+
+With this version we drop Python 2 support for the maintained Python wrappers
+as well as for all modules. Most of the modules are still Python 2 compatible
+but we won't maintain that compatibility over the next versions and will only
+support Python versions >= 3.3.
+
+Furthermore the detection of the installed Linux distribution
+(`seiscomp install-deps`) does not require `lsb_release` anymore. Instead we
+check `/etc/os-release`. All RHEL based dependencies are now located in the
+folder `rhel` instead of `centos`.
+
+The database schema receives an update and will increase the schema version
+to 0.12.
 
 -   fdsnws
     -   Fix broken unicode XML responses.
