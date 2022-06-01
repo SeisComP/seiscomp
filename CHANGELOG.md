@@ -141,6 +141,34 @@ to 0.12.
         Luca Scarabello / ETH for this contribution)
     -   Add usage and examples to command-line help for many Python utilities.
 
+## 4.10.0
+
+**IMPORTANT**: Please check if your are affected by the bug concerning the scmaster
+               configuration (see below).
+
+-   system
+    -   Change Linux distribution detection which does not require the presence
+        of `lsb_release` anymore. Instead it looks in `/etc/os-release` which is
+        way more portable. Furthermore the RHEL based distribution directories
+        have been renamed from `centos` to `rhel`.
+    -   Count started/stopped modules correctly.
+-   scolv
+    -   Fix lat/lon order of modify origin dialog opened from zoomtrace of
+        the picker.
+-   scmaster
+    -   Fix saving location of the generated configuration file with `seiscomp setup`.
+        Due to a bug the file was generated in `~/.seiscomp/scmaster.cfg` whereas it
+        should have been generated in `etc/scmaster.cfg`. As this is fixed now, please
+        remove `~/.seiscomp/scmaster.cfg` if you were affected by the bug otherwise
+        this old configuration will take precedence and new configurations will not
+        have any effect. This bug has been introduced with version 4.9.0.
+
+## 4.9.3
+
+-   trunk
+    -   Fix default messaging URL from `localhost/productive` to
+        `localhost/production`.
+
 ## 4.9.2
 
 -   scolv
