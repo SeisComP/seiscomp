@@ -172,8 +172,8 @@ def xml_collect_cmdline(mod_node, publicids_only):
 
     options = '''
 
-Command-line
-============
+Command-Line Options
+====================
 
 .. program:: %s
 
@@ -627,8 +627,8 @@ for app in sorted(app_plugin_nodes.keys()):
             pf.write('''
 .. _%s_configuration:
 
-Configuration
-=============
+Module Configuration
+====================
 
 %s
 ''' % (desc_name, options))
@@ -924,8 +924,8 @@ Plugins
         f.write('''
 .. _%s_configuration:
 
-Configuration
-=============
+Module Configuration
+====================
 %s
 %s
 ''' % (app_name, note, cfgs))
@@ -1008,8 +1008,8 @@ Configuration
         if bindings_options:
             f.write('''
 
-Bindings
-========
+Bindings Parameters
+===================
 
 ''')
 
@@ -1023,9 +1023,6 @@ Bindings
                 f.write("%s\n\n" % bdoc)
 
             f.write('''
-Configuration
--------------
-
 %s
 ''' % bindings_options)
 
