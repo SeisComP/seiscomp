@@ -85,5 +85,5 @@ Related Modules
 * :ref:`scdbstrip`
 * :ref:`scdispatch`
 * :ref:`scquery`
-* :ref:`scquery_qc`
+* :ref:`scqueryqc`
 * :ref:`scxmldump`

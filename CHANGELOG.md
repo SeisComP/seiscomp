@@ -58,8 +58,8 @@ to 0.12.
     -   New command-line parameter `--net-sta` for filtering streams by network
         and station codes.
 -   scqcquery
-    -   Removed module. It is replaced by new module scquery_qc.
--   scquery_qc
+    -   Removed module. It is replaced by new module scqueryqc.
+-   scqueryqc
     -   Added as new module including HTML documentation for querying the data
         base for waveform quality control (QC) parameters.
     -   Allows filtering by QC parameter, stream and time.
