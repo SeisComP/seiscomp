@@ -21,6 +21,7 @@ to 0.12.
 
 -   fdsnws
     -   Fix broken unicode XML responses.
+    -   Fix invalid request logging when HUP signal received.
 -   scart
     -   New command-line parameter `--check` for new check mode checking
         miniSEED files in directories for out-of-order records.
@@ -142,6 +143,13 @@ to 0.12.
         Luca Scarabello / ETH for this contribution)
     -   Add usage and examples to command-line help for many Python utilities.
     -   Update Flinn-Engdahl region names to match Wikipedia
+
+-   seedlink
+    -   Add GFZ meteo protocol support (serial_plugin).
+    -   Add GDRT (GFZ Displacement Real-Time) protocol support (gdrt_plugin).
+    -   Fix using invalid memory with script arguments (serial_plugin, miscScript).
+    -   Check for invalid message (serial_plugin, Vaisala ASCII protocol).
+    -   Improve seisplotjs compatibility by adding Sec-WebSocket-Protocol header.
 
 ## 4.10.0
 
