@@ -141,6 +141,7 @@ to 0.12.
         station, location or channel codes to fixed proxy streams (thanks to
         Luca Scarabello / ETH for this contribution)
     -   Add usage and examples to command-line help for many Python utilities.
+    -   Update Flinn-Engdahl region names to match Wikipedia
 
 ## 4.10.0
 
