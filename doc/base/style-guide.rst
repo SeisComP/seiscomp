@@ -319,6 +319,8 @@ avoiding this: "The :program:`scmaster` module has..."
   - STA, LTA, STA/LTA detector
   - TAR file
 
+.. _documentation_style_guide_images:
+
 Adding Images
 =============
 
