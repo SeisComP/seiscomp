@@ -14,7 +14,8 @@ research centers, companies and governmental agencies world-wide by:
 
 * Powerful and reliable automatic data processing in real time or during post-processing
 * User-friendly and comprehensive graphical interfaces
-* Modern and well-maintained OpenSource software on `GitHub`_ welcoming community contributions.
+* Modern and well-maintained OpenSource software on GitHub
+  :cite:p:`seiscomp-github` welcoming community contributions.
 
 The first work on what became |scname| today began nearly two decades ago
 with developments at :term:`GFZ` of plugins for digitizers.
@@ -64,7 +65,8 @@ The guidelines for the design of |scname| are:
 
 These design principles have given |scname| much robustness and flexibility
 to respond to new developments. The |scname| community is encouraged to contribute
-their |scname| source code on `GitHub`_. Examples and guidelines for generating
+their |scname| source code on GitHub :cite:p:`seiscomp-github`. Examples and
+guidelines for generating
 code are given in the :ref:`developer section <sec_index_developers>`.
 
 
@@ -75,13 +77,15 @@ This documentation begins with an :ref:`overview` and a :ref:`concepts` section
 necessary for understanding and using |scname| successfully.
 The :ref:`Glossary section <glossary>` introduces technical terms.
 All important code changes are listed in the :ref:`change log <sc-changelog>`.
-When using |scname| or contributing source code, you should understand the :ref:`license terms <license>`.
+When using |scname| or contributing source code, you should understand the
+:ref:`license terms <license>`.
 If you actually make use of |scname| and publish the results, we ask you to give
 appropriate reference as set out on the :ref:`Citation section <citation>`.
 
 In the following section the documentation covers the :ref:`installation <installation>`
 and how to configure and operate a working |scname| system.
-A few :ref:`tutorials` will guide you through a first example set up and further operations.
+A few :ref:`tutorials` will guide you through a first example set up and further
+operations.
 
 The tutorials are followed by :ref:`detailed technical descriptions <sec_index_modules>`
 of each individual |scname| module, grouped by their general functionality:
@@ -93,26 +97,18 @@ of each individual |scname| module, grouped by their general functionality:
 * Utilities
 
 and many more :ref:`extensions <sec_index_extensions>` like descriptions of the
-:term:`RecordStream`, magnitude types, locators, GUI customizations, waveform filters or plugins.
+:term:`RecordStream`, magnitude types, locators, GUI customizations, waveform
+filters or plugins.
 
 The final part of the documentation relates to
 :ref:`contributing your own source code <sec_index_developers>` to |scname|.
 This requires a deeper knowledge of the |scname| :ref:`data model<api-datamodel-python>`
 and other details.
 This part also includes guidelines for developers such as
-:ref:`coding conventions <coding_conventions>`, :ref:`unit tests <unittests>` and a
-:ref:`guide for contributing documentation <contributing_documentation>`.
-:ref:`Some Python examples <sdk-python-examples>` help you to get started quickly
-with programming for |scname|.
+:ref:`coding conventions <coding_conventions>`, :ref:`unit tests <unittests>`
+and a :ref:`guide for contributing documentation <contributing_documentation>`.
+:ref:`Some Python examples <sdk-python-examples>` help you to get started
+quickly with programming for |scname|.
 
 |scname| is developed and distributed under the terms of the GNU
-`Affero General Public License`_, as set out in the :ref:`license` section.
-
-
-References
-==========
-
-.. target-notes::
-
-.. _`GitHub` : https://github.com/SeisComP
-.. _`Affero General Public License` : https://www.gnu.org/licenses/agpl-3.0.html
+:cite:t:`agpl`, as set out in the :ref:`license` section.

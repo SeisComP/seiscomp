@@ -88,7 +88,7 @@ Package download
 ================
 
 Get the latest or older SeisComP release packages from gempa GmbH or from the
-`SeisComP package downloader`_.
+download website of :cite:t:`seiscomp`.
 
 
 Documentation of changes
@@ -109,7 +109,8 @@ or from the *Docs* panel in :ref:`scconfig`.
 .. note::
 
    New features are regularly advertised and described in detail on the
-   `News website of gempa GmbH`_ and on the `SeisComP forum`_.
+   `News website of gempa GmbH <https://www.gempa.de/news/>`_ and on the
+   :cite:t:`seiscomp-forum`.
 
 
 .. _tutorials_upgrade_number:
@@ -598,13 +599,3 @@ strong-motion data—, both sending Z, N and E channels. Now if the stream proce
 is attached to station, data from both plugin instances would mixed up. We must
 attach a different stream processor to each plugin instance—one producing BH\*,
 LH\* and VH\* and the other one producing BN\* and so on.
-
-
-References
-==========
-
-.. target-notes::
-
-.. _`News website of gempa GmbH` : https://www.gempa.de/news/
-.. _`SeisComP forum` : https://forum.seiscomp.de/
-.. _`SeisComP package downloader` : https://www.seiscomp.de/downloader/

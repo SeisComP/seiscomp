@@ -15,12 +15,12 @@ different :ref:`SeisComP modules <concepts_modules>` during runtime.
 Overview
 ========
 
-A typical real-time |scname| system consists of data processing and other modules (clients)
-and a messaging bus.
-The messaging bus connects all the clients letting them exchange information by messages
-through this bus.
-The messaging system is a fundamental concept of SeisComP following the publish-subscribe
-pattern [#wppubsub]_. It is provided by the |scname| module :ref:`scmaster`.
+A typical real-time |scname| system consists of data processing and other
+modules (clients) and a messaging bus. The messaging bus connects all the
+clients letting them exchange information by messages through this bus.
+The messaging system is a fundamental concept of SeisComP following the
+publish-subscribe pattern :cite:p:`wppubsub`. It is provided by the |scname|
+module :ref:`scmaster`.
 
 Clients can be producers (sending messages) and/or consumers (receiving
 messages). The basic concept is really simple: A producer sends a message
@@ -129,9 +129,9 @@ the scheme parameter of the connection:
 * `scmp` (default): unencrypted,
 * `scmps`: encrypted.
 
-Scheme, host, port and :ref:`queue <messaging-scheme>` together form the connection URL of the messaging
-system which is configurable in :confval:`connection.server` or set by the
-command-line option ``-H``.
+Scheme, host, port and :ref:`queue <messaging-scheme>` together form the
+connection URL of the messaging system which is configurable in
+:confval:`connection.server` or set by the command-line option ``-H``.
 
 Examples:
 
@@ -204,19 +204,19 @@ while modules running on computer B use
 
    connection.server = computerA/production
 
-The database connection which is used by :ref:`scmaster` will be reported to the clients
-when they connect so no explicit database configuration is necessary.
+The database connection which is used by :ref:`scmaster` will be reported to the
+clients when they connect so no explicit database configuration is necessary.
 
-The messaging connection can be explicitly provided on the command line using the
-option ``-H`` considering the comments on the :ref:`scheme <messaging-scheme>` and
-:ref:`queue <messaging-queue>`, e.g.
+The messaging connection can be explicitly provided on the command line using
+the option ``-H`` considering the comments on the
+:ref:`scheme <messaging-scheme>` and :ref:`queue <messaging-queue>`, e.g.
 
 .. code-block:: sh
 
    scolv -H computerA/production
 
 
-Web frontend
+Web Frontend
 ============
 
 When running :ref:`scmaster` a web frontend is available which can be adjusted to
@@ -234,15 +234,9 @@ provide system information. The default port to access the web frontend is 18180
    scmaster: Web frontend
 
 
-Related modules
+Related Modules
 ===============
 
 * :ref:`scmaster`
 * :ref:`scm`
 * :ref:`scmm`
-
-
-References
-==========
-
-.. [#wppubsub] https://en.wikipedia.org/wiki/Publish-subscribe_pattern

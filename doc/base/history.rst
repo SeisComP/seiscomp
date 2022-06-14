@@ -7,23 +7,26 @@ Historical Information
 The first version of SeisComP was developed for the
 :term:`GEOFON` program operated by :term:`GFZ`.
 
-Originally, |scname| was designed as a high-standard, fully automatic data acquisition and (near-)real-time
-data processing tool including quality control, event detection and location as well as dissemination
-of event alerts.
+Originally, |scname| was designed as a high-standard, fully automatic data
+acquisition and (near-)real-time data processing tool including quality control,
+event detection and location as well as dissemination of event alerts.
 
-SeisComP was further extended within the MEREDIAN project under the lead of GEOFON and `ORFEUS`_.
+SeisComP was further extended within the MEREDIAN project under the lead of
+GEOFON and :cite:t:`orfeus`.
 
-Following the devastating 2004 Indian Ocean earthquake and tsunami, the `GITEWS`_ (German Indian Ocean
-Tsunami Early Warning System) project led to additional functionality being implemented to fulfill the
-requirements of 24/7 early warning control centers. Major changes in the architecture of SeisComP
-were necessary and many new features resulted in the upgrade of SeisComP to version 3.
+Following the devastating 2004 Indian Ocean earthquake and tsunami, the
+:cite:t:`gitews` (German Indian Ocean Tsunami Early Warning System) project led
+to additional functionality being implemented to fulfill the requirements of
+24/7 early warning control centers. Major changes in the architecture of SeisComP
+were necessary and many new features resulted in the upgrade of SeisComP to 
+version 3.
 
-Since 2008 SeisComP has been jointly developed by :term:`gempa GmbH`, a spin-off company of GFZ and GFZ.
-Nowadays, gempa GmbH is the main SeisComP developing and service company.
+Since 2008 SeisComP has been jointly developed by :term:`gempa GmbH`, a spin-off
+company of GFZ and GFZ. Nowadays, gempa GmbH is the main SeisComP developing and
+service company.
 
-Major SeisComP releases are shown below. The important changes as of version 4.0 are documented in
-the :ref:`change log <sc-changelog>`.
-
+Major SeisComP releases are shown below. The important changes as of version 4.0
+are documented in the :ref:`changelog <sc-changelog>`.
 
 +---------+-----------+--------------------+-----------------------------------------------------+
 | Version | Name      |  Time              |                                                     |
@@ -66,11 +69,3 @@ the :ref:`change log <sc-changelog>`.
 | 4.0.0   |           | May 2020           | Adopts the GNU Affero General Public License v. 3.0,|
 |         |           |                    | (AGPL), support for Python3 and QT5                 |
 +---------+-----------+--------------------+-----------------------------------------------------+
-
-References
-==========
-
-.. target-notes::
-
-.. _`ORFEUS`: https://www.orfeus-eu.org
-.. _`GITEWS`: https://www.gitews.org

@@ -4,7 +4,7 @@
 Add real-time stations from GEOFON
 **********************************
 
-You will use :program:`scconfig` to:
+You will use :ref:`scconfig` to:
 
 * Add stations of the GEOFON seismic network, obtained from GEOFON,
   as a source of data.
@@ -17,7 +17,7 @@ Pre-requisites for this tutorial:
 Afterwards/Results/Outcomes:
 
 * :program:`slinktool -Q` locally shows GE streams are available
-* :program:`scrttv` locally shows the GE station traces
+* :ref:`scrttv` locally shows the GE station traces
 
 Time range estimate:
 
@@ -53,34 +53,39 @@ Check data are available
 
 First, we'll query the upstream Seedlink server, which runs on
 host `geofon.gfz-potsdam.de` at port 18000.
-We do this with SeisComP's :program:`slinktool` command, giving the '-L' option
-to :program:`slinktool` ::
+We do this with SeisComP's :ref:`slinktool` command, giving the ``-L`` option
+to :ref:`slinktool`
 
-  $ slinktool -L geofon.gfz-potsdam.de
-  6C GF01  GF01
-  6C GF02  GF02
-  6C GF03  GF03
-  [..]
-  ZB URD20 URD20
-  ZB VAL41 VAL41
-  ZB VOS   VOS
+.. code-block:: sh
+
+   $ slinktool -L geofon.gfz-potsdam.de
+   6C GF01  GF01
+   6C GF02  GF02
+   6C GF03  GF03
+   [..]
+   ZB URD20 URD20
+   ZB VAL41 VAL41
+   ZB VOS   VOS
 
 This is a long list.
 It shows the network code and station code of each
 of the stations for which data is available from this Seedlink server.
 We'll just be interested in a few stations, namely those corresponding
-to broadband 20 sps vertical channels - with channel code BHZ, and with network code GE ::
+to broadband 20 sps vertical channels - with channel code BHZ, and with network
+code GE
 
-  $ slinktool -Q geofon.gfz-potsdam.de | grep ^GE.*BHZ
-  GE ACRG     BHZ D 2019/11/28 06:51:48.7500  -  2019/11/28 09:18:32.1000
-  GE APE      BHZ D 2019/11/28 07:40:52.0400  -  2019/11/28 12:22:00.3950
-  GE ARPR     BHZ D 2019/11/27 23:23:27.4400  -  2019/11/28 09:41:22.1500
-  GE ARPR     BHZ E 2019/11/27 23:23:27.4400  -  2019/11/28 09:16:25.0400
-  [..]
-  GE KBS   00 BHZ D 2019/11/24 13:22:12.9695  -  2019/11/24 22:46:17.4195
-  GE KBS   10 BHZ D 2019/11/24 13:22:12.9695  -  2019/11/24 22:46:19.5945
-  GE KBU      BHZ D 2019/11/28 06:53:21.8450  -  2019/11/28 12:22:18.2450
-  [..]
+.. code-block:: sh
+  
+   $ slinktool -Q geofon.gfz-potsdam.de | grep ^GE.*BHZ
+   GE ACRG     BHZ D 2019/11/28 06:51:48.7500  -  2019/11/28 09:18:32.1000
+   GE APE      BHZ D 2019/11/28 07:40:52.0400  -  2019/11/28 12:22:00.3950
+   GE ARPR     BHZ D 2019/11/27 23:23:27.4400  -  2019/11/28 09:41:22.1500
+   GE ARPR     BHZ E 2019/11/27 23:23:27.4400  -  2019/11/28 09:16:25.0400
+   [..]
+   GE KBS   00 BHZ D 2019/11/24 13:22:12.9695  -  2019/11/24 22:46:17.4195
+   GE KBS   10 BHZ D 2019/11/24 13:22:12.9695  -  2019/11/24 22:46:19.5945
+   GE KBU      BHZ D 2019/11/28 06:53:21.8450  -  2019/11/28 12:22:18.2450
+   [..]
 
 The '-Q' option provides a formatted stream list,
 with one line for each stream available from the server.
@@ -104,27 +109,28 @@ There are several possible ways to obtain inventory.
 
 - Other sources of inventory, like a dataless SEED file, can also be used.
 
-- The Gempa Station Management Portal `SMP`_
+- The Gempa Station Management Portal, :cite:t:`smp`,
   is another important source of station metadata.
   If you would like to create your own inventory you may use this online tool.
-  Before doing so, you will need to create
-  an `SMP account`_.
+  Before doing so, you will need to create an account on SMP.
 
 
 Option 1: Using FDSN web services
 ---------------------------------
 
-The FDSN web services are the standard adopted by the FDSN and have been
-deployed at almost every data centre [#FDSN_SVCS]_.
+The FDSN web services :cite:p:`fdsn` are the standard adopted by the FDSN and have been
+deployed at almost every data centre.
 One of them is called  *fdsnws-station* and
 is the service to contact to get all information related to stations, sensors,
 responses, etc.
 
 To get data from the *fdsnws-station* web service you can use any web client (browser or command
 line). For instance, the *wget* command. The file you will receive will be in
-StationXML format. ::
+StationXML format.
 
-    $ wget "http://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=GE&level=response" -O ge.xml
+.. code-block:: sh
+
+   $ wget "http://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=GE&level=response" -O ge.xml
 
 
 Option 2: Using WebDC3
@@ -136,7 +142,7 @@ and query event catalogs
 from different data centres among other possibilities.
 
 You can find detailed information about WebDC3 in the on-line documentation at
-`Read The Docs`_.
+:cite:t:`webdc3-documentation`.
 
 * Go to http://eida.gfz-potsdam.de/webdc3 with a browser.
 
@@ -179,16 +185,20 @@ Now find where your web browser has saved the file.
 Import the inventory
 ====================
 
-It is easiest to use the import function of the :program:`scconfig` GUI.
+It is easiest to use the import function of the :ref:`scconfig` GUI.
 Alternatively, you can import from the command line:
 
-* From FDSN StationXML: ::
+* From FDSN StationXML:
 
-    fdsnxml2inv -f station.xml > etc/inventory/mynetwork.xml
+  .. code-block:: sh
 
-* From SeisComP XML with filtering: ::
+     $ fdsnxml2inv -f station.xml > etc/inventory/mynetwork.xml
 
-    invextr -f --chans 'NE.STA.*' mynetwork.xml > etc/inventory/mynetwork.xml
+* From SeisComP XML with filtering:
+
+  .. code-block:: sh
+
+     $ invextr -f --chans 'NE.STA.*' mynetwork.xml > etc/inventory/mynetwork.xml
 
 Either way, afterwards, inventory is in :file:`~/seiscomp/etc/inventory`.
 It now needs to be loaded in to the SeisComP database.
@@ -196,7 +206,7 @@ It now needs to be loaded in to the SeisComP database.
 Import the metadata for your stations
 -------------------------------------
 
-* Open :program:`scconfig` from the terminal.
+* Open :ref:`scconfig` from the terminal.
   Click on the "Inventory" tab on the left side bar.
 
 * Select "Import" and at "Source:", browse to the file with the inventory
@@ -267,7 +277,7 @@ we will need to create bindings for every GE station to the
    with a non-blank location code, typically either "00" or "10".
    Configuring these requires additional work.
    You can create a profile setting :confval:`detecLocID` to "10",
-   called "BH10", and apply this to the appropriate stations.
+   called "10BHZ", and apply this to the appropriate stations.
    Repeat this for stations where location code "00" is desired (e.g. SFJD).
 
 
@@ -280,23 +290,30 @@ SeisComP's modules then require restarting to load the updated information.
 * Go to the System tab and press ESC (the Escape key, to de-select all modules).
 
   #. Click on "Update configuration", at the right of the window.
-     (**Not** "Update", - that just refreshes :program:`scconfig`'s
+     (**Not** "Update", - that just refreshes :ref:`scconfig`'s
      display of what is running!)
   #. Press *Start* to start acquiring data from the already configured stations.
 
-* Alternatively, at the command line::
+* Alternatively, on the command line
 
-    $ seiscomp update-config
-    $ seiscomp restart
+  .. code-block:: sh
+
+     $ seiscomp update-config
+     $ seiscomp restart
 
 
 Check it works
 ==============
 
 * To confirm that you have waveform data for the station locally,
-  run :program:`slinktool -Q`.
-* Open :program:`scmv` to see a map view of the configured stations.
-* Open :program:`scrttv` to see the incoming real-time streams.
+  run :ref:`slinktool`.
+
+  .. code-block:: sh
+   
+     $ slinktool -Q
+
+* Open :ref:`scmv` to see a map view of the configured stations.
+* Open :ref:`scrttv` to see the incoming real-time streams.
 
 If you see colored triangles and traces incoming it means that
 you have configured your system properly.
@@ -309,8 +326,8 @@ Further steps
 At this point,
 you can follow the same procedure for other networks/stations, provided you
 
-1. Have metadata available.
-2. Know the location of a Seedlink server for, and have access to, the waveforms.
+#. Have metadata available.
+#. Know the location of a Seedlink server for, and have access to, the waveforms.
 
 
 References
@@ -323,13 +340,5 @@ References
             M. Bianchi, *et al.* (2015): WebDC3 Web Interface. GFZ Data Services.
             doi:`10.5880/GFZ.2.4/2016.001 <http://dx.doi.org/10.5880/GFZ.2.4/2016.001>`_
 
-.. [#FDSN_SVCS] International Federation of Digital Seismograph Networks (2020).
-	        "FDSN Web Services", http://www.fdsn.org/webservices.
-
 .. [#NETPAGES] For instance that of the GEOFON Program, at
                https://geofon.gfz-potsdam.de/waveform/archive/network.php?ncode=GE.
-
-.. _`SMP` : https://smp.gempa.de/
-.. _`SMP account` :  https://smp.gempa.de/user/signup
-
-.. _`Read The Docs` : http://webdc3.readthedocs.io

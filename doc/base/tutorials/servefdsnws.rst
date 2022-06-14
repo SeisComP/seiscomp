@@ -6,7 +6,7 @@ Enable local FDSNWS server
 
 You will ...
 
-* Enable FDSN web service [#FDSN_SPEC]_ to serve waveforms and inventory for
+* Enable FDSN web service by :ref:`fdsnws` to serve waveforms and inventory for
   a configured station
 
 Pre-requisites for this tutorial:
@@ -42,21 +42,23 @@ The availability information can be retrieved using :ref:`scxmldump` or :ref:`fd
 Set-up
 ======
 
-#. Configure :program:`fdsnws`:
+#. Configure :ref:`fdsnws`:
 
    * set the :ref:`RecordStream <concepts_RecordStream>` to point to archived data.
    * configured and enable the desired services.
 
 #. Enable and start fdsnws locally:
 
-   * in :program:`scconfig`, go to the System tab.
+   * in :ref:`scconfig`, go to the System tab.
      Click on the line for the "fdsnws" module, and press "Enable module(s)".
      Then restart SeisComP.
 
-   * or from the command line ::
+   * or from the command line
+   
+     .. code-block:: sh
 
-     $ seiscomp enable fdsnws
-     $ seiscomp start fdsnws
+        $ seiscomp enable fdsnws
+        $ seiscomp start fdsnws
 
 #. Test by :ref:`visiting the locally started fdsnws <tutorials_servefdsnws-visit>`.
 
@@ -65,7 +67,7 @@ Information about requests handled goes to the file named in `accessLog`,
 if you set this.
 
 To see the available configuration options, go to the Modules tab in
-:program:`scconfig`.
+:ref:`scconfig`.
 Under Utilities open "fdsnws" to reveal the options.
 To disable fdsnws-event, for instance, unlock the "serveEvent" area
 and uncheck this parameter.
@@ -77,10 +79,10 @@ SeisComP :ref:`inventory <concepts_inventory>` using the `allowRestricted`,
 
 .. _tutorials_servefdsnws-visit:
 
-Visiting the service
+Visiting the Service
 ====================
 
-Once :program:`fdsnws` is running, you can visit the local web server
+Once :ref:`fdsnws` is running, you can visit the local web server
 that it runs.
 In your browser, visit http://localhost:8080/fdsnws/dataselect/1/
 
@@ -92,7 +94,7 @@ In your browser, visit http://localhost:8080/fdsnws/dataselect/1/
    http://localhost:8080/fdsnws/dataselect/1/
 
 
-Check it works
+Check it Works
 ==============
 
 * If you visit the URL http://localhost:8080/fdsnws/dataselect/1/version
@@ -103,10 +105,12 @@ Check it works
 * The fdsnws-station service should give a list of networks configured
   and served by the service, e.g. visiting
   http://localhost:8080/fdsnws/station/1/query?level=network&format=text
-  produces::
+  produces
+  
+  .. code-block:: bash
 
-    #Network|Description|StartTime|EndTime|TotalStations
-    GE|GEOFON Program, GFZ Potsdam, Germany|1993-01-01T00:00:00||84
+     #Network|Description|StartTime|EndTime|TotalStations
+     GE|GEOFON Program, GFZ Potsdam, Germany|1993-01-01T00:00:00||84
 
   Omitting the `format=text` argument in the query string of the above URL
   results in the service returning a StationXML file.
@@ -120,20 +124,21 @@ Check it works
    http://localhost:8080/fdsnws/station/1/query?level=network
 
 
-Further information
+Further Information
 ===================
 
-* The `URL Builder at GEOFON`_
+* The `URL Builder at GEOFON <https://geofon.gfz-potsdam.de/waveform/builder.php>`_
   lets you fill out a form to tailor your request.
   The URL to use to make your request is displayed at the bottom of that page.
 
-* More example requests are at the `FDSNWS description at GEOFON`_
+* More example requests are at the
+  `FDSNWS description at GEOFON <https://geofon.gfz-potsdam.de/waveform/webservices.php>`_
 
-* The FDSN Web Services specification document [#FDSN_SPEC]_ provides the
+* The FDSN Web Services specification document :cite:p:`fdsn-specs` provides the
   technical documentation and examples.
 
 
-Final tests
+Final Tests
 ===========
 
 * The station should now be visible when you query your local fdsnws instance.
@@ -148,17 +153,3 @@ Final tests
   Don't forget to adjust your start and end times to match the data
   actually present in your archive.
   The above example is just for the first hour of 2020.
-
-
-References
-==========
-
-.. target-notes::
-
-.. [#FDSN_SPEC] International Federation of Digital Seismograph Networks (2019-04-02).
-        FDSN Web Service Specifications Version 1.2.
-        At http://www.fdsn.org/webservices/FDSN-WS-Specifications-1.2.pdf
-
-.. _`URL builder at GEOFON` : https://geofon.gfz-potsdam.de/waveform/builder.php
-.. _`FDSNWS description at GEOFON` : https://geofon.gfz-potsdam.de/waveform/webservices.php
-.. _`scripts for FDSNWS` : https://www.seiscomp3.org/doc/applications/fdsnws_scripts.html

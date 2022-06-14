@@ -47,7 +47,7 @@ Ways to diagnose and to get help
 HTML documentation
 ------------------
 
-Most modules have HTML documentation. When installed, it can be found in :program:`scconfig`
+Most modules have HTML documentation. When installed, it can be found in :ref:`scconfig`
 under *Docs*. The HTML documentation can also be reached from the *Help*  menu of all GUIs.
 It contains the description of configuration and command-line parameters along with
 an overview with many detailed information.
@@ -59,12 +59,13 @@ an overview with many detailed information.
    :ref:`scmv` with access to the HTML documentation.
 
 The description of most configuration parameters is also available from
-within :program:`scconfig`.
+within :ref:`scconfig`.
 Look under *Modules*, and choose the relevant module.
 For each parameter, the first few lines of description are shown;
 hovering over these reveals the full text.
 
-The HTML documentation is built regularly and available online, e.g. `gempa's documentation`_.
+The HTML documentation is built regularly and available online, e.g.
+`gempa's documentation <https://docs.gempa.de>`_.
 
 
 .. _sec_tutorial_help_commandline:
@@ -77,13 +78,13 @@ pages which can be read on the command line:
 
 .. code-block:: sh
 
-   man [module name]
+   $ man [module name]
 
 and help on command-line options:
 
 .. code-block:: sh
 
-   [module name] -h
+   $ [module name] -h
 
 .. note::
 
@@ -132,7 +133,7 @@ To learn about them read the :ref:`sec_tutorial_help_documentation` or execute
 
 .. code-block:: sh
 
-   [module name] -h
+   $ [module name] -h
 
 
 .. _sec_tutorial_help_forum:
@@ -144,11 +145,10 @@ The SeisComP Forum
    :width: 16cm
    :align: center
 
-   The SeisComP Forum (https://forum.seiscomp.de).
+   The :cite:t:`seiscomp-forum`.
 
-The `Forum <https://forum.seiscomp.de>`_ is the place to
-discuss SeisComP.
-Anouncements about updates, training courses and more are posted
+The :cite:t:`seiscomp-forum` is the place to discuss |scname|.
+Announcements about updates, training courses and more are posted
 here by the developers, and users can post questions or discuss
 new developments.
 Anyone can browse the forum, while registration is required to post there.
@@ -187,7 +187,8 @@ are more severe than a given threshold.
 Default is 2.
 Setting `logging.level = 4` results in the most messages.
 
-For other modules such as :ref:`seedlink`, the log files are written to :file:`seiscomp/var/log/`
+For other modules such as :ref:`seedlink`, the log files are written to
+:file:`seiscomp/var/log/`
 
 
 .. _sec_tutorial_help_debugging:
@@ -260,9 +261,9 @@ In addition:
      11:47:56 [info] Shutting down MagTool
      - database accesses while runtime: 0
 
-  This suggests that :program:`scmaster` was not running to provide a
+  This suggests that :ref:`scmaster` was not running to provide a
   connection to the database.
-  To resolve this, you could next check that :program:`scmaster` is
+  To resolve this, you could next check that :ref:`scmaster` is
   running as expected.
 
 .. note::
@@ -281,7 +282,7 @@ Go to the Modules tab, then System > global (see "logging")
 or per module.
 
 e.g. set "logging.level = 3" in $SEISCOMP_ROOT/etc/scamp.log
-to set level to *INFO* only for :program:`scamp`.
+to set level to *INFO* only for :ref:`scamp`.
 
 You should also be aware of the version of SeisComP that you are running.
 The '-V' or '--version' option provides this for many SeisComP modules.
@@ -303,20 +304,11 @@ Commercial support
 ------------------
 
 Professional commercial support to SeisComP users is available from
-`gempa GmbH`_.
+:cite:t:`gempa`.
 
 
 Next time you have a problem
 ============================
 
 * Try some of the above techniques.
-* If you find a solution, don't forget to share it at the Forum.
-
-
-References
-==========
-
-.. target-notes::
-
-.. _`gempa's documentation`: https://docs.gempa.de
-.. _`gempa GmbH` : https://www.gempa.de
+* If you find a solution, don't forget to share it at the :cite:t:`seiscomp-forum`.
