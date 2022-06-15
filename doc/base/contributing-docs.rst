@@ -70,7 +70,7 @@ Images
 ======
 
 Any images should be placed in a suitable sub-directory of :file:`descriptions/media`.
-Read the :ref:`documentation on image styles <documentation_style_guide>` for more details.
+Read the :ref:`documentation on image styles <documentation_style_guide_image>` for more details.
 The images can then be referred to (in .rst) like::
 
     .. figure::  media/scolv/scolv-overview.png
@@ -572,10 +572,10 @@ References
 .. target-notes::
 
 .. _`SeisComP wiki` : https://www.seiscomp.de/
-.. _`reStructuredText` : https://docutils.sourceforge.net/rst.html
-.. _`Sphinx` : https://sphinx.pocoo.org/index.html
+.. _`reStructuredText` : https://docutils.sourceforge.io/rst.html
+.. _`Sphinx` : https://www.sphinx-doc.org/
 .. _`Python documentation` : https://docs.python.org/
-.. _`introduction to reST` : https://sphinx.pocoo.org/rest.html
-.. _`directives` : https://sphinx.pocoo.org/markup/index.html
+.. _`introduction to reST` : https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html
+.. _`directives` : https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html
 .. _`SeisComP on GitHub` : https://github.com/SeisComP
 .. _`discussion forum` : https://forum.seiscomp.de
