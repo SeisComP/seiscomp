@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.0.1
+
+-   trunk
+    -   Fix bug in application which causes `processing.blacklist.agencies`
+        and `processing.whitelist.agencies` to be switched.
+
 ## 5.0.0
 
 ```SC_API_VERSION 15.0.0```
