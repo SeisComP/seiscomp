@@ -4,12 +4,16 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
--   scmssort
-    -   Report duplicate records whenever found.
+-   scbulletin
+    -   Add option `--fdsn` for printing event parameters on just one line in
+        FDSN event format supporting to generate catalogs from event XML files.
+    -   Set output string of creation time of first origin time to event.
 -   scdbstrip
     -   Add options `-E` and `-Q` as well as module configuration for limiting
         stripping to event parameters and waveforms quality control parameters,
         respectively.
+-   scmssort
+    -   Report duplicate records whenever found.
 
 ## 5.0.1
 
