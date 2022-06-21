@@ -2,6 +2,15 @@
 
 All notable changes to SeisComP are documented here.
 
+## x.y.z
+
+-   scmssort
+    -   Report duplicate records whenever found.
+-   scdbstrip
+    -   Add options `-E` and `-Q` as well as module configuration for limiting
+        stripping to event parameters and waveforms quality control parameters,
+        respectively.
+
 ## 5.0.1
 
 -   trunk
