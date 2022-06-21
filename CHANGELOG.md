@@ -38,6 +38,9 @@ folder `rhel` instead of `centos`.
 The database schema receives an update and will increase the schema version
 to 0.12.
 
+-   VS(SC), Virtual Seismologist for SeisComP has been removed from the SeisComP
+    and is now available from a separate repository as an addon module. Read
+    the section "Addon Modules" of the seiscomp documentation for the details.
 -   fdsnws
     -   Fix broken unicode XML responses.
     -   Fix invalid request logging when HUP signal received.
