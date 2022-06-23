@@ -14,6 +14,13 @@ All notable changes to SeisComP are documented here.
         respectively.
 -   scmssort
     -   Report duplicate records whenever found.
+-   ql2sc
+    -   Add publicID prefix white- and blacklist configuration as alternative
+        to the already available agencyID filter.
+    -   Add option to ignore object removals during import.
+    -   Add more stable algorithm to synchronize the imported event with the
+        target system. This reduces the likelihood of infinite loops (re-imports)
+        on cross connected systems tremendously (note: it does not prevent that!).
 
 ## 5.0.1
 
