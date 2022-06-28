@@ -16,6 +16,7 @@ sed-eew
 
 Modules for earthquake early warning by ETHZ/SED.
 
-* Source code for download:
+* Source code :
   `GitHub <https://github.com/SED-EEW/SED-EEW-SeisComP-contributions>`_.
-* Documentation: Included within the source code.
+* Documentation: Included within the software package or
+  `online <https://docs.gempa.de/sed-eew/current/seiscomp/share/doc/eew/html/>`_.
