@@ -6,7 +6,7 @@ Installation on Ubuntu
 
 You will ...
 
-* Make a basic SeisComP installation
+* Make a basic |scname| installation
 
 Pre-requisites for this tutorial:
 
@@ -14,8 +14,8 @@ Pre-requisites for this tutorial:
 
 Afterwards/Results/Outcomes:
 
-* Run a SeisComP executable
-* Run a SeisComP GUI program
+* Run a |scname| executable
+* Run a |scname| GUI program
 
 Time range estimate:
 
@@ -29,7 +29,7 @@ Related tutorial(s):
 
 ------------
 
-You may install SeisComP by:
+You may install |scname| by:
 
 #. :ref:`Compiling the source code <tutorials_postinstall_compile>`,
 #. :ref:`Installing pre-compiled release packages <tutorials_postinstall_package>`
@@ -45,7 +45,7 @@ but the steps for other Ubuntu versions are similar.
 
 #. Add a new user. Throughout our documentation, this user is called `sysop`.
 
-   .. code-block:: bash
+   .. code-block:: sh
 
       $ sudo adduser sysop
       $ sudo addgroup admin
@@ -54,8 +54,8 @@ but the steps for other Ubuntu versions are similar.
    .. note:
 
       Adding a new user is not mandatory. You can install under an existing user
-      directory. Creating a new user is recommended as it allows an easy cleanup of the system later simply by
-      removing the new user if needed.
+      directory. Creating a new user is recommended as it allows an easy cleanup
+      of the system later simply by removing the new user if needed.
 
 #. Check the size and the architecture. This is espcially required when installing
    :ref:`pre-compiled packages<tutorials_postinstall_package>`: ::
@@ -87,52 +87,68 @@ Install pre-compiled release packages
 
 You may download and installed pre-compile SeisComP binary package, maps and documentation.
 
-#. Download the appropriate SeisComP binary package taking into
+#. Download the appropriate |scname| binary package taking into
    account your Linux distribution and the architecture.
-   Get the package from the `SeisComP package downloader`_ or `gempa GmbH`_.
-   Packages are available for Ubuntu and other Linux flavors such as CentOS and Debian.
+   Get the package from the download site of |scname| :cite:p:`seiscomp` or from
+   :cite:t:`gempa-download`. Packages are available for Ubuntu and other Linux
+   flavors such as RHEL/CentOS and Debian.
 
-#. When getting packages from `SeisComP package downloader`_ you should also download
+#. When downloading the |scname| binary packages you should also download
 
-   * `maps`_
-   * the documentation package from the `SeisComP package downloader`_. Make sure,
-     the documentation matches your SeisComP version.
+   * maps for |scname|
+     
+     .. code-block:: sh
+   
+        wget "https://www.seiscomp.de/downloader/seiscomp-maps.tar.gz"
 
-   .. note::
+   * the documentation package. Make sure, the documentation matches your
+     SeisComP version.
 
-      The SeisComP packages received from gempa GmbH contain the documentation
-      for the respective version and no separate download is required.
+     .. note::
+
+        The |scname| packages received from gempa GmbH contain the documentation
+        for the respective version and no separate download is required.
 
 #. Untar the :file:`seiscomp*` files (binary package, maps and documentation)
-   you will find in your home or downloads directory. For SeisComP in version 4.0.0 this is: ::
+   you will find in your home or downloads directory. For SeisComP in version
+   4.0.0 this is:
 
-     $ cd
-     $ tar xzf seiscomp-4.0.0-ubuntu20.04-x86_64.tar.gz
-     $ tar xzf seiscomp-maps.tar.gz
-     $ tar xzf seiscomp-4.0.0-doc.tar.gz
-     $ ls seiscomp
-     bin  etc  include  lib  man  sbin  share
+   .. code-block:: sh
+
+      $ cd
+      $ tar xzf seiscomp-4.0.0-ubuntu20.04-x86_64.tar.gz
+      $ tar xzf seiscomp-maps.tar.gz
+      $ tar xzf seiscomp-4.0.0-doc.tar.gz
+      $ ls seiscomp
+      bin  etc  include  lib  man  sbin  share
 
 #. Install all dependencies needed and prepare the environment.
 
    * This should be automatic for most distributions.
-     Simply run the install script::
+     Simply run the install script
+     
+     .. code-block:: sh
 
-       $ ~/seiscomp/bin/seiscomp install-deps base
-       Distribution: Ubuntu 20.04
+        $ ~/seiscomp/bin/seiscomp install-deps base
+        Distribution: Ubuntu 20.04
 
      This will generally prompt for your user's password to allow `sudo` to
      install packages on your system.
 
    * On Ubuntu 18, Python 3 is installed, but not Python.
-     Get it first::
+     Get it first
+     
+     .. code-block:: sh
 
-       $ sudo apt-get install python libqtgui4
+        $ sudo apt-get install python libqtgui4
 
    * On Ubuntu 20 and newer, you may need libpython3-dev before you can use
-     "install-deps"::
+     "install-deps"
 
-       $ sudo apt-get install libpython3-dev
+     
+     .. code-block:: sh
+
+        $ sudo apt-get install libpython3-dev
 
    * Alternatively, for Mint 18 (Ubuntu 16.04):
 
@@ -198,7 +214,7 @@ Find a detailed description in section :ref:`getting-started` and short guide be
    For bash users, print the environment variables and copy them to your
    :file:`.bashrc`
 
-   .. code-block:: bash
+   .. code-block:: sh
 
       $ ~/seiscomp/bin/seiscomp print env
       export SEISCOMP_ROOT=/home/sysop/seiscomp
@@ -210,23 +226,34 @@ Find a detailed description in section :ref:`getting-started` and short guide be
       source /home/sysop/seiscomp/share/shell-completion/seiscomp.bash
 
    The path to your home directory will likely differ from `/home/sysop` as shown above.
-   Cut and paste your own output from the
-   `seiscomp print env` command, not what is shown here.
-   Edit your :file:`~/.bashrc` file, inserting the command from the output. ::
+   Therefore, do not copy and paste what you see here but use for your own
+   system the output from the command
+
+   .. code-block:: sh
+   
+      ~/seiscomp/bin/seiscomp print env
+   
+   Add the output from the command to your file :file:`~/.bashrc`
+
+   .. code-block:: sh
 
       $ vi ~/.bashrc
 
-   Then reload the contents of :file:`.bashrc` in your current environment ::
+   Then reload the content of :file:`~/.bashrc` in your current environment
 
-   $ source ~/.bashrc
+   .. code-block:: sh
+
+      $ source ~/.bashrc
 
    After this, you won't have to type `~/seiscomp/bin/seiscomp` as
-   the `seiscomp` command will be added to your shell's path.
+   the :ref:`seiscomp` command will be added to your shell's path.
 
    .. hint::
 
-      If, when you attempt to run a SeisComP command such as `scconfig` or `scolv`,
-      you receive an error message like ::
+      If, when you attempt to run a SeisComP command such as :ref:`scconfig` or
+      :ref:`scolv`, you receive an error message like 
+
+      .. code-block:: sh
 
          scconfig: command not found
 
@@ -237,48 +264,59 @@ Find a detailed description in section :ref:`getting-started` and short guide be
       where you installed.
       The seven lines of output are not actually run by the 'seiscomp print env'
       command; you need to cut and paste them into your shell to run them.
-      You can also add these to your :file:`.bashrc`, :file:`.profile`,
+      You can also add these to your :file:`~/.bashrc`, :file:`~/.profile`,
       or equivalent file with commands to be run every time you log in.
 
 #. Run `seiscomp setup` and enter your preferred IDs and password. For the other
-   fields, you can always accept the default values. ::
+   fields, you can always accept the default values.
 
-     $ seiscomp setup
+   .. code-block:: sh
 
-   You should enter an appropriate short name (without spaces) for Agency ID and Datacenter ID.
-   These are used for Arclink and Seedlink, and in the information describing data model objects such as origins and events.
+      $ seiscomp setup
+
+   You should enter an appropriate short name (without spaces) for Agency ID and
+   Datacenter ID. These are used for Arclink and Seedlink, and in the information
+   describing data model objects such as origins and events.
 
 #. The `seiscomp` command is a wrapper, which controls the SeisComP modules.
    See :ref:`system-management`.
-   Run something by typing seiscomp followed by a command::
+   Run something by typing seiscomp followed by a command
 
-     $ seiscomp help
-     Available commands:
-      install-deps
-      setup
-      shell
-      enable
-      disable
-      print
-      help
+   .. code-block:: sh
+
+      $ seiscomp help
+      Available commands:
+       install-deps
+       setup
+       shell
+       enable
+       disable
+       print
+       help
 
      Use 'help [command]' to get more help about a command
 
-#. Start :program:`scmaster`.
+#. Start :ref:`scmaster`.
    As described in the :ref:`overview`, these are needed for
    communication between the SeisComP database and the individual
-   SeisComP modules. ::
+   SeisComP modules.
 
-     $ seiscomp start scmaster
-     starting scmaster
+   .. code-block:: sh
 
-#. Install all dependencies needed for the GUI::
+      $ seiscomp start scmaster
+      starting scmaster
 
-     $ seiscomp install-deps gui
+#. Install all dependencies needed for the GUI
 
-#. Start the :program:`scconfig` GUI ::
+   .. code-block:: sh
 
-     $ seiscomp exec scconfig
+      $ seiscomp install-deps gui
+
+#. Start the :ref:`scconfig` GUI
+
+   .. code-block:: sh
+
+      $ seiscomp exec scconfig
 
    Learn more about :ref:`scconfig` in this documentation.
    You should see a screen/window like this.
@@ -289,17 +327,20 @@ Find a detailed description in section :ref:`getting-started` and short guide be
 
       First view of :ref:`scconfig` configurator.
 
-#. Run :program:`scrttv` ::
+#. Run :ref:`scrttv`
 
-     $ seiscomp exec scrttv
+   .. code-block:: sh
+
+      $ seiscomp exec scrttv
 
    After seeing the SeisComP splash screen,
    you'll likely get an error message "Could not read inventory (NULL)".
    After a new installation, that's okay.
    Click that box away, and you'll see a screen with
    "Enabled", and "Disabled" tabs, and time along bottom axis as in the figure below.
-   To see stations and data you will later need to :ref:`add inventory <tutorials_addstation>`
-   and :ref:`waveforms <tutorials_geofon_waveforms>` to your system.
+   To see stations and data you will later need to
+   :ref:`add inventory <tutorials_addstation>` and
+   :ref:`waveforms <tutorials_geofon_waveforms>` to your system.
 
    .. figure:: media/postinstall_scrttv.png
       :width: 14.6cm
@@ -309,14 +350,3 @@ Find a detailed description in section :ref:`getting-started` and short guide be
 
 
 Congratulations, you're done with this tutorial.
-
-
-References
-==========
-
-.. target-notes::
-
-.. _`SeisComP package downloader` : https://www.seiscomp.de/downloader/
-.. _`gempa GmbH` : https://www.gempa.de/
-.. _`maps` : https://www.seiscomp.de/downloader/seiscomp-maps.tar.gz
-.. _`new SeisComP license scheme` : https://www.seiscomp.de/doc/base/license.html

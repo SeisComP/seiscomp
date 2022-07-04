@@ -30,13 +30,14 @@ Set-up
 
 To use this template, you'll need to:
 
-#. Get the source code of the SeisComP documentation, e.g. from `GitHub`_
+#. Get the source code of the SeisComP documentation, e.g. from
+   :cite:t:`seiscomp-github`
 
 #. Copy this tutorial file (:file:`doc/base/tutorials/template.rst`) to the tutorials directory
    with a new name, :file:`doc/base/tutorials/{nn}_{something}.rst`.
 
 #. Change the reference at the top (first line); it must be
-   `_tutorials_{something}`.
+   *.. _tutorials_{something}*.
 
 #. Change the title: start with a verb, describe what the student is
    trying to do.
@@ -59,7 +60,7 @@ To use this template, you'll need to:
 
 .. _tutorials_template_testing:
 
-Final tests
+Final Tests
 ===========
 
 * If you've applied this template,
@@ -74,19 +75,11 @@ Final tests
 
   .. code-block:: sh
 
-     cd doc
-     python3 build-doc.py
+     $ cd doc
+     $ python3 build-doc.py
 
 * View the new files in `build-doc/base/html/tutorials` using a web browser, e.g. firefox:
 
   .. code-block:: sh
 
-     firefox build-doc/html/basetutorials.html
-
-
-References
-==========
-
-.. target-notes::
-
-.. _`GitHub` : https://github.com/SeisComP/seiscomp
+     $ firefox build-doc/html/basetutorials.html

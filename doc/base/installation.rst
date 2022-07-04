@@ -8,7 +8,7 @@
 only under Linux. For production systems we recommend Linux distributions with
 long-term support (LTS). The Linux flavors under which |scname| has been tested
 are given along with the |scname| package names on the download sites of
-`SeisComP`_ and `gempa`_.
+:cite:t:`seiscomp` and :cite:t:`gempa`.
 
 The software can be obtained and installed from
 
@@ -25,7 +25,7 @@ Packages may include
 * Documentation,
 * Station configuration files (optional).
 
-Download these packages from `SeisComP`_ or `gempa`_.
+Download these packages from :cite:t:`seiscomp` or :cite:t:`gempa-download`.
 
 The next sections describe the installation of the binary packages of |scname|
 on
@@ -107,7 +107,8 @@ Simply follow a few steps to complete your installation of |scname|:
 
 #. Log in to your Linux system as user, e.g. sysop, the standard user in this
    documentation.
-#. Download the installation packages, e.g. from `SeisComP`_ or from `gempa`_:
+#. Download the installation packages, e.g. from :cite:t:`seiscomp` or
+   :cite:t:`gempa-download`:
 
    * :file:`seiscomp-[version]-[OS]-[arch].tar.gz`: main |scname| package with binaries, etc.
      Ensure to download the right package matching your operating system (OS) and
@@ -116,12 +117,12 @@ Simply follow a few steps to complete your installation of |scname|:
 
      .. note::
 
-        When receiving the packages from `gempa`_, the documentation is already
+        When receiving the packages from :cite:t:`gempa-download`, the documentation is already
         included in the main |scname| package to match the installed version. In this
         case, the documentation does not need to be downloaded and installed separately.
 
    * :file:`seiscomp-maps.tar.gz`: standard |scname| maps available on the
-     download site of `SeisComP`_.
+     download site of :cite:t:`seiscomp`.
 
 #. Copy the downloaded files to your $HOME directory.
 
@@ -426,17 +427,8 @@ PostgreSQL
      :file:`/var/lib/pgsql/data/postgresql.conf`
 
 
-Next steps
+Next Steps
 ==========
 
-Now everything is installed and the system can be configured. The :ref:`next chapter<getting-started>`
-chapter explains the first steps.
-
-References
-==========
-
-.. target-notes::
-
-.. _`gempa` : https://data.gempa.de/packages/Public/seiscomp/
-.. _`SeisComP` : https://www.seiscomp.de
-.. _`GitHub` : https://github.com/SeisComP
+Now everything is installed and the system can be configured. The
+:ref:`next chapter<getting-started>` chapter explains the first steps.

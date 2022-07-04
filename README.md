@@ -120,6 +120,10 @@ the following global options are available:
 |SC_ENABLE_CONTRIB|ON|Enable inclusion of external contributions into the build. This includes all directories in `src/extras`.|
 |SC_GLOBAL_GUI|ON|Enables compilation of GUI components. This requires the Qt libraries to be installed. Either Qt4 or Qt5 are supported. The build will prefer Qt5 if found and will fallback to Qt4 if the Qt5 development libraries are not installed on the host system.|
 |SC_GLOBAL_GUI_QT5|ON|If SC_GLOBAL_GUI is enabled then Qt5 support will be enabled if this option is active. Otherwise only Qt4 will be supported.|
+|SC_DOC_GENERATE|OFF|Enable generation of documentation|
+|SC_DOC_GENERATE_HTML|ON|Enable generation of HTML documentation|
+|SC_DOC_GENERATE_MAN|ON|Enable generation of MAN pages|
+|SC_DOC_GENERATE_PDF|OFF|Enable generation of PDF documentation|
 
 ### Compilation
 

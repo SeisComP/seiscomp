@@ -28,7 +28,6 @@ Time range estimate:
 
 * Variable
 
-
 ----------
 
 Before you start
@@ -58,16 +57,19 @@ For processing, you will need inventory for the new station.
 How to obtain this will vary.
 You can fetch inventory from:
 
-* Other SeisComP systems. Use :program:`scxmldump` to fetch inventories.
-* `EIDA nodes`_. Use web interfaces such as web browsers or `wget` to fetch an inventory.
-* Data centers providing `FDSNWS`_. Use web interfaces such as web browsers or `wget` to fetch an inventory.
+* Other SeisComP systems. Use :ref:`scxmldump` to fetch inventories.
+* EIDA nodes :cite:p:`eida`. Use web interfaces such as web browsers or `wget`
+  to fetch an inventory.
+* Data centers providing :cite:t:`fdsn`. Use web interfaces such as web browsers
+  or `wget` to fetch an inventory.
+* Your own or shared user repositories on :cite:t:`smp`.
 
 
 .. note:: Create and share inventories
 
-   gempa's `SMP`_ is a tool for creating inventory from scratch and community sharing.
-   Create inventories for new or old networks and stations from
-   permanent or temporary deployments.
+   gempa's :cite:t:`smp` is a tool for creating inventory from scratch and
+   community sharing. Create inventories for new or old networks and stations
+   from permanent or temporary deployments.
    SMP provides inventories in :term:`SCML` format in multiple versions
    which can be used without modification.
 
@@ -95,7 +97,7 @@ See the chapter on :ref:`concepts_inventory`.
    Writing inventory to /home/user/seiscomp/etc/inventory/inventory_CLL.xml
 
 When inventory is loaded, you will see your station in the results
-of :program:`scinv` with the `ls` option:
+of :ref:`scinv` with the `ls` option:
 
 .. code-block:: sh
 
@@ -147,23 +149,16 @@ key file for the station in the :file:`~/seiscomp/etc/key` directory.
   location code used, if any.
   See :ref:`tutorials_waveforms` for the remaining details.
 
+
 Configuring processing
 ======================
 
 Now you can enable the station for processing.
 Follow the :ref:`tutorials_processing` tutorial.
 
+
 Configuring for archiving
 =========================
 
 If you want to archive waveforms, consider how long they should be retained.
 See :ref:`tutorials_archiving` for how to do this.
-
-References
-==========
-
-.. target-notes::
-
-.. _`EIDA nodes` : http://orfeus-eu.org/stationbook/nodes/
-.. _`FDSNWS` : https://www.fdsn.org/webservices/datacenters/
-.. _`SMP` : https://smp.gempa.de

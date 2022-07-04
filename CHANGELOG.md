@@ -2,6 +2,36 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.1.0
+
+-   scbulletin
+    -   Add option `--fdsn` for printing event parameters on just one line in
+        FDSN event format supporting to generate catalogs from event XML files.
+    -   Set output string of creation time of first origin time to event.
+-   scdbstrip
+    -   Fix reading `--days`.
+    -   Add options `-E` and `-Q` as well as module configuration for limiting
+        stripping to event parameters and waveforms quality control parameters,
+        respectively.
+-   scmssort
+    -   Report duplicate records whenever found.
+-   scquery
+    -   Do not require a database when using `--showqueries`.
+-   ql2sc
+    -   Add publicID prefix white- and blacklist configuration as alternative
+        to the already available agencyID filter.
+    -   Add option to ignore object removals during import.
+    -   Add more stable algorithm to synchronize the imported event with the
+        target system. This reduces the likelihood of infinite loops (re-imports)
+        on cross connected systems tremendously (note: it does not prevent that!).
+-   scinv
+    -   Add more tests to inventory check.
+    -   Add command-line options for tolerances: `max-elevation-difference` and
+        `max-sensor-depth` and corresponding module configuration parameters.
+    -   Add a test matrix to documentation reporting tests and consequences.
+-   FixedHypocenter
+    -   Set uncertainties in location to 0 km if entered manually.
+
 ## 5.0.1
 
 -   trunk
@@ -25,6 +55,9 @@ folder `rhel` instead of `centos`.
 The database schema receives an update and will increase the schema version
 to 0.12.
 
+-   VS(SC), Virtual Seismologist for SeisComP has been removed from the SeisComP
+    and is now available from a separate repository as an addon module. Read
+    the section "Addon Modules" of the seiscomp documentation for the details.
 -   fdsnws
     -   Fix broken unicode XML responses.
     -   Fix invalid request logging when HUP signal received.

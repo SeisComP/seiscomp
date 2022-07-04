@@ -1092,8 +1092,11 @@ if build_html:
     except BaseException:
         pass
 
-    os.system("sphinx-build -b html %s %s" % (
-        out_dir, os.path.join(out_build_dir, "html")))
+    r = os.WEXITSTATUS(
+        os.system("sphinx-build -b html %s %s" % (
+            out_dir, os.path.join(out_build_dir, "html"))))
+    if r:
+        sys.exit(r)
 
 if build_man:
     print("Clean-up MAN build dir")
@@ -1102,8 +1105,11 @@ if build_man:
     except BaseException:
         pass
 
-    os.system("sphinx-build -b man %s %s" % (
-        out_dir, os.path.join(out_build_dir, "man1")))
+    r = os.WEXITSTATUS(
+        os.system("sphinx-build -b man %s %s" % (
+            out_dir, os.path.join(out_build_dir, "man1"))))
+    if r:
+        sys.exit(r)
 
     print("Clean-up MAN temporary files")
     try:
@@ -1118,5 +1124,8 @@ if build_pdf:
     except BaseException:
         pass
 
-    os.system("sphinx-build -M latexpdf %s %s" % (
-        out_dir, os.path.join(out_build_dir, "pdf")))
+    r = os.WEXITSTATUS(
+        os.system("sphinx-build -M latexpdf %s %s" % (
+            out_dir, os.path.join(out_build_dir, "pdf"))))
+    if r:
+        sys.exit(r)

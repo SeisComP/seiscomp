@@ -7,6 +7,7 @@ Overview
 This overview section is intended to quickly introduce the reader into
 key aspect of |scname| and to provide the access points for further reading.
 
+
 Modular structure
 =================
 
@@ -31,17 +32,20 @@ and many more. Key features are summarized in the :ref:`introduction <introducti
 
    Real-time data acquisition, archiving and automatic processing combined with manual analysis.
 
+
 Data acquisition modules
 ------------------------
 
 Data acquisition modules allow to provide and store waveform data in real-time.
 They are described in the acquisition section of the modules documentation.
 
+
 Automatic processing modules
 ----------------------------
 
 Automatic processing modules allow real-time or offline processing of waveforms and event parameters.
 They are described in the processing section of the modules documentation.
+
 
 Interactive modules
 -------------------
@@ -60,6 +64,7 @@ Interactive :term:`GUI` modules show waveforms and processing results and allow 
 
 The GUI modules are described in the Interactive analysis section of this documentation.
 
+
 Inventory modules
 -----------------
 
@@ -67,11 +72,13 @@ Inventory modules allow to manipulate inventories, e.g. to convert different for
 or to write information to the database.
 They are described in the inventory section of the modules documentation.
 
+
 Utility modules
 ---------------
 
 Utility modules provide access to waveforms, the data base and much more.
 They are described in the utilities section of the modules documentation.
+
 
 Communication and database access
 =================================
@@ -97,6 +104,7 @@ Additional details are found under :ref:`concepts_messaging` in the :ref:`concep
 
    Modular organization of |scname| with messaging system, RecordStream interface and database.
 
+
 Waveform data
 =============
 
@@ -117,9 +125,9 @@ where::
 Here *alphanumeric* means the digits 0 to 9, and uppercase letters A-Z.
 
 For publicly-available seismic stations these are typically supplied
-by external servers such as :ref:`seedlink` or `CAPS`_ servers.
-For example, the `GEOFON`_ seismic network makes data available at port 18000
-at geofon.gfz-potsdam.de.
+by external servers such as :ref:`seedlink` or :cite:t:`caps` servers.
+For example, the :cite:t:`geofon` seismic network makes data available at port 18000
+at geofon.gfz-potsdam.de which you may query and test using :ref:`slinktool`.
 
 If you operate your own seismic network, you may collect data directly
 from your station's digitizer using one of the many plugins included with
@@ -147,7 +155,8 @@ obtain waveform data from upstream sources and relay it to other data users.
    Data flow from data centers and stations via plugins to seedlink and the waveform archive
    both providing the data to local or remote |scname| modules or other clients.
 
-Access to waveform data
+   
+Access to Waveform Data
 =======================
 
 |scname| modules can access waveform data from many difference sources,
@@ -169,6 +178,7 @@ Since messages can be exchanged between different computers, and
 waveform data can be obtained from many sources, the different modules
 do not all have to be on a single computer.
 Multiple operators can connect to a single |scname| installation from their own computers.
+
 
 Station metadata
 ================
@@ -196,9 +206,10 @@ Today there are some common formats to store metadata:
 
 Dataless SEED can be imported to, and exported from, |scname| if needed.
 
-You can get inventory information from various public sources including `EIDA`_ or
-`IRIS`_ and many more. `SMP`_ allows you to create and share meta data from your own
-station network and to export an intentory in :term:`SCML` format.
+You can get inventory information from various public sources including
+:cite:t:`eida` or :cite:t:`iris` and many more. :cite:t:`smp` allows you to
+create and share meta data from your own
+station network and to export an inventory in :term:`SCML` format.
 
 Inventories for all considered recording stations need to be imported
 into |scname|. and loaded into its database, before data can be processed.
@@ -210,13 +221,16 @@ The tools are described in the inventory section of this documentation.
    In order to process data streams, the inventory must provide complete response information
    for all the streams AND must match the :term:`bindings <binding>` configuration.
 
+
 Configuration
 =============
 
-The basics of configuring a |scname| system are described in the :ref:`concepts section <concepts_configuration>`.
-The :ref:`tutorials` of this documentation provide step-by-step recipes.
-The modules documentation explains the modules functioning, their configuration and
-command-line parameters and give additional examples and links to related topics.
+The basics of configuring a |scname| system are described in the
+:ref:`concepts section <concepts_configuration>`. The :ref:`tutorials` of this
+documentation provide step-by-step recipes. The modules documentation explains
+the modules functioning, their configuration and command-line parameters and
+give additional examples and links to related topics.
+
 
 What next?
 ==========
@@ -233,33 +247,24 @@ Eventually, your new |scname| system will pick and create origins,
 should a locatable :term:`seismic event <event>` take place while it
 is running.
 
-Where to go for more help
+
+Where to Go for More Help
 =========================
 
 The :ref:`tutorial on help<tutorials_help>` provides comprehensive list of options
 to get help on |scname|.
-Most |scname| modules have built-in help messages and descriptive HTML documentation.
-Read the :ref:`tutorial on help<tutorials_help>` for a neat introduction.
+Most |scname| modules have built-in help messages and descriptive HTML
+documentation. Read the :ref:`tutorial on help <tutorials_help>` for a neat
+introduction.
 
-There are other sources of information beyond this documentation.
-The `SeisComP forum`_ has many useful contributions from the community.
+There are other sources of information beyond this documentation. The
+:cite:t:`seiscomp-forum` has many useful contributions from the community.
 You are encouraged to register and post your own questions and comments there.
 
-Professional support including installation, training courses, maintenance, module development
-and modification is provided world-wide by `gempa GmbH`_, a software company out-sourced from GFZ
-and founded by the main |scname| developers.
+Professional support including installation, training courses, maintenance,
+module development and modification is provided world-wide by
+`gempa GmbH <https://www.gempa.de/>`_ :cite:p:`gempa`, a
+software company out-sourced from GFZ and founded by the main |scname|
+developers.
 
 Enjoy |scname|!
-
-References
-==========
-
-.. target-notes::
-
-.. _`CAPS` : https://docs.gempa.de/caps/current/
-.. _`GEOFON` : https://geofon.gfz-potsdam.de
-.. _`EIDA` : https://www.orfeus-eu.org/data/eida/
-.. _`IRIS` : https://service.iris.edu/fdsnws/
-.. _`SMP` : https://smp.gempa.de
-.. _`SeisComP forum` : https://forum.seiscomp.de
-.. _`gempa GmbH` : https://www.gempa.de
