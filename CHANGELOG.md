@@ -14,6 +14,8 @@ All notable changes to SeisComP are documented here.
         respectively.
 -   scmssort
     -   Report duplicate records whenever found.
+-   scquery
+    -   Do not require a database when using `--showqueries`.
 -   ql2sc
     -   Add publicID prefix white- and blacklist configuration as alternative
         to the already available agencyID filter.
@@ -21,6 +23,13 @@ All notable changes to SeisComP are documented here.
     -   Add more stable algorithm to synchronize the imported event with the
         target system. This reduces the likelihood of infinite loops (re-imports)
         on cross connected systems tremendously (note: it does not prevent that!).
+-   scinv
+    -   Add more tests to inventory check.
+    -   Add command-line options for tolerances: `max-elevation-difference` and
+        `max-sensor-depth` and corresponding module configuration parameters.
+    -   Add a test matrix to documentation reporting tests and consequences.
+-   FixedHypocenter
+    -   Set uncertainties in location to 0 km if entered manually.
 
 ## 5.0.1
 
