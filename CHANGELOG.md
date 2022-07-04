@@ -2,13 +2,14 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 5.1.0
 
 -   scbulletin
     -   Add option `--fdsn` for printing event parameters on just one line in
         FDSN event format supporting to generate catalogs from event XML files.
     -   Set output string of creation time of first origin time to event.
 -   scdbstrip
+    -   Fix reading `--days`.
     -   Add options `-E` and `-Q` as well as module configuration for limiting
         stripping to event parameters and waveforms quality control parameters,
         respectively.
