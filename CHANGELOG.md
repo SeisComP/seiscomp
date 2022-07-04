@@ -31,6 +31,8 @@ All notable changes to SeisComP are documented here.
     -   Add a test matrix to documentation reporting tests and consequences.
 -   FixedHypocenter
     -   Set uncertainties in location to 0 km if entered manually.
+-   scrttv
+    -   Show number of traces in tab header
 
 ## 5.0.1
 
