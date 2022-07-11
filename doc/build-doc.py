@@ -999,7 +999,7 @@ Module Configuration
                 bindings_options += "\n.. _%s-%s-%s-label:\n\n" % (
                     app_name, cat, name)
                 bindings_options += "%s\n" % name
-                bindings_options += "%s\n\n" % ('^'*len(name))
+                bindings_options += "%s\n\n" % ('-'*len(name))
                 desc = xml_desc_lines(b)
                 if len(desc) > 0:
                     bindings_options += "\n".join(desc)
