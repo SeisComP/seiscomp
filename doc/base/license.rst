@@ -7,7 +7,7 @@ License
 In a nutshell
 =============
 
-You can use the entire |scname| software collection under
+You can use the entire SeisComP software collection under
 the terms of the GNU AGPL, non-commercially or commercially. You can talk
 about the software, you can give training sessions with the software, you
 can install the software wherever you like regardless of whether
@@ -16,10 +16,10 @@ You can operate the software and do your business with it.
 
 If you want to modify the software then you must publish all the changes
 you made. Even if you only run it on your servers and expose it to the public.
-If you build software applications linking against |scname| libraries you have
+If you build software applications linking against SeisComP libraries you have
 to publish them under the GNU AGPL/GPL if they are for use by others.
 
-If you want to write closed-source software with |scname| you can apply for
+If you want to write closed-source software with SeisComP you can apply for
 a Commercial License. It is your decision whether you want to use the
 libraries under the GNU AGPL or the Commercial License. You can't do both!
 
@@ -31,12 +31,12 @@ Affero General Public License version 3.0 as published by the Free Software
 Foundation. Please review the following information to ensure the
 GNU Affero General Public License version 3.0 requirements will be met.
 
-The |scname| application package is licensed exclusively under the GNU AGPL.
+The SeisComP application package is licensed exclusively under the GNU AGPL.
 
 Commercial License Usage
 ========================
 
-Licensees holding valid commercial |scname| licenses may use the Software in
+Licensees holding valid commercial SeisComP licenses may use the Software in
 accordance with the commercial license agreement between you and gempa GmbH.
 For further information use the contact form at https://www.gempa.de/contact.
 
