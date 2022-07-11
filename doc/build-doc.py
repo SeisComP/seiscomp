@@ -368,6 +368,8 @@ for o, arg in opts:
         build_man = True
     if o == '--pdf':
         build_pdf = True
+    if o == '--all':
+        allowContrib = True
 
 if not args:
     print("error: build directory not specified\n", file=sys.stderr)
