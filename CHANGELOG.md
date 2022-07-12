@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.1.1
+
+-   The release did not contain the latest advertised changes of the main
+    repository. This version does not introduce any new features or bugfixes.
+
 ## 5.1.0
 
 -   scbulletin
