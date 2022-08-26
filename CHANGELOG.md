@@ -2,6 +2,48 @@
 
 All notable changes to SeisComP are documented here.
 
+## x.y.z
+
+-   scalert
+    -   Add more configurable constraints to scripts started up reception of
+        picks (thanks to Luca Scarabello, ETH Zurich, for this contribution).
+-   scautoloc
+    -   Fix a bug occasionally resulting in two associated picks of the same
+        station and phase.
+-   scardac
+    -   Support plugins for scanning other than miniSEED SDS archives.
+-   scautopick
+    -   Make phase hint configurable for primary picker.
+-   scbulletin
+    -   Add support for event and origin lists with options `-E` and `-O`.
+-   scconfig
+    -   Add used SeisComP version number to GUI header.
+-   scevtls
+    -   Add option `--hours` for searching the database within given hours before
+        now.
+-   scorgls
+    -   Add command-line option `-D` for a custom delimiter.
+-   scqcv
+    -   Update default configuration parameters and description for evaluating
+        score in QcOverview.
+-   scqueryqc
+    -   Use 1970-01-01 for default begin if begin is not set.
+    -   Fix option `-i`.
+-   travel-time interface
+    -   Add interface 'homogeneous' for velocity models with just one P- and one
+        S-wave velocity (thanks to Luca Scarabello, ETH Zurich, for this
+        contribution).
+-   scolv
+    -   Fix mapping of map station symbols and arrival table rows. This mapping
+        was unfortunately out of sync in previous 5.x versions.
+-   scevent
+    -   Make eventID slot margin configurable (`eventIDLookupMargin`). The default
+        value was 5 which meant that only 5 event slots in the future and 5 event
+        slots in the past were checked for availability in case of eventID conflicts.
+        This could lead to allocation errors in case of earthquake swarms. Now the
+        number of slots to look back and to look ahead is determined based on the
+        event association time window (+/- 30 minutes) by default.
+
 ## 5.1.1
 
 -   The release did not contain the latest advertised changes of the main
