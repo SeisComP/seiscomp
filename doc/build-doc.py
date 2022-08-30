@@ -60,24 +60,20 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
             prefix = prefix[:-1]
             name = ""
 
+        desc = xml_desc_lines(param_node)
         options += "\n.. confval:: %s%s\n\n" % (prefix, name)
         default = param_node.get('default')
+
+        if default:
+            options += "   Default: ``%s``\n\n" % default
         if type_:
             options += "   Type: *%s*\n\n" % type_
         if unit:
             options += "   Unit: *%s*\n\n" % unit
-
-        desc = xml_desc_lines(param_node)
-
         # Description available
         if len(desc) > 0:
             for line in desc:
                 options += "   %s\n" % escape(line)
-            if default:
-                options += "   Default is ``%s``." % default
-        # No description, but default
-        elif default:
-            options += "   Default is ``%s``." % default
         # Nothing
         else:
             options += "   *No description available*"
