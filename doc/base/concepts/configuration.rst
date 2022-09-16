@@ -467,10 +467,10 @@ Example: global bindings
 A binding is a set of name value pairs just like a configuration file but for
 a station. In the file system a binding looks like this:
 
-.. code-block:: python
+.. code-block:: properties
 
-  detecLocid = ""
-  detecStream = HH
+   detecLocid = ""
+   detecStream = HH
 
 Simple. These are actually two parameters from the global binding and it solves
 a common issue elegantly: a station might provide a couple of channels, often
@@ -572,21 +572,31 @@ Summary
 * Key files are another human readable representation of bindings,
 * ``seiscomp update-config`` or ``seiscomp update-config trunk`` writes the
   information from :file:`etc/key` to the database,
-* An application never reads ``etc/key``,
+* An application never reads :file:`etc/key`,
 * Bindings are being read from the database or an XML file.
 
+
+.. _concepts_configuration_parameters:
 
 Format of Parameters
 ====================
 
 The :term:`trunk` configuration files are simple text files where each line
-is a name-value pair.
+is a name-value pair containing the parameter name and its value.
+
+Parameter values can be provided as
+
+* plain values or comma-separated lists on single or multiple lines
+  (read sections below) or as
+* :ref:`variables <concepts_configuration_variables>`, allowing to refer to
+  previously defined parameters, e.g., in :file:`global.cfg` or to define relative
+  directories related to the |scname| installation or the Linux system.
 
 .. warning::
 
    In contrast to previous versions of |scname| the parameter names are now
-   case-sensitive. To check configurations from previous versions regarding
-   case-sensitivity, :ref`scchkcfg` can be used.
+   case-sensitive. Use :ref`scchkcfg` to check configurations from previous
+   versions regarding case-sensitivity.
 
 
 Basic
@@ -729,18 +739,22 @@ The final list of parameter names is:
 .. _concepts_configuration_variables:
 
 Variables
----------
+=========
 
-Environment or preceding configuration variables can be used in the configuration of
-SeisComP modules with `${var}`, e.g.
+Environment or preceding configuration variables (configuration parameters) can
+be used as values for :ref:`parameters <concepts_configuration_parameters>` in
+the configuration of SeisComP modules with `${var}`, e.g.
 
 .. code-block:: properties
+
+   plugins = ${plugins}, hypo71
 
    homeDir = ${HOME}
    myPath = ${homeDir}/test
    myseiscomp = ${SEISCOMP_ROOT}
 
-Internal |scname| variables can be used with `@var@`, e.g.
+|scname| knows internal variables defining the it environment. The can be used
+with `@var@`, e.g.
 
 .. code-block:: properties
 
@@ -773,6 +787,16 @@ panel of :ref:`scconfig`.
    :width: 18cm
 
    scconfig information panel indicating the internal |scname| variables.
+
+The internal |scname| variable CONFIGDIR can be re-defined by the SHELL
+environment variable SEISCOMP_LOCAL_CONFIG. Setting SEISCOMP_LOCAL_CONFIG will
+also effect LOGDIR which is automatically set to
+:file:`$SEISCOMP_LOCAL_CONFIG/log`.
+Example:
+
+.. code-block:: properties
+
+   SEISCOMP_LOCAL_CONFIG = /var/log/seiscomp
 
 
 Related Tools
