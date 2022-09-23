@@ -794,9 +794,9 @@ also effect LOGDIR which is automatically set to
 :file:`$SEISCOMP_LOCAL_CONFIG/log`.
 Example:
 
-.. code-block:: properties
+.. code-block:: sh
 
-   SEISCOMP_LOCAL_CONFIG = /var/log/seiscomp
+   export SEISCOMP_LOCAL_CONFIG=/var/log/seiscomp
 
 
 Related Tools
