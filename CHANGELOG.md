@@ -2,8 +2,14 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 5.2.0
 
+```SC_API_VERSION 15.2.0```
+
+-   GUI
+    -   Allow theoretical arrivals with negative depth in picker/amplitude view
+    -   Add support for GeoJSON to export of map drawings
+    -   Fix FM event list loading with filters
 -   scalert
     -   Add more configurable constraints to scripts started up reception of
         picks (thanks to Luca Scarabello, ETH Zurich, for this contribution).
@@ -18,9 +24,22 @@ All notable changes to SeisComP are documented here.
     -   Add support for event and origin lists with options `-E` and `-O`.
 -   scconfig
     -   Add used SeisComP version number to GUI header.
+-   scchkconfig
+    -   Increase verbosity
+-   scevent
+    -   Make eventID slot margin configurable (`eventIDLookupMargin`). The default
+        value was 5 which meant that only 5 event slots in the future and 5 event
+        slots in the past were checked for availability in case of eventID conflicts.
+        This could lead to allocation errors in case of earthquake swarms. Now the
+        number of slots to look back and to look ahead is determined based on the
+        event association time window (+/- 30 minutes) by default.
 -   scevtls
     -   Add option `--hours` for searching the database within given hours before
         now.
+-   scolv
+    -   Fix mapping of map station symbols and arrival table rows. This mapping
+        was unfortunately out of sync in previous 5.x versions.
+    -   Preset fixed depth and depth type if `olv.locator.presetFromOrigin` is enabled
 -   scorgls
     -   Add command-line option `-D` for a custom delimiter.
 -   scqcv
@@ -33,16 +52,8 @@ All notable changes to SeisComP are documented here.
     -   Add interface 'homogeneous' for velocity models with just one P- and one
         S-wave velocity (thanks to Luca Scarabello, ETH Zurich, for this
         contribution).
--   scolv
-    -   Fix mapping of map station symbols and arrival table rows. This mapping
-        was unfortunately out of sync in previous 5.x versions.
--   scevent
-    -   Make eventID slot margin configurable (`eventIDLookupMargin`). The default
-        value was 5 which meant that only 5 event slots in the future and 5 event
-        slots in the past were checked for availability in case of eventID conflicts.
-        This could lead to allocation errors in case of earthquake swarms. Now the
-        number of slots to look back and to look ahead is determined based on the
-        event association time window (+/- 30 minutes) by default.
+-   XML
+    -   Install 0.12 schema and XSLT files
 
 ## 5.1.1
 
@@ -50,6 +61,8 @@ All notable changes to SeisComP are documented here.
     repository. This version does not introduce any new features or bugfixes.
 
 ## 5.1.0
+
+```SC_API_VERSION 15.1.0```
 
 -   scbulletin
     -   Add option `--fdsnws` for printing event parameters on just one line in
