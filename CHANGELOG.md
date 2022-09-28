@@ -6,6 +6,9 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 15.2.0```
 
+-   fdsnxml2inv
+    -   Add support for "subject" attribute in FDSNXML::Comment
+    -   Add support for instrument identifiers
 -   GUI
     -   Allow theoretical arrivals with negative depth in picker/amplitude view
     -   Add support for GeoJSON to export of map drawings
