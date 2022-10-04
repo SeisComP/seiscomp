@@ -13,6 +13,8 @@ All notable changes to SeisComP are documented here.
     -   Allow theoretical arrivals with negative depth in picker/amplitude view
     -   Add support for GeoJSON to export of map drawings
     -   Fix FM event list loading with filters
+    -   Fix segmentation fault in trace widget in combination with empty
+        records
 -   scalert
     -   Add more configurable constraints to scripts started up reception of
         picks (thanks to Luca Scarabello, ETH Zurich, for this contribution).
