@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.2.1
+
+-   Amplitudes ML*
+    -   Fix bug which prevented `signalEnd`, `minSNR` and `maxDist` from being
+        configurable
+
 ## 5.2.0
 
 ```SC_API_VERSION 15.2.0```
