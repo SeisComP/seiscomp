@@ -29,7 +29,7 @@ All notable changes to SeisComP are documented here.
     -   Add support for event and origin lists with options `-E` and `-O`.
 -   scconfig
     -   Add used SeisComP version number to GUI header.
--   scchkconfig
+-   scchkcfg
     -   Increase verbosity
 -   scevent
     -   Make eventID slot margin configurable (`eventIDLookupMargin`). The default
