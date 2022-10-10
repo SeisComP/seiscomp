@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.2.1
+
+-   Amplitudes ML*
+    -   Fix bug which prevented `signalEnd`, `minSNR` and `maxDist` from being
+        configurable
+
 ## 5.2.0
 
 ```SC_API_VERSION 15.2.0```
@@ -29,7 +35,7 @@ All notable changes to SeisComP are documented here.
     -   Add support for event and origin lists with options `-E` and `-O`.
 -   scconfig
     -   Add used SeisComP version number to GUI header.
--   scchkconfig
+-   scchkcfg
     -   Increase verbosity
 -   scevent
     -   Make eventID slot margin configurable (`eventIDLookupMargin`). The default
