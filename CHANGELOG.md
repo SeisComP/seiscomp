@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.2.2
+
+-   scevtlog
+    -   Fix segmentation fault on exit
+
 ## 5.2.1
 
 -   Amplitudes ML*
