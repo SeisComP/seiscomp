@@ -2,6 +2,18 @@
 
 All notable changes to SeisComP are documented here.
 
+## x.y.z
+
+-   trunk
+    -   Fix reading `logging.syslog` from configuration file in any application.
+-   sccnv
+    -   Add conversion from QuakeML to documentation.
+-   scrttv
+    -   Allow configuration of stream decorations using scconfig.
+        string.
+-   GUI
+    -   Add tooltips to all column headers of event list.
+
 ## 5.2.2
 
 -   scevtlog
