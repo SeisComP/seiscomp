@@ -2,7 +2,7 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 5.3.0
 
 -   trunk
     -   Fix reading `logging.syslog` from configuration file in any application.
