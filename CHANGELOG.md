@@ -282,6 +282,11 @@ to 0.12.
     -   Check for invalid message (serial_plugin, Vaisala ASCII protocol).
     -   Improve seisplotjs compatibility by adding Sec-WebSocket-Protocol header.
 
+## 4.10.1
+
+-   trunk
+    -   Fix reading `logging.syslog` from configuration file in any application.
+
 ## 4.10.0
 
 **IMPORTANT**: Please check if your are affected by the bug concerning the scmaster
