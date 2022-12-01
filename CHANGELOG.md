@@ -10,7 +10,8 @@ All notable changes to SeisComP are documented here.
     -   Add conversion from QuakeML to documentation.
 -   scrttv
     -   Allow configuration of stream decorations using scconfig.
-        string.
+    -   Allow `streams.codes` to contain stream group profiles, e.g.
+        `streams.codes = GE.UGM..*, MyStreamsProfile` 
 -   GUI
     -   Add tooltips to all column headers of event list.
 
