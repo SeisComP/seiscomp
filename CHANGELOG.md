@@ -286,6 +286,7 @@ to 0.12.
 
 -   trunk
     -   Fix reading `logging.syslog` from configuration file in any application.
+        This is a backport from version 5 and is not fixed in version < 5.2.2.
 
 ## 4.10.0
 
