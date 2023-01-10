@@ -6,6 +6,10 @@ All notable changes to SeisComP are documented here.
 
 -   trunk
     -   Fix reading `logging.syslog` from configuration file in any application.
+    -   Fix JSON archive with respect to serialization of polymorphic objects
+    -   Resolve all path variables defined with @ when reading configuration
+        strings. This affects in particular the author configuration which now
+        needs 6 @ characters for correct escaping, e.g. `@appname@@@@@@hostname`.
 -   sccnv
     -   Add conversion from QuakeML to documentation.
 -   scrttv
@@ -14,6 +18,26 @@ All notable changes to SeisComP are documented here.
         `streams.codes = GE.UGM..*, MyStreamsProfile` 
 -   GUI
     -   Add tooltips to all column headers of event list.
+    -   Fix filter issue with transformed 3C traces
+    -   Fix event and origin count in EventList if objects are removed
+-   XML
+    -   Improve performance in scml to quakeml XSLT parser (thanks to Anthony Carapetis)
+-   apps
+    -   Remove author settings from default configuration files.
+-   scmssort
+    -   Remove listed streams from input
+    -   Update documentation
+-   scinv
+    -   Add nslc option for more compact output which is also compatible
+        with e.g. scmssort or scart.
+    -   Update documetnation
+-   invextr
+    -   Add region filter
+    -   Update documentation
+-   scart
+    -   Add `--print-streams` option
+-   scolv
+    -   Add `-i` to load an XML file on start up
 
 ## 5.2.2
 
