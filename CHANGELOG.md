@@ -10,6 +10,10 @@ All notable changes to SeisComP are documented here.
     -   Resolve all path variables defined with @ when reading configuration
         strings. This affects in particular the author configuration which now
         needs 6 @ characters for correct escaping, e.g. `@appname@@@@@@hostname`.
+    -   Figuring out the three components of a sensor location or the vertical
+        component of the sensor location from the inventory does not require the
+        Stream.azimuth to be set if the dip is defined -90 or 90 degrees. This
+        relaxes the requirement of a well defined inventory for vertical channels.
 -   sccnv
     -   Add conversion from QuakeML to documentation.
 -   scrttv
