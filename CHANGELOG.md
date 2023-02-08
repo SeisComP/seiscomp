@@ -2,6 +2,20 @@
 
 All notable changes to SeisComP are documented here.
 
+## x.y.z
+
+-   trunk
+    -   Fix crash of SDSArchive in combination with e.g. `routing` recordstream,
+        thanks to Luca Scarabello (SED/ETHZ).
+-   scart
+    -   Allow to rename net, sta, loc, ch codes in dump and import modes, thanks
+        to Luca Scarabello (SED/ETHZ).
+    -   Unify -t -n -c --list --sncl options for Dump and Import mode, thanks to
+        Luca Scarabello (SED/ETHZ).
+-   scmssort
+    -   Fix reading miniSEED from stdin which was not the default anymore due to
+        recent code changes.
+
 ## 5.3.0
 
 -   trunk
