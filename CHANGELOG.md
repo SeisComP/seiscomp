@@ -7,14 +7,28 @@ All notable changes to SeisComP are documented here.
 -   trunk
     -   Fix crash of SDSArchive in combination with e.g. `routing` recordstream,
         thanks to Luca Scarabello (SED/ETHZ).
+    -   Improve GeoJSON parsing:
+        -   Fix GeoJSON Point and MultiPoint parsing,
+        -   Fix parsing of rank,
+        -   Support for GeometryCollection,
+        -   Support empty geometry definitions according to standard.
 -   scart
     -   Allow to rename net, sta, loc, ch codes in dump and import modes, thanks
         to Luca Scarabello (SED/ETHZ).
     -   Unify -t -n -c --list --sncl options for Dump and Import mode, thanks to
         Luca Scarabello (SED/ETHZ).
+    -   Add command-line option `--ignore` for ignoring empty records.
+    -   Report empty records whenever found.
 -   scmssort
     -   Fix reading miniSEED from stdin which was not the default anymore due to
         recent code changes.
+    -   Add command-line option `--ignore` for ignoring empty records.
+    -   Report empty records whenever found.
+    -   Support verbosity at different levels using `-v`, `-vv`, `-vvv`.
+-   scbulletin
+    -   Do not crash when reading origins with magnitudes but without
+        corresponding picks.
+    -   Guess missing arrival weight from use of measurements.
 
 ## 5.3.0
 
@@ -29,7 +43,7 @@ All notable changes to SeisComP are documented here.
         Stream.azimuth to be set if the dip is defined -90 or 90 degrees. This
         relaxes the requirement of a well defined inventory for vertical channels.
 -   sccnv
-    -   Add conversion from QuakeML to documentation.
+    -   Add conversion from QuakeML to SCML documentation.
 -   scrttv
     -   Allow configuration of stream decorations using scconfig.
     -   Allow `streams.codes` to contain stream group profiles, e.g.
@@ -48,14 +62,20 @@ All notable changes to SeisComP are documented here.
 -   scinv
     -   Add nslc option for more compact output which is also compatible
         with e.g. scmssort or scart.
-    -   Update documetnation
+    -   Update documentation
 -   invextr
     -   Add region filter
     -   Update documentation
 -   scart
     -   Add `--print-streams` option
+-   scconfig
+    -   Allow renaming files in Inventory panel by right-click on module.
+    -   Allow opening module log files in system panel by right-click on module.
 -   scolv
     -   Add `-i` to load an XML file on start up
+    -   Make ID column selectable in arrival table of Location tab for showing
+        the pick ID.
+    -   Allow copying cells in arrival table of Location tab.
 
 ## 5.2.2
 
