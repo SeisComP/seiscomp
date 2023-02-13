@@ -29,6 +29,9 @@ All notable changes to SeisComP are documented here.
     -   Do not crash when reading origins with magnitudes but without
         corresponding picks.
     -   Guess missing arrival weight from use of measurements.
+-   scautopick
+    -   Remove fixed noise margin of 60s for any picker which is optionally
+        created for each detection, e.g. if configured with `picker = AIC`.
 
 ## 5.3.0
 
