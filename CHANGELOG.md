@@ -12,6 +12,19 @@ All notable changes to SeisComP are documented here.
         -   Fix parsing of rank,
         -   Support for GeometryCollection,
         -   Support empty geometry definitions according to standard.
+    -   Configuration schema files (description.xml) supports extending available
+        structures with plugins including selective name matching.
+        ```xml
+        <extend-struct type="Amplitude">
+            <parameter name="param1" type="string"/>
+        </extent-struct>
+        ```
+        or with matching structure names (here ML*)
+        ```xml
+        <extend-struct type="Amplitude" name="ML.*">
+            <parameter name="param1" type="string"/>
+        </extent-struct>
+        ```
 -   scart
     -   Allow to rename net, sta, loc, ch codes in dump and import modes, thanks
         to Luca Scarabello (SED/ETHZ).
