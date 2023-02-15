@@ -19,9 +19,9 @@ All notable changes to SeisComP are documented here.
             <parameter name="param1" type="string"/>
         </extent-struct>
         ```
-        or with matching structure names (here ML*)
+        or with matching structure names (here ML* including regular expressions)
         ```xml
-        <extend-struct type="Amplitude" name="ML.*">
+        <extend-struct type="Amplitude" match-name="ML.*">
             <parameter name="param1" type="string"/>
         </extent-struct>
         ```
@@ -75,7 +75,7 @@ All notable changes to SeisComP are documented here.
 -   scrttv
     -   Allow configuration of stream decorations using scconfig.
     -   Allow `streams.codes` to contain stream group profiles, e.g.
-        `streams.codes = GE.UGM..*, MyStreamsProfile` 
+        `streams.codes = GE.UGM..*, MyStreamsProfile`
 -   GUI
     -   Add tooltips to all column headers of event list.
     -   Fix filter issue with transformed 3C traces
