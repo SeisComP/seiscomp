@@ -30,7 +30,7 @@ class Module(seiscomp.kernel.Module):
         sys.stderr.write("%s: warning: nothing to do, no email addresses configured\n" % self.name)
         return 0
 
-      cmd = 'df | awk -v max="%d" \'{ if ( $5 > max ) print $0 }\'' % threshold
+      cmd = 'df | awk -v max="%d" \'/[0-9]%%/ { use = $5; gsub("%%", "", use); if ( int(use) > max ) print $0; }\'' % threshold
       p = sub.Popen(['sh', '-c', cmd], stdout=sub.PIPE)
       msg = p.stdout.read().decode()
 
