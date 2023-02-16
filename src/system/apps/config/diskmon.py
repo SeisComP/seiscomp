@@ -32,7 +32,7 @@ class Module(seiscomp.kernel.Module):
 
       cmd = 'df | awk -v max="%d" \'{ if ( $5 > max ) print $0 }\'' % threshold
       p = sub.Popen(['sh', '-c', cmd], stdout=sub.PIPE)
-      msg = p.stdout.read()
+      msg = p.stdout.read().decode()
 
       statfile = os.path.join(run_dir, "msg_sent")
 
