@@ -45,6 +45,10 @@ All notable changes to SeisComP are documented here.
 -   scautopick
     -   Remove fixed noise margin of 60s for any picker which is optionally
         created for each detection, e.g. if configured with `picker = AIC`.
+-   scmv
+    -   Add tooltip to station layer with station annotation
+-   diskmon
+    -   Improve Python3 support
 
 ## 5.3.0
 
