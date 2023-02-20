@@ -25,9 +25,20 @@ All notable changes to SeisComP are documented here.
             <parameter name="param1" type="string"/>
         </extent-struct>
         ```
+    -   Artificial origins: Allow pasting of hypocenter coordinates with high
+        precision.
+-   amplitudes
+    -   Allow configuration of Wood-Anderson instrument parameters in amplitudes
+        global section of module configuration.
+-   magnitudes
+    -   Simplify configuration of magnitude regionalization by global
+        module configuration.
+    -   Allow creating magnitude aliases by configuration of `magnitudes.aliases`
+        in global module configuration and magnitude type profiles in global
+        bindings.
 -   scolv
     -   Show Pick.onset attribute (impulsive, emergent, ...) in the arrival table
-        and allow to edit/set it in the picker
+        and in picker window. Allow editing/setting it in the picker.
 -   scart
     -   Allow to rename net, sta, loc, ch codes in dump and import modes, thanks
         to Luca Scarabello (SED/ETHZ).
@@ -47,16 +58,16 @@ All notable changes to SeisComP are documented here.
     -   Guess missing arrival weight from use of measurements.
 -   scautopick
     -   Remove fixed noise margin of 60s for any picker which is optionally
-        created for each detection, e.g. if configured with `picker = AIC`.
+        created for each detection, e.g., if configured with `picker = AIC`.
 -   scqc
     -   Fix default configuration timeout value for Rms plugin from 60 back to 0
         reflecting the documented default value. A value greater than 0 results
         in warning messages such as "TimeOut specified, but no timeoutTask was
         defined for this QcPlugin".
 -   scmv
-    -   Add tooltip to station layer with station annotation
+    -   Add tooltip to station layer with station annotation.
 -   diskmon
-    -   Improve Python3 support
+    -   Improve Python3 support.
 
 ## 5.3.0
 
