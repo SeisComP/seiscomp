@@ -36,6 +36,7 @@ All notable changes to SeisComP are documented here.
     -   Allow creating magnitude aliases by configuration of `magnitudes.aliases`
         in global module configuration and magnitude type profiles in global
         bindings.
+    -   Add a Magnitudes section to the documentation of concepts.
 -   scolv
     -   Show Pick.onset attribute (impulsive, emergent, ...) in the arrival table
         and in picker window. Allow editing/setting it in the picker.
