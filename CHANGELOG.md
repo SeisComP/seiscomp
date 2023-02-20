@@ -25,6 +25,9 @@ All notable changes to SeisComP are documented here.
             <parameter name="param1" type="string"/>
         </extent-struct>
         ```
+-   scolv
+    -   Show Pick.onset attribute (impulsive, emergent, ...) in the arrival table
+        and allow to edit/set it in the picker
 -   scart
     -   Allow to rename net, sta, loc, ch codes in dump and import modes, thanks
         to Luca Scarabello (SED/ETHZ).
