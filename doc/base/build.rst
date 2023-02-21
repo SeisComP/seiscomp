@@ -8,8 +8,8 @@ Getting the Source Code
 
    For production systems only
    :ref:`install the officially released packages <installation-packages>`
-   from :cite:t:`seiscomp`, :cite:t:`gempa` or compile from the corresponding release
-   tags in this repository.
+   from :cite:t:`seiscomp`, :cite:t:`gempa` or compile from the corresponding
+   release tags in this repository.
 
 The |scname| software collection is distributed among several repositories.
 For more information about compilation and build configuration head over to
@@ -44,7 +44,7 @@ the following script:
    echo "Cloning external base components"
    git clone $repo_path/contrib-gns.git
    git clone $repo_path/contrib-ipgp.git
-   git clone $repo_path/contrib-sed.git
+   git clone https://github.com/swiss-seismological-service/sed-SeisComP-contributions.git contrib-sed
 
    echo "Done"
 
@@ -110,8 +110,8 @@ To compile the sources the following development packages are required
 - libfl-dev
 - libssl-dev
 - crypto-dev
-- python-dev (optional)
-- python-numpy (optional)
+- python3-dev (optional)
+- python3-numpy (optional)
 - libqt4-dev (optional)
 - qtbase5-dev (optional)
 - libmysqlclient-dev (optional)
@@ -119,11 +119,11 @@ To compile the sources the following development packages are required
 - libsqlite3-dev (optional)
 - ncurses-dev (optional)
 
+As of |scname| in version 5.0.0 support for Python 2 is dropped and Python 3 has
+become the default.
 The Python development libraries are required if Python wrappers should be
 compiled which is the default configuration. The development files must
-match the used Python interpreter of the system. If the system uses Python3
-then Python3 development files must be present in exactly the same version
-as the used Python3 interpreter. The same holds for Python2.
+match the used Python interpreter of the system.
 
-Python-numpy is required if Numpy support is enable which is also
+python3-numpy is required if Numpy support is enabled which is also
 the default configuration.
