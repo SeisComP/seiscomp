@@ -48,6 +48,11 @@ All notable changes to SeisComP are documented here.
 -   scautopick
     -   Remove fixed noise margin of 60s for any picker which is optionally
         created for each detection, e.g. if configured with `picker = AIC`.
+-   scqc
+    -   Fix default configuration timeout value for Rms plugin from 60 back to 0
+        reflecting the documented default value. A value greater than 0 results
+        in warning messages such as "TimeOut specified, but no timeoutTask was
+        defined for this QcPlugin".
 -   scmv
     -   Add tooltip to station layer with station annotation
 -   diskmon
