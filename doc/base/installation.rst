@@ -197,9 +197,9 @@ After installation of |scname| these packages can be installed using the
 :program:`seiscomp`.
 The :program:`seiscomp` tool comes with
 the command :command:`install-deps` which installs required packages.
-Read the section :ref:`System management<system-management>` for more detailed instructions.
-For example, to install the dependencies for using the MariaDB database,
-give 'mariadb-server' as parameter.
+Read the section :ref:`System management<system-management>` for more detailed
+instructions. For example, to install the dependencies for using the MariaDB
+database, give 'mariadb-server' as parameter.
 
 .. code-block:: sh
 
