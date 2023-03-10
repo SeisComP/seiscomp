@@ -118,6 +118,10 @@ All notable changes to SeisComP are documented here.
     -   Add gain=0 check to documentation
 -   scinvextr
     -   Correct command-line help
+-   scwfparam
+    -   Use organization configuration parameter for ShakeMap version >= 4
+    -   Populate ShakeMap commtype attribute from bindings
+    -   Allow to output any spectral values with ShakeMap version >= 4
 -   diskmon
     -   Improve Python3 support.
 
