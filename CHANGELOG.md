@@ -74,6 +74,12 @@ All notable changes to SeisComP are documented here.
         created for each detection, e.g., if configured with `picker = AIC`.
 -   scmv
     -   Add tooltip to station layer with station annotation.
+-   scrttv
+    -   Show different colour scheme for picks and arrivals (associated with a non-rejected
+        origin)
+    -   Allow to collect picks to create a preliminary location which can be sent to the
+        messaging as regular origin object
+    -   Re-organize menus and actions
 -   scqc
     -   Fix default configuration timeout value for Rms plugin from 60 back to 0
         reflecting the documented default value. A value greater than 0 results
