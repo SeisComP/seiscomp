@@ -32,8 +32,6 @@ All notable changes to SeisComP are documented here.
         amplitudes.WoodAnderson.T0 = ...
         amplitudes.WoodAnderson.h = ...
         ```
--   travel-time interface
-    -   Simplify configuration for homogeneous implementation
 -   GUI
     -   Fix tooltip display of MapWidget under some circumstances
 -   scolv
