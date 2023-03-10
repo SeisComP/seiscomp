@@ -2,7 +2,47 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.4.0
+
+```SC_API_VERSION 15.4.0```
+
+-   trunk
+    -   Fix crash of SDSArchive in combination with e.g. `routing` recordstream,
+        thanks to Luca Scarabello (SED/ETHZ).
+    -   Fix fdsnws:// recordstream which caused the connection to hang and to
+        not terminate.
+    -   Improve GeoJSON parsing:
+        -   Fix GeoJSON Point and MultiPoint parsing,
+        -   Fix parsing of rank,
+        -   Support for GeometryCollection,
+        -   Support empty geometry definitions according to standard.
+    -   Compute dtdd/dtdh values in LOCSAT travel time table implementation (Luca
+        Scarabello (SED/ETHZ))
+    -   Revert resolving all path variables with configuration files introduced
+        with version 5.3. It caused to much conflicts and inconsistencies that we
+        have decided to revert the "feature".
+-   amplitudes
+    -   Allow configuration of Wood-Anderson instrument parameters in amplitudes
+        global section of module configuration.
+        ```
+        amplitudes.WoodAnderson.gain = ...
+        amplitudes.WoodAnderson.T0 = ...
+        amplitudes.WoodAnderson.h = ...
+        ```
+-   travel-time interface
+    -   Simplify configuration for homogeneous implementation
+-   GUI
+    -   Fix tooltip display of MapWidget under some circumstances
+-   scolv
+    -   Show `Pick.onset` in arrival table (emergent, impulsive, ...)
+    -   Preserve used attribute states when committing from picker
+    -   Load associated picks of temporary originsa
+    -   Support small values in diagram widget
+    -   Add residual to pick tooltip of arrival table
+
 ## 5.3.0
+
+```SC_API_VERSION 15.3.0```
 
 -   trunk
     -   Fix reading `logging.syslog` from configuration file in any application.
