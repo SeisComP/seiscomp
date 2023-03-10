@@ -34,43 +34,14 @@ All notable changes to SeisComP are documented here.
         in global module configuration and magnitude type profiles in global
         bindings.
     -   Add a Magnitudes section to the documentation of concepts.
--   scolv
-    -   Show Pick.onset attribute (impulsive, emergent, ...) in the arrival table
-        and in picker window. Allow editing/setting it in the picker.
--   scart
-    -   Allow to rename net, sta, loc, ch codes in dump and import modes, thanks
-        to Luca Scarabello (SED/ETHZ).
-    -   Unify -t -n -c --list --sncl options for Dump and Import mode, thanks to
-        Luca Scarabello (SED/ETHZ).
-    -   Add command-line option `--ignore` for ignoring empty records.
-    -   Report empty records whenever found.
--   scmssort
-    -   Fix reading miniSEED from stdin which was not the default anymore due to
-        recent code changes.
-    -   Add command-line option `--ignore` for ignoring empty records.
-    -   Report empty records whenever found.
-    -   Support verbosity at different levels using `-v`, `-vv`, `-vvv`.
--   scbulletin
-    -   Do not crash when reading origins with magnitudes but without
-        corresponding picks.
-    -   Guess missing arrival weight from use of measurements.
--   scautopick
-    -   Remove fixed noise margin of 60s for any picker which is optionally
-        created for each detection, e.g., if configured with `picker = AIC`.
--   scqc
-    -   Fix default configuration timeout value for Rms plugin from 60 back to 0
-        reflecting the documented default value. A value greater than 0 results
-        in warning messages such as "TimeOut specified, but no timeoutTask was
-        defined for this QcPlugin".
--   scmv
-    -   Add tooltip to station layer with station annotation.
--   diskmon
-    -   Improve Python3 support.
 
 ## 5.4.0
 
 ```SC_API_VERSION 15.4.0```
 
+
+-   deps
+    -   Add RHEL 9 support
 -   trunk
     -   Fix crash of SDSArchive in combination with e.g. `routing` recordstream,
         thanks to Luca Scarabello (SED/ETHZ).
@@ -99,11 +70,56 @@ All notable changes to SeisComP are documented here.
 -   GUI
     -   Fix tooltip display of MapWidget under some circumstances
 -   scolv
-    -   Show `Pick.onset` in arrival table (emergent, impulsive, ...)
+    -   Show Pick.onset attribute (impulsive, emergent, ...) in the arrival table
+        and in picker window. Allow editing/setting it in the picker.
     -   Preserve used attribute states when committing from picker
     -   Load associated picks of temporary originsa
     -   Support small values in diagram widget
     -   Add residual to pick tooltip of arrival table
+-   scart
+    -   Allow to rename net, sta, loc, ch codes in dump and import modes, thanks
+        to Luca Scarabello (SED/ETHZ).
+    -   Unify -t -n -c --list --sncl options for Dump and Import mode, thanks to
+        Luca Scarabello (SED/ETHZ).
+    -   Add command-line option `--ignore` for ignoring empty records.
+    -   Report empty records whenever found.
+    -   Report errors even without verbose option (Luca Scarabello (SED/ETHZ))
+    -   When using `--print-streams` option in input mode the data
+        is written instead of just printing information. This has
+        been fixed. (Luca Scarabello (SED/ETHZ))
+    -   Update documentation
+-   scmssort
+    -   Fix reading miniSEED from stdin which was not the default anymore due to
+        recent code changes.
+    -   Add command-line option `--ignore` for ignoring empty records.
+    -   Report empty records whenever found.
+    -   Support verbosity at different levels using `-v`, `-vv`, `-vvv`.
+-   scsendjournal
+    -   Add `-i` to read journal parameter data from file
+-   scbulletin
+    -   Do not crash when reading origins with magnitudes but without
+        corresponding picks.
+    -   Guess missing arrival weight from use of measurements.
+-   ql2sc
+    -   Update filter documentation
+-   scautopick
+    -   Fix segmentation fault if being used in playback mode without
+        inventory
+    -   Remove fixed noise margin of 60s for any picker which is optionally
+        created for each detection, e.g., if configured with `picker = AIC`.
+-   scmv
+    -   Add tooltip to station layer with station annotation.
+-   scqc
+    -   Fix default configuration timeout value for Rms plugin from 60 back to 0
+        reflecting the documented default value. A value greater than 0 results
+        in warning messages such as "TimeOut specified, but no timeoutTask was
+        defined for this QcPlugin".
+-   scinv
+    -   Add gain=0 check to documentation
+-   scinvextr
+    -   Correct command-line help
+-   diskmon
+    -   Improve Python3 support.
 
 ## 5.3.0
 
