@@ -39,7 +39,6 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 15.4.0```
 
-
 -   deps
     -   Add RHEL 9 support
 -   trunk
@@ -128,6 +127,8 @@ All notable changes to SeisComP are documented here.
     -   Use organization configuration parameter for ShakeMap version >= 4
     -   Populate ShakeMap commtype attribute from bindings
     -   Allow to output any spectral values with ShakeMap version >= 4
+-   LOCSAT
+    -   Add Iw phase
 -   diskmon
     -   Improve Python3 support.
 
