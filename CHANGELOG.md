@@ -79,6 +79,8 @@ All notable changes to SeisComP are documented here.
         origin)
     -   Allow to collect picks to create a preliminary location which can be sent to the
         messaging as regular origin object
+    -   Add reload action which reloads data and picks at the current visible time range
+    -   Add action to switch to real-time with configured buffer size
     -   Re-organize menus and actions
 -   scqc
     -   Fix default configuration timeout value for Rms plugin from 60 back to 0
