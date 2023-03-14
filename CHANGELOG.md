@@ -73,8 +73,10 @@ All notable changes to SeisComP are documented here.
     -   Load associated picks of temporary originsa
     -   Support small values in diagram widget
     -   Add residual to pick tooltip of arrival table
-    -   Add option to define origin comment profile to be used to populate
+    -   Add option to define origin comment profiles to populate
         arbitrary comments when committing an origin.
+    -   Add option to define magnitude comment profiles to populate
+        arbitrary comments when reviewing a network magnitude
 -   scart
     -   Allow to rename net, sta, loc, ch codes in dump and import modes, thanks
         to Luca Scarabello (SED/ETHZ).
