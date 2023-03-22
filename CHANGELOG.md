@@ -41,6 +41,9 @@ All notable changes to SeisComP are documented here.
 
 -   deps
     -   Add RHEL 9 support
+-   scconfig
+    -   Preserve escaped characters when writing the configuration
+    -   Fix reading variables when using includes
 -   trunk
     -   Fix crash of SDSArchive in combination with e.g. `routing` recordstream,
         thanks to Luca Scarabello (SED/ETHZ).
