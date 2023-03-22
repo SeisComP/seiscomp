@@ -745,18 +745,18 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-bool Config::handleInclude(const std::string& fileName)
-{
+bool Config::handleInclude(const std::string& fileName) {
 	if ( fileName.empty() ) return false;
 
 	std::string tmpFileName(fileName);
 	// Resolve ~ for home directory
-	if (tmpFileName[0] == '~') {
+	if ( tmpFileName[0] == '~' ) {
 		tmpFileName = homeDir() + tmpFileName.substr(1);
 	}
 
 	bool isRelativePath = false;
 	char oldPath[PATH_MAX];
+
 	if ( tmpFileName[0] != '/' ) {
 		isRelativePath = true;
 		// Change to the config file path to be able to handle relative paths
@@ -771,12 +771,14 @@ bool Config::handleInclude(const std::string& fileName)
 		//SEISCOMP_DEBUG("Handling include: %s", tmpFileName.c_str());
 		Config conf;
 		if ( !conf.readInternalConfig(tmpFileName, _symbolTable, _namespacePrefix,
-		                              _stage, !_resolveReferences) )
+		                              _stage, !_resolveReferences) ) {
 			return false;
+		}
 	}
 
-	if ( isRelativePath )
+	if ( isRelativePath ) {
 		chdir(oldPath);
+	}
 
 	return true;
 }
@@ -915,7 +917,9 @@ bool Config::parseRValue(const std::string& entry,
 	std::string::const_iterator previous = entry.begin();
 	std::string::const_iterator next     = entry.begin();
 
-	if ( rawMode ) resolveReferences = false;
+	if ( rawMode ) {
+		resolveReferences = false;
+	}
 
 	//SEISCOMP_DEBUG("entry: %s", entry.c_str());
 
@@ -924,6 +928,9 @@ bool Config::parseRValue(const std::string& entry,
 		next = it + 1;
 
 		if ( *it == '\\' && !stringMode && !escapeMode ) {
+			if ( rawMode ) {
+				parsedEntry.push_back(*it);
+			}
 			escapeMode = true;
 			continue;
 		}
@@ -934,7 +941,9 @@ bool Config::parseRValue(const std::string& entry,
 		}
 		else if ( *it == '"' ) {
 			stringMode = !stringMode;
-			if ( rawMode ) parsedEntry.push_back(*it);
+			if ( rawMode ) {
+				parsedEntry.push_back(*it);
+			}
 			else if ( next != entry.end() && *next == '"' ) tokens.push_back("");
 		}
 		else if ( *it == '$' && !stringMode && resolveReferences ) {
