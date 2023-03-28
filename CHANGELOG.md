@@ -5,14 +5,16 @@ All notable changes to SeisComP are documented here.
 ## x.y.z
 
 -   trunk
-    -   Configuration schema files (description.xml) supports extending available
-        structures with plugins including selective name matching.
+    -   Configuration schema files (`@SYSTEMCONFIGDIR@/descriptions/[module].xml`)
+        support extending available structures with plugins including selective
+        name matching:
         ```xml
         <extend-struct type="Amplitude">
             <parameter name="param1" type="string"/>
         </extent-struct>
         ```
-        or with matching structure names (here ML* including regular expressions)
+
+        or with matching structure names (here ML* including regular expressions):
         ```xml
         <extend-struct type="Amplitude" match-name="ML.*">
             <parameter name="param1" type="string"/>
@@ -23,17 +25,39 @@ All notable changes to SeisComP are documented here.
     -   Simplify the configuation of the travel-time interface homogeneous:
         Deprecated global configuration parameter -> new parameter, dropped
         '.profile':
-
         ```
         ttt.homogeneous.profile.[profile].[parameters]  -> ttt.homogeneous.[profile].[parameters]
+        ```
     -   Changed KM_OF_DEGREE constant according to WGS84 mean radius definition.
+    -   Changed default values of Wood-Anderson instrument filter to
+        recommendations by IASPEI magnitude group, 2011 and Uhrhammer et al.,
+        1990. The change systematically reduces magnitudes by 0.13 when making
+        use of amplitudes measured on waveforms corrected for Wood-Anderson
+        seismometers with default.
 -   magnitudes
     -   Simplify configuration of magnitude regionalization by global
-        module configuration.
+        module configuration in scconfig.
     -   Allow creating magnitude aliases by configuration of `magnitudes.aliases`
         in global module configuration and magnitude type profiles in global
         bindings.
     -   Add a Magnitudes section to the documentation of concepts.
+-   GUIs
+    -   Add View and Settings menus consistently to all GUIs.
+-   iLoc
+    -   Fix crash in local travel-time computation and if local model is enabled
+        but not configured.
+    -   Make parameter `auxDir` and `MaxLocalTTDelta` configurable in scconfig.
+    -   Fix reading `LocalVModel` and `DoNotRenamePhases` from configuration.
+-   LOCSAT
+    -   Apply strict limit of 181 distance samples to travel time tables.
+    -   Update documentation.
+-   scolv
+    -   Make `olv.arrivalPlot.showUncertainties` configurable in scconfig.
+-   scrttv
+    -   Update documentation.
+    -   New option `--map-picks` allows to show picks on visible streams even
+        when they were created on invisble streams, e.g., S picks created on
+        horizontal components are shown verticals.
 
 ## 5.4.0
 
@@ -81,17 +105,24 @@ All notable changes to SeisComP are documented here.
     -   Add option to define magnitude comment profiles to populate
         arbitrary comments when reviewing a network magnitude
 -   scart
-    -   Allow to rename net, sta, loc, ch codes in dump and import modes, thanks
+    -   Allow to rename net, sta, loc, ch codes in dump and import modes,
+        thanks to Luca Scarabello (SED/ETHZ).
+    -   Unify -t -n -c --list --sncl options for Dump and Import mode, thanks
         to Luca Scarabello (SED/ETHZ).
-    -   Unify -t -n -c --list --sncl options for Dump and Import mode, thanks to
-        Luca Scarabello (SED/ETHZ).
     -   Add command-line option `--ignore` for ignoring empty records.
+    -   Add command-line option `-o` for writing miniSEED records to file in
+        import mode.
+    -   Allow filtering records from files by time (`-t`) in import mode.
+    -   Allow filtering records from files by stream lists (`--nslc`) in import
+        mode.
     -   Report empty records whenever found.
+    -   Print stream information whenever requested by `--print-streams`.
     -   Report errors even without verbose option (Luca Scarabello (SED/ETHZ))
     -   When using `--print-streams` option in input mode the data
         is written instead of just printing information. This has
-        been fixed. (Luca Scarabello (SED/ETHZ))
-    -   Update documentation
+        been fixed (Luca Scarabello (SED/ETHZ)) and can be deactivated with
+        `--test`.
+    -   Update documentation.
 -   scmssort
     -   Fix reading miniSEED from stdin which was not the default anymore due to
         recent code changes.
@@ -121,6 +152,8 @@ All notable changes to SeisComP are documented here.
     -   Add reload action which reloads data and picks at the current visible time range
     -   Add action to switch to real-time with configured buffer size
     -   Re-organize menus and actions
+-   scmapcut
+    -   Fix segmentation fault at exit if a tilestore plugin is used
 -   scqc
     -   Fix default configuration timeout value for Rms plugin from 60 back to 0
         reflecting the documented default value. A value greater than 0 results
@@ -138,6 +171,9 @@ All notable changes to SeisComP are documented here.
     -   Add Iw phase
 -   diskmon
     -   Improve Python3 support.
+-   FDSN StationXML
+    -   Fix generating of -nan values for clock drift caused by sample rates
+        of 0.
 
 ## 5.3.0
 
