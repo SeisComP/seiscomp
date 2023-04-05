@@ -1,4 +1,4 @@
-MACRO(SC_BEGIN_PACKAGE ...)
+MACRO (SC_BEGIN_PACKAGE ...)
 	SET(SC3_PACKAGE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 	SET(SC3_PACKAGE_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR})
 	IF (${ARGC} GREATER 1)
@@ -33,9 +33,9 @@ MACRO(SC_BEGIN_PACKAGE ...)
 	MESSAGE(STATUS "Adding pkg ${ARGV0}")
 	MESSAGE(STATUS "... resides in ${SC3_PACKAGE_SOURCE_DIR}.")
 	MESSAGE(STATUS "... will be installed under ${SC3_PACKAGE_INSTALL_PREFIX}.")
-ENDMACRO(SC_BEGIN_PACKAGE)
+ENDMACRO ()
 
-MACRO(SC_ADD_CHANGELOG _app)
+MACRO (SC_ADD_CHANGELOG _app)
 	SET(CL_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 	IF (${ARGC} GREATER 1)
 		SET(CL_DIR ${ARGV1})
@@ -52,9 +52,9 @@ MACRO(SC_ADD_CHANGELOG _app)
 			ENDIF(EXISTS "${CL_DIR}/CHANGELOG")
 		ENDIF(EXISTS "${CL_DIR}/CHANGELOG.rst")
 	ENDIF(EXISTS "${CL_DIR}/CHANGELOG.md")
-ENDMACRO(SC_ADD_CHANGELOG)
+ENDMACRO ()
 
-MACRO(SC_ADD_VERSION _package _name)
+MACRO (SC_ADD_VERSION _package _name)
 	INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
 	# Read build year from current source directory
@@ -105,9 +105,9 @@ MACRO(SC_ADD_VERSION _package _name)
 	SET(${_package}_SOURCES ${${_package}_SOURCES} ${${_name}_VERSION})
 
 	SC_ADD_CHANGELOG(${_name})
-ENDMACRO(SC_ADD_VERSION)
+ENDMACRO ()
 
-MACRO(SC_ADD_SUBDIRS)
+MACRO (SC_ADD_SUBDIRS)
 	FILE(GLOB files RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "[^.]*")
 	SET(dirs "")
 	SET(prio_dirs " ")
@@ -132,70 +132,70 @@ MACRO(SC_ADD_SUBDIRS)
 	IF(dirs)
 		SUBDIRS(${dirs})
 	ENDIF()
-ENDMACRO(SC_ADD_SUBDIRS)
+ENDMACRO ()
 
-MACRO(SC_SETUP_LIB_SUBDIR _package)
+MACRO (SC_SETUP_LIB_SUBDIR _package)
 	SET_PROPERTY(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY SOURCES ${${_package}_SOURCES})
 	SET_PROPERTY(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY HEADERS ${${_package}_HEADERS})
 	SET_PROPERTY(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY DEFS ${${_package}_DEFINITIONS})
-ENDMACRO(SC_SETUP_LIB_SUBDIR)
+ENDMACRO ()
 
 
 # This macro changed in CMake 2.8 it does not work anymore correctly so
 # it is included here as _COMPAT version
-MACRO (QT4_EXTRACT_OPTIONS_COMPAT _qt4_files _qt4_options)
-  SET(${_qt4_files})
-  SET(${_qt4_options})
-  SET(_QT4_DOING_OPTIONS FALSE)
-  FOREACH(_currentArg ${ARGN})
-    IF ("${_currentArg}" STREQUAL "OPTIONS")
-      SET(_QT4_DOING_OPTIONS TRUE)
-    ELSE ("${_currentArg}" STREQUAL "OPTIONS")
-      IF(_QT4_DOING_OPTIONS) 
-        LIST(APPEND ${_qt4_options} "${_currentArg}")
-      ELSE(_QT4_DOING_OPTIONS)
-        LIST(APPEND ${_qt4_files} "${_currentArg}")
-      ENDIF(_QT4_DOING_OPTIONS)
-    ENDIF ("${_currentArg}" STREQUAL "OPTIONS")
-  ENDFOREACH(_currentArg) 
-ENDMACRO (QT4_EXTRACT_OPTIONS_COMPAT)
+MACRO (QT_EXTRACT_OPTIONS_COMPAT _qt_files _qt_options)
+	SET(${_qt_files})
+	SET(${_qt_options})
+	SET(_QT_DOING_OPTIONS FALSE)
+	FOREACH(_currentArg ${ARGN})
+		IF ("${_currentArg}" STREQUAL "OPTIONS")
+			SET(_QT_DOING_OPTIONS TRUE)
+		ELSE ("${_currentArg}" STREQUAL "OPTIONS")
+			IF(_QT_DOING_OPTIONS)
+				LIST(APPEND ${_qt_options} "${_currentArg}")
+			ELSE(_QT_DOING_OPTIONS)
+				LIST(APPEND ${_qt_files} "${_currentArg}")
+			ENDIF(_QT_DOING_OPTIONS)
+		ENDIF ("${_currentArg}" STREQUAL "OPTIONS")
+	ENDFOREACH(_currentArg)
+ENDMACRO ()
 
 
-MACRO(SC_QT4_WRAP_UI outfiles)
-  QT4_EXTRACT_OPTIONS_COMPAT(ui_files ui_options ${ARGN})
+MACRO(SC_QT_WRAP_UI outfiles)
+	QT_EXTRACT_OPTIONS_COMPAT(ui_files ui_options ${ARGN})
 
-  IF (SC_GLOBAL_GUI_QT5)
-  	get_target_property(QT_UIC_EXECUTABLE Qt5::uic LOCATION)
-  ENDIF ()
+	IF (SC_GLOBAL_GUI_QT5)
+		get_target_property(QT_UIC_EXECUTABLE Qt5::uic LOCATION)
+	ENDIF ()
 
-  FOREACH (it ${ui_files})
-    GET_FILENAME_COMPONENT(outfile ${it} NAME_WE)
-    GET_FILENAME_COMPONENT(infile ${it} ABSOLUTE)
-    GET_FILENAME_COMPONENT(_rel ${it} PATH)
-    IF (_rel)
-      SET(_rel "${_rel}/")
-    ENDIF (_rel)
-    SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${_rel}ui_${outfile}.h) # Here we set output
-    ADD_CUSTOM_COMMAND(OUTPUT ${outfile}
-      COMMAND ${QT_UIC_EXECUTABLE}
-      ARGS ${ui_options} -o ${outfile} ${infile}
-      MAIN_DEPENDENCY ${infile})
-    SET(${outfiles} ${${outfiles}} ${outfile})
-  ENDFOREACH (it)
-ENDMACRO (SC_QT4_WRAP_UI)
+	FOREACH (it ${ui_files})
+		GET_FILENAME_COMPONENT(outfile ${it} NAME_WE)
+		GET_FILENAME_COMPONENT(infile ${it} ABSOLUTE)
+		GET_FILENAME_COMPONENT(_rel ${it} PATH)
+		IF (_rel)
+			SET(_rel "${_rel}/")
+		ENDIF (_rel)
+		SET(outfile ${CMAKE_CURRENT_BINARY_DIR}/${_rel}ui_${outfile}.h) # Here we set output
+		ADD_CUSTOM_COMMAND(OUTPUT ${outfile}
+			COMMAND ${QT_UIC_EXECUTABLE}
+			ARGS ${ui_options} -o ${outfile} ${infile}
+			MAIN_DEPENDENCY ${infile})
+		SET(${outfiles} ${${outfiles}} ${outfile})
+	ENDFOREACH (it)
+ENDMACRO ()
 
 
-MACRO(SC_SETUP_GUI_LIB_SUBDIR _package)
+MACRO (SC_SETUP_GUI_LIB_SUBDIR _package)
 	SET_PROPERTY(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY SOURCES ${${_package}_SOURCES})
 	SET_PROPERTY(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY HEADERS ${${_package}_HEADERS})
 	SET_PROPERTY(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY DEFS ${${_package}_DEFINITIONS})
 	SET_PROPERTY(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY MOCS ${${_package}_MOC_HEADERS})
 	SET_PROPERTY(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY UIS ${${_package}_UI})
 	SET_PROPERTY(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY RESOURCES ${${_package}_RESOURCES})
-ENDMACRO(SC_SETUP_GUI_LIB_SUBDIR)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_SUBDIR_SOURCES ...)
+MACRO (SC_ADD_SUBDIR_SOURCES ...)
 	SET(prefix ${ARGV0})
 	SET(dir ${ARGV1})
 	ADD_SUBDIRECTORY(${dir})
@@ -230,10 +230,10 @@ MACRO(SC_ADD_SUBDIR_SOURCES ...)
 			ENDIF(_head_dirs_len EQUAL 2)
 		ENDIF(NOT ARGV2)
 	ENDFOREACH(_head)
-ENDMACRO(SC_ADD_SUBDIR_SOURCES)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_GUI_SUBDIR_SOURCES ...)
+MACRO (SC_ADD_GUI_SUBDIR_SOURCES ...)
 	SET(prefix ${ARGV0})
 	SET(dir ${ARGV1})
 	ADD_SUBDIRECTORY(${dir})
@@ -284,18 +284,18 @@ MACRO(SC_ADD_GUI_SUBDIR_SOURCES ...)
 	FOREACH (_ui ${uis})
 		SET(_ui ${dir}/${_ui})
 		SET(${prefix}_UI ${${prefix}_UI} ${_ui})
-		# TODO: Add QT4_WRAP_HERE and set the install directory here as well
+		# TODO: Add QT_WRAP_HERE and set the install directory here as well
 		# in cmakelists.txt set UI_HEADERS to ""
 		SET(_ui_out "")
-		SC_QT4_WRAP_UI(_ui_out ${_ui})
+		SC_QT_WRAP_UI(_ui_out ${_ui})
 		IF(NOT ARGV2)
 			INSTALL(FILES ${_ui_out} DESTINATION ${SC3_PACKAGE_INCLUDE_DIR}/${_package_dir}/${dir})
 		ENDIF(NOT ARGV2)
 	ENDFOREACH(_ui)
-ENDMACRO(SC_ADD_GUI_SUBDIR_SOURCES)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_LIBRARY _library_package _library_name)
+MACRO (SC_ADD_LIBRARY _library_package _library_name)
 	SET(_global_library_package SC_${_library_package})
 
 	IF (SHARED_LIBRARIES)
@@ -358,10 +358,10 @@ MACRO(SC_ADD_LIBRARY _library_package _library_name)
 		ARCHIVE DESTINATION ${SC3_PACKAGE_LIB_DIR}
 		LIBRARY DESTINATION ${SC3_PACKAGE_LIB_DIR}
 	)
-ENDMACRO(SC_ADD_LIBRARY)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_PLUGIN_LIBRARY _library_package _library_name _plugin_app)
+MACRO (SC_ADD_PLUGIN_LIBRARY _library_package _library_name _plugin_app)
 	SET(_global_library_package SEISCOMP3_PLUGIN_${_library_package})
 
 	SET(${_global_library_package}_SHARED 1)
@@ -375,14 +375,10 @@ MACRO(SC_ADD_PLUGIN_LIBRARY _library_package _library_name _plugin_app)
 	INSTALL(TARGETS ${_library_name}
 		DESTINATION ${SC3_PACKAGE_SHARE_DIR}/plugins/${_plugin_app}
 	)
-ENDMACRO(SC_ADD_PLUGIN_LIBRARY)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_GUI_PLUGIN_LIBRARY _library_package _library_name _plugin_app)
-	IF (NOT SC_GLOBAL_GUI_QT5)
-		INCLUDE(${QT_USE_FILE})
-	ENDIF()
-
+MACRO (SC_ADD_GUI_PLUGIN_LIBRARY _library_package _library_name _plugin_app)
 	SET(_global_library_package SEISCOMP3_PLUGIN_${_library_package})
 
 	SET(${_global_library_package}_SHARED 1)
@@ -391,14 +387,12 @@ MACRO(SC_ADD_GUI_PLUGIN_LIBRARY _library_package _library_name _plugin_app)
 	IF (${_library_package}_MOC_HEADERS)
 		IF (SC_GLOBAL_GUI_QT5)
 			QT5_WRAP_CPP(${_library_package}_MOC_SOURCES ${${_library_package}_MOC_HEADERS} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
-		ELSE ()
-			QT4_WRAP_CPP(${_library_package}_MOC_SOURCES ${${_library_package}_MOC_HEADERS} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 		ENDIF ()
 	ENDIF (${_library_package}_MOC_HEADERS)
 
 	# Create UI Headers
 	IF (${_library_package}_UI)
-		SC_QT4_WRAP_UI(${_library_package}_UI_HEADERS ${${_library_package}_UI})
+		SC_QT_WRAP_UI(${_library_package}_UI_HEADERS ${${_library_package}_UI})
 		INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 		INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 	ENDIF (${_library_package}_UI)
@@ -407,8 +401,6 @@ MACRO(SC_ADD_GUI_PLUGIN_LIBRARY _library_package _library_name _plugin_app)
 	IF (${_library_package}_RESOURCES)
 		IF (SC_GLOBAL_GUI_QT5)
 			QT5_ADD_RESOURCES(${_library_package}_RESOURCE_SOURCES ${${_library_package}_RESOURCES})
-		ELSE ()
-			QT4_ADD_RESOURCES(${_library_package}_RESOURCE_SOURCES ${${_library_package}_RESOURCES})
 		ENDIF()
 	ENDIF (${_library_package}_RESOURCES)
 
@@ -434,14 +426,10 @@ MACRO(SC_ADD_GUI_PLUGIN_LIBRARY _library_package _library_name _plugin_app)
 	INSTALL(TARGETS ${_library_name}
 		DESTINATION ${SC3_PACKAGE_SHARE_DIR}/plugins/${_plugin_app}
 	)
-ENDMACRO(SC_ADD_GUI_PLUGIN_LIBRARY)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_GUI_LIBRARY_CUSTOM_INSTALL _library_package _library_name)
-	IF (NOT SC_GLOBAL_GUI_QT5)
-		INCLUDE(${QT_USE_FILE})
-	ENDIF()
-
+MACRO (SC_ADD_GUI_LIBRARY_CUSTOM_INSTALL _library_package _library_name)
 	SET(_global_library_package SC_${_library_package})
 
 	IF (SHARED_LIBRARIES)
@@ -456,14 +444,12 @@ MACRO(SC_ADD_GUI_LIBRARY_CUSTOM_INSTALL _library_package _library_name)
 	IF (${_library_package}_MOC_HEADERS)
 		IF (SC_GLOBAL_GUI_QT5)
 			QT5_WRAP_CPP(${_library_package}_MOC_SOURCES ${${_library_package}_MOC_HEADERS} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
-		ELSE ()
-			QT4_WRAP_CPP(${_library_package}_MOC_SOURCES ${${_library_package}_MOC_HEADERS} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 		ENDIF ()
 	ENDIF (${_library_package}_MOC_HEADERS)
 
 	# Create UI Headers
 	IF (${_library_package}_UI)
-		SC_QT4_WRAP_UI(${_library_package}_UI_HEADERS ${${_library_package}_UI})
+		SC_QT_WRAP_UI(${_library_package}_UI_HEADERS ${${_library_package}_UI})
 		INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 		INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 	ENDIF (${_library_package}_UI)
@@ -472,8 +458,6 @@ MACRO(SC_ADD_GUI_LIBRARY_CUSTOM_INSTALL _library_package _library_name)
 	IF (${_library_package}_RESOURCES)
 		IF (SC_GLOBAL_GUI_QT5)
 			QT5_ADD_RESOURCES(${_library_package}_RESOURCE_SOURCES ${${_library_package}_RESOURCES})
-		ELSE ()
-			QT4_ADD_RESOURCES(${_library_package}_RESOURCE_SOURCES ${${_library_package}_RESOURCES})
 		ENDIF()
 	ENDIF (${_library_package}_RESOURCES)
 
@@ -513,10 +497,10 @@ MACRO(SC_ADD_GUI_LIBRARY_CUSTOM_INSTALL _library_package _library_name)
 	ELSE ()
 		TARGET_LINK_LIBRARIES(seiscomp_${_library_name} ${QT_LIBRARIES})
 	ENDIF()
-ENDMACRO(SC_ADD_GUI_LIBRARY_CUSTOM_INSTALL)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_GUI_LIBRARY _library_package _library_name)
+MACRO (SC_ADD_GUI_LIBRARY _library_package _library_name)
 	SC_ADD_GUI_LIBRARY_CUSTOM_INSTALL(${_library_package} ${_library_name})
 
 	INSTALL(TARGETS seiscomp_${_library_name}
@@ -524,10 +508,10 @@ MACRO(SC_ADD_GUI_LIBRARY _library_package _library_name)
 		ARCHIVE DESTINATION ${SC3_PACKAGE_LIB_DIR}
 		LIBRARY DESTINATION ${SC3_PACKAGE_LIB_DIR}
 	)
-ENDMACRO(SC_ADD_GUI_LIBRARY)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_EXECUTABLE _package _name)
+MACRO (SC_ADD_EXECUTABLE _package _name)
 	IF (${ARGC} GREATER 2)
 		SET(bin_dir ${ARGV2})
 	ELSE (${ARGC} GREATER 2)
@@ -557,10 +541,10 @@ MACRO(SC_ADD_EXECUTABLE _package _name)
 	IF (SC_GLOBAL_UNITTESTS AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/test/CMakeLists.txt)
 		ADD_SUBDIRECTORY(test)
 	ENDIF (SC_GLOBAL_UNITTESTS AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/test/CMakeLists.txt)
-ENDMACRO(SC_ADD_EXECUTABLE)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_PYTHON_EXECUTABLE _name)
+MACRO (SC_ADD_PYTHON_EXECUTABLE _name)
 	SET(MAIN_PY "")
 	FOREACH(file ${${_name}_FILES})
 		IF(NOT MAIN_PY)
@@ -582,10 +566,10 @@ MACRO(SC_ADD_PYTHON_EXECUTABLE _name)
 		INSTALL(FILES config/${_name}.xml
 			DESTINATION ${SC3_PACKAGE_APP_DESC_DIR})
 	ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/config/${_name}.xml)
-ENDMACRO(SC_ADD_PYTHON_EXECUTABLE)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_PYTHON_PROG _name)
+MACRO (SC_ADD_PYTHON_PROG _name)
 	INSTALL(PROGRAMS ${_name}.py RENAME ${_name} DESTINATION ${SC3_PACKAGE_BIN_DIR})
 	IF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/config/${_name}.cfg)
 		INSTALL(FILES config/${_name}.cfg
@@ -595,26 +579,20 @@ MACRO(SC_ADD_PYTHON_PROG _name)
 		INSTALL(FILES config/${_name}.xml
 			DESTINATION ${SC3_PACKAGE_APP_DESC_DIR})
 	ENDIF(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/config/${_name}.xml)
-ENDMACRO(SC_ADD_PYTHON_PROG)
+ENDMACRO ()
 
-MACRO(SC_ADD_TEST_EXECUTABLE _package _name)
+MACRO (SC_ADD_TEST_EXECUTABLE _package _name)
 	ADD_DEFINITIONS(-DSEISCOMP_TEST_DATA_DIR="${PROJECT_TEST_DATA_DIR}")
 	ADD_EXECUTABLE(${_name} ${${_package}_SOURCES})
-ENDMACRO(SC_ADD_TEST_EXECUTABLE)
+ENDMACRO ()
 
 
 
-MACRO(SC_ADD_GUI_EXECUTABLE _package _name)
-	IF (NOT SC_GLOBAL_GUI_QT5)
-		INCLUDE(${QT_USE_FILE})
-	ENDIF()
-
+MACRO (SC_ADD_GUI_EXECUTABLE _package _name)
 	# Create MOC Files
 	IF (${_package}_MOC_HEADERS)
 		IF (SC_GLOBAL_GUI_QT5)
 			QT5_WRAP_CPP(${_package}_MOC_SOURCES ${${_package}_MOC_HEADERS} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
-		ELSE ()
-			QT4_WRAP_CPP(${_package}_MOC_SOURCES ${${_package}_MOC_HEADERS} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 		ENDIF ()
 	ENDIF (${_package}_MOC_HEADERS)
 
@@ -622,8 +600,6 @@ MACRO(SC_ADD_GUI_EXECUTABLE _package _name)
 	IF (${_package}_UI)
 		IF (SC_GLOBAL_GUI_QT5)
 			QT5_WRAP_UI(${_package}_UI_HEADERS ${${_package}_UI})
-		ELSE ()
-			QT4_WRAP_UI(${_package}_UI_HEADERS ${${_package}_UI})
 		ENDIF ()
 		INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 		INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
@@ -633,8 +609,6 @@ MACRO(SC_ADD_GUI_EXECUTABLE _package _name)
 	IF (${_package}_RESOURCES)
 		IF (SC_GLOBAL_GUI_QT5)
 			QT5_ADD_RESOURCES(${_package}_RESOURCE_SOURCES ${${_package}_RESOURCES})
-		ELSE ()
-			QT4_ADD_RESOURCES(${_package}_RESOURCE_SOURCES ${${_package}_RESOURCES})
 		ENDIF ()
 	ENDIF (${_package}_RESOURCES)
 
@@ -652,11 +626,6 @@ MACRO(SC_ADD_GUI_EXECUTABLE _package _name)
 	ELSE(WIN32)
 		ADD_EXECUTABLE(${_name} ${${_package}_FILES_})
 	ENDIF(WIN32)
-
-	IF (NOT SC_GLOBAL_GUI_QT5)
-		TARGET_LINK_LIBRARIES(${_name} ${QT_LIBRARIES})
-		TARGET_LINK_LIBRARIES(${_name} ${QT_QTOPENGL_LIBRARY})
-	ENDIF ()
 
 	INSTALL(TARGETS ${_name}
 		RUNTIME DESTINATION ${SC3_PACKAGE_BIN_DIR}
@@ -676,21 +645,16 @@ MACRO(SC_ADD_GUI_EXECUTABLE _package _name)
 	IF (SC_GLOBAL_UNITTESTS AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/test/CMakeLists.txt)
 		ADD_SUBDIRECTORY(test)
 	ENDIF (SC_GLOBAL_UNITTESTS AND EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/test/CMakeLists.txt)
-ENDMACRO(SC_ADD_GUI_EXECUTABLE)
+ENDMACRO ()
 
 
-MACRO(SC_ADD_GUI_TEST_EXECUTABLE _package _name)
+MACRO (SC_ADD_GUI_TEST_EXECUTABLE _package _name)
 	ADD_DEFINITIONS(-DSEISCOMP_TEST_DATA_DIR="${PROJECT_TEST_DATA_DIR}")
-	IF (NOT SC_GLOBAL_GUI_QT5)
-		INCLUDE(${QT_USE_FILE})
-	ENDIF ()
 
 	# Create MOC Files
 	IF (${_package}_MOC_HEADERS)
 		IF (SC_GLOBAL_GUI_QT5)
 			QT5_WRAP_CPP(${_package}_MOC_SOURCES ${${_package}_MOC_HEADERS} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
-		ELSE ()
-			QT4_WRAP_CPP(${_package}_MOC_SOURCES ${${_package}_MOC_HEADERS} OPTIONS -DBOOST_TT_HAS_OPERATOR_HPP_INCLUDED)
 		ENDIF ()
 	ENDIF (${_package}_MOC_HEADERS)
 
@@ -698,8 +662,6 @@ MACRO(SC_ADD_GUI_TEST_EXECUTABLE _package _name)
 	IF (${_package}_UI)
 		IF (SC_GLOBAL_GUI_QT5)
 			QT5_WRAP_UI(${_package}_UI_HEADERS ${${_package}_UI})
-		ELSE ()
-			QT4_WRAP_UI(${_package}_UI_HEADERS ${${_package}_UI})
 		ENDIF ()
 		INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 		INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
@@ -709,8 +671,6 @@ MACRO(SC_ADD_GUI_TEST_EXECUTABLE _package _name)
 	IF (${_package}_RESOURCES)
 		IF (SC_GLOBAL_GUI_QT5)
 			QT5_ADD_RESOURCES(${_package}_RESOURCE_SOURCES ${${_package}_RESOURCES})
-		ELSE ()
-			QT4_ADD_RESOURCES(${_package}_RESOURCE_SOURCES ${${_package}_RESOURCES})
 		ENDIF ()
 	ENDIF (${_package}_RESOURCES)
 
@@ -730,52 +690,52 @@ MACRO(SC_ADD_GUI_TEST_EXECUTABLE _package _name)
 	ENDIF(WIN32)
 	TARGET_LINK_LIBRARIES(${_name} ${QT_LIBRARIES})
 	TARGET_LINK_LIBRARIES(${_name} ${QT_QTOPENGL_LIBRARY})
-ENDMACRO(SC_ADD_GUI_TEST_EXECUTABLE)
+ENDMACRO ()
 
 
-MACRO(SC_LINK_LIBRARIES _name)
+MACRO (SC_LINK_LIBRARIES _name)
 	TARGET_LINK_LIBRARIES(${_name} ${ARGN})
-ENDMACRO(SC_LINK_LIBRARIES)
+ENDMACRO ()
 
 
-MACRO(SC_LINK_LIBRARIES_INTERNAL _name)
+MACRO (SC_LINK_LIBRARIES_INTERNAL _name)
 	FOREACH(_lib ${ARGN})
 		TARGET_LINK_LIBRARIES(${_name} seiscomp_${_lib})
 	ENDFOREACH(_lib)
-ENDMACRO(SC_LINK_LIBRARIES_INTERNAL)
+ENDMACRO ()
 
 
-MACRO(SC_LIB_LINK_LIBRARIES _library_name)
+MACRO (SC_LIB_LINK_LIBRARIES _library_name)
 	TARGET_LINK_LIBRARIES(seiscomp_${_library_name} ${ARGN})
-ENDMACRO(SC_LIB_LINK_LIBRARIES)
+ENDMACRO ()
 
 
-MACRO(SC_LIB_LINK_LIBRARIES_INTERNAL _library_name)
+MACRO (SC_LIB_LINK_LIBRARIES_INTERNAL _library_name)
 	FOREACH(_lib ${ARGN})
 		TARGET_LINK_LIBRARIES(seiscomp_${_library_name} seiscomp_${_lib})
 	ENDFOREACH(_lib)
-ENDMACRO(SC_LIB_LINK_LIBRARIES_INTERNAL)
+ENDMACRO ()
 
 
-MACRO(SC_SWIG_LINK_LIBRARIES_INTERNAL _module)
+MACRO (SC_SWIG_LINK_LIBRARIES_INTERNAL _module)
 	FOREACH(_lib ${ARGN})
 		SWIG_LINK_LIBRARIES(${_module} seiscomp_${_lib})
 	ENDFOREACH(_lib)
-ENDMACRO(SC_SWIG_LINK_LIBRARIES_INTERNAL)
+ENDMACRO ()
 
 
-MACRO(SC_SWIG_GET_MODULE_PATH _out)
+MACRO (SC_SWIG_GET_MODULE_PATH _out)
 	FILE(RELATIVE_PATH ${_out} ${SC3_PACKAGE_SOURCE_DIR}/libs/swig ${CMAKE_CURRENT_SOURCE_DIR})
 	SET(${_out} ${SC3_PACKAGE_LIB_DIR}${PYTHON_LIBRARY_SUFFIX}/${${_out}})
-ENDMACRO(SC_SWIG_GET_MODULE_PATH)
+ENDMACRO ()
 
 
-MACRO(SC_LIB_VERSION _library_name _version _soversion)
+MACRO (SC_LIB_VERSION _library_name _version _soversion)
 	SET_TARGET_PROPERTIES(seiscomp_${_library_name} PROPERTIES VERSION ${_version} SOVERSION ${_soversion})
-ENDMACRO(SC_LIB_VERSION)
+ENDMACRO ()
 
 
-MACRO(SC_LIB_INSTALL_HEADERS ...)
+MACRO (SC_LIB_INSTALL_HEADERS ...)
 	IF(${ARGC} GREATER 1)
 		SET(_package_dir "${ARGV1}")
 	ELSE(${ARGC} GREATER 1)
@@ -797,35 +757,35 @@ MACRO(SC_LIB_INSTALL_HEADERS ...)
 			DESTINATION ${SC3_PACKAGE_INCLUDE_DIR}/${_package_dir}
 		)
 	ENDIF (${ARGV0}_UI_HEADERS)
-ENDMACRO(SC_LIB_INSTALL_HEADERS)
+ENDMACRO ()
 
 
-MACRO(SC_PLUGIN_INSTALL _library_name _plugin_app)
+MACRO (SC_PLUGIN_INSTALL _library_name _plugin_app)
 	INSTALL(TARGETS seiscomp_${_library_name}
 		DESTINATION ${SC3_PACKAGE_SHARE_DIR}/plugins/${_plugin_app}
 	)
-ENDMACRO(SC_PLUGIN_INSTALL)
+ENDMACRO ()
 
 
-MACRO(SC_RAW_PLUGIN_INSTALL _library_name _plugin_app)
+MACRO (SC_RAW_PLUGIN_INSTALL _library_name _plugin_app)
 	INSTALL(TARGETS ${_library_name}
 		DESTINATION ${SC3_PACKAGE_SHARE_DIR}/plugins/${_plugin_app}
 	)
-ENDMACRO(SC_RAW_PLUGIN_INSTALL)
+ENDMACRO ()
 
 
-MACRO(SC_INSTALL_DATA _package _path)
+MACRO (SC_INSTALL_DATA _package _path)
 	INSTALL(FILES ${${_package}_DATA}
 		DESTINATION ${SC3_PACKAGE_SHARE_DIR}/${_path}
 	)
-ENDMACRO(SC_INSTALL_DATA)
+ENDMACRO ()
 
 
-MACRO(SC_INSTALL_CONFIG _package)
+MACRO (SC_INSTALL_CONFIG _package)
 	INSTALL(FILES ${${_package}_CONFIG}
 		DESTINATION ${SC3_PACKAGE_CONFIG_DIR})
-ENDMACRO(SC_INSTALL_CONFIG)
+ENDMACRO ()
 
-MACRO(SC_INSTALL_INIT _module_name _script)
+MACRO (SC_INSTALL_INIT _module_name _script)
 	INSTALL(FILES ${_script} RENAME ${_module_name}.py DESTINATION ${SC3_PACKAGE_INIT_DIR})
-ENDMACRO(SC_INSTALL_INIT)
+ENDMACRO ()
