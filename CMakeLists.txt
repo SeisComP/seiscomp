@@ -55,18 +55,14 @@ FIND_PACKAGE(PythonInterp REQUIRED)
 SET(PYTHON_LIBRARY_SUFFIX /python)
 SET(PYTHON_LIBRARY_PATH lib${PYTHON_LIBRARY_SUFFIX})
 
-OPTION(SC_GLOBAL_GUI "Build graphical user interfaces (requires Qt4 or Qt5)" ON)
-OPTION(SC_GLOBAL_GUI_QT5 "Build graphical user interfaces for Qt5" ON)
+OPTION(SC_GLOBAL_GUI "Build graphical user interfaces (requires Qt5)" ON)
+SET(SC_GLOBAL_GUI_QT5 ON)
 
 IF(SC_GLOBAL_GUI)
-	FIND_PACKAGE(Qt5 QUIET COMPONENTS Core Widgets)
-	IF(NOT Qt5_FOUND)
-		SET(SC_GLOBAL_GUI_QT5 OFF)
-	ENDIF()
-
 	IF(NOT SC_GLOBAL_GUI_QT5)
-		FIND_PACKAGE(Qt4 QUIET)
+		MESSAGE(FATAL_ERROR "Qt5 must be enabled, other versions are not supported")
 	ENDIF()
+	FIND_PACKAGE(Qt5 REQUIRED COMPONENTS Core Widgets)
 ENDIF()
 
 INCLUDE(AddFileDependencies)
