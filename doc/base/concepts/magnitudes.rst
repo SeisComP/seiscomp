@@ -63,7 +63,7 @@ global parameter :confval:`magnitudes.aliases` and configured as any other
 amplitude and magnitude in bindings or by regionalization.
 
 
-Network magnitudes
+Network Magnitudes
 ==================
 
 Network magnitudes are computed automatically by :ref:`scmag` or interactively
@@ -72,10 +72,24 @@ The averaging methods applied by :ref:`scmag` are configurable by
 :ref:`magnitudes.average`.
 
 
-Summary magnitude
+Summary Magnitude
 =================
 
 In order to account for different phenomena related to magnitude computation
 including magnitude saturation and application of different magnitude types at
 specific distance and depth ranges of the sources a summary magnitude can be
-computed by :ref:`scmag` from network magnitudes.
+computed from network magnitudes by :ref:`scmag`. The summary magnitude is
+usually referred to as *M*. The name is configurable.
+
+.. note::
+
+   Station, network and summary magnitudes are contained uniquely in one
+   :term:`origin`.
+
+
+Preferred Magnitude
+===================
+
+From the list of computed network magnitudes and the summary magnitude,
+:ref:`scevent` can automatically determine the preferred magnitude of the
+:term:`event`. This may also be done interactively by operators in :ref:`scolv`.
