@@ -28,13 +28,37 @@ Background
 ==========
 
 
+Installing a new SeisComP :ref:`release version <tutorials_upgrade_versions>`
+is typically simple and the step described in :ref:`tutorials_upgrade-normal`
+can be applied. **More actions** are required when
+
+* Upgrading the major version of SeisComP as described in :ref:`tutorials_upgrade-normal`.
+* Upgrading :ref:`from SeisComP3 to SeisComP in version 4.0.0. or higher <tutorials_upgrade_v4>`.
+* Upgrading :ref:`from SeisComP3 Jakarta-2018.327 or older to Jakarta-2020.330 or
+  SeisComP in version 4 or higher <tutorials_upgrade_seedlink>`.
+
+
+.. _tutorials_upgrade_versions:
+
 SeisComP versions
 -----------------
 
 SeisComP has :ref:`developed over time <history>`. The versions can be distinguished
 by the name of the release:
 
-* **SeisComP since version 4.0.0** uses release version numbers
+* **SeisComP since version 4.0.0** uses release version numbers such as *5.2.1*
+  where
+
+  * 5: major version with changes in API and database schema version, new features,
+    bug fixed, optimizations,
+  * 2: minor version with new features, bug fixed, optimizations,
+  * 1: patch number with bug fixes, optimizations.
+
+  .. note ::
+
+     When increasing the major version number, an upgrade of
+     the database is required.
+
 * **SeisComP3** uses release versions, names, numbers and patch numbers.
 
   Full example:  *SeisComP3-jakarta-2020.330.02*
@@ -62,16 +86,18 @@ Upgrade SeisComP on multiple machines
 -------------------------------------
 
 Applications can only connect to a messaging system that runs with a database
-in an equal or lower data model version. Therefore, the SeisComP system which
-operates the messaging system is always updated last.
+in an equal or lower data base schema version. In distributed |scname| systems
+one machine host the messaging system and the database and all other machines
+are connected to this messaging or are running independently, the |scname|
+installation on the machine operating the messaging is always updated last.
 
-**Example:** A distributed system
-includes a processing system with the messaging system and database and a GUI work
-station connected to the processing system:
+**Example:** A distributed system includes a processing system with the
+messaging system and database and a GUI work station connected to the processing
+system:
 
 #. Upgrade the GUI work station
 #. Upgrade the processing system, take actions to
-   :ref:`upgrade the database version <tutorials_upgrade_number>`.
+   :ref:`upgrade the database version <tutorials_upgrade-db>`.
 
 .. note::
 
@@ -82,29 +108,38 @@ station connected to the processing system:
       seiscomp stop
 
 
-.. _tutorials_upgrade_changelog:
+.. _tutorials_upgrade_download:
 
-Package download
+Package Download
 ================
 
-Get the latest or older SeisComP release packages from gempa GmbH or from the
-download website of :cite:t:`seiscomp`.
+Get the SeisComP package in the latest version or older ones from gempa GmbH or
+from the download website of :cite:t:`seiscomp`.
+
+.. note ::
+
+   gempa provides :cite:t:`gsm` for convenient and consistent download and
+   installation of SeisComP and other packages.
 
 
-Documentation of changes
+.. _tutorials_upgrade_changelog:
+
+Documentation of Changes
 ========================
 
 The important novelties, optimizations and changes that are available after upgrading
-are documented in the change log.
-It is recommend to read the change log before taking further actions. The details
-can be found in the file
+are documented in the change log which can be read
+`online <https://www.seiscomp.de/doc/base/changelog.html>`_.
+It is recommend to read the change log before taking further actions.
+
+The details can also be found locally in the file
 
 .. code-block:: sh
 
    $SEISCOMP_ROOT/share/doc/seiscomp/CHANGELOG
 
-The change log can be directly accessed from the |scname| :ref:`documentation <sc-changelog>`
-or from the *Docs* panel in :ref:`scconfig`.
+which is integrated in the :ref:`documentation <sc-changelog>` or accessible
+from the *Docs* panel in :ref:`scconfig`.
 
 .. note::
 
@@ -113,99 +148,125 @@ or from the *Docs* panel in :ref:`scconfig`.
    :cite:t:`seiscomp-forum`.
 
 
-.. _tutorials_upgrade_number:
+.. _tutorials_upgrade-normal:
 
-Upgrade to a higher release number
-==================================
+Normal Upgrade
+==============
 
-Installing a new SeisComP release or version is typically simple. **More actions** are
-required when
+The normal upgrade including upgrading the major version of SeisComP takes only
+a few steps:
 
-* Upgrading :ref:`from SeisComP3 to SeisComP in version 4 or higher <tutorials_upgrade_v4>`.
-* Upgrading :ref:`from SeisComP3 Jakarta-2018.327 or older to Jakarta-2020.330 or
-  SeisComP in version 4 or higher <tutorials_upgrade_seedlink>`.
+#. :ref:`Download <tutorials_upgrade_download>` the SeisComP package.
+#. Stop all SeisComP modules:
 
-The normal upgrade takes only a few steps:
-
-#. Download the SeisComP package
-#. Stop all SeisComP modules: ::
+   .. code-block:: sh
 
       seiscomp stop
 
-#. Install the new packages
+#. Install the new packages.
 
    .. note::
 
-      Users of external, e.g. |gempa| modules must ensure that the gempa modules
-      match the SeisComP release version if they depend on SeisComP libraries.
+      Users of external, e.g., |gempa| modules must ensure that these external
+      modules match the SeisComP release version if they depend on SeisComP
+      libraries.
 
-#. When installing a new SeisComP release, upgrading the database may be required.
-   The database version will be tested and the required actions will be shown when executing:
-
-   .. code-block:: sh
-
-      seiscomp update-config
-
-   or when pressing the Update Configuration button in scconfig.
-   An upgrade from version SeisComP3 jakarta-2017.334 to SeisComP in version 4.1.0
-   will give, e.g.:
+#. Test the database schema version and update bindings
 
    .. code-block:: sh
 
       seiscomp update-config
-      * starting kernel modules
-      starting scmaster
-      * configure kernel
-      * configure scmaster
-      INFO: checking DB schema version of queue: production
-        * check database write access ... OK
-        * database schema version is 0.10
-        * last migration version is 0.11
-        * migration to the current version is required. apply the following
-          scripts in exactly the given order:
-          * /home/sysop/seiscomp/share/db/migrations/mysql/0_10_to_0_11.sql
-      error: updating configuration for scmaster failed
 
-   The shown migration scripts can be used directly with the database command for upgrading:
+   :ref:`Upgrade the database schema version <tutorials_upgrade-db>` if
+   mismatches are reported.
 
-   * MySQL / MariaDB: ::
+#. After a successful upgrade, start all modules again and observe the status:
 
-        mysql -u sysop -p -D seiscomp -h localhost < /home/sysop/seiscomp/share/db/migrations/mysql/0_10_to_0_11.sql
-
-   * PostgreSQL: ::
-
-        psql -U sysop -d seiscomp -h localhost -W -f /home/sysop/seiscomp/share/db/migrations/postgresql/0_10_to_0_11.sql
-
-   Using the migration scripts provides a more user friendly way than copying the
-   lines of MySQL code from the changelog. In future versions we might add the option
-   to automatically run the migrations.
-
-   .. warning::
-
-      Upgrading the database make take some time. Do no interrupt the process!
-      During this time, the |scname| messaging system is unavailable causing a downtime of the system.
-
-   After applying the migration scripts the database should be at the correct version.
-   Test again with: ::
-
-      seiscomp update-config
-
-#. After a successful upgrade, start all modules again and observe the status: ::
+   .. code-block:: sh
 
       seiscomp start
-      seiscomp status
+      seiscomp status started
+
+
+.. _tutorials_upgrade-db:
+
+Upgrade database schema version
+===============================
+
+When installing a new SeisComP release with a higher major version number,
+upgrading the database may be required. The database version will be tested and
+the required actions will be shown when executing:
+
+.. code-block:: sh
+
+   seiscomp update-config
+
+or when pressing the Update Configuration button in scconfig.
+An upgrade from version SeisComP3 jakarta-2017.334 to SeisComP in version 5.1.0
+will give, e.g.:
+
+.. code-block:: sh
+
+   seiscomp update-config
+   * starting kernel modules
+   starting scmaster
+   * configure kernel
+   * configure scmaster
+   INFO: checking DB schema version of queue: production
+     * check database write access ... OK
+     * database schema version is 0.10
+     * last migration version is 0.12
+     * migration to the current version is required. apply the following
+       scripts in exactly the given order:
+       * mysql -u sysop -p -D seiscomp -h localhost < /home/sysop/seiscomp/share/db/migrations/mysql/0_10_to_0_11.sql
+       * mysql -u sysop -p -D seiscomp -h localhost < /home/sysop/seiscomp/share/db/migrations/mysql/0_11_to_0_12.sql
+   error: updating configuration for scmaster failed
+
+The shown migration scripts can be used directly as given and in the given order:
+
+* MySQL / MariaDB:
+
+  .. code-block:: sh
+
+     mysql -u sysop -p -D seiscomp -h localhost < /home/sysop/seiscomp/share/db/migrations/mysql/0_10_to_0_11.sql
+     mysql -u sysop -p -D seiscomp -h localhost < /home/sysop/seiscomp/share/db/migrations/mysql/0_11_to_0_12.sql
+
+* PostgreSQL:
+
+  .. code-block:: sh
+
+     psql -U sysop -d seiscomp -h localhost -W -f /home/sysop/seiscomp/share/db/migrations/postgresql/0_10_to_0_11.sql
+     psql -U sysop -d seiscomp -h localhost -W -f /home/sysop/seiscomp/share/db/migrations/postgresql/0_11_to_0_12.sql
+
+Using the migration scripts provides a more user friendly way than copying the
+lines of MySQL code from the changelog. In future versions we might add the option
+to automatically run the migrations.
+
+.. warning::
+
+   Upgrading the database make take some time. Do no interrupt the process!
+   During this time, the |scname| messaging system is unavailable causing a downtime of the system.
+
+After applying the migration scripts the database should be at the correct version.
+Test again with:
+
+.. code-block:: sh
+
+   seiscomp update-config
+
+After successfully upgrading the database continue your previous upgrade procedure.
 
 
 .. _tutorials_upgrade_v4:
 
-Migrate from SeisComP3 to version >=4
-=====================================
+SeisComP3 to version >=4
+========================
 
 SeisComP in version 4 has some major differences to SeisComP3 which require adjustments.
 The main differences are in the :ref:`directories of the SeisComP installation <sec-tutorials_upgrading_path>`
 and the :ref:`messaging system <sec-tutorials_upgrading_messaging>`.
 The changes and the required actions are explained below. They must be considered
-in addition to the steps set out in section :ref:`tutorials_upgrade_number`.
+in addition to the steps set out in section :ref:`tutorials_upgrade-normal`.
 
 
 .. _sec-tutorials_upgrading_path:
@@ -332,29 +393,35 @@ configuration. Migrate the legacy database parameters and configure the new one:
      * Add the required plugins per queue. Currently only *dbstore* is supported.
        Example for the *production* queue:
 
-       .. code-block:: sh
+       .. code-block:: params
 
           queues.production.plugins = dbstore
 
      * Add non-default message groups, e.g. *L1PICK* and *L1LOCATION* to the list
        of groups **in one of the ways**:
 
-       * Set :confval:`defaultGroups` ::
-
-            defaultGroups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,IMPORT_GROUP,SERVICE_REQUEST,SERVICE_PROVIDE
-
-       * Set groups per queue in :confval:`queues.$name.groups`,
-         ignoring groups in :confval:`defaultGroups` ::
-
-          queues.production.groups = L1PICK, L1LOCATION, AMPLITUDE,PICK,LOCATION,MAGNITUDE,FOCMECH,EVENT,QC,PUBLICATION,GUI,INVENTORY,ROUTING,CONFIG,LOGGING,IMPORT_GROUP,SERVICE_REQUEST,SERVICE_PROVIDE
-
-       * Add groups per queues to defaults in :confval:`queues.$name.groups`, e.g.
-         for the *production* group.
+       * **Recommended:** Add groups per queues to defaults in
+         :confval:`queues.$name.groups`, e.g. for the *production* group.
          This convenient configuration per queue
          considers the default groups in :confval:`defaultGroups` and simply adds
-         new groups in the configuration of queues ::
+         new groups in the configuration of queues
+
+         .. code-block:: params
 
             queues.production.groups = ${defaultGroups}, L1PICK, L1LOCATION
+
+       * Set groups per queue in :confval:`queues.$name.groups`,
+         ignoring groups in :confval:`defaultGroups`
+
+         .. code-block:: params
+
+            queues.production.groups = L1PICK, L1LOCATION, AMPLITUDE, PICK, LOCATION, MAGNITUDE, FOCMECH, EVENT, QC, PUBLICATION, GUI, INVENTORY, ROUTING, CONFIG, LOGGING, IMPORT_GROUP, SERVICE_REQUEST, SERVICE_PROVIDE
+
+       * Set groups in :confval:`defaultGroups`
+
+         .. code-block:: params
+
+            defaultGroups = L1PICK, L1LOCATION, AMPLITUDE, PICK, LOCATION, MAGNITUDE, FOCMECH, EVENT, QC, PUBLICATION, GUI, INVENTORY, ROUTING, CONFIG, LOGGING, IMPORT_GROUP, SERVICE_REQUEST, SERVICE_PROVIDE
 
        .. warning::
 
@@ -366,13 +433,13 @@ configuration. Migrate the legacy database parameters and configure the new one:
      * Add the interface name, currently only *dbstore* is supported. Example for
        a queue names *production*
 
-       .. code-block:: sh
+       .. code-block:: params
 
           queues.production.processors.messages = dbstore
 
      * Add the database parameters which can be used from the legacy configuration
 
-       .. code-block:: sh
+       .. code-block:: params
 
           queues.production.processors.messages.dbstore.driver = mysql
           queues.production.processors.messages.dbstore.read = sysop:sysop@localhost/seiscomp3
@@ -385,7 +452,9 @@ configuration. Migrate the legacy database parameters and configure the new one:
           to be used with the new SeisComP in version 4.x.x.
 
    * Add one or more of the queues to the :confval:`queues` parameter to register
-     them by their names ::
+     them by their names
+
+     .. code-block:: params
 
         queues = production, playback
 
@@ -396,7 +465,7 @@ configuration. Migrate the legacy database parameters and configure the new one:
    localhost. The queue name is added to the host by "/". The default queue
    is *production*, e.g.
 
-   .. code-block:: sh
+   .. code-block:: params
 
       connection.server = localhost/production
 
@@ -409,7 +478,7 @@ Database
 --------
 
 After adjusting the structure, variables and configuration parameters, check if the
-:ref:`database requires an upgrade <tutorials_upgrade_number>` as well.
+:ref:`database requires an upgrade <tutorials_upgrade-db>` as well.
 
 
 Seedlink
@@ -439,7 +508,7 @@ modules automatically during computer startup, then the startup script must be
 adjusted.
 
 
-Upgrade from SeisComP3 Jakarta-2018.327 or before
+Upgrade From SeisComP3 Jakarta-2018.327 or Before
 =================================================
 
 
@@ -461,30 +530,42 @@ accordingly.
 
 **Example:**
 
-#. Check the current situation: ::
+#. Check the current situation:
+
+   .. code-block:: bash
 
       sysop@host:~/seiscomp3/var/lib/seedlink/buffer$ ls
-      PB02
+        PB02
+
 #. Rename the directories properly:
 
-   #. Stop seedlink: ::
+   #. Stop seedlink:
+
+      .. code-block:: sh
 
          sysop@host:seiscomp stop seedlink
 
    #. Upgrade to SeisComP3-jakarta-2020.330 or SeisComP in version 4 or higher.
-   #. Rename all seedlink buffer directories to NET.STA, e.g. ::
+   #. Rename all seedlink buffer directories to NET.STA, e.g.
+
+      .. code-block:: bash
 
          sysop@host:~/seiscomp3/var/lib/seedlink/buffer$ mv PB02 CX.PB02
          sysop@host:~/seiscomp3/var/lib/seedlink/buffer$ ls
-         CX.PB02
+           CX.PB02
 
       .. note:
 
          The :ref:`script below <seedlink-buffer-script>` can be used for renaming the seedlink buffer directories.
-   #. Update configuration: ::
+   #. Update configuration:
+
+      .. code-block:: bash
 
          sysop@host:seiscomp update-config
-   #. Start SeedLink ::
+
+   #. Start SeedLink
+
+      .. code-block:: bash
 
          sysop@host:seiscomp start seedlink
 
@@ -544,10 +625,11 @@ parameter (or both) can be used in SeedLink bindings.
 chain plugin
 ~~~~~~~~~~~~
 
-In case of ``chain_plugin``, there is normally just one instance, so stream
-processors attached to this instance apply to all stations. **This is normally
-not what we want.** Therefore the chain_plugin does not support the
-``sources.*.proc`` option.
+In case of the :ref:`chain plugin <seedlink-sources-chain-label>` for
+:ref:`seedlink`, there is
+normally just one instance, so stream processors attached to this instance apply
+to all stations. **This is normally not what we want.** Therefore the
+chain plugin does not support the ``sources.*.proc`` option.
 
 Before SeisComP3 in version Jakarta-2020.030 and SeisComP in version 4.0.0,
 stream processors were always attached to stations, even when ``sources.*.proc``
