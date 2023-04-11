@@ -269,11 +269,12 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
    :param lta: Long-term time window
 
 
-.. py:function:: WA([type = 1[,gain=2800[,T0=0.8[,h=0.8]]]])
+.. py:function:: WA([type = 1[,gain=2080[,T0=0.8[,h=0.7]]]])
 
-   The simulation filter of a Wood-Anderson seismometer. The data format of the waveforms has
-   to be given for applying the simulation filter (displacement = 0, velocity = 1, acceleration = 2),
-   e.g. WA(1) is the simulation on velocity data.
+   The simulation filter of a :term:`Wood-Anderson seismometer`. The data format
+   of the waveforms has to be given for applying the simulation filter
+   (displacement = 0, velocity = 1, acceleration = 2), e.g., WA(1) is the
+   simulation on velocity data.
 
    :param type: The data type: 0 (displacement), 1 (velocity) or 2 (acceleration)
    :param gain: The gain of the Wood-Anderson response
@@ -283,13 +284,15 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
 
 .. py:function:: WWSSN_LP([type = 1])
 
-   The instrument simulation filter of a World-Wide Standard Seismograph Network (WWSSN) long-period seismometer.
+   The instrument simulation filter of a
+   :term:`World-Wide Standard Seismograph Network (WWSSN) long-period seismometer <WWSSN_LP>`.
 
    :param type: The data type: 0 (displacement), 1 (velocity) or 2 (acceleration)
 
 
 .. py:function:: WWSSN_SP([type = 1])
 
-   Analog to the WWSSN_LP, the simulation filter of the short-period seismometer of the WWSSN.
+   Analog to the :func:`WWSSN_LP`, the simulation filter of the
+   :term:`short-period seismometer of the WWSSN <WWSSN_SP>`.
 
    :param type: The data type: 0 (displacement), 1 (velocity) or 2 (acceleration)

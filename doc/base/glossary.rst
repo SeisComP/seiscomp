@@ -91,11 +91,11 @@ Scientific and technical terms
 
    amplitude
       #. General term used for an observation of a wave at a particular time.
-      #. QuakeML object. Amplitudes are computed, e.g. for computing :term:`magnitudes <magnitude>`
-         of different types. Another type is the :term:`SNR`.
-         Amplitude computation depends on the type.
+      #. QuakeML object. Amplitudes are computed, e.g. for computing
+         :term:`magnitudes <magnitude>` of different types. Another type is the
+         :term:`SNR`. Amplitude computation depends on the type.
 
-      In |scname| magnitudes are computed automatically by :ref:`scautopick` and
+      In |scname| amplitudes are computed automatically by :ref:`scautopick` and
       :ref:`scamp` or interactively by :ref:`scolv`.
 
    array
@@ -493,11 +493,12 @@ Scientific and technical terms
       recordings of earthquakes smaller than ML 7 at regional stations. It is
       usually a measure of the
       regional-distance S-wave on horizontal component records.
-      The original formula is only valid for records from a Wood-Anderson torsion
-      seismometer with a natural period of
+      The original formula is only valid for records from a :term:`Wood-Anderson torsion
+      seismometer <Wood-Anderson seismometer>` with a natural period of
       0.8 s and shallow earthquakes in California. Therefore calibration functions
       for other regions and wider depth ranges are necessary.
-      A Wood-Anderson seismometer is simulated.
+      A :term:`Wood-Anderson torsion seismometer <Wood-Anderson seismometer>` is
+      simulated when measuring amplitudes.
 
       For amplitudes measured on the vertical component records, additional
       correction factors have to be applied. ML saturates at
@@ -517,8 +518,9 @@ Scientific and technical terms
 
    magnitude, local custom (MLc)
       The local magnitude measured on the horizontal components with
-      custom parametric calibration function, configurable amplitude filtering,
-      Wood-Anderson simulation and distance measure.
+      custom parametric or non-parametric function, configurable amplitude
+      filtering, :term:`Wood-Anderson torsion seismometer <Wood-Anderson
+      seismometer>` and distance measures.
 
       * Amplitude unit in |scname|: **millimeter** (mm)
 
@@ -1357,13 +1359,31 @@ Scientific and technical terms
       Attribute of the QuakeML objects Arrival and !MagnitudeReferences defining the
       effect of the referenced object (e.g. Pick).
 
+   Wood-Anderson seismometer
+      Torsion seismometer recording horizontal displacement
+      :term:`amplitudes <amplitude>` described in :cite:t:`richter-1935` and
+      :cite:t:`uhrhammer-1990`. Simulation of the Wood-Anderson seismometer is
+      used for measuring amplitudes for selected :term:`magnitudes <magnitude>`.
+      SeisComP3 and SeisComP in versions 4 and 5 have considered Wood-Anderson
+      instrument parameters originally published by :cite:t:`richter-1935` with
+      gain = 2800, T0 = 0.8 s, h = 0.8. However, updated parameters where
+      published by :cite:t:`uhrhammer-1990` with gain = 2080, T0 = 0.8 s,
+      h = 0.7. These values were part of the IASPEI Magnitude Working Group
+      recommendations of 2011 September 9 and therefore apply by default in later
+      versions of SeisComP. With the original set of values
+      :cite:p:`richter-1935`, magnitudes are systematically overestimated by 0.13.
+      Wood-Anderson seismometers can be simulated by filtering waveforms with
+      :func:`WA`.
+
    WWSSN_SP
       Short period seismograph with a dominant period of 1 s of the World-Wide
-      Standard Seismograph Network (WWSSN).
+      Standard Seismograph Network (WWSSN). WWSSN_SP instruments can be simulated
+      by filtering waveforms with :func:`WWSSN_SP`.
 
    WWSSN_LP
       Long period seismograph with a dominant period of 20 s of the World-Wide
-      Standard Seismograph Network (WWSSN).
+      Standard Seismograph Network (WWSSN). WWSSN_LP instruments can be simulated
+      by filtering waveforms with :func:`WWSSN_LP`.
 
    XML
-      Extensible Markup Language
+      Extensible Markup Language a version of which is :term:`SCML`.
