@@ -41,23 +41,6 @@ All notable changes to SeisComP are documented here.
         in global module configuration and magnitude type profiles in global
         bindings.
     -   Add a Magnitudes section to the documentation of concepts.
--   GUIs
-    -   Add View and Settings menus consistently to all GUIs.
--   iLoc
-    -   Fix crash in local travel-time computation and if local model is enabled
-        but not configured.
-    -   Make parameter `auxDir` and `MaxLocalTTDelta` configurable in scconfig.
-    -   Fix reading `LocalVModel` and `DoNotRenamePhases` from configuration.
--   LOCSAT
-    -   Apply strict limit of 181 distance samples to travel time tables.
-    -   Update documentation.
--   scolv
-    -   Make `olv.arrivalPlot.showUncertainties` configurable in scconfig.
--   scrttv
-    -   Update documentation.
-    -   New option `--map-picks` allows to show picks on visible streams even
-        when they were created on invisble streams, e.g., S picks created on
-        horizontal components are shown verticals.
 
 ## 5.4.0
 
@@ -93,6 +76,7 @@ All notable changes to SeisComP are documented here.
         ```
 -   GUI
     -   Fix tooltip display of MapWidget under some circumstances
+    -   Add View and Settings menus consistently to all GUIs.
 -   scolv
     -   Show Pick.onset attribute (impulsive, emergent, ...) in the arrival table
         and in picker window. Allow editing/setting it in the picker.
@@ -104,6 +88,7 @@ All notable changes to SeisComP are documented here.
         arbitrary comments when committing an origin.
     -   Add option to define magnitude comment profiles to populate
         arbitrary comments when reviewing a network magnitude
+    -   Make `olv.arrivalPlot.showUncertainties` configurable in scconfig.
 -   scart
     -   Allow to rename net, sta, loc, ch codes in dump and import modes,
         thanks to Luca Scarabello (SED/ETHZ).
@@ -145,6 +130,7 @@ All notable changes to SeisComP are documented here.
 -   scmv
     -   Add tooltip to station layer with station annotation.
 -   scrttv
+    -   Update documentation.
     -   Show different colour scheme for picks and arrivals (associated with a non-rejected
         origin)
     -   Allow to collect picks to create a preliminary location which can be sent to the
@@ -152,6 +138,9 @@ All notable changes to SeisComP are documented here.
     -   Add reload action which reloads data and picks at the current visible time range
     -   Add action to switch to real-time with configured buffer size
     -   Re-organize menus and actions
+    -   New option `--map-picks` allows to show picks on visible streams even
+        when they were created on invisble streams, e.g., S picks created on
+        horizontal components are shown verticals.
 -   scmapcut
     -   Fix segmentation fault at exit if a tilestore plugin is used
 -   scqc
@@ -169,6 +158,15 @@ All notable changes to SeisComP are documented here.
     -   Allow to output any spectral values with ShakeMap version >= 4
 -   LOCSAT
     -   Add Iw phase
+    -   Apply strict limit of 210 distance samples to travel time tables.
+    -   Reduce memory consumption to the bare minimum required by the
+        provided travel-time tables.
+    -   Update documentation.
+-   iLoc
+    -   Fix crash in local travel-time computation and if local model is enabled
+        but not configured.
+    -   Make parameter `auxDir` and `MaxLocalTTDelta` configurable in scconfig.
+    -   Fix reading `LocalVModel` and `DoNotRenamePhases` from configuration.
 -   diskmon
     -   Improve Python3 support.
 -   FDSN StationXML
