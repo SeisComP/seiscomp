@@ -87,7 +87,7 @@ All notable changes to SeisComP are documented here.
     -   Show Pick.onset attribute (impulsive, emergent, ...) in the arrival table
         and in picker window. Allow editing/setting it in the picker.
     -   Preserve used attribute states when committing from picker
-    -   Load associated picks of temporary originsa
+    -   Load associated picks of temporary origins
     -   Support small values in diagram widget
     -   Add residual to pick tooltip of arrival table
     -   Add option to define origin comment profiles to populate
@@ -98,7 +98,7 @@ All notable changes to SeisComP are documented here.
 -   scart
     -   Allow to rename net, sta, loc, ch codes in dump and import modes,
         thanks to Luca Scarabello (SED/ETHZ).
-    -   Unify -t -n -c --list --sncl options for Dump and Import mode, thanks
+    -   Unify -t -n -c --list --nscl options for Dump and Import mode, thanks
         to Luca Scarabello (SED/ETHZ).
     -   Add command-line option `--ignore` for ignoring empty records.
     -   Add command-line option `-o` for writing miniSEED records to file in
@@ -109,7 +109,7 @@ All notable changes to SeisComP are documented here.
     -   Report empty records whenever found.
     -   Print stream information whenever requested by `--print-streams`.
     -   Report errors even without verbose option (Luca Scarabello (SED/ETHZ))
-    -   When using `--print-streams` option in input mode the data
+    -   When using `--print-streams` option in import mode the data
         is written instead of just printing information. This has
         been fixed (Luca Scarabello (SED/ETHZ)) and can be deactivated with
         `--test`.
@@ -145,7 +145,7 @@ All notable changes to SeisComP are documented here.
     -   Add action to switch to real-time with configured buffer size
     -   Re-organize menus and actions
     -   New option `--map-picks` allows to show picks on visible streams even
-        when they were created on invisble streams, e.g., S picks created on
+        when they were created on invisible streams, e.g., S picks created on
         horizontal components are shown verticals.
 -   scmapcut
     -   Fix segmentation fault at exit if a tilestore plugin is used
