@@ -26,6 +26,12 @@ All notable changes to SeisComP are documented here.
     -   Revert resolving all path variables with configuration files introduced
         with version 5.3. It caused to much conflicts and inconsistencies that we
         have decided to revert the "feature".
+    -   Simplify the configuation of the travel-time interface homogeneous:
+        Deprecated global configuration parameter -> new parameter, dropped
+        '.profile':
+        ```
+        ttt.homogeneous.profile.[profile].[parameters]  -> ttt.homogeneous.[profile].[parameters]
+        ```
 -   amplitudes
     -   Allow configuration of Wood-Anderson instrument parameters in amplitudes
         global section of module configuration.
