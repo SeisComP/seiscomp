@@ -33,7 +33,7 @@ All notable changes to SeisComP are documented here.
         ttt.homogeneous.profile.[profile].[parameters]  -> ttt.homogeneous.[profile].[parameters]
         ```
     -   Add stdloc locator plugin which implements a new locator called StdLoc.
-        It has been contributed by Luca Scarabello / ETH.The algorithms 
+        It has been contributed by Luca Scarabello / ETH. The algorithms 
         implemented in StdLoc are standard methods described in
         "Routine Data Processing in Earthquake Seismology" by Jens Havskov
         and Lars Ottemoller.
