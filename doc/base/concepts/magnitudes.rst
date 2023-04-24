@@ -36,8 +36,8 @@ Wood-Anderson simulation, e.g. :term:`ML <magnitude, local (ML)>`,
 :term:`MLv <magnitude, local vertical (MLv)>`, :term:`MLc <magnitude, local custom (MLc)>`.
 
 
-Stations Magnitudes
-===================
+Station Magnitudes
+==================
 
 Station magnitudes are computed automatically by :ref:`scmag` or interactively
 by :ref:`scolv` from measured amplitudes based on distance-dependent
