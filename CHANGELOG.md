@@ -55,7 +55,7 @@ All notable changes to SeisComP are documented here.
     -   Preserve used attribute states when committing from picker
     -   Load associated picks of temporary origins
     -   Support small values in diagram widget
-    -   Add residual to pick tooltip of arrival table
+    -   Add residual to pick tooltip of arrival plot
     -   Add option to define origin comment profiles to populate
         arbitrary comments when committing an origin.
     -   Add option to define magnitude comment profiles to populate
