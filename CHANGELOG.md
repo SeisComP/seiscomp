@@ -113,6 +113,7 @@ All notable changes to SeisComP are documented here.
     -   New option `--map-picks` allows to show picks on visible streams even
         when they were created on invisible streams, e.g., S picks created on
         horizontal components are shown verticals.
+    -   Add --input-file to load an XML pick file at startup
 -   scmapcut
     -   Fix segmentation fault at exit if a tilestore plugin is used
 -   scqc
