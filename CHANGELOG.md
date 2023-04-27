@@ -60,7 +60,11 @@ All notable changes to SeisComP are documented here.
         arbitrary comments when committing an origin.
     -   Add option to define magnitude comment profiles to populate
         arbitrary comments when reviewing a network magnitude
-    -   Make `olv.arrivalPlot.showUncertainties` configurable in scconfig.
+    -   Make `olv.arrivalPlot.showUncertainties` configurable in scconfig
+    -   Change picker behaviour when hovering another component when pick mode
+        is active: only the component of the zoom trace is changed and not the
+        overall component. The old behaviour can be restored with
+        `picker.componentFollowsMouse = true`.
 -   scart
     -   Allow to rename net, sta, loc, ch codes in dump and import modes,
         thanks to Luca Scarabello (SED/ETHZ).
