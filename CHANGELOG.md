@@ -35,6 +35,11 @@ All notable changes to SeisComP are documented here.
         in global module configuration and magnitude type profiles in global
         bindings.
     -   Add a Magnitudes section to the documentation of concepts.
+-   scart
+    -   Add summary for --print-streams.
+-   scmssort
+    -   Add command-line option `-o` for explicitely writing miniSEED records to
+        file instead of stdout.
 
 ## 5.4.0
 
