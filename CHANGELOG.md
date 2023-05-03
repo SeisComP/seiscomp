@@ -35,11 +35,6 @@ All notable changes to SeisComP are documented here.
         in global module configuration and magnitude type profiles in global
         bindings.
     -   Add a Magnitudes section to the documentation of concepts.
--   scart
-    -   Add summary for --print-streams.
--   scmssort
-    -   Add command-line option `-o` for explicitely writing miniSEED records to
-        file instead of stdout.
 
 ## 5.5.0
 
@@ -130,6 +125,7 @@ All notable changes to SeisComP are documented here.
         is written instead of just printing information. This has
         been fixed (Luca Scarabello (SED/ETHZ)) and can be deactivated with
         `--test`.
+    -   Add summary for --print-streams.
     -   Update documentation.
 -   scmssort
     -   Fix reading miniSEED from stdin which was not the default anymore due to
@@ -137,6 +133,8 @@ All notable changes to SeisComP are documented here.
     -   Add command-line option `--ignore` for ignoring empty records.
     -   Report empty records whenever found.
     -   Support verbosity at different levels using `-v`, `-vv`, `-vvv`.
+    -   Add command-line option `-o` for explicitely writing miniSEED records to
+        file instead of stdout.
 -   scsendjournal
     -   Add `-i` to read journal parameter data from file
 -   scbulletin
