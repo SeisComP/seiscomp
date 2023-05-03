@@ -41,6 +41,14 @@ All notable changes to SeisComP are documented here.
     -   Add command-line option `-o` for explicitely writing miniSEED records to
         file instead of stdout.
 
+## 5.5.0
+
+```SC_API_VERSION 15.5.0```
+
+-   trunk
+    -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3)
+    -   Fix mb amplitude computation to respect selected time window
+
 ## 5.4.0
 
 ```SC_API_VERSION 15.4.0```
