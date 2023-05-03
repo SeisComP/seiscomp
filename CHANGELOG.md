@@ -28,7 +28,7 @@ All notable changes to SeisComP are documented here.
         1990. The change systematically reduces magnitudes by 0.13 when making
         use of amplitudes measured on waveforms corrected for Wood-Anderson
         seismometers with default.
-    -   Fix deadlock in messaging reconnect (scmp + scmps)
+    -   Limit alias names to 20 characters if the module provides bindings.
 -   magnitudes
     -   Simplify configuration of magnitude regionalization by global
         module configuration in scconfig.
@@ -53,6 +53,13 @@ All notable changes to SeisComP are documented here.
 -   trunk
     -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3)
     -   Fix mb amplitude computation to respect selected time window
+    -   Fix deadlock in messaging reconnect (scmp + scmps)
+    -   Add command-line option `--channels` for selecting channels to load.
+-   scautoloc
+    -   Do not consider picks with evaluationMode = rejected. Can be overruled
+        by `--allow-rejected-picks`.
+-   scbulletin
+    -   Fix output of event type used in fdsnws format.
 
 ## 5.4.0
 
