@@ -54,15 +54,6 @@ is achieved by adding magnitude-type profiles in the magnitudes section of
 global module configuration parameters.
 
 
-Aliases
--------
-
-New magnitude types (aliases) can be created based on existing magnitude and
-amplitude types with specific properties. Such aliases are defined by the
-global parameter :confval:`magnitudes.aliases` and configured as any other
-amplitude and magnitude in bindings or by regionalization.
-
-
 Network magnitudes
 ==================
 
