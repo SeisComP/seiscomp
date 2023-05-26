@@ -28,6 +28,7 @@ All notable changes to SeisComP are documented here.
         1990. The change systematically reduces magnitudes by 0.13 when making
         use of amplitudes measured on waveforms corrected for Wood-Anderson
         seismometers with default.
+    -   Fix deadlock in messaging reconnect (scmp + scmps)
 -   magnitudes
     -   Simplify configuration of magnitude regionalization by global
         module configuration in scconfig.
