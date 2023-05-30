@@ -54,6 +54,7 @@ All notable changes to SeisComP are documented here.
     -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3)
     -   Fix mb amplitude computation to respect selected time window
     -   Fix deadlock in messaging reconnect (scmp + scmps)
+-   scrttv
     -   Add command-line option `--channels` for selecting channels to load.
 -   scautoloc
     -   Do not consider picks with evaluationMode = rejected. Can be overruled
