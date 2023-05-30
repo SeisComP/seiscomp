@@ -36,6 +36,15 @@ All notable changes to SeisComP are documented here.
         in global module configuration and magnitude type profiles in global
         bindings.
     -   Add a Magnitudes section to the documentation of concepts.
+-   scolv
+    -   Add notion of auxilliary channels (configurable). Auxilliary channels can
+        be skipped while adding stations in range because a minimum or maximum
+        distance has not been reached.
+        ```
+        picker.auxilliary.channels = AB.*.*.*
+        picker.auxilliary.minimumDistance = 0 # Optional, default 0
+        picker.auxilliary.maximumDistance = 1 # Optional, default 1000
+        ```
 
 ## 5.5.0
 
