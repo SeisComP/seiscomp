@@ -28,7 +28,6 @@ All notable changes to SeisComP are documented here.
         1990. The change systematically reduces magnitudes by 0.13 when making
         use of amplitudes measured on waveforms corrected for Wood-Anderson
         seismometers with default.
-    -   Limit alias names to 20 characters if the module provides bindings.
 -   magnitudes
     -   Simplify configuration of magnitude regionalization by global
         module configuration in scconfig.
@@ -36,6 +35,24 @@ All notable changes to SeisComP are documented here.
         in global module configuration and magnitude type profiles in global
         bindings.
     -   Add a Magnitudes section to the documentation of concepts.
+
+## 5.5.0
+
+```SC_API_VERSION 15.5.0```
+
+-   trunk
+    -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3)
+    -   Fix deadlock in messaging reconnect (scmp + scmps)
+    -   Limit alias names to 20 characters if the module provides bindings.
+-   scrttv
+    -   Add command-line option `--channels` for selecting channels to load.
+-   scautoloc
+    -   Do not consider picks with evaluationMode = rejected. Can be overruled
+        by `--allow-rejected-picks`.
+-   scbulletin
+    -   Fix output of event type used in fdsnws format.
+    -   Add option `--kml` for output in KML format
+    -   Add option `-o` for direct output to file
 -   scolv
     -   Add notion of auxilliary channels (configurable). Auxilliary channels can
         be skipped while adding stations in range because a minimum or maximum
@@ -45,21 +62,6 @@ All notable changes to SeisComP are documented here.
         picker.auxilliary.minimumDistance = 0 # Optional, default 0
         picker.auxilliary.maximumDistance = 1 # Optional, default 1000
         ```
-
-## 5.5.0
-
-```SC_API_VERSION 15.5.0```
-
--   trunk
-    -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3)
-    -   Fix deadlock in messaging reconnect (scmp + scmps)
--   scrttv
-    -   Add command-line option `--channels` for selecting channels to load.
--   scautoloc
-    -   Do not consider picks with evaluationMode = rejected. Can be overruled
-        by `--allow-rejected-picks`.
--   scbulletin
-    -   Fix output of event type used in fdsnws format.
 
 ## 5.4.0
 
