@@ -43,14 +43,17 @@ All notable changes to SeisComP are documented here.
 -   trunk
     -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3)
     -   Fix deadlock in messaging reconnect (scmp + scmps)
-    -   Limit alias names to 20 characters if the module provides bindings.
+    -   Limit alias names to 20 characters if the module provides bindings
+-   GUI
+    -   Fix bad performance of reading events into the event list in combination
+        with Qt4
 -   scrttv
-    -   Add command-line option `--channels` for selecting channels to load.
+    -   Add command-line option `--channels` for selecting channels to load
 -   scautoloc
     -   Do not consider picks with evaluationMode = rejected. Can be overruled
         by `--allow-rejected-picks`.
 -   scbulletin
-    -   Fix output of event type used in fdsnws format.
+    -   Fix output of event type used in fdsnws format
     -   Add option `--kml` for output in KML format
     -   Add option `-o` for direct output to file
 -   scolv
