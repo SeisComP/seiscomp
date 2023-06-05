@@ -47,15 +47,18 @@ All notable changes to SeisComP are documented here.
 -   GUI
     -   Fix bad performance of reading events into the event list in combination
         with Qt4
--   scrttv
-    -   Add command-line option `--channels` for selecting channels to load
 -   scautoloc
     -   Do not consider picks with evaluationMode = rejected. Can be overruled
         by `--allow-rejected-picks`.
+-   scamp
+    -   Add option `--picks` for processing picks in playbacks with `--ep` while
+        ignoring origins.
 -   scbulletin
     -   Fix output of event type used in fdsnws format
     -   Add option `--kml` for output in KML format
     -   Add option `-o` for direct output to file
+-   scart
+    -   Do not require an output archive when executing with `--test`.
 -   scolv
     -   Add notion of auxilliary channels (configurable). Auxilliary channels can
         be skipped while adding stations in range because a minimum or maximum
@@ -65,6 +68,10 @@ All notable changes to SeisComP are documented here.
         picker.auxilliary.minimumDistance = 0 # Optional, default 0
         picker.auxilliary.maximumDistance = 1 # Optional, default 1000
         ```
+-   scrttv
+    -   Add command-line option `--channels` for selecting channels to load
+-   scqcv
+    -   Remove unused parameters from descriptions, hence scconfig.
 
 ## 5.4.0
 
