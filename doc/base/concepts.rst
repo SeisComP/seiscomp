@@ -19,4 +19,5 @@ the :term:`trunk` package.
    RecordStream: Access to data from real-time servers or archives </base/concepts/recordstream>
    Inventory: Station meta data </base/concepts/inventory>
    Configuration: Inventory, module and binding configurations </base/concepts/configuration>
-   Magnitude computation </base/concepts/magnitudes>
+   Processing: Magnitude computation </base/concepts/magnitudes>
+   Processing: Locator types </base/concepts/locators>
