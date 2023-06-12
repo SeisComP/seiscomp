@@ -72,6 +72,26 @@ The averaging methods applied by :ref:`scmag` are configurable by
 :ref:`magnitudes.average`.
 
 
+Moment Magnitudes
+=================
+
+Moment magnitudes can be derived from other all network magnitudes by mapping of the
+original network magnitude, e.g., *Mx* to a new moment magnitude *Mw(Mx)*. The
+mapping function can be configured within a magnitude type profile for all
+original magnitude types except :term:`mB < magnitude, derived mB (Mw(mB))>` and
+:term:`Mwp <magnitude, derived Mwp (Mw(Mwp))>` in the global module configuration.
+Any mapping configuration for :term:`mB < magnitude, derived mB (Mw(mB))>` and
+:term:`Mwp <magnitude, derived Mwp (Mw(Mwp))>` is ignored since a hard-coded
+mapping applied.
+
+In order to avoid that :ref:`summary magnitudes <concepts-magnitudes-summary>`
+are computed from original magnitude and mapped Mw together and biased, the
+original magnitudes can be blocklisted in :ref:`scmag`
+(:confval:`summaryMagnitude.blacklist`).
+
+
+.. _concepts-magnitudes-summary :
+
 Summary Magnitude
 =================
 
