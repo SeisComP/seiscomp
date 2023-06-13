@@ -35,6 +35,8 @@ All notable changes to SeisComP are documented here.
         in global module configuration and magnitude type profiles in global
         bindings.
     -   Add a Magnitudes section to the documentation of concepts.
+-   documentation
+    -   Add subsection on locators to Concepts section.
 
 ## 5.5.0
 
