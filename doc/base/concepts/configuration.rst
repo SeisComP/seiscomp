@@ -9,8 +9,8 @@ Scope
 =====
 
 This chapter describes the configuration of a processing system and how all
-the pieces gear into each other. It will cover application specific
-configuration, inventory (station metadata) and application station bindings.
+the pieces gear into each other. It will cover module specific
+configuration, inventory (station metadata) and module station bindings.
 
 
 Overview
@@ -18,10 +18,10 @@ Overview
 
 The |scname| framework defines a common schema to read configuration parameters.
 This schema is used by all :ref:`SeisComP modules <concepts_modules>` with names
-starting with **sc**, e.g. `scautopick`. Other applications might be available
-as well such as third party applications which use other naming conventions.
+starting with **sc**, e.g. `scautopick`. Other modules might be available
+as well such as third party modules which use other naming conventions.
 
-A way to discover an application that uses the |scname| configuration schema
+A way to discover a module that uses the |scname| configuration schema
 is to call it with ``--help``. The first lines of a typical output look like
 this:
 
@@ -32,16 +32,16 @@ this:
      -V [ --version ]                      Show version information
      --config-file arg                     Use alternative configuration file
 
-The reason for that is that there are also other applications which do not
+The reason for that is that there are also other modules which do not
 use the |scname| core and client libraries such Seedlink plugins, Seedlink
 itself and some others which are not part of the trunk source package. Those
-applications need translators to generate their native configuration when
+modules need translators to generate their native configuration when
 the configuration is updated (``seiscomp update-config``).
 
-Again, the two indicators that an application uses the following configuration
+Again, the two indicators that a module uses the following configuration
 schema are:
 
-* The application name is prefixed with **sc**, e.g. *scautopick*
+* The module name is prefixed with **sc**, e.g. *scautopick*
 * The output of ``--help`` looks like the text fragment above
 
 A typical configuration requires the following steps:
@@ -54,14 +54,6 @@ A typical configuration requires the following steps:
 .. note::
 
    :ref:`Standalone modules <concepts_modules>` can also run without inventory.
-
-
-Inventory
-=========
-
-A correct inventory is fundamental to |scname|. Read the
-:ref:`inventory section <concepts_inventory>` in concepts for a description.
-:cite:t:`smp` can be used to generate the required files in :term:`SCML` format.
 
 
 .. _concepts_configuration-configs:
@@ -118,28 +110,14 @@ module configuration panel of :ref:`scconfig`.
 Module configuration
 --------------------
 
-Module configurations are saved as :file:`*.cfg` files and an application will
-look into 6 locations to read all of its configuration parameters:
-
-#. :file:`$SEISCOMP_ROOT/etc/defaults/global.cfg`
-#. :file:`$SEISCOMP_ROOT/etc/defaults/[application].cfg`
-#. :file:`$SEISCOMP_ROOT/etc/global.cfg`
-#. :file:`$SEISCOMP_ROOT/etc/[application].cfg`
-#. :file:`$HOME/.seiscomp/global.cfg`
-#. :file:`$HOME/.seiscomp/[application].cfg`
-
-
-Reading
-~~~~~~~
-
-The order of files also represents the order of loading. There are three
-directories involved:
+Configurations for modules are saved as :file:`*.cfg` files. There are three
+directories involved where configuration files can be stored:
 
 #. :file:`$SEISCOMP_ROOT/etc/defaults/`: This directory ships with the distribution
    of |scname| and should never be touched. All contained files might be
    overwritten with the next software update.
 #. :file:`$SEISCOMP_ROOT/etc/`: This directory will never be populated by a software
-   update and it is save to store global application configuration files there.
+   update and it is save to store global module configuration files there.
    Depending on the system setup this directory might be read-only to users.
    It is called the system configuration directory.
 #. :file:`$HOME/.seiscomp/`: This directory is in the user's home directory and
@@ -147,10 +125,24 @@ directories involved:
    configurations.
    It is called the user configuration directory.
 
-Furthermore there are two file names involved: :file:`global.cfg` and
-:file:`[application].cfg`. The file :file:`global.cfg` will be loaded by all
-applications and it is a good place to store common parameters such as messaging
-connections or logging configurations.
+Furthermore there are two file names involved in each directory:
+:file:`global.cfg` and :file:`[module].cfg`. The file :file:`global.cfg`
+will be loaded by all modules and it is a good place to store common
+parameters such as messaging connections or logging configurations.
+
+The three directories and two files result in 6 locations to read all of a
+module's configuration parameters:
+
+#. :file:`$SEISCOMP_ROOT/etc/defaults/global.cfg`
+#. :file:`$SEISCOMP_ROOT/etc/defaults/[module].cfg`
+#. :file:`$SEISCOMP_ROOT/etc/global.cfg`
+#. :file:`$SEISCOMP_ROOT/etc/[module].cfg`
+#. :file:`$HOME/.seiscomp/global.cfg`
+#. :file:`$HOME/.seiscomp/[module].cfg`
+
+The order of the configuration files above also represents the order of loading.
+Parameters can be available in any of these files. The last occurrence of a
+parameter takes priority such as  configurations in :file:`$HOME/.seiscomp/`.
 
 
 Adjusting
@@ -171,7 +163,7 @@ a module. An easy way of getting started is to copy the default configuration
 file in :file:`$SEISCOMP_ROOT/etc/defaults/` to :file:`$SEISCOMP_ROOT/etc/` and
 adjust it there.
 
-.. warning ::
+.. warning::
 
    Do not adjust any parameter in the default configuration files located in
    :file:`$SEISCOMP_ROOT/etc/defaults/` as they will be overwritten by future
@@ -204,15 +196,15 @@ overridden on the command line. E.g. refer to the codes parameter of
 Bindings configuration
 ----------------------
 
-Bindings configure parameters specific to stations and for a certain module or application.
+Bindings configure parameters specific to stations and for a certain module.
 A station might require a custom set of parameters for e.g. data acquisition from
 a remote data logger or server, for processing or
 displaying. |scname| design is that bindings will be stored
-in the database. All applications requiring this information read the them from the
-database.
-In this way consistent inventory and its bindings will be distributed.
+in the database. All modules requiring this information read them from the
+database. In this way consistent inventory and its bindings will be distributed
+to all modules running locally or on remote computers.
 
-.. hint ::
+.. hint::
 
    Bindings can be conveniently configured in the Bindings panel of :ref:`scconfig`.
    Read the section :ref:`scconfig-bindings` for instructions.
@@ -230,9 +222,9 @@ Parameters defined in bindings override parameters in module configurations.
 Bindings configurations are saved as stations bindings or as bindings profiles with
 given names:
 
-#. **Station binding parameters:** :file:`$SEISCOMP_ROOT/etc/key/[application]/station_NET_STA`
+#. **Station binding parameters:** :file:`$SEISCOMP_ROOT/etc/key/[module]/station_NET_STA`
    is used only be one station NET.STA.
-#. **Binding profile parameters:** :file:`$SEISCOMP_ROOT/etc/key/[application]/profile_[name]`
+#. **Binding profile parameters:** :file:`$SEISCOMP_ROOT/etc/key/[module]/profile_[name]`
    can be used by many stations. Then any update of this file applies to all stations
    bound to this profile.
 
@@ -409,7 +401,7 @@ The mapping to the binding configuration files is 1:1. Each parameter in
 the configuration file is exactly one parameter in the database and their
 names are matching exactly.
 
-The concept of global bindings which are specialized for each application is
+The concept of global bindings which are specialized for each module is
 reflected by the *baseID* of the ParameterSet which points to setup *default*
 of station GE.UGM:
 
@@ -477,7 +469,7 @@ a common issue elegantly: a station might provide a couple of channels, often
 data in various sampling rates, e.g. LH, BH, SH and HH. Co-located stations
 with velocity and acceleration sensors also provide at least two channel groups,
 e.g. HL and HH. Those groups are also provided with different location code,
-e.g. 00 and 10. To process a station an application needs to know which channel
+e.g. 00 and 10. To process a station a module needs to know which channel
 it should process. To display a representative data channel a viewer needs to
 know which channel to show. Global bindings solve that issue by defining the
 "preferred" location code and channel code with the two parameters `detecLocid`
@@ -505,21 +497,21 @@ Like module configurations, parameters defined in the global bindings can be
 overridden in module bindings. The order of loading is:
 
 #. :file:`$SEISCOMP_ROOT/etc/key/global/`: Global bindings configurations
-#. :file:`$SEISCOMP_ROOT/etc/key/[application]`:  Bindings configurations for a particular module.
+#. :file:`$SEISCOMP_ROOT/etc/key/[module]`:  Bindings configurations for a particular module.
 
-If the application connects to a messaging server then it will receive the database parameters,
+If the module connects to a messaging server then it will receive the database parameters,
 connect to it and read the bindings. Otherwise the user has to provide the
-database address. An application never reads the key directory. It only
+database address. A module never reads the key directory. It only
 gets the bindings from the configuration tables.
 
-As with inventory information there might are cases when an application should
+As with inventory information there might are cases when a module should
 not connect to a database and work offline, in particular when ``--ep`` is being
 used.
 
 In order to
 read the bindings configuration from XML files (again in SCML format),
 use :ref:`scxmldump` to dump the configuration XML file and let
-the application use this XML file, ``--config-db`` must be used:
+the module use this XML file, ``--config-db`` must be used:
 
 .. code-block:: sh
 
@@ -572,7 +564,7 @@ Summary
 * Key files are another human readable representation of bindings,
 * ``seiscomp update-config`` or ``seiscomp update-config trunk`` writes the
   information from :file:`etc/key` to the database,
-* An application never reads :file:`etc/key`,
+* A module never reads :file:`etc/key`,
 * Bindings are being read from the database or an XML file.
 
 
@@ -619,7 +611,7 @@ configuration file is important. The file is parsed top-down.
 
 .. note::
 
-   Values are not type-checked. Type checking is part of the application
+   Values are not type-checked. Type checking is part of the module
    logic and will be handled there. The configuration file parser will not raise
    an error if a string is assigned to a parameter that is expected to be an
    integer.
