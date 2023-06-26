@@ -910,7 +910,7 @@ def on_update_config(args, _):
 
 
 def on_update_config_help(_):
-    print("Updates the configuration of all avsailable modules. This command")
+    print("Updates the configuration of all available modules. This command")
     print("will convert the etc/*.cfg to the modules native configuration")
     print("including its bindings.")
     return 0
@@ -954,8 +954,6 @@ def on_alias(args, _):
                 "bindings will not be written to database"
             )
             return 1
-        else:
-            warning("alias names")
 
         mod2 = args[2]
         if os.path.exists(os.path.join("bin", mod2)):
@@ -998,29 +996,29 @@ def on_alias(args, _):
         except BaseException:
             pass
 
+        print(f"Creating alias '{aliasName}' for '{mod2}':")
         if has_alias:
             warning(
-                "%s is already registered as alias for %s in "
-                "$SEISCOMP_ROOT/etc/descriptions/aliases" % (aliasName, toks[1])
+                f"  + {aliasName} is already registered as alias for {mod2} in "
+                "$SEISCOMP_ROOT/etc/descriptions/aliases"
             )
-            warning("  + do not register again but trying to link the required files")
+            warning("    do not register again but trying to link the required files")
         else:
             print(
-                "Registered alias '%s' in $SEISCOMP_ROOT/etc/descriptions/aliases"
-                % (aliasName)
+                f"  + registering alias '{aliasName}' in $SEISCOMP_ROOT/etc/descriptions/aliases"
             )
 
         # Check if target exists already
         if os.path.exists(os.path.join(SEISCOMP_ROOT, mod1)):
             warning(
-                f"link '{aliasName}' to '{mod2}' exists already in {SEISCOMP_ROOT}/bin/"
+                f"  + link '{aliasName}' to '{mod2}' exists already in {SEISCOMP_ROOT}/bin/"
             )
-            warning("  + do not link again")
+            warning("    do not link again")
 
         try:
             f = open(ALIAS_FILE, "w")
         except BaseException:
-            error(f"failed to open/create alias file: {ALIAS_FILE}")
+            error(f"  + failed to open/create alias file: {ALIAS_FILE}")
             return 1
 
         new_lines.append(f"{aliasName} = {args[2]}")
@@ -1035,7 +1033,9 @@ def on_alias(args, _):
         default_cfg1 = aliasName + ".cfg"
         default_cfg2 = args[2] + ".cfg"
         if os.path.exists(default_cfg2):
-            print(f"Linking default configuration: {default_cfg2} -> {default_cfg1}")
+            print(
+                f"  + linking default configuration: {default_cfg2} -> {default_cfg1}"
+            )
             # - first: remove target
             try:
                 os.remove(default_cfg1)
@@ -1044,7 +1044,7 @@ def on_alias(args, _):
             # create symlink
             os.symlink(os.path.relpath(default_cfg2), default_cfg1)
         else:
-            print("No default configuration to link")
+            print("  + no default configuration to link")
         # return to initial directory
         os.chdir(cwdAlias)
 
@@ -1054,7 +1054,7 @@ def on_alias(args, _):
             os.remove(os.path.join(SEISCOMP_ROOT, mod1))
         except BaseException:
             pass
-        print(f"Creating app symlink: {mod2} -> {mod1}")
+        print(f"  + creating alias to application: {mod2} -> {mod1}")
         os.symlink(mod2, os.path.join(SEISCOMP_ROOT, mod1))
 
         # create symlink from etc/init/mod1.py to etc/init/mod2.py
@@ -1062,7 +1062,7 @@ def on_alias(args, _):
         os.chdir(os.path.join(SEISCOMP_ROOT, "etc", "init"))
         init1 = aliasName + ".py"
         init2 = args[2] + ".py"
-        print(f"Linking init script: {init2} -> {init1}")
+        print(f"  + linking init script: {init2} -> {init1}")
         # - first: remove target
         try:
             os.remove(init1)
@@ -1080,7 +1080,7 @@ def on_alias(args, _):
             error("expected one argument for remove: alias-name")
             return 1
 
-        print(f"Removing alias '{aliasName}'")
+        print(f"Removing alias '{aliasName}':")
         #  check and remove alias line in etc/descriptions/aliases
         has_alias = False
         lines = []
@@ -1135,7 +1135,7 @@ def on_alias(args, _):
             sym_link = ""
 
         if sym_link:
-            print(f"  + removing app symlink: {sym_link}")
+            print(f"  + removing alias application: {sym_link}")
             try:
                 os.remove(os.path.join(SEISCOMP_ROOT, sym_link))
             except BaseException:
@@ -1239,21 +1239,26 @@ def on_alias(args, _):
 def on_alias_help(_):
     print("seiscomp alias {create|remove} ALIAS_NAME APP_NAME")
     print(
-        "Creates/removes aliases as symlinks to applications. Symlinks to symlinks are not allowed."
+        "Creates/removes aliases of applications as symlinks allowing to run multiple "
+        "application instances with different parameter sets. Aliases of aliases are "
+        "not allowed."
     )
     print()
     print("Examples:")
-    print("$ seiscomp alias create scautopick2 scautopick")
+    print("$ seiscomp alias create l1autopick scautopick")
+    print("Creating alias 'l1autopick' for 'scautopick'':")
     print(
-        "Copy default configuration: etc/defaults/scautopick.cfg -> etc/defaults/scautopick2.cfg"
+        "  + registering alias 'l1autopick' in $SEISCOMP_ROOT/etc/descriptions/aliases"
     )
-    print("Create app symlink: scautopick -> bin/scautopick2")
-    print("Copy init script: etc/init/scautopick.py -> etc/init/scautopick2.py")
+    print("  + linking default configuration: scautopick.cfg -> l1autopick.cfg")
+    print("  + creating alias to application: scautopick -> bin/l1autopick")
+    print("  + linking init script: scautopick.py -> l1autopick.py")
     print()
-    print("$ seiscomp alias remove scautopick2")
-    print("Remove default configuration: etc/defaults/scautopick2.cfg")
-    print("Remove app symlink: bin/scautopick2")
-    print("Remove init script: etc/init/scautopick2.py")
+    print("$ seiscomp alias remove l1autopick")
+    print("Removing alias 'l1autopick':")
+    print("  + removing alias application: bin/l1autopick")
+    print("  + removing init script: etc/init/l1autopick.py")
+    print("  + removing default configuration: etc/defaults/l1autopick.cfg")
 
 
 allowed_actions = [
