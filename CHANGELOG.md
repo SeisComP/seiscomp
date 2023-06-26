@@ -68,6 +68,7 @@ All notable changes to SeisComP are documented here.
         picker.auxilliary.minimumDistance = 0 # Optional, default 0
         picker.auxilliary.maximumDistance = 1 # Optional, default 1000
         ```
+    -   Read journal entries also from offline XML files
 -   scrttv
     -   Add command-line option `--channels` for selecting channels to load
 -   scqcv
