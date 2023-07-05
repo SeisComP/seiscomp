@@ -2,6 +2,50 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.0
+
+```SC_API_VERSION 15.5.0```
+
+-   deps
+    -   Add Debian 12 support
+-   seedlink
+    -   Fix bug of win plugin which caused log entries 'invalid time' and did
+        not forward data
+    -   Update libq330 for the q330 plugin
+-   trunk
+    -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3)
+    -   Fix deadlock in messaging reconnect (scmp + scmps)
+    -   Limit alias names to 20 characters if the module provides bindings
+-   GUI
+    -   Fix bad performance of reading events into the event list in combination
+        with Qt4
+-   scautoloc
+    -   Do not consider picks with evaluationMode = rejected. Can be overruled
+        by `--allow-rejected-picks`.
+-   scamp
+    -   Add option `--picks` for processing picks in playbacks with `--ep` while
+        ignoring origins.
+-   scbulletin
+    -   Fix output of event type used in fdsnws format
+    -   Add option `--kml` for output in KML format
+    -   Add option `-o` for direct output to file
+-   scart
+    -   Do not require an output archive when executing with `--test`.
+-   scolv
+    -   Add notion of auxilliary channels (configurable). Auxilliary channels can
+        be skipped while adding stations in range because a minimum or maximum
+        distance has not been reached.
+        ```
+        picker.auxilliary.channels = AB.*.*.*
+        picker.auxilliary.minimumDistance = 0 # Optional, default 0
+        picker.auxilliary.maximumDistance = 1 # Optional, default 1000
+        ```
+    -   Read journal entries also from offline XML files
+-   scrttv
+    -   Add command-line option `--channels` for selecting channels to load
+-   scqcv
+    -   Remove unused parameters from descriptions, hence scconfig.
+
 ## 5.4.0
 
 ```SC_API_VERSION 15.4.0```
