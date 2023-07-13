@@ -41,10 +41,18 @@ All notable changes to SeisComP are documented here.
         picker.auxilliary.maximumDistance = 1 # Optional, default 1000
         ```
     -   Read journal entries also from offline XML files
+    -   Fix regression in 5.4 which prevents the picker from resetting the
+        amplitude scaling of the zoom trace when scaling to visible amplitudes
+        with, e.g. 's'.
 -   scrttv
     -   Add command-line option `--channels` for selecting channels to load
+    -   Fix restoring the default display when loading files or reloading a
+        new time range. Only the initially configured buffer size (e.g. 30 minutes)
+        was used.
 -   scqcv
     -   Remove unused parameters from descriptions, hence scconfig.
+    -   Allow sorting by stream ID
+    -   Rename menu "Options" to "Settings"
 
 ## 5.4.0
 
