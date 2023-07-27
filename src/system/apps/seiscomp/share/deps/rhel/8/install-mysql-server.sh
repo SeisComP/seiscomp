@@ -1,1 +1,1 @@
-yum install mariadb mariadb-server
+dnf install mysql mysql-server
