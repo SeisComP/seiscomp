@@ -38,6 +38,14 @@ All notable changes to SeisComP are documented here.
 -   documentation
     -   Add subsection on locators to Concepts section.
 
+## 5.5.1
+
+-   scxmldump
+    -   Stop warning about empty amplitude ID in station magnitude
+-   scrttv
+    -   Fix --start-at-now and disable time window load actions with --rt
+    -   Fix crash if removed picks are associated with incoming origins
+
 ## 5.5.0
 
 ```SC_API_VERSION 15.5.0```
