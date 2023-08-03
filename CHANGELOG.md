@@ -28,6 +28,9 @@ All notable changes to SeisComP are documented here.
         1990. The change systematically reduces magnitudes by 0.13 when making
         use of amplitudes measured on waveforms corrected for Wood-Anderson
         seismometers with default.
+-   GUI
+    -   Renamed configuration variables `picker.auxilliary.*` to
+        `picker.auxiliary.*`. Old variable names are not supported anymore.
 -   magnitudes
     -   Simplify configuration of magnitude regionalization by global
         module configuration in scconfig.
