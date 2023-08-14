@@ -2,6 +2,22 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.2
+
+```SC_API_VERSION 15.6.0```
+
+-   trunk
+    -   Fix concurrent recordstream termination when data still available
+    -   Fix invalid ResourceUri for QuakeML arrival export
+-   scolv
+    -   Announced feature of auxiliary channels from version 5.5.0 has been added
+        which was left out accidentally.
+    -   Select previous and next event buttons now consider only visible events in
+        the event list. This is now similar to switching to the event list and
+        selecting the event previous or next to the current event.
+-   screloc
+    -   Be more informative at INFO log level (--ep option)
+
 ## 5.5.1
 
 -   scxmldump
@@ -40,13 +56,13 @@ All notable changes to SeisComP are documented here.
 -   scart
     -   Do not require an output archive when executing with `--test`.
 -   scolv
-    -   Add notion of auxilliary channels (configurable). Auxilliary channels can
+    -   Add notion of auxiliary channels (configurable). Auxiliary channels can
         be skipped while adding stations in range because a minimum or maximum
         distance has not been reached.
         ```
-        picker.auxilliary.channels = AB.*.*.*
-        picker.auxilliary.minimumDistance = 0 # Optional, default 0
-        picker.auxilliary.maximumDistance = 1 # Optional, default 1000
+        picker.auxiliary.channels = AB.*.*.*
+        picker.auxiliary.minimumDistance = 0 # Optional, default 0
+        picker.auxiliary.maximumDistance = 1 # Optional, default 1000
         ```
     -   Read journal entries also from offline XML files
     -   Fix regression in 5.4 which prevents the picker from resetting the
