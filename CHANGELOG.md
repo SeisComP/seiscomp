@@ -2,29 +2,50 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.3
+
+-   trunk
+    -   Add more debug output to magnitudes ML, MLv and MLc
+    -   Fix crash if distance for MLv.logA0 is out of range
+    -   Fix reading of MLc magnitude correction factors of
+        regionalization profiles
+    -   Fix messaging re-connection deadlock that causes applications
+        to hang forever after the messaging connection has been
+        re-established.
+-   GUI
+    -   Show surface wave onsets in amplitude view
+-   scmag
+    -   Fix description of `minimumArrivalWeight` for scconfig
+-   scdumpcfg
+    -   Fix loading of shadowed application plugins, e.g. scqc, which
+        caused issues when loading application specific plugins.
+
 ## 5.5.2
 
 ```SC_API_VERSION 15.6.0```
 
+-   documentation
+    -   Add subsection on locators to Concepts section.
+    -   Add a concepts section on magnitudes.
 -   trunk
     -   Fix concurrent recordstream termination when data still available
     -   Fix invalid ResourceUri for QuakeML arrival export
 -   scolv
-    -   Announced feature of auxiliary channels from version 5.5.0 has been added
-        which was left out accidentally.
-    -   Select previous and next event buttons now consider only visible events in
-        the event list. This is now similar to switching to the event list and
-        selecting the event previous or next to the current event.
+    -   Announced feature of auxiliary channels from version 5.5.0 has been
+        added which was left out accidentally.
+    -   Select previous and next event buttons now consider only visible events
+        in the event list. This is now similar to switching to the event list
+        and selecting the event previous or next to the current event.
 -   screloc
-    -   Be more informative at INFO log level (--ep option)
+    -   Be more informative at INFO log level (`--ep` option)
 
 ## 5.5.1
 
 -   scxmldump
-    -   Stop warning about empty amplitude ID in station magnitude
+    -   Stop warning about empty amplitude ID in station magnitude.
 -   scrttv
-    -   Fix --start-at-now and disable time window load actions with --rt
-    -   Fix crash if removed picks are associated with incoming origins
+    -   Fix `--start-at-now` and disable time window load actions with `--rt`.
+    -   Fix crash if removed picks are associated with incoming origins.
 
 ## 5.5.0
 
@@ -37,22 +58,22 @@ All notable changes to SeisComP are documented here.
         not forward data
     -   Update libq330 for the q330 plugin
 -   trunk
-    -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3)
-    -   Fix deadlock in messaging reconnect (scmp + scmps)
-    -   Limit alias names to 20 characters if the module provides bindings
+    -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3).
+    -   Fix deadlock in messaging reconnect (scmp + scmps).
+    -   Limit alias names to 20 characters if the module provides bindings.
 -   GUI
     -   Fix bad performance of reading events into the event list in combination
-        with Qt4
+        with Qt4.
 -   scautoloc
-    -   Do not consider picks with evaluationMode = rejected. Can be overruled
+    -   Do not consider picks with `evaluationMode = rejected`. Can be overruled
         by `--allow-rejected-picks`.
 -   scamp
     -   Add option `--picks` for processing picks in playbacks with `--ep` while
         ignoring origins.
 -   scbulletin
-    -   Fix output of event type used in fdsnws format
-    -   Add option `--kml` for output in KML format
-    -   Add option `-o` for direct output to file
+    -   Fix output of event type used in fdsnws format.
+    -   Add option `--kml` for output in KML format.
+    -   Add option `-o` for direct output to file.
 -   scart
     -   Do not require an output archive when executing with `--test`.
 -   scolv
@@ -75,8 +96,8 @@ All notable changes to SeisComP are documented here.
         was used.
 -   scqcv
     -   Remove unused parameters from descriptions, hence scconfig.
-    -   Allow sorting by stream ID
-    -   Rename menu "Options" to "Settings"
+    -   Allow sorting by stream ID.
+    -   Rename menu "Options" to "Settings".
 
 ## 5.4.0
 
