@@ -20,10 +20,13 @@ into an application.
 
 Typical plugins provide access to:
 
-* Databases
+* :ref:`Databases <concepts_database>`
 * :ref:`Recordstream implementations <global_recordstream>`
 * :ref:`Locator routines <sec_index_extensions>`
-* :ref:`Magnitude types <sec_index_extensions>`.
+* :ref:`Amplitude and magnitude types <sec_index_extensions>`
+* :ref:`Waveform quality <scqc>`.
+
+The plugin files themselves are located in :file:`share/plugins`.
 
 By just loading a plugin an application does not change
 it's way to function magically. Common plugins just implement a certain

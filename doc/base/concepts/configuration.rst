@@ -440,6 +440,10 @@ They are finally transferred to the database or converted to other
 representations a module might require to access them. The  directory :file:`etc/key` is meant
 for backup and used for copying bindings from one computer to another.
 
+
+Adjusting
+~~~~~~~~~
+
 :ref:`scconfig` provides a graphical interface to adjust the global and the module
 bindings parameters and to create the bindings. It populates the :file:`etc/key`
 directory and it takes care that they synchronize with the database when processing
@@ -451,6 +455,66 @@ directory and it takes care that they synchronize with the database when process
    :width: 18cm
 
    scconfig modules bindings configuration panel.
+
+Alternatively, you may manually generate the binding parameter file
+:file:`etc/key/global/station_GE_UGM` and
+:file:`etc/key/scautopick/station_GE_UGM` and add the binding to the key file
+corresponding to the station, e.g.,
+:file:`$SEISCOMP_ROOT/etc/key/station_GE_UGM`.´
+
+
+SeisComP shell
+~~~~~~~~~~~~~~
+
+Instead of creating bindings in :ref:`scconfig` or by adjusting key files
+manually you may assign binding profiles to stations or networks or remove them
+using the |scname| shell which is a specific shell:
+
+#. Start the |scname| shell:
+
+   .. code-block:: sh
+
+      seiscomp shell
+
+#. Issue a shell command. Examples:
+
+   * Read the help of the new shell:
+
+     .. code-block:: sh
+
+        ================================================================================
+        SeisComP shell
+        ================================================================================
+
+        Welcome to the SeisComP interactive shell. You can get help about
+        available commands with 'help'. 'exit' leaves the shell.
+
+        $ help
+
+   * add the existing scautopick binding profile, *default*, to the station
+     *GE.UGM*:
+
+     .. code-block:: sh
+
+        $ set profile scautopick default GE.UGM
+
+     or to all stations of the network *GE*:
+
+     .. code-block:: sh
+
+        $ set profile scautopick default GE.UGM
+
+   * remove the scautopick binding profile, *default*, from the station *GE.UGM*:
+
+     .. code-block:: sh
+
+        $ remove profile scautopick default GE.UGM
+
+   * exit the shell and get back to the Linux shell:
+
+     .. code-block:: sh
+
+        $ exit
 
 
 Example: global bindings
@@ -568,6 +632,14 @@ Summary
 * Bindings are being read from the database or an XML file.
 
 
+Validation
+----------
+
+After changing configuration the affected modules should be tested, e.g. by
+running with informative debug logging output. You may use :ref:`scdumpcfg` for
+dumping the module an binding parameters into a summary file.
+
+
 .. _concepts_configuration_parameters:
 
 Format of Parameters
@@ -598,13 +670,20 @@ Module and binding configuration files are simple text file where each line is a
 name-value pair for one parameter. The parameter names are case-sensitive. The
 format is a simple as:
 
-.. code-block:: properties
+.. code-block:: param
 
    agencyID = gempa
    recordstream = slink://localhost:18000
 
-In parameter groups indicated by a separating dot (".") the dot separates the group
-from the parameter name.
+Spaces in string parameters must be protected by quotes:
+
+.. code-block:: param
+
+   eventlist.filter.types.blacklist = "not existing"
+
+Parameter groups are indicated by a separating dot ("."). The dot separates the
+group from the parameter name or other groups. The item after the last dot is
+the parameter.
 
 Later assignments of parameters override previous ones so the order of lines in the
 configuration file is important. The file is parsed top-down.
@@ -682,6 +761,30 @@ Values can extend over multiple lines if a backslash is appended to each line
                    yellow,\
                    green, blue,\
                    indigo, violet
+
+
+Control characters
+------------------
+
+A limited set of control characters is allowed within strings.
+
+.. csv-table::
+   :widths: 10 90
+   :align: left
+   :delim: ;
+
+   \\n; new line
+   \\t; tab
+
+Example of a string consisting of two lines:
+
+.. code-block:: properties
+
+   a = "123 456"\n"This is a new line with text"
+
+The control characters must be outside of double quotes. Everything **within**
+double quotes will **not** be decoded. Hence, "\n" will end up as the string
+"\n" and not a new line character.
 
 
 Namespaces

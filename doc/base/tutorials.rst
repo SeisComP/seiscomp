@@ -22,6 +22,7 @@ For details, see the other chapters of this manual.
    /base/tutorials/processing
    /base/tutorials/geofon_waveforms
    /base/tutorials/servefdsnws
+   /base/tutorials/magnitude-regionalization
    /base/tutorials/waveformplayback
    /base/tutorials/help
 

@@ -15,15 +15,15 @@ You will enable processing by your existing local SeisComP system.
 
 :Afterwards/Results/Outcomes:
 
-   The new station is used for automatic real-time data processing.
+  * The new station is used for automatic real-time data processing.
 
 :Time range estimate:
 
-  10 minutes.
+  * 10 minutes.
 
 :Related tutorial(s):
 
-  :ref:`tutorials_addstation`
+  * :ref:`tutorials_addstation`
 
 -----------
 
