@@ -936,7 +936,15 @@ bool Config::parseRValue(const std::string& entry,
 		}
 
 		if ( escapeMode ) {
-			parsedEntry.push_back(*it);
+			if ( !rawMode && *it == 'n' ) {
+				parsedEntry.push_back('\n');
+			}
+			else if ( !rawMode && *it == 't' ) {
+				parsedEntry.push_back('\t');
+			}
+			else {
+				parsedEntry.push_back(*it);
+			}
 			escapeMode = false;
 		}
 		else if ( *it == '"' ) {
