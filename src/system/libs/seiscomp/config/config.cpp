@@ -73,7 +73,8 @@ namespace Config {
 namespace {
 
 std::string CONF_NULL_OBJECT = "___CONFIG_NULL_OBJECT___";
-std::string quotable = "\\\t\n\v\f\r ,${}";
+std::string controls = "\n\t";
+std::string quotable = controls + "\\\v\f\r ,=${}";
 
 std::string stripEscapes(const std::string &str) {
 	std::string tmpString(str);
@@ -98,11 +99,30 @@ std::string escapeDoubleQuotes(const std::string &str) {
 	return tmpString;
 }
 
+std::string splitControls(const std::string &str) {
+	std::string out;
+	for ( size_t i = 0; i < str.size(); ++i ) {
+		if ( str[i] == '\n' ) {
+			out += "\"\\n\"";
+		}
+		else if ( str[i] == '\t' ) {
+			out += "\"\\t\"";
+		}
+		else {
+			out += str[i];
+		}
+	}
+	return out;
+}
+
 std::string quote(const std::string &str) {
-	if ( str.empty() )
+	if ( str.empty() ) {
 		return "\"\"";
-	if ( str.find_first_of(quotable) != std::string::npos )
-		return std::string("\"") + str + "\"";
+	}
+
+	if ( str.find_first_of(quotable) != std::string::npos ) {
+		return std::string("\"") + splitControls(str) + "\"";
+	}
 
 	return str;
 }
@@ -952,7 +972,9 @@ bool Config::parseRValue(const std::string& entry,
 			if ( rawMode ) {
 				parsedEntry.push_back(*it);
 			}
-			else if ( next != entry.end() && *next == '"' ) tokens.push_back("");
+			else if ( next != entry.end() && *next == '"' ) {
+				tokens.push_back("");
+			}
 		}
 		else if ( *it == '$' && !stringMode && resolveReferences ) {
 			std::string variable;
