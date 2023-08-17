@@ -81,7 +81,7 @@ The full procedure to create the seiscomp database:
 .. code-block:: sh
 
    user@host:~$ sudo mysql -u root -p
-        CREATE DATABASE seiscomp CHARACTER SET utf8 COLLATE utf8_bin;
+        CREATE DATABASE seiscomp CHARACTER SET utf8mb4;
         grant usage on seiscomp.* to sysop@localhost identified by 'sysop';
         grant all privileges on seiscomp.* to sysop@localhost;
         grant usage on seiscomp.* to sysop@'%' identified by 'sysop';
@@ -91,6 +91,12 @@ The full procedure to create the seiscomp database:
 
    user@host:~$ mysql -u sysop -p seiscomp < ~/seiscomp/share/db/mysql.sql
 
+.. note::
+
+   If character set 'utf8mb4' is not supported by your specific database server
+   version then use the old 'utf8' format. For historical reasons, SeisComP
+   would use then the 'utf8_bin' collation. The full statement looks as
+   follows: :code:`CREATE DATABASE seiscomp CHARACTER SET utf8 COLLATE utf8_bin`.
 
 .. _getting-started-postgresql:
 
