@@ -40,6 +40,13 @@ All notable changes to SeisComP are documented here.
     -   Add a Magnitudes section to the documentation of concepts.
 -   documentation
     -   Add subsection on locators to Concepts section.
+    -   Add a tutorial on regionalization of magnitudes and aliases.
+-   scesv
+    -   Show event type information.
+-   scquery
+    -   Add option `--print-query-only`.
+-   scdumpcfg
+    -   Fix reading bindings from database without requiring a messaging system.
 
 ## 5.5.3
 
@@ -55,9 +62,14 @@ All notable changes to SeisComP are documented here.
     -   Show surface wave onsets in amplitude view
 -   scmag
     -   Fix description of `minimumArrivalWeight` for scconfig
+-   scdumpcfg
+    -   Fix loading of shadowed application plugins, e.g. scqc, which
+        caused issues when loading application specific plugins.
 -   bindings2cfg
     -   Fix help text
-    -   Add commandline option `--create-notifier`
+    -   Add commandline option `--create-notifier`. The notifiers can be added
+        to the database using scdb allowing to import bindings while bypassing
+        the messaging system.
 
 ## 5.5.2
 
@@ -67,11 +79,11 @@ All notable changes to SeisComP are documented here.
     -   Fix concurrent recordstream termination when data still available
     -   Fix invalid ResourceUri for QuakeML arrival export
 -   scolv
-    -   Announced feature of auxiliary channels from version 5.5.0 has been added
-        which was left out accidentally.
-    -   Select previous and next event buttons now consider only visible events in
-        the event list. This is now similar to switching to the event list and
-        selecting the event previous or next to the current event.
+    -   Announced feature of auxiliary channels from version 5.5.0 has been
+        added which was left out accidentally.
+    -   Select previous and next event buttons now consider only visible events
+        in the event list. This is now similar to switching to the event list
+        and selecting the event previous or next to the current event.
 -   screloc
     -   Be more informative at INFO log level (--ep option)
 

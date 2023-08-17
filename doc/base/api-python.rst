@@ -4669,7 +4669,7 @@ AuxDevice
 
    Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
 
-   This type describes an auxilliary device
+   This type describes an auxiliary device
 
    **Parents**:
 
@@ -4905,7 +4905,7 @@ AuxSource
 
    Inherits :ref:`Object <api-python-datamodel-object>`.
 
-   This type describes a channel of an auxilliary device
+   This type describes a channel of an auxiliary device
 
    **Parents**:
 
