@@ -41,6 +41,40 @@ All notable changes to SeisComP are documented here.
 -   documentation
     -   Add subsection on locators to Concepts section.
 
+## 5.5.3
+
+-   trunk
+    -   Add more debug output to magnitudes ML, MLv and MLc
+    -   Fix crash if distance for MLv.logA0 is out of range
+    -   Fix reading of MLc magnitude correction factors of
+        regionalization profiles
+    -   Fix messaging re-connection deadlock that causes applications
+        to hang forever after the messaging connection has been
+        re-established.
+-   GUI
+    -   Show surface wave onsets in amplitude view
+-   scmag
+    -   Fix description of `minimumArrivalWeight` for scconfig
+-   bindings2cfg
+    -   Fix help text
+    -   Add commandline option `--create-notifier`
+
+## 5.5.2
+
+```SC_API_VERSION 15.6.0```
+
+-   trunk
+    -   Fix concurrent recordstream termination when data still available
+    -   Fix invalid ResourceUri for QuakeML arrival export
+-   scolv
+    -   Announced feature of auxiliary channels from version 5.5.0 has been added
+        which was left out accidentally.
+    -   Select previous and next event buttons now consider only visible events in
+        the event list. This is now similar to switching to the event list and
+        selecting the event previous or next to the current event.
+-   screloc
+    -   Be more informative at INFO log level (--ep option)
+
 ## 5.5.1
 
 -   scxmldump
