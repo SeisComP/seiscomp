@@ -2,6 +2,21 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.4
+
+-   scamp
+    -   Fix bug which prevented passing the origin information to
+        the amplitude computation.
+-   MYSQL
+    -   Fix deprecation warning of the libmysqlclient w.r.t. `MYSQL_OPT_RECONNECT`
+-   trunk
+    -   Output full database schema version including patch version
+    -   Fix logging memory leak when the application class is initialized multiple
+        times, usually in code implementing tests.
+    -   Minor documentation fixes for stdloc
+-   scrttv
+    -   Fix mouse selection of mode drop down menu
+
 ## 5.5.3
 
 -   trunk
@@ -19,6 +34,11 @@ All notable changes to SeisComP are documented here.
 -   scdumpcfg
     -   Fix loading of shadowed application plugins, e.g. scqc, which
         caused issues when loading application specific plugins.
+-   bindings2cfg
+    -   Fix help text
+    -   Add commandline option `--create-notifier`. The notifiers can be added
+        to the database using scdb allowing to import bindings while bypassing
+        the messaging system.
 
 ## 5.5.2
 
