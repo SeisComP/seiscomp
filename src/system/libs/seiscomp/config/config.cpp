@@ -128,6 +128,17 @@ std::string quote(const std::string &str) {
 }
 
 
+std::ostream &escapeName(std::ostream &os, const std::string &name) {
+	for ( char ch : name ) {
+		if ( quotable.find(ch) != std::string::npos )
+			os << '\\';
+		os << ch;
+	}
+
+	return os;
+}
+
+
 struct DefaultLogger : Logger {
 	void log(LogLevel l, const char *filename, int line, const char *msg) {
 		if ( filename && *filename != '\0' )
@@ -336,9 +347,7 @@ bool Config::readInternalConfig(const std::string &file,
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool Config::writeConfig(const std::string &filename, bool localOnly,
-                         bool multilineLists)
-{
-	SymbolTable::iterator it = _symbolTable->begin();
+                         bool multilineLists) {
 	int firstLine = true;
 
 	std::ostream *os;
@@ -355,10 +364,9 @@ bool Config::writeConfig(const std::string &filename, bool localOnly,
 		os = &file;
 	}
 
-	for ( ; it != _symbolTable->end(); ++it)
-	{
+	for ( const auto &symbol : *_symbolTable ) {
 		if ( localOnly ) {
-			if ( !(*it)->uri.empty() && (*it)->uri != filename ) {
+			if ( !symbol->uri.empty() && symbol->uri != filename ) {
 				continue;
 			}
 		}
@@ -368,10 +376,10 @@ bool Config::writeConfig(const std::string &filename, bool localOnly,
 		else
 			firstLine = false;
 
-		if ( !(*it)->comment.empty() )
-			*os << (*it)->comment << std::endl;
+		if ( !symbol->comment.empty() )
+			*os << symbol->comment << std::endl;
 
-		writeSymbol(*os, *it, multilineLists);
+		writeSymbol(*os, symbol, multilineLists);
 	}
 
 	return true;
@@ -483,11 +491,21 @@ void Config::writeContent(std::ostream &os, const Symbol *symbol,
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void Config::writeSymbol(std::ostream &os, const Symbol *symbol,
-                         bool multilineLists)
-{
-	os << symbol->name << " = ";
+                         bool multilineLists) {
+	escapeName(os, symbol->name) << " = ";
 	writeValues(os, symbol, multilineLists);
 	os << std::endl;
+}
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+std::string Config::escapeIdentifier(const std::string &name) {
+	std::stringstream sstream;
+	escapeName(sstream, name);
+	return sstream.str();
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -517,6 +535,29 @@ const Variables& Config::getVariables() const {
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 std::string Config::escape(const std::string &s) const {
 	return quote(escapeDoubleQuotes(s));
+}
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Config &Config::operator=(Config &&other) {
+	// Move common attributes
+	_stage = std::move(other._stage);
+	_line = std::move(other._line);
+	_resolveReferences = std::move(other._resolveReferences);
+	_fileName = std::move(other._fileName);
+	_namespaces = std::move(other._namespaces);
+	_namespacePrefix = std::move(other._namespacePrefix);
+	_defaultNamespacePrefix = std::move(other._defaultNamespacePrefix);
+
+	_logger = other._logger; other._logger = nullptr;
+	_symbolTable = other._symbolTable; _symbolTable = nullptr;
+	_trackVariables = std::move(other._trackVariables);
+	_variables = std::move(other._variables);
+
+	return *this;
 }
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -887,7 +928,11 @@ std::vector<std::string> Config::tokenize(const std::string& entry)
 			}
 		}
 		else if ( escapeMode ) {
-			nextToken.push_back(*previousIt);
+			// The first token either defines a variable name or a command and
+			// is not going to be parsed further. So the escape character must
+			// be removed.
+			if ( !tokens.empty() )
+				nextToken.push_back(*previousIt);
 			nextToken.push_back(*it);
 			escapeMode = false;
 		}

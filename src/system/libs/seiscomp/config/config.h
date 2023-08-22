@@ -223,6 +223,12 @@ class SC_CONFIG_API Config {
 		static void writeSymbol(std::ostream &os, const Symbol *symbol,
 		                        bool multilineLists = false);
 
+		/**
+		 * @brief Escapes an identifier (symbol name).
+		 * @return The escaped string
+		 */
+		static std::string escapeIdentifier(const std::string &);
+
 		/** Enables/disables tracking of configuration variables.
 		 */
 		void trackVariables(bool enabled);
@@ -238,6 +244,13 @@ class SC_CONFIG_API Config {
 		 * @return The escaped string inside double quotes if necessary
 		 */
 		std::string escape(const std::string &) const;
+
+
+	// ------------------------------------------------------------------------
+	// Operators
+	// ------------------------------------------------------------------------
+	public:
+		Config &operator=(Config &&other);
 
 
 	// ----------------------------------------------------------------------
