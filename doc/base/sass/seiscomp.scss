@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "theme.scss";
 @import "font-roboto.scss";
 
@@ -108,8 +109,8 @@ body {
 		}
 
 		.content {
-			margin-top: $contentSpacing/2;
-			margin-bottom: $contentSpacing/2;
+			margin-top: math.div($contentSpacing, 2);
+			margin-bottom: math.div($contentSpacing, 2);
 		}
 
 		.related {
@@ -133,7 +134,7 @@ body {
 			          user-select: none;
 
 			&.pull-right {
-				margin-left: $contentSpacing/2;
+				margin-left: math.div($contentSpacing, 2);
 			}
 
 			&#sidebar-toggle {
@@ -143,7 +144,7 @@ body {
 
 				&:before {
 					content: '|';
-					margin-right: $contentSpacing/2;
+					margin-right: math.div($contentSpacing, 2);
 				}
 			}
 		}
@@ -167,7 +168,7 @@ body {
 .container {
 	max-width: 100%;
 	width: $pageMaxWidth;
-	margin: $contentMargin/2 auto;
+	margin: math.div($contentMargin, 2) auto;
 	position: relative;
 	overflow: hidden;
 }
@@ -330,8 +331,8 @@ blockquote {
 	font-style: normal;
 	margin-left: 0;
 	padding-left: 0.75em;
-	color: mix($primaryForeground, $infoBackground, 50);
-	border-left: 0.25em solid mix($primaryForeground, $infoBackground, 50);
+	color: mix($primaryForeground, $infoBackground, 50%);
+	border-left: 0.25em solid mix($primaryForeground, $infoBackground, 50%);
 }
 
 // ----------------------------------------------------------------------------
@@ -361,17 +362,18 @@ blockquote {
 		flex-wrap: wrap;
 		justify-content: flex-start;
 		align-items: flex-start;
-		margin: -$contentSpacing / 2;
+		margin: math.div(-$contentSpacing, 2);
 
 		&.inverted {
 			background: $secondaryBackground;
 			color: $secondaryForeground;
 			margin: 0 (-$contentSpacing);
-			padding: $contentSpacing / 2;
+			padding: math.div($contentSpacing, 2);
 		}
 
 		> * {
-			padding: $contentSpacing / 2;
+			padding: math.div($contentSpacing, 2);
+			margin: 0;
 			box-sizing: border-box;
 			flex: 0 0 auto;
 			display: block;
@@ -389,13 +391,13 @@ blockquote {
 			}
 		}
 
-		> .figure {
+		> figure {
 			> img {
 				width: 100%;
 				box-shadow: 0 .25em 0.5em -.125em rgba(10,10,10,.25),0 0 0 1px rgba(10,10,10,.05);
 			}
 
-			> .caption {
+			> figcaption {
 				text-align: center;
 				margin-bottom: 0;
 			}
@@ -448,8 +450,10 @@ blockquote {
 			top: 2rem;
 		}
 
-		> &:first-child {
-			margin-top: 0;
+		> * {
+			&:first-child {
+				margin-top: 0;
+			}
 		}
 
 		width: $sidebarWidth;
@@ -530,7 +534,7 @@ blockquote {
 // Related / navigation
 // ----------------------------------------------------------------------------
 .related {
-	padding: $contentMargin/2 $contentMargin;
+	padding: math.div($contentMargin, 2) $contentMargin;
 	background-color: $invertedBackground2;
 	color: white;
 	font-weight: normal;
@@ -581,7 +585,7 @@ div.highlight {
 	background: $codeBackground;
 
 	> * {
-		margin: $contentSpacing/1.6;
+		margin: math.div($contentSpacing, 1.6);
 	}
 }
 
@@ -617,11 +621,11 @@ dl {
 		dt {
 			background-color: #f0f0f0;
 			border: 1px solid #d0d0d0;
-			padding: 0 $contentSpacing/2;
+			padding: 0 math.div($contentSpacing, 2);
 		}
 
 		dd {
-			margin-left: $contentSpacing/2;
+			margin-left: math.div($contentSpacing, 2);
 		}
 	}
 
@@ -652,15 +656,15 @@ div.admonition {
 	margin: $contentSpacing 0;
 
 	> * {
-		margin: $contentSpacing/2 0;
+		margin: math.div($contentSpacing, 2) 0;
 
 		//line-height: 1.2em !important;
 		&:first-child {
-			margin-top: $contentSpacing/2;
+			margin-top: math.div($contentSpacing, 2);
 		}
 
 		&:last-child {
-			margin-bottom: $contentSpacing/2;
+			margin-bottom: math.div($contentSpacing, 2);
 		}
 	}
 
@@ -711,7 +715,7 @@ table {
 			color: $tableHeaderForeground;
 			background-color: $tableHeaderBackground;
 			text-align: left;
-			padding: $contentSpacing/2;
+			padding: math.div($contentSpacing, 2);
 
 			> * {
 				&:first-child {
@@ -731,7 +735,7 @@ table {
 				border-right: 0;
 			}
 
-			padding: $contentSpacing/2;
+			padding: math.div($contentSpacing, 2);
 
 			> * {
 				&:first-child {
@@ -791,50 +795,35 @@ p {
 	}
 }
 
-dl {
-	&.footnote {
-		font-size: 0.9rem;
+.footnote-list, .citation-list {
+	> .footnote, .citation {
+		> .label {
+			background: $footnoteBracketsBackground;
+                        color: $footnoteBracketsForeground;
+                        border-radius: 1em;
+                        display: inline-block;
+                        text-align: center;
+                        padding: 0.25em;
+                        font-weight: normal;
+                        min-width: 1em;
+                        line-height: 1em;
+			float: left;
 
-		dt {
-			&.label {
-				float: left;
-
-				span {
-					line-height: 1.3em;
-					margin-top: 0.1em;
-
-					&.brackets {
-						background: $footnoteBracketsBackground;
-						color: $footnoteBracketsForeground;
-						border-radius: 1em;
-						display: inline-block;
-						padding: 0 0.5em;
-						font-weight: normal;
-						text-align: center;
-
-						a {
-							color: inherit;
-						}
-					}
-				}
+			> a {
+				color: inherit;
 			}
+
+                        > .fn-bracket {
+                                display: none;
+                        }
 		}
 
-		dd {
+		> p {
 			margin-left: 2.5em;
-
-			p {
-				line-height: 1.5em;
-				&:first-child {
-					margin-top: 0;
-				}
-				&:last-child {
-					margin-bottom: 0;
-				}
-			}
 		}
 	}
 }
+
 
 a {
 	&.footnote-reference {
@@ -844,9 +833,15 @@ a {
 			border-radius: 1em;
 			display: inline-block;
 			text-align: center;
-			padding: 0 0.5em;
+			padding: 0.25em;
 			font-size: 0.8em;
 			font-weight: normal;
+			min-width: 1em;
+			line-height: 1em;
+
+			> .fn-bracket {
+				display: none;
+			}
 		}
 	}
 }
