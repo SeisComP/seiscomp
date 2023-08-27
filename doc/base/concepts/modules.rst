@@ -14,54 +14,27 @@ This document describes the difference between command-line and daemon modules.
 Overview
 ========
 
-SeisComP is not a single executable but it provides a set of modules which
+SeisComP is not a single executable but it provides a set of :term:`trunk` and
+:term:`standalone <standalone module>` :term:`modules <module>`. Trunk modules
 can be
 
-* :ref:`Command-line modules <concepts_modules_commandline>`
+* :ref:`Command-line modules <concepts_modules_commandline>`,
 * :ref:`Daemon modules <concepts_modules_daemon>`.
 
-A :term:`module` is :ref:`configured by its configuration files <concepts_modules_config>` either to be used directly or to
-generate its native configuration. Modules that need to convert the configuration or do not
-use the default configuration options (see below) are called :term:`standalone modules <standalone module>`.
+Modules are :ref:`configured by configuration files <concepts_modules_config>`
+either to be used directly or to generate its native configuration. Modules that
+need to convert the configuration or do not use the default configuration
+options (see below) are called :term:`standalone modules <standalone module>`.
 All other modules are called :term:`trunk` modules.
 
 Examples for standalone modules are :ref:`seedlink`, :ref:`slarchive` and :ref:`slmon`.
 
-
-.. _concepts_modules_commandline:
-
-Command-Line Tools
-==================
-
-Command-line modules can be executed on demand from the SHELL command-line. These
-modules can be utilities or :term:`GUIs <GUI>`, e.g.
-
-.. code-block:: sh
-
-   seiscomp exec scolv [options]
-   scolv [options]
-
-Command-line modules are found in $SEISCOMP_ROOT/bin but they are **NOT** listed
-when executing
-
-.. code-block:: sh
-
-   seiscomp list modules
-
-Using options like *-h* the list of available command-line options can be learned.
-Debugging information can be obtained during runtime using the --debug option:
-
-
-.. code-block:: sh
-
-   scbulletin -h
-   scbulletin --debug [more options]
-
 .. note::
 
-   In order to execute modules without *seiscomp exec*, the SeisComP environment
-   variable must be known to the system. The environment variables and their values
-   can be printed giving the full path to the *seiscomp* script:, e.g.
+   In order to start or execute modules without :command:`seiscomp exec`
+   (see below), the |scname| SHELL environment variables must be known to the
+   system. The variables and their values can be printed giving the full path to
+   the :ref:`seiscomp` tool. Example:
 
    .. code-block:: sh
 
@@ -73,8 +46,10 @@ Debugging information can be obtained during runtime using the --debug option:
 Daemon Tools
 ============
 
-Daemon tools can run in the background, e.g. for automatic data acquisition or
-processing. The names of all daemon modules are listed when executing
+Daemon tools are |scname| modules that can run automatically in the background
+without user interaction, e.g., for automatic data acquisition or data
+processing. The names of all daemon modules are listed when executing the
+:ref:`seiscomp` tool with :command:`list modules`:
 
 .. code-block:: sh
 
@@ -86,9 +61,67 @@ Daemon modules can be started to run in the background:
 
    seiscomp start scautopick
 
-When starting a daemon module all verbosity output is stored in @LOGDIR@ or
-$SEISCOMP_ROOT/var/log. Daemon modules can also be executed as
-:ref:`command-line tools <concepts_modules_commandline>`.
+When starting a daemon module, all verbosity output is logged to
+:ref:`log files <concepts_modules_logging>`. Daemon modules can also be executed
+as :ref:`command-line tools <concepts_modules_commandline>`.
+
+
+.. _concepts_modules_commandline:
+
+Command-Line Tools
+==================
+
+All non-daemon modules are command-line modules. These command-line modules
+and most :ref:`daemon modules <concepts_modules_daemon>` can be executed on
+demand from the SHELL command-line. These modules can also be
+utilities or :term:`graphical user interfaces (GUIs) <GUI>`.
+For executing use the full path to the :ref:`seiscomp` tool or, when the
+|scname| environment is known, just call the module name along with command-line
+options, e.g.
+
+.. code-block:: sh
+
+   seiscomp exec scolv [options]
+   scolv [options]
+
+Command-line modules are found in :file:`@ROOTDIR@/bin/` but they are **NOT**
+listed when executing
+
+.. code-block:: sh
+
+   seiscomp list modules
+
+Using options like :option:`-h` the list of available command-line options can
+be learned.
+
+.. code-block:: sh
+
+   scbulletin -h
+
+In addition, any module configuration parameter can be specified on
+the command line overriding the configured parameter. For indicating that a
+module configuration parameter is set on the command line separate the value
+from the parameter by '=' and provide the full set of sections separated by '.'.
+Example:
+
+.. code-block:: sh
+
+   scolv --picker.loadAllPicks=true
+
+When executing a module, all verbosity output is logged to
+:ref:`log files <concepts_modules_logging>`. The logging level can be controlled
+by configuration or by the command-line option :option:`-v`.
+
+.. code-block:: sh
+
+   scbulletin -vvvv
+
+Detailed debugging information can also be printed on the command line during
+runtime using the :option:`--debug` option:
+
+.. code-block:: sh
+
+   scbulletin --debug
 
 
 .. _concepts_modules_config:
@@ -96,9 +129,10 @@ $SEISCOMP_ROOT/var/log. Daemon modules can also be executed as
 Configuration
 =============
 
-Each :term:`standalone module` tries to read from three configuration files
-whereas :term:`trunk` modules try to read the six files. Note that configuration
-parameters defined earlier are overwritten if defined in files read in later:
+Each :term:`standalone module` tries to read from three module configuration
+files whereas :term:`trunk` modules try to read the six files. Note that
+configuration parameters defined earlier are overwritten if defined in files
+read in later:
 
 +-----------------------------------------+------------+----------------+
 | File                                    | Standalone | Trunk          |
@@ -116,13 +150,32 @@ parameters defined earlier are overwritten if defined in files read in later:
 |        ~/.seiscomp/module.cfg           |  X         |    X           |
 +-----------------------------------------+------------+----------------+
 
-The :ref:`configuration section<global-configuration>` describes all available
-configuration parameters for a trunk module. Not all modules make use of all
-available parameters because they may be disabled, e.g., the messaging component.
-So the configuration of the messaging server is disabled too.
+In addition to the module configuration files some modules such as
+:ref:`seedlink` or :ref:`scautopick` read :term:`bindings <binding>`. Bindings
+provide parameters specific to stations and are configured per-station bindings
+or profiles used for multiple stations.
+
+The :ref:`global configuration section <global-configuration>` describes all
+available global configuration parameters for a trunk module. Modules typically
+do not make use of all available global parameters because they may be disabled,
+e.g., the messaging component. So the configuration of the messaging server is disabled, too.
 
 The concept section :ref:`Configuration <concepts_configuration>` provides more
 details about configurations.
+
+
+.. _concepts_modules_logging:
+
+Logging
+=======
+
+Whenever operated, modules report the state of operation to log files. Trunk
+modules report the module and the start up log to :file:`@LOGDIR@/[module].log` and
+:file:`@ROOTDIR@/var/log/[module].log`, respectively. Standalone modules log to
+:file:`@ROOTDIR@/var/log/[module].log` only. The log files are rotated and the
+level of detail can be configured by :confval:`logging.level`. More parameters
+in :confval:`logging.*` provide more control over logging, e.g., the log file
+rotation.
 
 
 .. _concepts_modules_aliaes:
@@ -130,8 +183,8 @@ details about configurations.
 Alias Modules
 =============
 
-Many :term:`trunk` and :term:`standalone modules` allow generating aliases as
-symbolic links to another module.
+Many :term:`trunk` and :term:`standalone modules <standalone module>` allow
+generating aliases as symbolic links to another module.
 These aliases are useful for running multiple instances of the same module with
 different configuration.
 
