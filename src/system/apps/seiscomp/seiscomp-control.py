@@ -732,7 +732,7 @@ def on_status_help(_):
 
 def on_print(args, _):
     if len(args) < 1:
-        error("expected argument: {crontab|env}")
+        error("expected argument: {crontab|env|variables}")
         return 1
 
     if args[0] == "crontab":
@@ -760,17 +760,48 @@ def on_print(args, _):
         )
         if os.path.isfile(hostenv):
             print(f"source {hostenv}")
+    elif args[0] == "variables":
+        try:
+            import seiscomp.system
+        except:
+            # unavailable without trunk installation, e.g., seedlink-only
+            error("wrong argument: variables is unavailable without trunk installation")
+            return 1
+
+        print(
+            f"@HOMEDIR@          : {seiscomp.system.Environment.Instance().homeDir()}"
+        )
+        print(
+            f"@ROOTDIR@          : {seiscomp.system.Environment.Instance().installDir()}"
+        )
+        print(
+            f"@SYSTEMCONFIGDIR@  : {seiscomp.system.Environment.Instance().appConfigDir()}"
+        )
+        print(
+            f"@DEFAULTCONFIGDIR@ : {seiscomp.system.Environment.Instance().globalConfigDir()}"
+        )
+        print(
+            f"@KEYDIR@           : {seiscomp.system.Environment.Instance().appConfigDir()}/key"
+        )
+        print(
+            f"@DATADIR@          : {seiscomp.system.Environment.Instance().shareDir()}"
+        )
+        print(
+            f"@CONFIGDIR@        : {seiscomp.system.Environment.Instance().configDir()}"
+        )
+        print(f"@LOGDIR@           : {seiscomp.system.Environment.Instance().logDir()}")
     else:
-        error("wrong argument: {crontab|env} expected")
+        error("wrong argument: {crontab|env|variables} expected")
         return 1
 
     return 0
 
 
 def on_print_help(_):
-    print("seiscomp print {crontab|env}")
-    print(" crontab: prints crontab entries of all registered or given modules.")
+    print("seiscomp print {crontab|env|variables}")
+    print(" crontab: suggests crontab entries of all registered or given modules.")
     print(" env: prints environment variables necessary to run SeisComP modules.")
+    print(" variables: prints internal SeisComP variables.")
     print()
     print("Examples:")
     print("Source SC environment into current bash session")

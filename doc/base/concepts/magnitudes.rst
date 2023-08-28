@@ -66,8 +66,8 @@ When using binding profiles, all referencing stations will be affected equally
 which is typically not intended. In contrast, applying station bindings requires
 to set up many bindings which may not be intended either.
 
-Therefore, you may add lines to the global modules configuration
-:ref:`global.cfg` where one line corresponds to one station with one magnitude
+Therefore, you may add lines to the global module configuration in
+:file:`global.cfg` where one line corresponds to one station with one magnitude
 and the corresponding correction parameter. The groups and the name of the
 parameters are identical to the global bindings parameters. All lines start with
 "*module.trunk*". Example for an offset correction of
@@ -116,7 +116,7 @@ Network Magnitudes
 Network magnitudes are computed automatically by :ref:`scmag` or interactively
 by :ref:`scolv` from station magnitudes based on averaging station magnitudes.
 The averaging methods applied by :ref:`scmag` are configurable by
-:ref:`magnitudes.average`.
+:confval:`magnitudes.average`.
 
 
 Moment Magnitudes
@@ -125,9 +125,9 @@ Moment Magnitudes
 Moment magnitudes can be derived from all other network magnitudes by mapping of
 the original network magnitude, e.g., *Mx*, to a new moment magnitude *Mw(Mx)*.
 The mapping function can be configured within a magnitude type profile for all
-original magnitude types except :term:`mB < magnitude, derived mB (Mw(mB))>` and
+original magnitude types except :term:`mB <magnitude, derived mB (Mw(mB))>` and
 :term:`Mwp <magnitude, derived Mwp (Mw(Mwp))>` in the global module configuration.
-Any mapping configuration for :term:`mB < magnitude, derived mB (Mw(mB))>` and
+Any mapping configuration for :term:`mB <magnitude, derived mB (Mw(mB))>` and
 :term:`Mwp <magnitude, derived Mwp (Mw(Mwp))>` is ignored since a hard-coded
 mapping applied.
 

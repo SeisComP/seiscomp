@@ -408,6 +408,10 @@ print(
 # Collect doc directories from source tree
 source_dir = os.path.abspath(os.path.join(base_dir, "..", "src", "base"))
 doc_dirs = list(find_doc_dirs(source_dir))
+
+source_dir = os.path.abspath(os.path.join(base_dir, "..", "src", "system"))
+system_dirs = list(find_doc_dirs(source_dir))
+doc_dirs += system_dirs
 print(
     f"Using source code repo from '{source_dir}' (#doc dirs: {doc_dirs})",
     file=sys.stderr,

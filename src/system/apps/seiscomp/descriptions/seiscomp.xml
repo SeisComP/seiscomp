@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<seiscomp>
+	<module name="seiscomp" category="Utilities"  standalone="true">
+		<description>SeisComP system control utility</description>
+		<command-line>
+			<synopsis>
+				seiscomp [flags] command(s) [argument(s)]
+			</synopsis>
+			<group name="Flags">
+				<option flag="" long-flag="asroot" argument="" publicID="">
+					<description>
+						Allow running a command as root.
+					</description>
+				</option>
+				<option flag="" long-flag="csv" argument="" publicID="">
+					<description>
+						Print output as csv in machine-readable format.
+					</description>
+				</option>
+				<option flag="i" long-flag="interactive" argument="" publicID="">
+					<description>
+					Interactive mode: Allow deleting files interactively when
+					removing aliases.
+					</description>
+				</option>
+				<option flag="" long-flag="wait" argument="arg" publicID="">
+					<description>
+						Define a timeout in seconds for acquiring the seiscomp lock
+						file, e.g. `seiscomp --wait 10 update-config`.
+					</description>
+				</option>
+			</group>
+		</command-line>
+	</module>
+</seiscomp>

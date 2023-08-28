@@ -123,6 +123,10 @@ runtime using the :option:`--debug` option:
 
    scbulletin --debug
 
+When starting a daemon module all verbosity output is stored in :file:`@LOGDIR@`
+or :file:`$SEISCOMP_ROOT/var/log`. Daemon modules can also be executed as
+:ref:`command-line tools <concepts_modules_commandline>`.
+
 
 .. _concepts_modules_config:
 
@@ -151,14 +155,15 @@ read in later:
 +-----------------------------------------+------------+----------------+
 
 In addition to the module configuration files some modules such as
-:ref:`seedlink` or :ref:`scautopick` read :term:`bindings <binding>`. Bindings
-provide parameters specific to stations and are configured per-station bindings
-or profiles used for multiple stations.
+:ref:`seedlink` or :ref:`scautopick` consider :term:`bindings <binding>`.
+Bindings provide parameters specific to stations. They are configured as
+per-station bindings or profiles used for multiple stations.
 
 The :ref:`global configuration section <global-configuration>` describes all
 available global configuration parameters for a trunk module. Modules typically
 do not make use of all available global parameters because they may be disabled,
-e.g., the messaging component. So the configuration of the messaging server is disabled, too.
+e.g., the messaging component. So the configuration of the messaging server is
+disabled, too.
 
 The concept section :ref:`Configuration <concepts_configuration>` provides more
 details about configurations.
@@ -188,37 +193,7 @@ generating aliases as symbolic links to another module.
 These aliases are useful for running multiple instances of the same module with
 different configuration.
 
-Alias modules can be created using the :ref:`seiscomp` script by providing the 
-options :option:`alias create` along with the name of the alias and the
-corresponding module. Example:
-
-.. code-block:: sh
-
-   seiscomp alias create l1autopick scautopick
-   
-where *l1autopick* is the alias name and :ref:`scautopick` is the name of the
-corresponding linked module.
-
-.. warning::
-
-   The length of alias names for modules considering
-   :ref:`bindings<global_bindings_config>` is strictly limited to 20 characters.
-
-Alias modules provide the same
-:ref:`module and bindings configuration <concepts_configuration-configs>`
-parameters as the linked module and they must be configured separately.
-
-Alias modules can be removed along with generated links. Example:
-
-.. code-block:: sh
-
-   seiscomp alias remove l1autopick
-
-Without further options, module and bindings configurations will be preserved.
-These configurations can be interactively removed using :option:`--interactive`.
-Example:
-
-.. code-block:: sh
-
-   seiscomp --interactive alias remove l1autopick
-
+Alias modules can be created or removed using the :ref:`seiscomp` tool by
+providing the commands :command:`alias create` or :command:`alias remove`,
+respectively. Read the documentation of :ref:`seiscomp <sec_seiscomp_aliases>`
+for the details.
