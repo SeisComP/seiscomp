@@ -28,6 +28,9 @@ All notable changes to SeisComP are documented here.
         1990. The change systematically reduces magnitudes by 0.13 when making
         use of amplitudes measured on waveforms corrected for Wood-Anderson
         seismometers with default.
+    -   Remove `MYSQL_OPT_RECONNECT` option from MYSQL database driver to get
+        rid of the deprecation warning by newer MYSQL client library versions.
+        The automatic reconnect has been added to the driver code instead.
 -   GUI
     -   Renamed configuration variables `picker.auxilliary.*` to
         `picker.auxiliary.*`. Old variable names are not supported anymore.
