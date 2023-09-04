@@ -51,6 +51,12 @@ All notable changes to SeisComP are documented here.
 -   scdumpcfg
     -   Fix reading bindings from database without requiring a messaging system.
 
+## 5.5.4
+
+-   scamp
+    -   Fix bug which prevented passing the origin information to
+        the amplitude computation.
+
 ## 5.5.3
 
 -   trunk
