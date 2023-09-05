@@ -44,12 +44,23 @@ All notable changes to SeisComP are documented here.
 -   documentation
     -   Add subsection on locators to Concepts section.
     -   Add a tutorial on regionalization of magnitudes and aliases.
+    -   Add section on time grammar for configuring time windows, e.g. for
+        measuring amplitudes for magnitudes.
 -   scesv
     -   Show event type information.
 -   scquery
     -   Add option `--print-query-only`.
 -   scdumpcfg
     -   Fix reading bindings from database without requiring a messaging system.
+-   scevtstreams
+    -   Add option `--nslc` for filtering the read phase picks by stream IDs.
+-   Hypo71
+    -   Add file rotator for log file defined by global parameter
+        `hypo71.logFile`.
+    -   Use `hypo71.logFile` consistently with @LOGDIR@/HYPO71.LOG.
+-   seiscomp tool
+    -   Add command `print variables` for printing internal SeisComP variables.
+    -   Add documentation in section Utilities.
 
 ## 5.5.4
 
