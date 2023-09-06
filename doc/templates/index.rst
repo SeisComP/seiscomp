@@ -34,6 +34,7 @@ Please consider :doc:`contributing</base/contributing-docs>` to this documentati
 
    </div>
 
+
 Understanding |scname|
 ######################
 
@@ -51,6 +52,7 @@ Understanding |scname|
    /base/references
    /base/changelog
 
+
 Operating |scname|
 ##################
 
@@ -63,6 +65,7 @@ Operating |scname|
    /base/management
    /base/tutorials
 
+
 Interactive Analysis
 ####################
 
@@ -71,6 +74,7 @@ Interactive Analysis
    :titlesonly:
 
    /gui
+
 
 .. _sec_index_modules:
 
@@ -84,17 +88,24 @@ Modules and Tools
    /modules
    /base/addons
 
-.. _sec_index_extensions:
-
-Extensions and Filters
-######################
-
 .. toctree::
    :maxdepth: 4
    :titlesonly:
 
 ${generator.refs.extensions}
+
+
+.. _sec_index_extensions:
+
+Filter and Time Grammar
+#######################
+
+.. toctree::
+   :maxdepth: 1
+   :titlesonly:
+
    /base/filter-grammar
+   /base/time-grammar
 
 
 .. _sec_index_developers:

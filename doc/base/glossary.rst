@@ -1387,3 +1387,17 @@ Scientific and technical terms
 
    XML
       Extensible Markup Language a version of which is :term:`SCML`.
+
+
+Distance terms
+--------------
+
+.. glossary::
+
+   distance, epicentral
+      The epicentral distance is defined as the shortest distance from a seismic
+      station or any other site to the epicentre of the seismic event.
+
+   distance, hypocentral
+      The hypocentral distance is defined as the shortest distance from a
+      seismic station or any other site to the hypocentre of the seismic event.
