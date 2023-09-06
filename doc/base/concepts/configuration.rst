@@ -670,14 +670,14 @@ Module and binding configuration files are simple text file where each line is a
 name-value pair for one parameter. The parameter names are case-sensitive. The
 format is a simple as:
 
-.. code-block:: param
+.. code-block:: properties
 
    agencyID = gempa
    recordstream = slink://localhost:18000
 
 Spaces in string parameters must be protected by quotes:
 
-.. code-block:: param
+.. code-block:: properties
 
    eventlist.filter.types.blacklist = "not existing"
 

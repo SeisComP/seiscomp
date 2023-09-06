@@ -87,7 +87,7 @@ for separating the region name from the value.
 
 Example for correcting MLv computed at station GE.UGM:
 
-.. code-block:: param
+.. code-block:: properties
 
    module.trunk.GE.UGM.magnitudes.MLv.offset = 0.1, europe:0.2, asia:-0.1
 

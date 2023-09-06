@@ -73,7 +73,7 @@ parameters are identical to the global bindings parameters. All lines start with
 "*module.trunk*". Example for an offset correction of
 :term:`MLv <magnitude, local vertical (MLv)>` measured station GE.UGM:
 
-.. code-block:: param
+.. code-block:: properties
 
    module.trunk.GE.UGM.magnitudes.MLv.offset = 0.1
 

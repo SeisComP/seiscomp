@@ -393,7 +393,7 @@ configuration. Migrate the legacy database parameters and configure the new one:
      * Add the required plugins per queue. Currently only *dbstore* is supported.
        Example for the *production* queue:
 
-       .. code-block:: params
+       .. code-block:: properties
 
           queues.production.plugins = dbstore
 
@@ -406,20 +406,20 @@ configuration. Migrate the legacy database parameters and configure the new one:
          considers the default groups in :confval:`defaultGroups` and simply adds
          new groups in the configuration of queues
 
-         .. code-block:: params
+         .. code-block:: properties
 
             queues.production.groups = ${defaultGroups}, L1PICK, L1LOCATION
 
        * Set groups per queue in :confval:`queues.$name.groups`,
          ignoring groups in :confval:`defaultGroups`
 
-         .. code-block:: params
+         .. code-block:: properties
 
             queues.production.groups = L1PICK, L1LOCATION, AMPLITUDE, PICK, LOCATION, MAGNITUDE, FOCMECH, EVENT, QC, PUBLICATION, GUI, INVENTORY, ROUTING, CONFIG, LOGGING, IMPORT_GROUP, SERVICE_REQUEST, SERVICE_PROVIDE
 
        * Set groups in :confval:`defaultGroups`
 
-         .. code-block:: params
+         .. code-block:: properties
 
             defaultGroups = L1PICK, L1LOCATION, AMPLITUDE, PICK, LOCATION, MAGNITUDE, FOCMECH, EVENT, QC, PUBLICATION, GUI, INVENTORY, ROUTING, CONFIG, LOGGING, IMPORT_GROUP, SERVICE_REQUEST, SERVICE_PROVIDE
 
@@ -433,13 +433,13 @@ configuration. Migrate the legacy database parameters and configure the new one:
      * Add the interface name, currently only *dbstore* is supported. Example for
        a queue names *production*
 
-       .. code-block:: params
+       .. code-block:: properties
 
           queues.production.processors.messages = dbstore
 
      * Add the database parameters which can be used from the legacy configuration
 
-       .. code-block:: params
+       .. code-block:: properties
 
           queues.production.processors.messages.dbstore.driver = mysql
           queues.production.processors.messages.dbstore.read = sysop:sysop@localhost/seiscomp3
@@ -454,7 +454,7 @@ configuration. Migrate the legacy database parameters and configure the new one:
    * Add one or more of the queues to the :confval:`queues` parameter to register
      them by their names
 
-     .. code-block:: params
+     .. code-block:: properties
 
         queues = production, playback
 
@@ -465,7 +465,7 @@ configuration. Migrate the legacy database parameters and configure the new one:
    localhost. The queue name is added to the host by "/". The default queue
    is *production*, e.g.
 
-   .. code-block:: params
+   .. code-block:: properties
 
       connection.server = localhost/production
 
