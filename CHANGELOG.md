@@ -67,6 +67,13 @@ All notable changes to SeisComP are documented here.
 -   scamp
     -   Fix bug which prevented passing the origin information to
         the amplitude computation.
+-   MYSQL
+    -   Fix deprecation warning of the libmysqlclient w.r.t. `MYSQL_OPT_RECONNECT`
+-   trunk
+    -   Output full database schema version including patch version
+    -   Fix logging memory leak when the application class is initialized multiple
+        times, usually in code implementing tests.
+    -   Minor documentation fixes for stdloc
 
 ## 5.5.3
 
