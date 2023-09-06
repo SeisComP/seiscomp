@@ -17,10 +17,10 @@
  * gempa GmbH.                                                             *
  ***************************************************************************/
 
+
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <typename T>
-void Config::add(const std::string& name, const T& value)
-{
+void Config::add(const std::string &name, const T &value) {
 	Symbol symbol;
 	symbol.name = name;
 	symbol.values.push_back(Private::toString(value));
@@ -35,8 +35,7 @@ void Config::add(const std::string& name, const T& value)
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <>
-void Config::add<std::string>(const std::string& name, const std::string& value)
-{
+void Config::add<std::string>(const std::string &name, const std::string &value) {
 	Symbol symbol;
 	symbol.name = name;
 	symbol.values.push_back(value);
@@ -51,12 +50,12 @@ void Config::add<std::string>(const std::string& name, const std::string& value)
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <typename T>
-void Config::add(const std::string& name, const std::vector<T>& values)
-{
+void Config::add(const std::string &name, const std::vector<T> &values) {
 	Symbol symbol;
 	symbol.name = name;
-	for (size_t i = 0; i < values.size(); ++i)
+	for ( size_t i = 0; i < values.size(); ++i ) {
 		symbol.values.push_back(Private::toString(values[i]));
+	}
 	symbol.uri = "";
 
 	_symbolTable->add(symbol);
@@ -68,12 +67,12 @@ void Config::add(const std::string& name, const std::vector<T>& values)
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <>
-void Config::add<std::string>(const std::string& name, const std::vector<std::string>& values)
-{
+void Config::add<std::string>(const std::string &name, const std::vector<std::string> &values) {
 	Symbol symbol;
 	symbol.name = name;
-	for (size_t i = 0; i < values.size(); ++i)
+	for ( size_t i = 0; i < values.size(); ++i ) {
 		symbol.values.push_back(values[i]);
+	}
 	symbol.uri = "";
 
 	_symbolTable->add(symbol);
@@ -85,11 +84,9 @@ void Config::add<std::string>(const std::string& name, const std::vector<std::st
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <typename T>
-bool Config::set(const std::string& name, const T& value)
-{
+bool Config::set(const std::string &name, const T &value) {
 	Symbol* symbol = _symbolTable->get(name);
-	if (!symbol)
-	{
+	if ( !symbol ) {
 		add<T>(name, value);
 		return true;
 	}
@@ -108,21 +105,19 @@ bool Config::set(const std::string& name, const T& value)
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <typename T>
-bool Config::set(const std::string& name, const std::vector<T>& values)
-{
-	Symbol* symbol = _symbolTable->get(name);
-	if (!symbol)
-	{
+bool Config::set(const std::string &name, const std::vector<T> &values) {
+	Symbol *symbol = _symbolTable->get(name);
+	if ( !symbol ) {
 		add<T>(name, values);
 		return true;
 	}
 
 	symbol->values.clear();
-	for (size_t i = 0; i < values.size(); ++i)
+	for ( size_t i = 0; i < values.size(); ++i ) {
 		symbol->values.push_back(Private::toString(values[i]));
+	}
 
 	symbol->uri = "";
-
 	return true;
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -133,13 +128,15 @@ bool Config::set(const std::string& name, const std::vector<T>& values)
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <typename T>
 T Config::get(const std::string& name) const {
-	const Symbol* symbol = _symbolTable->get(name);
-	if (!symbol)
+	const Symbol *symbol = _symbolTable->get(name);
+	if ( !symbol ) {
 		throw OptionNotFoundException(name);
+	}
 
 	T value = T();
-	if (!Private::fromString(value, symbol->values[0]))
+	if ( !Private::fromString(value, symbol->values[0]) ) {
 		throw TypeConversionException(symbol->values[0]);
+	}
 
 	return value;
 }
@@ -151,16 +148,17 @@ T Config::get(const std::string& name) const {
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <typename T>
 std::vector<T> Config::getVec(const std::string& name) const {
-	const Symbol* symbol = _symbolTable->get(name);
-	if (!symbol)
+	const Symbol *symbol = _symbolTable->get(name);
+	if ( !symbol ) {
 		throw OptionNotFoundException(name);
+	}
 
 	std::vector<T> values;
-	for (size_t i = 0; i < symbol->values.size(); ++i)
-	{
+	for ( size_t i = 0; i < symbol->values.size(); ++i ) {
 		T tmp = T();
-		if (!Private::fromString(tmp, symbol->values[i]))
+		if ( !Private::fromString(tmp, symbol->values[i]) ) {
 			throw TypeConversionException(symbol->values[i]);
+		}
 		values.push_back(tmp);
 	}
 
@@ -174,8 +172,7 @@ std::vector<T> Config::getVec(const std::string& name) const {
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <typename T>
-T Config::get(const std::string& name, bool* error) const
-{
+T Config::get(const std::string &name, bool *error) const {
 	*error = false;
 	try {
 		return get<T>(name);
@@ -193,12 +190,12 @@ T Config::get(const std::string& name, bool* error) const
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <typename T>
-bool Config::get(T& value, const std::string& name) const
-{
+bool Config::get(T &value, const std::string &name) const {
 	try {
 		value = get<T>(name);
 		return true;
-	} catch (...) {
+	}
+	catch (...) {
 		return false;
 	}
 }
@@ -210,8 +207,7 @@ bool Config::get(T& value, const std::string& name) const
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 template <typename T>
-std::vector<T> Config::getVec(const std::string& name, bool* error) const
-{
+std::vector<T> Config::getVec(const std::string &name, bool *error) const {
 	*error = false;
 	try {
 		return getVec<T>(name);
