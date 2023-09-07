@@ -74,6 +74,8 @@ All notable changes to SeisComP are documented here.
     -   Fix logging memory leak when the application class is initialized multiple
         times, usually in code implementing tests.
     -   Minor documentation fixes for stdloc
+-   scrttv
+    -   Fix mouse selection of mode drop down menu
 
 ## 5.5.3
 
