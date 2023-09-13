@@ -2,20 +2,58 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.5
+
+**IMPORTANT**: This fixes a regression of scamp introduced with version 5.5.0 which
+               caused scamp to always compute new amplitudes for origin and their
+               arrivals.
+
+-   doc
+    -   Update templates to build with latest Sphinx version. We tested against
+        Sphinx 7.2.2 and required the following packages installed with pip:
+
+        -   sphinx
+        -   m2r2
+        -   sphinxcontrib.bibtex
+
+        The doctulils package must be installed in  version 0.20 or later in order
+        to render the bib index correctly.
+
+-   scart
+    -   Run in import mode by default.
+-   scamp
+    -   Fix re-computation of amplitudes anytime a new origin is received. This restores
+        the behaviour of version < 5.5.0.
+-   scevtls
+    -   Support date format %F, e.g. `scevtls --begin 2023-09-13`.
+-   scmapcut
+    -   Plot all events from a given XML and not just the first one unless filtered
+        with `--event-id`.
+    -   Add `--without-arrivals` to plot only the origin symbol without stations.
+-   trunk
+    -   Fix computation of stdloc residuals.
+    -   Allow stdloc LeastSquares to locate even with less iterations.
+    -   Fix regression in MLc magnitude to correctly compute the hypocentral
+        distance taking the sensor location elevation into account and also
+        supporting negative source depths. In versions < 5.5.3 the source depth was
+        clipped to 0 and the sensor location elevation did not contribute. In
+        version 5.5.3 and 5.5.4 all depths were considered but without the
+        sensor location elevation.
+
 ## 5.5.4
 
 -   scamp
     -   Fix bug which prevented passing the origin information to
         the amplitude computation.
 -   MYSQL
-    -   Fix deprecation warning of the libmysqlclient w.r.t. `MYSQL_OPT_RECONNECT`
+    -   Fix deprecation warning of the libmysqlclient w.r.t. `MYSQL_OPT_RECONNECT`.
 -   trunk
     -   Output full database schema version including patch version
     -   Fix logging memory leak when the application class is initialized multiple
         times, usually in code implementing tests.
-    -   Minor documentation fixes for stdloc
+    -   Minor documentation fixes for stdloc.
 -   scrttv
-    -   Fix mouse selection of mode drop down menu
+    -   Fix mouse selection of mode drop down menu.
 
 ## 5.5.3
 
