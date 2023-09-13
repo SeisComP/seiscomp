@@ -85,6 +85,9 @@ All notable changes to SeisComP are documented here.
     -   Plot all events from a given XML and not just the first one unless filtered
         with `--event-id`.
     -   Add `--without-arrivals` to plot only the origin symbol without stations.
+-   trunk
+    -   Fix computation of stdloc residuals.
+    -   Allow stdloc LeastSquares to locate even with less iterations.
 
 ## 5.5.4
 
@@ -92,14 +95,14 @@ All notable changes to SeisComP are documented here.
     -   Fix bug which prevented passing the origin information to
         the amplitude computation.
 -   MYSQL
-    -   Fix deprecation warning of the libmysqlclient w.r.t. `MYSQL_OPT_RECONNECT`
+    -   Fix deprecation warning of the libmysqlclient w.r.t. `MYSQL_OPT_RECONNECT`.
 -   trunk
     -   Output full database schema version including patch version
     -   Fix logging memory leak when the application class is initialized multiple
         times, usually in code implementing tests.
-    -   Minor documentation fixes for stdloc
+    -   Minor documentation fixes for stdloc.
 -   scrttv
-    -   Fix mouse selection of mode drop down menu
+    -   Fix mouse selection of mode drop down menu.
 
 ## 5.5.3
 
