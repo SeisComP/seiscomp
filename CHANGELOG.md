@@ -31,9 +31,6 @@ All notable changes to SeisComP are documented here.
     -   Remove `MYSQL_OPT_RECONNECT` option from MYSQL database driver to get
         rid of the deprecation warning by newer MYSQL client library versions.
         The automatic reconnect has been added to the driver code instead.
--   GUI
-    -   Renamed configuration variables `picker.auxilliary.*` to
-        `picker.auxiliary.*`. Old variable names are not supported anymore.
 -   magnitudes
     -   Simplify configuration of magnitude regionalization by global
         module configuration in scconfig.
@@ -61,6 +58,33 @@ All notable changes to SeisComP are documented here.
 -   seiscomp tool
     -   Add command `print variables` for printing internal SeisComP variables.
     -   Add documentation in section Utilities.
+-   scolv
+    -   Add restoring default amplitude-time windows in amplitude picker
+        (Shift + W).
+    -   Add resetting the length of the zoom window to the trace overview in
+        amplitude picker.
+-   scmapcut
+    -   Plot multiple events if given.
+-   scart
+    -   Fix reading miniSEED from stdin without -I as default.
+
+## 5.5.5
+
+**IMPORTANT**: This fixes a regression of scamp introduced with version 5.5.0 which
+               caused scamp to always compute new amplitudes for origin and their
+               arrivals.
+
+-   scart
+    -   Run in import mode by default.
+-   scamp
+    -   Fix re-computation of amplitudes anytime a new origin is received. This restores
+        the behaviour of version < 5.5.0.
+-   scevtls
+    -   Support date format %F, e.g. `scevtls --begin 2023-09-13`.
+-   scmapcut
+    -   Plot all events from a given XML and not just the first one unless filtered
+        with `--event-id`.
+    -   Add `--without-arrivals` to plot only the origin symbol without stations.
 
 ## 5.5.4
 
@@ -104,6 +128,9 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 15.6.0```
 
+-   documentation
+    -   Add subsection on locators to Concepts section.
+    -   Add a concepts section on magnitudes.
 -   trunk
     -   Fix concurrent recordstream termination when data still available
     -   Fix invalid ResourceUri for QuakeML arrival export
@@ -114,14 +141,14 @@ All notable changes to SeisComP are documented here.
         in the event list. This is now similar to switching to the event list
         and selecting the event previous or next to the current event.
 -   screloc
-    -   Be more informative at INFO log level (--ep option)
+    -   Be more informative at INFO log level (`--ep` option)
 
 ## 5.5.1
 
 -   scxmldump
     -   Stop warning about empty amplitude ID in station magnitude
 -   scrttv
-    -   Fix --start-at-now and disable time window load actions with --rt
+    -   Fix `--start-at-now` and disable time window load actions with `--rt`.
     -   Fix crash if removed picks are associated with incoming origins
 
 ## 5.5.0
