@@ -88,6 +88,12 @@ All notable changes to SeisComP are documented here.
 -   trunk
     -   Fix computation of stdloc residuals.
     -   Allow stdloc LeastSquares to locate even with less iterations.
+    -   Fix regression in MLc magnitude to correctly compute the hypocentral
+            distance taking the sensor location elevation into account and also
+            supporting negative source depths. In versions < 5.5.3 the source depth was
+            clipped to 0 and the sensor location elevation did not contribute. In
+            version 5.5.3 and 5.5.4 all depths were considered but without the
+            sensor location elevation.
 
 ## 5.5.4
 
