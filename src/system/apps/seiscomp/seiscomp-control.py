@@ -596,7 +596,12 @@ def on_list(args, _):
         return 0
 
     if args[0] == "aliases":
-        f = open(ALIAS_FILE, "r")
+        try:
+            f = open(ALIAS_FILE, "r")
+        except:
+            print(f"No aliases found: Cannot open file {ALIAS_FILE}", file=sys.stderr)
+            return 1
+
         lines = [line.rstrip() for line in f.readlines()]
         for line in lines:
             if line.lstrip().startswith("#") or not line.strip():
