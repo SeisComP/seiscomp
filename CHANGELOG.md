@@ -70,6 +70,14 @@ All notable changes to SeisComP are documented here.
     -   Plot multiple events if given.
 -   scart
     -   Fix reading miniSEED from stdin without -I as default.
+-   scconfig
+    -   Fix rendering of parameter tooltips and evaluation info boxes. This bug
+        prevented special strings, e.g. "A < 12", to be displayed correctly.
+-   scdbstrip
+    -   Do not delete anything by default.
+    -   Add daterange option `--daterange`.
+-   scdispatch
+    -   Add `--create-notifier` option.
 
 ## 5.5.5
 
