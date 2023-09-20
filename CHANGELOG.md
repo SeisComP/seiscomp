@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.6
+
+-   scbulletin
+    -   Fix KML output which did not produce complete XML documents.
+
 ## 5.5.5
 
 **IMPORTANT**: This fixes a regression of scamp introduced with version 5.5.0 which
