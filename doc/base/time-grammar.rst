@@ -12,6 +12,10 @@ measuring amplitudes for magnitudes.
 You may use brackets *()* to apply operations within before operations outside
 of them.
 
+If the result of the evaluation is unset, e.g. because required information
+are not available, then the processing receives an error and the amplitude will
+not be computed.
+
 
 Examples
 ========
@@ -24,7 +28,7 @@ described :ref:`below <sec-time-details>`.
 
   .. code-block:: properties
 
-     min(D * 11.5, 60) || 60
+     min(D * 11.5, 60)
 
   where :py:func:`min()` is a function with two parameters to
   compare, :envvar:`D` is a variable and '\*' and '\+' are operators. In this
@@ -60,9 +64,8 @@ Functions, Operators, Variables
 ===============================
 
 Variables, operators and functions are available. Variables define standard
-values and function provide values based on a parameter given within parentheses
-like :py:func:`tt()`. Find below their individual descriptions.
-
+values and function provide values based on a parameter given within
+parentheses like :py:func:`tt()`. Find below their individual descriptions.
 
 .. _sec-time-functions:
 
@@ -71,14 +74,16 @@ Functions
 
 .. py:function:: max(arg1,arg2)
 
-   Calculates the maximum of two values
+   Calculates the maximum of two values. If one value is unset then the other
+   value is returned. If both values are unset then the result is unset, too.
 
    :param arg1: First value to consider
    :param arg2: Second value to consider
 
 .. py:function:: min(arg1,arg2)
 
-   Calculates the minimum of two values
+   Calculates the minimum of two values. If one value is unset then the other
+   value is returned. If both values are unset then the result is unset, too.
 
    :param arg1: First value to consider
    :param arg2: Second value to consider
@@ -86,7 +91,8 @@ Functions
 
 .. py:function:: tt(phase)
 
-   Calculates the travel-time of the given phase
+   Calculates the travel-time of the given phase. The result is unset if the
+   travel time cannot be computed.
 
    :param phase: Phase name available with the define travel-time interface
                  and profile.
@@ -97,12 +103,14 @@ Functions
 Operators
 ---------
 
+If either of the operands is unset then the result will be also unset.
+
 * \+ : addition
 * \- : subtraction
 * \* : multiplitation
 * \/ : division
 * \^ : power / exponentiation
-* \|\| : logical OR
+* \|\| : logical OR which returns the first set value if any
 * \|. \| : absolute value
 * \% : modulo
 
@@ -111,6 +119,8 @@ Operators
 
 Variables
 ---------
+
+Variables can be unset because a required information is not available.
 
 .. envvar:: D
 
