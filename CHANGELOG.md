@@ -74,10 +74,16 @@ All notable changes to SeisComP are documented here.
     -   Fix rendering of parameter tooltips and evaluation info boxes. This bug
         prevented special strings, e.g. "A < 12", to be displayed correctly.
 -   scdbstrip
+    -   Add option `--time-window`.
     -   Do not delete anything by default.
     -   Add daterange option `--daterange`.
 -   scdispatch
     -   Add `--create-notifier` option.
+-   GUI
+    -   Fix removal of map legend
+    -   Reset legends if geo feature layer is reloaded
+    -   Add additional legend alignment options
+    -   Support rendering of geo feature name next to symbols
 
 ## 5.5.6
 
