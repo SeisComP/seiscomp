@@ -96,6 +96,16 @@ All notable changes to SeisComP are documented here.
                caused scamp to always compute new amplitudes for origin and their
                arrivals.
 
+-   doc
+    -   Update templates to build with latest Sphinx version. We tested against
+        Sphinx 7.2.2 and required the following packages installed with pip:
+
+        -   sphinx
+        -   m2r2
+        -   sphinxcontrib.bibtex
+
+        The doctulils package must be installed in  version 0.20 or later in order
+        to render the bib index correctly.
 -   scart
     -   Run in import mode by default.
 -   scamp
@@ -135,22 +145,22 @@ All notable changes to SeisComP are documented here.
 ## 5.5.3
 
 -   trunk
-    -   Add more debug output to magnitudes ML, MLv and MLc
-    -   Fix crash if distance for MLv.logA0 is out of range
+    -   Add more debug output to magnitudes ML, MLv and MLc.
+    -   Fix crash if distance for MLv.logA0 is out of range.
     -   Fix reading of MLc magnitude correction factors of
-        regionalization profiles
+        regionalization profiles.
     -   Fix messaging re-connection deadlock that causes applications
         to hang forever after the messaging connection has been
         re-established.
 -   GUI
-    -   Show surface wave onsets in amplitude view
+    -   Show surface wave onsets in amplitude view.
 -   scmag
-    -   Fix description of `minimumArrivalWeight` for scconfig
+    -   Fix description of `minimumArrivalWeight` for scconfig.
 -   scdumpcfg
     -   Fix loading of shadowed application plugins, e.g. scqc, which
         caused issues when loading application specific plugins.
 -   bindings2cfg
-    -   Fix help text
+    -   Fix help text.
     -   Add commandline option `--create-notifier`. The notifiers can be added
         to the database using scdb allowing to import bindings while bypassing
         the messaging system.
@@ -163,8 +173,8 @@ All notable changes to SeisComP are documented here.
     -   Add subsection on locators to Concepts section.
     -   Add a concepts section on magnitudes.
 -   trunk
-    -   Fix concurrent recordstream termination when data still available
-    -   Fix invalid ResourceUri for QuakeML arrival export
+    -   Fix concurrent recordstream termination when data still available.
+    -   Fix invalid ResourceUri for QuakeML arrival export.
 -   scolv
     -   Announced feature of auxiliary channels from version 5.5.0 has been
         added which was left out accidentally.
@@ -172,27 +182,33 @@ All notable changes to SeisComP are documented here.
         in the event list. This is now similar to switching to the event list
         and selecting the event previous or next to the current event.
 -   screloc
-    -   Be more informative at INFO log level (`--ep` option)
+    -   Be more informative at INFO log level (`--ep` option).
 
 ## 5.5.1
 
 -   scxmldump
-    -   Stop warning about empty amplitude ID in station magnitude
+    -   Stop warning about empty amplitude ID in station magnitude.
 -   scrttv
     -   Fix `--start-at-now` and disable time window load actions with `--rt`.
-    -   Fix crash if removed picks are associated with incoming origins
+    -   Fix crash if removed picks are associated with incoming origins.
 
 ## 5.5.0
 
 ```SC_API_VERSION 15.5.0```
 
+-   deps
+    -   Add Debian 12 support
+-   seedlink
+    -   Fix bug of win plugin which caused log entries 'invalid time' and did
+        not forward data.
+    -   Update libq330 for the q330 plugin.
 -   trunk
-    -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3)
-    -   Fix deadlock in messaging reconnect (scmp + scmps)
-    -   Limit alias names to 20 characters if the module provides bindings
+    -   Add ML(IDC) and mb(IDC) magnitude implementation (ported from SeisComP3).
+    -   Fix deadlock in messaging reconnect (scmp + scmps).
+    -   Limit alias names to 20 characters if the module provides bindings.
 -   GUI
     -   Fix bad performance of reading events into the event list in combination
-        with Qt4
+        with Qt4.
 -   scautoloc
     -   Do not consider picks with evaluationMode = rejected. Can be overruled
         by `--allow-rejected-picks`.
@@ -200,9 +216,9 @@ All notable changes to SeisComP are documented here.
     -   Add option `--picks` for processing picks in playbacks with `--ep` while
         ignoring origins.
 -   scbulletin
-    -   Fix output of event type used in fdsnws format
-    -   Add option `--kml` for output in KML format
-    -   Add option `-o` for direct output to file
+    -   Fix output of event type used in fdsnws format.
+    -   Add option `--kml` for output in KML format.
+    -   Add option `-o` for direct output to file.
 -   scart
     -   Do not require an output archive when executing with `--test`.
 -   scolv
@@ -225,8 +241,8 @@ All notable changes to SeisComP are documented here.
         was used.
 -   scqcv
     -   Remove unused parameters from descriptions, hence scconfig.
-    -   Allow sorting by stream ID
-    -   Rename menu "Options" to "Settings"
+    -   Allow sorting by stream ID.
+    -   Rename menu "Options" to "Settings".
 
 ## 5.4.0
 
@@ -294,8 +310,8 @@ All notable changes to SeisComP are documented here.
 -   scart
     -   Allow to rename net, sta, loc, ch codes in dump and import modes,
         thanks to Luca Scarabello (SED/ETHZ).
-    -   Unify -t -n -c --list --nscl options for Dump and Import mode, thanks
-        to Luca Scarabello (SED/ETHZ).
+    -   Unify `-t`, `-n`, `-c`, `--list`, `--nscl` options for Dump and Import
+        mode, thanks to Luca Scarabello (SED/ETHZ).
     -   Add command-line option `--ignore` for ignoring empty records.
     -   Add command-line option `-o` for writing miniSEED records to file in
         import mode.
@@ -309,7 +325,7 @@ All notable changes to SeisComP are documented here.
         is written instead of just printing information. This has
         been fixed (Luca Scarabello (SED/ETHZ)) and can be deactivated with
         `--test`.
-    -   Add summary for --print-streams.
+    -   Add summary for `--print-streams`.
     -   Update documentation.
 -   scmssort
     -   Fix reading miniSEED from stdin which was not the default anymore due to
@@ -346,7 +362,7 @@ All notable changes to SeisComP are documented here.
     -   New option `--map-picks` allows to show picks on visible streams even
         when they were created on invisible streams, e.g., S picks created on
         horizontal components are shown verticals.
-    -   Add --input-file to load an XML pick file at startup
+    -   Add `--input-file` to load an XML pick file at startup
 -   scmapcut
     -   Fix segmentation fault at exit if a tilestore plugin is used
 -   scqc
@@ -355,15 +371,15 @@ All notable changes to SeisComP are documented here.
         in warning messages such as "TimeOut specified, but no timeoutTask was
         defined for this QcPlugin".
 -   scinv
-    -   Add gain=0 check to documentation
--   scinvextr
-    -   Correct command-line help
+    -   Add gain=0 check to documentation.
+-   invextr
+    -   Correct command-line help.
 -   scwfparam
     -   Use organization configuration parameter for ShakeMap version >= 4
     -   Populate ShakeMap commtype attribute from bindings
     -   Allow to output any spectral values with ShakeMap version >= 4
 -   LOCSAT
-    -   Add Iw phase
+    -   Add Iw phase.
     -   Apply strict limit of 210 distance samples to travel time tables.
     -   Reduce memory consumption to the bare minimum required by the
         provided travel-time tables.
@@ -682,7 +698,7 @@ to 0.12.
         "submarine landslide", "rocket launch", "rocket", "rocket impact",
         "artillery strike", "bomb detonation", "moving aircraft",
         "atmospheric meteor explosion".
-    -   Add new routing recordstream which allows to route specific network,
+    -   Add new routing RecordStream which allows to route specific network,
         station, location or channel codes to fixed proxy streams (thanks to
         Luca Scarabello / ETH for this contribution)
     -   Add usage and examples to command-line help for many Python utilities.
@@ -816,28 +832,28 @@ to 0.12.
         -   Unfix -> Unfix type
         -   Fix -> Fix FM
         -   Fix Mw -> Fix Mw type
-    -   Use configured magnitude digits to display Mw magnitude value
+    -   Use configured magnitude digits to display Mw magnitude value.
     -   Only enable creation of artificial origin in zoom trace if picking
-        is disabled
-    -   Fix committing of manual amplitudes in the amplitude picker
+        is disabled.
+    -   Fix committing of manual amplitudes in the amplitude picker.
 -   scmag
     -   Fix bug that caused multiple occurrences of magnitudes of the same
-        type when a new set of manually computed amplitudes has been received
+        type when a new set of manually computed amplitudes has been received.
 -   trunk
-    -   Fix segmentation fault when reading malformed GeoJSON features
+    -   Fix segmentation fault when reading malformed GeoJSON features.
 -   scorgls
-    -   Add option to filter for author (thanks to Fred Massin / ETHZ)
--   sdmssort
--   Fix error when two or more files are passed
+    -   Add option to filter for author (thanks to Fred Massin / ETHZ).
+-   scmssort
+    -   Fix error when two or more files are passed.
 -   seedlink
-    -   Fix typo in setup script
-    -   Add misc plugin
+    -   Fix typo in setup script.
+    -   Add misc plugin.
 
 ## 4.7.3
 
 -   trunk
     -   Fix MYSQL database setup script to create
-        ro and rw user accounts correctly
+        ro and rw user accounts correctly.
 
 ## 4.7.2
 
@@ -864,7 +880,7 @@ to 0.12.
 -   Documentation
     -   Update SDK Python examples
 -   seiscomp
-    -   Add --wait parameter to set the timeout when acquiring
+    -   Add `--wait` parameter to set the timeout when acquiring
         the seiscomp lock
     -   Add dialog for removing obsolete configuration after
         removing alias modules
@@ -933,7 +949,7 @@ to 0.12.
     -   Add new journal action EvRefresh: Select the preferred origin, the preferred
         magnitude, update the region, call processors loaded with plugins.
 -   scmssort
-    -   Add new `list` option to filter miniSEED data by stream lists
+    -   Add new `--list` option to filter miniSEED data by stream lists
     -   Add some statistics to stderr output in verbosity mode
 -   scart
     -   Do not crash when requesting data for non-existing networks from SDS archive
@@ -964,7 +980,7 @@ to 0.12.
     -   Include moment tensor derived origins into output document for
         QuakeML 1.2
 -   scxmldump
-    -   Add -J, --journal option allowing to export the journal
+    -   Add `-J`, `--journal` option allowing to export the journal
 
 ## 4.5.0
 
@@ -1167,8 +1183,8 @@ to 0.12.
     -   Add IMPORT_GROUP to default group set
 -   screloc
     -   Add option to allow processing of origins with mode MANUAL in daemon mode
-    -   When using `--ep` playbacks with origins defined by -O, then the processing
-        is limited to the defined origins.
+    -   When using `--ep` playbacks with origins defined by `-O`, then the
+        processing is limited to the defined origins.
 -   scevent
     -   Update event agencyID and author on event update if it has
         changed. This is important if scevent has been reconfigured
@@ -1179,7 +1195,7 @@ to 0.12.
         errors with init scripts
     -   Add fixed hypocenter locator
     -   Add external locator plugin (locext)
-    -   Fix combined recordstream for slinkMax|rtMax|1stMax units `s` and `h`
+    -   Fix combined RecordStream for slinkMax|rtMax|1stMax units `s` and `h`
     -   Fix LOCSAT travel time computation for phases which do not provide
         a table file or with zero depth layers. Sometimes LOCSAT produced
         fake travel times for non existing phases after switching tables.
