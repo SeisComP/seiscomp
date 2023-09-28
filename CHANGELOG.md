@@ -2,6 +2,15 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.7
+
+-   scolv
+    -   Fix width of calculate amplitude window in combination with
+        large recordstream URIs.
+-   trunk
+    -   Fix deadlock in concurrent recordstream which affected
+        `balanced://` and `routing://`.
+
 ## 5.5.6
 
 -   scbulletin
