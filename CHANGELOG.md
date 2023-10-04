@@ -66,6 +66,8 @@ All notable changes to SeisComP are documented here.
         (Shift + W).
     -   Add resetting the length of the zoom window to the trace overview in
         amplitude picker.
+    -   Preserve arrival definition flags (backazimuth, h-slowness) when committing
+        from picker if a pick is not enabled.
 -   scmapcut
     -   Plot multiple events if given.
 -   scart
