@@ -66,8 +66,6 @@ All notable changes to SeisComP are documented here.
         (Shift + W).
     -   Add resetting the length of the zoom window to the trace overview in
         amplitude picker.
-    -   Preserve arrival definition flags (backazimuth, h-slowness) when committing
-        from picker if a pick is not enabled.
 -   scmapcut
     -   Plot multiple events if given.
 -   scart
@@ -86,9 +84,25 @@ All notable changes to SeisComP are documented here.
     -   Reset legends if geo feature layer is reloaded
     -   Add additional legend alignment options
     -   Support rendering of geo feature name next to symbols
+
+## 5.5.8
+
+-   GUI
     -   Fix setting first enabled event in event list. This has caused application,
         e.g. scesv, to not update the current event if the type has changed to
         "not existing" or "other".
+-   scolv
+    -   Preserve arrival definition flags (backazimuth, h-slowness) when committing
+        from picker if a pick is not enabled.
+
+## 5.5.7
+
+-   scolv
+    -   Fix width of calculate amplitude window in combination with
+        large recordstream URIs.
+-   trunk
+    -   Fix deadlock in concurrent recordstream which affected
+        `balanced://` and `routing://`.
 
 ## 5.5.6
 
