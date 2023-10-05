@@ -86,6 +86,9 @@ All notable changes to SeisComP are documented here.
     -   Reset legends if geo feature layer is reloaded
     -   Add additional legend alignment options
     -   Support rendering of geo feature name next to symbols
+    -   Fix setting first enabled event in event list. This has caused application,
+        e.g. scesv, to not update the current event if the type has changed to
+        "not existing" or "other".
 
 ## 5.5.6
 
