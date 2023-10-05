@@ -2,6 +2,16 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.8
+
+-   GUI
+    -   Fix setting first enabled event in event list. This has caused application,
+        e.g. scesv, to not update the current event if the type has changed to
+        "not existing" or "other".
+-   scolv
+    -   Preserve arrival definition flags (backazimuth, h-slowness) when committing
+        from picker if a pick is not enabled.
+
 ## 5.5.7
 
 -   scolv
