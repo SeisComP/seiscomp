@@ -90,7 +90,7 @@ All notable changes to SeisComP are documented here.
 -   scolv
     -   Fix setting the preferred magnitude from the magnitude view by selecting
         the magnitude tab and committing. Fix / release / fix did not work as
-        expected. This issue only exhibited with PostgreSQL.
+        expected with some database backends.
 
 ## 5.5.8
 
