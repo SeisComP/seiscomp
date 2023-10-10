@@ -85,6 +85,13 @@ All notable changes to SeisComP are documented here.
     -   Add additional legend alignment options
     -   Support rendering of geo feature name next to symbols
 
+## 5.5.9
+
+-   scolv
+    -   Fix setting the preferred magnitude from the magnitude view by selecting
+        the magnitude tab and committing. Fix / release / fix did not work as
+        expected. This issue only exhibited with PostgreSQL.
+
 ## 5.5.8
 
 -   GUI
