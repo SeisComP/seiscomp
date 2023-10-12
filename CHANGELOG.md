@@ -66,6 +66,8 @@ All notable changes to SeisComP are documented here.
         (Shift + W).
     -   Add resetting the length of the zoom window to the trace overview in
         amplitude picker.
+-   scrttv
+    -   Add spectrogram view
 -   scmapcut
     -   Plot multiple events if given.
 -   scart
