@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.10
+
+-   scrttv
+    -   Fix associator locator solution update with Qt4 if either locator profile
+        or depth has changed. This mainly affects RHEL7 builds. All other builds
+        which are using Qt4 are affected as well.
+
 ## 5.5.9
 
 -   scconfig
