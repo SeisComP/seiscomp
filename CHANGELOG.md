@@ -86,6 +86,29 @@ All notable changes to SeisComP are documented here.
     -   Reset legends if geo feature layer is reloaded
     -   Add additional legend alignment options
     -   Support rendering of geo feature name next to symbols
+-   invextr
+    -   Add option `--nslc`.
+-   scevtls
+    -   Add option `--input` loading XML and printing IDs of contained events.
+-   scorgls
+    -   Add option `--input` loading XML and printing IDs of contained origins.
+-   scardac
+    -   rescan only those chunks modified since last scan
+    -   add `deep-scan` paramater to force rescan
+    -   add `to` and `from` parameter to limit scan by record time
+    -   add `modified-since` and `modified-util` parameter to rescan
+        chunks modified in particular time window
+    -   add waveform id filter parameter
+    -   modernize code
+    -   add test cases
+    -   increase collector API version to 2
+
+## 5.5.10
+
+-   scrttv
+    -   Fix associator locator solution update with Qt4 if either locator profile
+        or depth has changed. This mainly affects RHEL7 builds. All other builds
+        which are using Qt4 are affected as well.
 
 ## 5.5.9
 
