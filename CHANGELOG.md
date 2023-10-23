@@ -31,6 +31,7 @@ All notable changes to SeisComP are documented here.
     -   Remove `MYSQL_OPT_RECONNECT` option from MYSQL database driver to get
         rid of the deprecation warning by newer MYSQL client library versions.
         The automatic reconnect has been added to the driver code instead.
+    -   Update `cities.xml`.
 -   amplitudes
     -   Compute ML peak-to-trough and mb amplitudes according to IASPEI
         recommendations if configured with `amplitudes.iaspei = true`
