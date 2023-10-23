@@ -381,8 +381,9 @@ Hint: Entered values starting with a dot (.) are handled
                 def_idx = 0
                 for opt in self.currentNode.input.options:
                     sys.stdout.write("%2d) %s\n" % (idx, opt.value))
-                    for l in opt.desc:
-                        sys.stdout.write("      %s\n" % l)
+                    if opt.desc:
+                        for l in opt.desc:
+                            sys.stdout.write("      %s\n" % l)
                     if default_value == opt.value:
                         def_idx = idx
                     idx += 1
