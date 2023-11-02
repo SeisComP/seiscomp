@@ -34,7 +34,8 @@ All notable changes to SeisComP are documented here.
     -   Update `cities.xml`.
 -   amplitudes
     -   Compute ML peak-to-trough and mb amplitudes according to IASPEI
-        recommendations if configured with `amplitudes.iaspei = true`
+        recommendations if configured with `amplitudes.iaspei = true`.
+    -   Allow configuration of time windows based on time grammar.
 -   magnitudes
     -   Simplify configuration of magnitude regionalization by global
         module configuration in scconfig.
@@ -324,7 +325,7 @@ All notable changes to SeisComP are documented here.
     -   Revert resolving all path variables with configuration files introduced
         with version 5.3. It caused to much conflicts and inconsistencies that we
         have decided to revert the "feature".
-    -   Simplify the configuation of the travel-time interface homogeneous:
+    -   Simplify the configuration of the travel-time interface homogeneous:
         Deprecated global configuration parameter -> new parameter, dropped
         '.profile':
         ```
