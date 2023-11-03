@@ -4,7 +4,7 @@
 Getting the Source Code
 ***********************
 
-.. caution ::
+.. caution::
 
    For production systems only
    :ref:`install the officially released packages <installation-packages>`
@@ -95,29 +95,29 @@ a build directory, configure the build and start it:
 
 .. _build_dependencies:
 
-Dependencies
-============
+Software dependencies
+=====================
 
-To compile the sources the following development packages are required
-(Debian/Ubuntu package names):
+For compiling the |scname| sources the following development software packages
+are required (Debian/Ubuntu package names):
 
-- g++
-- git
-- cmake + cmake-gui
-- libboost
-- libxml2-dev
-- flex
-- libfl-dev
-- libssl-dev
-- crypto-dev
-- python3-dev (optional)
-- python3-numpy (optional)
-- libqt4-dev (optional)
-- qtbase5-dev (optional)
-- libmysqlclient-dev (optional)
-- libpq-dev (optional)
-- libsqlite3-dev (optional)
-- ncurses-dev (optional)
+* g++
+* git
+* cmakecmake-gui
+* libboost
+* libxml2-dev
+* flex
+* libfl-dev
+* libssl-dev
+* crypto-dev
+* python3-dev (optional)
+* python3-numpy (optional, required if Numpy support is enabled which is also the default configuration)
+* libqt5-dev (optional)
+* qtbase5-dev (optional)
+* libmysqlclient-dev (optional)
+* libpq-dev (optional)
+* libsqlite3-dev (optional)
+* ncurses-dev (optional)
 
 As of |scname| in version 5.0.0 support for Python 2 is dropped and Python 3 has
 become the default.
@@ -125,5 +125,11 @@ The Python development libraries are required if Python wrappers should be
 compiled which is the default configuration. The development files must
 match the used Python interpreter of the system.
 
-python3-numpy is required if Numpy support is enabled which is also
-the default configuration.
+
+Compiling |scname| for MacOS
+============================
+
+Although |scname| has been developed, compiled and tested on Linux systems,
+users have compiled |scname| on MacOS.
+The procedures are given online by external sources :cite:p:`macos-compile`.
+Please contact the managers of these sources for any requests.
