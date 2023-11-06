@@ -14,7 +14,7 @@
 				</option>
 				<option flag="" long-flag="csv" argument="" publicID="">
 					<description>
-						Print output as csv in machine-readable format.
+						Print output as CSV in machine-readable format.
 					</description>
 				</option>
 				<option flag="i" long-flag="interactive" argument="" publicID="">
@@ -26,7 +26,7 @@
 				<option flag="" long-flag="wait" argument="arg" publicID="">
 					<description>
 						Define a timeout in seconds for acquiring the seiscomp lock
-						file, e.g. `seiscomp --wait 10 update-config`.
+						file, e.g., `seiscomp --wait 10 update-config`.
 					</description>
 				</option>
 			</group>

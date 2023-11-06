@@ -105,7 +105,7 @@ execute:
 
    man crontab
    crontab -e
-`
+
 
 .. _sec_seiscomp_setup:
 
