@@ -87,6 +87,7 @@ All notable changes to SeisComP are documented here.
     -   Reset legends if geo feature layer is reloaded
     -   Add additional legend alignment options
     -   Support rendering of geo feature name next to symbols
+    -   Drop Qt4 support
 -   invextr
     -   Add option `--nslc`.
 -   scevtls
