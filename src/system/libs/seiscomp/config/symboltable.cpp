@@ -181,7 +181,7 @@ void SymbolTable::add(const std::string& name,
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-void SymbolTable::add(const Symbol& symbol) {
+void SymbolTable::add(const Symbol &symbol) {
 	std::pair<Symbols::iterator, bool> itp;
 	itp = _symbols.insert(Symbols::value_type(symbol.name, Symbol()));
 
@@ -190,8 +190,9 @@ void SymbolTable::add(const Symbol& symbol) {
 		newSymbol = symbol;
 		_symbolOrder.push_back(&newSymbol);
 	}
-	else
+	else {
 		itp.first->second = symbol;
+	}
 
 	// Register mapping to case-sensitive name
 	_cisymbols[toupper(symbol.name)] = itp.first;
