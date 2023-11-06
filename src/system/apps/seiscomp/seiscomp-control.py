@@ -38,7 +38,7 @@ def getInput(question, default=None, options=None):
     def _default(text):
         # print default value to previous line if no input was made
         if default:
-            print("\033[F\033[{}G{}".format(len(text) + 1, default))
+            print(f"\033[F\033[{len(text) + 1}G{default}")
         return default
 
     # no options: accept any type of input
@@ -109,19 +109,19 @@ def sigterm_handler(_signum, _):
 
 
 def system(args):
-    proc = subprocess.Popen(args, shell=False, env=os.environ)
-    while True:
-        try:
-            return proc.wait()
-        except KeyboardInterrupt:
-            continue
-        except Exception as e:
+    with subprocess.Popen(args, shell=False, env=os.environ) as proc:
+        while True:
             try:
-                proc.terminate()
-            except Exception:
-                pass
-            sys.stderr.write(f"Exception: {str(e)}\n")
-            continue
+                return proc.wait()
+            except KeyboardInterrupt:
+                continue
+            except Exception as e:
+                try:
+                    proc.terminate()
+                except Exception:
+                    pass
+                sys.stderr.write(f"Exception: {e}\n")
+                continue
 
     # return subprocess.call(cmd, shell=True)
 
@@ -222,8 +222,9 @@ def shouldModuleRun(mod_name):
 
 def touch(filename):
     try:
-        open(filename, "w").close()
-    except Exception as exc:
+        with open(filename, "w", encoding="utf8") as _:
+            pass
+    except OSError as exc:
         error(str(exc))
 
 
@@ -276,7 +277,7 @@ def detectOS():
         arch = "x86_64"
 
     data = {}
-    with open("/etc/os-release", "r") as f:
+    with open("/etc/os-release", "r", encoding="utf8") as f:
         for line in f:
             toks = line.split("=")
             if len(toks) != 2:
@@ -341,7 +342,8 @@ def on_setup(args, flags):
         statfile = os.path.join(runpath, "seiscomp.init")
         if not os.path.exists(statfile):
             try:
-                open(statfile, "w").close()
+                with open(statfile, "w", encoding="utf8") as _:
+                    pass
             except BaseException:
                 error(f"failed to create status file: {statfile}")
 
@@ -369,7 +371,7 @@ def on_shell(_args, _):
 
 
 def on_shell_help(_):
-    print("Launches the SeisComP shell, a commandline interface which allows")
+    print("Launches the SeisComP shell, a command-line interface which allows")
     print("to manage modules configurations and bindings.")
     return 0
 
@@ -566,7 +568,7 @@ def on_exec(args, _):
 
 
 def on_exec_help(_):
-    print("Executes a command like calling a command from commandline.")
+    print("Executes a command like calling a command from command-line.")
     print("It will setup all paths and execute the command.")
     print("'seiscomp run' will block until the command terminates.")
     print("Example:")
@@ -597,12 +599,12 @@ def on_list(args, _):
 
     if args[0] == "aliases":
         try:
-            f = open(ALIAS_FILE, "r")
-        except:
+            with open(ALIAS_FILE, "r", encoding="utf8") as f:
+                lines = [line.rstrip() for line in f.readlines()]
+        except OSError:
             print(f"No aliases found: Cannot open file {ALIAS_FILE}", file=sys.stderr)
             return 1
 
-        lines = [line.rstrip() for line in f.readlines()]
         for line in lines:
             if line.lstrip().startswith("#") or not line.strip():
                 continue
@@ -614,7 +616,7 @@ def on_list(args, _):
                 print(f"{toks[0]};{toks[1]}")
             else:
                 print(f"{toks[0]} -> {toks[1]}")
-        f.close()
+
         return 0
 
     if args[0] == "enabled":
@@ -741,20 +743,19 @@ def on_print(args, _):
         return 1
 
     if args[0] == "crontab":
-        print(
-            "*/3 * * * * %s check >/dev/null 2>&1"
-            % os.path.join(env.SEISCOMP_ROOT, "bin", "seiscomp")
-        )
+        path = os.path.join(env.SEISCOMP_ROOT, "bin", "seiscomp")
+        print(f"*/3 * * * * {path} check >/dev/null 2>&1")
         for mod in mods:
             mod.printCrontab()
+
     elif args[0] == "env":
         print(f'export SEISCOMP_ROOT="{SEISCOMP_ROOT}"')
         print(f'export PATH="{BIN_PATH}:$PATH"')
         print(f'export {SysLibraryPathVar}="{get_library_path()}:${SysLibraryPathVar}"')
         if sys.platform == "darwin":
             print(
-                'export %s="%s:$%s"'
-                % (SysFrameworkPathVar, get_framework_path(), SysFrameworkPathVar)
+                f'export {SysFrameworkPathVar}="{get_framework_path()}:'
+                f'${SysFrameworkPathVar}"'
             )
 
         print(f'export PYTHONPATH="{PYTHONPATH}:$PYTHONPATH"')
@@ -765,36 +766,27 @@ def on_print(args, _):
         )
         if os.path.isfile(hostenv):
             print(f"source {hostenv}")
+
     elif args[0] == "variables":
         try:
-            import seiscomp.system
-        except:
+            # pylint: disable=C0415
+            import seiscomp.system.Environment as environ
+        except ImportError:
             # unavailable without trunk installation, e.g., seedlink-only
             error("wrong argument: variables is unavailable without trunk installation")
             return 1
+        sysenv = environ.Instance()
+        print(
+            f"""@HOMEDIR@          : {sysenv.homeDir()}
+@ROOTDIR@          : {sysenv.installDir()}
+@SYSTEMCONFIGDIR@  : {sysenv.appConfigDir()}
+@DEFAULTCONFIGDIR@ : {sysenv.globalConfigDir()}
+@KEYDIR@           : {sysenv.appConfigDir()}/key"
+@DATADIR@          : {sysenv.shareDir()}
+@CONFIGDIR@        : {sysenv.configDir()}
+@LOGDIR@           : {sysenv.logDir()}"""
+        )
 
-        print(
-            f"@HOMEDIR@          : {seiscomp.system.Environment.Instance().homeDir()}"
-        )
-        print(
-            f"@ROOTDIR@          : {seiscomp.system.Environment.Instance().installDir()}"
-        )
-        print(
-            f"@SYSTEMCONFIGDIR@  : {seiscomp.system.Environment.Instance().appConfigDir()}"
-        )
-        print(
-            f"@DEFAULTCONFIGDIR@ : {seiscomp.system.Environment.Instance().globalConfigDir()}"
-        )
-        print(
-            f"@KEYDIR@           : {seiscomp.system.Environment.Instance().appConfigDir()}/key"
-        )
-        print(
-            f"@DATADIR@          : {seiscomp.system.Environment.Instance().shareDir()}"
-        )
-        print(
-            f"@CONFIGDIR@        : {seiscomp.system.Environment.Instance().configDir()}"
-        )
-        print(f"@LOGDIR@           : {seiscomp.system.Environment.Instance().logDir()}")
     else:
         error("wrong argument: {crontab|env|variables} expected")
         return 1
@@ -860,7 +852,7 @@ def on_install_deps_linux(args, _):
 def on_install_deps(args, flags):
     if not args:
         error("expected package list: PKG1 [PKG2 [..]]")
-        print("Example: seiscomp install-deps base gui mysql-server")
+        print("Example: seiscomp install-deps base gui mariadb-server")
         print("For a list of available packages issue: seiscomp help install-deps")
 
     if sys.platform.startswith("linux"):
@@ -882,7 +874,7 @@ def on_install_deps_help(_):
     print("or root account. Available packages are:")
     print("  base:   basic packages required by all installations")
     print("  gui:    required by graphical user interfaces, e.g. on workstations")
-    print("  [mysql,mariadb,postgresql]-server:")
+    print("  [mariadb,mysql,postgresql]-server:")
     print("          database management system required by the machine running")
     print("          the SeisComP messaging system (scmaster)")
     print("  fdsnws: required for data sharing via the FDSN web services")
@@ -997,7 +989,7 @@ def on_alias(args, _):
         elif os.path.exists(os.path.join("sbin", mod2)):
             mod1 = os.path.join("sbin", aliasName)
         else:
-            error("no %s binary found (neither bin nor sbin)")
+            error(f"no {mod2} binary found (neither bin nor sbin)")
             return 1
 
         # create alias line in etc/descriptions/aliases
@@ -1012,8 +1004,9 @@ def on_alias(args, _):
         lines = []
         new_lines = []
         try:
-            f = open(ALIAS_FILE, "r")
-            lines = [line.rstrip() for line in f.readlines()]
+            with open(ALIAS_FILE, "r", encoding="utf8") as f:
+                lines = [line.rstrip() for line in f.readlines()]
+
             for line in lines:
                 if line.lstrip().startswith("#") or not line.strip():
                     # Keep comments or empty lines
@@ -1028,7 +1021,6 @@ def on_alias(args, _):
                     break
 
                 new_lines.append(line)
-            f.close()
         except BaseException:
             pass
 
@@ -1041,26 +1033,25 @@ def on_alias(args, _):
             warning("    do not register again but trying to link the required files")
         else:
             print(
-                f"  + registering alias '{aliasName}' in $SEISCOMP_ROOT/etc/descriptions/aliases"
+                f"  + registering alias '{aliasName}' in "
+                "$SEISCOMP_ROOT/etc/descriptions/aliases"
             )
 
         # Check if target exists already
         if os.path.exists(os.path.join(SEISCOMP_ROOT, mod1)):
             warning(
-                f"  + link '{aliasName}' to '{mod2}' exists already in {SEISCOMP_ROOT}/bin/"
+                f"  + link '{aliasName}' to '{mod2}' exists already in {SEISCOMP_ROOT}"
+                "/bin/"
             )
             warning("    do not link again")
 
         try:
-            f = open(ALIAS_FILE, "w")
+            with open(ALIAS_FILE, "w", encoding="utf8") as f:
+                new_lines.append(f"{aliasName} = {args[2]}")
+                f.write("\n".join(new_lines) + "\n")
         except BaseException:
             error(f"  + failed to open/create alias file: {ALIAS_FILE}")
             return 1
-
-        new_lines.append(f"{aliasName} = {args[2]}")
-
-        f.write("\n".join(new_lines) + "\n")
-        f.close()
 
         # create symlink of defaults from etc/defaults/mod1.cfg to etc/defaults/mod2.cfg
         # use relative path to default_cfg2
@@ -1122,8 +1113,9 @@ def on_alias(args, _):
         lines = []
         new_lines = []
         try:
-            f = open(ALIAS_FILE, "r")
-            lines = [line.rstrip() for line in f.readlines()]
+            with open(ALIAS_FILE, "r", encoding="utf8") as f:
+                lines = [line.rstrip() for line in f.readlines()]
+
             for line in lines:
                 if line.lstrip().startswith("#") or not line.strip():
                     # Keep comments or empty lines
@@ -1137,7 +1129,6 @@ def on_alias(args, _):
                     has_alias = True
                 else:
                     new_lines.append(line)
-            f.close()
         except BaseException:
             pass
 
@@ -1149,18 +1140,15 @@ def on_alias(args, _):
                     return 1
 
         try:
-            f = open(ALIAS_FILE, "w")
-        except BaseException:
+            with open(ALIAS_FILE, "w", encoding="utf8") as f:
+                if len(lines) > 0:
+                    f.write("\n".join(new_lines) + "\n")
+        except OSError:
             error(f"  + failed to open/create alias file: {ALIAS_FILE}")
             return 1
 
-        if len(lines) > 0:
-            f.write("\n".join(new_lines) + "\n")
-        f.close()
-
-        if not has_alias:
-            if not interactiveMode:
-                return 1
+        if not has_alias and not interactiveMode:
+            return 1
 
         # remove symlink from bin/mod1
         if os.path.exists(os.path.join("bin", aliasName)):
@@ -1195,8 +1183,8 @@ def on_alias(args, _):
 
         if not interactiveMode:
             warning(
-                "No other configuration removed for '%s' - interactive"
-                " removal is supported by '--interactive'" % aliasName
+                f"No other configuration removed for '{aliasName}' - interactive"
+                " removal is supported by '--interactive'"
             )
             return 0
 
@@ -1246,7 +1234,7 @@ def on_alias(args, _):
                 continue
 
             keyFile = os.path.join(keyDir, f)
-            with open(keyFile, "r") as fp:
+            with open(keyFile, "r", encoding="utf8") as fp:
                 # Read all lines in the file one by one
                 for line in fp:
                     # check if the line starts with the module name
@@ -1355,7 +1343,7 @@ def on_help(args, _):
         print("\nUse 'help [command]' to get more help about a command")
         print("\nExamples:")
         print("  seiscomp help update-config          Show help for update-config")
-        print("  seiscomp update-config               Run update-config for allmodules")
+        print("  seiscomp update-config               Run update-config for all modules")
         print(
             "  seiscomp update-config trunk         Run update-config for all trunk modules"
         )
@@ -1369,6 +1357,7 @@ def on_help(args, _):
         print(f"Sorry, no help available for {cmd}")
         return 1
     func(args[1:])
+
     return 0
 
 
@@ -1540,7 +1529,7 @@ if not isWrapped:
 sys.path.insert(0, PYTHONPATH)
 
 # Create environment which supports queries for various SeisComP
-# directoris and sets PATH, LD_LIBRARY_PATH and PYTHONPATH
+# directories and sets PATH, LD_LIBRARY_PATH and PYTHONPATH
 env = seiscomp.kernel.Environment(SEISCOMP_ROOT)
 env.setCSVOutput(useCSV)
 
@@ -1558,8 +1547,8 @@ else:
 if not isChild:
     if not env.tryLock("seiscomp", lockTimeout):
         error(
-            "Could not get lock %s - is another process using it?"
-            % env.lockFile("seiscomp")
+            f"Could not get lock {env.lockFile('seiscomp')} - is another process "
+            "using it?"
         )
         sys.exit(1)
 
