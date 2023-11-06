@@ -12,7 +12,7 @@ building filter chains (operator >> or ->) as well as combining them with basic 
 
 * \+ : addition
 * \- : subtraction
-* \* : multiplitation
+* \* : multiplication
 * \/ : division
 * \^ : power / exponentiation
 * \|. \| : absolute value.

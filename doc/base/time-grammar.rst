@@ -122,7 +122,7 @@ If either of the operands is unset then the result will be also unset.
 
 * \+ : addition
 * \- : subtraction
-* \* : multiplitation
+* \* : multiplication
 * \/ : division
 * \^ : power / exponentiation
 * \|\| : logical OR which returns the first set value if any
