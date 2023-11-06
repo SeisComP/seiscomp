@@ -68,6 +68,8 @@ All notable changes to SeisComP are documented here.
         (Shift + W).
     -   Add resetting the length of the zoom window to the trace overview in
         amplitude picker.
+    -   Preserve arrival definition flags (backazimuth, h-slowness) when committing
+        from picker if a pick is not enabled.
 -   scrttv
     -   Add spectrogram view
 -   scmapcut
@@ -96,15 +98,15 @@ All notable changes to SeisComP are documented here.
 -   scorgls
     -   Add option `--input` loading XML and printing IDs of contained origins.
 -   scardac
-    -   rescan only those chunks modified since last scan
-    -   add `deep-scan` paramater to force rescan
-    -   add `to` and `from` parameter to limit scan by record time
-    -   add `modified-since` and `modified-util` parameter to rescan
-        chunks modified in particular time window
-    -   add waveform id filter parameter
-    -   modernize code
-    -   add test cases
-    -   increase collector API version to 2
+    -   Rescan only those chunks modified since last scan.
+    -   Add `--deep-scan` paramater to force rescan.
+    -   Add `--to` and `--from` parameter to limit scan by record time.
+    -   Add `--modified-since` and `--modified-until` parameter to rescan
+        chunks modified in particular time window.
+    -   Add options `--include` and `--exclude` for filtering waveforms by ID.
+    -   Modernize code.
+    -   Add test cases.
+    -   Increase collector API version to 2.
 -   screpick
     -   Add as new module.
 
