@@ -105,6 +105,8 @@ All notable changes to SeisComP are documented here.
     -   modernize code
     -   add test cases
     -   increase collector API version to 2
+-   screpick
+    -   Add as new module.
 
 ## 5.5.10
 
