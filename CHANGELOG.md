@@ -2,12 +2,57 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 6.0.0
+
+```SC_API_VERSION 16.0.0```
+
+With this version we drop Qt 4 support for all GUI applications.
+
+The database schema receives a small update and will increase the schema version
+to 0.13. In particular some new event types have been introduced:
+
+-   volcano tectonic
+-   volcanic long period
+-   volcanic very long period
+-   volcanic hybrid
+-   volcanic rockfall
+-   volcanic tremor
+-   pyroclastic flow
+-   lahar
+
+SeisComP3 API support is deprecated and will be removed in the next
+major version of SeisComP. This affects C++ includes like
+
+```c++
+#include <seiscomp3/core/datetime.h>
+```
+
+and Python imports like
+
+```python
+import seiscomp3.Core
+```
+
+They must be replaced with their SeisComP counterparts:
+
+```c++
+#include <seiscomp/core/datetime.h>
+```
+
+and
+
+```python
+import seiscomp.core
+```
+
+
+Changes:
 
 -   trunk
     -   Configuration schema files (`@SYSTEMCONFIGDIR@/descriptions/[module].xml`)
         support extending available structures with plugins including selective
         name matching:
+
         ```xml
         <extend-struct type="Amplitude">
             <parameter name="param1" type="string"/>
@@ -15,17 +60,19 @@ All notable changes to SeisComP are documented here.
         ```
 
         or with matching structure names (here ML* including regular expressions):
+
         ```xml
         <extend-struct type="Amplitude" match-name="ML.*">
             <parameter name="param1" type="string"/>
         </extent-struct>
         ```
+
     -   Artificial origins: Allow pasting of hypocenter coordinates with high
         precision.
     -   Changed KM_OF_DEGREE constant according to WGS84 mean radius definition.
     -   Changed default values of Wood-Anderson instrument filter to
-        recommendations by IASPEI magnitude group, 2011 and Uhrhammer et al.,
-        1990. The change systematically reduces magnitudes by 0.13 when making
+        recommendations by IASPEI magnitude group, 2011 and Uhrhammer et al., 1990.
+        The change systematically reduces magnitudes by 0.13 when making
         use of amplitudes measured on waveforms corrected for Wood-Anderson
         seismometers with default.
     -   Remove `MYSQL_OPT_RECONNECT` option from MYSQL database driver to get
