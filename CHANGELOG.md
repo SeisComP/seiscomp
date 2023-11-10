@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.0.1
+
+-   scmaster
+    -   Fix database migration detection
+
 ## 6.0.0
 
 ```SC_API_VERSION 16.0.0```
