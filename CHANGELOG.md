@@ -2,6 +2,15 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.0.2
+
+-   trunk
+    -   Remove logging of database connection to not expose user
+        accounts in log files.
+-   scmaster
+    -   Remove logging of of database connection in dbstore plugin
+        to not expose user accounts in log files.
+
 ## 6.0.1
 
 -   scmaster
