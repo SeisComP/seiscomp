@@ -7,6 +7,11 @@ All notable changes to SeisComP are documented here.
 -   GUI
     -   Fix spectrogram update rendering w.r.t. time
         normalization.
+    -   Fix zoom record time range display in amplitude view.
+        When a new time range has been selected, e.g. via
+        the time scale, then not the full time range has been
+        set but only < 100% depending on the window size and
+        screen resolution.
 
 ## 6.0.2
 
