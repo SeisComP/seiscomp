@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.0.3
+
+-   GUI
+    -   Fix spectrogram update rendering w.r.t. time
+        normalization.
+
 ## 6.0.2
 
 -   trunk
