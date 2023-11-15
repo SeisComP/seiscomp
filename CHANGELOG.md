@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.11
+
+-   scmapcut
+    -   Fix crash in combination with `-h`.
+
 ## 5.5.10
 
 -   scrttv
