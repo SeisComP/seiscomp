@@ -14,6 +14,9 @@ All notable changes to SeisComP are documented here.
 -   trunk
     -   Fix internal timer exceptions in combination with OSX.
     -   Remove duplicate CLI parameter `--shutdown-master-username`.
+-   seedlink
+    -   Add more channels and increase sample rate to 1Hz for vaisala
+        protocol.
 
 ## 6.0.3
 
