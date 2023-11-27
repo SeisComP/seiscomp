@@ -2,6 +2,22 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.0.4
+
+-   seiscomp
+    -   Fix an issue with special characters in db password, etc.
+-   scconfig
+    -   Set red background also for checkboxes if the parameter
+        is overridden.
+-   GUI
+    -   Fix spectrogram rendering with time normalization.
+-   trunk
+    -   Fix internal timer exceptions in combination with OSX.
+    -   Remove duplicate CLI parameter `--shutdown-master-username`.
+-   seedlink
+    -   Add more channels and increase sample rate to 1Hz for vaisala
+        protocol.
+
 ## 6.0.3
 
 -   GUI
