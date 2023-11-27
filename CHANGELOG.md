@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.12
+
+-   seiscomp
+    -   Fix an issue with special characters in db password, etc.
+-   trunk
+    -   Remove duplicate CLI parameter `--shutdown-master-username`.
+
 ## 5.5.11
 
 -   scmapcut
