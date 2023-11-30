@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.13
+
+-   seedlink
+    -   Fix plugin update-config if global parameters are modified,
+        e.g. mseeedfifo plugin. 
+
 ## 5.5.12
 
 -   seiscomp
