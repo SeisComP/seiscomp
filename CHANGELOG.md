@@ -17,6 +17,8 @@ All notable changes to SeisComP are documented here.
 -   seedlink
     -   Add more channels and increase sample rate to 1Hz for vaisala
         protocol.
+    -   Fix plugin update-config if global parameters are modified,
+        e.g. mseeedfifo plugin.
 
 ## 6.0.3
 
