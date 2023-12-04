@@ -89,6 +89,95 @@ import seiscomp.core
 
 Changes:
 
+## 6.0.4
+
+-   seiscomp
+    -   Fix an issue with special characters in db password, etc.
+-   scconfig
+    -   Set red background also for checkboxes if the parameter
+        is overridden.
+-   GUI
+    -   Fix spectrogram rendering with time normalization.
+-   trunk
+    -   Fix internal timer exceptions in combination with OSX.
+    -   Remove duplicate CLI parameter `--shutdown-master-username`.
+-   seedlink
+    -   Add more channels and increase sample rate to 1Hz for vaisala
+        protocol.
+    -   Fix plugin update-config if global parameters are modified,
+        e.g. mseeedfifo plugin.
+
+## 6.0.3
+
+-   GUI
+    -   Fix spectrogram update rendering w.r.t. time
+        normalization.
+    -   Fix zoom record time range display in amplitude view.
+        When a new time range has been selected, e.g. via
+        the time scale, then not the full time range has been
+        set but only < 100% depending on the window size and
+        screen resolution.
+
+## 6.0.2
+
+-   trunk
+    -   Remove logging of database connection to not expose user
+        accounts in log files.
+-   scmaster
+    -   Remove logging of of database connection in dbstore plugin
+        to not expose user accounts in log files.
+
+## 6.0.1
+
+-   scmaster
+    -   Fix database migration detection
+
+## 6.0.0
+
+```SC_API_VERSION 16.0.0```
+
+With this version we drop Qt 4 support for all GUI applications.
+
+The database schema receives a small update and will increase the schema version
+to 0.13. In particular some new event types have been introduced:
+
+-   volcano tectonic
+-   volcanic long period
+-   volcanic very long period
+-   volcanic hybrid
+-   volcanic rockfall
+-   volcanic tremor
+-   pyroclastic flow
+-   lahar
+
+SeisComP3 API support is deprecated and will be removed in the next
+major version of SeisComP. This affects C++ includes like
+
+```c++
+#include <seiscomp3/core/datetime.h>
+```
+
+and Python imports like
+
+```python
+import seiscomp3.Core
+```
+
+They must be replaced with their SeisComP counterparts:
+
+```c++
+#include <seiscomp/core/datetime.h>
+```
+
+and
+
+```python
+import seiscomp.core
+```
+
+
+Changes:
+
 -   trunk
     -   Configuration schema files (`@SYSTEMCONFIGDIR@/descriptions/[module].xml`)
         support extending available structures with plugins including selective
