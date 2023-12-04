@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.14
+
+-   seedlink
+    -   Revert previous fix as it fixes one configuration but breaks
+        another.
+    -   Fix mseedfifo plugin setup that it can be used as regular plugin.
+
 ## 5.5.13
 
 -   seedlink
