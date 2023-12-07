@@ -1,6 +1,10 @@
 # Change Log
 
 All notable changes to SeisComP are documented here.
+## x.y.z
+
+-   ql2sc
+    -   Add configurable event attribute synchronization delay.        
 
 ## 6.0.4
 
