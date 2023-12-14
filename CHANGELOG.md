@@ -1,97 +1,46 @@
 # Change Log
 
 All notable changes to SeisComP are documented here.
-## x.y.z
+
+## 6.1.0
 
 -   ql2sc
-    -   Add configurable event attribute synchronization delay.        
-
-## 6.0.4
-
--   seiscomp
-    -   Fix an issue with special characters in db password, etc.
--   scconfig
-    -   Set red background also for checkboxes if the parameter
-        is overridden.
--   GUI
-    -   Fix spectrogram rendering with time normalization.
--   trunk
-    -   Fix internal timer exceptions in combination with OSX.
-    -   Remove duplicate CLI parameter `--shutdown-master-username`.
+    -   Add configurable event synchronization delay parameter to avoid
+        race conditions in cross connected setups.
+-   scautoloc
+    -   Consider configuration of LOCSAT locator interface, supporting
+        deactivation of slowess, backazimuth parameters which may be obtained
+        during phase picking.
 -   seedlink
-    -   Add more channels and increase sample rate to 1Hz for vaisala
-        protocol.
-
-## 6.0.3
-
--   GUI
-    -   Fix spectrogram update rendering w.r.t. time
-        normalization.
-    -   Fix zoom record time range display in amplitude view.
-        When a new time range has been selected, e.g. via
-        the time scale, then not the full time range has been
-        set but only < 100% depending on the window size and
-        screen resolution.
-
-## 6.0.2
-
+    -   Fix crash in chain plugin if mseed records with
+        invalid header data are transmitted.
+-   scesv
+    -   Fix crash in combination with latest automatic
+        origin display.
+-   scdispatch
+    -   Log if an object already exists in database so that
+        a user can understand why nothing was dispatched.
+    -   Remove all event objects from the list of objects when applying
+        `--no-events` instead of removing the routing.
+-   scardac
+    -   Add --nslc option allowing to skip initial archive scan for
+        available waveform stream IDs.
 -   trunk
-    -   Remove logging of database connection to not expose user
-        accounts in log files.
--   scmaster
-    -   Remove logging of of database connection in dbstore plugin
-        to not expose user accounts in log files.
+    -   Prevent RMHP() from crashing when time span is below sample interval.
+    -   Magnitude regionalization for profile "world" can work without
+        specifying a region file.
+    -   Magnitude region check also includes mininum and maximum depth,
+        transforming the 2D region test into a 3D region test.
+-   seiscomp
+    -   Remove support for Ubuntu 18.04 with `install-deps`.
+    -   Switch `install-deps` to Qt5 with RHEL7.
 
-## 6.0.1
+## 6.0.5
 
--   scmaster
-    -   Fix database migration detection
-
-## 6.0.0
-
-```SC_API_VERSION 16.0.0```
-
-With this version we drop Qt 4 support for all GUI applications.
-
-The database schema receives a small update and will increase the schema version
-to 0.13. In particular some new event types have been introduced:
-
--   volcano tectonic
--   volcanic long period
--   volcanic very long period
--   volcanic hybrid
--   volcanic rockfall
--   volcanic tremor
--   pyroclastic flow
--   lahar
-
-SeisComP3 API support is deprecated and will be removed in the next
-major version of SeisComP. This affects C++ includes like
-
-```c++
-#include <seiscomp3/core/datetime.h>
-```
-
-and Python imports like
-
-```python
-import seiscomp3.Core
-```
-
-They must be replaced with their SeisComP counterparts:
-
-```c++
-#include <seiscomp/core/datetime.h>
-```
-
-and
-
-```python
-import seiscomp.core
-```
-
-
-Changes:
+-   seedlink
+    -   Revert previous fix as it fixes one configuration but breaks
+        another. Future versions will address this issue.
+    -   Fix mseedfifo plugin setup that it can be used as regular plugin.
 
 ## 6.0.4
 
