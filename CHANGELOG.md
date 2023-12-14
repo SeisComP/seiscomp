@@ -9,7 +9,7 @@ All notable changes to SeisComP are documented here.
         race conditions in cross connected setups.
 -   scautoloc
     -   Consider configuration of LOCSAT locator interface, supporting
-        deactivation of slowess, backazimuth parameters which may be obtained
+        deactivation of slowness, backazimuth parameters which may be obtained
         during phase picking.
 -   seedlink
     -   Fix crash in chain plugin if mseed records with
@@ -23,14 +23,19 @@ All notable changes to SeisComP are documented here.
     -   Remove all event objects from the list of objects when applying
         `--no-events` instead of removing the routing.
 -   scardac
-    -   Add --nslc option allowing to skip initial archive scan for
+    -   Add `--nslc` option allowing to skip initial archive scan for
         available waveform stream IDs.
 -   trunk
     -   Prevent RMHP() from crashing when time span is below sample interval.
     -   Magnitude regionalization for profile "world" can work without
         specifying a region file.
-    -   Magnitude region check also includes mininum and maximum depth,
+    -   Magnitude region check also includes minimum and maximum depth,
         transforming the 2D region test into a 3D region test.
+-   magnitudes
+    -   Add depth check to regionalization.
+    -   Update documentation of concepts and tutorial.
+    -   Update MLc documentation.
+    -   MLv, ML, MLc: Test regionalized `logA0` parameters for old-style values.
 -   seiscomp
     -   Remove support for Ubuntu 18.04 with `install-deps`.
     -   Switch `install-deps` to Qt5 with RHEL7.
