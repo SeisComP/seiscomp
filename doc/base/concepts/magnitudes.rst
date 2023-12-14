@@ -77,11 +77,36 @@ parameters are identical to the global bindings parameters. All lines start with
 
    module.trunk.GE.UGM.magnitudes.MLv.offset = 0.1
 
+.. note::
+
+   The configuration of parameters starting with *module.trunk.* is not
+   supported by :ref:`scconfig`. All corresponding configurations must be done
+   by direclty editing the configuration file, e.g.,
+   :file:`seiscomp/etc/global.cfg`.
+
+
+Network Magnitudes
+==================
+
+Network magnitudes are computed automatically by :ref:`scmag` or interactively
+by :ref:`scolv` from station magnitudes based on averaging station magnitudes.
+The averaging methods applied by :ref:`scmag` are configurable by
+:confval:`magnitudes.average`.
+
+
+Aliases
+=======
+
+New magnitude types (aliases) can be created based on existing magnitude and
+amplitude types but configured specifically.
+The setup procedure is outlined in the
+:ref:`tutorial on magnitude aliases <tutorials_magnitude-aliases>`.
+
 
 .. _concepts-magnitudes-regionalization:
 
 Regionalization
----------------
+===============
 
 The computation of station magnitudes can be regionalized. This means that for
 a specific region specific conditions apply when computing magnitudes. The
@@ -99,42 +124,17 @@ setup procedure including
 :ref:`tutorial on regionalization <tutorials_magnitude-region-aliases>`.
 
 
-Aliases
--------
-
-New magnitude types (aliases) can be created based on existing magnitude and
-amplitude types with specific properties. Such aliases are defined by the
-global parameter :confval:`magnitudes.aliases` and configured as any other
-amplitude and magnitude in bindings or by regionalization.
-The setup procedure is outlined in the
-:ref:`tutorial on magnitude aliases <tutorials_magnitude-region-aliases>`.
-
-
-Network Magnitudes
-==================
-
-Network magnitudes are computed automatically by :ref:`scmag` or interactively
-by :ref:`scolv` from station magnitudes based on averaging station magnitudes.
-The averaging methods applied by :ref:`scmag` are configurable by
-:confval:`magnitudes.average`.
-
-
 Moment Magnitudes
 =================
 
 Moment magnitudes can be derived from all other network magnitudes by mapping of
 the original network magnitude, e.g., *Mx*, to a new moment magnitude *Mw(Mx)*.
-The mapping function can be configured within a magnitude type profile for all
-original magnitude types except :term:`mB <magnitude, derived mB (Mw(mB))>` and
-:term:`Mwp <magnitude, derived Mwp (Mw(Mwp))>` in the global module configuration.
-Any mapping configuration for :term:`mB <magnitude, derived mB (Mw(mB))>` and
-:term:`Mwp <magnitude, derived Mwp (Mw(Mwp))>` is ignored since a hard-coded
-mapping applied.
 
-In order to avoid that :ref:`summary magnitudes <concepts-magnitudes-summary>`
-are computed from original magnitudes and mapped Mw together and biased to both,
-the original magnitudes can be blocklisted in :ref:`scmag`
-(:confval:`summaryMagnitude.blacklist`).
+The mapping function can be configured for all original magnitude types except
+:term:`mB <magnitude, derived mB (Mw(mB))>` and
+:term:`Mwp <magnitude, derived Mwp (Mw(Mwp))>` where the mapping is hardcoded.
+Read the :ref:`tutorial on moment magnitudes <tutorials_mags_moment>` for the
+configuration.
 
 
 .. _concepts-magnitudes-summary:
