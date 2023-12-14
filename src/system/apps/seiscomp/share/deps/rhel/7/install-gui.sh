@@ -1,1 +1,1 @@
-yum install qt qt-x11
+yum install qt5-qtbase qt5-qtbase-gui qt5-qtsvg
