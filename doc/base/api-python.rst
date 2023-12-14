@@ -2089,6 +2089,30 @@ Used by:
    * - ``ATMOSPHERIC_METEOR_EXPLOSION``
      - 59
      - atmospheric meteor explosion
+   * - ``VOLCANO_TECTONIC``
+     - 60
+     - volcano-tectonic
+   * - ``VOLCANIC_LONG_PERIOD``
+     - 61
+     - volcanic long-period
+   * - ``VOLCANIC_VERY_LONG_PERIOD``
+     - 62
+     - volcanic very-long-period
+   * - ``VOLCANIC_HYBRID``
+     - 63
+     - volcanic hybrid
+   * - ``VOLCANIC_ROCKFALL``
+     - 64
+     - volcanic rockfall
+   * - ``VOLCANIC_TREMOR``
+     - 65
+     - volcanic tremor
+   * - ``PYROCLASTIC_FLOW``
+     - 66
+     - pyroclastic flow
+   * - ``LAHAR``
+     - 67
+     - lahar
 
 Used by:
 
