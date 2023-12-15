@@ -16,6 +16,8 @@ All notable changes to SeisComP are documented here.
 -   seedlink
     -   Fix crash in chain plugin if mseed records with
         invalid header data are transmitted.
+    -   Fix network code mapping in `sock_plugin`.
+    -   Fix fifo path resolve in `mseedfifo_plugin`.
 -   scesv
     -   Fix crash in combination with latest automatic
         origin display.
