@@ -34,6 +34,8 @@ All notable changes to SeisComP are documented here.
 -   seiscomp
     -   Remove support for Ubuntu 18.04 with `install-deps`.
     -   Switch `install-deps` to Qt5 with RHEL7.
+    -   Resolve fifo path in `mseedfifo` plugin configuration to support
+        `@ROOTDIR@` and other SeisComP directories.
 
 ## 6.0.5
 
