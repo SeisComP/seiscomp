@@ -29,6 +29,19 @@ All notable changes to SeisComP are documented here.
 -   scardac
     -   Add `--nslc` option allowing to skip initial archive scan for
         available waveform stream IDs.
+-   scinv
+    -   Add test for stream orthogonality to the check command:
+        -   The test is limited to streams with sensor type code G, H, L or N
+            (second letter of channel code).
+        -   Any 3-component stream group of the same epoch stream code being not
+            orthogonal is reported. Deviations of up to 1 degree are tolerated.
+            The test is diagnostic since data processing made on horizontal or 3
+            components, e.g., for picking S phases or measuring ML amplitudes
+            will rely on orthogonality and will deny any streams groups
+            violating orthogonality.
+        -   If 3-component streams exist for a sensor location, any epoch
+            having 2 or more than 3 components for the same sensor location will
+            be reported.
 -   trunk
     -   Prevent RMHP() from crashing when time span is below sample interval.
     -   Magnitude regionalization for profile "world" can work without
@@ -138,7 +151,6 @@ and
 ```python
 import seiscomp.core
 ```
-
 
 Changes:
 
@@ -324,10 +336,10 @@ Changes:
     -   Allow stdloc LeastSquares to locate even with less iterations.
     -   Fix regression in MLc magnitude to correctly compute the hypocentral
             distance taking the sensor location elevation into account and also
-            supporting negative source depths. In versions < 5.5.3 the source depth was
-            clipped to 0 and the sensor location elevation did not contribute. In
-            version 5.5.3 and 5.5.4 all depths were considered but without the
-            sensor location elevation.
+            supporting negative source depths. In versions < 5.5.3 the source
+            depth was clipped to 0 and the sensor location elevation did not
+            contribute. In version 5.5.3 and 5.5.4 all depths were considered
+            but without the sensor location elevation.
 
 ## 5.5.4
 
@@ -538,13 +550,13 @@ Changes:
     -   Add command-line option `-o` for explicitely writing miniSEED records to
         file instead of stdout.
 -   scsendjournal
-    -   Add `-i` to read journal parameter data from file
+    -   Add `-i` to read journal parameter data from file.
 -   scbulletin
     -   Do not crash when reading origins with magnitudes but without
         corresponding picks.
     -   Guess missing arrival weight from use of measurements.
 -   ql2sc
-    -   Update filter documentation
+    -   Update filter documentation.
 -   scautopick
     -   Fix segmentation fault if being used in playback mode without
         inventory
@@ -554,19 +566,20 @@ Changes:
     -   Add tooltip to station layer with station annotation.
 -   scrttv
     -   Update documentation.
-    -   Show different colour scheme for picks and arrivals (associated with a non-rejected
-        origin)
-    -   Allow to collect picks to create a preliminary location which can be sent to the
-        messaging as regular origin object
-    -   Add reload action which reloads data and picks at the current visible time range
-    -   Add action to switch to real-time with configured buffer size
-    -   Re-organize menus and actions
+    -   Show different colour scheme for picks and arrivals (associated with a
+        non-rejected origin).
+    -   Allow to collect picks to create a preliminary location which can be
+        sent to the messaging as regular origin object.
+    -   Add reload action which reloads data and picks at the current visible
+        time range.
+    -   Add action to switch to real-time with configured buffer size.
+    -   Re-organize menus and actions.
     -   New option `--map-picks` allows to show picks on visible streams even
         when they were created on invisible streams, e.g., S picks created on
         horizontal components are shown verticals.
-    -   Add `--input-file` to load an XML pick file at startup
+    -   Add `--input-file` to load an XML pick file at startup.
 -   scmapcut
-    -   Fix segmentation fault at exit if a tilestore plugin is used
+    -   Fix segmentation fault at exit if a tilestore plugin is used.
 -   scqc
     -   Fix default configuration timeout value for Rms plugin from 60 back to 0
         reflecting the documented default value. A value greater than 0 results
@@ -934,12 +947,13 @@ to 0.12.
     -   Fix lat/lon order of modify origin dialog opened from zoomtrace of
         the picker.
 -   scmaster
-    -   Fix saving location of the generated configuration file with `seiscomp setup`.
-        Due to a bug the file was generated in `~/.seiscomp/scmaster.cfg` whereas it
-        should have been generated in `etc/scmaster.cfg`. As this is fixed now, please
-        remove `~/.seiscomp/scmaster.cfg` if you were affected by the bug otherwise
-        this old configuration will take precedence and new configurations will not
-        have any effect. This bug has been introduced with version 4.9.0.
+    -   Fix saving location of the generated configuration file with
+        `seiscomp setup`. Due to a bug the file was generated in
+        `~/.seiscomp/scmaster.cfg` whereas it should have been generated in
+        `etc/scmaster.cfg`. As this is fixed now, please remove
+        `~/.seiscomp/scmaster.cfg` if you were affected by the bug otherwise
+        this old configuration will take precedence and new configurations will
+        not have any effect. This bug has been introduced with version 4.9.0.
 
 ## 4.9.3
 
