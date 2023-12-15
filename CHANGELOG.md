@@ -2,6 +2,21 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.15
+
+-   seedlink
+    -   Fix crash in chain plugin if mseed records with
+        invalid header data are transmitted.
+    -   Fix network code mapping in `sock_plugin`.
+    -   Fix fifo path resolve in `mseedfifo_plugin`.
+-   scesv
+    -   Fix crash in combination with latest automatic
+        origin display.
+-   scautoloc
+    -   Consider configuration of LOCSAT locator interface, supporting
+        deactivation of slowness, backazimuth parameters which may be obtained
+        during phase picking.
+
 ## 5.5.14
 
 -   seedlink
