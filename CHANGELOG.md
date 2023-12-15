@@ -4,6 +4,8 @@ All notable changes to SeisComP are documented here.
 
 ## 6.1.0
 
+```SC_API_VERSION 16.1.0```
+
 -   ql2sc
     -   Add configurable event synchronization delay parameter to avoid
         race conditions in cross connected setups.
