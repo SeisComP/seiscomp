@@ -263,6 +263,39 @@ Changes:
 -   screpick
     -   Add as new module.
 
+## 5.5.15
+
+-   seedlink
+    -   Fix crash in chain plugin if mseed records with
+        invalid header data are transmitted.
+    -   Fix network code mapping in `sock_plugin`.
+    -   Fix fifo path resolve in `mseedfifo_plugin`.
+
+## 5.5.14
+
+-   seedlink
+    -   Revert previous fix as it fixes one configuration but breaks
+        another.
+    -   Fix mseedfifo plugin setup that it can be used as regular plugin.
+
+## 5.5.13
+
+-   seedlink
+    -   Fix plugin update-config if global parameters are modified,
+        e.g. mseeedfifo plugin. 
+
+## 5.5.12
+
+-   seiscomp
+    -   Fix an issue with special characters in db password, etc.
+-   trunk
+    -   Remove duplicate CLI parameter `--shutdown-master-username`.
+
+## 5.5.11
+
+-   scmapcut
+    -   Fix crash in combination with `-h`.
+
 ## 5.5.10
 
 -   scrttv
