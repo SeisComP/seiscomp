@@ -48,6 +48,8 @@ All notable changes to SeisComP are documented here.
         specifying a region file.
     -   Magnitude region check also includes minimum and maximum depth,
         transforming the 2D region test into a 3D region test.
+    -   Expose parameter `amplitudes.iaspei` in global module configuration of
+        scconfig.
 -   magnitudes
     -   Add depth check to regionalization.
     -   Update documentation of concepts and tutorial.
