@@ -2,6 +2,14 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.16
+
+-   scolv
+    -   Fix station count update of Mw magnitude if a magnitudes
+        has been recalculated in the magnitude view. Furthermore
+        the Mw tab header updates correctly and shows the number
+        of stations.
+
 ## 5.5.15
 
 -   seedlink
