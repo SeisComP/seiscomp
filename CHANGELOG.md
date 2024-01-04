@@ -2,6 +2,14 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.1.2
+
+-   trunk
+    -   Populate SNR value of ML and MLc amplitudes.
+-   scolv
+    -   Preselect measure type and combiner dropdown based on
+        station bindings.
+
 ## 6.1.1
 
 -   scolv
