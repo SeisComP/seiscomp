@@ -2,6 +2,25 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.1.2
+
+-   trunk
+    -   Populate SNR value of ML and MLc amplitudes.
+    -   Fix reading amplitude regionalization regions,
+        use `magnitudes.[type].regionFile` instead of
+        `magnitudes.[type].regions` as in v4.
+-   scolv
+    -   Preselect measure type and combiner dropdown based on
+        station bindings.
+
+## 6.1.1
+
+-   scolv
+    -   Fix station count update of Mw magnitude if a magnitudes
+        has been recalculated in the magnitude view. Furthermore
+        the Mw tab header updates correctly and shows the number
+        of stations.
+
 ## 6.1.0
 
 ```SC_API_VERSION 16.1.0```
