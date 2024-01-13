@@ -44,6 +44,15 @@ def xml_desc_lines(n):
     return []
 
 
+def xml_parameter_attributes(n, tag):
+    value_node = n.find(tag)
+
+    if value_node is not None and value_node.text is not None:
+        return value_node.text.replace("\r", "").replace(",", ", ")
+
+    return None
+
+
 def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
     # pylint: disable=W0621
     if param_nodes is None and group_nodes is None:
@@ -64,6 +73,19 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
         desc = xml_desc_lines(param_node)
         options += f"\n.. confval:: {prefix}{name}\n\n"
         default = param_node.get("default")
+        pValues = param_node.get("values")
+        pRange = param_node.get("range")
+
+        if not default:
+            default = xml_parameter_attributes(param_node, "default")
+        if not unit:
+            unit = xml_parameter_attributes(param_node, "unit")
+        if not type_:
+            type_ = xml_parameter_attributes(param_node, "type")
+        if not pValues:
+            pValues = xml_parameter_attributes(param_node, "values")
+        if not pRange:
+            pRange = xml_parameter_attributes(param_node, "range")
 
         if default:
             options += f"   Default: ``{default}``\n\n"
@@ -71,6 +93,11 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
             options += f"   Type: *{type_}*\n\n"
         if unit:
             options += f"   Unit: *{unit}*\n\n"
+        if pValues:
+            options += f"   Values: ``{pValues.lstrip().rstrip()}``\n\n"
+        if pRange:
+            options += f"   Range: ``{pRange.lstrip().rstrip()}``\n\n"
+
         # Description available
         if len(desc) > 0:
             for line in desc:
@@ -240,8 +267,44 @@ Command-Line Options
 
             if param_ref:
                 option += (
-                    f"   Overrides configuration parameter :confval:`{param_ref}`.\n"
+                    f"   Overrides configuration parameter :confval:`{param_ref}`.\n\n"
                 )
+
+            pDefault = None
+            pUnit = None
+            pType = None
+            pValues = None
+            pRange = None
+
+            if arg:
+                pDefault = option_node.get("default")
+                pUnit = option_node.get("unit")
+                pType = option_node.get("type")
+                pValues = option_node.get("values")
+                pRange = option_node.get("range")
+
+                if not pDefault:
+                    pDefault = xml_parameter_attributes(option_node, "default")
+                if not pUnit:
+                    pUnit = xml_parameter_attributes(option_node, "unit")
+                if not pType:
+                    pType = xml_parameter_attributes(option_node, "type")
+                if not pValues:
+                    pValues = xml_parameter_attributes(option_node, "values")
+                if not pRange:
+                    pRange = xml_parameter_attributes(option_node, "range")
+
+            if pDefault:
+                option += f"   Default: ``{pDefault}``\n\n"
+            if pUnit:
+                option += f"   Unit: *{pUnit}*\n\n"
+            if pType:
+                option += f"   Type: *{pType}*\n\n"
+            if pValues:
+                option += f"   Values: ``{pValues.lstrip().rstrip()}``\n\n"
+            if pRange:
+                option += f"   Range: ``{pRange.lstrip().rstrip()}``\n\n"
+
             desc = xml_desc_lines(option_node)
             if len(desc) > 0:
                 for line in desc:
