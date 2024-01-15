@@ -15,7 +15,8 @@ You will enable processing by your existing local SeisComP system.
 
 :Afterwards/Results/Outcomes:
 
-  * The new station is used for automatic real-time data processing.
+  * The new station is available for visualization and general data processing.
+  * The new station is used for automatic real-time phase picking.
 
 :Time range estimate:
 
@@ -36,8 +37,8 @@ and individual stations.
 See the "Bindings" section of :ref:`concepts_configuration` for full details.
 
 You can create the necessary bindings for your new station
-using :program:`scconfig`.
-Go to the "Bindings" tab on the left side bar of :program:`scconfig`.
+using :ref:`scconfig`.
+Go to the "Bindings" tab on the left side bar of :ref:`scconfig`.
 
 * You will need to add  "global" and "scautopick" bindings.
 
@@ -51,7 +52,7 @@ Go to the "Bindings" tab on the left side bar of :program:`scconfig`.
   * Drag and drop all profiles from the right side to the network icon on the
     left side (you may do that also at the station level).
 
-  * Press Ctrl+S to save the configuration.
+  * Press :kbd:`Ctrl`+:kbd:`S` to save the configuration.
     This writes configuration files in :file:`~/seiscomp/etc/key`.
 
 * Alternatively, you can add the scautopick and global bindings
@@ -67,12 +68,27 @@ Go to the "Bindings" tab on the left side bar of :program:`scconfig`.
 
   in addition to any other bindings that might be defined for this station.
 
-Then:
+Then execute:
 
 .. code-block:: sh
 
    $ seiscomp update-config
    $ seiscomp restart scautopick
+
+or use :ref:`scconfig` for these actions.
+
+.. note::
+
+   * Station inventory must be available at least on channel level and the global
+     bindings must match the inventory and the available waveforms.
+   * Global bindings are required for data visualization and general data
+     processing.
+   * Enable :ref:`scautopick` for running it by default.
+   * Generated picks may be used by other modules, such as :ref:`scautoloc`
+     which must be set up independently.
+   * The default parameters for :ref:`scautopick` have been optimized for
+     monitoring earthquakes at teleseismic distances and the must be adjusted
+     for other types.
 
 
 Check the station is used for processing
@@ -86,26 +102,27 @@ If you have correctly configured the station for processing, then:
 
     2020/03/01 18:01:00 [info/Autopick] Adding detection channel GR.CLL..BHZ
 
-  After some time, a nearby event will occur and the station should then be picked.
-  This should appear in the latest :file:`autoloc-picklog` file in
-  :file:`~/.seiscomp/log`:
+  After some time, a nearby event will occur and phases recorded on this station
+  should be picked. If :ref:`scautoloc` was running at the time and
+  :confval:`autoloc.pickLogEnable` was activated, the pick should appear in the
+  latest :file:`autoloc-picklog` file in :file:`~/.seiscomp/log`:
 
   .. code-block:: sh
 
      $ grep "CLL" .seiscomp/log/autoloc-picklog.2020-03-01
      2020-03-01 18:31:47.1 GR CLL    BHZ __   40.9    177.433  1.1 A 20200301.183147.13-AIC-GR.CLL..BHZ
 
+* The station should now also appear in the GUIs.
+  After reopening them,
 
-* The station should now appear in the GUIs.
-  After restarting them,
-
-  - The station should now show up in :program:`scmv`
+  * The station should now show up in :program:`scmv`
     (as a new triangle at the expected location on the map,
     which is not black if the station is active).
 
-  - In :program:`scrttv` a trace should be visible.
+  * In :program:`scrttv` a trace or at least the line for the configured stream
+    should be visible.
 
-  - In :program:`scolv`, the new station is either already included
+  * In :program:`scolv`, the new station is either already included
     in automatic locations, or can be added manually.
 
 In case of problems, check that :confval:`detecStream` and
