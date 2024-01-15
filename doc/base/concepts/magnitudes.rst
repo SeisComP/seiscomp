@@ -91,7 +91,18 @@ Network Magnitudes
 Network magnitudes are computed automatically by :ref:`scmag` or interactively
 by :ref:`scolv` from station magnitudes based on averaging station magnitudes.
 The averaging methods applied by :ref:`scmag` are configurable by
-:confval:`magnitudes.average`.
+:confval:`magnitudes.average`. Available are (:cite:t:`rosenberger-1983`):
+
+* *mean*: the mean value from all station magnitudes.
+* *median*: the mean value from all station magnitudes.
+* *trimmedMean(X)*: gnores outlier station magnitudes by first removing the
+  largest and the smallest *X*% of the observed values (percentiles). The mean is
+  formed from the remaining station magnitudes.
+* *trimmedMedian(X)*: forms the median from all station magnitudes but returns
+  the uncertainty by ignoring the largest and the smallest *X*% station
+  magnitudes.
+* *medianTrimmedMean(X)*: returns the mean magnitude from all station magnitudes
+  differing less than *X* magnitudes from the median.
 
 
 Aliases
