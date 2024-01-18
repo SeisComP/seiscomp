@@ -12,6 +12,9 @@ All notable changes to SeisComP are documented here.
 -   scolv
     -   Preselect measure type and combiner dropdown based on
         station bindings.
+-   scesv
+    -   Fix regression which prevented showing the current
+        magnitudes when `showLastAutomaticSolution = true`.
 
 ## 6.1.1
 
