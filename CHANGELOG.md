@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.17
+
+-   scesv
+    -   Fix regression which prevented showing the current
+        magnitudes when `showLastAutomaticSolution = true`.
+
 ## 5.5.16
 
 -   scolv
