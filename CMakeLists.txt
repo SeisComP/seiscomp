@@ -30,6 +30,10 @@ OPTION(SC_GLOBAL_PYTHON_WRAPPER "Create Python 3 wrapper" ON)
 OPTION(SC_GLOBAL_PYTHON_WRAPPER_NUMPY "Add Numpy support for Python 3 wrapper" ON)
 OPTION(SC_ENABLE_CONTRIB "Enables descending into the contrib directory" ON)
 
+# Modern GCC (>= 5.1) on old systems with libraries compiled with ABI version 0.
+# see https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dual_abi.html
+OPTION(FORCE_CXX11_ABI_0 "Option description" OFF)
+
 SET(PythonInterp_FIND_VERSION 3)
 SET(PythonInterp_FIND_VERSION_MAJOR 3)
 SET(PythonInterp_FIND_VERSION_EXACT 0)
@@ -136,6 +140,12 @@ IF (CMAKE_COMPILER_IS_GNUCC)
 
 	# Enable C++17 features
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+
+	# Modern GCC (>= 5.1) on old systems with libraries compiled with ABI version 0.
+	# see https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dual_abi.html
+	IF ( FORCE_CXX11_ABI_0 )
+		ADD_COMPILE_DEFINITIONS(_GLIBCXX_USE_CXX11_ABI=0)
+	ENDIF ()
 ENDIF (CMAKE_COMPILER_IS_GNUCC)
 
 # Set the platform specific suffix for dynamic libraries
@@ -153,7 +163,7 @@ IF (CMAKE_COMPILER_IS_GNUCXX)
 	IF (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "7.0.0")
 		MESSAGE(FATAL_ERROR "Insufficient GCC version. At least version \
 7.0.0 is required for C++17 language features.")
-	ENDIF()
+	ENDIF ()
 
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fmessage-length=0")
 ENDIF(CMAKE_COMPILER_IS_GNUCXX)
