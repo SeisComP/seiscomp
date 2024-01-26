@@ -102,6 +102,19 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
 
 .. _filter-bw:
 
+.. py:function:: BPENV(center-freq, bandwidth, order)
+
+   Butterworth bandpass filter combined with envelope computation.
+
+   This is a recursive approximation of the envelope. It depends on the bandpass center 
+   frequency being also the dominant frequency of the signal. Hence it only makes sense for
+   bandpass filtered signals. Even though bandwidth and order may be changed it is
+   recommended to use the defaults.
+
+   :param center-freq: The center frequency of the passband in Hz
+   :param bandwidth: The filter bandwidth in octaves (default is 1 octave)
+   :param order: The filter order of the bandpass (default is 4)
+
 .. py:function:: BW(order, lo-freq, hi-freq)
 
    Alias for the :py:func:`Butterworth band-pass filter, BW_BP<BW_BP()>`.
