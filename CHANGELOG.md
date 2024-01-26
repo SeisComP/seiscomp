@@ -2,6 +2,37 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.2.0
+
+-   trunk
+    -   Fix magnitude aliases for ML's in combination with
+        different amplitude types. E.g. `MLderived:MLc:MLv`
+        should work now.
+    -   3C component detection by checking mutual perpendicular
+        sensor orientations increased the tolerance from 1 degree
+        to 5 degrees.
+-   scconfig
+    -   Allow checking individual inventory files in Inventory panel.
+    -   Fix white space rendering in tooltips.
+-   scolv
+    -   Fix crash in amplitude review window under CentOS7
+        caused by the measure type preselection introduced
+        in 6.1.2.
+-   scrttv
+    -   Disable "Show picks/arrivals" actions if `showPicks`
+        is set to `false`.
+-   scardac
+    -   Fix segfault triggered by stream filter
+    -   Use value of `0` in `maxSegment` parameter to disable segment limits
+-   scinv
+    -   Fix reporting stream groups with other than 1 or 3 channels.
+-   fdsnws
+    -   Output full precision in event text format
+    -   Fix exception in availablity access test
+    -   Fix authorization error
+    -   Add configuration option `inventoryCoordinatePrecision` allowing
+        to obfuscate inventory geo coordinates
+
 ## 6.1.2
 
 -   trunk
