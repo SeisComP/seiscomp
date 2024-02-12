@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.18
+
+-   scdb
+    -   Fix reading notifier messages from XML
+
 ## 5.5.17
 
 -   scesv
