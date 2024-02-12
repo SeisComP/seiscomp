@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.x.y
+
+-   scalert
+    -   Fix crash on exit
+    -   Fix handling of `agencyIDs`: an empty string in the
+        configuration file will allow any agencyID.
+
 ## 6.2.0
 
 -   trunk
