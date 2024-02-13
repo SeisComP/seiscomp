@@ -126,7 +126,9 @@ Other markup tools and conventions
 ----------------------------------
 
 - **Code fragments:** Use the reST code-block syntax for code fragments, with
-  flavor "c", "python", "sh" or "xml" as appropriate: ::
+  flavor "c", "python", "sh" or "xml" as appropriate:
+
+  .. code-block:: rst
 
      .. code-block:: sh
 
@@ -141,33 +143,43 @@ Other markup tools and conventions
      echo $SEISCOMP_ROOT
 
 - **Configuration parameters:** Configuration values and options have a special syntax. Use the :confval: tag
-  within the module configuration: ::
+  within the module configuration:
+
+  .. code-block:: rst
 
      :confval:`foo`
 
   Using this tag allows a link to be made within the documentation to that module
   to the given configuration or command-line parameter of the same module.
 
-- **Configuration files:** Use the reST :file: indicator to refer to files such as configuration files: ::
+- **Configuration files:** Use the reST :file: indicator to refer to files such as configuration files:
+
+  .. code-block:: rst
 
      :file:`$SEISCOMP_ROOT/etc/scautopick.cfg`
 
   Result: :file:`$SEISCOMP_ROOT/etc/scautopick.cfg`
 
-- **Programs:** Use the reST :program: indicator for |scname| programs: ::
+- **Programs:** Use the reST :program: indicator for |scname| programs:
+
+  .. code-block:: rst
 
      :program:`scautopick`
 
   Result: :program:`scautopick`
 
 - **References:** Use the reST :ref: indicator for cross referencing |scname|. documentation pages.
-  Use :ref: if a cross reference to the documentation is needed: ::
+  Use :ref: if a cross reference to the documentation is needed:
+
+  .. code-block:: rst
 
      :ref:`scautopick`
 
   Result: :ref:`scautopick`
 
-- **Glossary:** Use the reST :term: indicator for referencing terms in the |scname| :ref:`glossary`: ::
+- **Glossary:** Use the reST :term: indicator for referencing terms in the |scname| :ref:`glossary`:
+
+  .. code-block:: rst
 
      :term:`magnitude`
 
@@ -183,21 +195,25 @@ Create links to sections and subsections within and to figures  the text which c
 Use unique link names, e.g. including the upper-level section name or the module name.
 Use appropriate short names to fit within the texts.
 
-Link with in this documentation to the section on headings: ::
+Link within this documentation to the section on headings:
+
+.. code-block:: rst
 
    .. _documentation_style_guide_headings:
 
-Reference: ::
+Reference:
+
+.. code-block:: rst
 
    :ref:`short name <documentation_style_guide_headings>`
 
 Result: :ref:`short name <documentation_style_guide_headings>`
 
 
-External references
--------------------
+External links and references
+-----------------------------
 
-Do not show full citations or URLs for
+Preferably you do not show full citations or URLs for literature or
 external web sites within the text but make references which
 are listed in the section :ref:`sec-references`. Procedure:
 
@@ -205,13 +221,43 @@ are listed in the section :ref:`sec-references`. Procedure:
    entries to the reference list :file:`doc/base/references.bib`
    in the base |scname| :ref:`repository on Github <build>`.
 #. Cite documents within the RST file using the *cite*
-   directive ::
+   directive
+
+   .. code-block:: rst
 
       :cite:p:`seiscomp`
       :cite:t:`seiscomp`
 
    which results in :cite:p:`seiscomp` and
    :cite:t:`seiscomp` within the documentation HTML text.
+
+If you really cannot avoid URLs in RST files, then you may link them to some
+text like
+
+.. code-block:: rst
+
+   `SeisComP forum <https://forum.seiscomp.de/>`_
+
+resulting in `SeisComP forum <https://forum.seiscomp.de/>`_.
+
+Alternatively you may generate reference in a *Reference* sections as
+
+.. code-block:: rst
+
+   References
+   ==========
+
+   .. target-notes::
+
+   .. _`discussion` : https://english.stackexchange.com/questions/65630/you-should-be-well-organised-or-you-should-be-well-organised
+
+and then cite it within the text as
+
+.. code-block:: rst
+
+   `discussion`_
+
+which results in `discussion`_.
 
 
 Text boxes
@@ -220,7 +266,9 @@ Text boxes
 You may emphasize information within the text as text boxes to stand out at different levels.
 Make sensible use of it!
 
-* Hints ::
+* Hints
+
+  .. code-block:: rst
 
      .. hint::
 
@@ -232,7 +280,9 @@ Make sensible use of it!
 
      This adds a useful hint.
 
-* Notes ::
+* Notes
+
+  .. code-block:: rst
 
      .. note::
 
@@ -244,7 +294,9 @@ Make sensible use of it!
 
      This adds an extra note.
 
-* Alerts ::
+* Alerts
+
+  .. code-block:: rst
 
      .. caution::
 
@@ -256,7 +308,9 @@ Make sensible use of it!
 
      This adds a heads-up alert.
 
-* Warnings ::
+* Warnings
+
+  .. code-block:: rst
 
      .. warning::
 
@@ -295,8 +349,8 @@ avoiding this: "The :program:`scmaster` module has..."
 - Hyphenation for compound adjectives: yes, before a noun; after verb to be is harder.
   See the `discussion`_, e.g.:
 
-  - Use command-line parameters.
-  - Type on the command line.
+  - Use command-line parameters
+  - Type on the command line
 
 - Spelling:
 
@@ -308,8 +362,8 @@ avoiding this: "The :program:`scmaster` module has..."
 
 - Case:
 
-  - SEED, miniSEED (miniSEED in `libmseed documentation`_, or MiniSEED,
-    but Mini-SEED appears in Appendix G of the `Seed Reference Manual`_.)
+  - SEED, miniSEED (miniSEED in :cite:t:`libmseed-github`, or MiniSEED,
+    but Mini-SEED appears in Appendix G of the :cite:t:`seed-2012`.)
   - Ctrl+S for 'control' key plus 's'.
   - MySQL, PostgreSQL, MariaDB
 
@@ -318,6 +372,7 @@ avoiding this: "The :program:`scmaster` module has..."
   - e.g., i.e.
   - STA, LTA, STA/LTA detector
   - TAR file
+
 
 .. _documentation_style_guide_images:
 
@@ -388,7 +443,4 @@ References
 
 .. target-notes::
 
-.. _`gempa GmbH`: https://www.gempa.de
 .. _`discussion` : https://english.stackexchange.com/questions/65630/you-should-be-well-organised-or-you-should-be-well-organised
-.. _`libmseed documentation` : https://github.com/iris-edu/libmseed/wiki
-.. _`Seed Reference Manual` : https://www.fdsn.org/pdf/SEEDManual_V2.4.pdf
