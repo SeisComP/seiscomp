@@ -2,12 +2,21 @@
 
 All notable changes to SeisComP are documented here.
 
-## 6.x.y
+## 6.2.1
 
 -   scalert
     -   Fix crash on exit
     -   Fix handling of `agencyIDs`: an empty string in the
         configuration file will allow any agencyID.
+-   trunk
+    -   Fix ML/MLc amplitude time window computation to raise an error
+        if one component fails.
+-   GUI
+    -   Fix map legend generation from feature directories.
+-   scolv
+    -   Fix crash if an MT solution does not contain a derived origin.
+-   hypo71
+    -   Fix writing the correct number of stations and phases to new origins.
 
 ## 6.2.0
 
