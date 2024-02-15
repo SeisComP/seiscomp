@@ -6,16 +6,27 @@ All notable changes to SeisComP are documented here.
 
 -   trunk
     -   Add new filter BPENV() for approximating envelopes.
-    -   Fix ML/MLc amplitude time window computation to raise an error
-        if one component fails
--   scolv
-    -   Fix crash if an MT solution does not contain a derived origin
--   hypo71
-    -   Fix writing the correct number of stations and phases to new origins.
+    -   New time grammar operator, OT, for configuring amplitude-time windows.
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
         documentation and exposed in scconfig
+
+## 6.2.1
+
+-   scalert
+    -   Fix crash on exit
+    -   Fix handling of `agencyIDs`: an empty string in the
+        configuration file will allow any agencyID.
+-   trunk
+    -   Fix ML/MLc amplitude time window computation to raise an error
+        if one component fails.
+-   GUI
+    -   Fix map legend generation from feature directories.
+-   scolv
+    -   Fix crash if an MT solution does not contain a derived origin.
+-   hypo71
+    -   Fix writing the correct number of stations and phases to new origins.
 
 ## 6.2.0
 
