@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.x.y
+
+-   trunk
+    -   Add new filter BPENV() for approximating envelopes.
+    -   New time grammar operator, OT, for configuring amplitude-time windows.
+
 ## 6.2.1
 
 -   scalert
