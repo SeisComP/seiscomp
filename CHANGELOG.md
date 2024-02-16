@@ -2,11 +2,17 @@
 
 All notable changes to SeisComP are documented here.
 
-## 6.x.y
+## 6.3.0
 
 -   trunk
     -   Add new filter BPENV() for approximating envelopes.
     -   New time grammar operator, OT, for configuring amplitude-time windows.
+-   scolv
+    -   Add time and publicID to pick tool tip in picker
+-   doc
+    -   Add more details to amplitude time window configuration grammar
+    -   Add BPENV filter
+    -   More details on magnitude average methods
 
 ## 6.2.1
 
