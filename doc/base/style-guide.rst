@@ -126,7 +126,7 @@ Other markup tools and conventions
 ----------------------------------
 
 - **Code fragments:** Use the reST code-block syntax for code fragments, with
-  flavor "c", "python", "sh" or "xml" as appropriate:
+  flavors like "c", "python", "sh", "bash", "properties´" or "xml" as appropriate:
 
   .. code-block:: rst
 
@@ -142,17 +142,29 @@ Other markup tools and conventions
      #!/bin/bash
      echo $SEISCOMP_ROOT
 
-- **Configuration parameters:** Configuration values and options have a special syntax. Use the :confval: tag
-  within the module configuration:
+- **Configuration parameters:** Configuration values have a special
+  syntax. Use the ':confval:' indicator for referencing a module configuration
+  parameter:
 
   .. code-block:: rst
 
-     :confval:`foo`
+     :confval:`logging.level`
 
-  Using this tag allows a link to be made within the documentation to that module
-  to the given configuration or command-line parameter of the same module.
+  Using this tag allows a link to be made within the documentation of that module
+  to the given configuration of the same module. The parameter must be defined
+  in the description XML file of the module.
 
-- **Configuration files:** Use the reST :file: indicator to refer to files such as configuration files:
+- **Command-line options:** Command-line options have a special
+  syntax. Use the ':option:' indicator for referencing an option:
+
+  .. code-block:: rst
+
+     :option:`--help`
+
+  The option must be defined in the description XML file of the module.
+
+- **Configuration files:** Use the reST ':file:' indicator to refer to files such
+  as configuration files:
 
   .. code-block:: rst
 
@@ -160,7 +172,7 @@ Other markup tools and conventions
 
   Result: :file:`$SEISCOMP_ROOT/etc/scautopick.cfg`
 
-- **Programs:** Use the reST :program: indicator for |scname| programs:
+- **Programs:** Use the reST ':program:' indicator for |scname| programs:
 
   .. code-block:: rst
 
@@ -168,8 +180,8 @@ Other markup tools and conventions
 
   Result: :program:`scautopick`
 
-- **References:** Use the reST :ref: indicator for cross referencing |scname|. documentation pages.
-  Use :ref: if a cross reference to the documentation is needed:
+- **References:** Use the reST ':ref:' indicator for cross referencing |scname|
+  module documentation pages:
 
   .. code-block:: rst
 
@@ -177,7 +189,8 @@ Other markup tools and conventions
 
   Result: :ref:`scautopick`
 
-- **Glossary:** Use the reST :term: indicator for referencing terms in the |scname| :ref:`glossary`:
+- **Glossary:** Use the reST ':term:' indicator for referencing terms in the
+  |scname| :ref:`glossary`:
 
   .. code-block:: rst
 
