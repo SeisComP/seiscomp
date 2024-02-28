@@ -7,8 +7,12 @@ Filter grammar
 SeisComP supports string-based filter definitions. This section covers available
 filters and their parameters.
 
-The filter definition supports :ref:`SeisComP filters <sec-filters-list>` and
-building filter chains (operator >> or ->) as well as combining them with basic mathematical operators like
+The filter definitions support :ref:`SeisComP filters <sec-filters-list>` and
+building filter chains (operator >> or ->) as well as combining them with basic
+mathematical operators. Filter or the first filter in a filter chain is always
+applied to the raw, uncorrected data.
+
+Operators are:
 
 * \+ : addition
 * \- : subtraction
@@ -22,8 +26,9 @@ Use brackets *()* to apply the operations within before the one outside.
 .. note::
 
    Filters in |scname| are recursive allowing real-time application. Therefore,
-   filter artefacts, e.g. ringing, are always visible at the beginning of the traces
-   or after data gaps.
+   filter artefacts, e.g. ringing, are always visible at the beginning of the
+   traces or after data gaps.
+
 
 Example
 =======
@@ -59,6 +64,7 @@ To apply mathematical operations on original waveforms use :py:func:`self()`, e.
 
    self()*-1>>A(1,2)
 
+
 Test filter strings
 ===================
 
@@ -79,26 +85,28 @@ Filters can be conveniently tested without much configuration. To perform such t
    scrttv with raw (blue) and filtered (black) data. The applied filter string
    is shown in the lower left corner.
 
+
 .. _sec-filters-list:
 
 List of filters
 ===============
 
-Multiple filter functions are available. If a filter function has no
-parameter, it can be given either with parentheses, e.g. :py:func:`DIFF()<DIFF()>`,
-or without, e.g. :py:func:`DIFF<DIFF()>`.
+Multiple filter functions are available. Filters may take parameters as
+arguments. If a filter function has no parameter, it can be given either with
+parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
+:py:func:`DIFF<DIFF()>`.
 
 .. warning::
 
-   All frequencies given as parameters to filters must be below the Nyquist
+   All frequencies passed by parameters to filters must be below the Nyquist
    frequency of the original signal. Otherwise, filtering may result in undesired
-   behavior of modules, e.g. stopping or showing of empty traces.
+   behavior of modules, e.g., stopping or showing of empty traces.
 
 .. py:function:: AVG(timespan)
 
    Calculates the average of preceding samples.
 
-   :param timespan: Time span in seconds
+   :param timespan: Time span to form the average in seconds
 
 .. _filter-bw:
 
@@ -125,8 +133,8 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
    filter. An arbitrary bandpass filter can be created for given order and corner frequencies.
 
    :param order: The filter order
-   :param lo-freq: The lower corner frequency
-   :param hi-freq: The upper corner frequency
+   :param lo-freq: The lower corner frequency as 1/seconds
+   :param hi-freq: The upper corner frequency as 1/seconds
 
 
 .. py:function:: BW_BS(order, lo-freq, hi-freq)
@@ -135,39 +143,51 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
    suppressing amplitudes at frequencies between *lo-freq* and *hi-freq*.
 
    :param order: The filter order
-   :param lo-freq: The lower corner frequency
-   :param hi-freq: The upper corner frequency
+   :param lo-freq: The lower corner frequency as 1/seconds
+   :param hi-freq: The upper corner frequency as 1/seconds
 
 
 .. py:function:: BW_HP(order, lo-freq)
 
-   Butterworth high-pass filter realized as a causal recursive IIR (infinite impulse response) filter.
+   Butterworth high-pass filter realized as a causal recursive IIR (infinite
+   impulse response) filter.
 
    :param order: The filter order
-   :param lo-freq: The corner frequency
+   :param lo-freq: The corner frequency as 1/seconds
 
 
 .. py:function:: BW_HLP(order, lo-freq, hi-freq)
 
-   Butterworth high-low-pass filter realized as a combination of :py:func:`BW_HP` and :py:func:`BW_LP`.
+   Butterworth high-low-pass filter realized as a combination of
+   :py:func:`BW_HP` and :py:func:`BW_LP`.
 
    :param order: The filter order
-   :param lo-freq: The lower corner frequency
-   :param hi-freq: The upper corner frequency
+   :param lo-freq: The lower corner frequency as 1/seconds
+   :param hi-freq: The upper corner frequency as 1/seconds
 
 
 .. py:function:: BW_LP(order, hi-freq)
 
-   Butterworth low-pass filter realized as a causal recursive IIR (infinite impulse response) filter.
+   Butterworth low-pass filter realized as a causal recursive IIR (infinite
+   impulse response) filter.
 
    :param order: The filter order
-   :param hi-freq: The corner frequency
+   :param hi-freq: The corner frequency as 1/seconds
+
+
+.. py:function:: CUTOFF(delta)
+
+   Sets the value of the current sample to the mean of the current and the
+   previous sample when the difference between the two exceeds *delta*.
+   Otherwise, the original value is retained.
+
+   :param delta: The threshold for forming the average.
 
 
 .. py:function:: DIFF
 
-   Differentiation filter realized as a recursive IIR (infinite impulse response) differentiation
-   filter.
+   Differentiation filter realized as a recursive IIR (infinite impulse
+   response) differentiation filter.
 
    The differentiation loop calculates for each input sample `s` the output sample `s\'`:
 
@@ -207,16 +227,17 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
 
 .. py:function:: ITAPER(timespan)
 
-   A one-sided cosine taper.
+   A one-sided cosine taper applied when initializing the filter, e.g. at the
+   beginning of the data or after longer gaps.
 
-   :param timespan: The timespan in seconds.
+   :param timespan: The timespan to apply the taper in seconds.
 
 
 .. py:function:: MAX(timespan)
 
    Computes the maximum within the timespan preceeding the sample.
 
-   :param timespan: The timespan in seconds
+   :param timespan: The timespan to measure the maximum in seconds
 
 
 .. py:function:: MEDIAN(timespan)
@@ -224,28 +245,29 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
    Computes the median within the timespan preceeding the sample. Useful, e.g.
    for despiking. The delay due to the filter may be up to its timespan.
 
-   :param timespan: The timespan in seconds
+   :param timespan: The timespan to compute the median in seconds
 
 
 .. py:function:: MIN(timespan)
 
    Computes the minimum within the timespan preceeding the sample.
 
-   :param timespan: The timespan in seconds
+   :param timespan: The timespan to measure the minimum in seconds
 
 
 .. py:function:: RM(timespan)
 
-   A running mean filter computing the mean value within *timespan*. For a given time window in seconds the running mean is
-   computed from the single amplitude values and set as output. This computation
-   is equal to :py:func:`RHMP<RMHP()>` with the exception that the mean is not
-   subtracted from single amplitudes but replaces them.
+   A running mean filter computing the mean value within *timespan*. For a given
+   time window in seconds the running mean is computed from the single amplitude
+   values and set as output. This computation is equal to :py:func:`RHMP<RMHP()>`
+   with the exception that the mean is not subtracted from single amplitudes but
+   replaces them.
 
    .. code-block:: sh
 
       RMHP = self-RM
 
-   :param timespan: The timespan in seconds
+   :param timespan: The timespan to measure the mean in seconds
 
 
 .. py:function:: RMHP(timespan)
@@ -256,7 +278,7 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
 
    Running mean high-pass of e.g. 10 seconds calculates the difference to the running mean of 10 seconds.
 
-   :param timespan: The timespan in seconds
+   :param timespan: The timespan to measure the mean in seconds
 
 
 .. py:function:: self()
@@ -273,14 +295,27 @@ or without, e.g. :py:func:`DIFF<DIFF()>`.
 
 .. py:function:: STALTA(sta, lta)
 
-   A STA/LTA filter is the ratio of a short-time average to a long-time average calculated
-   continuously in two consecutive time windows. This method is the basis for many trigger
-   algorithm. The short-time window is for detection of transient signal onsets whereas the
-   long-time window provides information about the actual seismic noise at the station.
+   A STA/LTA filter is the ratio of a short-time amplitude average (STA) to a
+   long-time amplitude average (LTA) calculated continuously in two consecutive
+   time windows. This method is the basis for many trigger algorithm. The
+   short-time window is for detection of transient signal onsets whereas the
+   long-time window provides information about the actual seismic noise at the
+   station.
 
-   :param sta: Short-term time window
-   :param lta: Long-term time window
+   :param sta: Length of short-term time window in seconds
+   :param lta: Length of long-term time window in seconds. The time window ends
+       with the same sample as sta.
 
+
+.. py:function:: STALTA2(sta, lta, on, off)
+
+   The :py:func:`STALTA` implementation where LTA time window is kept fixed
+   between the time the STA/LTA ratio exceeds *on* and falls below *off*.
+
+   :param sta: Length of short-term time window in seconds
+   :param lta: Long-term time window ending with the same sample as sta
+   :param on: STA/LTA ratio defining the start of the time window for fixing LTA.
+   :param off: STA/LTA ratio defining the end of the time window for fixing LTA.
 
 .. py:function:: WA([type = 1[,gain=2080[,T0=0.8[,h=0.7]]]])
 
