@@ -96,10 +96,10 @@ The averaging methods applied by :ref:`scmag` are configurable by
 * *mean*: the mean value from all station magnitudes.
 * *median*: the mean value from all station magnitudes.
 * *trimmedMean(X)*: gnores outlier station magnitudes by first removing the
-  largest and the smallest *X*% of the observed values (percentiles). The mean is
+  largest and the smallest *X* % of the observed values (percentiles). The mean is
   formed from the remaining station magnitudes.
 * *trimmedMedian(X)*: forms the median from all station magnitudes but returns
-  the uncertainty by ignoring the largest and the smallest *X*% station
+  the uncertainty by ignoring the largest and the smallest *X* % station
   magnitudes.
 * *medianTrimmedMean(X)*: returns the mean magnitude from all station magnitudes
   differing less than *X* magnitudes from the median.
