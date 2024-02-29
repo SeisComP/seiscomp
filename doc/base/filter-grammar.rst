@@ -281,6 +281,26 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    :param timespan: The timespan to measure the mean in seconds
 
 
+.. py:function:: RND(mean, stddev)
+
+   A random signal generator with Gaussian normal distribution. It replaces
+   input samples with the new signal. Use RND() with the operator '+' for adding
+   the random signal to some data. Example: (BW(3,0.7,2) + RND(0,10))>>STALTA(2,80)
+
+   :param mean: The mean value of the normal distribution
+   :param stddev: The standard deviation of the normal distribution
+
+
+.. py:function:: RUD(minimum, maximum)
+
+   A random signal generator with uniform distribution. It replaces input
+   samples with the new signal. Use RUD() with the operator '+' for adding the
+   random signal to some data. Example: (BW(3,0.7,2) + RUD(-10,10))>>STALTA(2,80)
+
+   :param minimum: The minimum value of the uniform distribution
+   :param maximum: The maximum value of the uniform distribution
+
+
 .. py:function:: self()
 
    The original data itself.
