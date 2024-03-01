@@ -6,7 +6,13 @@ All notable changes to SeisComP are documented here.
 
 -   trunk
     -   Add new filter BPENV() for approximating envelopes.
+    -   Add new filter RND and RUD for generating random numbers
     -   New time grammar operator, OT, for configuring amplitude-time windows.
+    -   Handle negative channel gain: amplitude processors always return
+        positive amplitudes.
+-   GUI
+    -   Handle negative gains. Traces will be flipped if values should be shown
+        in gain units.
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
