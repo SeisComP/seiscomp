@@ -17,6 +17,8 @@ All notable changes to SeisComP are documented here.
         positive amplitudes.
 -   scolv
     -   Add time and publicID to pick tool tip in picker
+    -   Handle single component positive dip. Traces will be flipped when transforming
+        int ZNE.
 -   GUI
     -   Handle negative gains. Traces will be flipped if values should be shown
         in gain units.
