@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.3.1
+
+-   trunk
+    -   Fix MYSQL reconnect when server went away.
+
 ## 6.3.0
 
 -   seedlink
