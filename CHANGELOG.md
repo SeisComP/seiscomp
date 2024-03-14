@@ -4,19 +4,58 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
--   trunk
-    -   Add new filter BPENV() for approximating envelopes.
-    -   Add new filter RND and RUD for generating random numbers
-    -   New time grammar operator, OT, for configuring amplitude-time windows.
-    -   Handle negative channel gain: amplitude processors always return
-        positive amplitudes.
 -   GUI
-    -   Handle negative gains. Traces will be flipped if values should be shown
-        in gain units.
+    -   Add preferred magnitude selection to "Commit with options" dialog.
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
         documentation and exposed in scconfig
+
+## 6.3.1
+
+-   trunk
+    -   Fix MYSQL reconnect when server went away.
+
+## 6.3.0
+
+-   seedlink
+    -   Add OptoDAS plugin.
+-   trunk
+    -   Add new filter BPENV() for approximating envelopes.
+    -   Add new filters RUD() and RND() for generating random signals with
+        uniform and normal distribution, respectively. When apply to data, the
+        data samples are replaced by the random signal. For adding noise use the
+        '+' operator. Example: self+RUD(-10,10)>>BW(3,0.7,2).
+    -   New time grammar operator, OT, for configuring amplitude-time windows.
+    -   Handle negative channel gain: amplitude processors always return
+        positive amplitudes.
+-   scolv
+    -   Add time and publicID to pick tool tip in picker
+    -   Handle single component positive dip. Traces will be flipped when transforming
+        int ZNE.
+-   GUI
+    -   Handle negative gains. Traces will be flipped if values should be shown
+        in gain units.
+-   scdumpcfg
+    -   The option `-P` supports lists, allowing to request the values for
+        multiple parameters instead of only one.
+-   scevtls
+    -   Include created events in output without modified date using `--modified-after`.
+-   scinv
+    -   Report missing values for channel dip and azimuth,
+    -   Report when both channel dip and gain are negative as this may be
+        accomplished by positive values.
+-   scevent
+    -   The evrc (RegionCheck) plugin ignores but reports missing polygons
+        instead of dropping the region check entirely.
+-   iLoc
+    -   Update iLoc code to version 4.2
+-   doc
+    -   Add more details to amplitude time window configuration grammar
+    -   Add BPENV, RND and RUD filter
+    -   More details on magnitude average methods
+-   system
+    -   Add libqt5printsupport5 dependency to Debian bases distributions.
 
 ## 6.2.1
 
