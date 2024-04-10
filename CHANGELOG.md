@@ -26,6 +26,7 @@ All notable changes to SeisComP are documented here.
         function fromString() such as "2024-04-01 01" and 2024-04-01T01.
 -   GUI
     -   Add preferred magnitude selection to "Commit with options" dialog.
+    -   Populate AmplitudeView minSNR control with currently configured value
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
