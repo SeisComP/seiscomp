@@ -2,6 +2,53 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.4.0
+
+-   trunk
+    -   Add Pipe record filter
+    -   Take sensor location elevation into account when computing
+        the hypocentral distance in amplitude time windows.
+    -   Add more supported time formats when parsing a time string.
+-   seedlink
+    -   reftek plugin: expand max stream ID length to 5 characters.
+    -   optodas: set gain frequency in inventory channel.
+    -   serial: add maRam Weatherstation V1 support.
+    -   mws: fix dft485 support.
+-   scmaster
+    -   Serve index.html when browsing a directory with HTTP.a
+-   scautoloc
+    -   Fix a bug affecting playbacks if creation times of an amplitude and
+        associated pick are identical.
+-   scamp
+    -   Add parameter `amptool.streamFromBindings` to compute amplitudes
+        on the global bindings channel instead of the picked channel.aa
+-   scmag
+    -   Sychronize default values with code and cfg.
+    -   Add `summaryMagnitude.singleton` to control whether the summary
+        magnitude M is also computed for a single network magnitude (true)
+        or only for at least two network magnitudes (false). The default
+        value is `true`.
+-   scardac
+    -   Fix PostgreSQL query.
+-   scolv
+    -   Plot infrasound phases with inverted triangle.
+-   scrttv
+    -   Allow streams with undefined coordinates if region restriction is not used.
+    -   Allow to read files from stdin with `scrttv -`.
+-   fdsnxml2inv
+    -   PoleAndZero.number and PolynomialCoefficient.number is optional.
+    -   Add support for more date time formats.
+    -   Add usage to help output.
+-   fdsnws
+    -   Add charset=utf-8 to all text-based content types.
+-   scalert
+    -   Add author filter. Thanks to Donavin97 for the contribution.
+-   scevtls
+    -   Add event type filter.
+-   scevent
+    -   Fix crash under some conditions. This crash was caused by configurations
+        where remove and update operations were sent out of sync.
+
 ## 6.3.1
 
 -   trunk
