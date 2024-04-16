@@ -8,7 +8,10 @@ All notable changes to SeisComP are documented here.
     -   Add Pipe record filter
     -   Take sensor location elevation into account when computing
         the hypocentral distance in amplitude time windows.
-    -   Add more supported time formats when parsing a time string.
+    -   Support shortened time formats for SeisComP and ISO time strings in
+        function fromString() such as "2024-04-01 01" and 2024-04-01T01.
+    -   Report an error if file recordstream is used without a regular file.
+    -   Add CUTOFF() and STALTA2() to documentation of filter grammar.
 -   seedlink
     -   reftek plugin: expand max stream ID length to 5 characters.
     -   optodas: set gain frequency in inventory channel.
@@ -16,22 +19,28 @@ All notable changes to SeisComP are documented here.
     -   mws: fix dft485 support.
 -   scmaster
     -   Serve index.html when browsing a directory with HTTP.a
+-   GUI
+    -   Add preferred magnitude selection to "Commit with options" dialog.
+    -   Populate AmplitudeView minSNR control with currently configured value.
 -   scautoloc
-    -   Fix a bug affecting playbacks if creation times of an amplitude and
-        associated pick are identical.
+    -   Prioritize picks over amplitudes when sorting both with identical
+        creation times in playbacks using `--ep`.
+    -   Initialize variables consistently with default configuration and
+        description XML.
+    -   Do not use horizontal slowness and backazimuth for relocating if arrival
+        is excluded.
 -   scamp
     -   Add parameter `amptool.streamFromBindings` to compute amplitudes
         on the global bindings channel instead of the picked channel.aa
 -   scmag
     -   Sychronize default values with code and cfg.
-    -   Add `summaryMagnitude.singleton` to control whether the summary
-        magnitude M is also computed for a single network magnitude (true)
-        or only for at least two network magnitudes (false). The default
-        value is `true`.
+    -   Add configuration parameter `summaryMagnitude.singleton` controlling
+        whether a summary magnitude is computed from a single network magnitude
+        or not.
 -   scardac
     -   Fix PostgreSQL query.
 -   scolv
-    -   Plot infrasound phases with inverted triangle.
+    -   Plot infrasound phases with inverted triangles.
 -   scrttv
     -   Allow streams with undefined coordinates if region restriction is not used.
     -   Allow to read files from stdin with `scrttv -`.
@@ -44,7 +53,7 @@ All notable changes to SeisComP are documented here.
 -   scalert
     -   Add author filter. Thanks to Donavin97 for the contribution.
 -   scevtls
-    -   Add event type filter.
+    -   Allow searching for events by event type.
 -   scevent
     -   Fix crash under some conditions. This crash was caused by configurations
         where remove and update operations were sent out of sync.
