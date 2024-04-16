@@ -4,29 +4,6 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
--   scautoloc
-    -   Prioritize picks over amplitudes when sorting both with identical
-        creation times in playbacks using `--ep`.
-    -   Initialize variables consistently with default configuration and
-        description XML.
-    -   Do not use horizontal slowness and backazimuth for relocating if arrival
-        is excluded.
--   scolv
-    -   Plot infrasound phases with inverted triangles.
--   scevtls
-    -   Allow searching for events by event type.
--   scmag
-    -   Add configuration parameter `summaryMagnitude.singleton` controlling
-        whether a summary magnitude is computed from a single network magnitude
-        or not.
--   trunk
-    -   Add CUTOFF() and STALTA2() to documentation of filter grammar.
-    -   Report an error if file recordstream is used without a regular file.
-    -   Support shortened time formats for SeisComP and ISO time strings in
-        function fromString() such as "2024-04-01 01" and 2024-04-01T01.
--   GUI
-    -   Add preferred magnitude selection to "Commit with options" dialog.
-    -   Populate AmplitudeView minSNR control with currently configured value
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
@@ -34,6 +11,62 @@ All notable changes to SeisComP are documented here.
 -   magnitudes
     -   Consider source depth instead of vertical distance between station and
         origin for computing H.
+
+## 6.4.0
+
+-   trunk
+    -   Add Pipe record filter
+    -   Take sensor location elevation into account when computing
+        the hypocentral distance in amplitude time windows.
+    -   Support shortened time formats for SeisComP and ISO time strings in
+        function fromString() such as "2024-04-01 01" and 2024-04-01T01.
+    -   Report an error if file recordstream is used without a regular file.
+    -   Add CUTOFF() and STALTA2() to documentation of filter grammar.
+-   seedlink
+    -   reftek plugin: expand max stream ID length to 5 characters.
+    -   optodas: set gain frequency in inventory channel.
+    -   serial: add maRam Weatherstation V1 support.
+    -   mws: fix dft485 support.
+-   scmaster
+    -   Serve index.html when browsing a directory with HTTP.a
+-   GUI
+    -   Add preferred magnitude selection to "Commit with options" dialog.
+    -   Populate AmplitudeView minSNR control with currently configured value.
+-   scautoloc
+    -   Prioritize picks over amplitudes when sorting both with identical
+        creation times in playbacks using `--ep`.
+    -   Initialize variables consistently with default configuration and
+        description XML.
+    -   Do not use horizontal slowness and backazimuth for relocating if arrival
+        is excluded.
+-   scamp
+    -   Add parameter `amptool.streamFromBindings` to compute amplitudes
+        on the global bindings channel instead of the picked channel.aa
+-   scmag
+    -   Sychronize default values with code and cfg.
+    -   Add configuration parameter `summaryMagnitude.singleton` controlling
+        whether a summary magnitude is computed from a single network magnitude
+        or not.
+-   scardac
+    -   Fix PostgreSQL query.
+-   scolv
+    -   Plot infrasound phases with inverted triangles.
+-   scrttv
+    -   Allow streams with undefined coordinates if region restriction is not used.
+    -   Allow to read files from stdin with `scrttv -`.
+-   fdsnxml2inv
+    -   PoleAndZero.number and PolynomialCoefficient.number is optional.
+    -   Add support for more date time formats.
+    -   Add usage to help output.
+-   fdsnws
+    -   Add charset=utf-8 to all text-based content types.
+-   scalert
+    -   Add author filter. Thanks to Donavin97 for the contribution.
+-   scevtls
+    -   Allow searching for events by event type.
+-   scevent
+    -   Fix crash under some conditions. This crash was caused by configurations
+        where remove and update operations were sent out of sync.
 
 ## 6.3.1
 
