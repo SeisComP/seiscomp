@@ -7,12 +7,12 @@ Unit Testing
 Introduction
 ============
 
-From Wikipedia:
+From Wikipedia [#WPUT]_: ::
 
-  In computer programming, unit testing is a software testing method by which
-  individual units of source code, sets of one or more computer program modules
-  together with associated control data, usage procedures, and operating
-  procedures, are tested to determine whether they are fit for use. [#WPUT]_
+   In computer programming, unit testing is a software testing method by which
+   individual units of source code, sets of one or more computer program modules
+   together with associated control data, usage procedures, and operating
+   procedures, are tested to determine whether they are fit for use.
 
 This chapter targets programmers, either ones contributing to |scname| or
 adding their extended set of modules / libraries.
@@ -35,6 +35,7 @@ library.
 Apart from the availability of the Boost test libraries, cmake with version
 2.8.0 or greater is also required.
 
+
 Preparations
 ============
 
@@ -53,6 +54,7 @@ its executable against the library the tests are built for.
 
    The recommend test file naming is :code:`{class}_{function}.cpp`.
 
+
 Execution
 =========
 
@@ -62,9 +64,10 @@ Compiling and running tests is as easy as running
 
    make test
 
-in the build directory. Thats it.
+in the build directory. That's it.
 
-Test implementation
+
+Test Implementation
 ===================
 
 The following section shows an example of a simple but in many cases sufficient
@@ -107,6 +110,7 @@ your test executable against :code:`${Boost_unit_test_framework_LIBRARY}` and
        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
        COMMAND test_mylib_myfeature
    )
+
 
 Warning levels
 --------------
@@ -162,6 +166,7 @@ Tools
 +-----------------------------------------------------------+-------------------------------------------+-----------------------------------------------------------+-----------------------------+
 
 For more tools and information about the Boost unit test tools see [#b4]_.
+
 
 Test output
 ===========
