@@ -4,10 +4,15 @@
 Time grammar
 ************
 
-The time windows for measuring noise and signal for amplitudes used to compute
-magnitudes can be configured by the respective begin and end values. These
-window parameters are configured as global binding parameters specifically for
-a particular amplitude type, let's say :ref:`ML <global_ml>`:
+Amplitudes are measured on waveforms by modules such as :ref:`scautopick`,
+:ref:`scamp` or :ref:`scolv` for computing magnitudes, e.g., by :ref:`scmag` or
+:ref:`scolv`. The principles are outlined in the concepts section
+:ref:`concepts_magnitudes`.
+
+The time windows for measuring noise and signal amplitudes are given by their
+respective begin and end values. These window parameters are configured as
+global binding parameters specifically for a particular amplitude type, let's
+say :ref:`ML <global_ml>`:
 
 .. code-block:: properties
 
@@ -21,7 +26,6 @@ origin time** for forming absolute times. The relative trigger time
 corresponds to the arrival of P waves for most applications. The configured
 begin and end values are therefore given as time differences relative to the
 absolute trigger time.
-
 
 Example:
 
@@ -38,16 +42,19 @@ Example:
    :py:func:`tt()` returns the time difference to :envvar:`OT` and
    :py:func:`tt()` does not need to be corrected.
 
-In |scname| the configuration of the begin and end values is supported by a
-combination of :ref:`functions <sec-time-functions>`,
+In |scname| the configuration of the begin and end values is supported in the
+Bindings Panel of :ref:`scconfig`: For global bindings parameters you may create
+an amplitude-type profile with the name of the amplitude type, e.g., ML. The
+profile allows you to configure the parameters.
+You may set the values as a combination of :ref:`functions <sec-time-functions>`,
 :ref:`operators <sec-time-operators>`, :ref:`variables <sec-time-variables>` and
 constant values. The combination of them allows setting up a flexible time
-grammar for time windows. You may use parentheses *()* to apply operations
-within the parentheses before operations outside of parentheses.
+grammar for time windows. You may further use parentheses *()* to apply
+operations within the parentheses before operations outside of parentheses.
 
-If the result of the final evaluation is *unset*, e.g., because required
-information are not available, then the processing receives an error and the
-amplitude will not be computed.
+If the result of the final evaluation of the parameter value is *unset*, e.g.,
+because required information are not available, then the processing receives an
+error and the amplitude will not be computed.
 
 
 Examples
@@ -143,10 +150,13 @@ Functions
 .. py:function:: tt(phase)
 
    Calculates the travel-time of the given phase **relative to the trigger time**.
-   The result is unset if the travel time cannot be computed.
+   The result is unset if the travel time cannot be computed. The travel times
+   are computed based on the travel-time interface and and model defined in
+   :confval:`amplitudes.ttt.interface` and :confval:`amplitudes.ttt.model`,
+   respectively.
 
    :param phase: Phase name available with the define travel-time interface
-                 and profile.
+                 and model.
 
 
 .. py:function:: arr(phase, acceptAll)

@@ -8,21 +8,27 @@ types of amplitudes and magnitudes are available which are listed in
 :ref:`scamp` and :ref:`scmag`.
 
 
+.. _concepts_magnitudes-amplitudes:
+
 Amplitudes
 ==========
 
-Amplitudes can be measured automatically from waveforms
+Amplitudes can be measured from waveforms
 
-* During phase picking by :ref:`scautopick` with generally fixed time windows
-  due to the absence of knowledge about source parameters or by,
-* :ref:`scamp` as soon as :term:`origins <origin>` are available. Depending
-  on the magnitude type, fixed or distance-dependent time windows apply.
+* Automatically during phase picking by :ref:`scautopick` with generally fixed
+  time windows due to the absence of knowledge about source parameters.
+* Automatically by :ref:`scamp` as soon as :term:`origins <origin>` are
+  available. Depending on the magnitude type, fixed or distance-dependent
+  time windows apply.
+* Interactively using :ref:`scolv`.
 
-and interactively using :ref:`scolv`.
+:ref:`Time grammar <time-grammar>` applies for configuring the time windows.
 
 
-Instrument simulation
----------------------
+.. _concepts_magnitudes-wa:
+
+Wood-Anderson simulation
+------------------------
 
 Amplitude measurements for some magnitude types require or allow the simulation
 of instruments such as :py:func:`Wood-Anderson torsion seismometers <WA>`
@@ -38,6 +44,35 @@ Wood-Anderson simulation, e.g. :term:`ML <magnitude, local (ML)>`,
 :term:`MLv <magnitude, local vertical (MLv)>`, :term:`MLc <magnitude, local custom (MLc)>`.
 
 
+Input data
+----------
+
+Amplitudes are initially measured on raw data or data corrected for the WA
+instrument assuming counts and streams with gain unit of M/S which is typical
+for seismometers. It is assumed that the measured signal has its dominant
+frequency where the response of the recording instrument is flat. For other
+instruments such as accelerometers or short-period geophones, amplitude
+correction for instrument response and the corresponding frequency range may be
+configured by the global binding parameters
+:confval:`amplitudes.enableResponses`, :confval:`amplitudes.resp.minFreq`,
+:confval:`amplitudes.resp.maxFreq` or even with in amplitude-type profiles for
+more specific application. Amplitude measurements will fail if the
+unit of the (corrected) input data do not correspond to the requirement of the
+amplitude type.
+
+Final amplitude measurements are corrected by stream gain and provided as an
+amplitude object.
+
+
+Physical units
+--------------
+
+The physical units of measured amplitudes depend on amplitudes type. They are
+documented along with the corresponding magnitude type.
+
+
+.. _concepts_magnitudes-station:
+
 Station Magnitudes
 ==================
 
@@ -47,7 +82,8 @@ calibration curves which depend on magnitude type. When computing a set of
 magnitudes in :ref:`scolv` which is different from the set configured in
 :ref:`scmag`, then scmag may later add the missing magnitudes automatically.
 Magnitude types for which the evaluation status is set to "rejected", e.g., in
-scolv, will not be recomputed by scmag.
+scolv, will not be recomputed by scmag. In order to ignore a magnitude type
+interactively, it should be computed in scolv and then rejected.
 
 
 .. _concepts-magnitudes-correction:
@@ -85,6 +121,8 @@ parameters are identical to the global bindings parameters. All lines start with
    :file:`seiscomp/etc/global.cfg`.
 
 
+.. _concepts_magnitudes-network:
+
 Network Magnitudes
 ==================
 
@@ -104,6 +142,8 @@ The averaging methods applied by :ref:`scmag` are configurable by
 * *medianTrimmedMean(X)*: returns the mean magnitude from all station magnitudes
   differing less than *X* magnitudes from the median.
 
+
+.. _concepts_magnitudes-aliases:
 
 Aliases
 =======
@@ -135,6 +175,8 @@ setup procedure including
 :ref:`tutorial on regionalization <tutorials_magnitude-region-aliases>`.
 
 
+.. _concepts_magnitudes-moment:
+
 Moment Magnitudes
 =================
 
@@ -164,6 +206,8 @@ usually referred to as *M*. The name is configurable.
    Station, network and summary magnitudes are contained uniquely in one
    :term:`origin`.
 
+
+.. _concepts_magnitudes-preferred:
 
 Preferred Magnitude
 ===================
