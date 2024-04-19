@@ -1,2 +1,2 @@
-yum install epel-release
-yum install python3-twisted python3-dateutil
+dnf install epel-release
+dnf install python3-twisted python3-dateutil
