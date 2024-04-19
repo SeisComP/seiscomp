@@ -781,7 +781,7 @@ def on_print(args, _):
 @ROOTDIR@          : {sysenv.installDir()}
 @SYSTEMCONFIGDIR@  : {sysenv.appConfigDir()}
 @DEFAULTCONFIGDIR@ : {sysenv.globalConfigDir()}
-@KEYDIR@           : {sysenv.appConfigDir()}/key"
+@KEYDIR@           : {sysenv.appConfigDir()}/key
 @DATADIR@          : {sysenv.shareDir()}
 @CONFIGDIR@        : {sysenv.configDir()}
 @LOGDIR@           : {sysenv.logDir()}"""
