@@ -33,6 +33,7 @@ then you can use the *Show Source* link on each page to view the reST
 source. The source and the documentation files for executables (see below) are
 good starting points for a new patch.
 
+
 Documenting Executables
 =======================
 
@@ -70,7 +71,7 @@ Images
 ======
 
 Any images should be placed in a suitable sub-directory of :file:`descriptions/media`.
-Read the :ref:`documentation on image styles <documentation_style_guide_image>` for more details.
+Read the :ref:`documentation on image styles <documentation_style_guide_images>` for more details.
 The images can then be referred to (in .rst) like::
 
     .. figure::  media/scolv/scolv-overview.png

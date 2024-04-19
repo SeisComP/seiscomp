@@ -217,7 +217,7 @@ The configuration procedure is:
       this is hardcoded already and done automatically by :ref:`scmag`.
 
 The new moment magnitudes will be available along with the original magnitudes
-and can be viewed in :ref:`scolv`or :ref:`scesv` and considered by :ref:`scmag`
+and can be viewed in :ref:`scolv` or :ref:`scesv` and considered by :ref:`scmag`
 or :ref:`scevent`.
 
 In order to avoid that :ref:`summary magnitudes <concepts-magnitudes-summary>`

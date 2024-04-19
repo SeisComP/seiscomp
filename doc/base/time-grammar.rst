@@ -1,3 +1,108 @@
+.. _time-formats:
+
+************
+Time formats
+************
+
+In |scname| all absolute times of raw :term:`miniSEED` waveforms and
+:ref:`SeisComP objects <api-datamodel-python>` like event parameters, inventory,
+etc. are natively given and assumed in UTC. For reading and writing absolute
+times a range of formats are supported.
+
+Historically, the only time format native to |scname| would be
+
+.. code-block:: properties
+
+   YYYY-MM-DD hh:mm:ss.ssssss
+
+As a consequence of the space between *DD* and *hh* this time string needs
+to be enclosed by quotes or double quotes. Otherwise, the time string meant to
+be a single string only would be interpreted as two strings. Example:
+
+.. code-block:: sh
+
+   scevtls -d localhost --begin '2024-01-01 12:00:00'
+
+Depending on the module, trailing parameters could be ommitted or not for
+shortening the arguments but the general rules were initially unclear.
+
+More flexibilty has been introduced with SeisComP in version 6.4.0 with the
+new C++ and Python function:
+
+C++:
+
+.. code-block:: c
+
+   Seiscomp::Core::Time::fromString()
+
+Python:
+
+.. code-block:: python
+
+   seiscomp.core().time().fromString()
+
+In adaptation to the norm :cite:t:`iso_8601` a subset of strings is now
+availble. Supported formats are
+
+* Calender dates,
+* Ordinal dates,
+* Times (24-hour clock system) in combination with calender or ordinal dates.
+
+Currently unsupported are:
+
+* Week dates,
+* Times without dates,
+* Time zone offset designators,
+* Local times.
+
+.. csv-table:: List and examples of supported time string formats
+   :widths: 30 30 40
+   :header: Implementation, Time string format, Examples: all actual times are identical
+   :align: left
+   :delim: ;
+
+   %FT%T.%fZ    ; YYYY-MM-DDThh:mm:ss.ssssssZ ; 2025-01-01T00:00:00.000000Z
+   %FT%T.%f     ; YYYY-MM-DDThh:mm:ss.ssssss ; 2025-01-01T00:00:00.000000
+   %FT%TZ       ; YYYY-MM-DDThh:mm:ssZ ; 2025-01-01T00:00:00Z
+   %FT%T        ; YYYY-MM-DDThh:mm:ss ; 2025-01-01T00:00:00
+   %FT%R        ; YYYY-MM-DDThh:mm ; 2025-01-01T00:00
+   %FT%H        ; YYYY-MM-DDThh ; 2025-01-01T00
+   %Y-%jT%T.%f  ; YYYY-DDDThh:mm:ss.ssssss ; 2025-001T00:00:00.000000
+   %Y-%jT%T     ; YYYY-DDDThh:mm:ss ; 2025-001T00:00:00
+   %Y-%jT%R     ; YYYY-DDDThh:mm ; 2025-001T00:00
+   %Y-%jT%H     ; YYYY-DDDThh ; 2025-001T00
+   %F %T.%f *   ; YYYY-MM-DD hh:mm:ss.ssssss ; '2025-01-01 00:00:00.000000'
+   %F %T    *   ; YYYY-MM-DD hh:mm:ss ;'2025-01-01 00:00:00'
+   %F %R    *   ; YYYY-MM-DD hh:mm ; '2025-01-01 00:00'
+   %F %H    *   ; YYYY-MM-DD hh ; '2025-01-01 00'
+   %F           ; YYYY-MM-DD ; 2025-01-01
+   %Y-%j        ; YYYY-DDD ; 2025-001
+   %Y           ; YYYY ; 2025
+
+.. csv-table:: List of format symbols used in table of time string formats
+   :widths: 10 90
+   :header: Symbol, Describtion
+   :align: left
+   :delim: ;
+
+   YYYY;   4-digit year
+   MM;     2-digit month starting with 01
+   DD;     1- or 2-digit day of the month starting with 01
+   DDD;    1-, 2- or 3-digit day of year starting with 001
+   hh;     1- or 2-digit hour of the day starting with 00
+   mm;     1- or 2-digit minute of the hour starting with 00
+   ss;     1- or 2-digit second of the minute starting with 00
+   ssssss; 1-6 digits decimal fraction of a second with 0
+   Z;      Zone designator for the zero UTC offset
+
+Durations can be formed from start and end dates and times combined by tilde(~).
+Example:
+
+.. code-block:: sh
+
+   scart -dsEv -t 2024-01-01T12~2024-01-01T12:15:30.2Z
+
+
 .. _time-grammar:
 
 ************
@@ -124,6 +229,7 @@ Functions, Operators, Variables
 Variables, operators and functions are available. Variables define standard
 values and function provide values based on a parameter given within
 parentheses like :py:func:`tt()`. Find below their individual descriptions.
+
 
 .. _sec-time-functions:
 
