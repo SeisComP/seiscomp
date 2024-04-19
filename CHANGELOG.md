@@ -67,6 +67,9 @@ All notable changes to SeisComP are documented here.
 -   scevent
     -   Fix crash under some conditions. This crash was caused by configurations
         where remove and update operations were sent out of sync.
+    -   Do not prefer magnitudes with evaluation mode "rejected".
+-   invextr
+    -   Extract inventory based on start and end time.
 
 ## 6.3.1
 
