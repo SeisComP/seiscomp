@@ -1,7 +1,7 @@
 .. _filter-grammar:
 
 **************
-Filter grammar
+Filter Grammar
 **************
 
 SeisComP supports string-based filter definitions. This section covers available

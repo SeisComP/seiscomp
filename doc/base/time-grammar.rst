@@ -1,7 +1,7 @@
 .. _time-formats:
 
 ************
-Time formats
+Time Formats
 ************
 
 In |scname| all absolute times of raw :term:`miniSEED` waveforms and
@@ -23,10 +23,10 @@ be a single string only would be interpreted as two strings. Example:
 
    scevtls -d localhost --begin '2024-01-01 12:00:00'
 
-Depending on the module, trailing parameters could be ommitted or not for
+Depending on the module, trailing parameters could be omitted or not for
 shortening the arguments but the general rules were initially unclear.
 
-More flexibilty has been introduced with SeisComP in version 6.4.0 with the
+More flexibility has been introduced with SeisComP in version 6.4.0 with the
 new C++ and Python function:
 
 C++:
@@ -42,7 +42,7 @@ Python:
    seiscomp.core().time().fromString()
 
 In adaptation to the norm :cite:t:`iso_8601` a subset of strings is now
-availble. Supported formats are
+available. Supported formats are
 
 * Calender dates,
 * Ordinal dates,
@@ -62,26 +62,29 @@ Currently unsupported are:
    :delim: ;
 
    %FT%T.%fZ    ; YYYY-MM-DDThh:mm:ss.ssssssZ ; 2025-01-01T00:00:00.000000Z
-   %FT%T.%f     ; YYYY-MM-DDThh:mm:ss.ssssss ; 2025-01-01T00:00:00.000000
-   %FT%TZ       ; YYYY-MM-DDThh:mm:ssZ ; 2025-01-01T00:00:00Z
-   %FT%T        ; YYYY-MM-DDThh:mm:ss ; 2025-01-01T00:00:00
-   %FT%R        ; YYYY-MM-DDThh:mm ; 2025-01-01T00:00
-   %FT%H        ; YYYY-MM-DDThh ; 2025-01-01T00
-   %Y-%jT%T.%f  ; YYYY-DDDThh:mm:ss.ssssss ; 2025-001T00:00:00.000000
-   %Y-%jT%T     ; YYYY-DDDThh:mm:ss ; 2025-001T00:00:00
-   %Y-%jT%R     ; YYYY-DDDThh:mm ; 2025-001T00:00
-   %Y-%jT%H     ; YYYY-DDDThh ; 2025-001T00
-   %F %T.%f *   ; YYYY-MM-DD hh:mm:ss.ssssss ; '2025-01-01 00:00:00.000000'
-   %F %T    *   ; YYYY-MM-DD hh:mm:ss ;'2025-01-01 00:00:00'
-   %F %R    *   ; YYYY-MM-DD hh:mm ; '2025-01-01 00:00'
-   %F %H    *   ; YYYY-MM-DD hh ; '2025-01-01 00'
-   %F           ; YYYY-MM-DD ; 2025-01-01
-   %Y-%j        ; YYYY-DDD ; 2025-001
-   %Y           ; YYYY ; 2025
+   %FT%T.%f     ; YYYY-MM-DDThh:mm:ss.ssssss  ; 2025-01-01T00:00:00.000000
+   %FT%TZ       ; YYYY-MM-DDThh:mm:ssZ        ; 2025-01-01T00:00:00Z
+   %FT%T        ; YYYY-MM-DDThh:mm:ss         ; 2025-01-01T00:00:00
+   %FT%R        ; YYYY-MM-DDThh:mm            ; 2025-01-01T00:00
+   %FT%H        ; YYYY-MM-DDThh               ; 2025-01-01T00
+   %Y-%jT%T.%f  ; YYYY-DDDThh:mm:ss.ssssss    ; 2025-001T00:00:00.000000
+   %Y-%jT%T     ; YYYY-DDDThh:mm:ss           ; 2025-001T00:00:00
+   %Y-%jT%R     ; YYYY-DDDThh:mm              ; 2025-001T00:00
+   %Y-%jT%H     ; YYYY-DDDThh                 ; 2025-001T00
+   %F %T.%f (*) ; YYYY-MM-DD hh:mm:ss.ssssss  ; '2025-01-01 00:00:00.000000'
+   %F %T    (*) ; YYYY-MM-DD hh:mm:ss         ; '2025-01-01 00:00:00'
+   %F %R    (*) ; YYYY-MM-DD hh:mm            ; '2025-01-01 00:00'
+   %F %H    (*) ; YYYY-MM-DD hh               ; '2025-01-01 00'
+   %F           ; YYYY-MM-DD                  ; 2025-01-01
+   %Y-%j        ; YYYY-DDD                    ; 2025-001
+   %Y           ; YYYY                        ; 2025
+
+(*): Time strings with spaces must be enclosed by quotes or double quotes for
+protecting the space.
 
 .. csv-table:: List of format symbols used in table of time string formats
    :widths: 10 90
-   :header: Symbol, Describtion
+   :header: Symbol, Description
    :align: left
    :delim: ;
 
@@ -106,7 +109,7 @@ Example:
 .. _time-grammar:
 
 ************
-Time grammar
+Time Grammar
 ************
 
 Amplitudes are measured on waveforms by modules such as :ref:`scautopick`,

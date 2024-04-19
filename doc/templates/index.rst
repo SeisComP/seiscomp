@@ -97,15 +97,15 @@ ${generator.refs.extensions}
 
 .. _sec_index_extensions:
 
-Time Strings, Filter and Time Grammar
+Time Strings, Time and Filter Grammar
 #####################################
 
 .. toctree::
    :maxdepth: 1
    :titlesonly:
 
-   /base/filter-grammar
    /base/time-grammar
+   /base/filter-grammar
 
 
 .. _sec_index_developers:
