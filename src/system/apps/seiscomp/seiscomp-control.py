@@ -770,12 +770,15 @@ def on_print(args, _):
     elif args[0] == "variables":
         try:
             # pylint: disable=C0415
-            import seiscomp.system.Environment as environ
-        except ImportError:
+            import seiscomp.system as scsys
+        except ImportError as e:
             # unavailable without trunk installation, e.g., seedlink-only
-            error("wrong argument: variables is unavailable without trunk installation")
+            error(
+                "wrong argument: variables is unavailable without trunk installation\n"
+                f"  + {e}"
+            )
             return 1
-        sysenv = environ.Instance()
+        sysenv = scsys.Environment.Instance()
         print(
             f"""@HOMEDIR@          : {sysenv.homeDir()}
 @ROOTDIR@          : {sysenv.installDir()}
@@ -1343,7 +1346,9 @@ def on_help(args, _):
         print("\nUse 'help [command]' to get more help about a command")
         print("\nExamples:")
         print("  seiscomp help update-config          Show help for update-config")
-        print("  seiscomp update-config               Run update-config for all modules")
+        print(
+            "  seiscomp update-config               Run update-config for all modules"
+        )
         print(
             "  seiscomp update-config trunk         Run update-config for all trunk modules"
         )
