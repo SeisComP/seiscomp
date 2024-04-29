@@ -1,13 +1,126 @@
+.. _time-formats:
+
+************
+Time Formats
+************
+
+In |scname| all absolute times of raw :term:`miniSEED` waveforms and
+:ref:`SeisComP objects <api-datamodel-python>` like event parameters, inventory,
+etc. are natively given and assumed in UTC. For reading and writing absolute
+times a range of formats are supported.
+
+Historically, the only time format native to |scname| would be
+
+.. code-block:: properties
+
+   YYYY-MM-DD hh:mm:ss.ssssss
+
+As a consequence of the space between *DD* and *hh* this time string needs
+to be enclosed by quotes or double quotes. Otherwise, the time string meant to
+be a single string only would be interpreted as two strings. Example:
+
+.. code-block:: sh
+
+   scevtls -d localhost --begin '2024-01-01 12:00:00'
+
+Depending on the module, trailing parameters could be omitted or not for
+shortening the arguments but the general rules were initially unclear.
+
+More flexibility has been introduced with SeisComP in version 6.4.0 with the
+new C++ and Python function:
+
+C++:
+
+.. code-block:: c
+
+   Seiscomp::Core::Time::fromString()
+
+Python:
+
+.. code-block:: python
+
+   seiscomp.core().time().fromString()
+
+In adaptation to the norm :cite:t:`iso_8601` a subset of strings is now
+available. Supported formats are
+
+* Calender dates,
+* Ordinal dates,
+* Times (24-hour clock system) in combination with calender or ordinal dates.
+
+Currently unsupported are:
+
+* Week dates,
+* Times without dates,
+* Time zone offset designators,
+* Local times.
+
+.. csv-table:: List and examples of supported time string formats
+   :widths: 30 30 40
+   :header: Implementation, Time string format, Examples: all actual times are identical
+   :align: left
+   :delim: ;
+
+   %FT%T.%fZ    ; YYYY-MM-DDThh:mm:ss.ssssssZ ; 2025-01-01T00:00:00.000000Z
+   %FT%T.%f     ; YYYY-MM-DDThh:mm:ss.ssssss  ; 2025-01-01T00:00:00.000000
+   %FT%TZ       ; YYYY-MM-DDThh:mm:ssZ        ; 2025-01-01T00:00:00Z
+   %FT%T        ; YYYY-MM-DDThh:mm:ss         ; 2025-01-01T00:00:00
+   %FT%R        ; YYYY-MM-DDThh:mm            ; 2025-01-01T00:00
+   %FT%H        ; YYYY-MM-DDThh               ; 2025-01-01T00
+   %Y-%jT%T.%f  ; YYYY-DDDThh:mm:ss.ssssss    ; 2025-001T00:00:00.000000
+   %Y-%jT%T     ; YYYY-DDDThh:mm:ss           ; 2025-001T00:00:00
+   %Y-%jT%R     ; YYYY-DDDThh:mm              ; 2025-001T00:00
+   %Y-%jT%H     ; YYYY-DDDThh                 ; 2025-001T00
+   %F %T.%f (*) ; YYYY-MM-DD hh:mm:ss.ssssss  ; '2025-01-01 00:00:00.000000'
+   %F %T    (*) ; YYYY-MM-DD hh:mm:ss         ; '2025-01-01 00:00:00'
+   %F %R    (*) ; YYYY-MM-DD hh:mm            ; '2025-01-01 00:00'
+   %F %H    (*) ; YYYY-MM-DD hh               ; '2025-01-01 00'
+   %F           ; YYYY-MM-DD                  ; 2025-01-01
+   %Y-%j        ; YYYY-DDD                    ; 2025-001
+   %Y           ; YYYY                        ; 2025
+
+(*): Time strings with spaces must be enclosed by quotes or double quotes for
+protecting the space.
+
+.. csv-table:: List of format symbols used in table of time string formats
+   :widths: 10 90
+   :header: Symbol, Description
+   :align: left
+   :delim: ;
+
+   YYYY;   4-digit year
+   MM;     2-digit month starting with 01
+   DD;     1- or 2-digit day of the month starting with 01
+   DDD;    1-, 2- or 3-digit day of year starting with 001
+   hh;     1- or 2-digit hour of the day starting with 00
+   mm;     1- or 2-digit minute of the hour starting with 00
+   ss;     1- or 2-digit second of the minute starting with 00
+   ssssss; 1-6 digits decimal fraction of a second with 0
+   Z;      Zone designator for the zero UTC offset
+
+Durations can be formed from start and end dates and times combined by tilde(~).
+Example:
+
+.. code-block:: sh
+
+   scart -dsEv -t 2024-01-01T12~2024-01-01T12:15:30.2Z
+
+
 .. _time-grammar:
 
 ************
-Time grammar
+Time Grammar
 ************
 
-The time windows for measuring noise and signal for amplitudes used to compute
-magnitudes can be configured by the respective begin and end values. These
-window parameters are configured as global binding parameters specifically for
-a particular amplitude type, let's say :ref:`ML <global_ml>`:
+Amplitudes are measured on waveforms by modules such as :ref:`scautopick`,
+:ref:`scamp` or :ref:`scolv` for computing magnitudes, e.g., by :ref:`scmag` or
+:ref:`scolv`. The principles are outlined in the concepts section
+:ref:`concepts_magnitudes`.
+
+The time windows for measuring noise and signal amplitudes are given by their
+respective begin and end values. These window parameters are configured as
+global binding parameters specifically for a particular amplitude type, let's
+say :ref:`ML <global_ml>`:
 
 .. code-block:: properties
 
@@ -16,38 +129,39 @@ a particular amplitude type, let's say :ref:`ML <global_ml>`:
    amplitudes.ML.signalBegin
    amplitudes.ML.signalEnd
 
-**The configured values are added to the relative trigger time and the
-origin time** for forming absolute times. The relative trigger time
-corresponds to the arrival of P waves for most applications. The configured
-begin and end values are therefore given as time differences relative to the
-absolute trigger time.
-
+**The configured values are added to trigger time**, *triggerTime*, which
+corresponds to the arrival of P waves for most applications. *triggerTime* is
+hence the sum of *originTime* and *relativeTriggerTime*.
 
 Example:
 
 .. math::
 
    absoluteSignalEnd =\ &originTime + relativeTriggerTime + amplitudes.ML.signalEnd \\
+                     =\ &originTime - relativeOriginTime + amplitudes.ML.signalEnd \\
                      =\ &triggerTime + amplitudes.ML.signalEnd
 
 .. important::
 
-   Where travel times of a particular phase are estimated from distance
+   Where values of time-window parameter values shall be estimated from distance
    measures such as :envvar:`D` or :envvar:`h`, the relative origin time,
-   :envvar:`OT`, must be added to get the time difference. In contrast,
-   :py:func:`tt()` returns the time difference to :envvar:`OT` and
-   :py:func:`tt()` does not need to be corrected.
+   :envvar:`OT`, must be added to get the actual difference to *triggerTime*. In
+   contrast, :py:func:`tt()` returns the time difference to :envvar:`OT`.
+   Therefore, :py:func:`tt()` does not need to be corrected for origin time.
 
-In |scname| the configuration of the begin and end values is supported by a
-combination of :ref:`functions <sec-time-functions>`,
+In |scname| the configuration of the begin and end values is supported in the
+Bindings Panel of :ref:`scconfig`: For global bindings parameters you may create
+an amplitude-type profile with the name of the amplitude type, e.g., ML. The
+profile allows you to configure the parameters.
+You may set the values as a combination of :ref:`functions <sec-time-functions>`,
 :ref:`operators <sec-time-operators>`, :ref:`variables <sec-time-variables>` and
 constant values. The combination of them allows setting up a flexible time
-grammar for time windows. You may use parentheses *()* to apply operations
-within the parentheses before operations outside of parentheses.
+grammar for time windows. You may further use parentheses *()* to apply
+operations within the parentheses before operations outside of parentheses.
 
-If the result of the final evaluation is *unset*, e.g., because required
-information are not available, then the processing receives an error and the
-amplitude will not be computed.
+If the result of the final evaluation of the parameter value is *unset*, e.g.,
+because required information are not available, then the processing receives an
+error and the amplitude will not be computed.
 
 
 Examples
@@ -118,6 +232,7 @@ Variables, operators and functions are available. Variables define standard
 values and function provide values based on a parameter given within
 parentheses like :py:func:`tt()`. Find below their individual descriptions.
 
+
 .. _sec-time-functions:
 
 Functions
@@ -142,11 +257,14 @@ Functions
 
 .. py:function:: tt(phase)
 
-   Calculates the travel-time of the given phase **relative to the trigger time**.
-   The result is unset if the travel time cannot be computed.
+   Calculates the travel-time of the given phase **w.r.t. relative origin
+   time, :py:envvar:`OT`**. The result is unset if the travel time cannot be
+   computed. The travel times are computed based on the travel-time interface
+   and model defined in :confval:`amplitudes.ttt.interface` and
+   :confval:`amplitudes.ttt.model`, respectively.
 
-   :param phase: Phase name available with the define travel-time interface
-                 and profile.
+   :param phase: Phase name available with the defined travel-time interface
+                 and model.
 
 
 .. py:function:: arr(phase, acceptAll)
@@ -201,8 +319,6 @@ on the operator and function itself.
    Unit: ``s``
 
 .. envvar:: D
-
-   Unit: ``km``
 
    :term:`Epicentral distance <distance, epicentral>`
 
