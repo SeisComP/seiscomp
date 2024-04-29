@@ -129,26 +129,25 @@ say :ref:`ML <global_ml>`:
    amplitudes.ML.signalBegin
    amplitudes.ML.signalEnd
 
-**The configured values are added to the relative trigger time and the
-origin time** for forming absolute times. The relative trigger time
-corresponds to the arrival of P waves for most applications. The configured
-begin and end values are therefore given as time differences relative to the
-absolute trigger time.
+**The configured values are added to trigger time**, *triggerTime*, which
+corresponds to the arrival of P waves for most applications. *triggerTime* is
+hence the sum of *originTime* and *relativeTriggerTime*.
 
 Example:
 
 .. math::
 
    absoluteSignalEnd =\ &originTime + relativeTriggerTime + amplitudes.ML.signalEnd \\
+                     =\ &originTime - relativeOriginTime + amplitudes.ML.signalEnd \\
                      =\ &triggerTime + amplitudes.ML.signalEnd
 
 .. important::
 
-   Where travel times of a particular phase are estimated from distance
+   Where values of time-window parameter values shall be estimated from distance
    measures such as :envvar:`D` or :envvar:`h`, the relative origin time,
-   :envvar:`OT`, must be added to get the time difference. In contrast,
-   :py:func:`tt()` returns the time difference to :envvar:`OT` and
-   :py:func:`tt()` does not need to be corrected.
+   :envvar:`OT`, must be added to get the actual difference to *triggerTime*. In
+   contrast, :py:func:`tt()` returns the time difference to :envvar:`OT`.
+   Therefore, :py:func:`tt()` does not need to be corrected for origin time.
 
 In |scname| the configuration of the begin and end values is supported in the
 Bindings Panel of :ref:`scconfig`: For global bindings parameters you may create
@@ -258,13 +257,13 @@ Functions
 
 .. py:function:: tt(phase)
 
-   Calculates the travel-time of the given phase **relative to the trigger time**.
-   The result is unset if the travel time cannot be computed. The travel times
-   are computed based on the travel-time interface and and model defined in
-   :confval:`amplitudes.ttt.interface` and :confval:`amplitudes.ttt.model`,
-   respectively.
+   Calculates the travel-time of the given phase **w.r.t. relative origin
+   time, :py:envvar:`OT`**. The result is unset if the travel time cannot be
+   computed. The travel times are computed based on the travel-time interface
+   and model defined in :confval:`amplitudes.ttt.interface` and
+   :confval:`amplitudes.ttt.model`, respectively.
 
-   :param phase: Phase name available with the define travel-time interface
+   :param phase: Phase name available with the defined travel-time interface
                  and model.
 
 
@@ -320,8 +319,6 @@ on the operator and function itself.
    Unit: ``s``
 
 .. envvar:: D
-
-   Unit: ``km``
 
    :term:`Epicentral distance <distance, epicentral>`
 
