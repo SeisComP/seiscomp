@@ -4,6 +4,9 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
+-   trunk
+    -   Add scripts for installing software dependencies for Ubuntu 24.04 which
+        can be installed using seiscomp install-deps ...
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
