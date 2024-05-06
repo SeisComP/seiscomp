@@ -4,9 +4,6 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
--   trunk
-    -   Add scripts for installing software dependencies for Ubuntu 24.04 which
-        can be installed using seiscomp install-deps ...
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
@@ -26,6 +23,8 @@ All notable changes to SeisComP are documented here.
         function fromString() such as "2024-04-01 01" and 2024-04-01T01.
     -   Report an error if file recordstream is used without a regular file.
     -   Add CUTOFF() and STALTA2() to documentation of filter grammar.
+    -   Add scripts for installing software dependencies for Ubuntu 24.04 which
+        can be installed using seiscomp install-deps ...
 -   seedlink
     -   reftek plugin: expand max stream ID length to 5 characters.
     -   optodas: set gain frequency in inventory channel.
