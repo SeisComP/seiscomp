@@ -20,7 +20,9 @@ All notable changes to SeisComP are documented here.
     -   serial: add maRam Weatherstation V1 support.
     -   mws: fix dft485 support.
 -   scmaster
-    -   Serve index.html when browsing a directory with HTTP.a
+    -   Serve index.html when browsing a directory with HTTP.
+-   scart, scdbstrip, scevtls, scevtstreams, scmssort, scorgls, scart, scsendorigin
+    -   Allow all datetime formats support by Time.FromString.
 -   GUI
     -   Add preferred magnitude selection to "Commit with options" dialog.
     -   Populate AmplitudeView minSNR control with currently configured value.
