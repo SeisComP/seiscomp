@@ -36,6 +36,11 @@ All notable changes to SeisComP are documented here.
 -   GUI
     -   Add preferred magnitude selection to "Commit with options" dialog.
     -   Populate AmplitudeView minSNR control with currently configured value.
+-   scolv
+    -   Add splitter between main view and event summary to be able to adjust the
+        width of the event summary panel.
+    -   Make the application content scrollable if the window width is smaller than
+        the minimum required content width.
 -   fdsnxml2inv
     -   Support more flexible date strings.
 -   scautoloc
