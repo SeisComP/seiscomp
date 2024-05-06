@@ -12,8 +12,9 @@ All notable changes to SeisComP are documented here.
         configuration and command-line parameters which will be highlighted in
         documentation and exposed in scconfig.
 -   magnitudes
-    -   Consider source depth instead of vertical distance between station and
-        origin for computing H.
+    -   MLc: Consider source depth instead of vertical distance between station
+        and origin for computing H.
+    -   Consider correction term with exponential decay.
 
 ## 6.4.0
 
@@ -35,6 +36,8 @@ All notable changes to SeisComP are documented here.
 -   GUI
     -   Add preferred magnitude selection to "Commit with options" dialog.
     -   Populate AmplitudeView minSNR control with currently configured value.
+-   fdsnxml2inv
+    -   Support more flexible date strings.
 -   scautoloc
     -   Prioritize picks over amplitudes when sorting both with identical
         creation times in playbacks using `--ep`.
@@ -73,6 +76,8 @@ All notable changes to SeisComP are documented here.
     -   Do not prefer magnitudes with evaluation mode "rejected".
 -   invextr
     -   Extract inventory based on start and end time.
+-   documentation
+    -   Add supported time formats in new section 'Time Formats'.
 
 ## 6.3.1
 
