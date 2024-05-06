@@ -24,6 +24,13 @@ All notable changes to SeisComP are documented here.
 -   GUI
     -   Add preferred magnitude selection to "Commit with options" dialog.
     -   Populate AmplitudeView minSNR control with currently configured value.
+-   scolv
+    -   Add splitter between main view and event summary to be able to adjust the
+        width of the event summary panel.
+    -   Make the application content scrollable if the window width is smaller than
+        the minimum required content width.
+-   fdsnxml2inv
+    -   Support more flexible date strings.
 -   scautoloc
     -   Prioritize picks over amplitudes when sorting both with identical
         creation times in playbacks using `--ep`.
@@ -59,6 +66,11 @@ All notable changes to SeisComP are documented here.
 -   scevent
     -   Fix crash under some conditions. This crash was caused by configurations
         where remove and update operations were sent out of sync.
+    -   Do not prefer magnitudes with evaluation mode "rejected".
+-   invextr
+    -   Extract inventory based on start and end time.
+-   documentation
+    -   Add supported time formats in new section 'Time Formats'.
 
 ## 6.3.1
 
@@ -79,9 +91,9 @@ All notable changes to SeisComP are documented here.
     -   Handle negative channel gain: amplitude processors always return
         positive amplitudes.
 -   scolv
-    -   Add time and publicID to pick tool tip in picker
-    -   Handle single component positive dip. Traces will be flipped when transforming
-        int ZNE.
+    -   Add time and publicID to pick tool tip in picker.
+    -   Handle single component positive dip. Traces will be flipped when
+        transforming int ZNE.
 -   GUI
     -   Handle negative gains. Traces will be flipped if values should be shown
         in gain units.
@@ -89,7 +101,8 @@ All notable changes to SeisComP are documented here.
     -   The option `-P` supports lists, allowing to request the values for
         multiple parameters instead of only one.
 -   scevtls
-    -   Include created events in output without modified date using `--modified-after`.
+    -   Include created events in output without modified date using
+        `--modified-after`.
 -   scinv
     -   Report missing values for channel dip and azimuth,
     -   Report when both channel dip and gain are negative as this may be
@@ -98,23 +111,23 @@ All notable changes to SeisComP are documented here.
     -   The evrc (RegionCheck) plugin ignores but reports missing polygons
         instead of dropping the region check entirely.
 -   iLoc
-    -   Update iLoc code to version 4.2
+    -   Update iLoc code to version 4.2.
 -   doc
-    -   Add more details to amplitude time window configuration grammar
-    -   Add BPENV, RND and RUD filter
-    -   More details on magnitude average methods
+    -   Add more details to amplitude time window configuration grammar.
+    -   Add BPENV, RND and RUD filter.
+    -   More details on magnitude average methods.
 -   system
     -   Add libqt5printsupport5 dependency to Debian bases distributions.
 
 ## 6.2.1
 
 -   scalert
-    -   Fix crash on exit
-    -   Fix handling of `agencyIDs`: an empty string in the
-        configuration file will allow any agencyID.
+    -   Fix crash on exit.
+    -   Fix handling of `agencyIDs`: an empty string in the configuration file
+        will allow any agency ID.
 -   trunk
-    -   Fix ML/MLc amplitude time window computation to raise an error
-        if one component fails.
+    -   Fix ML/MLc amplitude time window computation to raise an error if one
+        component fails.
 -   GUI
     -   Fix map legend generation from feature directories.
 -   scolv
@@ -125,12 +138,10 @@ All notable changes to SeisComP are documented here.
 ## 6.2.0
 
 -   trunk
-    -   Fix magnitude aliases for ML's in combination with
-        different amplitude types. E.g. `MLderived:MLc:MLv`
-        should work now.
-    -   3C component detection by checking mutual perpendicular
-        sensor orientations increased the tolerance from 1 degree
-        to 5 degrees.
+    -   Fix magnitude aliases for ML's in combination with different amplitude
+        types. E.g. `MLderived:MLc:MLv` should work now.
+    -   3C component detection by checking mutual perpendicular sensor
+        orientations increased the tolerance from 1 degree to 5 degrees.
 -   scconfig
     -   Allow checking individual inventory files in Inventory panel.
     -   Fix white space rendering in tooltips.
@@ -142,38 +153,36 @@ All notable changes to SeisComP are documented here.
     -   Disable "Show picks/arrivals" actions if `showPicks`
         is set to `false`.
 -   scardac
-    -   Fix segfault triggered by stream filter
-    -   Use value of `0` in `maxSegment` parameter to disable segment limits
+    -   Fix segfault triggered by stream filter.
+    -   Use value of `0` in `maxSegment` parameter to disable segment limits.
 -   scinv
     -   Fix reporting stream groups with other than 1 or 3 channels.
 -   fdsnws
-    -   Output full precision in event text format
-    -   Fix exception in availablity access test
-    -   Fix authorization error
+    -   Output full precision in event text format.
+    -   Fix exception in availability access test.
+    -   Fix authorization error.
     -   Add configuration option `inventoryCoordinatePrecision` allowing
-        to obfuscate inventory geo coordinates
+        to obfuscate inventory geo coordinates.
 
 ## 6.1.2
 
 -   trunk
     -   Populate SNR value of ML and MLc amplitudes.
-    -   Fix reading amplitude regionalization regions,
-        use `magnitudes.[type].regionFile` instead of
-        `magnitudes.[type].regions` as in v4.
+    -   Fix reading amplitude regionalization regions, use
+        `magnitudes.[type].regionFile` instead of `magnitudes.[type].regions` as
+        in v4.
 -   scolv
-    -   Preselect measure type and combiner dropdown based on
-        station bindings.
+    -   Preselect measure type and combiner dropdown based on station bindings.
 -   scesv
-    -   Fix regression which prevented showing the current
-        magnitudes when `showLastAutomaticSolution = true`.
+    -   Fix regression which prevented showing the current magnitudes when
+        `showLastAutomaticSolution = true`.
 
 ## 6.1.1
 
 -   scolv
-    -   Fix station count update of Mw magnitude if a magnitudes
-        has been recalculated in the magnitude view. Furthermore
-        the Mw tab header updates correctly and shows the number
-        of stations.
+    -   Fix station count update of Mw magnitude if a magnitudes has been
+        recalculated in the magnitude view. Furthermore the Mw tab header
+        updates correctly and shows the number of stations.
 
 ## 6.1.0
 
@@ -187,16 +196,16 @@ All notable changes to SeisComP are documented here.
         deactivation of slowness, backazimuth parameters which may be obtained
         during phase picking.
 -   seedlink
-    -   Fix crash in chain plugin if mseed records with
-        invalid header data are transmitted.
+    -   Fix crash in chain plugin if mseed records with invalid header data are
+        transmitted.
     -   Fix network code mapping in `sock_plugin`.
     -   Fix fifo path resolve in `mseedfifo_plugin`.
 -   scesv
     -   Fix crash in combination with latest automatic
         origin display.
 -   scdispatch
-    -   Log if an object already exists in database so that
-        a user can understand why nothing was dispatched.
+    -   Log if an object already exists in database so that a user can
+        understand why nothing was dispatched.
     -   Remove all event objects from the list of objects when applying
         `--no-events` instead of removing the routing.
 -   scardac
@@ -237,8 +246,8 @@ All notable changes to SeisComP are documented here.
 ## 6.0.5
 
 -   seedlink
-    -   Revert previous fix as it fixes one configuration but breaks
-        another. Future versions will address this issue.
+    -   Revert previous fix as it fixes one configuration but breaks another.
+        Future versions will address this issue.
     -   Fix mseedfifo plugin setup that it can be used as regular plugin.
 
 ## 6.0.4
@@ -246,38 +255,34 @@ All notable changes to SeisComP are documented here.
 -   seiscomp
     -   Fix an issue with special characters in db password, etc.
 -   scconfig
-    -   Set red background also for checkboxes if the parameter
-        is overridden.
+    -   Set red background also for checkboxes if the parameter is overridden.
 -   GUI
     -   Fix spectrogram rendering with time normalization.
 -   trunk
     -   Fix internal timer exceptions in combination with OSX.
     -   Remove duplicate CLI parameter `--shutdown-master-username`.
 -   seedlink
-    -   Add more channels and increase sample rate to 1Hz for vaisala
-        protocol.
-    -   Fix plugin update-config if global parameters are modified,
-        e.g. mseeedfifo plugin.
+    -   Add more channels and increase sample rate to 1Hz for vaisala protocol.
+    -   Fix plugin update-config if global parameters are modified, e.g.,
+        mseeedfifo plugin.
 
 ## 6.0.3
 
 -   GUI
-    -   Fix spectrogram update rendering w.r.t. time
-        normalization.
-    -   Fix zoom record time range display in amplitude view.
-        When a new time range has been selected, e.g. via
-        the time scale, then not the full time range has been
-        set but only < 100% depending on the window size and
+    -   Fix spectrogram update rendering w.r.t. time normalization.
+    -   Fix zoom record time range display in amplitude view. When a new time
+        range has been selected, e.g. via the time scale, then not the full time
+        range has been set but only < 100% depending on the window size and
         screen resolution.
 
 ## 6.0.2
 
 -   trunk
-    -   Remove logging of database connection to not expose user
-        accounts in log files.
+    -   Remove logging of database connection to not expose user accounts in log
+        files.
 -   scmaster
-    -   Remove logging of of database connection in dbstore plugin
-        to not expose user accounts in log files.
+    -   Remove logging of of database connection in dbstore plugin to not expose
+        user accounts in log files.
 
 ## 6.0.1
 
@@ -302,8 +307,8 @@ to 0.13. In particular some new event types have been introduced:
 -   pyroclastic flow
 -   lahar
 
-SeisComP3 API support is deprecated and will be removed in the next
-major version of SeisComP. This affects C++ includes like
+SeisComP3 API support is deprecated and will be removed in the next major
+version of SeisComP. This affects C++ includes like
 
 ```c++
 #include <seiscomp3/core/datetime.h>
@@ -330,9 +335,9 @@ import seiscomp.core
 Changes:
 
 -   trunk
-    -   Configuration schema files (`@SYSTEMCONFIGDIR@/descriptions/[module].xml`)
-        support extending available structures with plugins including selective
-        name matching:
+    -   Configuration schema files
+        (`@SYSTEMCONFIGDIR@/descriptions/[module].xml`) support extending
+        available structures with plugins including selective name matching:
 
         ```xml
         <extend-struct type="Amplitude">
@@ -352,8 +357,8 @@ Changes:
         precision.
     -   Changed KM_OF_DEGREE constant according to WGS84 mean radius definition.
     -   Changed default values of Wood-Anderson instrument filter to
-        recommendations by IASPEI magnitude group, 2011 and Uhrhammer et al., 1990.
-        The change systematically reduces magnitudes by 0.13 when making
+        recommendations by IASPEI magnitude group, 2011 and Uhrhammer et al.,
+        1990. The change systematically reduces magnitudes by 0.13 when making
         use of amplitudes measured on waveforms corrected for Wood-Anderson
         seismometers with default.
     -   Remove `MYSQL_OPT_RECONNECT` option from MYSQL database driver to get
@@ -1232,20 +1237,20 @@ to 0.12.
     -   Report correct module name with messaging for Python applications.
         Previous versions only reported `python` or `python3.8`.
 -   scsohlog
-    -   Port to Python3
+    -   Port to Python3.
 -   sh2proc
-    -   Port to Python3
+    -   Port to Python3.
 
 ## 4.8.2
 
 -   scart
-    -   Fix date in error output
+    -   Fix date in error output.
 
 ## 4.8.1
 
 -   fdsnws
     -   Fix return of empty event publicID in event service when a
-        PostgreSQL database is being used
+        PostgreSQL database is being used.
 
 ## 4.8.0
 
@@ -1261,8 +1266,8 @@ to 0.12.
         is disabled.
     -   Fix committing of manual amplitudes in the amplitude picker.
 -   scmag
-    -   Fix bug that caused multiple occurrences of magnitudes of the same
-        type when a new set of manually computed amplitudes has been received.
+    -   Fix bug that caused multiple occurrences of magnitudes of the same type
+        when a new set of manually computed amplitudes has been received.
 -   trunk
     -   Fix segmentation fault when reading malformed GeoJSON features.
 -   scorgls
@@ -1276,40 +1281,40 @@ to 0.12.
 ## 4.7.3
 
 -   trunk
-    -   Fix MYSQL database setup script to create
-        ro and rw user accounts correctly.
+    -   Fix MYSQL database setup script to create ro and rw user accounts
+        correctly.
 
 ## 4.7.2
 
 -   trunk
-    -   Update changelog
-    -   Fix `seiscomp setup trunk` with respect to database initialization
+    -   Update changelog.
+    -   Fix `seiscomp setup trunk` with respect to database initialization.
 -   scart
-    -   Do not require archive directory when writing records to stdout
+    -   Do not require archive directory when writing records to stdout.
 -   iLoc
-    -   Allow configuration of local models
+    -   Allow configuration of local models.
     -   Add comprehensive documentation on iLoc and integration / configuration
-        in SeisComP
+        in SeisComP.
 
 ## 4.7.1
 
 -   trunk
-    -   Fix test compilation for some distributions
-    -   Update changelog
+    -   Fix test compilation for some distributions.
+    -   Update changelog.
 
 ## 4.7.0
 
 ```SC_API_VERSION 14.3.0```
 
 -   Documentation
-    -   Update SDK Python examples
+    -   Update SDK Python examples.
 -   seiscomp
     -   Add `--wait` parameter to set the timeout when acquiring
-        the seiscomp lock
+        the seiscomp lock.
     -   Add dialog for removing obsolete configuration after
-        removing alias modules
+        removing alias modules.
     -   Add support for additional host environment which is sourced from
-        `$SEISCOMP_ROOT/etc/env/$(hostname)` if present
+        `$SEISCOMP_ROOT/etc/env/$(hostname)` if present.
 -   trunk
     -   Add HTTP proxy support for FDSNWS recordstream. `http_proxy`,
         `https_proxy` and `no_proxy` environment are being read and
@@ -1322,82 +1327,85 @@ to 0.12.
     -   Add support for GeoJSON files (*.geojson) in the new geo
         feature directory.
     -   Add data scheme version information to output when starting
-        a module with the option `-V`
-    -   Add MEDIAN() filter
+        a module with the option `-V`.
+    -   Add MEDIAN() filter.
 -   scolv
-    -   Fix display of tooltips in origin map and magnitude map
+    -   Fix display of tooltips in origin map and magnitude map.
     -   Fix loading configured streams from either scolv or global
-        bindings instead of the first bindings found
+        bindings instead of the first bindings found.
     -   Allow modifying origins and creating artificial origins on zoom trace
-        in picker window
+        in picker window.
 -   scquery
     -   Add `--print-header` option for generating information on the query as a
-        header of the output
-    -   Add examples for PostgreSQL
+        header of the output.
+    -   Add examples for PostgreSQL.
 -   GUI
     -   Add azimuthal gap column to event list which is initially hidden. To
-        activate it, add `AzGap"` to `eventlist.visibleColumns`
+        activate it, add `AzGap"` to `eventlist.visibleColumns`.
     -   Add units to columns of tables: Events, Events, Magnitudes
     -   Remove number of origins column in event list if origins should not be
-        listed
+        listed.
     -   Correct issue with magnitude view map which does not show symbols
-        for stations which have a magnitude but no arrival
+        for stations which have a magnitude but no arrival.
 -   scesv
     -   Add azimuthal gap to hypocenter panel
 -   scqcv
-    -   Make many configuration parameters available in scconfig and documentation
+    -   Make many configuration parameters available in scconfig and
+        documentation.
 -   scautoloc
     -   Disable pick logging by default to optimize disk space consumption.
         Can be enabled by new option `autoloc.pickLogEnable`.
-    -   Added documentation of parameters
-    -   Send a journal message when setting the origin evaluation status
-    -   Add IM network to default station.conf
+    -   Added documentation of parameters.
+    -   Send a journal message when setting the origin evaluation status.
+    -   Add IM network to default `station.conf`.
 -   iLoc
     -   Update iLoc code to version 3.3
 -   scdispatch
-    -   Add command-line option `-e` as a wrapper for removing the EVENT group from
-        routing table
+    -   Add command-line option `-e` as a wrapper for removing the EVENT group
+        from routing table.
 
 ## 4.6.1
 
 -   scolv
-    -   Add number of used / unused station magnitudes to Magnitudes tab (missing
-        from 4.6.0)
+    -   Add number of used / unused station magnitudes to Magnitudes tab
+        (missing from 4.6.0).
 
 ## 4.6.0
 
 -   Dependencies
-    -   Change Debian 10 dependencies to Python3 and Qt5
+    -   Change Debian 10 dependencies to Python3 and Qt5.
 -   scevent
-    -   Use application name for processing-info log
+    -   Use application name for processing-info log.
     -   Add new journal action EvRefresh: Select the preferred origin, the preferred
         magnitude, update the region, call processors loaded with plugins.
 -   scmssort
-    -   Add new `--list` option to filter miniSEED data by stream lists
-    -   Add some statistics to stderr output in verbosity mode
+    -   Add new `--list` option to filter miniSEED data by stream lists.
+    -   Add some statistics to stderr output in verbosity mode.
 -   scart
-    -   Do not crash when requesting data for non-existing networks from SDS archive
-    -   Add error output when attempting retrieve non-existing data from SDS archive
+    -   Do not crash when requesting data for non-existing networks from SDS
+        archive.
+    -   Add error output when attempting retrieve non-existing data from SDS
+        archive.
 -   GUI
-    -   Add number of origins per event to event list
-    -   Add copy cell operation to context menu to all tables in event editor
+    -   Add number of origins per event to event list.
+    -   Add copy cell operation to context menu to all tables in event editor.
 -   scmv
     -   Report erroneous configuration of `stations.groundMotionFilter` and stop
-        smoothly
+        smoothly.
 -   scolv
-    -   Add number of used / unused station magnitudes to Magnitudes tab
+    -   Add number of used / unused station magnitudes to Magnitudes tab.
 -   scheli
-    -   Allow scaling of traces per maximum row amplitude
+    -   Allow scaling of traces per maximum row amplitude.
 -   trunk
-    -   Add support for permanent redirects to fdsnws RecordStream
+    -   Add support for permanent redirects to fdsnws RecordStream.
     -   Fix MiniSEED reader for records without blockette 1000 and
         for records with blockette 1000 at an offset beyond the
-        first 128 bytes
+        first 128 bytes.
 -   seiscomp
-    -   Create aliases even if some links already exist
-    -   List remaining configuration files after removing aliases
-    -   Support requesting status of enabled and of started modules
-    -   Support requesting list of started modules
+    -   Create aliases even if some links already exist.
+    -   List remaining configuration files after removing aliases.
+    -   Support requesting status of enabled and of started modules.
+    -   Support requesting list of started modules.
 -   scconfig
     -   Add search for parameters in bindings panel: Ctrl + f
 -   sccnv
@@ -1541,8 +1549,8 @@ to 0.12.
     -   Allow creation of aliases
 -   scmag
     -   Add medianTrimmedMean average method
-    -   Remove internally cached objects if an objects has been removed
-      via messaging
+    -   Remove internally cached objects if an objects has been removed via
+        messaging.
 -   scolv
     -   Add median trimmed mean to magnitude average method
     -   Sort event types alphabetically and status by priority
