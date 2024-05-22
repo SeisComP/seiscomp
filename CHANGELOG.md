@@ -14,6 +14,7 @@ All notable changes to SeisComP are documented here.
     -   Add CUTOFF() and STALTA2() to documentation of filter grammar.
     -   Add scripts for installing software dependencies for Ubuntu 24.04 which
         can be installed using seiscomp install-deps ...
+    -   Set host to localhost if empty in caps recordstream
 -   seedlink
     -   reftek plugin: expand max stream ID length to 5 characters.
     -   optodas: set gain frequency in inventory channel.
