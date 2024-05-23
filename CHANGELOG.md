@@ -76,6 +76,8 @@ All notable changes to SeisComP are documented here.
 -   msrtsimul
     -   Add option `-u, --unlimited` to allow forwarding non 512 byte miniSEED
         records.
+-   gfs2fep
+    -   Add new tool to convert BNA or GeoJSON vectors to fep format.
 -   software dependencies
     -   Add support of Ubuntu 24.04.
 -   documentation
