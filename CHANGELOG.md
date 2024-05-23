@@ -43,8 +43,6 @@ All notable changes to SeisComP are documented here.
         width of the event summary panel.
     -   Make the application content scrollable if the window width is smaller than
         the minimum required content width.
--   fdsnxml2inv
-    -   Support more flexible date strings.
 -   scautoloc
     -   Prioritize picks over amplitudes when sorting both with identical
         creation times in playbacks using `--ep`.
@@ -68,6 +66,7 @@ All notable changes to SeisComP are documented here.
     -   Allow streams with undefined coordinates if region restriction is not used.
     -   Allow to read files from stdin with `scrttv -`.
 -   fdsnxml2inv
+    -   Support more flexible date strings.
     -   PoleAndZero.number and PolynomialCoefficient.number is optional.
     -   Add support for more date time formats.
     -   Add usage to help output.
@@ -83,6 +82,9 @@ All notable changes to SeisComP are documented here.
     -   Do not prefer magnitudes with evaluation mode "rejected".
 -   invextr
     -   Extract inventory based on start and end time.
+-   msrtsimul
+    -   Add option `-u, --unlimited` to allow forwarding non 512 byte miniSEED
+        records.
 -   documentation
     -   Add supported time formats in new section 'Time Formats'.
 
