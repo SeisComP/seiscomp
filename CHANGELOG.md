@@ -24,6 +24,8 @@ All notable changes to SeisComP are documented here.
     -   Serve index.html when browsing a directory with HTTP.
 -   scart, scdbstrip, scevtls, scevtstreams, scmssort, scorgls, scart, scsendorigin
     -   Allow all datetime formats support by Time.FromString.
+-   scart
+    -   Fix running in a loop when applying --check.
 -   GUI
     -   Add preferred magnitude selection to "Commit with options" dialog.
     -   Populate AmplitudeView minSNR control with currently configured value.
@@ -74,6 +76,8 @@ All notable changes to SeisComP are documented here.
 -   msrtsimul
     -   Add option `-u, --unlimited` to allow forwarding non 512 byte miniSEED
         records.
+-   software dependencies
+    -   Add support of Ubuntu 24.04.
 -   documentation
     -   Add supported time formats in new section 'Time Formats'.
 
