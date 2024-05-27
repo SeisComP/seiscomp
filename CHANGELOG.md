@@ -15,6 +15,14 @@ All notable changes to SeisComP are documented here.
     -   Add scripts for installing software dependencies for Ubuntu 24.04 which
         can be installed using seiscomp install-deps ...
     -   Set host to localhost if empty in caps recordstream
+    -   stdloc
+        -   Reject locations on the grid boundary.
+        -   Handle missing ttt for certain phases.
+        -   Arrival distance must be epicentral not hypocentral.
+        -   OctTree search optimization.
+        -   Remove overwhelming log messages.
+        -   Avoid rare but possible crush of eigv/chi2 code.
+        -   Fix octtree search failures in case of very large cell sizes.
 -   seedlink
     -   reftek plugin: expand max stream ID length to 5 characters.
     -   optodas: set gain frequency in inventory channel.
