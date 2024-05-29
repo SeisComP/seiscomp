@@ -624,8 +624,11 @@ bool Config::parseFile(std::istream &is) {
 			if ( current != line.begin() )
 				previous = current - 1;
 
-			if ( *current == '"' && *previous != '\\' ) {
-				stringMode = !stringMode;
+			if ( *current == '"' ) {
+				if ( (*previous != '\\') || stringMode ) {
+					// Escape mode only valid outside of strings
+					stringMode = !stringMode;
+				}
 			}
 			else if ( *current == '#' && !stringMode ) {
 				if ( !comment.empty() )
@@ -916,8 +919,17 @@ std::vector<std::string> Config::tokenize(const std::string& entry)
 			continue;
 		}
 
-		if ( stringMode ) {
-			if ( *it == '"' && *previousIt != '\\' ) {
+		if ( escapeMode ) {
+			// The first token either defines a variable name or a command and
+			// is not going to be parsed further. So the escape character must
+			// be removed.
+			if ( !tokens.empty() )
+				nextToken.push_back(*previousIt);
+			nextToken.push_back(*it);
+			escapeMode = false;
+		}
+		else if ( stringMode ) {
+			if ( *it == '"' ) {
 				stringMode = !stringMode;
 				nextToken.push_back(*it);
 				tokens.push_back(nextToken);
@@ -926,15 +938,6 @@ std::vector<std::string> Config::tokenize(const std::string& entry)
 			else {
 				nextToken.push_back(*it);
 			}
-		}
-		else if ( escapeMode ) {
-			// The first token either defines a variable name or a command and
-			// is not going to be parsed further. So the escape character must
-			// be removed.
-			if ( !tokens.empty() )
-				nextToken.push_back(*previousIt);
-			nextToken.push_back(*it);
-			escapeMode = false;
 		}
 		else if ( Private::isWhitespace(*it) ) {
 			if ( !nextToken.empty() ) {
@@ -985,8 +988,6 @@ bool Config::parseRValue(const std::string& entry,
 	if ( rawMode ) {
 		resolveReferences = false;
 	}
-
-	//SEISCOMP_DEBUG("entry: %s", entry.c_str());
 
 	for ( ; it != entry.end(); ++it ) {
 		if ( it != entry.begin() ) previous = it - 1;
@@ -1091,6 +1092,12 @@ bool Config::parseRValue(const std::string& entry,
 		}
 	}
 
+	if ( stringMode ) {
+		if ( errmsg ) {
+			*errmsg = "Missing terminating \" character in rvalue";
+		}
+		return false;
+	}
 	if ( !parsedEntry.empty() )
 		tokens.push_back(parsedEntry);
 
@@ -1098,9 +1105,9 @@ bool Config::parseRValue(const std::string& entry,
 	//	SEISCOMP_DEBUG("token%lu: %s", i ,tokens[i].c_str());
 
 	// Apply grammar
-	std::vector<std::string>::const_iterator currentIt  = tokens.begin();
-	std::vector<std::string>::const_iterator previousIt = tokens.begin();
-	std::vector<std::string>::const_iterator nextIt     = tokens.begin();
+	auto currentIt  = tokens.begin();
+	auto previousIt = tokens.begin();
+	auto nextIt     = tokens.begin();
 	std::string token;
 	for ( ; currentIt != tokens.end(); ++currentIt ) {
 		if ( currentIt != tokens.begin() ) previousIt = currentIt - 1;
