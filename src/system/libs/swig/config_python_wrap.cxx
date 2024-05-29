@@ -3934,41 +3934,6 @@ SWIG_FromCharPtr(const char *cptr)
 
 
 SWIGINTERN int
-SWIG_AsCharArray(PyObject * obj, char *val, size_t size)
-{ 
-  char* cptr = 0; size_t csize = 0; int alloc = SWIG_OLDOBJ;
-  int res = SWIG_AsCharPtrAndSize(obj, &cptr, &csize, &alloc);
-  if (SWIG_IsOK(res)) {
-    /* special case of single char conversion when we don't need space for NUL */
-    if (size == 1 && csize == 2 && cptr && !cptr[1]) --csize;
-    if (csize <= size) {
-      if (val) {
-	if (csize) memcpy(val, cptr, csize*sizeof(char));
-	if (csize < size) memset(val + csize, 0, (size - csize)*sizeof(char));
-      }
-      if (alloc == SWIG_NEWOBJ) {
-	delete[] cptr;
-	res = SWIG_DelNewMask(res);
-      }      
-      return res;
-    }
-    if (alloc == SWIG_NEWOBJ) delete[] cptr;
-  }
-  return SWIG_TypeError;
-}
-
-
-SWIGINTERN size_t
-SWIG_strnlen(const char* s, size_t maxlen)
-{
-  const char *p;
-  for (p = s; maxlen-- && *p; p++)
-    ;
-  return p - s;
-}
-
-
-SWIGINTERN int
 SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
 {
   char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
@@ -6805,33 +6770,6 @@ SWIGINTERN PyObject *Logger_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *a
   return SWIG_Python_InitShadowInstance(args);
 }
 
-SWIGINTERN int Swig_var_log_msg_buffer_set(PyObject *_val) {
-  {
-    int res = SWIG_AsCharArray(_val, Seiscomp::Config::log_msg_buffer, 1024);
-    if (!SWIG_IsOK(res)) {
-      SWIG_exception_fail(SWIG_ArgError(res), "in variable '""Seiscomp::Config::log_msg_buffer""' of type '""char [1024]""'");
-    }
-  }
-  return 0;
-fail:
-  return 1;
-}
-
-
-SWIGINTERN PyObject *Swig_var_log_msg_buffer_get(void) {
-  PyObject *pyobj = 0;
-  
-  {
-    size_t size = SWIG_strnlen(Seiscomp::Config::log_msg_buffer, 1024);
-    
-    
-    
-    pyobj = SWIG_FromCharPtrAndSize(Seiscomp::Config::log_msg_buffer, size);
-  }
-  return pyobj;
-}
-
-
 SWIGINTERN PyObject *_wrap_new_Exception__SWIG_0(PyObject *SWIGUNUSEDPARM(self), Py_ssize_t nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
   Seiscomp::Config::Exception *result = 0 ;
@@ -8664,48 +8602,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SymbolTable_setCaseSensitivityCheck(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Seiscomp::Config::SymbolTable *arg1 = (Seiscomp::Config::SymbolTable *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  PyObject *swig_obj[2] ;
-  
-  if (!SWIG_Python_UnpackTuple(args, "SymbolTable_setCaseSensitivityCheck", 2, 2, swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Seiscomp__Config__SymbolTable, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SymbolTable_setCaseSensitivityCheck" "', argument " "1"" of type '" "Seiscomp::Config::SymbolTable *""'"); 
-  }
-  arg1 = reinterpret_cast< Seiscomp::Config::SymbolTable * >(argp1);
-  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SymbolTable_setCaseSensitivityCheck" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  {
-    try {
-      (arg1)->setCaseSensitivityCheck(arg2);
-    }
-    catch ( const Seiscomp::Config::OptionNotFoundException &e) {
-      SWIG_exception(SWIG_ValueError, e.what());
-    }
-    catch ( const std::exception &e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-    catch ( ... ) {
-      SWIG_exception(SWIG_UnknownError, "C++ anonymous exception");
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_SymbolTable_setLogger(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Seiscomp::Config::SymbolTable *arg1 = (Seiscomp::Config::SymbolTable *) 0 ;
@@ -10168,48 +10064,6 @@ SWIGINTERN PyObject *_wrap_delete_Config(PyObject *SWIGUNUSEDPARM(self), PyObjec
   {
     try {
       delete arg1;
-    }
-    catch ( const Seiscomp::Config::OptionNotFoundException &e) {
-      SWIG_exception(SWIG_ValueError, e.what());
-    }
-    catch ( const std::exception &e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-    catch ( ... ) {
-      SWIG_exception(SWIG_UnknownError, "C++ anonymous exception");
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Config_setCaseSensitivityCheck(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Seiscomp::Config::Config *arg1 = (Seiscomp::Config::Config *) 0 ;
-  bool arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  PyObject *swig_obj[2] ;
-  
-  if (!SWIG_Python_UnpackTuple(args, "Config_setCaseSensitivityCheck", 2, 2, swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Seiscomp__Config__Config, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Config_setCaseSensitivityCheck" "', argument " "1"" of type '" "Seiscomp::Config::Config *""'"); 
-  }
-  arg1 = reinterpret_cast< Seiscomp::Config::Config * >(argp1);
-  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Config_setCaseSensitivityCheck" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  {
-    try {
-      (arg1)->setCaseSensitivityCheck(arg2);
     }
     catch ( const Seiscomp::Config::OptionNotFoundException &e) {
       SWIG_exception(SWIG_ValueError, e.what());
@@ -24123,7 +23977,6 @@ static PyMethodDef SwigMethods[] = {
 	 { "Symbol_swigregister", Symbol_swigregister, METH_O, NULL},
 	 { "Symbol_swiginit", Symbol_swiginit, METH_VARARGS, NULL},
 	 { "new_SymbolTable", _wrap_new_SymbolTable, METH_NOARGS, NULL},
-	 { "SymbolTable_setCaseSensitivityCheck", _wrap_SymbolTable_setCaseSensitivityCheck, METH_VARARGS, NULL},
 	 { "SymbolTable_setLogger", _wrap_SymbolTable_setLogger, METH_VARARGS, NULL},
 	 { "SymbolTable_logger", _wrap_SymbolTable_logger, METH_O, NULL},
 	 { "SymbolTable_add", _wrap_SymbolTable_add, METH_VARARGS, NULL},
@@ -24144,7 +23997,6 @@ static PyMethodDef SwigMethods[] = {
 	 { "SymbolTable_swiginit", SymbolTable_swiginit, METH_VARARGS, NULL},
 	 { "new_Config", _wrap_new_Config, METH_NOARGS, NULL},
 	 { "delete_Config", _wrap_delete_Config, METH_O, NULL},
-	 { "Config_setCaseSensitivityCheck", _wrap_Config_setCaseSensitivityCheck, METH_VARARGS, NULL},
 	 { "Config_readConfig", _wrap_Config_readConfig, METH_VARARGS, NULL},
 	 { "Config_writeConfig", _wrap_Config_writeConfig, METH_VARARGS, NULL},
 	 { "Config_setLogger", _wrap_Config_setLogger, METH_VARARGS, NULL},
@@ -25258,18 +25110,6 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "WARNING",SWIG_From_int(static_cast< int >(Seiscomp::Config::WARNING)));
   SWIG_Python_SetConstant(d, "INFO",SWIG_From_int(static_cast< int >(Seiscomp::Config::INFO)));
   SWIG_Python_SetConstant(d, "DEBUG",SWIG_From_int(static_cast< int >(Seiscomp::Config::DEBUG)));
-  globals = SWIG_globals();
-  if (!globals) {
-    PyErr_SetString(PyExc_TypeError, "Failure to create SWIG globals.");
-#if PY_VERSION_HEX >= 0x03000000
-    return NULL;
-#else
-    return;
-#endif
-  }
-  PyDict_SetItemString(md, "cvar", globals);
-  Py_DECREF(globals);
-  SWIG_addvarlink(globals, "log_msg_buffer", Swig_var_log_msg_buffer_get, Swig_var_log_msg_buffer_set);
   
   // thread safe initialization
   swig::container_owner_attribute();

@@ -163,7 +163,6 @@ class Exception(object):
 
 # Register Exception in _config:
 _config.Exception_swigregister(Exception)
-cvar = _config.cvar
 
 class OptionNotFoundException(Exception):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -244,9 +243,6 @@ class SymbolTable(object):
     def __init__(self):
         _config.SymbolTable_swiginit(self, _config.new_SymbolTable())
 
-    def setCaseSensitivityCheck(self, arg2):
-        return _config.SymbolTable_setCaseSensitivityCheck(self, arg2)
-
     def setLogger(self, arg2):
         return _config.SymbolTable_setLogger(self, arg2)
 
@@ -303,9 +299,6 @@ class Config(object):
     def __init__(self):
         _config.Config_swiginit(self, _config.new_Config())
     __swig_destroy__ = _config.delete_Config
-
-    def setCaseSensitivityCheck(self, arg2):
-        return _config.Config_setCaseSensitivityCheck(self, arg2)
 
     def readConfig(self, file, stage=-1, raw=False):
         return _config.Config_readConfig(self, file, stage, raw)
