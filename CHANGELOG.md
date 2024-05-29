@@ -13,6 +13,12 @@ All notable changes to SeisComP are documented here.
         and origin for computing H.
     -   Consider correction term with exponential decay.
 
+## 6.4.1
+
+-   scevent
+    -   Fix regression which causes a crash if a magnitude type should be
+        fixed.
+
 ## 6.4.0
 
 -   trunk
