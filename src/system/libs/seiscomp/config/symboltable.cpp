@@ -29,22 +29,6 @@ namespace Seiscomp {
 namespace Config {
 
 
-namespace {
-
-
-std::string toupper(const std::string &s) {
-	std::string tmp;
-	std::string::const_iterator it;
-	for ( it = s.begin(); it != s.end(); ++it )
-		tmp += ::toupper(*it);
-	return tmp;
-}
-
-
-}
-
-
-
 Symbol::Symbol(const std::string& name, const std::string &ns,
                const std::vector<std::string>& values,
                const std::string& uri,
@@ -119,20 +103,6 @@ std::string Symbol::toString() const {
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-SymbolTable::SymbolTable() : _csCheck(false), _objectCount(0), _logger(NULL) {}
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-void SymbolTable::setCaseSensitivityCheck(bool f) {
-	_csCheck = f;
-}
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void SymbolTable::setLogger(Logger *l) {
 	_logger = l;
 }
@@ -171,9 +141,6 @@ void SymbolTable::add(const std::string& name,
 
 	// Update the last line in the parsed content
 	itp.first->second.line = line;
-
-	// Register mapping to case-sensitive name
-	_cisymbols[toupper(name)] = itp.first;
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -182,8 +149,7 @@ void SymbolTable::add(const std::string& name,
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void SymbolTable::add(const Symbol &symbol) {
-	std::pair<Symbols::iterator, bool> itp;
-	itp = _symbols.insert(Symbols::value_type(symbol.name, Symbol()));
+	auto itp = _symbols.insert(Symbols::value_type(symbol.name, Symbol()));
 
 	if ( itp.second ) {
 		Symbol &newSymbol = itp.first->second;
@@ -193,9 +159,6 @@ void SymbolTable::add(const Symbol &symbol) {
 	else {
 		itp.first->second = symbol;
 	}
-
-	// Register mapping to case-sensitive name
-	_cisymbols[toupper(symbol.name)] = itp.first;
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -204,13 +167,7 @@ void SymbolTable::add(const Symbol &symbol) {
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool SymbolTable::remove(const std::string& name) {
-	CISymbols::iterator ci_it;
-	ci_it = _cisymbols.find(toupper(name));
-	if ( ci_it != _cisymbols.end() )
-		_cisymbols.erase(ci_it);
-
-	Symbols::iterator it;
-	it = _symbols.find(name);
+	auto it = _symbols.find(name);
 	if ( it != _symbols.end() ) {
 		SymbolOrder::iterator ito = std::find(_symbolOrder.begin(), _symbolOrder.end(), &it->second);
 		if ( ito != _symbolOrder.end() )
@@ -228,17 +185,12 @@ bool SymbolTable::remove(const std::string& name) {
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 Symbol* SymbolTable::get(const std::string& name) {
-	Symbols::iterator it = _symbols.find(name);
+	auto it = _symbols.find(name);
 	if ( it != _symbols.end() ) {
-		if ( _csCheck && checkCI(name, &it->second) )
-			return NULL;
-
 		return &it->second;
 	}
 
-	if ( _csCheck ) checkCI(name, NULL);
-
-	return NULL;
+	return nullptr;
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -249,51 +201,10 @@ Symbol* SymbolTable::get(const std::string& name) {
 const Symbol* SymbolTable::get(const std::string& name) const {
 	Symbols::const_iterator it = _symbols.find(name);
 	if ( it != _symbols.end() ) {
-		if ( _csCheck && checkCI(name, &it->second) )
-			return NULL;
-
 		return &it->second;
 	}
 
-	if ( _csCheck ) checkCI(name, NULL);
-
-	return NULL;
-}
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
-
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-bool SymbolTable::checkCI(const std::string &name, const Symbol *s) const {
-	CISymbols::const_iterator it = _cisymbols.find(toupper(name));
-	// No upper case entry found
-	if ( it == _cisymbols.end() ) return false;
-
-	if ( s == NULL ) {
-		int _line = it->second->second.line;
-		const std::string &_fileName = it->second->second.uri;
-
-		// Issue warning
-		CONFIG_WARNING("%s should define %s which is not defined itself: names are case-sensitive!",
-		               it->second->second.name.c_str(),
-		               name.c_str());
-		return true;
-	}
-
-	const Symbol *cisym = &it->second->second;
-	// Defined at a later stage?
-	if ( s->stage >= 0 && (cisym->stage > s->stage || cisym->line > s->line) ) {
-		int _line = cisym->line;
-		const std::string &_fileName = cisym->uri;
-
-		// Issue warning
-		CONFIG_WARNING("%s should override %s but does not: names are case-sensitive!",
-		               cisym->name.c_str(), name.c_str());
-		return true;
-	}
-
-	return false;
+	return nullptr;
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 

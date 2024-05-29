@@ -23,6 +23,7 @@
 
 
 #include <seiscomp/config/api.h>
+#include <fmt/printf.h>
 #include <cstdio>
 
 
@@ -44,13 +45,10 @@ struct SC_CONFIG_API Logger {
 };
 
 
-extern char log_msg_buffer[1024];
-
-
 #define CONFIG_LOG_CHANNEL(chan, msg, ...) \
 	if ( _logger ) {\
-		snprintf(log_msg_buffer, 1023, msg, __VA_ARGS__);\
-		_logger->log(chan, _fileName.c_str(), _line, log_msg_buffer);\
+		auto line = fmt::sprintf(msg, __VA_ARGS__);\
+		_logger->log(chan, _fileName.c_str(), _line, line.c_str());\
 	}
 
 

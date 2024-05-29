@@ -279,15 +279,6 @@ Config::~Config() {
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-void Config::setCaseSensitivityCheck(bool f) {
-	_symbolTable->setCaseSensitivityCheck(f);
-}
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
-
-
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool Config::readConfig(const std::string &filename, int stage, bool raw) {
 	_stage = stage;
 	_resolveReferences = !raw;
@@ -553,7 +544,7 @@ Config &Config::operator=(Config &&other) {
 	_defaultNamespacePrefix = std::move(other._defaultNamespacePrefix);
 
 	_logger = other._logger; other._logger = nullptr;
-	_symbolTable = other._symbolTable; _symbolTable = nullptr;
+	_symbolTable = other._symbolTable; other._symbolTable = nullptr;
 	_trackVariables = std::move(other._trackVariables);
 	_variables = std::move(other._variables);
 
@@ -663,7 +654,7 @@ bool Config::parseFile(std::istream &is) {
 	}
 
 	if ( !_namespaces.empty() ) {
-		CONFIG_ERROR("Namespace '%s' has not been closed", _namespaces.back().c_str());
+		CONFIG_ERROR("Namespace '%s' has not been closed", _namespaces.back());
 		return false;
 	}
 
@@ -698,7 +689,7 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 	if ( tokens.size() < 2 ) {
 		if ( (tokens.size() == 1) && (tokens[0] == BLOCK_END) ) {
 			if ( _namespaces.empty() ) {
-				CONFIG_ERROR("Unexpected closing block: %s", entry.c_str());
+				CONFIG_ERROR("Unexpected closing block: %s", entry);
 				return false;
 			}
 
@@ -716,13 +707,13 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 			return true;
 		}
 		else {
-			CONFIG_ERROR("Config entry malformed: Too few parameters for %s", entry.c_str());
+			CONFIG_ERROR("Config entry malformed: Too few parameters for %s", entry);
 			return false;
 		}
 	}
 
 	if ( tokens[0][0] == '$' ) {
-		CONFIG_ERROR("Cannot assign to rvalue: %s", tokens[0].c_str());
+		CONFIG_ERROR("Cannot assign to rvalue: %s", tokens[0]);
 		return false;
 	}
 
@@ -731,18 +722,18 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 	if ( tokens[0] == KEYWORD_INCLUDE ) {
 		if ( tokens.size() > 2 ) {
 			CONFIG_ERROR("Operator %s has too many operands -> %s file",
-			          tokens[0].c_str(), tokens[0].c_str());
+			             tokens[0], tokens[0]);
 			return false;
 		}
 
 		if ( !parseRValue(tokens[1], parsedValues, _symbolTable,
 		                  _resolveReferences, false, &errmsg) ) {
-			CONFIG_ERROR("%s", errmsg.c_str());
+			CONFIG_ERROR("%s", errmsg);
 			return false;
 		}
 
 		if ( !handleInclude(parsedValues[0]) ) {
-			CONFIG_ERROR("Could not read include file %s", parsedValues[0].c_str());
+			CONFIG_ERROR("Could not read include file %s", parsedValues[0]);
 			return false;
 		}
 	}
@@ -760,7 +751,7 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 		parsedValues.clear();
 		if ( !parseRValue(tmp, parsedValues, _symbolTable,
 		                  _resolveReferences, false, &errmsg) ) {
-			CONFIG_ERROR("%s", errmsg.c_str());
+			CONFIG_ERROR("%s", errmsg);
 			return false;
 		}
 
@@ -768,7 +759,7 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 		for ( ; it != parsedValues.end(); ++it ) {
 			if ( !_symbolTable->remove(_namespacePrefix + *it) ) {
 				CONFIG_ERROR("Could not remove variable %s from symbol table",
-				             (_namespacePrefix + (*it)).c_str());
+				             _namespacePrefix + (*it));
 				return false;
 			}
 		}
@@ -780,7 +771,7 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 	}
 	else if ( tokens[1] == "=" ) {
 		if ( tokens.size() < 3 ) {
-			CONFIG_ERROR("RValue missing in assignment: %s", entry.c_str());
+			CONFIG_ERROR("RValue missing in assignment: %s", entry);
 			return false;
 		}
 
@@ -790,14 +781,14 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 			tmp += tokens[i];
 
 		if ( !eval(tmp, values, _resolveReferences, &errmsg) ) {
-			CONFIG_ERROR("%s", errmsg.c_str());
+			CONFIG_ERROR("%s", errmsg);
 			return false;
 		}
 
 		handleAssignment(tokens[0], tmp, values, comment);
 	}
 	else {
-		CONFIG_ERROR("Invalid entry: %s", entry.c_str());
+		CONFIG_ERROR("Invalid entry: %s", entry);
 		return false;
 	}
 
@@ -809,8 +800,10 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-bool Config::handleInclude(const std::string& fileName) {
-	if ( fileName.empty() ) return false;
+bool Config::handleInclude(const std::string &fileName) {
+	if ( fileName.empty() ) {
+		return false;
+	}
 
 	std::string tmpFileName(fileName);
 	// Resolve ~ for home directory
@@ -826,8 +819,13 @@ bool Config::handleInclude(const std::string& fileName) {
 		// Change to the config file path to be able to handle relative paths
 		if ( getcwd(oldPath, PATH_MAX) ) {
 			std::string::size_type pos = _fileName.rfind("/");
-			if ( pos != std::string::npos )
-				chdir(_fileName.substr(0, pos).c_str());
+			if ( pos != std::string::npos ) {
+				if ( chdir(_fileName.substr(0, pos).c_str()) ) {
+					CONFIG_ERROR("Cannot change into directory %s",
+					             _fileName.substr(0, pos));
+					return false;
+				}
+			}
 		}
 	}
 
@@ -841,7 +839,10 @@ bool Config::handleInclude(const std::string& fileName) {
 	}
 
 	if ( isRelativePath ) {
-		chdir(oldPath);
+		if ( chdir(oldPath) ) {
+			CONFIG_ERROR("Cannot change back into directory %s", oldPath);
+			return false;
+		}
 	}
 
 	return true;

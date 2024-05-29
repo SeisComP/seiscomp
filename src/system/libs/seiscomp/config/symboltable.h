@@ -17,8 +17,10 @@
  * gempa GmbH.                                                             *
  ***************************************************************************/
 
+
 #ifndef __SEISCOMP_CONFIG_SYMBOLTABLE__
 #define __SEISCOMP_CONFIG_SYMBOLTABLE__
+
 
 #include <string>
 #include <vector>
@@ -27,6 +29,7 @@
 #include <sstream>
 
 #include <seiscomp/config/log.h>
+
 
 namespace Seiscomp {
 namespace Config {
@@ -65,23 +68,22 @@ struct SC_CONFIG_API Symbol {
 
 
 class SC_CONFIG_API SymbolTable {
-
 	private:
-		typedef std::map<std::string, Symbol> Symbols;
-		typedef std::vector<Symbol*> SymbolOrder;
-		typedef std::map<std::string, Symbols::iterator> CISymbols;
-
-	public:
-		typedef SymbolOrder::const_iterator iterator;
-		typedef std::set<std::string> IncludedFiles;
-		typedef IncludedFiles::iterator file_iterator;
-
-	public:
-		SymbolTable();
+		using Symbols = std::map<std::string, Symbol>;
+		using SymbolOrder = std::vector<Symbol*>;
 
 
 	public:
-		void setCaseSensitivityCheck(bool);
+		using iterator = SymbolOrder::const_iterator;
+		using IncludedFiles = std::set<std::string>;
+		using file_iterator = IncludedFiles::iterator;
+
+
+	public:
+		SymbolTable() = default;
+
+
+	public:
 		void setLogger(Logger *);
 		Logger *logger();
 
@@ -114,22 +116,18 @@ class SC_CONFIG_API SymbolTable {
 		iterator begin();
 		iterator end();
 
-	private:
-		//! Returns true if an inconsistent definition has been found
-		bool checkCI(const std::string &name, const Symbol *) const;
 
 	private:
-		bool          _csCheck;
-		Symbols       _symbols;
-		CISymbols     _cisymbols;
-		SymbolOrder   _symbolOrder;
-		IncludedFiles _includedFiles;
-		int           _objectCount;
-		Logger        *_logger;
+		Symbols        _symbols;
+		SymbolOrder    _symbolOrder;
+		IncludedFiles  _includedFiles;
+		int            _objectCount{0};
+		Logger        *_logger{nullptr};
 };
 
 
 } // namespace Config
 } // namespace Seiscomp
+
 
 #endif

@@ -40,7 +40,7 @@ namespace Config {
 /**
  * Mapping of configuration variable to type
  */
-typedef std::map<std::string, std::string> Variables;
+using Variables = std::map<std::string, std::string>;
 
 
 /**
@@ -61,21 +61,13 @@ class SC_CONFIG_API Config {
 	// Public interface
 	// ------------------------------------------------------------------------
 	public:
-		/** When names are queried and this check is enabled, it will
-		 * throw an exception if the same name is defined in a later stage
-		 * with respect to case insensitive name comparison.
-		 * This allows to check for parameter inconsistencies that are
-		 * hard to track otherwise.
-		 */
-		void setCaseSensitivityCheck(bool);
-
 		/** Reads the given configuration file.
 		 * @param file name of the configuration files
 		 * @param stage Optional stage value to be set to each read symbol
 		 * @param raw Raw mode which does not resolv references like ${var}
 		 * @return true on success
 		 */
-		bool readConfig(const std::string& file, int stage=-1, bool raw=false);
+		bool readConfig(const std::string &file, int stage=-1, bool raw=false);
 
 		/** Writes the configuration to the given configuration file.
 		 * @param file name of the configuarion files
@@ -327,7 +319,8 @@ class SC_CONFIG_API Config {
 	// Private data members
 	// ------------------------------------------------------------------------
 	private:
-		typedef std::deque<std::string> Namespaces;
+		using Namespaces = std::deque<std::string>;
+
 		int          _stage;
 		int          _line;
 		bool         _resolveReferences;
@@ -345,5 +338,6 @@ class SC_CONFIG_API Config {
 
 } // namespace Config
 } // namespace Seiscomp
+
 
 #endif
