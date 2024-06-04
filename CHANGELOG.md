@@ -18,6 +18,8 @@ All notable changes to SeisComP are documented here.
 -   scqc
     -   Fix performance issue which can result in 100% CPU usage so that
         scqc cannot keep up with the input data rate.
+-   trunk
+    -   Populate Ms(BB) amplitude SNR attribute.
 
 ## 6.4.1
 
