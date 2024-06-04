@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.4.2
+
+-   scqc
+    -   Fix performance issue which can result in 100% CPU usage so that
+        scqc cannot keep up with the input data rate.
+
 ## 6.4.1
 
 -   scevent
