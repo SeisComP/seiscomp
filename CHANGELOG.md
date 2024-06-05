@@ -13,6 +13,13 @@ All notable changes to SeisComP are documented here.
         and origin for computing H.
     -   Consider correction term with exponential decay.
 
+## 6.4.3
+
+-   scolv
+    -   Fix network magnitude evaluation status dropdown update. Due
+        to different sorting of the dropdown values the evaluation
+        status has not been set correctly.
+
 ## 6.4.2
 
 -   scqc
