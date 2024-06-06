@@ -229,16 +229,37 @@ def touch(filename):
 
 
 def start_module(mod):
-    # Create runfile
-    touch(env.runFile(mod.name))
-    return mod.start()
+    try:
+        r = mod.start()
+        if r is None:
+            # Not supported
+            return 1
+        # Create runfile
+        touch(env.runFile(mod.name))
+        return r
+    except Exception as e:
+        error(f"Failed to start {mod.name}: {str(e)}")
+        return 1
 
 
 def stop_module(mod):
     try:
-        if not mod.stop():
-            error(f"Failed to stop {mod.name}: unknown error")
+        r = mod.stop()
+        if r is None:
+            # Not supported
             return 1
+        elif type(r) == type(True):
+            # Boolean type: True = success, False = error
+            if not r:
+                return 1
+        elif type(r) == type(0):
+            # Integer type: 0 = success, error otherwise
+            if r:
+                return 1
+        else:
+            # Any other type: Truthy = success, Falsy = error
+            if not r:
+                return 1
     except Exception as e:
         error(f"Failed to stop {mod.name}: {str(e)}")
         return 1
@@ -388,6 +409,13 @@ def on_enable(args, _):
         elif isinstance(modName, seiscomp.kernel.CoreModule):
             error(f"{name} is a kernel module and is enabled automatically")
         else:
+            try:
+                r = modName.enable()
+                if r is None:
+                    # Not supported
+                    return 1
+            except:
+                pass
             env.enableModule(name)
     return 0
 
