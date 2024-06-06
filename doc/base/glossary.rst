@@ -626,21 +626,14 @@ Scientific and technical terms
 
    magnitude, broadband surface wave (Ms(BB))
       Ms(BB) is a broadband magnitude scale based on teleseismic surface waves.
-      In contrast to :term:`Ms <magnitude, surface wave (Ms)>`, amplitudes for Ms(BB)
+      In contrast to :term:`Ms <magnitude, surface wave (Ms)>`/
+      :term:`Ms <magnitude, surface wave (Ms_20)>`, amplitudes for Ms(BB)
       are measured as the maximum on vertical true ground motion velocity seismograms without
       instrument simulation or restitution.
 
-      The Moscow-Prague equation for surface wave magnitude is applied as given by
-
-      .. math::
-
-         M_s = \log \left(\frac{A}{2\pi}\right) + 1.66 \log(\Delta) + 3.3
-
-      * Amplitude unit in |scname|: **meter per second** (m/s)
-      * Period range: all
-      * Distance range: 2 - 160°
-      * Depth range: 0 - 100 km
-      * Time window: distance (km) / 3.5 km/s + 30 s
+      The Moscow-Prague equation for surface wave magnitude is applied.
+      Read the :ref:`technical documentation <global_msbb>` for more details and
+      the configuration.
 
    magnitude, duration (Md)
       The duration magnitude measured on the coda wave train.
