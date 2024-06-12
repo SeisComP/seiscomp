@@ -12,6 +12,11 @@ All notable changes to SeisComP are documented here.
     -   MLc: Consider source depth instead of vertical distance between station
         and origin for computing H.
     -   Consider correction term with exponential decay.
+-   scolv
+    -   Focal mechanisms show the station distribution on the map if station
+        display is enabled (F9).
+-   GUI
+    -   The event list preserves the sorting mode and column after a reload.
 
 ## 6.4.3
 
