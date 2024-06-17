@@ -123,7 +123,7 @@ and configure it in the constructor.
 As marked in line 4, the call of the constructor of the base class is very
 important. It takes the command line parameters and sets up internal
 application variables. Without this call the application will either not run
-at all or show undefined/unexpected behaviour.
+at all or show undefined/unexpected behavior.
 
 The constructor takes also the initial parameters of the application such as
 enabling a messaging connection and enabling database access.
@@ -155,7 +155,7 @@ All application methods are defined in the C++ header file
 Init
 ^^^^
 
-The workflow of the init function looks like this:
+The workflow of the :func:`init` function looks like this:
 
 .. code-block:: python
 
@@ -394,7 +394,7 @@ returns the RecordStream instance which can be used to add stream requests.
 
 The record stream service is configured either with configuration files
 (:confval:`recordstream`) or
-via command-line options ``-I`, ``--record-url``.
+via the command-line option ``-I, --record-url``.
 
 The application finishes if the record stream read EOF. Running a :class:`StreamApplication`
 with :ref:`Seedlink<seedlink>` would probably never terminate since it is a
