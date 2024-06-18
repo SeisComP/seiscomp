@@ -17,6 +17,11 @@ All notable changes to SeisComP are documented here.
         display is enabled (F9).
 -   GUI
     -   The event list preserves the sorting mode and column after a reload.
+    -   The commit with options dialog removes the "Fix magnitude type" checkbox
+        and replaces it with the magnitude type dropdown. This affects the
+        custom commit buttons when activated in combination with SHIFT or if
+        the profile asks for confirmation. The configured preferred magnitude
+        type will be preselected in the dropdown list.
 
 ## 6.4.3
 
