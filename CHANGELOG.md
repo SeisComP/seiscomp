@@ -4,17 +4,20 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
+-   seiscomp
+    -   Support forming alias modules from GUI modules.
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
         documentation and exposed in scconfig.
+-   trunk
+    -   Add `minPeriod` and `maxPeriod` to amplitude type configuration. Both
+        are checked against the measured period to skip emitting amplitudes which
+        are outside the allowed period range.
 -   magnitudes
     -   MLc: Consider source depth instead of vertical distance between station
         and origin for computing H.
     -   Consider correction term with exponential decay.
--   scolv
-    -   Focal mechanisms show the station distribution on the map if station
-        display is enabled (F9).
 -   GUI
     -   The event list preserves the sorting mode and column after a reload.
     -   The commit with options dialog removes the "Fix magnitude type" checkbox
@@ -22,6 +25,11 @@ All notable changes to SeisComP are documented here.
         custom commit buttons when activated in combination with SHIFT or if
         the profile asks for confirmation. The configured preferred magnitude
         type will be preselected in the dropdown list.
+-   scolv
+    -   Focal mechanisms show the station distribution on the map if station
+        display is enabled (F9).
+-   scxmldump
+    -   Support dumping picks by publicID using `--pick`.
 
 ## 6.4.3
 
