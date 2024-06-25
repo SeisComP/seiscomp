@@ -114,7 +114,7 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
 
    Butterworth bandpass filter combined with envelope computation.
 
-   This is a recursive approximation of the envelope. It depends on the bandpass center 
+   This is a recursive approximation of the envelope. It depends on the bandpass center
    frequency being also the dominant frequency of the signal. Hence it only makes sense for
    bandpass filtered signals. Even though bandwidth and order may be changed it is
    recommended to use the defaults.
@@ -195,6 +195,13 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
 
       s' = (s-v1) / dt
       v1 = s;
+
+
+.. py:function:: DT
+
+   Replaces each input sample with the sampling time of the current sample. This
+   is a shortcut for :code:`1/SR` but more efficient as the division has to be
+   done only once and not once per input sample.
 
 
 .. py:function:: INT([a = 0])
@@ -313,6 +320,11 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    :param type: The data type: either 0 (displacement), 1 (velocity) or 2 (acceleration)
 
 
+.. py:function:: SR
+
+   Replaces each input sample with the sampling rate of the current sample.
+
+
 .. py:function:: STALTA(sta, lta)
 
    A STA/LTA filter is the ratio of a short-time amplitude average (STA) to a
@@ -336,6 +348,14 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    :param lta: Long-term time window ending with the same sample as sta
    :param on: STA/LTA ratio defining the start of the time window for fixing LTA.
    :param off: STA/LTA ratio defining the end of the time window for fixing LTA.
+
+
+.. py:function:: SUM(timespan)
+
+   :param timespan: The timespan to be summed up in seconds
+
+   Computes the amplitude sum of the timespan preceeding the sample.
+
 
 .. py:function:: WA([type = 1[,gain=2080[,T0=0.8[,h=0.7]]]])
 
