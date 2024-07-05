@@ -30,6 +30,8 @@ All notable changes to SeisComP are documented here.
         display is enabled (F9).
 -   scxmldump
     -   Support dumping picks by publicID using `--pick`.
+-   scrttv
+    -   Fix crash in combination with `-N`
 
 ## 6.4.3
 
