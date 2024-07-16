@@ -10,6 +10,9 @@ All notable changes to SeisComP are documented here.
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
         documentation and exposed in scconfig.
+-   seedlink
+    -   Fix invalid memory access in caps_plugin which prevented to start up
+        correctly.
 -   trunk
     -   Add `minPeriod` and `maxPeriod` to amplitude type configuration. Both
         are checked against the measured period to skip emitting amplitudes which
