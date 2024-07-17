@@ -2,6 +2,21 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.4.4
+
+-   seedlink
+    -   Fix invalid memory access in caps_plugin which prevented to start up
+        correctly.
+-   scardac
+    -   Fix relative time parameter parsing.
+-   scrttv
+    -   Fix crash in combination with `-N`.
+-   iloc
+    -   Update link to aux files.
+-   GUI
+    -   Update event list sorting if new data has been read.
+
+
 ## 6.4.3
 
 -   scolv
