@@ -10,9 +10,6 @@ All notable changes to SeisComP are documented here.
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
         documentation and exposed in scconfig.
--   seedlink
-    -   Fix invalid memory access in caps_plugin which prevented to start up
-        correctly.
 -   trunk
     -   Add `minPeriod` and `maxPeriod` to amplitude type configuration. Both
         are checked against the measured period to skip emitting amplitudes which
@@ -33,8 +30,18 @@ All notable changes to SeisComP are documented here.
         display is enabled (F9).
 -   scxmldump
     -   Support dumping picks by publicID using `--pick`.
+
+## 6.4.4
+
+-   seedlink
+    -   Fix invalid memory access in caps_plugin which prevented to start up
+        correctly.
+-   scardac
+    -   Fix relative time parameter parsing.
 -   scrttv
-    -   Fix crash in combination with `-N`
+    -   Fix crash in combination with `-N`.
+-   iloc
+    -   Update link to aux files.
 
 ## 6.4.3
 
