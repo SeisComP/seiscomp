@@ -4,8 +4,6 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
--   seiscomp
-    -   Support forming alias modules from GUI modules.
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
@@ -14,22 +12,51 @@ All notable changes to SeisComP are documented here.
     -   Add `minPeriod` and `maxPeriod` to amplitude type configuration. Both
         are checked against the measured period to skip emitting amplitudes which
         are outside the allowed period range.
+    -   Support amplitude data conversion without `enableResponses = true`,
+        e.g. when computing amplitudes on acceleration data. This implicitly
+        includes support for amplitude updates for such data.
 -   magnitudes
     -   MLc: Consider source depth instead of vertical distance between station
         and origin for computing H.
     -   Consider correction term with exponential decay.
+-   scolv
+    -   Focal mechanisms show the station distribution on the map if station
+        display is enabled (F9).
+
+## 6.5.0
+
+-   seiscomp
+    -   Support forming alias modules from GUI modules.
+-   trunk
+    -   Filter `INT` can be used without an argument (default 0).
+    -   Add more filters: SUM, DT and SR.
+    -   Remove deprecated module from `access.py`.
+-   amplitudes
+    -   If IASPEI mode is enabled then Ms(BB) checks the period to be in the
+        valid range of (3, 60).
+    -   Fix crash in MLh if maxDepth is set greater than DEPTH_MAX.
 -   GUI
-    -   The event list preserves the sorting mode and column after a reload.
     -   The commit with options dialog removes the "Fix magnitude type" checkbox
         and replaces it with the magnitude type dropdown. This affects the
         custom commit buttons when activated in combination with SHIFT or if
         the profile asks for confirmation. The configured preferred magnitude
         type will be preselected in the dropdown list.
--   scolv
-    -   Focal mechanisms show the station distribution on the map if station
-        display is enabled (F9).
+    -   Fix background rendering of trace widget under some conditions
+-   fdsnxml2inv
+    -   Add `--only-instruments` switch to ignore networks on output.
+-   ql2sc
+    -   Send EvPrefMw if Mw part of a moment tensor has been received as preferred
+        magnitude. This fixes the `syncPreferred` switch.
 -   scxmldump
     -   Support dumping picks by publicID using `--pick`.
+    -   Ignore unpreferred magnitudes with `-p`.
+-   scrttv
+    -    Add option `--3c` to show all three components of `detecStream`.
+    -    Use consistent menu entry names.
+-   stdloc
+    -    GridSearch.cellSize replaced by GridSearch.numPoints.
+    -    Default method is now LeastSquares.
+    -    Add LeastSquares.depthInit (like LOCSAT locator).
 
 ## 6.4.4
 
@@ -42,6 +69,8 @@ All notable changes to SeisComP are documented here.
     -   Fix crash in combination with `-N`.
 -   iloc
     -   Update link to aux files.
+-   GUI
+    -   The event list preserves the sorting mode and column after a reload.
 
 ## 6.4.3
 
