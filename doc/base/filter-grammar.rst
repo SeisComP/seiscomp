@@ -1,7 +1,7 @@
 .. _filter-grammar:
 
 **************
-Filter grammar
+Filter Grammar
 **************
 
 SeisComP supports string-based filter definitions. This section covers available
@@ -217,6 +217,12 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    is a shortcut for :code:`1/SR` but more efficient as the division has to be
    done only once and not once per input sample.
 
+
+.. py:function:: DURATION(trigger_on, trigger_off)
+
+   Replaces the input samples with the trigger duration. The duration is computed as the
+   time between `trigger_on` and `trigger_off`. Outside the trigger, the filter outputs
+   zero.
 
 .. py:function:: INT([a = 0])
 
