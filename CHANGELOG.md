@@ -2,6 +2,63 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.5.0
+
+```SC_API_VERSION 16.2.0```
+
+-   seiscomp
+    -   Support forming alias modules from GUI modules.
+-   trunk
+    -   Filter `INT` can be used without an argument (default 0).
+    -   Add more filters: SUM, DT and SR.
+    -   Allow negative frequency parameters for `BW_*` and `BPENV` which
+        resolve to `-freq * fsamp`.
+    -   Remove deprecated module from `access.py`.
+    -   Read homogeneous travel time configuration from application
+        configuration.
+    -   Fix unit conversion for confidenceEllipsoid in QuakeML exporter.
+    -   Improve handling of connection errors in PostgreSQL database plugin.
+-   amplitudes
+    -   If IASPEI mode is enabled then Ms(BB) checks the period to be in the
+        valid range of (3, 60).
+    -   Fix crash in MLh if maxDepth is set greater than DEPTH_MAX.
+-   GUI
+    -   The commit with options dialog removes the "Fix magnitude type" checkbox
+        and replaces it with the magnitude type dropdown. This affects the
+        custom commit buttons when activated in combination with SHIFT or if
+        the profile asks for confirmation. The configured preferred magnitude
+        type will be preselected in the dropdown list.
+    -   Fix background rendering of trace widget under some conditions
+    -   Sychronize XML defaults with event list.
+    -   Do not show tooltips for hidden trace widget markers.
+    -   Add Pick.time.confidenceLevel to pick tooltip of the waveform picker.
+-   fdsnxml2inv
+    -   Add `--only-instruments` switch to ignore networks on output.
+    -   Derive stream sampling rate from decimation stages if not given explicitly
+        in the FDSNXML channel.
+-   ql2sc
+    -   Send EvPrefMw if Mw part of a moment tensor has been received as preferred
+        magnitude. This fixes the `syncPreferred` switch.
+-   scautoloc
+    -   Fixed three memory leaks.
+-   scalert
+    -   Fix applying author filter.
+-   scvoice
+    -   Fix segfault during exit.
+-   scxmldump
+    -   Support dumping picks by publicID using `--pick`.
+    -   Ignore unpreferred magnitudes with `-p`.
+-   scrttv
+    -    Add option `--3c` to show all three components of `detecStream`.
+    -    Use consistent menu entry names.
+-   stdloc
+    -    GridSearch.cellSize replaced by GridSearch.numPoints.
+    -    Default method is now LeastSquares.
+    -    Add LeastSquares.depthInit (like LOCSAT locator).
+-   screloc
+    -    Add `allowAnyStatus` option to allow origins to be relocated
+         without checking their evaluationStatus.
+
 ## 6.4.4
 
 -   seedlink
@@ -14,8 +71,7 @@ All notable changes to SeisComP are documented here.
 -   iloc
     -   Update link to aux files.
 -   GUI
-    -   Update event list sorting if new data has been read.
-
+    -   The event list preserves the sorting mode and column after a reload.
 
 ## 6.4.3
 
