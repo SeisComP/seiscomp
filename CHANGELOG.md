@@ -25,6 +25,8 @@ All notable changes to SeisComP are documented here.
 
 ## 6.5.0
 
+```SC_API_VERSION 16.2.0```
+
 -   seiscomp
     -   Support forming alias modules from GUI modules.
 -   trunk
@@ -47,6 +49,10 @@ All notable changes to SeisComP are documented here.
 -   ql2sc
     -   Send EvPrefMw if Mw part of a moment tensor has been received as preferred
         magnitude. This fixes the `syncPreferred` switch.
+-   scautoloc
+    -   Fixed three memory leaks.
+-   scalert
+    -   Fix applying author filter.
 -   scxmldump
     -   Support dumping picks by publicID using `--pick`.
     -   Ignore unpreferred magnitudes with `-p`.
