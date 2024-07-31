@@ -197,6 +197,11 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
       v1 = s;
 
 
+.. py:function:: DT()
+
+   The sampling interval in seconds of the data. Each input sample is replaced with the current
+   sampling interval. This filter is most useful in combination with other filters.
+
 .. py:function:: INT([a = 0])
 
    Integration filter realized as a recursive IIR (infinite impulse response) integration
@@ -313,6 +318,11 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    :param type: The data type: either 0 (displacement), 1 (velocity) or 2 (acceleration)
 
 
+.. py:function:: SR()
+
+   The sampling rate of the data. Each input sample is replaced with the current
+   sampling rate. This filter is most useful in combination with other filters.
+
 .. py:function:: STALTA(sta, lta)
 
    A STA/LTA filter is the ratio of a short-time amplitude average (STA) to a
@@ -336,6 +346,12 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    :param lta: Long-term time window ending with the same sample as sta
    :param on: STA/LTA ratio defining the start of the time window for fixing LTA.
    :param off: STA/LTA ratio defining the end of the time window for fixing LTA.
+
+.. py:function:: SUM(timespan)
+
+   Computes the sum of previous samples within a *timespan*.
+
+   :param timespan: Time timespan to compute the sum in seconds
 
 .. py:function:: WA([type = 1[,gain=2080[,T0=0.8[,h=0.7]]]])
 
