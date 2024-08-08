@@ -9,10 +9,11 @@ filters and their parameters.
 
 The filter definitions support :ref:`SeisComP filters <sec-filters-list>` and
 building filter chains (operator >> or ->) as well as combining them with basic
-mathematical operators. Filter or the first filter in a filter chain is always
-applied to the raw, uncorrected data.
+mathematical operators. Filter or the first filter in a filter chain
+is always applied to the raw, uncorrected data.
+Use brackets *()* to apply the operations within before the one outside.
 
-Operators are:
+Mathematical operators are:
 
 * \+ : addition
 * \- : subtraction
@@ -21,7 +22,20 @@ Operators are:
 * \^ : power / exponentiation
 * \|. \| : absolute value.
 
-Use brackets *()* to apply the operations within before the one outside.
+A special mathematical operator is a negative value replacing a positive
+frequency value, e.g., in Butterworth filters (see Section
+:ref:`sec-filters-list`). The modulus of the frequency value is multiplied by
+the sample rate of the waveforms to which it is applied. The resulting value
+defines the frequency the filter is configured with. Note, -0.5 defines the
+:term:`Nyquist frequency` of the data. Negative values can be applied for
+defining frequencies dynamically based on sample rate.
+
+Example:
+
+Data with a sample rate of 100 Hz shall be low-pass filtered at 80% of the
+Nyquist frequency by a :py:func:`Butterworth low-pass filter, BW_LP<BW_LP()>`. A
+value of -0.4 corresponds to 80% of the Nyquist frequency. The filter can be
+specified as :py:func:`BW_LP(3,-0.4)<BW_LP()>`.
 
 .. note::
 
@@ -62,7 +76,7 @@ To apply mathematical operations on original waveforms use :py:func:`self()`, e.
 
 .. code-block:: sh
 
-   self()*-1>>A(1,2)
+   self()^2>>A(1,2)
 
 
 Test filter strings
@@ -119,7 +133,7 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    bandpass filtered signals. Even though bandwidth and order may be changed it is
    recommended to use the defaults.
 
-   :param center-freq: The center frequency of the passband in Hz
+   :param center-freq: The center frequency of the passband in Hz. Negative values define the frequency as -value * sample rate.
    :param bandwidth: The filter bandwidth in octaves (default is 1 octave)
    :param order: The filter order of the bandpass (default is 4)
 
@@ -133,8 +147,8 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    filter. An arbitrary bandpass filter can be created for given order and corner frequencies.
 
    :param order: The filter order
-   :param lo-freq: The lower corner frequency as 1/seconds
-   :param hi-freq: The upper corner frequency as 1/seconds
+   :param lo-freq: The lower corner frequency as 1/seconds. Negative values define the frequency as -value * sample rate.
+   :param hi-freq: The upper corner frequency as 1/seconds. Negative values define the frequency as -value * sample rate.
 
 
 .. py:function:: BW_BS(order, lo-freq, hi-freq)
@@ -143,8 +157,8 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    suppressing amplitudes at frequencies between *lo-freq* and *hi-freq*.
 
    :param order: The filter order
-   :param lo-freq: The lower corner frequency as 1/seconds
-   :param hi-freq: The upper corner frequency as 1/seconds
+   :param lo-freq: The lower corner frequency as 1/seconds. Negative values define the frequency as -value * sample rate.
+   :param hi-freq: The upper corner frequency as 1/seconds. Negative values define the frequency as -value * sample rate.
 
 
 .. py:function:: BW_HP(order, lo-freq)
@@ -153,7 +167,7 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    impulse response) filter.
 
    :param order: The filter order
-   :param lo-freq: The corner frequency as 1/seconds
+   :param lo-freq: The corner frequency as 1/seconds. Negative values define the frequency as -value * sample rate.
 
 
 .. py:function:: BW_HLP(order, lo-freq, hi-freq)
@@ -162,8 +176,8 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    :py:func:`BW_HP` and :py:func:`BW_LP`.
 
    :param order: The filter order
-   :param lo-freq: The lower corner frequency as 1/seconds
-   :param hi-freq: The upper corner frequency as 1/seconds
+   :param lo-freq: The lower corner frequency as 1/seconds. Negative values define the frequency as -value * sample rate.
+   :param hi-freq: The upper corner frequency as 1/seconds. Negative values define the frequency as -value * sample rate.
 
 
 .. py:function:: BW_LP(order, hi-freq)
@@ -172,7 +186,7 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    impulse response) filter.
 
    :param order: The filter order
-   :param hi-freq: The corner frequency as 1/seconds
+   :param hi-freq: The corner frequency as 1/seconds. Negative values define the frequency as -value * sample rate.
 
 
 .. py:function:: CUTOFF(delta)
@@ -242,14 +256,14 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
 
 .. py:function:: MAX(timespan)
 
-   Computes the maximum within the timespan preceeding the sample.
+   Computes the maximum within the timespan preceding the sample.
 
    :param timespan: The timespan to measure the maximum in seconds
 
 
 .. py:function:: MEDIAN(timespan)
 
-   Computes the median within the timespan preceeding the sample. Useful, e.g.
+   Computes the median within the timespan preceding the sample. Useful, e.g.
    for despiking. The delay due to the filter may be up to its timespan.
 
    :param timespan: The timespan to compute the median in seconds
@@ -257,7 +271,7 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
 
 .. py:function:: MIN(timespan)
 
-   Computes the minimum within the timespan preceeding the sample.
+   Computes the minimum within the timespan preceding the sample.
 
    :param timespan: The timespan to measure the minimum in seconds
 
@@ -354,7 +368,7 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
 
    :param timespan: The timespan to be summed up in seconds
 
-   Computes the amplitude sum of the timespan preceeding the sample.
+   Computes the amplitude sum of the timespan preceding the sample.
 
 
 .. py:function:: WA([type = 1[,gain=2080[,T0=0.8[,h=0.7]]]])
@@ -366,7 +380,7 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
 
    :param type: The data type: 0 (displacement), 1 (velocity) or 2 (acceleration)
    :param gain: The gain of the Wood-Anderson response
-   :param T0: The eigenperiod in seconds
+   :param T0: The eigen period in seconds
    :param h: The damping constant
 
 
