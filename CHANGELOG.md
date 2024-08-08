@@ -33,6 +33,10 @@ All notable changes to SeisComP are documented here.
     -   Filter `INT` can be used without an argument (default 0).
     -   Add more filters: SUM, DT and SR.
     -   Remove deprecated module from `access.py`.
+    -   Read homogeneous travel time configuration from application
+        configuration.
+    -   Fix unit conversion for confidenceEllipsoid in QuakeML exporter.
+    -   Improve handling of connection errors in PostgreSQL database plugin.
 -   amplitudes
     -   If IASPEI mode is enabled then Ms(BB) checks the period to be in the
         valid range of (3, 60).
@@ -44,6 +48,7 @@ All notable changes to SeisComP are documented here.
         the profile asks for confirmation. The configured preferred magnitude
         type will be preselected in the dropdown list.
     -   Fix background rendering of trace widget under some conditions
+    -   Sychronize XML defaults with event list.
 -   fdsnxml2inv
     -   Add `--only-instruments` switch to ignore networks on output.
 -   ql2sc
