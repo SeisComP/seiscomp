@@ -53,6 +53,8 @@ All notable changes to SeisComP are documented here.
     -   Sychronize XML defaults with event list.
 -   fdsnxml2inv
     -   Add `--only-instruments` switch to ignore networks on output.
+    -   Derive stream sampling rate from decimation stages if not given explicitly
+        in the FDSNXML channel.
 -   ql2sc
     -   Send EvPrefMw if Mw part of a moment tensor has been received as preferred
         magnitude. This fixes the `syncPreferred` switch.
