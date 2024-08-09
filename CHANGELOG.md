@@ -32,6 +32,8 @@ All notable changes to SeisComP are documented here.
 -   trunk
     -   Filter `INT` can be used without an argument (default 0).
     -   Add more filters: SUM, DT and SR.
+    -   Allow negative frequency parameters for `BW_*` and `BPENV` which
+        resolve to `-freq * fsamp`.
     -   Remove deprecated module from `access.py`.
     -   Read homogeneous travel time configuration from application
         configuration.
