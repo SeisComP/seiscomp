@@ -62,6 +62,8 @@ All notable changes to SeisComP are documented here.
     -   Fixed three memory leaks.
 -   scalert
     -   Fix applying author filter.
+-   scvoice
+    -   Fix segfault during exit.
 -   scxmldump
     -   Support dumping picks by publicID using `--pick`.
     -   Ignore unpreferred magnitudes with `-p`.
