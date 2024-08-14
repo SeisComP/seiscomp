@@ -76,6 +76,9 @@ All notable changes to SeisComP are documented here.
     -    GridSearch.cellSize replaced by GridSearch.numPoints.
     -    Default method is now LeastSquares.
     -    Add LeastSquares.depthInit (like LOCSAT locator).
+-   screloc
+    -    Add `allowAnyStatus` option to allow origins to be relocated
+         without checking their evaluationStatus.
 
 ## 6.4.4
 
