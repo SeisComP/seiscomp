@@ -51,6 +51,8 @@ All notable changes to SeisComP are documented here.
         type will be preselected in the dropdown list.
     -   Fix background rendering of trace widget under some conditions
     -   Sychronize XML defaults with event list.
+    -   Do not show tooltips for hidden trace widget markers.
+    -   Add Pick.time.confidenceLevel to pick tooltip of the waveform picker.
 -   fdsnxml2inv
     -   Add `--only-instruments` switch to ignore networks on output.
     -   Derive stream sampling rate from decimation stages if not given explicitly
