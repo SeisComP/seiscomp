@@ -17,10 +17,21 @@
 						Print output as CSV in machine-readable format.
 					</description>
 				</option>
+				<option flag="h" long-flag="help" argument="" publicID="">
+					<description>
+					Produce this help message.
+					</description>
+				</option>
 				<option flag="i" long-flag="interactive" argument="" publicID="">
 					<description>
-					Interactive mode: Allow deleting files interactively when
+					Interactive mode: Allow deleting configurations interactively when
 					removing aliases.
+					</description>
+				</option>
+				<option flag="" long-flag="invert" argument="" publicID="">
+					<description>
+					Invert the selection of the specified module names when using any of the
+					commands: start, stop, check, status, reload, or restart.
 					</description>
 				</option>
 				<option flag="" long-flag="wait" argument="arg" publicID="">

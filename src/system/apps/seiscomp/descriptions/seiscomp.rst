@@ -35,7 +35,7 @@ options and commands, e.g., the command :command:`help`. Apply
 
       $HOME/seiscomp-test/bin/seiscomp
 
-Many of these actions are used by :ref:`scconfig`
+Many of these actions are used by :ref:`scconfig`.
 
 
 .. _sec_seiscomp_help:
@@ -49,6 +49,12 @@ other commands including examples:
 .. code-block:: sh
 
    seiscomp help
+
+For basic help you may also use the option :option:`-h`:
+
+.. code-block:: sh
+
+   seiscomp -h
 
 
 .. _sec_seiscomp_applications:
@@ -139,8 +145,8 @@ categories. Examples:
 
 .. _sec_seiscomp_enable:
 
-Enable/disable
---------------
+Enable/disable [*]_
+-------------------
 
 Enabled modules will be started to run as a background daemon module.
 You may enable or disable one or multiple modules. Examples:
@@ -154,8 +160,8 @@ You may enable or disable one or multiple modules. Examples:
 
 .. _sec_seiscomp_start:
 
-Start/stop/restart/reload
--------------------------
+Start/stop/restart/reload [*]_
+------------------------------
 
 Start all enabled modules:
 
@@ -194,8 +200,8 @@ modules and parameters.
 
 .. _sec_seiscomp_check:
 
-Check
------
+Check [*]_
+----------
 
 When modules stop unexpectedly, they are not stopped in a clean way. Such
 stopped modules may be detected and started again in order to minimize
@@ -236,8 +242,8 @@ Examples:
 
 .. _sec_seiscomp_status:
 
-Status
-------
+Status [*]_
+-----------
 
 List the status of all, enabled, disabled, started, or specific modules.
 Examples:
@@ -300,8 +306,8 @@ interactively.
 
 .. _sec_seiscomp_update:
 
-Update configuration
---------------------
+Update configuration [*]_
+-------------------------
 
 The command :command:`update-config` allows reading bindings configurations from
 the standard :file:`@KEYDIR@` directory as well as inventory from
@@ -407,3 +413,21 @@ seiscomp shell:
        Lists all available profiles of a module.
 
    ...
+
+
+.. note::
+
+   .. [*] With this command, the flag :option:`--invert` can be used
+          in order to invert the application to the specific modules. You may provide
+          one or more module names. A major application is to
+          restart most |scname| modules after a change in global bindings. However,
+          :ref:`seedlink` and :ref:`slarchive` are not affected by global
+          bindings and any downtime of these modules shall be avoided. Example:
+
+          .. code-block:: sh
+
+             seiscomp --invert restart seedlink slarchive
+
+          The same procedure could be achieved without :option:`--invert` by
+          explicitly stating all other modules which, however, may result in a
+          long list of module names.
