@@ -126,6 +126,11 @@ def system(args):
     # return subprocess.call(cmd, shell=True)
 
 
+def info(msg):
+    sys.stderr.write(f"info: {msg}\n")
+    sys.stderr.flush()
+
+
 def error(msg):
     sys.stderr.write(f"error: {msg}\n")
     sys.stderr.flush()
@@ -1357,21 +1362,27 @@ def on_help(args, _):
         print("\nSynopsis:")
         print("  seiscomp [flags] [commands] [arguments]")
         print("\nFlags:")
-        print("  --asroot              Allow running a command as root")
-        print("  --csv                 Print output as csv in machine-readable format")
+        print("  -h, [--help]          Produce this help message.")
+        print("  --asroot              Allow running a command as root.")
+        print("  --csv                 Print output as csv in machine-readable format.")
         print(
-            "  -i, [--interactive]   Interactive mode: Allow deleting files "
-            "interactively when removing aliases"
+            "  -i, [--interactive]   Interactive mode: Allow deleting configurations "
+            "interactively when removing aliases."
+        )
+        print(
+            "  --invert              Invert the selection of the specified module names "
+            "when using any of the commands: start, stop, check, status, reload, or "
+            "restart."
         )
         print(
             "  --wait arg            Define a timeout in seconds for acquiring the seiscomp "
-            "lock file, e.g. `seiscomp --wait 10 update-config`"
+            "lock file, e.g. `seiscomp --wait 10 update-config`."
         )
         print("\nAvailable commands:")
         for helpAction in allowed_actions:
             print(f"  {helpAction}")
 
-        print("\nUse 'help [command]' to get more help about a command")
+        print("\nUse 'help [command]' to get more help about a command.")
         print("\nExamples:")
         print("  seiscomp help update-config          Show help for update-config")
         print(
@@ -1424,20 +1435,27 @@ useCSV = False
 asRoot = False
 lockTimeout = None
 interactiveMode = False
+invert = False
 
 argv = sys.argv[1:]
 argflags = []
 
 # Check for flags
 while argv:
+    if argv[0] == "--help" or argv[0] == "-h":
+        on_help([], "")
+        sys.exit(1)
     if argv[0] == "--csv":
         useCSV = True
         argv = argv[1:]
     elif argv[0] == "--asroot":
         asRoot = True
         argv = argv[1:]
-    if argv[0] == "--interactive" or argv[0] == "-i":
+    elif argv[0] == "--interactive" or argv[0] == "-i":
         interactiveMode = True
+        argv = argv[1:]
+    elif argv[0] == "--invert":
+        invert = True
         argv = argv[1:]
     elif argv[0] == "--wait":
         argv = argv[1:]
@@ -1459,6 +1477,7 @@ while argv:
     else:
         break
 
+
 if len(argv) < 1:
     print("seiscomp [flags] {%s} [args]" % "|".join(allowed_actions))
     print("\nUse 'seiscomp help' to get more help")
@@ -1466,6 +1485,7 @@ if len(argv) < 1:
 
 action = argv[0]
 arguments = argv[1:]
+inverted = []
 
 if action not in allowed_actions:
     print("seiscomp [flags] {%s} [args]" % "|".join(allowed_actions))
@@ -1475,6 +1495,12 @@ if os.getuid() == 0 and not asRoot and action != "install-deps":
     print("Running 'seiscomp' as root is dangerous. Use --asroot only if you")
     print("know exactly what you are doing!")
     sys.exit(1)
+
+if invert and action in ["start", "stop", "check", "status", "reload", "restart"]:
+    inverted = arguments
+    arguments = []
+else:
+    invert = False
 
 # ------------------------------------------------------------------------------
 # Initialize the environment
@@ -1601,6 +1627,8 @@ if not simpleCommand:
     mods = []
     for m in config_mods:
         if m.isConfigModule:
+            continue
+        if invert and m.name in inverted:
             continue
         mods.append(m)
 
