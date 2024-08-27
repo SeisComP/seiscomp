@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 5.5.19
+
+-   trunk
+    -   Fix MYSQL reconnect when server went away.
+
 ## 5.5.18
 
 -   scdb
