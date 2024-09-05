@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.5.1
+
+-   scalert
+    -   Fix bug in message composition
+-   scevtlog
+    -   Output pick comments
+
 ## 6.5.0
 
 ```SC_API_VERSION 16.2.0```
