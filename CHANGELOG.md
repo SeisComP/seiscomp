@@ -561,6 +561,30 @@ Changes:
 -   screpick
     -   Add as new module.
 
+## 5.5.19
+
+-   trunk
+    -   Fix MYSQL reconnect when server went away.
+
+## 5.5.18
+
+-   scdb
+    -   Fix reading notifier messages from XML
+
+## 5.5.17
+
+-   scesv
+    -   Fix regression which prevented showing the current
+        magnitudes when `showLastAutomaticSolution = true`.
+
+## 5.5.16
+
+-   scolv
+    -   Fix station count update of Mw magnitude if a magnitudes
+        has been recalculated in the magnitude view. Furthermore
+        the Mw tab header updates correctly and shows the number
+        of stations.
+
 ## 5.5.15
 
 -   seedlink
