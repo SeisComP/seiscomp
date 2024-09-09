@@ -218,6 +218,12 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    done only once and not once per input sample.
 
 
+.. py:function:: DURATION(trigger_on, trigger_off)
+
+   Replaces the input samples with the trigger duration. The duration is computed as the
+   time between `trigger_on` and `trigger_off`. Outside the trigger, the filter outputs
+   zero.
+
 .. py:function:: INT([a = 0])
 
    Integration filter realized as a recursive IIR (infinite impulse response) integration
