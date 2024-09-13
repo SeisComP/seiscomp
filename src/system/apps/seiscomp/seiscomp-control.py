@@ -248,6 +248,7 @@ def start_module(mod):
 
 
 def stop_module(mod):
+    returncode = 0
     try:
         r = mod.stop()
         if r is None:
@@ -256,26 +257,31 @@ def stop_module(mod):
         elif type(r) == type(True):
             # Boolean type: True = success, False = error
             if not r:
-                return 1
+                returncode = 1
         elif type(r) == type(0):
             # Integer type: 0 = success, error otherwise
             if r:
-                return 1
+                returncode = 1
         else:
             # Any other type: Truthy = success, Falsy = error
             if not r:
-                return 1
+                returncode = 1
     except Exception as e:
         error(f"Failed to stop {mod.name}: {str(e)}")
         return 1
 
-    # Delete runfile
+    # Delete runfile and pidfile
     try:
-        os.remove(env.runFile(mod.name))
+        runFile = env.runFile(mod.name)
+        if os.path.isfile(runFile):
+            os.remove(runFile)
+        pidFile = f"{runFile.split('.')[0]}.pid"
+        if os.path.isfile(pidFile):
+            os.remove(pidFile)
     except BaseException:
-        return 1
+        returncode = 1
 
-    return 0
+    return returncode
 
 
 def start_kernel_modules():
