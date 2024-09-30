@@ -45,6 +45,7 @@ if LooseVersion(sphinx.__version__) < LooseVersion('1.4'):
     extensions.append('sphinx.ext.pngmath')
 else:
     extensions.append('sphinx.ext.imgmath')
+    imgmath_image_format = "svg"
 
 # bibliography
 bibtex_bibfiles = ['base/references.bib']
