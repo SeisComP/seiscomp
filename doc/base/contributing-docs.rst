@@ -10,18 +10,17 @@ It aims to document the configuration and command line options for
 consistent way. The functionality of |scname| differs between
 versions so the documentation is versioned along with |scname|.
 For more general topics and tutorials please refer to the
-`SeisComP wiki`_.
+|scname| website and documentation :cite:p:`seiscomp`.
 
-The documentation is written in `reStructuredText`_ (reST) a
-simple text mark up format. The documentation is generated using `Sphinx`_
-which is used to create the `Python documentation`_.
-The Sphinx website has a very good
-`introduction to reST`_ and also covers the Sphinx specific
-`directives`_.
+The documentation is written in :cite:t:`reStructuredText` (reST) a simple text
+mark up format. The documentation is generated using Sphinx :cite:p:`sphinx`
+which is used to create the Python documentation :cite:p:`python-doc`.
+The Sphinx website :cite:p:`reStructuredText-sphinx` has a very good
+introduction to reST and also covers the Sphinx-specific
+directives :cite:p:`reStructuredText-directives`.
 
 If you would like to add to this documentation or you find an error, then please
-submit a patch to `SeisComP on GitHub`_ or report to the
-SeisComP `discussion forum`_.
+submit a patch to :cite:t:`seiscomp-github` or report to the :cite:t:`seiscomp-forum`.
 
 .. note::
 
@@ -40,9 +39,9 @@ Documenting Executables
 The documentation for executables is generated from two sources:
 
 'executable'.xml
-    An XML file that contains a brief description of the command,
-    markup describing the command line parameters, and any
-    configuration parameters for the executable. Each parameter should
+    An :ref:`XML file <contributing_documentation_XML>` that contains a brief
+    description of the command, markup describing the command line parameters,
+    and any configuration parameters for the executable. Each parameter should
     have a brief description of the purpose of the parameter.
 
     The description should be plain text and not contain reST markup. Where parameters are common across
@@ -82,6 +81,8 @@ The images can then be referred to (in .rst) like::
 
 The images will be moved to the correct location during the documentation build.
 
+
+.. _contributing_documentation_XML:
 
 Understanding the XML
 =====================
@@ -320,8 +321,15 @@ Element: **parameter**
 | **default**       | attrib   |    no     | The default value the module uses if this         |
 |                   |          |           | parameter is not configured.                      |
 +-------------------+----------+-----------+---------------------------------------------------+
+| **values**        | element  |    no     | Lists the supported value separated by comma.     |
+|                   | attrib   |           |                                                   |
++-------------------+----------+-----------+---------------------------------------------------+
+| **range**         | element  |    no     | Gives the range of values.                        |
+|                   | attrib   |           |                                                   |
++-------------------+----------+-----------+---------------------------------------------------+
 | **description**   | element  |    no     | Gives a brief description of the parameter.       |
 +-------------------+----------+-----------+---------------------------------------------------+
+
 
 .. _xml-configuration-struct:
 
@@ -333,6 +341,8 @@ Element: **struct**
 | **type**          | attrib   |    yes    | The name of the struct type. This name is         |
 |                   |          |           | used in a configurator to give a selection        |
 |                   |          |           | of available types to be instantiated.            |
++-------------------+----------+-----------+---------------------------------------------------+
+| **title**         | attrib   |    no     | The title of the struct as shown, e.g. in scconfig|
 +-------------------+----------+-----------+---------------------------------------------------+
 | **link**          | attrib   |    no     | The absolute reference parameter as it would      |
 |                   |          |           | appear in the configuration file which            |
@@ -364,6 +374,19 @@ Element: **struct**
 |                   |          |           | :ref:`group<xml-configuration-group>`.            |
 +-------------------+----------+-----------+---------------------------------------------------+
 
+
+.. _xml-configuration-extend-struct:
+
+Element: **extend-struct**
+
++-------------------+----------+-----------+---------------------------------------------------+
+| Name              | XML type | Mandatory | Description                                       |
++===================+==========+===========+===================================================+
+| **type**          | attrib   |    yes    | The name of the struct type to be extended. This  |
++-------------------+----------+-----------+---------------------------------------------------+
+| **match-name**    | attrib   |    no     | The name given of the struct with parameters      |
+|                   |          |           | extending name the  struct given by name.         |
++-------------------+----------+-----------+---------------------------------------------------+
 
 
 .. _xml-configuration-group:
@@ -565,18 +588,3 @@ Below is an example of the module definition for :program:`scautoloc` (extract).
        </command-line>
      </module>
    </seiscomp>
-
-
-References
-==========
-
-.. target-notes::
-
-.. _`SeisComP wiki` : https://www.seiscomp.de/
-.. _`reStructuredText` : https://docutils.sourceforge.io/rst.html
-.. _`Sphinx` : https://www.sphinx-doc.org/
-.. _`Python documentation` : https://docs.python.org/
-.. _`introduction to reST` : https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html
-.. _`directives` : https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html
-.. _`SeisComP on GitHub` : https://github.com/SeisComP
-.. _`discussion forum` : https://forum.seiscomp.de
