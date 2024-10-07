@@ -1,1 +1,1 @@
-SUBDIRS(seiscomp seiscomp3-compat)
+SUBDIRS(seiscomp)

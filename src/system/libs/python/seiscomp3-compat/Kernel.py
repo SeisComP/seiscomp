@@ -1,1 +1,0 @@
-from seiscomp.kernel import *
