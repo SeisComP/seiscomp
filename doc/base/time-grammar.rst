@@ -258,7 +258,7 @@ Functions
 .. py:function:: tt(phase)
 
    Calculates the travel-time of the given phase **w.r.t. relative origin
-   time, :py:envvar:`OT`**. The result is unset if the travel time cannot be
+   time**, :py:envvar:`OT`. The result is unset if the travel time cannot be
    computed. The travel times are computed based on the travel-time interface
    and model defined in :confval:`amplitudes.ttt.interface` and
    :confval:`amplitudes.ttt.model`, respectively.
