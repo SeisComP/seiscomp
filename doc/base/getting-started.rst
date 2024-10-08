@@ -294,6 +294,8 @@ without doing anything.
    Command? [P]:
 
 
+.. _getting-started-variables:
+
 Environment variables
 =====================
 

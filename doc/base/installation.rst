@@ -34,6 +34,8 @@ on
 * :program:`CentOS 7`, 64 bit system.
 
 
+.. _installation-hw:
+
 Hardware Requirements
 =====================
 
@@ -194,12 +196,10 @@ Software dependencies
 |scname| depends on a number of additional software packages shipped with each
 Linux distribution.
 After installation of |scname| these packages can be installed using the
-:program:`seiscomp`.
-The :program:`seiscomp` tool comes with
-the command :command:`install-deps` which installs required packages.
-Read the section :ref:`System management<system-management>` for more detailed
-instructions. For example, to install the dependencies for using the MariaDB
-database, give 'mariadb-server' as parameter.
+:ref:`seiscomp` script.
+:ref:`seiscomp` comes with the command :command:`install-deps` which installs
+required packages. For example, to install the dependencies for
+using the MariaDB database, give 'mariadb-server' as parameter.
 
 .. code-block:: sh
 
@@ -211,13 +211,17 @@ database, give 'mariadb-server' as parameter.
    Reading state information... Done
    ...
 
-More options for systems with GUIs and FDSNWS are: ::
+More requirements for systems with GUIs and/or FDSNWS are:
 
-   user@host:~$ seiscomp/bin/seiscomp install-deps gui fdsnws
+.. code-block:: sh
+
+   user@host:~$ seiscomp/bin/seiscomp install-deps gui
+   user@host:~$ seiscomp/bin/seiscomp install-deps fdsnws
 
 
-If your distribution is not supported by :command:`install-deps`,
-install the above packages manually:
+If your distribution is not supported by :ref:`seiscomp` *install-deps*,
+install the above packages manually from the scripts within the OS-dependent
+directories:
 
 :program:`Ubuntu` `version`
 
@@ -226,38 +230,31 @@ install the above packages manually:
    user@host:~$ cd seiscomp/share/deps/ubuntu/[version]
    ...
 
-:program:`CentOS` `version`
+:program:`RHEL` `version`
 
 .. code-block:: sh
 
-   user@host:~$ cd seiscomp/share/deps/centos/[version]
+   user@host:~$ cd seiscomp/share/deps/rhel/[version]
    ...
 
-.. code-block:: sh
-
-   su root
-   bash install-mariadb-server.sh
-   bash install-postgresql-server.sh
-   bash install-base.sh
-   bash install-gui.sh
-   bash install-fdsnws.sh
-   ...
-
-or contact the |scname| developers to add support for your distribution.
+Read the section :ref:`System management<system-management>` for more detailed
+options and instructions.
 
 .. warning::
 
-   Either the MariaDB **or** the MySQL server can be installed; not both at the
-   same time. When replacing on by the other, ensure that all related files are
+   Either the MariaDB **or** the MySQL server can be installed; **not both at the
+   same time**. When replacing one by the other, ensure that all related files are
    removed before installing the alternative server. For MySQL instead of MariaDB
-   use: ::
+   use:
+
+   .. code-block:: sh
 
       root@host:~$ sh install-mysql-server.sh
 
    Preferably use MariaDB instead of MySQL as MariaDB is the default for the
    supported Linux distributions!
 
-.. note ::
+.. note::
 
    Linux systems develop dynamically and the installation of the dependencies
    may be incomplete. |scname| modules will stop and indicate the missing software.

@@ -86,10 +86,23 @@ The *seiscomp* script can be executed with additional commands:
 
 * **install-deps** [packages]
 
-  Installs 3rd party packages on which |scname| depends such as MariaDB or MySQL.
+  Installs 3rd-party packages on which |scname| depends such as MariaDB or MySQL.
   This is currently only supported for major Linux distributions. A list of packages
-  needs to be given. Available packages are: **base**, **GUI**,
-  **mariadb-server**, **postgresql-server**, **fdsnws**.
+  needs to be given. Available packages are defined in BASH scripts located in
+  :file:`@DATADIR@/deps/[os]/[version]/install-[name].sh`:
+
+  .. csv-table::
+     :widths: 40 60
+     :align: left
+     :delim: ;
+     :header: Package name, Installation
+
+     base; Base libraries needed for all |scname| module
+     gui; Libraries for running graphical interfaces
+     mariadb-server/mysql-sever; Mariadb/MySQL server
+     postgresql-server; Postgresql server
+     fdsnws; Python modules for running FDSNWS
+     iloc; Auxiliary files for :ref:`global_iloc` from :cite:t:`iloc-github`
 
   #. Install only base system dependencies:
 
@@ -116,6 +129,12 @@ The *seiscomp* script can be executed with additional commands:
      .. code-block:: sh
 
         seiscomp install-deps gui fdsnws
+
+  #. For using :ref:`global_iloc`:
+
+     .. code-block:: sh
+
+        seiscomp install-deps iloc
 
 * **list** modules|aliases|enabled|disabled
 
