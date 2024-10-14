@@ -1,5 +1,4 @@
-SET(
-	CONFIG_SOURCES
+SET(CONFIG_SOURCES
 	log.cpp
 	config.cpp
 	symboltable.cpp
@@ -8,8 +7,7 @@ SET(
 	../../3rd-party/fmt/src/os.cc
 )
 
-SET(
-	CONFIG_HEADERS
+SET(CONFIG_HEADERS
 	log.h
 	config.h
 	config.ipp
