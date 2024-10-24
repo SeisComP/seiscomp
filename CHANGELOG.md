@@ -2,6 +2,35 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.6.0
+
+```SC_API_VERSION 16.3.0```
+
+-   trunk
+    -   Add filter DURATION().
+    -   Fix XSL unit conversion for confidenceEllipsoid.
+        -   Previously the confidenceEllipsoid where multiplied by
+            respectively devided by 1000 when converting to/from
+            QuakeML. As it turns out no conversion is needed since
+            both, SCML and QuakeML, use meter as unit.
+    -   Fix stability of record resampler with decimal sampling rates
+        and factors.
+-   GUI
+    -   Fix rendering of line styles in map legends.
+-   scolv
+    -   Set spin distance precision to 1 decimal place in picker and amplitude
+        picker.
+    -   Replace operator comment input control with a text edit control which
+        allows new lines. Furthermore the restriction of 160 characters has been
+        removed from the input controls for operator comment and event name.
+    -   Increase number of visible event types in dropdown to 20 (default=10).
+    -   Ensure all commonEventTypes are visible in event type dropdown.
+    -   Fix initial locator profile parameter setup in locator setup window.
+    -   Fix consistency of OriginLocatorView and PickerView with weight 0 arrivals.
+-   StdLoc
+    -   Refuse to locating with less than 4 picks.
+    -   Update documentation.
+
 ## 6.5.1
 
 -   scalert
