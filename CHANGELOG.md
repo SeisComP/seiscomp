@@ -81,7 +81,7 @@ All notable changes to SeisComP are documented here.
     -   Add scripts for installing iLoc auxiliary files with
         `seiscomp install-deps iloc`.
 -   StdLoc
-    -   Refuse to locating with less than 4 picks.
+    -   Refuse locating with less than 4 picks.
     -   Update documentation.
 
 ## 6.5.1
@@ -100,7 +100,7 @@ All notable changes to SeisComP are documented here.
 -   trunk
     -   Filter `INT` can be used without an argument (default 0).
     -   Add more filters: SUM, DT and SR.
-    -   Allow negative frequency parameters for `BW_*` and `BPENV` which
+    -   Allow negative frequency values for `BW*` and `BPENV` which
         resolve to `-freq * fsamp`.
     -   Remove deprecated module from `access.py`.
     -   Read homogeneous travel time configuration from application
@@ -192,10 +192,10 @@ All notable changes to SeisComP are documented here.
     -   Support shortened time formats for SeisComP and ISO time strings in
         function fromString() such as "2024-04-01 01" and 2024-04-01T01.
     -   Report an error if file recordstream is used without a regular file.
+    -   Set host to localhost if empty in caps recordstream.
     -   Add CUTOFF() and STALTA2() to documentation of filter grammar.
     -   Add scripts for installing software dependencies for Ubuntu 24.04 which
         can be installed using seiscomp install-deps ...
-    -   Set host to localhost if empty in caps recordstream
     -   stdloc
         -   Reject locations on the grid boundary.
         -   Handle missing ttt for certain phases.

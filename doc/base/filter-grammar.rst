@@ -213,9 +213,9 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
 
 .. py:function:: DT
 
-   Replaces each input sample with the sampling time of the current sample. This
+   Replaces each input sample with the sampling interval of the current sample. This
    is a shortcut for :code:`1/SR` but more efficient as the division has to be
-   done only once and not once per input sample.
+   done only once and not once per input sample. The output unit is *seconds*.
 
 
 .. py:function:: DURATION(trigger_on, trigger_off)
@@ -252,12 +252,14 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    :param a: Coefficient `a`.
 
 
-.. py:function:: ITAPER(timespan)
+.. py:function:: ITAPER(timespan[,offset = 0])
 
    A one-sided cosine taper applied when initializing the filter, e.g. at the
    beginning of the data or after longer gaps.
 
-   :param timespan: The timespan to apply the taper in seconds.
+   :param timespan: The length of the taper in seconds
+   :param offset: The offset in counts removed from the data records before
+       applying the taper. Optional parameter.
 
 
 .. py:function:: MAX(timespan)
@@ -342,7 +344,8 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
 
 .. py:function:: SR
 
-   Replaces each input sample with the sampling rate of the current sample.
+   Replaces each input sample with the sampling rate of the current sample. The
+   output unit is *1/seconds*.
 
 
 .. py:function:: STALTA(sta, lta)
@@ -377,7 +380,7 @@ parentheses, e.g. :py:func:`DIFF()<DIFF()>`, or without, e.g.
    Computes the amplitude sum of the timespan preceding the sample.
 
 
-.. py:function:: WA([type = 1[,gain=2080[,T0=0.8[,h=0.7]]]])
+.. py:function:: WA([type = 1[,gain = 2080[,T0 = 0.8[,h = 0.7]]]])
 
    The simulation filter of a :term:`Wood-Anderson seismometer`. The data format
    of the waveforms has to be given for applying the simulation filter
