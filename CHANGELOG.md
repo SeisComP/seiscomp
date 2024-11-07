@@ -9,6 +9,8 @@ All notable changes to SeisComP are documented here.
         configuration and command-line parameters which will be highlighted in
         documentation and exposed in scconfig.
 -   trunk
+    -   Application cli option `-q, --quiet` took an argument which was not
+        correct. It has been converted to a switch without argument.
     -   Add `minPeriod` and `maxPeriod` to amplitude type configuration. Both
         are checked against the measured period to skip emitting amplitudes which
         are outside the allowed period range.
@@ -68,6 +70,10 @@ All notable changes to SeisComP are documented here.
 -   scinv
     -   In check mode report streams without reference to data logger.
     -   Update table of checked objects in documentation.
+-   scxmlmerge
+    -   Add support for journaling and command-line option `--journaling`.
+    -   Allow ignoring empty or other bad files by new command-line option
+        `--ignore-bad-files`.
 -   scvoice
     -    Fix message string and value precision.
 -   GUI
@@ -87,9 +93,9 @@ All notable changes to SeisComP are documented here.
 ## 6.5.1
 
 -   scalert
-    -   Fix bug in message composition
+    -   Fix bug in message composition.
 -   scevtlog
-    -   Output pick comments
+    -   Output pick comments.
 
 ## 6.5.0
 
@@ -223,6 +229,7 @@ All notable changes to SeisComP are documented here.
         width of the event summary panel.
     -   Make the application content scrollable if the window width is smaller than
         the minimum required content width.
+    -   Plot infrasound phases with inverted triangles.
 -   scautoloc
     -   Prioritize picks over amplitudes when sorting both with identical
         creation times in playbacks using `--ep`.
@@ -231,8 +238,8 @@ All notable changes to SeisComP are documented here.
     -   Do not use horizontal slowness and backazimuth for relocating if arrival
         is excluded.
 -   scamp
-    -   Add parameter `amptool.streamFromBindings` to compute amplitudes
-        on the global bindings channel instead of the picked channel.aa
+    -   Add parameter `amptool.streamFromBindings` to measure amplitudes
+        on the global bindings channel instead of the picked channel.
 -   scmag
     -   Sychronize default values with code and cfg.
     -   Add configuration parameter `summaryMagnitude.singleton` controlling
@@ -258,7 +265,7 @@ All notable changes to SeisComP are documented here.
 -   scevent
     -   Fix crash under some conditions. This crash was caused by configurations
         where remove and update operations were sent out of sync.
-    -   Do not prefer magnitudes with evaluation mode "rejected".
+    -   Do not prefer magnitudes with evaluation status "rejected".
 -   invextr
     -   Extract inventory based on start and end time.
 -   msrtsimul
