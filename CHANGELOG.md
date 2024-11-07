@@ -7,36 +7,83 @@ All notable changes to SeisComP are documented here.
 ```SC_API_VERSION 16.3.0```
 
 -   trunk
+    -   Support amplitude data conversion without `enableResponses = true`,
+        e.g. when computing amplitudes on acceleration data. This implicitly
+        includes support for amplitude updates for such data.
+    -   Allow creating amplitude aliases by configuration of `amplitudes.aliases`
+        in global module configuration and amplitude type profiles in global
+        bindings.
     -   Add filter DURATION().
-    -   Fix XSL unit conversion for confidenceEllipsoid.
-        -   Previously the confidenceEllipsoid where multiplied by
-            respectively devided by 1000 when converting to/from
-            QuakeML. As it turns out no conversion is needed since
-            both, SCML and QuakeML, use meter as unit.
-    -   Fix stability of record resampler with decimal sampling rates
-        and factors.
--   GUI
-    -   Fix rendering of line styles in map legends.
 -   scolv
-    -   Set spin distance precision to 1 decimal place in picker and amplitude
-        picker.
+    -   Focal mechanisms show the station distribution on the map if station
+        display is enabled (F9).
     -   Replace operator comment input control with a text edit control which
         allows new lines. Furthermore the restriction of 160 characters has been
         removed from the input controls for operator comment and event name.
+    -   Set spin distance precision to 1 decimal place in picker and amplitude
+        picker.
     -   Increase number of visible event types in dropdown to 20 (default=10).
     -   Ensure all commonEventTypes are visible in event type dropdown.
     -   Fix initial locator profile parameter setup in locator setup window.
     -   Fix consistency of OriginLocatorView and PickerView with weight 0 arrivals.
+-   scqcv
+    -   Store filter string in QSettings.
+-   scrttv
+    -   Allow the configuration of `filters` with filter names displayed in the
+        filter selection menu.
+    -   Change sorting w.r.t. location and channel.
+-   fdsnxml2inv
+    -   Add inconsistency warning with decimation stages.
+    -   Derive stream sampling rate from decimation stages if not given
+        explicitly.
+-   scalert
+    -    Fix message string and value precision.
+-   scart
+    -   Fix option `--rename`. 
+-   scautopick
+    -   Add configuration parameters `thresholds.minDuration` and
+        `thresholds.maxDuration` for constraining pick generation.
+    -   Allow adding custom comments to picks which can be evaluated by other
+        modules. Requires the parameters `comment.ID` and `comment.text` to be
+        configured.
+    -   Fix crash in debug output.
+    -   Add duration comment to pick of `thresholds.maxDuration` is configured.
+-   scevent
+    -   Add new plugin "evType" for setting event types based on comments of
+        picks.
+    -   Read and write journals with `--ep`.
+-   scquery
+    -   Fix query in documentation.
+    -   Report if query does not require additional parameters.
+-   screpick
+    -   Add option `--ep` for XML playbacks.
+-   scinv
+    -   In check mode report streams without reference to data logger.
+    -   Update table of checked objects in documentation.
+-   scxmlmerge
+    -   Add support for journaling and command-line option `--journaling`.
+    -   Allow ignoring empty or other bad files by new command-line option
+        `--ignore-bad-files`.
+-   scvoice
+    -    Fix message string and value precision.
+-   GUI
+    -   Fix rendering of line styles in map legends.
+-   seiscomp-control
+    -   Always remove run- and pid-file upon seiscomp stop.
+-   iLoc
+    -   Update documentation.
+    -   Add scripts for installing iLoc auxiliary files with
+        `seiscomp install-deps iloc`.
 -   StdLoc
-    -   Refuse to locating with less than 4 picks.
+    -   Refuse locating with less than 4 picks.
     -   Update documentation.
 
 ## 6.5.1
 
 -   scalert
-    -   Fix bug in message composition
+    -   Fix bug in message composition.
 -   scevtlog
-    -   Output pick comments
+    -   Output pick comments.
 
 ## 6.5.0
 
@@ -47,7 +94,7 @@ All notable changes to SeisComP are documented here.
 -   trunk
     -   Filter `INT` can be used without an argument (default 0).
     -   Add more filters: SUM, DT and SR.
-    -   Allow negative frequency parameters for `BW_*` and `BPENV` which
+    -   Allow negative frequency values for `BW*` and `BPENV` which
         resolve to `-freq * fsamp`.
     -   Remove deprecated module from `access.py`.
     -   Read homogeneous travel time configuration from application
@@ -139,10 +186,10 @@ All notable changes to SeisComP are documented here.
     -   Support shortened time formats for SeisComP and ISO time strings in
         function fromString() such as "2024-04-01 01" and 2024-04-01T01.
     -   Report an error if file recordstream is used without a regular file.
+    -   Set host to localhost if empty in caps recordstream.
     -   Add CUTOFF() and STALTA2() to documentation of filter grammar.
     -   Add scripts for installing software dependencies for Ubuntu 24.04 which
         can be installed using seiscomp install-deps ...
-    -   Set host to localhost if empty in caps recordstream
     -   stdloc
         -   Reject locations on the grid boundary.
         -   Handle missing ttt for certain phases.
@@ -170,6 +217,7 @@ All notable changes to SeisComP are documented here.
         width of the event summary panel.
     -   Make the application content scrollable if the window width is smaller than
         the minimum required content width.
+    -   Plot infrasound phases with inverted triangles.
 -   scautoloc
     -   Prioritize picks over amplitudes when sorting both with identical
         creation times in playbacks using `--ep`.
@@ -178,8 +226,8 @@ All notable changes to SeisComP are documented here.
     -   Do not use horizontal slowness and backazimuth for relocating if arrival
         is excluded.
 -   scamp
-    -   Add parameter `amptool.streamFromBindings` to compute amplitudes
-        on the global bindings channel instead of the picked channel.aa
+    -   Add parameter `amptool.streamFromBindings` to measure amplitudes
+        on the global bindings channel instead of the picked channel.
 -   scmag
     -   Sychronize default values with code and cfg.
     -   Add configuration parameter `summaryMagnitude.singleton` controlling
@@ -187,15 +235,12 @@ All notable changes to SeisComP are documented here.
         or not.
 -   scardac
     -   Fix PostgreSQL query.
--   scolv
-    -   Plot infrasound phases with inverted triangles.
 -   scrttv
     -   Allow streams with undefined coordinates if region restriction is not used.
     -   Allow to read files from stdin with `scrttv -`.
 -   fdsnxml2inv
-    -   Support more flexible date strings.
     -   PoleAndZero.number and PolynomialCoefficient.number is optional.
-    -   Add support for more date time formats.
+    -   Add support for more flexible date and time strings.
     -   Add usage to help output.
 -   fdsnws
     -   Add charset=utf-8 to all text-based content types.
@@ -206,7 +251,7 @@ All notable changes to SeisComP are documented here.
 -   scevent
     -   Fix crash under some conditions. This crash was caused by configurations
         where remove and update operations were sent out of sync.
-    -   Do not prefer magnitudes with evaluation mode "rejected".
+    -   Do not prefer magnitudes with evaluation status "rejected".
 -   invextr
     -   Extract inventory based on start and end time.
 -   msrtsimul
