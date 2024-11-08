@@ -60,8 +60,6 @@ All notable changes to SeisComP are documented here.
     -   Add new plugin "evType" for setting event types based on comments of
         picks.
     -   Read and write journals with `--ep`.
--   scevtlog
-    -   Dump pick comments.
 -   scquery
     -   Fix query in documentation.
     -   Report if query does not require additional parameters.
@@ -247,8 +245,6 @@ All notable changes to SeisComP are documented here.
         or not.
 -   scardac
     -   Fix PostgreSQL query.
--   scolv
-    -   Plot infrasound phases with inverted triangles.
 -   scrttv
     -   Allow streams with undefined coordinates if region restriction is not used.
     -   Allow to read files from stdin with `scrttv -`.
