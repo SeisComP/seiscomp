@@ -15,8 +15,6 @@ All notable changes to SeisComP are documented here.
         bindings.
     -   Add filter DURATION().
 -   scolv
-    -   Focal mechanisms show the station distribution on the map if station
-        display is enabled (F9).
     -   Replace operator comment input control with a text edit control which
         allows new lines. Furthermore the restriction of 160 characters has been
         removed from the input controls for operator comment and event name.
