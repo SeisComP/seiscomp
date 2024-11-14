@@ -63,7 +63,7 @@ All notable changes to SeisComP are documented here.
     -   Allow ignoring empty or other bad files by new command-line option
         `--ignore-bad-files`.
 -   scvoice
-    -    Fix message string and value precision.
+    -   Fix message string and value precision.
 -   GUI
     -   Fix rendering of line styles in map legends.
 -   seiscomp-control
