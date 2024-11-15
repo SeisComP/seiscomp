@@ -7,9 +7,6 @@ All notable changes to SeisComP are documented here.
 ```SC_API_VERSION 16.3.0```
 
 -   trunk
-    -   Support amplitude data conversion without `enableResponses = true`,
-        e.g. when computing amplitudes on acceleration data. This implicitly
-        includes support for amplitude updates for such data.
     -   Allow creating amplitude aliases by configuration of `amplitudes.aliases`
         in global module configuration and amplitude type profiles in global
         bindings.
