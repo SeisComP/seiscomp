@@ -6,8 +6,6 @@
  *
  * Written by Chad Trabant,
  *   IRIS Data Management Center
- *
- * modified: 2015.273
  ***************************************************************************/
 
 #include <stdio.h>
@@ -847,7 +845,7 @@ msr_update_header (MSRecord *msr, char *rawrec, flag swapflag,
   struct fsdh_s *fsdh;
   hptime_t hptimems;
   int8_t usecoffset;
-  char seqnum[7];
+  char seqnum[16];
 
   if (!msr || !rawrec)
     return -1;
@@ -858,7 +856,7 @@ msr_update_header (MSRecord *msr, char *rawrec, flag swapflag,
   fsdh = (struct fsdh_s *)rawrec;
 
   /* Pack values into the fixed section of header */
-  snprintf (seqnum, 7, "%06d", msr->sequence_number);
+  snprintf (seqnum, sizeof(seqnum), "%06d", msr->sequence_number);
   memcpy (fsdh->sequence_number, seqnum, 6);
 
   /* Get start time rounded to tenths of milliseconds and microsecond offset */

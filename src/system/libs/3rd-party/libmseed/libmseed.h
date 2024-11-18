@@ -17,7 +17,7 @@
  * License along with this software.
  * If not, see <https://www.gnu.org/licenses/>.
  *
- * Copyright (C) 2017 Chad Trabant
+ * Copyright (C) 2022 Chad Trabant
  * IRIS Data Management Center
  ***************************************************************************/
 
@@ -28,8 +28,8 @@
 extern "C" {
 #endif
 
-#define LIBMSEED_VERSION "2.19.6"
-#define LIBMSEED_RELEASE "2018.240"
+#define LIBMSEED_VERSION "2.19.8"
+#define LIBMSEED_RELEASE "2022.087"
 
 /* C99 standard headers */
 #include <stdlib.h>
@@ -157,8 +157,8 @@ extern int LM_SIZEOF_OFF_T;  /* Size of off_t data type determined at build time
 #define HPTERROR -2145916800000000LL
 
 /* Macros to scale between Unix/POSIX epoch time & high precision time */
-#define MS_EPOCH2HPTIME(X) X * (hptime_t) HPTMODULUS
-#define MS_HPTIME2EPOCH(X) X / HPTMODULUS
+#define MS_EPOCH2HPTIME(X) (X) * (hptime_t) HPTMODULUS
+#define MS_HPTIME2EPOCH(X) (X) / HPTMODULUS
 
 /* Macro to test a character for data record indicators */
 #define MS_ISDATAINDICATOR(X) (X=='D' || X=='R' || X=='Q' || X=='M')
@@ -587,22 +587,22 @@ typedef struct Selections_s {
  * pack byte orders */
 extern flag packheaderbyteorder;
 extern flag packdatabyteorder;
-#define MS_PACKHEADERBYTEORDER(X) (packheaderbyteorder = X);
-#define MS_PACKDATABYTEORDER(X) (packdatabyteorder = X);
+#define MS_PACKHEADERBYTEORDER(X) do { packheaderbyteorder = (X); } while(0)
+#define MS_PACKDATABYTEORDER(X) do { packdatabyteorder = (X); } while(0)
 
 /* Global variables (defined in unpack.c) and macros to set/force
  * unpack byte orders */
 extern flag unpackheaderbyteorder;
 extern flag unpackdatabyteorder;
-#define MS_UNPACKHEADERBYTEORDER(X) (unpackheaderbyteorder = X);
-#define MS_UNPACKDATABYTEORDER(X) (unpackdatabyteorder = X);
+#define MS_UNPACKHEADERBYTEORDER(X) do { unpackheaderbyteorder = (X); } while(0)
+#define MS_UNPACKDATABYTEORDER(X) do { unpackdatabyteorder = (X); } while(0)
 
 /* Global variables (defined in unpack.c) and macros to set/force
  * encoding and fallback encoding */
 extern int unpackencodingformat;
 extern int unpackencodingfallback;
-#define MS_UNPACKENCODINGFORMAT(X) (unpackencodingformat = X);
-#define MS_UNPACKENCODINGFALLBACK(X) (unpackencodingfallback = X);
+#define MS_UNPACKENCODINGFORMAT(X) do { unpackencodingformat = (X); } while(0)
+#define MS_UNPACKENCODINGFALLBACK(X) do { unpackencodingfallback = (X); } while(0)
 
 /* Mini-SEED record related functions */
 extern int           msr_parse (char *record, int recbuflen, MSRecord **ppmsr, int reclen,
@@ -816,16 +816,35 @@ extern void     ms_gswap3 ( void *data3 );
 extern void     ms_gswap4 ( void *data4 );
 extern void     ms_gswap8 ( void *data8 );
 
-/* Generic byte swapping routines for memory aligned quantities */
+/* Generic byte swapping routines for memory aligned quantities; names exist
+ * for backwards compatibility, but are the same as the generic routines. */
+#if __GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5) || defined (__clang__)
+__attribute__ ((deprecated("Use ms_gswap2 instead.")))
+extern void     ms_gswap2a ( void *data2 );
+__attribute__ ((deprecated("Use ms_gswap4 instead.")))
+extern void     ms_gswap4a ( void *data4 );
+__attribute__ ((deprecated("Use ms_gswap8 instead.")))
+extern void     ms_gswap8a ( void *data8 );
+#elif defined(_MSC_FULL_VER) && (_MSC_FULL_VER > 140050320)
+__declspec(deprecated("Use ms_gswap2 instead."))
+extern void     ms_gswap2a ( void *data2 );
+__declspec(deprecated("Use ms_gswap4 instead."))
+extern void     ms_gswap4a ( void *data4 );
+__declspec(deprecated("Use ms_gswap8 instead."))
+extern void     ms_gswap8a ( void *data8 );
+#else
 extern void     ms_gswap2a ( void *data2 );
 extern void     ms_gswap4a ( void *data4 );
 extern void     ms_gswap8a ( void *data8 );
+#endif
 
 /* Byte swap macro for the BTime struct */
-#define MS_SWAPBTIME(x) \
-  ms_gswap2 (x.year);   \
-  ms_gswap2 (x.day);    \
-  ms_gswap2 (x.fract);
+#define MS_SWAPBTIME(x)  \
+  do {                   \
+    ms_gswap2 (x.year);  \
+    ms_gswap2 (x.day);   \
+    ms_gswap2 (x.fract); \
+  } while (0)
 
 /* Platform portable functions */
 extern off_t lmp_ftello (FILE *stream);
