@@ -6,6 +6,8 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 16.3.0```
 
+-   Third Party
+    -   Update libmseed to 2.19.8
 -   trunk
     -   Allow creating amplitude aliases by configuration of `amplitudes.aliases`
         in global module configuration and amplitude type profiles in global
