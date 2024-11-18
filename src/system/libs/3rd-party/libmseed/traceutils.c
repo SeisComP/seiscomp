@@ -438,7 +438,7 @@ mst_addmsr (MSTrace *mst, MSRecord *msr, flag whence)
 {
   int samplesize = 0;
 
-  if (!mst || !msr)
+  if (!mst || !msr || (whence != 1 && whence != 2))
     return -1;
 
   /* Reallocate data sample buffer if samples are present */
@@ -473,40 +473,34 @@ mst_addmsr (MSTrace *mst, MSRecord *msr, flag whence)
       ms_log (2, "mst_addmsr(): Cannot allocate memory\n");
       return -1;
     }
-  }
 
-  /* Add samples at end of trace */
-  if (whence == 1)
-  {
-    if (msr->datasamples && msr->numsamples >= 0)
+    /* Add samples at end of trace */
+    if (whence == 1)
     {
       memcpy ((char *)mst->datasamples + (mst->numsamples * samplesize),
               msr->datasamples,
               (size_t) (msr->numsamples * samplesize));
 
       mst->numsamples += msr->numsamples;
+
+      mst->endtime = msr_endtime (msr);
+
+      if (mst->endtime == HPTERROR)
+      {
+        ms_log (2, "mst_addmsr(): Error calculating record end time\n");
+        return -1;
+      }
     }
 
-    mst->endtime = msr_endtime (msr);
-
-    if (mst->endtime == HPTERROR)
-    {
-      ms_log (2, "mst_addmsr(): Error calculating record end time\n");
-      return -1;
-    }
-  }
-
-  /* Add samples at the beginning of trace */
-  else if (whence == 2)
-  {
-    if (msr->datasamples && msr->numsamples >= 0)
+    /* Add samples at the beginning of trace */
+    else if (whence == 2)
     {
       /* Move any samples to end of buffer */
       if (mst->numsamples > 0)
       {
         memmove ((char *)mst->datasamples + (msr->numsamples * samplesize),
-                 mst->datasamples,
-                 (size_t) (mst->numsamples * samplesize));
+                  mst->datasamples,
+                  (size_t) (mst->numsamples * samplesize));
       }
 
       memcpy (mst->datasamples,
@@ -514,17 +508,17 @@ mst_addmsr (MSTrace *mst, MSRecord *msr, flag whence)
               (size_t) (msr->numsamples * samplesize));
 
       mst->numsamples += msr->numsamples;
+
+      mst->starttime = msr->starttime;
     }
 
-    mst->starttime = msr->starttime;
+    /* If two different data qualities reset the MSTrace.dataquality to 0 */
+    if (mst->dataquality && msr->dataquality && mst->dataquality != msr->dataquality)
+      mst->dataquality = 0;
+
+    /* Update MSTrace sample count */
+    mst->samplecnt += msr->numsamples;
   }
-
-  /* If two different data qualities reset the MSTrace.dataquality to 0 */
-  if (mst->dataquality && msr->dataquality && mst->dataquality != msr->dataquality)
-    mst->dataquality = 0;
-
-  /* Update MSTrace sample count */
-  mst->samplecnt += msr->samplecnt;
 
   return 0;
 } /* End of mst_addmsr() */
@@ -549,7 +543,7 @@ mst_addspan (MSTrace *mst, hptime_t starttime, hptime_t endtime,
 {
   int samplesize = 0;
 
-  if (!mst)
+  if (!mst || (whence != 1 && whence != 2))
     return -1;
 
   if (datasamples && numsamples > 0)
@@ -576,34 +570,28 @@ mst_addspan (MSTrace *mst, hptime_t starttime, hptime_t endtime,
       ms_log (2, "mst_addspan(): Cannot allocate memory\n");
       return -1;
     }
-  }
 
-  /* Add samples at end of trace */
-  if (whence == 1)
-  {
-    if (datasamples && numsamples > 0)
+    /* Add samples at end of trace */
+    if (whence == 1)
     {
       memcpy ((char *)mst->datasamples + (mst->numsamples * samplesize),
               datasamples,
               (size_t) (numsamples * samplesize));
 
       mst->numsamples += numsamples;
+
+      mst->endtime = endtime;
     }
 
-    mst->endtime = endtime;
-  }
-
-  /* Add samples at the beginning of trace */
-  else if (whence == 2)
-  {
-    if (datasamples && numsamples > 0)
+    /* Add samples at the beginning of trace */
+    else if (whence == 2)
     {
       /* Move any samples to end of buffer */
       if (mst->numsamples > 0)
       {
         memmove ((char *)mst->datasamples + (numsamples * samplesize),
-                 mst->datasamples,
-                 (size_t) (mst->numsamples * samplesize));
+                  mst->datasamples,
+                  (size_t) (mst->numsamples * samplesize));
       }
 
       memcpy (mst->datasamples,
@@ -611,14 +599,15 @@ mst_addspan (MSTrace *mst, hptime_t starttime, hptime_t endtime,
               (size_t) (numsamples * samplesize));
 
       mst->numsamples += numsamples;
+
+      mst->starttime = starttime;
     }
 
-    mst->starttime = starttime;
-  }
+    /* Update MSTrace sample count */
+    if (numsamples > 0)
+      mst->samplecnt += numsamples;
 
-  /* Update MSTrace sample count */
-  if (numsamples > 0)
-    mst->samplecnt += numsamples;
+  }
 
   return 0;
 } /* End of mst_addspan() */
@@ -1341,8 +1330,8 @@ mst_printtracelist (MSTraceGroup *mstg, flag timeformat,
     /* Create formatted time strings */
     if (timeformat == 2)
     {
-      snprintf (stime, sizeof (stime), "%.6f", (double)MS_HPTIME2EPOCH (mst->starttime));
-      snprintf (etime, sizeof (etime), "%.6f", (double)MS_HPTIME2EPOCH (mst->endtime));
+      snprintf (stime, sizeof (stime), "%.6f", MS_HPTIME2EPOCH ((double)mst->starttime));
+      snprintf (etime, sizeof (etime), "%.6f", MS_HPTIME2EPOCH ((double)mst->endtime));
     }
     else if (timeformat == 1)
     {
@@ -1445,7 +1434,7 @@ mst_printsynclist (MSTraceGroup *mstg, char *dccid, flag subsecond)
   MSTrace *mst = 0;
   char stime[30];
   char etime[30];
-  char yearday[32];
+  char yearday[24];
   time_t now;
   struct tm *nt;
 
@@ -1586,8 +1575,8 @@ mst_printgaplist (MSTraceGroup *mstg, flag timeformat,
         /* Create formatted time strings */
         if (timeformat == 2)
         {
-          snprintf (time1, sizeof (time1), "%.6f", (double)MS_HPTIME2EPOCH (mst->endtime));
-          snprintf (time2, sizeof (time2), "%.6f", (double)MS_HPTIME2EPOCH (mst->next->starttime));
+          snprintf (time1, sizeof (time1), "%.6f", MS_HPTIME2EPOCH ((double)mst->endtime));
+          snprintf (time2, sizeof (time2), "%.6f", MS_HPTIME2EPOCH ((double)mst->next->starttime));
         }
         else if (timeformat == 1)
         {

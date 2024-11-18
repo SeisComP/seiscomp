@@ -4,8 +4,6 @@
  * Routines to handle TraceList and related structures.
  *
  * Written by Chad Trabant, IRIS Data Management Center
- *
- * modified: 2015.108
  ***************************************************************************/
 
 #include <stdio.h>
@@ -989,8 +987,8 @@ mstl_printtracelist (MSTraceList *mstl, flag timeformat,
       /* Create formatted time strings */
       if (timeformat == 2)
       {
-        snprintf (stime, sizeof (stime), "%.6f", (double)MS_HPTIME2EPOCH (seg->starttime));
-        snprintf (etime, sizeof (etime), "%.6f", (double)MS_HPTIME2EPOCH (seg->endtime));
+        snprintf (stime, sizeof (stime), "%.6f", MS_HPTIME2EPOCH ((double)seg->starttime));
+        snprintf (etime, sizeof (etime), "%.6f", MS_HPTIME2EPOCH ((double)seg->endtime));
       }
       else if (timeformat == 1)
       {
@@ -1091,7 +1089,7 @@ mstl_printsynclist (MSTraceList *mstl, char *dccid, flag subsecond)
   MSTraceSeg *seg = 0;
   char starttime[30];
   char endtime[30];
-  char yearday[10];
+  char yearday[24];
   time_t now;
   struct tm *nt;
 
@@ -1230,8 +1228,8 @@ mstl_printgaplist (MSTraceList *mstl, flag timeformat,
         /* Create formatted time strings */
         if (timeformat == 2)
         {
-          snprintf (time1, sizeof (time1), "%.6f", (double)MS_HPTIME2EPOCH (seg->endtime));
-          snprintf (time2, sizeof (time2), "%.6f", (double)MS_HPTIME2EPOCH (seg->next->starttime));
+          snprintf (time1, sizeof (time1), "%.6f", MS_HPTIME2EPOCH ((double)seg->endtime));
+          snprintf (time2, sizeof (time2), "%.6f", MS_HPTIME2EPOCH ((double)seg->next->starttime));
         }
         else if (timeformat == 1)
         {
