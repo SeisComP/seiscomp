@@ -31,6 +31,6 @@ IF(NOT WIN32)
 ENDIF(NOT WIN32)
 
 INSTALL(
-	FILES lmplatform.h libmseed.h
+	FILES libmseed.h
 	DESTINATION ${SC3_PACKAGE_INCLUDE_DIR}
 )
