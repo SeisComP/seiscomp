@@ -23,7 +23,7 @@ void ms_loginit_main (MSLogParam *logp,
 int ms_log_main (MSLogParam *logp, int level, va_list *varlist);
 
 /* Initialize the global logging parameters */
-MSLogParam gMSLogParam = {NULL, NULL, NULL, NULL};
+MSLogParam _gMSLogParam = {NULL, NULL, NULL, NULL};
 
 /***************************************************************************
  * ms_loginit:
@@ -36,7 +36,7 @@ void
 ms_loginit (void (*log_print) (char *), const char *logprefix,
             void (*diag_print) (char *), const char *errprefix)
 {
-  ms_loginit_main (&gMSLogParam, log_print, logprefix, diag_print, errprefix);
+  ms_loginit_main (&_gMSLogParam, log_print, logprefix, diag_print, errprefix);
 } /* End of ms_loginit() */
 
 /***************************************************************************
@@ -161,7 +161,7 @@ ms_log (int level, ...)
 
   va_start (varlist, level);
 
-  retval = ms_log_main (&gMSLogParam, level, &varlist);
+  retval = ms_log_main (&_gMSLogParam, level, &varlist);
 
   va_end (varlist);
 
@@ -185,7 +185,7 @@ ms_log_l (MSLogParam *logp, int level, ...)
   MSLogParam *llog;
 
   if (!logp)
-    llog = &gMSLogParam;
+    llog = &_gMSLogParam;
   else
     llog = logp;
 
