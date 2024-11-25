@@ -6,6 +6,12 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 16.3.0```
 
+-   seiscomp
+    -   Always remove run- and pid-file upon seiscomp stop.
+    -   Do not resolve and remove configuration variables in `global.cfg`
+        after `seiscomp setup`, e.g. `plugins = ${plugins}, abc`.
+    -   Fix PostgreSQL database setup script which caused an error if the
+        configured user does not yet exists as database role.
 -   Third Party
     -   Update libmseed to 2.19.8
 -   trunk
@@ -65,8 +71,6 @@ All notable changes to SeisComP are documented here.
     -   Fix message string and value precision.
 -   GUI
     -   Fix rendering of line styles in map legends.
--   seiscomp-control
-    -   Always remove run- and pid-file upon seiscomp stop.
 -   iLoc
     -   Update documentation.
     -   Add scripts for installing iLoc auxiliary files with
