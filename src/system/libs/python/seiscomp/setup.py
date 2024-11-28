@@ -240,7 +240,7 @@ Hint: Entered values starting with a dot (.) are handled
       help: Show help about the current parameter (if available).
 
       If you need to enter a value with a leading dot, escape it
-      with backslash, e.g. "\.value".
+      with backslash, e.g. "\\.value".
 --------------------------------------------------------------------
 
 ''')
@@ -414,7 +414,7 @@ Hint: Entered values starting with a dot (.) are handled
             elif value.startswith("."):
                 sys.stdout.write("Unknown command. Values starting with '.' are handled has commands such as\n"
                                  "'.help', '.quit' or '.back'. To use a leading dot in a value, escape it with '\'\n"
-                                 "e.g. '\.color'\n")
+                                 "e.g. '\\.color'\n")
                 continue
             else:
                 # Replace leading \. with .
