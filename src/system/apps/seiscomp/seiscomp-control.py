@@ -345,7 +345,7 @@ def on_setup(args, flags):
             error("invalid configuration from stdin")
             return 1
     else:
-        setup = seiscomp.setup.Simple()
+        setup = seiscomp.setup.Simple(args)
         cfg = setup.run(env)
 
     retCode = 0

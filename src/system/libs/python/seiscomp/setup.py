@@ -134,7 +134,8 @@ class Simple:
     passed to all init modules that have a setup method.
     """
 
-    def __init__(self):
+    def __init__(self, args = []):
+        self.modules = args
         self.setupTree = SetupNode(None, None)
         self.paths = []
         self.currentNode = None
@@ -172,6 +173,9 @@ class Simple:
                 if modname in setup_groups:
                     raise Exception(
                         "%s: duplicate module name: %s" % (f, modname))
+
+                if self.modules and modname not in self.modules:
+                    continue
 
                 setup = mod.find("setup")
                 if setup is None:
@@ -340,12 +344,20 @@ Hint: Entered values starting with a dot (.) are handled
             if not self.currentNode:
                 sys.stdout.write("\nFinished setup\n--------------\n\n")
                 sys.stdout.write("P) Proceed to apply configuration\n")
+                sys.stdout.write("D) Dump entered parameters\n")
                 sys.stdout.write("B) Back to last parameter\n")
                 sys.stdout.write("Q) Quit without changes\n")
 
                 value = py3input('Command? [P]: ').upper()
                 if value == "Q":
                     raise StopIteration()
+                if value == "D":
+                    sys.stdout.write("\n----\n")
+                    cfg = config.Config()
+                    dumpTree(cfg, self.setupTree)
+                    cfg.writeConfig("-")
+                    sys.stdout.write("----\n\n")
+                    continue
                 if value == "P" or not value:
                     sys.stdout.write("\nRunning setup\n-------------\n\n")
                     return
