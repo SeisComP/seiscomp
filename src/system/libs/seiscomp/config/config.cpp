@@ -493,7 +493,12 @@ void Config::writeContent(std::ostream &os, const Symbol *symbol,
 void Config::writeSymbol(std::ostream &os, const Symbol *symbol,
                          bool multilineLists) {
 	escapeName(os, symbol->name) << " = ";
-	writeValues(os, symbol, multilineLists);
+	if ( symbol->uri.empty() ) {
+		writeValues(os, symbol, multilineLists);
+	}
+	else {
+		writeContent(os, symbol, multilineLists);
+	}
 	os << std::endl;
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -792,6 +797,9 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 		std::vector<std::string> values;
 		std::string tmp;
 		for ( size_t i = 2; i < tokens.size(); ++i ) {
+			if ( tokens[i] == "," ) {
+				tokens[i] = ", ";
+			}
 			tmp += tokens[i];
 		}
 
