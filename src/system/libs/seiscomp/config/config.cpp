@@ -609,7 +609,7 @@ bool Config::parseFile(std::istream &is) {
 	_namespacePrefix = _defaultNamespacePrefix;
 	_namespaces.clear();
 
-	while ( getline(is, line) ) {
+	while ( std::getline(is, line) ) {
 		++_line;
 		Private::trim(line);
 		if ( line.empty() ) continue;
@@ -619,10 +619,12 @@ bool Config::parseFile(std::istream &is) {
 		std::string::iterator next     = line.begin();
 		std::string::iterator previous = line.begin();
 		for ( ; current != line.end(); ++current ) {
-			if ( current + 1 != line.end() )
+			if ( current + 1 != line.end() ) {
 				next = current + 1;
-			if ( current != line.begin() )
+			}
+			if ( current != line.begin() ) {
 				previous = current - 1;
+			}
 
 			if ( *current == '"' ) {
 				if ( (*previous != '\\') || stringMode ) {
@@ -631,8 +633,9 @@ bool Config::parseFile(std::istream &is) {
 				}
 			}
 			else if ( *current == '#' && !stringMode ) {
-				if ( !comment.empty() )
+				if ( !comment.empty() ) {
 					comment += '\n';
+				}
 				std::copy(current, line.end(), std::back_inserter(comment));
 				break;
 			}
@@ -640,7 +643,9 @@ bool Config::parseFile(std::istream &is) {
 		}
 
 		entry = Private::trim(entry);
-		if ( entry.empty() ) continue;
+		if ( entry.empty() ) {
+			continue;
+		}
 
 		if ( *entry.rbegin() != '\\' ) {
 			if ( stringMode ) {
@@ -786,8 +791,9 @@ bool Config::handleEntry(const std::string& entry, const std::string& comment) {
 
 		std::vector<std::string> values;
 		std::string tmp;
-		for ( size_t i = 2; i < tokens.size(); ++i )
+		for ( size_t i = 2; i < tokens.size(); ++i ) {
 			tmp += tokens[i];
+		}
 
 		if ( !eval(tmp, values, _resolveReferences, &errmsg) ) {
 			CONFIG_ERROR("%s", errmsg.c_str());
@@ -909,8 +915,9 @@ std::vector<std::string> Config::tokenize(const std::string& entry)
 
 	std::string::const_iterator it = entry.begin();
 	for ( ; it != entry.end(); ++it ) {
-		if (it != entry.begin())
+		if (it != entry.begin()) {
 			previousIt = it - 1;
+		}
 
 		bool isOperator = *it == '=' || *it == ',';
 
@@ -923,8 +930,9 @@ std::vector<std::string> Config::tokenize(const std::string& entry)
 			// The first token either defines a variable name or a command and
 			// is not going to be parsed further. So the escape character must
 			// be removed.
-			if ( !tokens.empty() )
+			if ( !tokens.empty() ) {
 				nextToken.push_back(*previousIt);
+			}
 			nextToken.push_back(*it);
 			escapeMode = false;
 		}
