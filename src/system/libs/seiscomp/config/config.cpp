@@ -348,7 +348,8 @@ bool Config::readInternalConfig(const std::string &file,
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool Config::writeConfig(const std::string &filename, bool localOnly,
                          bool multilineLists) {
-	int firstLine = true;
+	bool firstSymbol = true;
+	bool hadComment = false;
 
 	std::ostream *os;
 	std::fstream file;
@@ -371,15 +372,22 @@ bool Config::writeConfig(const std::string &filename, bool localOnly,
 			}
 		}
 
-		if ( !firstLine )
-			*os << std::endl;
-		else
-			firstLine = false;
+		if ( !symbol->comment.empty() ) {
+			if ( !firstSymbol ) {
+				*os << std::endl;
+			}
 
-		if ( !symbol->comment.empty() )
 			*os << symbol->comment << std::endl;
+			hadComment = true;
+		}
+		else if ( hadComment ) {
+			*os << std::endl;
+			hadComment = false;
+		}
 
 		writeSymbol(*os, symbol, multilineLists);
+
+		firstSymbol = false;
 	}
 
 	return true;
