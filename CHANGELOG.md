@@ -12,6 +12,7 @@ All notable changes to SeisComP are documented here.
         after `seiscomp setup`, e.g. `plugins = ${plugins}, abc`.
     -   Fix PostgreSQL database setup script which caused an error if the
         configured user does not yet exists as database role.
+    -   Fix MYSQL setup script escape warnings
 -   Third Party
     -   Update libmseed to 2.19.8
 -   trunk
@@ -19,6 +20,9 @@ All notable changes to SeisComP are documented here.
         in global module configuration and amplitude type profiles in global
         bindings.
     -   Add filter DURATION().
+    -   Allow to disable SQLite3 disc syncrhronization to decrease time needed to
+        save data in an SQLite3 database: `sqlite3:///path/to/file?sync=false`.
+    -   Add support for all synchronous flags of SQLite3 (`sync=[normal|full|extra]`).
 -   scolv
     -   Replace operator comment input control with a text edit control which
         allows new lines. Furthermore the restriction of 160 characters has been
@@ -71,6 +75,7 @@ All notable changes to SeisComP are documented here.
     -   Fix message string and value precision.
 -   GUI
     -   Fix rendering of line styles in map legends.
+    -   Fix rendering of geofeature names when a feature is wrapped on the map.
 -   iLoc
     -   Update documentation.
     -   Add scripts for installing iLoc auxiliary files with
@@ -78,6 +83,7 @@ All notable changes to SeisComP are documented here.
 -   StdLoc
     -   Refuse locating with less than 4 picks.
     -   Update documentation.
+    -   Improve parameter descriptions.
 
 ## 6.5.1
 
