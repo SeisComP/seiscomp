@@ -95,7 +95,7 @@ class SC_CONFIG_API Config {
 
 		/** Returns the names of parameters */
 		std::vector<std::string> names() const;
-		
+
 		/** Returns the names of the visited files */
 		std::string visitedFilesToString();
 
