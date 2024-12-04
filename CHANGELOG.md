@@ -4,12 +4,16 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
+```SC_API_VERSION 17.0.0```
+
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
         documentation and exposed in scconfig.
 -   trunk
-    -   Application cli option `-q, --quiet` took an argument which was not
+    -   ITAPER(): Support time spans with double precision, update filter
+        documentation.
+    -   Application CLI option `-q, --quiet` took an argument which was not
         correct. It has been converted to a switch without argument.
     -   Add `minPeriod` and `maxPeriod` to amplitude type configuration. Both
         are checked against the measured period to skip emitting amplitudes which
@@ -17,10 +21,6 @@ All notable changes to SeisComP are documented here.
     -   Support amplitude data conversion without `enableResponses = true`,
         e.g. when computing amplitudes on acceleration data. This implicitly
         includes support for amplitude updates for such data.
-    -   Allow creating amplitude aliases by configuration of `amplitudes.aliases`
-        in global module configuration and amplitude type profiles in global
-        bindings.
-    -   Add filter DURATION().
 -   magnitudes
     -   MLc:
         -   Add correction terms `c6` und `H` for considering vertical distance.
@@ -28,12 +28,64 @@ All notable changes to SeisComP are documented here.
             and origin for computing h.
         -   Add correction terms `c7` and `c8` for exponential decay.
         -   Update documentation with new style.
+-   GUI
+    -   EventLists support passing the IDs of events in selected rows to an
+        external script which can be configured with `eventlist.scripts.export`.
 -   scolv
     -   Focal mechanisms show the station distribution on the map if station
         display is enabled (F9).
+-   scamp
+    -   Add command-line option `--formatted` for generating formatted XML along
+        with `--ep`.
+-   scautoloc
+    -   Add command-line option `--formatted` for generating formatted XML along
+        with `--ep`.
+-   scautopick
+    -   Add command-line option `--formatted` for generating formatted XML along
+        with `--ep`.
+-   scevent
+    -   Add command-line option `--formatted` for generating formatted XML along
+        with `--ep`.
+    -   Add command-line option `--reprocess` for ignoring event objects in
+        input along with `--ep`.
+-   scmag
+    -   Add command-line option `--formatted` for generating formatted XML along
+        with `--ep`.
+-   screpick
+    -   Add command-line option `--formatted` for generating formatted XML along
+        with `--ep`.
+
+## 6.6.0
+
+```SC_API_VERSION 16.3.0```
+
+-   seiscomp
+    -   Always remove run- and pid-file upon seiscomp stop.
+    -   Do not resolve and remove configuration variables in `global.cfg`
+        after `seiscomp setup`, e.g. `plugins = ${plugins}, abc`.
+    -   Fix PostgreSQL database setup script which caused an error if the
+        configured user does not yet exists as database role.
+    -   Fix MYSQL setup script escape warnings.
+-   Third Party
+    -   Update libmseed to 2.19.8
+-   trunk
+    -   Allow creating amplitude aliases by configuration of `amplitudes.aliases`
+        in global module configuration and amplitude type profiles in global
+        bindings.
+    -   Add filter DURATION().
+    -   Allow to disable SQLite3 disc syncrhronization to decrease time needed to
+        save data in an SQLite3 database: `sqlite3:///path/to/file?sync=false`.
+    -   Add support for all synchronous flags of SQLite3 (`sync=[normal|full|extra]`).
+-   scolv
     -   Replace operator comment input control with a text edit control which
         allows new lines. Furthermore the restriction of 160 characters has been
         removed from the input controls for operator comment and event name.
+    -   Set spin distance precision to 1 decimal place in picker and amplitude
+        picker.
+    -   Increase number of visible event types in dropdown to 20 (default=10).
+    -   Ensure all commonEventTypes are visible in event type dropdown.
+    -   Fix initial locator profile parameter setup in locator setup window.
+    -   Fix consistency of OriginLocatorView and PickerView with weight 0 arrivals.
 -   scqcv
     -   Store filter string in QSettings.
 -   scrttv
@@ -73,13 +125,10 @@ All notable changes to SeisComP are documented here.
     -   Allow ignoring empty or other bad files by new command-line option
         `--ignore-bad-files`.
 -   scvoice
-    -    Fix message string and value precision.
+    -   Fix message string and value precision.
 -   GUI
     -   Fix rendering of line styles in map legends.
-    -   EventLists support passing the IDs of events in selected rows to an
-        external script which can be configured with `eventlist.scripts.export`.
--   seiscomp-control
-    -   Always remove run- and pid-file upon seiscomp stop.
+    -   Fix rendering of geofeature names when a feature is wrapped on the map.
 -   iLoc
     -   Update documentation.
     -   Add scripts for installing iLoc auxiliary files with
@@ -87,6 +136,7 @@ All notable changes to SeisComP are documented here.
 -   StdLoc
     -   Refuse locating with less than 4 picks.
     -   Update documentation.
+    -   Improve parameter descriptions.
 
 ## 6.5.1
 
@@ -644,6 +694,30 @@ Changes:
     -   Increase collector API version to 2.
 -   screpick
     -   Add as new module.
+
+## 5.5.19
+
+-   trunk
+    -   Fix MYSQL reconnect when server went away.
+
+## 5.5.18
+
+-   scdb
+    -   Fix reading notifier messages from XML
+
+## 5.5.17
+
+-   scesv
+    -   Fix regression which prevented showing the current
+        magnitudes when `showLastAutomaticSolution = true`.
+
+## 5.5.16
+
+-   scolv
+    -   Fix station count update of Mw magnitude if a magnitudes
+        has been recalculated in the magnitude view. Furthermore
+        the Mw tab header updates correctly and shows the number
+        of stations.
 
 ## 5.5.15
 
