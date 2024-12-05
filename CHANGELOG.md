@@ -55,6 +55,13 @@ All notable changes to SeisComP are documented here.
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
 
+## 6.6.1
+
+-   scolv
+    -   Fix mb magnitude computation in amplitude review window
+        which showed magnitudes based on uncorrected amplitude
+        values.
+
 ## 6.6.0
 
 ```SC_API_VERSION 16.3.0```
