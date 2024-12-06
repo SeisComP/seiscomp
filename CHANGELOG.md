@@ -55,6 +55,13 @@ All notable changes to SeisComP are documented here.
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
 
+## 6.6.2
+
+-   fdsnxml2inv
+    -   Derive sampling rate from decimation stages if not set explicitly
+    -   Add warning if decimation stages are not consistent with respect to
+        the sampling rates of each stage.
+
 ## 6.6.1
 
 -   scolv
