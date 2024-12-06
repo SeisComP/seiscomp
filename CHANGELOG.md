@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.6.2
+
+-   fdsnxml2inv
+    -   Fix crash if decimation is not set.
+
 ## 6.6.1
 
 -   scolv
