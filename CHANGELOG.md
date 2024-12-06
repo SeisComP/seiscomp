@@ -58,9 +58,7 @@ All notable changes to SeisComP are documented here.
 ## 6.6.2
 
 -   fdsnxml2inv
-    -   Derive sampling rate from decimation stages if not set explicitly
-    -   Add warning if decimation stages are not consistent with respect to
-        the sampling rates of each stage.
+    -   Fix crash if decimation is not set.
 
 ## 6.6.1
 
