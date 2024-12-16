@@ -57,6 +57,12 @@ All notable changes to SeisComP are documented here.
 -   screpick
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
+## 6.6.3
+
+-   bindings2cfg
+    -   Fix broken offline mode when `--module-name` is not provided.
+-   iloc
+    -   Fix RSTT linking issues with Ubuntu 24.04.
 
 ## 6.6.2
 
