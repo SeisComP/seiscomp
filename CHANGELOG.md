@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.6.3
+
+-   bindings2cfg
+    -   Fix broken offline mode when `--module-name` is not provided.
+-   iloc
+    -   Fix RSTT linking issues with Ubuntu 24.04.
+
 ## 6.6.2
 
 -   fdsnxml2inv
