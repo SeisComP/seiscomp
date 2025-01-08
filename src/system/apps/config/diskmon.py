@@ -55,7 +55,3 @@ class Module(seiscomp.kernel.Module):
 
       os.system('echo "%s" | mail -s "disk nearly full" %s' % (msg, " ".join(emails)))
       return 0
-
-
-    def stop(self):
-      return True

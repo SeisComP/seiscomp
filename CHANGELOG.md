@@ -84,6 +84,8 @@ All notable changes to SeisComP are documented here.
     -   Add `iLoc.usePickUncertainties` and `iLoc.defaultTimeError` to description.
 -   doc
     -   Replace Sphinx m2r2 with sphinx_mdinclude
+-   diskmon
+    -   Fix stopped modules counter for diskmon.
 
 ## 6.6.3
 
