@@ -34,6 +34,7 @@ All notable changes to SeisComP are documented here.
 -   scolv
     -   Focal mechanisms show the station distribution on the map if station
         display is enabled (F9).
+    -   Add LQT rotation to picker.
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
         date is not specified for the StationXML node.
