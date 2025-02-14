@@ -84,6 +84,7 @@ The following packages should be installed to compile SeisComP:
 - libfl-dev
 - libssl-dev
 - crypto-dev
+- libbson-dev
 - python-dev (optional)
 - python-numpy (optional)
 - libqt4-dev (optional)
