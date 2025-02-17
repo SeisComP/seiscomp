@@ -21,6 +21,9 @@ All notable changes to SeisComP are documented here.
     -   Support amplitude data conversion without `enableResponses = true`,
         e.g. when computing amplitudes on acceleration data. This implicitly
         includes support for amplitude updates for such data.
+    -   Add locrouter plugin, see
+        https://github.com/SeisComP/common/blob/master/plugins/locator/router/descriptions/global_locrouter.rst.
+    -   Speed up trace rendering for large number of records.
 -   magnitudes
     -   MLc:
         -   Add correction terms `c6` und `H` for considering vertical distance.
@@ -35,6 +38,11 @@ All notable changes to SeisComP are documented here.
     -   Focal mechanisms show the station distribution on the map if station
         display is enabled (F9).
     -   Add LQT rotation to picker.
+    -   Fix bug in picker when hidden unassociated picks become visible again after
+        transferring a solution to the locator window.
+    -   If `olv.locator.presetFromOrigin = true` then the locator will be selected
+        according to the methodID and earthModelID. If that is not found then
+        the default locator will be set again rather than keeping the last selection.
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
         date is not specified for the StationXML node.
@@ -58,6 +66,16 @@ All notable changes to SeisComP are documented here.
 -   screpick
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
+-   iloc
+    -   When reading a local velocity model file, If CONRAD is not specified,
+        the index of the Conrad discontinuity was not set properly, therefore iLoc
+        assumed the very first depth as the Conrad thus preventing the calculation
+        of Pg/Sg phases. The calculation of travel times from a local velocity model
+        was restricted to up to 6 degree distance.
+        The Conrad discontinuity is no longer set to the surface when CONRAD is not
+        specified in the local velocity model. Travel-time calculations from local
+        velocity models now extended to 10 degrees.
+
 ## 6.6.3
 
 -   bindings2cfg
