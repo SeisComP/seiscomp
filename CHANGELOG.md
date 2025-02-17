@@ -43,6 +43,9 @@ All notable changes to SeisComP are documented here.
     -   If `olv.locator.presetFromOrigin = true` then the locator will be selected
         according to the methodID and earthModelID. If that is not found then
         the default locator will be set again rather than keeping the last selection.
+    -   Set OriginLocatorView depth type to "depth type set by locator" when
+        presetFromOrigin is true and the depth type is unset, resetting the state of
+        the origin set before.
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
         date is not specified for the StationXML node.
@@ -116,6 +119,9 @@ All notable changes to SeisComP are documented here.
     -   Allow to disable SQLite3 disc syncrhronization to decrease time needed to
         save data in an SQLite3 database: `sqlite3:///path/to/file?sync=false`.
     -   Add support for all synchronous flags of SQLite3 (`sync=[normal|full|extra]`).
+    -   Add option `amplitudes.[type].considerUnusedArrivals` which if enabled
+        considers stations with unused (disabled) arrivals for amplitude and
+        implicitly magnitude computations. Affects scamp, scmag and scolv.
 -   scolv
     -   Replace operator comment input control with a text edit control which
         allows new lines. Furthermore the restriction of 160 characters has been
