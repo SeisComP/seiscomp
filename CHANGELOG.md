@@ -31,6 +31,9 @@ All notable changes to SeisComP are documented here.
             and origin for computing h.
         -   Add correction terms `c7` and `c8` for exponential decay.
         -   Update documentation with new style.
+-   ql2sc
+    -   Add FocalMechanismReference to event for the preferred focal mechanism to
+        force association.
 -   GUI
     -   EventLists support passing the IDs of events in selected rows to an
         external script which can be configured with `eventlist.scripts.export`.
@@ -69,7 +72,7 @@ All notable changes to SeisComP are documented here.
 -   screpick
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
--   iloc
+-   iLoc
     -   When reading a local velocity model file, If CONRAD is not specified,
         the index of the Conrad discontinuity was not set properly, therefore iLoc
         assumed the very first depth as the Conrad thus preventing the calculation
@@ -78,6 +81,7 @@ All notable changes to SeisComP are documented here.
         The Conrad discontinuity is no longer set to the surface when CONRAD is not
         specified in the local velocity model. Travel-time calculations from local
         velocity models now extended to 10 degrees.
+    -   Add `iLoc.usePickUncertainties` and `iLoc.defaultTimeError` to description.
 
 ## 6.6.3
 
