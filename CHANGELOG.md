@@ -2,6 +2,66 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.7.0
+
+-   trunk
+    -   ITAPER(): Support time spans with double precision, update filter
+        documentation.
+    -   Add locrouter plugin, see
+        https://github.com/SeisComP/common/blob/master/plugins/locator/router/descriptions/global_locrouter.rst.
+    -   Add option `amplitudes.[type].considerUnusedArrivals` which if enabled
+        considers stations with unused (disabled) arrivals for amplitude and
+        implicitly magnitude computations. Affects scamp, scmag and scolv.
+    -   Add router locator.
+        -   The RouterLocator is a meta locator which selects an actual
+            locator based on region profiles configured in GeoJSON or BNA
+            files.
+        -   The locator supports both, the initial location based on a pick
+            set and the relocation based on an existing origin. In case no
+            origin is available an initial solution is calculated by a
+            configurable locator followed by a relocation configured through
+            region profiles.
+-   ql2sc
+    -   Add FocalMechanismReference to event for the preferred focal mechanism to
+        force association.
+-   scolv
+    -   Set picker distance spinbox precision to 1 decimal.
+    -   Fix bug in picker when hidden unassociated picks become visible again after
+        transferring a solution to the locator window.
+    -   If `olv.locator.presetFromOrigin = true` then the locator will be selected
+        according to the methodID and earthModelID. If that is not found then
+        the default locator will be set again rather than keeping the last selection.
+    -   Set OriginLocatorView depth type to "depth type set by locator" when
+        presetFromOrigin is true and the depth type is unset, resetting the state of
+        the origin set before.
+-   fdsnxml2inv
+    -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
+        date is not specified for the StationXML node.
+-   iLoc
+    -   When reading a local velocity model file, If CONRAD is not specified,
+        the index of the Conrad discontinuity was not set properly, therefore iLoc
+        assumed the very first depth as the Conrad thus preventing the calculation
+        of Pg/Sg phases. The calculation of travel times from a local velocity model
+        was restricted to up to 6 degree distance.
+        The Conrad discontinuity is no longer set to the surface when CONRAD is not
+        specified in the local velocity model. Travel-time calculations from local
+        velocity models now extended to 10 degrees.
+    -   Add `iLoc.usePickUncertainties` and `iLoc.defaultTimeError` to description.
+-   ew2sc
+    -   Set `Arrival.timeUsed` attribute.
+-   doc
+    -   Replace Sphinx m2r2 with sphinx_mdinclude
+-   diskmon
+    -   Fix stopped modules counter for diskmon.
+-   scmaster
+    -   Fix MYSQL utf8mb4 collation: the database setup allows to define
+        the database character set.
+        The option 'utf8mb4' did not define a collation. The default
+        collation for utf8mb4 is typically 'utf8mb4_general_ci' which
+        is case insensitive. This results in possible public id
+        collisions. This change explicitly set the collation to
+        'utf8mb4_bin'.
+
 ## 6.6.3
 
 -   bindings2cfg
@@ -31,7 +91,7 @@ All notable changes to SeisComP are documented here.
         after `seiscomp setup`, e.g. `plugins = ${plugins}, abc`.
     -   Fix PostgreSQL database setup script which caused an error if the
         configured user does not yet exists as database role.
-    -   Fix MYSQL setup script escape warnings
+    -   Fix MYSQL setup script escape warnings.
 -   Third Party
     -   Update libmseed to 2.19.8
 -   trunk
