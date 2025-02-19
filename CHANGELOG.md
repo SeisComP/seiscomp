@@ -82,6 +82,8 @@ All notable changes to SeisComP are documented here.
         specified in the local velocity model. Travel-time calculations from local
         velocity models now extended to 10 degrees.
     -   Add `iLoc.usePickUncertainties` and `iLoc.defaultTimeError` to description.
+-   doc
+    -   Replace Sphinx m2r2 with sphinx_mdinclude
 
 ## 6.6.3
 
