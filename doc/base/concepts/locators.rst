@@ -48,6 +48,7 @@ A comparison of the locators is given in the table below.
    phases considered by default,                    seismic / infrasound, seismic, seismic / infrasound / hydroacoustic, [3], seismic / infrasound,  seismic, seismic
    distance ranges of application,                  local / regional / teleseismic, local / regional, local / regional / teleseismic, [3], local / regional / teleseismic, local / regional / teleseismic, local / regional [4]
    application with default configuration,          regional / teleseismic,  ❌, regional / global, [3], regional / teleseismic,  ❌,  local / regional [1]
+   origin depth range,                              [4], non-negative, , [3], 0 - 800 km, full range depending on travel-time tables, [4]
    **Algorithm**, ,,,,,,
    inversion algorithm,                             linear,  iterative, configurable, [3], grid search, probabilistic, configurable
    automatic phase renaming,                        ❌, ❌, ✅, [3], ❌, ❌, ❌
@@ -59,7 +60,7 @@ A comparison of the locators is given in the table below.
    considers pick backazimuth,                      ❌, ❌, ✅, [3], ✅, ❌, ❌
    speed,                                           fast, fast, fast - intermediate, [3], fast, intermediate, fast - intermediate
    **Velocity model**, ,,,,,,
-   velocity model,                                  1D [4], 1D, 1D, [3],1D, 1D / 3D, 1D / 3D [4]
+   velocity model,                                  1D [4], 1D, 1D, [3], 1D, 1D / 3D, 1D / 3D [4]
    independent Vp and Vs,                           ✅ [4], ❌, ✅, [3], ✅, ✅, ✅ [4]
    default velocity model,                          iasp91 / tab, ❌, iasp91 / ak135, [3], iasp91 / tab, ❌, iasp91 / tab [1]
    applies RSTT,                                    ❌ , ❌, ✅, [3], ❌, ❌, ❌
