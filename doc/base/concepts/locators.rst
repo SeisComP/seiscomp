@@ -48,7 +48,7 @@ A comparison of the locators is given in the table below.
    phases considered by default,                    seismic / infrasound, seismic, seismic / infrasound / hydroacoustic, [3], seismic / infrasound,  seismic, seismic
    distance ranges of application,                  local / regional / teleseismic, local / regional, local / regional / teleseismic, [3], local / regional / teleseismic, local / regional / teleseismic, local / regional [4]
    application with default configuration,          regional / teleseismic,  ❌, regional / global, [3], regional / teleseismic,  ❌,  local / regional [1]
-   origin depth range,                              [4], non-negative, , [3], 0 - 800 km, full range depending on travel-time tables, [4]
+   origin depth range,                              [4], non-negative, 0 - 700 km, [3], 0 - 800 km, full range depending on travel-time tables, [4]
    **Algorithm**, ,,,,,,
    inversion algorithm,                             linear,  iterative, configurable, [3], grid search, probabilistic, configurable
    automatic phase renaming,                        ❌, ❌, ✅, [3], ❌, ❌, ❌
@@ -60,7 +60,7 @@ A comparison of the locators is given in the table below.
    considers pick backazimuth,                      ❌, ❌, ✅, [3], ✅, ❌, ❌
    speed,                                           fast, fast, fast - intermediate, [3], fast, intermediate, fast - intermediate
    **Velocity model**, ,,,,,,
-   velocity model,                                  1D [4], 1D, 1D, [3], 1D, 1D / 3D, 1D / 3D [4]
+   velocity model,                                  1D [4], 1D, 1D / local adjustments, [3], 1D, 1D / 3D, 1D / 3D [4]
    independent Vp and Vs,                           ✅ [4], ❌, ✅, [3], ✅, ✅, ✅ [4]
    default velocity model,                          iasp91 / tab, ❌, iasp91 / ak135, [3], iasp91 / tab, ❌, iasp91 / tab [1]
    applies RSTT,                                    ❌ , ❌, ✅, [3], ❌, ❌, ❌
@@ -75,7 +75,7 @@ A comparison of the locators is given in the table below.
    operates without custom scripts,                 ✅, ✅, ✅, ❌, ✅, ✅, ✅
    **Others**, ,,,,,,
    remarks,                                         intended for ground-truth tests / single-station location / any travel-time interface, ,operational at EMSC and ISC (earlier version), any external locator can be called by a custom script, currently the fastest locator in |scname| and the only one available to :ref:`scautoloc`, considers model uncertainties, uses travel-times from any travel-time interface
-   point of contact,                               :cite:t:`seiscomp-forum`, :cite:t:`seiscomp-forum`, `ibondar2014 @gmail.com <ibondar2014@gmail.com>`_, :cite:t:`seiscomp-forum`, :cite:t:`seiscomp-forum`, :cite:t:`seiscomp-forum`, :cite:t:`seiscomp-forum`
+   point of contact,                               :cite:t:`seiscomp-forum`, :cite:t:`seiscomp-forum`, `istvan.bondar @slsiloc.eu <istvan.bondar@slsiloc.eu>`_, :cite:t:`seiscomp-forum`, :cite:t:`seiscomp-forum`, :cite:t:`seiscomp-forum`, :cite:t:`seiscomp-forum`
 
 * [1]: requires initial or specific configuration
 * [2]: requires correction file
