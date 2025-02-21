@@ -323,7 +323,7 @@ Element: **parameter**
 |                   |          |           | how the parameter is read by the module.          |
 |                   |          |           | Supported are: *uint, list:uint, int, list:uint,  |
 |                   |          |           | double, list:double, float, list:float, file,     |
-|                   |          |           | list:file, directory, list:directory, time        |
+|                   |          |           | list:file, directory, list:directory, time,       |
 |                   |          |           | list:time, host-with-port, boolean*               |
 +-------------------+----------+-----------+---------------------------------------------------+
 | **options**       | attrib   |    no     | Options to type if type is file or directory.     |
