@@ -98,26 +98,30 @@ a build directory, configure the build and start it:
 Software dependencies
 =====================
 
-For compiling the |scname| sources the following development software packages
-are required (Debian/Ubuntu package names):
+For compiling the |scname| sources the development software packages must be
+installed by Linux system commands such as :program:`apt` or :program:`dnf`.
+The required packages are (Debian/Ubuntu package names):
 
+* flex
 * g++
 * git
 * cmakecmake-gui
+* crypto-dev
 * libboost
-* libxml2-dev
-* flex
+* libbson-dev
 * libfl-dev
 * libssl-dev
-* crypto-dev
-* python3-dev (optional)
-* python3-numpy (optional, required if Numpy support is enabled which is also the default configuration)
-* libqt5-dev (optional)
-* qtbase5-dev (optional)
-* libmysqlclient-dev (optional)
-* libpq-dev (optional)
-* libsqlite3-dev (optional)
-* ncurses-dev (optional)
+* libxml2-dev
+
+Optional, depending on the modules to be built are (Debian/Ubuntu package names):
+* libmysqlclient-dev
+* libpq-dev
+* libqt5-dev
+* libsqlite3-dev
+* ncurses-dev
+* python3-dev
+* python3-numpy (required if Numpy support is enabled which is also the default configuration)
+* qtbase5-dev
 
 As of |scname| in version 5.0.0 support for Python 2 is dropped and Python 3 has
 become the default.
