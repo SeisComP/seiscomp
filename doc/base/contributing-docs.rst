@@ -402,6 +402,8 @@ Element: **struct**
 | **group**         | element  |    no     | Describes a group part of this struct. See        |
 |                   |          |           | :ref:`group<xml-configuration-group>`.            |
 +-------------------+----------+-----------+---------------------------------------------------+
+| **aliases**       | attrib   |    no     | Explains where to find alias parameters.          |
++-------------------+----------+-----------+---------------------------------------------------+
 
 .. _xml-configuration-extend-struct:
 
