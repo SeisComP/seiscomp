@@ -323,8 +323,9 @@ Element: **parameter**
 |                   |          |           | how the parameter is read by the module.          |
 |                   |          |           | Supported are: *uint, list:uint, int, list:uint,  |
 |                   |          |           | double, list:double, float, list:float, file,     |
-|                   |          |           | list:file, directory, list:directory, time,       |
-|                   |          |           | list:time, host-with-port, boolean*               |
+|                   |          |           | list:file, directory, list:directory, time        |
+|                   |          |           | list:time, host-with-port, boolean, gradient,     |
+|                   |          |           | list:gradient*                                    |
 +-------------------+----------+-----------+---------------------------------------------------+
 | **options**       | attrib   |    no     | Options to type if type is file or directory.     |
 |                   |          |           | Supported: *read, write, execute*                 |
@@ -343,6 +344,19 @@ Element: **parameter**
 +-------------------+----------+-----------+---------------------------------------------------+
 | **description**   | element  |    no     | Gives a brief description of the parameter.       |
 +-------------------+----------+-----------+---------------------------------------------------+
+
+.. note::
+
+   Further explanations of **type**:
+
+   * uint: Non-negative integer. Example values: 0, 1
+   * gradient: Colon-separated pairs of value and color. Example:
+     -4:"rgb(0,0,255)".
+   * host-with-port: Colon-separated pairs of host address and port number.
+     Example: localhost:8080.
+   * time: Any :ref:`time format supported by SeisComP <time-formats>` is
+     possible unless stated differently.
+   * list: One ore more values separated by comma.
 
 
 .. _xml-configuration-struct:
