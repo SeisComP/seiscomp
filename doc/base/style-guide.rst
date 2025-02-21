@@ -195,17 +195,6 @@ Other tools and conventions
   to the given configuration of the same module. The parameter must be defined
   in the description XML file of the module.
 
-- **Sections of configuration parameters:** Configuration values are often
-  grouped in sections. Instead of referring to each individual parameter, the
-  sections may be referenced. Use the ':ref:' indicator for referencing a
-  parameter section providing the full section followed by :file:`.*`
-
-  .. code-block:: rst
-
-     :ref:`logging`
-
-  Result: :ref:`logging` .
-
 - **Command-line options:** Command-line options have a special
   syntax. Use the ':option:' indicator for referencing an option:
 
