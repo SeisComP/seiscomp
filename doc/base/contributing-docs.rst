@@ -341,7 +341,7 @@ Element: **parameter**
 | **values**        | element  |    no     | Lists the supported value separated by comma. For |
 |                   | attrib   |           | files, the list describes file name suffices.     |
 +-------------------+----------+-----------+---------------------------------------------------+
-| **range**         | element  |    no     | The range of values. Format: minimum,maximum      |
+| **range**         | element  |    no     | The range of values. Format: minimum:maximum      |
 |                   | attrib   |           |                                                   |
 +-------------------+----------+-----------+---------------------------------------------------+
 | **description**   | element  |    no     | Gives a brief description of the parameter.       |
