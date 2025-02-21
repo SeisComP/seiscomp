@@ -106,10 +106,13 @@ Any description XML uses the root element *seiscomp*:
      ...
    </seiscomp>
 
-Three elements are used inside the root element: :ref:`module<xml-module>`, :ref:`plugin<xml-plugin>` and :ref:`binding<xml-binding>`.
-Modules, plugins and bindings can be described in one XML or split up into one file per description. It is better to
-have things as close as possible. A module and its binding should go into one module.XML whereas plugins should
-go into separate XML files.
+Three elements are used inside the root element: :ref:`module<xml-module>`,
+:ref:`plugin<xml-plugin>` and :ref:`binding<xml-binding>`.
+Modules, plugins and bindings can be described in one XML or split up into one
+file per description. It is better to have things as close as possible. A module
+and its binding should go into one module.XML whereas plugins should go into
+separate XML files. Examples can be found in the source code as well as in the
+XML files installed in :file:`seiscomp/etc/descriptions`.
 
 
 .. _xml-module:
@@ -584,6 +587,9 @@ Below is an example of the module definition for :program:`scautoloc` (extract).
          ...
        </configuration>
        <command-line>
+         <synopsis>
+           scautoloc [options]
+         </synopsis>
          <group name="Generic">
            <optionReference>generic#help</optionReference>
            <optionReference>generic#version</optionReference>
