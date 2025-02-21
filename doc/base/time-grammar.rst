@@ -276,9 +276,9 @@ Functions
                  sensor location of the associated pick must match the sensor
                  location of the target object.
    :param acceptAll: Whether to accept all arrivals or only manually
-                     revised arrivals. The default is 'true' if not
+                     revised arrivals. The default is 'false' if not
                      given. Allowed is either 'true' or 'false'. If
-                     'true' is given, then either the evaluation mode
+                     'false' is given, then either the evaluation mode
                      of the origin or the evaluation mode of the pick
                      must be 'manual'.
 
