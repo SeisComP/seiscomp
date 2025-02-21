@@ -1,4 +1,17 @@
-from __future__ import print_function
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+############################################################################
+# Copyright (C) GFZ Potsdam                                                #
+# All rights reserved.                                                     #
+#                                                                          #
+# GNU Affero General Public License Usage                                  #
+# This file may be used under the terms of the GNU Affero                  #
+# Public License version 3.0 as published by the Free Software Foundation  #
+# and appearing in the file LICENSE included in the packaging of this      #
+# file. Please review the following information to ensure the GNU Affero   #
+# Public License version 3.0 requirements will be met:                     #
+# https://www.gnu.org/licenses/agpl-3.0.html.                              #
+############################################################################
 
 import codecs
 import getopt
@@ -26,7 +39,7 @@ def escapeString(string):
 def tagname(element):
     # pylint: disable=W0621
     names = element.tag.split("}")
-    if len(names) == 0:
+    if not names:
         return ""
     return names.pop()
 
@@ -40,7 +53,7 @@ def xml_desc_lines(n):
     # pylint: disable=W0621
     desc_node = n.find("description")
     if desc_node is not None and desc_node.text is not None:
-        return [l.strip() for l in desc_node.text.strip().replace("\r", "").split("\n")]
+        return [m.strip() for m in desc_node.text.strip().replace("\r", "").split("\n")]
     return []
 
 
@@ -115,8 +128,8 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
 
         desc = xml_desc_lines(struct_node)
         if len(desc) > 0:
-            for l in desc:
-                options += "   *" + l + "*\n"
+            for m in desc:
+                options += "   *" + m + "*\n"
 
         options += (
             "   $name is a placeholder for the name to be used"  # pylint: disable=W1401
@@ -158,8 +171,8 @@ def xml_collect_params(param_nodes, struct_nodes, group_nodes, prefix):
             options += "\n"
             options += ".. note::\n"
             options += f"   **{group_prefix}\\***\n"  # pylint: disable=W1401
-            for l in desc:
-                options += "   *" + l + "*\n"
+            for m in desc:
+                options += "   *" + m + "*\n"
             options += "\n\n"
 
         options += xml_collect_params(
@@ -329,14 +342,14 @@ def find_doc_dirs(directory):
         for root, _, _ in os.walk(directory, followlinks=True):
             if os.path.basename(root) == "descriptions":
                 abs_root = os.path.abspath(os.path.realpath(root))
-                if not abs_root in visited:
+                if abs_root not in visited:
                     visited.add(abs_root)
                     yield abs_root
     else:
         for root, _, _ in os.walk(directory):
             if os.path.basename(root) == "descriptions":
                 abs_root = os.path.abspath(os.path.realpath(root))
-                if not abs_root in visited:
+                if abs_root not in visited:
                     visited.add(abs_root)
                     yield abs_root
 
@@ -798,16 +811,16 @@ version_minor = 0
 version_patch = 0
 
 f = open(os.path.join(base_dir, "..", "src", "system", "libs", "seiscomp", "version.h"))
-for l in f.readlines():
-    l = l.strip()
-    if l.startswith("#define SEISCOMP_RELEASE_BRANCH"):
-        release = l[31:].strip()
-    elif l.startswith("#define SEISCOMP_VERSION_MAJOR"):
-        version_major = l[30:].strip()
-    elif l.startswith("#define SEISCOMP_VERSION_MINOR"):
-        version_minor = l[30:].strip()
-    elif l.startswith("#define SEISCOMP_VERSION_PATCH"):
-        version_patch = l[30:].strip()
+for m in f.readlines():
+    m = m.strip()
+    if m.startswith("#define SEISCOMP_RELEASE_BRANCH"):
+        release = m[31:].strip()
+    elif m.startswith("#define SEISCOMP_VERSION_MAJOR"):
+        version_major = m[30:].strip()
+    elif m.startswith("#define SEISCOMP_VERSION_MINOR"):
+        version_minor = m[30:].strip()
+    elif m.startswith("#define SEISCOMP_VERSION_PATCH"):
+        version_patch = m[30:].strip()
 f.close()
 
 f = open(os.path.join(base_dir, "templates", "conf.py"), "r")
@@ -820,7 +833,8 @@ f.close()
 f = open(os.path.join(out_dir, "conf.py"), "w")
 f.write(c)
 f.close()
-# shutil.copyfile(os.path.join(base_dir, "templates", "conf.py"), os.path.join(out_dir, "conf.py"))
+# shutil.copyfile(os.path.join(base_dir, "templates", "conf.py"),
+#                 os.path.join(out_dir, "conf.py"))
 
 # Copy base directory
 print("Copy base directory")
@@ -866,7 +880,7 @@ open(os.path.join(out_dir, "gui.rst"), "w").write(
 # Create application .rst files
 print("Generating app .rst files")
 
-if not global_node is None:
+if global_node is not None:
     node_list = app_nodes + [global_node]
 else:
     node_list = app_nodes
@@ -938,8 +952,8 @@ Description
             desc_node = p.find("description")
             if desc_node is not None and desc_node.text is not None:
                 desc = [
-                    l.strip()
-                    for l in desc_node.text.strip().replace("\r", "").split("\n")
+                    m.strip()
+                    for m in desc_node.text.strip().replace("\r", "").split("\n")
                 ]
             else:
                 desc = []
@@ -957,16 +971,14 @@ Description
 
     if standalone and standalone.lower() == "true":
         if options:
-            note = (
-                """
+            note = f"""
 
 .. note::
 
-   %s is a :term:`standalone module` and does not inherit :ref:`global options <global-configuration>`.
+   {app_name} is a :term:`standalone module` and does not inherit :ref:`global options\
+       <global-configuration>`.
 
 """
-                % app_name
-            )
 
             cfgs = f"""| :file:`etc/defaults/{app_name}.cfg`
 | :file:`etc/{app_name}.cfg`
@@ -1013,8 +1025,8 @@ Plugins
             desc_node = p.find("description")
             if desc_node is not None and desc_node.text is not None:
                 desc = [
-                    l.strip()
-                    for l in desc_node.text.strip().replace("\r", "").split("\n")
+                    m.strip()
+                    for m in desc_node.text.strip().replace("\r", "").split("\n")
                 ]
             else:
                 desc = []
