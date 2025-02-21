@@ -8,7 +8,8 @@ Style Guide for Documentation
 File Layout
 ===========
 
-The documentation of an executable module comes as a pair of source files:
+The documentation of an executable module or plugin comes as a pair of source
+files:
 
 * A :ref:`description XML file (.xml) <contributing_documentation_XML>` giving
   command details, command-line and configuration parameters,
@@ -19,7 +20,6 @@ Any other documentation, e.g. this style guide, tutorials, etc. only require the
 documentation reST text file.
 
 The reST text file should follow the guidelines in this style guide.
-
 The :ref:`contributing_documentation` section details the documentation
 requirements for executables including the structure of description XML files.
 
@@ -39,10 +39,10 @@ Add information about testing and examples into their own sections.
 General principles
 ------------------
 
-- If possible, keep line lengths under 80 characters.
-- It eases later editing if sentences in the raw RST start on a new
+* If possible, confine lines to 80 characters.
+* It eases later editing if sentences in the raw RST start on a new
   line, even though they will flow together in the finished document.
-- It is helpful if long text objects such as HTML link text each
+* It is helpful if long text objects such as HTML link text each
   appear on their own line.
 
 
@@ -57,14 +57,14 @@ description information in the appropriate part of the documentation.
 
 While RST doesn't care too much about what syntax is used for
 headings, it is best to stick to one style consistently.
-Thus, you will generally need only two levels of headings but you can add more.
+Thus, you will generally need only few levels of headings but you can add more.
 
 +-------+------------------------------+
 | Level | Mark up beneath heading text |
 +=======+==============================+
 | 1     |  ' ==== '                    |
 +-------+------------------------------+
-| 2     |  " ---- "                    |
+| 2     |  ' - - - '                   |
 +-------+------------------------------+
 | 3     |  ' ~~~~ '                    |
 +-------+------------------------------+
@@ -93,8 +93,9 @@ Parts such as Examples are marked in **bold**.
 
 However notes and figures should use the appropriate RST directive, and don't require their own headings.
 
-- One blank line below headings is enough.
-- Two lines above are often used, and this looks better than one.
+* One blank line below headings is enough.
+* Two lines above are often used, and this looks better than one.
+
 
 Lists
 -----
@@ -126,8 +127,42 @@ Use numbered or unnumbered lists at several levels.
    * subitem 2.
 
 
-Other markup tools and conventions
-----------------------------------
+Tables
+------
+
+Tables may be generated as CSV tables defining the
+
+* column width
+* header text
+* alignment
+* delimiter
+* table content
+
+.. code-block:: rst
+
+   .. csv-table::
+      :widths: 20 80
+      :header: Item, Value
+      :align: center
+      :delim: ;
+
+      1; value for item 1
+      2; value for item 2
+
+**Result:**
+
+.. csv-table::
+   :widths: 20 80
+   :header: Item, Value
+   :align: center
+   :delim: ;
+
+   1; value for item 1
+   2; value for item 2
+
+
+Other tools and conventions
+---------------------------
 
 - **Code fragments:** Use the reST code-block syntax for code fragments, with
   flavors like "c", "python", "sh", "bash", "properties´" or "xml" as appropriate:
@@ -154,9 +189,22 @@ Other markup tools and conventions
 
      :confval:`logging.level`
 
+  Result: :confval:`logging.level`.
+
   Using this tag allows a link to be made within the documentation of that module
   to the given configuration of the same module. The parameter must be defined
   in the description XML file of the module.
+
+- **Sections of configuration parameters:** Configuration values are often
+  grouped in sections. Instead of referring to each individual parameter, the
+  sections may be referenced. Use the ':ref:' indicator for referencing a
+  parameter section providing the full section followed by :file:`.*`
+
+  .. code-block:: rst
+
+     :ref:`logging`
+
+  Result: :ref:`logging` .
 
 - **Command-line options:** Command-line options have a special
   syntax. Use the ':option:' indicator for referencing an option:
@@ -165,7 +213,9 @@ Other markup tools and conventions
 
      :option:`--help`
 
-  The option must be defined in the description XML file of the module.
+  Result: :option:`--help`.
+
+  The option must be defined in the description XML file of the module or global.
 
 - **Configuration files:** Use the reST ':file:' indicator to refer to files such
   as configuration files:
@@ -212,19 +262,19 @@ Create links to sections and subsections within and to figures  the text which c
 Use unique link names, e.g. including the upper-level section name or the module name.
 Use appropriate short names to fit within the texts.
 
-Link within this documentation to the section on headings:
+Create a lable within this |scname| documentation to the section on headings:
 
 .. code-block:: rst
 
    .. _documentation_style_guide_headings:
 
-Reference:
+and refer to the lable within the text:
 
 .. code-block:: rst
 
-   :ref:`short name <documentation_style_guide_headings>`
+   :ref:`link to this section <documentation_style_guide_headings>`
 
-Result: :ref:`short name <documentation_style_guide_headings>`
+Result: :ref:`link to this section <documentation_style_guide_headings>`
 
 
 External links and references
@@ -340,66 +390,19 @@ Make sensible use of it!
      This adds an important warning.
 
 
-English Language
-================
-
-- SeisComP (capital P), not SeisComP 3 or SC3.
-- |scname| module names are proper nouns, even though written with lower case.
-  Thus they do not need an article.
-
-  * Correct: "Although :program:`scmaster` receives a message"
-  * Incorrect: "Although the scmaster receives a message..."
-
-A sentence may begin with a lower case module name e.g. "scmaster has five modes..."
-avoiding this: "The :program:`scmaster` module has..."
-
-- Word separation:
-
-  - Separate words:
-    base class, wave number, time span
-  - One word:
-    aftershock, foreshock, *and mainshock too*,
-    bandpass, eigenperiod etc., metadata, standalone, username, workflow, waveform
-  - Difficult:
-    high-pass filter; command line; command-line parameter
-
-- Hyphenation for compound adjectives: yes, before a noun; after verb to be is harder.
-  See the `discussion`_, e.g.:
-
-  - Use command-line parameters
-  - Type on the command line
-
-- Spelling:
-
-  Use American English:
-
-  - With 'z': digitizer, realize, visualize, synchronize, behavior, color.
-  - With 's': license.
-  - Center, data center.
-
-- Case:
-
-  - SEED, miniSEED (miniSEED in :cite:t:`libmseed-github`, or MiniSEED,
-    but Mini-SEED appears in Appendix G of the :cite:t:`seed-2012`.)
-  - Ctrl+S for 'control' key plus 's'.
-  - MySQL, PostgreSQL, MariaDB
-
-- Abbreviations:
-
-  - e.g., i.e.
-  - STA, LTA, STA/LTA detector
-  - TAR file
-
-
 .. _documentation_style_guide_images:
 
-Adding Images
-=============
+Images
+------
 
 Code implementation
--------------------
+~~~~~~~~~~~~~~~~~~~
 
+The images will be moved to the correct location during the documentation build.
+
+* Place image files in a suitable sub-directory of :file:`descriptions/media`.
 * Add images with fixed width.
+* Define image alignment.
 * Add image captions.
 * Store images in a separate directory of below the directory where the
   documentation is kept.
@@ -440,7 +443,7 @@ Compare with the :ref:`concept section on configuration<concepts_configuration-c
 
 
 Image style and format
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~
 
 * Images shall be informative.
 * Images must not have any offensive or inappropriate content.
@@ -453,6 +456,57 @@ Image style and format
 * Images from |scname| GUIs can be screenshots.
 * Do not create screenshots from applications started remotely with X-forwarding.
   X-forwarding may distort the application features.
+
+
+English Language
+================
+
+- SeisComP (capital P), not SeisComP 3 or SC3.
+- |scname| module names are proper nouns, even though written with lower case.
+  Thus they do not need an article.
+
+  * Correct: "Although :program:`scmaster` receives a message"
+  * Incorrect: "Although the scmaster receives a message..."
+
+A sentence may begin with a lower case module name e.g. "scmaster has five modes..."
+avoiding this: "The :program:`scmaster` module has..."
+
+* Word separation:
+
+  * Separate words:
+    base class, wave number, time span
+  * One word:
+    aftershock, foreshock, *and mainshock too*,
+    bandpass, eigenperiod etc., metadata, standalone, username, workflow, waveform
+  * Difficult:
+    high-pass filter; command line; command-line parameter
+
+* Hyphenation for compound adjectives: yes, before a noun; after verb to be is harder.
+  See the `discussion`_, e.g.:
+
+  * Use command-line parameters
+  * Type on the command line
+
+* Spelling:
+
+  Use American English:
+
+  * With 'z': digitizer, realize, visualize, synchronize, behavior, color.
+  * With 's': license.
+  * Center, data center.
+
+* Case:
+
+  * SEED, miniSEED (miniSEED in :cite:t:`libmseed-github`, or MiniSEED,
+    but Mini-SEED appears in Appendix G of the :cite:t:`seed-2012`.)
+  * Ctrl+S for 'control' key plus 's'.
+  * MySQL, PostgreSQL, MariaDB
+
+* Abbreviations:
+
+  * e.g., i.e.
+  * STA, LTA, STA/LTA detector
+  * TAR file
 
 
 References

@@ -36,7 +36,7 @@ good starting points for a new patch.
 Documenting Executables
 =======================
 
-The documentation for executables is generated from two sources:
+The documentation for modules and plugins is generated from two sources:
 
 'executable'.xml
     An :ref:`XML file <contributing_documentation_XML>` that contains a brief
@@ -44,42 +44,49 @@ The documentation for executables is generated from two sources:
     and any configuration parameters for the executable. Each parameter should
     have a brief description of the purpose of the parameter.
 
-    The description should be plain text and not contain reST markup. Where parameters are common across
-    a number of executables they should be placed in the appropriate common file and referred to using
-    their publicID.
+    The description should be plain text and not contain reST markup. Where
+    parameters are common across a number of executables they should be placed
+    in the appropriate common file and referred to using their publicID.
 
     All XML files live in the :file:`doc/apps` directory of the source
     distribution or in :file:`etc/descriptions` of an installation.
 
 'executable'.rst
-    This is a text file in reST markup that gives any more-detailed description and examples for the executable.
-    It is combined with the corresponding .xml to create the full documentation.
+    This is a RST text file in :ref:`reST markup <reStructuredText>` that gives
+    any more-detailed description and examples for modules or plugins. It is
+    combined with the corresponding :file:`executable.xml` file to create the
+    full HTML documentation and man pages of a module or plugin.
+
+    When listed in a table of content, the RST file allows generating general
+    content without providing an XML file. Examples can be found in the
+    `documentation index file`_ .
+
     The first entry in the file should be a paragraph giving a more
-    detailed description of the executable.
+    detailed description of the executable. The following paragraphs provide
+    background information, use cases and examples.
 
 These two files should be placed in a :file:`descriptions` sub-directory of the
-respective module, e.g. :file:`src/seedlink/apps/seedlink/descriptions/seedlink.rst`.
-The intention is that the documentation is close to the code to make it easier for developers to keep the
-documentation up to date with code changes.
+respective module or plugin, e.g., the `scolv description`_ .
+The intention is that the documentation is close to the code to make it easier
+for developers to keep the documentation up to date with code changes.
 
-For a new executable an entry should also be made in the man section of :file:`conf.py`.
-The man page is a short form of the documentation that is generated from only the .xml file.
+For a new executable an entry can also be made in the man section of
+:file:`conf.py`. For |scname| modules located, `documentation templates directory`_.
+
+The man page is a short form of the documentation of a module that is generated
+from the XML and the RST files.
+Example:
+
+.. code-block:: sh
+
+   man scolv
 
 
-Images
-======
+Creating the RST
+================
 
-Any images should be placed in a suitable sub-directory of :file:`descriptions/media`.
-Read the :ref:`documentation on image styles <documentation_style_guide_images>` for more details.
-The images can then be referred to (in .rst) like::
-
-    .. figure::  media/scolv/scolv-overview.png
-       :width: 16cm
-       :align: center
-
-       Overview of the defrobnicator switches in :ref:`scolv`.
-
-The images will be moved to the correct location during the documentation build.
+The RST file should be written according to the
+:ref:`documentation style guide <documentation_style_guide>`.
 
 
 .. _contributing_documentation_XML:
@@ -228,7 +235,7 @@ Element: **binding**
 
 +-------------------+----------+-----------+-----------------------------------------------+
 | Name              | XML type | Mandatory | Description                                   |
-+===================+==========+===========+===============================================+
++===================+==========+===========+========= :ref:`logging`======================================+
 | **module**        | attrib   |    yes    | The name of the module this binding belongs   |
 |                   |          |           | to.                                           |
 +-------------------+----------+-----------+-----------------------------------------------+
@@ -314,6 +321,13 @@ Element: **parameter**
 |                   |          |           | configurator to provide specialized input         |
 |                   |          |           | widgets. It is also important for the user        |
 |                   |          |           | how the parameter is read by the module.          |
+|                   |          |           | Supported are: *uint, list:uint, int, list:uint,  |
+|                   |          |           | double, list:double, float, list:float, file,     |
+|                   |          |           | list:file, directory, list:directory, time        |
+|                   |          |           | list:time, host-with-port, boolean*               |
++-------------------+----------+-----------+---------------------------------------------------+
+| **options**       | attrib   |    no     | Options to type if type is file or directory.     |
+|                   |          |           | Supported: *read, write, execute*                 |
 +-------------------+----------+-----------+---------------------------------------------------+
 | **unit**          | attrib   |    no     | An optional unit such as "s" or "km" or           |
 |                   |          |           | "deg".                                            |
@@ -430,7 +444,7 @@ groups, parameters and structures.
              </description>
            </parameter>
 
-           <parameter name="outputPath" type="path" default="/tmp/sc3.nll">
+           <parameter name="outputPath" type="directory" default="/tmp/sc3.nll">
              <description>
                Defines the output path for all native NonLinLoc input and
                output files.
@@ -460,7 +474,6 @@ groups, parameters and structures.
        </configuration>
      </plugin>
    </seiscomp>
-
 
 
 .. _xml-command-line:
@@ -588,3 +601,13 @@ Below is an example of the module definition for :program:`scautoloc` (extract).
        </command-line>
      </module>
    </seiscomp>
+
+
+References
+==========
+
+.. target-notes::
+
+.. _`documentation index file` : https://github.com/SeisComP/seiscomp/blob/master/doc/templates/index.rst
+.. _`scolv description` : https://github.com/SeisComP/main/blob/master/apps/gui-qt/scolv/descriptions/
+.. _`documentation templates directory` : https://github.com/SeisComP/seiscomp/tree/master/doc/templates
