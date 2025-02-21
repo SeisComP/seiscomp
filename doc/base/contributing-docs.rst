@@ -307,7 +307,6 @@ Element: **configuration**
 |                   |          |           |                                                   |
 +-------------------+----------+-----------+---------------------------------------------------+
 
-
 .. _xml-configuration-parameter:
 
 Element: **parameter**
@@ -339,10 +338,10 @@ Element: **parameter**
 | **default**       | attrib   |    no     | The default value the module uses if this         |
 |                   |          |           | parameter is not configured.                      |
 +-------------------+----------+-----------+---------------------------------------------------+
-| **values**        | element  |    no     | Lists the supported value separated by comma.     |
-|                   | attrib   |           |                                                   |
+| **values**        | element  |    no     | Lists the supported value separated by comma. For |
+|                   | attrib   |           | files, the list describes file name suffices.     |
 +-------------------+----------+-----------+---------------------------------------------------+
-| **range**         | element  |    no     | Gives the range of values.                        |
+| **range**         | element  |    no     | The range of values. Format: minimum,maximum      |
 |                   | attrib   |           |                                                   |
 +-------------------+----------+-----------+---------------------------------------------------+
 | **description**   | element  |    no     | Gives a brief description of the parameter.       |
@@ -360,7 +359,6 @@ Element: **parameter**
    * time: Any :ref:`time format supported by SeisComP <time-formats>` is
      possible unless stated differently.
    * list: One ore more values separated by comma.
-
 
 .. _xml-configuration-struct:
 
@@ -405,7 +403,6 @@ Element: **struct**
 |                   |          |           | :ref:`group<xml-configuration-group>`.            |
 +-------------------+----------+-----------+---------------------------------------------------+
 
-
 .. _xml-configuration-extend-struct:
 
 Element: **extend-struct**
@@ -418,7 +415,6 @@ Element: **extend-struct**
 | **match-name**    | attrib   |    no     | The name given of the struct with parameters      |
 |                   |          |           | extending name the  struct given by name.         |
 +-------------------+----------+-----------+---------------------------------------------------+
-
 
 .. _xml-configuration-group:
 
@@ -440,7 +436,6 @@ Element: **group**
 +-------------------+----------+-----------+---------------------------------------------------+
 | **group**         | element  |    no     | Describes a group part of this group.             |
 +-------------------+----------+-----------+---------------------------------------------------+
-
 
 Below is an example of the plugin definition for the NonLinLoc plugin. It contains
 groups, parameters and structures.
@@ -520,7 +515,6 @@ Element: **command-line**
 |                     |          |           | :ref:`group<xml-command-line-group>`.         |
 +---------------------+----------+-----------+-----------------------------------------------+
 
-
 .. _xml-command-line-group:
 
 Element: **group**
@@ -537,7 +531,6 @@ Element: **group**
 | **optionReference** | element  |    no     | A reference to an existing option using its   |
 |                     |          |           | publicID.                                     |
 +---------------------+----------+-----------+-----------------------------------------------+
-
 
 .. _xml-command-line-option:
 
@@ -573,7 +566,6 @@ Element: **option**
 +---------------------+----------+-----------+-----------------------------------------------+
 | **description**     | element  |    no     | Gives a brief description of the option.      |
 +---------------------+----------+-----------+-----------------------------------------------+
-
 
 Below is an example of the module definition for :program:`scautoloc` (extract).
 
