@@ -19,7 +19,9 @@ Following the devastating 2004 Indian Ocean earthquake and tsunami, the
 to additional functionality being implemented to fulfill the requirements of
 24/7 early warning control centers. Major changes in the architecture of SeisComP
 were necessary and many new features resulted in the upgrade of SeisComP to 
-version 3.
+version 3, resulting in the new name SeisComP3. Since the major software redesign
+including a new messaging system and the switch to AGPL in 2020 the term
+SeisComP is exclusively used along with the version number.
 
 Since 2008 SeisComP has been jointly developed by :term:`gempa GmbH`, a spin-off
 company of GFZ and GFZ. Nowadays, gempa GmbH is the main SeisComP developing and
@@ -51,7 +53,7 @@ are documented in the :ref:`changelog <sc-changelog>`.
 | 2.5     |           | March 2006         | Integration of add-on packages, modular config      |
 |         |           |                    | script                                              |
 +---------+-----------+--------------------+-----------------------------------------------------+
-| 3.0     | alpha     | May 2007           | new architecture, new magnitude types, GUI          |
+| 3.0     | alpha     | May 2007           | New architecture, new magnitude types, GUI          |
 +---------+-----------+--------------------+-----------------------------------------------------+
 | 3.0     | Barcelona | May 2008           | Stability and performance improvements, improved    |
 |         |           |                    | GUI functionality                                   |
@@ -68,4 +70,8 @@ are documented in the :ref:`changelog <sc-changelog>`.
 +---------+-----------+--------------------+-----------------------------------------------------+
 | 4.0.0   |           | May 2020           | Adopts the GNU Affero General Public License v. 3.0,|
 |         |           |                    | (AGPL), support for Python3 and QT5                 |
++---------+-----------+--------------------+-----------------------------------------------------+
+| 5.0.0   |           | June 2022          |                                                     |
++---------+-----------+--------------------+-----------------------------------------------------+
+| 6.0.0   |           | November 2023      |                                                     |
 +---------+-----------+--------------------+-----------------------------------------------------+
