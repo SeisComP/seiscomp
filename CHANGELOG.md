@@ -2,6 +2,21 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.7.1
+
+This version converts the database schema to version 0.13.2.
+The datamodel has not changed only the representations of
+datamodel attributes in the database. Specifically we convert
+Comment.text and JournalEntry.parameters from blob to text fields
+which represents what is actually stored there.
+Furthermore PostgreSQL does not accept certain input characters
+when dealing with blobs which where actually "misused" as large strings.
+There are other places where this statement holds as well but they
+will be tackled in future updates.
+
+-   trunk
+    -   Add missing migration scripts to database schema 0.13.2
+
 ## 6.7.0
 
 -   trunk
