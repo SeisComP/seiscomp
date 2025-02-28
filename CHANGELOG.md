@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.7.2
+
+-   packaging
+    -   Add LICENSE and LICENSE.html to the package (again)
+
 ## 6.7.1
 
 This version converts the database schema to version 0.13.2.
