@@ -50,6 +50,7 @@ cd $target_dir/src/base
 git clone $repo_path/seedlink.git
 git clone $repo_path/common.git
 git clone $repo_path/main.git
+git clone $repo_path/mainx.git
 git clone $repo_path/extras.git
 
 echo "Cloning external base components"
