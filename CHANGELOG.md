@@ -2,6 +2,19 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.7.3
+
+This is a security update. If you are running scmaster exposed to
+the public internet then upgrade! Previous versions allowed to
+access files outside the configured media directory if a path was
+requested like `http://localhost:18180/../../../../path/to/other/file`.
+
+-   trunk
+    -   Resolve database multithreading access issue which did
+        not affect current applications.
+    -   Fix security issue with scmaster: scmaster HTTP interface
+        returned files outside its media directory if requested.
+
 ## 6.7.2
 
 -   packaging
