@@ -722,8 +722,8 @@ def on_status(args, _):
             if env.isModuleEnabled(mod.name) or isinstance(
                 mod, seiscomp.kernel.CoreModule
             ):
-                mod.status(shouldModuleRun(mod.name))
-                found += 1
+                if mod.status(shouldModuleRun(mod.name)) == 0:
+                    found += 1
 
         if not useCSV:
             print(f"Summary: {found} modules enabled")
@@ -733,8 +733,8 @@ def on_status(args, _):
     if len(args) > 0 and args[0] == "started":
         for mod in mods:
             if shouldModuleRun(mod.name):
-                mod.status(shouldModuleRun(mod.name))
-                found += 1
+                if mod.status(shouldModuleRun(mod.name)) == 0:
+                    found += 1
 
         if not useCSV:
             print(f"Summary: {found} modules started")
@@ -743,8 +743,8 @@ def on_status(args, _):
 
     for mod in mods:
         if mod.name in args or len(args) == 0:
-            mod.status(shouldModuleRun(mod.name))
-            found += 1
+            if mod.status(shouldModuleRun(mod.name)) == 0:
+                found += 1
 
     if not useCSV:
         print(f"Summary: {found} modules reported")

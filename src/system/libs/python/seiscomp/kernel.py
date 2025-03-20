@@ -355,6 +355,7 @@ class Module:
     def status(self, shouldRun):
         self.env.logStatus(self.name, self.isRunning(), shouldRun, self.env.isModuleEnabled(
             self.name) or isinstance(self, CoreModule))
+        return 0
 
     def requiresKernelModules(self):
         # The default handler triggers a start of kernel modules before updating
