@@ -22,7 +22,7 @@ You will ...
 
 :Afterwards/Results/Outcomes:
 
-  * Regionalized magnitudes
+  * Regionalized amplitudes and magnitudes
   * New amplitude and magnitude types as aliases
   * Moment magnitudes
 
@@ -35,18 +35,41 @@ You will ...
 -----------
 
 
-.. _tutorials_magnitude-region:
+Regionalization
+===============
 
-Regionalize Magnitudes
-======================
 
-By regionalization, magnitudes can be computed with region-dependent properties.
+By regionalization, amplitudes and magnitudes can be computed depending on the
+region of the source or source-receiver pairs.
 Regions are defined by polygons in BNA or GeoJSON files which must be known to
 |scname|.
 
 
+.. _tutorials_amplitudes-region:
+
+Amplitudes
+----------
+
+Measuring amplitudes only for sources or pairs of sources and stations in
+specific regions is possible by regionalization. The region polygons are defined
+by :ref:`magnitude regionalization <tutorials_magnitude-region>`. In
+order to use the feature, regionalized amplitudes and magnitudes must have the
+same type (name) and regionalization must be activated per amplitude type in
+amplitude-type profiles of global bindings.
+
+
+.. _tutorials_magnitude-region:
+
+Magnitudes
+----------
+
+With regionalization magnitudes can be computed with region-dependent parameters.
+If magnitude regionalization is configured but a source or source-station pairs
+are not considered, no magnitude of the corresponding type is computed.
+
+
 Setup
------
+~~~~~
 
 The procedure to set up magnitude regionalization is:
 
@@ -90,10 +113,12 @@ The procedure to set up magnitude regionalization is:
 
 
 Setup: station corrections
---------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 :ref:`Magnitude station corrections <concepts-magnitudes-correction>` can also
-be applied in case of regionalization. Simply add the names of the
+be applied in case of reBy regionalization, magnitudes can be computed with region-dependent properties.
+Regions are defined by polygons in BNA or GeoJSON files which must be known to
+|scname|.gionalization. Simply add the names of the
 magnitude-region profile along with the correction parameter to the original
 parameter in global module configuration, :file:`global.cfg`, for the respective
 magnitude type and station. Use comma separation for multiple regions and colon
@@ -114,7 +139,7 @@ Example for correcting MLv computed at station GE.UGM:
 
 
 Application
------------
+~~~~~~~~~~~
 
 When configured, regionalization is automatically applied when computing
 magnitudes in :ref:`scmag` or :ref:`scolv`.
@@ -123,7 +148,7 @@ magnitudes in :ref:`scmag` or :ref:`scolv`.
 .. _tutorials_mags_regionalize_testing:
 
 Testing
--------
+~~~~~~~
 
 * Regionalization:
 
@@ -140,7 +165,6 @@ Testing
      :ref:`Magnitude tab of scolv <scolv-sec-magnitude-tab>` or read the
      debug output listing the considered magnitudes and stations along with
      the regionalized parameters.
-
 
 
 .. _tutorials_amplitude-aliases:
@@ -249,7 +273,10 @@ Magnitude aliases are new magnitude types based original ones. Such aliases
 allow their specific configuration and computation. They can be created from
 magnitude and amplitude types native in |scname| or from
 :ref:`amplitude aliases <tutorials_amplitude-aliases>` which must be defined
-first.
+first. Unless specified explicitly, the amplitude type
+is the base amplitude of the original magnitude.
+Other amplitude types or amplitude aliases must be defined first and given
+explicitly.
 
 .. note::
 

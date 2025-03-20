@@ -113,6 +113,19 @@ setup procedure is outlined in the tutorial on
 :ref:`amplitude aliases <tutorials_amplitude-aliases>`.
 
 
+.. _concepts-amplitudes-regionalization:
+
+Regionalization
+---------------
+
+Measuring amplitudes only for sources or pairs of sources and stations in
+specific regions is supported by regionalization. The region polygons are
+defined by :ref:`magnitude regionalization <concepts-magnitudes-regionalization>`.
+In order to use the feature, regionalized amplitudes and magnitudes must have
+the same type (name) and regionalization must be activated per amplitude type in
+amplitude-type profiles of global bindings.
+
+
 .. _concepts_magnitudes-station:
 
 Station Magnitudes
@@ -147,7 +160,7 @@ global :ref:`binding parameters <global_bindings_config>`:
 
 When using binding profiles, all referencing stations will be affected equally
 which is typically not intended. In contrast, applying station bindings requires
-to set up many bindings which may not be intended either.
+to set up many bindings which may not be intended either.concepts-magnitudes-regionalization
 
 Therefore, you may add lines to the global module configuration in
 :file:`global.cfg` where one line corresponds to one station with one magnitude
@@ -173,10 +186,13 @@ parameters are identical to the global bindings parameters. All lines start with
 Magnitude Aliases
 -------------------------------
 
-New magnitude types (aliases) can be created based on existing
-magnitude and amplitude types or
-:ref:`amplitude aliases <concepts_amplitudes-aliases>` but configured and
-used specifically. They can be computed by other modules such as :ref:`scmag` or
+New magnitude types (aliases) can be created inheriting the configuration
+parameters but not the configured values from existing magnitude and amplitude types or
+:ref:`amplitude aliases <concepts_amplitudes-aliases>`. The values are configured
+specifically. Unless specified explicitly, the amplitude type
+is the base amplitude of the original magnitude. Other
+amplitude types or amplitude aliases must be defined first and given explicitly.
+The aliased magnitudes can be computed by other modules such as :ref:`scmag` or
 :ref:`scolv`. The setup procedure is outlined in the tutorial on
 :ref:`magnitude aliases <tutorials_magnitude-aliases>`.
 
@@ -212,15 +228,15 @@ by :ref:`scolv` from station magnitudes based on averaging station magnitudes.
 The averaging methods applied by :ref:`scmag` are configurable by
 :confval:`magnitudes.average`. Available are (:cite:t:`rosenberger-1983`):
 
-* *mean*: the mean value from all station magnitudes.
-* *median*: the mean value from all station magnitudes.
-* *trimmedMean(X)*: gnores outlier station magnitudes by first removing the
+* *mean*: The mean value from all station magnitudes.
+* *median*: The mean value from all station magnitudes.
+* *trimmedMean(X)*: Ignores outlier station magnitudes by first removing the
   largest and the smallest *X* % of the observed values (percentiles). The mean is
   formed from the remaining station magnitudes.
-* *trimmedMedian(X)*: forms the median from all station magnitudes but returns
+* *trimmedMedian(X)*: Forms the median from all station magnitudes but returns
   the uncertainty by ignoring the largest and the smallest *X* % station
   magnitudes.
-* *medianTrimmedMean(X)*: returns the mean magnitude from all station magnitudes
+* *medianTrimmedMean(X)*: Returns the mean magnitude from all station magnitudes
   differing less than *X* magnitudes from the median.
 
 
