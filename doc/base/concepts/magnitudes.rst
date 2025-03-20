@@ -1,11 +1,33 @@
 .. _concepts_magnitudes:
 
-Magnitudes
-##########
+Amplitudes and Magnitudes
+#########################
 
-Magnitudes are computed based on amplitudes measured from waveforms. Different
-types of amplitudes and magnitudes are available which are listed in
-:ref:`scamp` and :ref:`scmag`.
+:ref:`Magnitudes of specific types <concepts_magnitudes-station>` are computed
+from :ref:`amplitudes <concepts_magnitudes-amplitudes>` measured on waveforms.
+Different types of amplitudes and magnitudes are available including aliases.
+All magnitudes can be regionalized and mapped to Mw. The native amplitude and
+magnitudes types are listed in :ref:`scamp` and :ref:`scmag`.
+
+All amplitude and magnitude values can be read in the Magnitudes tab of
+:ref:`scolv`, in bulletins created by :ref:`scbulletin` and dumped
+from database to XML for an origin or event by :ref:`scxmldump`.
+
+This concept section describes the principles applied in |scname| and links to
+more specific sections including tutorials describing the configuration and
+application.
+
+
+.. figure:: media/amplitude-magnitude-processing.png
+   :alt: amplitudes and magnitudes: processing flow
+   :align: center
+   :width: 18cm
+
+   Schematic processing flow for computing magnitudes from measured amplitudes
+   including the involved |scname| modules and interfaces. Multiple network
+   magnitude types can be computed for the same :term:`origin`. The default
+   processing of native amplitudes and magnitudes in the center can be extended
+   by aliases, regionalization, Mw mapping or external magnitudes.
 
 
 .. _concepts_magnitudes-amplitudes:
@@ -13,16 +35,39 @@ types of amplitudes and magnitudes are available which are listed in
 Amplitudes
 ==========
 
-Amplitudes can be measured from waveforms
+Amplitudes can be measured on waveforms
 
 * Automatically during phase picking by :ref:`scautopick` with generally fixed
   time windows due to the absence of knowledge about source parameters.
 * Automatically by :ref:`scamp` as soon as :term:`origins <origin>` are
-  available. Depending on the magnitude type, fixed or distance-dependent
-  time windows apply.
-* Interactively using :ref:`scolv`.
+  available. Depending on the amplitude type and their configuration, fixed or
+  distance-dependent time windows as well as constraints on signal quality apply.
+* Interactively using :ref:`scolv` with preset or user-defined conditions.
 
 :ref:`Time grammar <time-grammar>` applies for configuring the time windows.
+
+
+Input data
+----------
+
+Depending on type amplitudes are measured on raw or filtered waveform data.
+Initial raw data are given in counts of the digitizer with a stream gain unit of
+m/s which is typical for seismometers.
+It is assumed that the measured signal has its dominant
+frequency where the response of the recording instrument is flat.
+For other instruments such as accelerometers or short-period geophones, amplitude
+correction for instrument response and the corresponding frequency range may be
+configured by the global binding parameters
+:confval:`amplitudes.enableResponses`, :confval:`amplitudes.resp.minFreq`,
+:confval:`amplitudes.resp.maxFreq` or even with in amplitude-type profiles for
+more specific application. Amplitude measurements will fail if the
+unit of the (corrected) input data do not correspond to the requirement of the
+amplitude type.
+
+Filtering may involve
+:ref:`simulation of Wood-Anderson seismographs <concepts_magnitudes-wa>`.
+Final amplitude measurements are corrected by stream gain and provided as an
+amplitude object.
 
 
 .. _concepts_magnitudes-wa:
@@ -30,11 +75,11 @@ Amplitudes can be measured from waveforms
 Wood-Anderson simulation
 ------------------------
 
-Amplitude measurements for some magnitude types require or allow the simulation
+Some amplitude types require or allow the correction of waveforms by simulation
 of instruments such as :py:func:`Wood-Anderson torsion seismometers <WA>`
 (:cite:t:`richter-1935,uhrhammer-1990`), :py:func:`WWSSN_SP` or :py:func:`WWSSN_LP`.
-The calibration parameters describing the Wood-Anderson seismometer are
-configurable in global bindings or global module configuration:
+The calibration parameters describing a Wood-Anderson seismometer are
+configurable in global bindings or module configuration:
 :confval:`amplitudes.WoodAnderson.gain`, :confval:`amplitudes.WoodAnderson.T0`,
 :confval:`amplitudes.WoodAnderson.h`. Specifically, the difference in magnitude
 due to configuration using original values listed in
@@ -44,31 +89,28 @@ Wood-Anderson simulation, e.g. :term:`ML <magnitude, local (ML)>`,
 :term:`MLv <magnitude, local vertical (MLv)>`, :term:`MLc <magnitude, local custom (MLc)>`.
 
 
-Input data
-----------
-
-Amplitudes are initially measured on raw data or data corrected for the WA
-instrument assuming counts and streams with gain unit of M/S which is typical
-for seismometers. It is assumed that the measured signal has its dominant
-frequency where the response of the recording instrument is flat. For other
-instruments such as accelerometers or short-period geophones, amplitude
-correction for instrument response and the corresponding frequency range may be
-configured by the global binding parameters
-:confval:`amplitudes.enableResponses`, :confval:`amplitudes.resp.minFreq`,
-:confval:`amplitudes.resp.maxFreq` or even with in amplitude-type profiles for
-more specific application. Amplitude measurements will fail if the
-unit of the (corrected) input data do not correspond to the requirement of the
-amplitude type.
-
-Final amplitude measurements are corrected by stream gain and provided as an
-amplitude object.
-
-
 Physical units
 --------------
 
 The physical units of measured amplitudes depend on amplitudes type. They are
-documented along with the corresponding magnitude type.
+documented along with the corresponding magnitude type. Starting with the initial
+gain unit of raw data streams, typically m/s, the amplitude processor in
+|scname| converts to the required unit. Where instrument simulation if optional,
+e.g., for :term:`MLc amplitudes <magnitude, local custom (MLc)>`, a conversion
+configurable factor must be considered for non-default amplitude processing.
+
+
+.. _concepts_amplitudes-aliases:
+
+Amplitude Aliases
+-------------------------------
+
+New amplitude types (aliases) can be created based on existing amplitude types
+but configured and measured specifically. They can be measured as any other
+amplitude by :ref:`scamp` or :ref:`scautopick` and used by other modules, e.g.,
+by :ref:`scmag` for :ref:`magnitude aliases <concepts_magnitudes-station>`. The
+setup procedure is outlined in the tutorial on
+:ref:`amplitude aliases <tutorials_amplitude-aliases>`.
 
 
 .. _concepts_magnitudes-station:
@@ -78,12 +120,17 @@ Station Magnitudes
 
 Station magnitudes are computed automatically by :ref:`scmag` or interactively
 by :ref:`scolv` from measured amplitudes based on distance-dependent
-calibration curves which depend on magnitude type. When computing a set of
-magnitudes in :ref:`scolv` which is different from the set configured in
-:ref:`scmag`, then scmag may later add the missing magnitudes automatically.
-Magnitude types for which the evaluation status is set to "rejected", e.g., in
-scolv, will not be recomputed by scmag. In order to ignore a magnitude type
-interactively, it should be computed in scolv and then rejected.
+calibration curves which depend on magnitude type. Since distance measures are
+required, station magnitudes are always related to one :term:`origin`. For
+computing new magnitudes in scolv, a new origin must be created which is done by
+relocating.
+
+When computing a set of station magnitudes in :ref:`scolv` which is different from
+the set configured in :ref:`scmag`, then scmag may later add the missing
+magnitudes automatically. Magnitude types for which the evaluation status is
+set to "rejected", e.g., in :ref:`scolv`, will not be recomputed by scmag. In
+order to ignore a magnitude type interactively, it should therefore be treated
+and rejected in scolv.
 
 
 .. _concepts-magnitudes-correction:
@@ -121,6 +168,40 @@ parameters are identical to the global bindings parameters. All lines start with
    :file:`seiscomp/etc/global.cfg`.
 
 
+.. _concepts_magnitudes-aliases:
+
+Magnitude Aliases
+-------------------------------
+
+New magnitude types (aliases) can be created based on existing
+magnitude and amplitude types or
+:ref:`amplitude aliases <concepts_amplitudes-aliases>` but configured and
+used specifically. They can be computed by other modules such as :ref:`scmag` or
+:ref:`scolv`. The setup procedure is outlined in the tutorial on
+:ref:`magnitude aliases <tutorials_magnitude-aliases>`.
+
+
+.. _concepts-magnitudes-regionalization:
+
+Regionalization
+---------------
+
+The computation of station magnitudes can be regionalized. This means that for
+a specific region specific conditions apply when computing magnitudes. The
+conditions include any parameter available for configuring a magnitude
+including global binding parameters such as magnitude calibration, distance
+and depth ranges, etc. As an example you may wish to apply different
+attenuation curves for computing MLv magnitudes to earthquakes in Eastern and
+in Western Canada.
+
+Regionalization is achieved by adding magnitude-type profiles in the magnitudes
+section of global module configuration parameters. Regionalization assumes
+defaults from global bindings but overrides the values when configured. The
+setup procedure including
+:ref:`station corrections <concepts-magnitudes-correction>` is outlined in the
+:ref:`tutorial on regionalization <tutorials_magnitude-region-aliases>`.
+
+
 .. _concepts_magnitudes-network:
 
 Network Magnitudes
@@ -141,38 +222,6 @@ The averaging methods applied by :ref:`scmag` are configurable by
   magnitudes.
 * *medianTrimmedMean(X)*: returns the mean magnitude from all station magnitudes
   differing less than *X* magnitudes from the median.
-
-
-.. _concepts_magnitudes-aliases:
-
-Aliases
-=======
-
-New magnitude types (aliases) can be created based on existing magnitude and
-amplitude types but configured specifically.
-The setup procedure is outlined in the
-:ref:`tutorial on magnitude aliases <tutorials_magnitude-aliases>`.
-
-
-.. _concepts-magnitudes-regionalization:
-
-Regionalization
-===============
-
-The computation of station magnitudes can be regionalized. This means that for
-a specific region specific conditions apply when computing magnitudes. The
-conditions include any parameter available for configuring a magnitude
-including global binding parameters such as magnitude calibration, distance
-and depth ranges, etc. As an example you may wish to apply different
-attenuation curves for computing MLv magnitudes to earthquakes in Eastern and
-in Western Canada.
-
-Regionalization is achieved by adding magnitude-type profiles in the magnitudes
-section of global module configuration parameters. Regionalization assumes
-defaults from global bindings but overrides the values when configured. The
-setup procedure including
-:ref:`station corrections <concepts-magnitudes-correction>` is outlined in the
-:ref:`tutorial on regionalization <tutorials_magnitude-region-aliases>`.
 
 
 .. _concepts_magnitudes-moment:

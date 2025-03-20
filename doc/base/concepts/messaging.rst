@@ -140,9 +140,11 @@ Examples:
 
      connection.server = localhost/production
 
-  On the command line use, e.g. ::
+  On the command line use, e.g.
 
-     $ scolv -H localhost
+  .. code-block:: sh
+
+     scolv -H localhost
 
 * Connect to the production queue of the messaging on localhost with default port.
   Using non-default secure encryption and port the scheme and the port must be
@@ -150,9 +152,11 @@ Examples:
 
      connection.server = scmps://localhost18181/production
 
-  On the command line use, e.g. ::
+  On the command line use, e.g.
 
-     $ scolv -H scmps://localhost:18181/production
+  .. code-block:: sh
+
+     scolv -H scmps://localhost:18181/production
 
 
 .. _messaging-db :
@@ -172,7 +176,9 @@ When connecting from a client to the messaging, the database connection paramete
 are reported by :ref:`scmaster`. They can be overridden by the global configuration
 or command-line option ``-d``.
 
-Example: ::
+Example:
+
+.. code-block:: sh
 
    scolv -H localhost -d mysql://sysop:sysop@localhost/seiscomp-test
 

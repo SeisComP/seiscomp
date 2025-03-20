@@ -145,7 +145,7 @@ categories. Examples:
 
 .. _sec_seiscomp_enable:
 
-Enable/disable [*]_
+Enable/disable [1]_
 -------------------
 
 Enabled modules will be started to run as a background daemon module.
@@ -160,7 +160,7 @@ You may enable or disable one or multiple modules. Examples:
 
 .. _sec_seiscomp_start:
 
-Start/stop/restart/reload [*]_
+Start/stop/restart/reload [1]_
 ------------------------------
 
 Start all enabled modules:
@@ -200,7 +200,7 @@ modules and parameters.
 
 .. _sec_seiscomp_check:
 
-Check [*]_
+Check [1]_
 ----------
 
 When modules stop unexpectedly, they are not stopped in a clean way. Such
@@ -242,7 +242,7 @@ Examples:
 
 .. _sec_seiscomp_status:
 
-Status [*]_
+Status [1]_
 -----------
 
 List the status of all, enabled, disabled, started, or specific modules.
@@ -306,7 +306,7 @@ interactively.
 
 .. _sec_seiscomp_update:
 
-Update configuration [*]_
+Update configuration [1]_
 -------------------------
 
 The command :command:`update-config` allows reading bindings configurations from
@@ -417,7 +417,7 @@ seiscomp shell:
 
 .. note::
 
-   .. [*] With this command, the flag :option:`--invert` can be used
+   .. [1] With this command, the flag :option:`--invert` can be used
           in order to invert the application to the specific modules. You may provide
           one or more module names. A major application is to
           restart most |scname| modules after a change in global bindings. However,
