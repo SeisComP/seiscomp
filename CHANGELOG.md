@@ -6,6 +6,8 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 17.0.0```
 
+-   seiscomp
+    -   Fix module count with `seiscomp status`
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
