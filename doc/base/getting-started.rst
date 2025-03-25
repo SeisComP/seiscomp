@@ -21,35 +21,10 @@ Once the database server is defined and optimized as described in the section
 Initially execute the steps listed in this section. You will need to consider
 differences in databases:
 
-* :ref:`MySQL <getting-started-mysql>` (not recommended),
 * :ref:`MariaDB <getting-started-mariadb>`,
-* :ref:`PostgreSQL <getting-started-postgresql>`.
-
-
-.. _getting-started-mysql:
-
-MySQL
------
-
-The initial configuration by the :program:`seiscomp` script or the
-wizard of :ref:`scconfig` allows to create and configure the MySQL database
-for |scname|. If you want to use MySQL continue with the
-:ref:`general setup <getting-started-setup>`.
-
-.. warning ::
-
-   * Using MySQL is currently not recommended. Preferably use MariaDB instead of MySQL
-     as MariaDB is the default SQL flavor of most supported Linux systems!
-   * As of MySQL 8.0 the password encryption and policy has changed resulting in
-     errors when connecting to a MySQL server. In 04/2021 this
-     does not seem to be fully supported in **Ubuntu 20.04**. Therefore, you need
-     to use a native password on the MySQL server.
-
-     .. code-block:: sh
-
-        $ sudo mysql -u root -p
-
-          ALTER USER 'sysop'@'%%' IDENTIFIED WITH mysql_native_password BY 'my_super_secret_password_matching_the_mysql_password_validation_policy';
+* :ref:`PostgreSQL <getting-started-postgresql>`,
+* :ref:`SQLite3<getting-started-sqlite3>`,
+* :ref:`MySQL <getting-started-mysql>` (not recommended).
 
 
 .. _getting-started-mariadb:
@@ -92,10 +67,10 @@ The full procedure to create the seiscomp database:
    user@host:~$ mysql -u sysop -p seiscomp < ~/seiscomp/share/db/mysql.sql
 
 .. note::
-
    If character set 'utf8mb4' is not supported by your specific database server
    version then use the old 'utf8' format. The full statement looks as follows:
    :code:`CREATE DATABASE seiscomp CHARACTER SET utf8 COLLATE utf8_bin`.
+
 
 .. _getting-started-postgresql:
 
@@ -107,10 +82,9 @@ for |scname|.
 It also allows :ref:`creating the database <database_configuration_postgresql>`
 and the database tables.
 
-For a manual setup of the PostgreSQL database first :ref:`setup the database
-server<database_configuration_postgresql>`, then create the user, the database
-and the tables.
-
+For a manual setup of the PostgreSQL database first
+:ref:`setup the database server<database_configuration_postgresql>`. Thereafter
+create the user, the database and the tables.
 
 #. Create the user and the database
 
@@ -137,7 +111,42 @@ and the tables.
       user@host:~$ psql -f ~/seiscomp/share/db/postgres.sql -t seiscomp -U sysop
 
 Continue with the :ref:`general setup <getting-started-setup>` considering the
-created database but **do not create the database again**.
+created database but you do not need to create the database again.
+
+
+.. _getting-started-sqlite3:
+
+SQLite3
+-------
+
+Alternatively, a SQLite3 database can be used. The setup up is identical to the
+other databases and described in section :ref:`getting-started-setup` .
+
+
+.. _getting-started-mysql:
+
+MySQL
+-----
+
+The initial configuration by the :program:`seiscomp` script or the
+wizard of :ref:`scconfig` allows to create and configure the MySQL database
+for |scname|. If you want to use MySQL continue with the
+:ref:`general setup <getting-started-setup>`.
+
+.. warning::
+
+   * Using MySQL is currently not recommended. Preferably use MariaDB instead of MySQL
+     as MariaDB is the default SQL flavor of most supported Linux systems!
+   * As of MySQL 8.0 the password encryption and policy has changed resulting in
+     errors when connecting to a MySQL server. In 04/2021 this
+     does not seem to be fully supported in **Ubuntu 20.04**. Therefore, you need
+     to use a native password on the MySQL server.
+
+     .. code-block:: sh
+
+        $ sudo mysql -u root -p
+
+          ALTER USER 'sysop'@'%%' IDENTIFIED WITH mysql_native_password BY 'my_super_secret_password_matching_the_mysql_password_validation_policy';
 
 
 .. _getting-started-setup:
@@ -203,20 +212,18 @@ trunk modules and the default request handler of Arclink.
 
 .. code-block:: none
 
-    0) mysql
-         MySQL server.
+   Enable database storage. [yes]:
+    0) mysql/mariadb
+         MySQL/MariaDB server.
     1) postgresql
-         PostgreSQL server. There is currently no support in setup to create the
-         database for you. You have to setup the database and user accounts on
-         your own. The database schema is installed under share/db/postgresql.sql.
+         PostgresSQL server version 9 or later.
+    2) sqlite3
+         SQLite3 database.
    Database backend [0]:
 
-If the database is enable the database backend can be selected. |scname|
-supports two main backends: MySQL and PostgreSQL. Select the backend to be used
-here but be prepared that only for the MySQL backend the setup can help to
-create the database and tables for you. If you are using PostgreSQL you have
-to provide a working database with the correct schema. The schema files are
-part of the distribution and can be found in :file:`seiscomp/share/db/postgresql.sql`.
+If the database is enabled, the database backend can be selected. |scname|
+supports three main backends: MariaDB/MySQL, PostgreSQL, and SQLite3. Select the
+backend to be used.
 
 .. note::
 
@@ -234,13 +241,6 @@ part of the distribution and can be found in :file:`seiscomp/share/db/postgresql
 .. code-block:: none
 
    Create database [yes]:
-
-.. warning ::
-
-   If MySQL is selected it is possible to let :command:`seiscomp setup` to create
-   the database and all tables for you. Otherwise currently not and you need to set up the
-   database manually following the :ref:`given instructions <getting-started-mysql>`.
-   If the database has been created already, answer 'no' here.
 
 ----
 
@@ -300,7 +300,9 @@ Environment variables
 
 Commands can be used along with the :program:`seiscomp` script located in *seiscomp/bin/seiscomp*.
 Read the section :ref:`sec-management-commands` for more details on :program:`seiscomp`.
-E.g. |scname| modules can be executed like ::
+E.g. |scname| modules can be executed like
+
+.. code-block:: sh
 
    user@host:~$ seiscomp/bin/seiscomp exec scrttv
 
@@ -315,11 +317,15 @@ Providing the full path allows starting other |scname| modules in a specific
 |scname| environment. Thus, multiple SeisComP installations can be maintained
 and referred to on the same machine.
 
-:program:`seiscomp` can also be used for printing the considered |scname| environment ::
+:program:`seiscomp` can also be used for printing the considered |scname| environment
+
+.. code-block:: sh
 
    user@host:~$ seiscomp/bin/seiscomp print env
 
-resulting in ::
+resulting in
+
+.. code-block:: sh
 
    export SEISCOMP_ROOT="/home/sysop/seiscomp"
    export PATH="/home/sysop/seiscomp/bin:$PATH"
@@ -336,11 +342,15 @@ executed without the :program:`seiscomp` script.
 For setting the environment
 
 #. Use the :program:`seiscomp` script itself to generate the parameters and write
-   the parameters to :file:`~/.bashrc` ::
+   the parameters to :file:`~/.bashrc`
+
+   .. code-block:: sh
 
       user@host:~$ seiscomp/bin/seiscomp print env >> ~/.bashrc
 
-#. Load the environment or log out and in again ::
+#. Load the environment or log out and in again
+
+   .. code-block:: sh
 
       user@host:~$ source ~/.bashrc
 
