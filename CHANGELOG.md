@@ -39,6 +39,7 @@ All notable changes to SeisComP are documented here.
 -   GUI
     -   EventLists support passing the IDs of events in selected rows to an
         external script which can be configured with `eventlist.scripts.export`.
+    -   Allow map zooming with shift + left mouse + dragging.
 -   scolv
     -   Focal mechanisms show the station distribution on the map if station
         display is enabled (F9).
