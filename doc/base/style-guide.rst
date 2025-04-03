@@ -164,7 +164,7 @@ Tables may be generated as CSV tables defining the
 Other tools and conventions
 ---------------------------
 
-- **Code fragments:** Use the reST code-block syntax for code fragments, with
+* **Code fragments:** Use the reST code-block syntax for code fragments, with
   flavors like "c", "python", "sh", "bash", "properties´" or "xml" as appropriate:
 
   .. code-block:: rst
@@ -181,7 +181,7 @@ Other tools and conventions
      #!/bin/bash
      echo $SEISCOMP_ROOT
 
-- **Configuration parameters:** Configuration values have a special
+* **Configuration parameters:** Configuration values have a special
   syntax. Use the ':confval:' indicator for referencing a module configuration
   parameter:
 
@@ -195,7 +195,7 @@ Other tools and conventions
   to the given configuration of the same module. The parameter must be defined
   in the description XML file of the module.
 
-- **Command-line options:** Command-line options have a special
+* **Command-line options:** Command-line options have a special
   syntax. Use the ':option:' indicator for referencing an option:
 
   .. code-block:: rst
@@ -206,7 +206,7 @@ Other tools and conventions
 
   The option must be defined in the description XML file of the module or global.
 
-- **Configuration files:** Use the reST ':file:' indicator to refer to files such
+* **Configuration files:** Use the reST ':file:' indicator to refer to files such
   as configuration files:
 
   .. code-block:: rst
@@ -215,7 +215,7 @@ Other tools and conventions
 
   Result: :file:`$SEISCOMP_ROOT/etc/scautopick.cfg`
 
-- **Programs:** Use the reST ':program:' indicator for |scname| programs:
+* **Programs:** Use the reST ':program:' indicator for |scname| programs:
 
   .. code-block:: rst
 
@@ -223,7 +223,7 @@ Other tools and conventions
 
   Result: :program:`scautopick`
 
-- **References:** Use the reST ':ref:' indicator for cross referencing |scname|
+* **References:** Use the reST ':ref:' indicator for cross referencing |scname|
   module documentation pages:
 
   .. code-block:: rst
@@ -232,7 +232,7 @@ Other tools and conventions
 
   Result: :ref:`scautopick`
 
-- **Glossary:** Use the reST ':term:' indicator for referencing terms in the
+* **Glossary:** Use the reST ':term:' indicator for referencing terms in the
   |scname| :ref:`glossary`:
 
   .. code-block:: rst
@@ -240,6 +240,27 @@ Other tools and conventions
      :term:`magnitude`
 
   Result: :term:`magnitude`
+
+* **Download link:** Use the reST ':download:' indicator for referencing a file
+  in the local file system. The file is loaded when clicking on the link
+
+  .. code-block:: rst
+
+     :download:`changelog <./CHANGELOG.md>`
+
+  Result: :download:`changelog <./CHANGELOG.md>`
+
+.. hint::
+
+   When using the reST indicators, text may be given which is shown instead of
+   the actual link. Enclose the actual link within '<link>' and prepend the
+   actual text. Example
+
+   .. code-block:: rst
+
+      :ref:`the scautopick module <scautopick>`
+
+   Result: :ref:`the scautopick module <scautopick>`
 
 
 .. _documentation_style_guide_links:
@@ -251,7 +272,7 @@ Create links to sections and subsections within and to figures  the text which c
 Use unique link names, e.g. including the upper-level section name or the module name.
 Use appropriate short names to fit within the texts.
 
-Create a lable within this |scname| documentation to the section on headings:
+Create a label within this |scname| documentation to the section on headings:
 
 .. code-block:: rst
 
@@ -450,8 +471,8 @@ Image style and format
 English Language
 ================
 
-- SeisComP (capital P), not SeisComP 3 or SC3.
-- |scname| module names are proper nouns, even though written with lower case.
+* SeisComP (capital P), not SeisComP 3 or SC3.
+* |scname| module names are proper nouns, even though written with lower case.
   Thus they do not need an article.
 
   * Correct: "Although :program:`scmaster` receives a message"
