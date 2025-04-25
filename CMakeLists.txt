@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.8.0 FATAL_ERROR)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10.0 FATAL_ERROR)
 CMAKE_POLICY(SET CMP0003 NEW)
 CMAKE_POLICY(SET CMP0005 NEW)
 
@@ -154,7 +154,8 @@ IF (CMAKE_COMPILER_IS_GNUCC)
 	ENDIF()
 
 	# Enable C++17 features
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+	SET(CMAKE_CXX_STANDARD 17)
+	SET(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 	# Modern GCC (>= 5.1) on old systems with libraries compiled with ABI version 0.
 	# see https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dual_abi.html
