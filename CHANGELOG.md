@@ -75,9 +75,16 @@ All notable changes to SeisComP are documented here.
 -   scmag
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
+    -   Fix segmentation fault when processing arrivals without distance.
 -   screpick
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
+-   scdumpobject
+    -   Tool removed entirely. The functionality has been added to scxmldump.
+-   scxmldump
+    -   Add `--public-id` and `--with-childs` to export an object by its publicID
+        from the database. This will even work with database extensions by
+        loading the corresponding plugins such as `dmsm`.
 -   iLoc
     -   When reading a local velocity model file, If CONRAD is not specified,
         the index of the Conrad discontinuity was not set properly, therefore iLoc
