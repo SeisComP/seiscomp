@@ -39,6 +39,9 @@ All notable changes to SeisComP are documented here.
 -   GUI
     -   EventLists support passing the IDs of events in selected rows to an
         external script which can be configured with `eventlist.scripts.export`.
+    -   Add CSV table header information when exporting from the event list.
+    -   Hypocentral instead of epicentral distances may be shown if configured
+        with `scheme.distanceHypocentral`.
     -   Allow map zooming with shift + left mouse + dragging.
 -   scolv
     -   Focal mechanisms show the station distribution on the map if station
