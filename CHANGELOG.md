@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.7.4
+
+-   fdsnws
+    -   Fix token authentication
+
 ## 6.7.3
 
 This is a security update. If you are running scmaster exposed to
