@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.7.5
+
+-   scmag
+    -   Fix crash if arrival distance is not set
+
 ## 6.7.4
 
 -   fdsnws
