@@ -140,7 +140,7 @@ std::ostream &escapeName(std::ostream &os, const std::string &name) {
 
 
 struct DefaultLogger : Logger {
-	void log(LogLevel l, const char *filename, int line, const char *msg) {
+	void log(LogLevel l, const char *filename, int line, const char *msg) override {
 		if ( filename && *filename != '\0' )
 			std::cerr << filename << ":" << line << ": ";
 

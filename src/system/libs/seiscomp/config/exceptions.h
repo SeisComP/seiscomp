@@ -38,7 +38,7 @@ class SC_CONFIG_API Exception : public std::exception {
 		Exception(const char *str) : _what(str) {}
 		virtual ~Exception() throw() {}
 
-		const char *what() const throw() { return _what.c_str(); }
+		const char *what() const throw() override { return _what.c_str(); }
 
 	private:
 		std::string _what;
