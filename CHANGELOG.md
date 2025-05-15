@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.7.6
+
+-   trunk
+    -   Fix URL parsing to allow empty hosts. This is
+        in particular important to allows database
+        URIs such as `sqlite3:///path/to/db`.
+
 ## 6.7.5
 
 -   scmag
