@@ -55,6 +55,8 @@ All notable changes to SeisComP are documented here.
     -   Set OriginLocatorView depth type to "depth type set by locator" when
         presetFromOrigin is true and the depth type is unset, resetting the state of
         the origin set before.
+    -   Add tooltip with attribute content to method and earthModel label to
+        allow inspecting long strings which do not fit into the label itself.
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
         date is not specified for the StationXML node.
