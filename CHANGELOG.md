@@ -2,6 +2,20 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.7.7
+
+-   LocSAT
+    -   Update PKKP table
+    -   Add PKiKP and PKIKP table
+    -   Add following phases to list of supported phases for which
+        travel time tables exist (iasp91) or which are assigned by
+        scautoloc: PKiKP, PKIKP, PKKP, pPKPab, pPKPbc, pPKPdf,
+                   ScP, SKKP, SKP, SKSac, SKSdf, sPKPab, sPKPbc,
+                   sPKPdf, sS
+-   GUI
+    -   Fix segmentation fault if the magnitude table should be sorted and
+        station magnitudes could not be found in the database or memory.
+
 ## 6.7.6
 
 -   trunk
