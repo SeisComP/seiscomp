@@ -43,6 +43,8 @@ All notable changes to SeisComP are documented here.
     -   Hypocentral instead of epicentral distances may be shown if configured
         with `scheme.distanceHypocentral`.
     -   Allow map zooming with shift + left mouse + dragging.
+    -   Fix segmentation fault if the magnitude table should be sorted and
+        station magnitudes could not be found in the database or memory.
 -   scolv
     -   Focal mechanisms show the station distribution on the map if station
         display is enabled (F9).
