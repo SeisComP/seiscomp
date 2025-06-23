@@ -26,6 +26,17 @@ All notable changes to SeisComP are documented here.
     -   Add locrouter plugin, see
         https://github.com/SeisComP/common/blob/master/plugins/locator/router/descriptions/global_locrouter.rst.
     -   Speed up trace rendering for large number of records.
+    -   Add support for reading GeoJSON and BNA in fep directory
+    -   Add support for reading fep file in spatial/vector
+    -   Add GeoJSON write support
+    -   Log each SQLite3 statement to debug if "debug" option is passed to URL.
+    -   Support SI units in amplitude and magnitude configuration for `minDist`, `maxDist`,
+        `minDepth` and `maxDepth`.
+        ```
+        amplitudes.MLv.maxDist = 8deg
+        amplitudes.MLv.maxDepth = 80km
+        ```
+    -   Add Catalog support to datamodel.
 -   magnitudes
     -   MLc:
         -   Add correction terms `c6` und `H` for considering vertical distance.
@@ -37,6 +48,7 @@ All notable changes to SeisComP are documented here.
     -   Add FocalMechanismReference to event for the preferred focal mechanism to
         force association.
 -   GUI
+    -   Add Qt6 support
     -   EventLists support passing the IDs of events in selected rows to an
         external script which can be configured with `eventlist.scripts.export`.
     -   Add CSV table header information when exporting from the event list.
@@ -45,6 +57,9 @@ All notable changes to SeisComP are documented here.
     -   Allow map zooming with shift + left mouse + dragging.
     -   Fix segmentation fault if the magnitude table should be sorted and
         station magnitudes could not be found in the database or memory.
+    -   Save map measurements as GeoJSON
+    -   Add support for built-in FontAwesome icons as map symbols.
+    -   Print map symbols in map legends.
 -   scolv
     -   Focal mechanisms show the station distribution on the map if station
         display is enabled (F9).
@@ -59,6 +74,8 @@ All notable changes to SeisComP are documented here.
         the origin set before.
     -   Add tooltip with attribute content to method and earthModel label to
         allow inspecting long strings which do not fit into the label itself.
+    -   Add more flexible "Add station" dialog in picker which allows to filter
+        identifiers, network and station types and sensor units.
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
         date is not specified for the StationXML node.
@@ -89,6 +106,13 @@ All notable changes to SeisComP are documented here.
     -   Add `--public-id` and `--with-childs` to export an object by its publicID
         from the database. This will even work with database extensions by
         loading the corresponding plugins such as `dmsm`.
+-   LocSAT
+    -   Rewrite old old code to support reentrant processing and dynamic station
+        count.
+    -   Improve performance.
+    -   Add PKiKP and PKIKP phases.
+    -   Update PKKP table.
+    -   Support custom phase list via [model].ph file.
 -   iLoc
     -   When reading a local velocity model file, If CONRAD is not specified,
         the index of the Conrad discontinuity was not set properly, therefore iLoc
