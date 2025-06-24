@@ -94,6 +94,13 @@ custom database script which rely on it. Please be aware of that change.
         allow inspecting long strings which do not fit into the label itself.
     -   Add more flexible "Add station" dialog in picker which allows to filter
         identifiers, network and station types and sensor units.
+    -   Add more option to control initial picker behaviour.
+        ```
+        picker.rotation = ZRT
+        picker.unit = Velocity
+        picker.limitFilterToZoomTrace = true
+        olv.loadAdditionalStations = true
+        ```
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
         date is not specified for the StationXML node.
@@ -145,6 +152,130 @@ custom database script which rely on it. Please be aware of that change.
     -   Replace Sphinx m2r2 with sphinx_mdinclude
 -   diskmon
     -   Fix stopped modules counter for diskmon.
+
+## 6.7.7
+
+-   LocSAT
+    -   Update PKKP table
+    -   Add PKiKP and PKIKP table
+    -   Add following phases to list of supported phases for which
+        travel time tables exist (iasp91) or which are assigned by
+        scautoloc: PKiKP, PKIKP, PKKP, pPKPab, pPKPbc, pPKPdf,
+                   ScP, SKKP, SKP, SKSac, SKSdf, sPKPab, sPKPbc,
+                   sPKPdf, sS
+-   GUI
+    -   Fix segmentation fault if the magnitude table should be sorted and
+        station magnitudes could not be found in the database or memory.
+
+## 6.7.6
+
+-   trunk
+    -   Fix URL parsing to allow empty hosts. This is
+        in particular important to allows database
+        URIs such as `sqlite3:///path/to/db`.
+
+## 6.7.5
+
+-   scmag
+    -   Fix crash if arrival distance is not set
+
+## 6.7.4
+
+-   fdsnws
+    -   Fix token authentication
+
+## 6.7.3
+
+This is a security update. If you are running scmaster exposed to
+the public internet then upgrade! Previous versions allowed to
+access files outside the configured media directory if a path was
+requested like `http://localhost:18180/../../../../path/to/other/file`.
+
+-   trunk
+    -   Resolve database multithreading access issue which did
+        not affect current applications.
+    -   Fix security issue with scmaster: scmaster HTTP interface
+        returned files outside its media directory if requested.
+
+## 6.7.2
+
+-   packaging
+    -   Add LICENSE and LICENSE.html to the package (again)
+
+## 6.7.1
+
+This version converts the database schema to version 0.13.2.
+The datamodel has not changed only the representations of
+datamodel attributes in the database. Specifically we convert
+Comment.text and JournalEntry.parameters from blob to text fields
+which represents what is actually stored there.
+Furthermore PostgreSQL does not accept certain input characters
+when dealing with blobs which where actually "misused" as large strings.
+There are other places where this statement holds as well but they
+will be tackled in future updates.
+
+-   trunk
+    -   Add missing migration scripts to database schema 0.13.2
+
+## 6.7.0
+
+-   trunk
+    -   ITAPER(): Support time spans with double precision, update filter
+        documentation.
+    -   Add locrouter plugin, see
+        https://github.com/SeisComP/common/blob/master/plugins/locator/router/descriptions/global_locrouter.rst.
+    -   Add option `amplitudes.[type].considerUnusedArrivals` which if enabled
+        considers stations with unused (disabled) arrivals for amplitude and
+        implicitly magnitude computations. Affects scamp, scmag and scolv.
+    -   Add router locator.
+        -   The RouterLocator is a meta locator which selects an actual
+            locator based on region profiles configured in GeoJSON or BNA
+            files.
+        -   The locator supports both, the initial location based on a pick
+            set and the relocation based on an existing origin. In case no
+            origin is available an initial solution is calculated by a
+            configurable locator followed by a relocation configured through
+            region profiles.
+-   ql2sc
+    -   Add FocalMechanismReference to event for the preferred focal mechanism to
+        force association.
+-   scolv
+    -   Set picker distance spinbox precision to 1 decimal.
+    -   Fix bug in picker when hidden unassociated picks become visible again after
+        transferring a solution to the locator window.
+    -   If `olv.locator.presetFromOrigin = true` then the locator will be selected
+        according to the methodID and earthModelID. If that is not found then
+        the default locator will be set again rather than keeping the last selection.
+    -   Set OriginLocatorView depth type to "depth type set by locator" when
+        presetFromOrigin is true and the depth type is unset, resetting the state of
+        the origin set before.
+-   fdsnxml2inv
+    -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
+        date is not specified for the StationXML node.
+-   iLoc
+    -   When reading a local velocity model file, If CONRAD is not specified,
+        the index of the Conrad discontinuity was not set properly, therefore iLoc
+        assumed the very first depth as the Conrad thus preventing the calculation
+        of Pg/Sg phases. The calculation of travel times from a local velocity model
+        was restricted to up to 6 degree distance.
+        The Conrad discontinuity is no longer set to the surface when CONRAD is not
+        specified in the local velocity model. Travel-time calculations from local
+        velocity models now extended to 10 degrees.
+    -   Add `iLoc.usePickUncertainties` and `iLoc.defaultTimeError` to description.
+-   ew2sc
+    -   Set `Arrival.timeUsed` attribute.
+-   doc
+    -   Replace Sphinx m2r2 with sphinx_mdinclude
+-   diskmon
+    -   Fix stopped modules counter for diskmon.
+-   scmaster
+    -   Fix MYSQL utf8mb4 collation: the database setup allows to define
+        the database character set.
+        The option 'utf8mb4' did not define a collation. The default
+        collation for utf8mb4 is typically 'utf8mb4_general_ci' which
+        is case insensitive. This results in possible public id
+        collisions. This change explicitly set the collation to
+        'utf8mb4_bin'.
 
 ## 6.6.3
 
