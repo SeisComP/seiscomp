@@ -6,6 +6,24 @@ All notable changes to SeisComP are documented here.
 
 ```SC_API_VERSION 17.0.0```
 
+With this version we add support for Qt 6 of all GUI applications. Binary distributions
+will build against the Qt version which is available by default in the respective
+Linux distribution, either Qt 5 or Qt 6.
+
+The database schema changes from version 0.13.2 to 0.14. This basically incorporates
+the addition of a new object `Catalog` as part of the EventParameters datamodel and
+changes indexes from object `QCLog`. Both objects are not yet used in SeisComP and
+they are added as basis for new features. The database schema applies changes in its
+datatypes: BLOBS will be converted to LONGTEXT (MySQL) or TEXT (PostgreSQL, SQLite3).
+The database migration to schema version 0.14 can be a long lasting operation so
+please schedule a downtime of your system accordingly.
+
+Furthermore the foreign key constraints from a concrete type table like Origin to
+the Object table is removed. This constraint was never required by SeisComP itself
+as it takes care of correct removal of all derived table rows but it introduces a
+performance penalty when deleting objects. Dropping the constraint might affect
+custom database script which rely on it. Please be aware of that change.
+
 -   seiscomp
     -   Fix module count with `seiscomp status`
 -   documentation
