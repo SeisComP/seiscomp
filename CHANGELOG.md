@@ -113,6 +113,13 @@ custom database script which rely on it. Please be aware of that change.
 -   scautopick
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
+-   scdb
+    -   Add option `-x` to wipe out all child objects of a public object from
+        database. This option might make the most sense on `Inventory`,
+        `EventParameters` or `Config`.
+        ```
+        $ scdb -d localhost -x Inventory
+        ```
 -   scevent
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
