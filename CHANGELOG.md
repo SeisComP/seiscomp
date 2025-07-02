@@ -2,6 +2,14 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.7.8
+
+-   trunk
+    -   Fix QuakeML NodalPlanes export: add `preferredPlane` attribute.
+    -   Fix crash when serializing empty array as binary streams. This
+        crash occurs only on some target builds caused by a certain
+        compiler version and configuration.
+
 ## 6.7.7
 
 -   LocSAT
