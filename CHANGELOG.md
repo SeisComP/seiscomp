@@ -2,6 +2,13 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.7.9
+
+-   trunk
+    -   Fix crash if a transfer function is created from a poles and zeros
+        response with either empty poles or empty zeros caused by a certain
+        compiler version and configuration.
+
 ## 6.7.8
 
 -   trunk
