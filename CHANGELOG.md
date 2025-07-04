@@ -101,6 +101,10 @@ custom database script which rely on it. Please be aware of that change.
         picker.limitFilterToZoomTrace = true
         olv.loadAdditionalStations = true
         ```
+    -   Increase precision to milliseconds for the following picker configuration values:
+        - `picker.preOffset`
+        - `picker.postOffset`
+        - `picker.minimumTimeWindow`
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
         date is not specified for the StationXML node.
