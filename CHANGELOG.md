@@ -142,6 +142,8 @@ custom database script which rely on it. Please be aware of that change.
     -   Add `--public-id` and `--with-childs` to export an object by its publicID
         from the database. This will even work with database extensions by
         loading the corresponding plugins such as `dmsm`.
+-   scwfparam
+    -   Add support for custom list of periods.
 -   LocSAT
     -   Rewrite old old code to support reentrant processing and dynamic station
         count.
@@ -149,6 +151,8 @@ custom database script which rely on it. Please be aware of that change.
     -   Add PKiKP and PKIKP phases.
     -   Update PKKP table.
     -   Support custom phase list via [model].ph file.
+-   NLL
+    -   Allow the use of SAVE_NLLOC_EXPECTATION.
 -   iLoc
     -   When reading a local velocity model file, If CONRAD is not specified,
         the index of the Conrad discontinuity was not set properly, therefore iLoc
@@ -163,6 +167,21 @@ custom database script which rely on it. Please be aware of that change.
     -   Replace Sphinx m2r2 with sphinx_mdinclude
 -   diskmon
     -   Fix stopped modules counter for diskmon.
+
+## 6.7.9
+
+-   trunk
+    -   Fix crash if a transfer function is created from a poles and zeros
+        response with either empty poles or empty zeros caused by a certain
+        compiler version and configuration.
+
+## 6.7.8
+
+-   trunk
+    -   Fix QuakeML NodalPlanes export: add `preferredPlane` attribute.
+    -   Fix crash when serializing empty array as binary streams. This
+        crash occurs only on some target builds caused by a certain
+        compiler version and configuration.
 
 ## 6.7.7
 
