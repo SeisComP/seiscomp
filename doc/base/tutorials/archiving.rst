@@ -126,9 +126,11 @@ e.g.
 
   $ cd ~/seiscomp/etc/key
   $ vi station_GR_CLL
-.. _tutorials_archiving:
+
 Add the line `slarchive:week` to whatever lines are already there.
-Afterwards it will look something like this::
+Afterwards it will look something like this
+
+.. code-block:: properties
 
   # Binding references
   global:BH
@@ -284,4 +286,3 @@ application.
 
      $ scart -dEsv -t 2025-02-01T01:00~2025-02-01T01:00 /archive | scrttv -
      $ scart -dEsv -t 2025-02-01T01:00~2025-02-01T01:00 /archive | scautopick -I - -d localhost --ep --playback
-

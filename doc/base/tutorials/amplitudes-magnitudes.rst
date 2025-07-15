@@ -254,8 +254,6 @@ Application
   :ref:`magnitude alias <tutorials_magnitude-aliases>`.
 
 
-.. _tutorials_magnitude-aliases:
-
 Testing
 -------
 
