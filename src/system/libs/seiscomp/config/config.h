@@ -18,8 +18,8 @@
  ***************************************************************************/
 
 
-#ifndef __SEISCOMP_CONFIG_H__
-#define __SEISCOMP_CONFIG_H__
+#ifndef SEISCOMP_CONFIG_H
+#define SEISCOMP_CONFIG_H
 
 
 #include <iostream>
@@ -34,8 +34,10 @@
 #include <seiscomp/config/exceptions.h>
 #include <seiscomp/config/symboltable.h>
 
+
 namespace Seiscomp {
 namespace Config {
+
 
 /**
  * Mapping of configuration variable to type
@@ -67,7 +69,7 @@ class SC_CONFIG_API Config {
 		 * @param raw Raw mode which does not resolv references like ${var}
 		 * @return true on success
 		 */
-		bool readConfig(const std::string &file, int stage=-1, bool raw=false);
+		bool readConfig(const std::string &file, int stage=-1, bool raw = false);
 
 		/** Writes the configuration to the given configuration file.
 		 * @param file name of the configuarion files
@@ -75,7 +77,7 @@ class SC_CONFIG_API Config {
 		 *                  new entries
 		 * @return true on success
 		 */
-		bool writeConfig(const std::string& file, bool localOny = true,
+		bool writeConfig(const std::string &file, bool localOny = true,
 		                 bool multilineLists = false);
 
 		/** Writes the configuration to the file which was given to
@@ -102,70 +104,108 @@ class SC_CONFIG_API Config {
 		//! Gets an integer from the configuration file
 		//! @param name name of the element
 		//! @return value
-		int getInt(const std::string& name) const;
-		int getInt(const std::string& name, bool* error) const;
-		bool getInt(int& value, const std::string& name) const;
+		int getInt(const std::string &name) const;
+		int getInt(const std::string &name, bool *error) const;
+		bool getInt(int &value, const std::string &name) const;
 
-		bool setInt(const std::string& name, int value);
+		bool setInt(const std::string &name, int value);
 
 		/** Gets a double from the configuration file
 		 * @param name name of the element
 		 * @return double
 		 */
-		double getDouble(const std::string& name) const;
-		double getDouble(const std::string& name, bool* error) const;
-		bool getDouble(double& value, const std::string& name) const;
+		double getDouble(const std::string &name) const;
+		double getDouble(const std::string &name, bool *error) const;
+		bool getDouble(double& value, const std::string &name) const;
 
-		bool setDouble(const std::string& name, double value);
+		bool setDouble(const std::string &name, double value);
 
 		/** Gets an boolean from the configuration file
 		 * @param name name of the element
 		 * @return boolean
 		 */
-		bool getBool(const std::string& name) const;
-		bool getBool(const std::string& name, bool* error) const;
-		bool getBool(bool& value, const std::string& name) const;
+		bool getBool(const std::string &name) const;
+		bool getBool(const std::string &name, bool *error) const;
+		bool getBool(bool &value, const std::string &name) const;
 
-		bool setBool(const std::string& name, bool value);
+		bool setBool(const std::string &name, bool value);
 
 		/** Gets a string from the configuration file
 		 * @param name name of the element
 		 * @return string
 		 */
-		std::string getString(const std::string& name) const;
-		std::string getString(const std::string& name, bool* error) const;
-		bool getString(std::string& value, const std::string& name) const;
+		std::string getString(const std::string &name) const;
+		std::string getString(const std::string &name, bool *error) const;
+		bool getString(std::string &value, const std::string &name) const;
 
-		bool setString(const std::string& name, const std::string& value);
+		bool setString(const std::string &name, const std::string &value);
 
 		/** Removes the symbol with the given name from the symboltable.
 		 * @param name Symbol to be removed
 		 */
-		bool remove(const std::string& name);
+		bool remove(const std::string &name);
 
-		std::vector<int> getInts(const std::string& name) const;
+		std::vector<int> getInts(const std::string &name) const;
 
-		std::vector<int> getInts(const std::string& name, bool* error) const;
+		std::vector<int> getInts(const std::string &name, bool *error) const;
 
-		bool setInts(const std::string& name, const std::vector<int>& values);
+		bool setInts(const std::string &name, const std::vector<int> &values);
 
-		std::vector<double> getDoubles(const std::string& name) const;
+		std::vector<double> getDoubles(const std::string &name) const;
 
-		std::vector<double> getDoubles(const std::string& name, bool* error) const;
+		std::vector<double> getDoubles(const std::string &name, bool *error) const;
 
-		bool setDoubles(const std::string& name, const std::vector<double>& values);
+		bool setDoubles(const std::string &name, const std::vector<double> &values);
 
-		std::vector<bool> getBools(const std::string& name) const;
+		std::vector<bool> getBools(const std::string &name) const;
 
-		std::vector<bool> getBools(const std::string& name, bool* error) const;
+		std::vector<bool> getBools(const std::string &name, bool *error) const;
 
-		bool setBools(const std::string& name, const std::vector<bool>& values);
+		bool setBools(const std::string &name, const std::vector<bool> &values);
 
-		std::vector<std::string> getStrings(const std::string& name) const;
-		std::vector<std::string> getStrings(const std::string& name, bool* error) const;
-		bool getStrings(std::vector<std::string>& value, const std::string& name) const;
+		std::vector<std::string> getStrings(const std::string &name) const;
+		std::vector<std::string> getStrings(const std::string &name, bool *error) const;
+		bool getStrings(std::vector<std::string> &value, const std::string &name) const;
 
-		bool setStrings(const std::string& name, const std::vector<std::string>& values);
+		bool setStrings(const std::string &name, const std::vector<std::string> &values);
+
+		/**
+		 * @brief Returns a list of symbols with a name that starts with a
+		 *        given prefix.
+		 * Alternatively a name of a symbol can be given. That symbol name must
+		 * exist under the checked candidate. Example of configuration:
+		 *
+		 * @code
+		 * profiles.A.enabled = false
+		 * profiles.A.name = "Profile A"
+		 * profiles.B.enabled = true
+		 * profiles.B.name = "Profile B"
+		 * profiles.C.name = "Profile C"
+		 * @endcode
+		 *
+		 * @code
+		 * auto symbols = cfg.findSymbols("profiles.", "enabled");
+		 * assert(symbols.size() == 1)
+		 * assert(symbols[0] == "profiles.B")
+		 *
+		 * symbols = cfg.findSymbols("profiles.");
+		 * assert(symbols.size() == 3)
+		 * assert(symbols[0] == "profiles.A")
+		 * assert(symbols[1] == "profiles.B")
+		 * assert(symbols[2] == "profiles.C")
+		 * @endcode
+		 *
+		 * @param prefix The prefix of the returned symbol name
+		 * @param enabledSymbol If not empty then a symbol is evaluated which
+		 *                      holds a true boolean value. The name of the
+		 *                      symbol is composed of the checked symbol name
+		 *                      and this parameters joined with a dot.
+		 * @return enabledDefault Default value for the enableSymbol.
+		 * @return The list of matching symbols.
+		 */
+		std::vector<std::string> findSymbols(const std::string &prefix,
+		                                     const std::string &enabledSymbol = {},
+		                                     bool enabledDefault = true) const;
 
 		SymbolTable *symbolTable() const;
 
@@ -260,17 +300,17 @@ class SC_CONFIG_API Config {
 	// ------------------------------------------------------------------------
 	private:
 		void init();
-		bool handleEntry(const std::string& entry, const std::string& comment);
-		bool handleInclude(const std::string& fileName);
-		void handleAssignment(const std::string& name, const std::string& content,
-		                      std::vector<std::string>& values,
-		                      const std::string& comment);
+		bool handleEntry(const std::string &entry, const std::string &comment);
+		bool handleInclude(const std::string &fileName);
+		void handleAssignment(const std::string &name, const std::string &content,
+		                      std::vector<std::string> &values,
+		                      const std::string &comment);
 		std::vector<std::string> tokenize(const std::string& entry);
 		static bool reference(const std::string &name,
 		                      std::vector<std::string> &value,
 		                      const SymbolTable *symtab);
-		static bool parseRValue(const std::string& entry,
-		                        std::vector<std::string>& parsedValues,
+		static bool parseRValue(const std::string &entry,
+		                        std::vector<std::string> &parsedValues,
 		                        const SymbolTable *symtab,
 		                        bool resolveReferences,
 		                        bool rawMode,
@@ -281,34 +321,34 @@ class SC_CONFIG_API Config {
 		                        int stage = -1, bool raw = false);
 
 		template <typename T>
-		T get(const std::string& name) const;
+		T get(const std::string &name) const;
 
 		template <typename T>
-		T get(const std::string& name, bool* error) const;
+		T get(const std::string &name, bool *error) const;
 
 		template <typename T>
-		bool get(T& value, const std::string& name) const;
+		bool get(T &value, const std::string &name) const;
 
 		template <typename T>
-		std::vector<T> getVec(const std::string& name) const;
+		std::vector<T> getVec(const std::string &name) const;
 
 		template <typename T>
-		std::vector<T> getVec(const std::string& name, bool* error) const;
+		std::vector<T> getVec(const std::string &name, bool *error) const;
 
 		template <typename T>
-		void add(const std::string& name, const T& value);
+		void add(const std::string &name, const T &value);
 
 		template <typename T>
-		void add(const std::string& name, const std::vector<T>& values);
+		void add(const std::string &name, const std::vector<T> &values);
 
 		/** Sets an value in the configuration file
 		 * @param element name of the element
 		 * @param value value for the element */
 		template <typename T>
-		bool set(const std::string& name, const T& value);
+		bool set(const std::string &name, const T &value);
 
 		template <typename T>
-		bool set(const std::string& name, const std::vector<T>& values);
+		bool set(const std::string &name, const std::vector<T> &values);
 
 		inline void addVariable(const std::string &name, const char *type) const;
 

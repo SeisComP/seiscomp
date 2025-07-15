@@ -26,6 +26,7 @@
 #include <cstring>
 #include <climits>
 #include <cstdlib>
+#include <unordered_set>
 #include <unistd.h>
 
 #if WIN32
@@ -1512,8 +1513,7 @@ bool Config::setInts(const std::string& name, const std::vector<int>& values)
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-bool Config::setDoubles(const std::string& name, const std::vector<double>& values)
-{
+bool Config::setDoubles(const std::string& name, const std::vector<double>& values) {
 	return set<double>(name, values);
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1522,8 +1522,7 @@ bool Config::setDoubles(const std::string& name, const std::vector<double>& valu
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-bool Config::setBools(const std::string& name, const std::vector<bool>& values)
-{
+bool Config::setBools(const std::string& name, const std::vector<bool>& values) {
 	return set<bool>(name, values);
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1532,9 +1531,62 @@ bool Config::setBools(const std::string& name, const std::vector<bool>& values)
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-bool Config::setStrings(const std::string& name, const std::vector<std::string>& values)
-{
+bool Config::setStrings(const std::string& name, const std::vector<std::string>& values) {
 	return set<std::string>(name, values);
+}
+// <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+std::vector<std::string>
+Config::findSymbols(const std::string &prefix,
+                    const std::string &enabledSymbol,
+                    bool enabledDefault) const {
+	std::vector<std::string> symbolNames;
+	std::unordered_set<std::string> visitedSymbolNames;
+
+	for ( const auto &symbol : *_symbolTable ) {
+		std::string symbolName = symbol->name;
+
+		if ( symbolName.compare(0, prefix.size(), prefix) ) {
+			continue;
+		}
+
+		size_t pos = symbolName.find('.', prefix.size());
+		if ( pos != std::string::npos ) {
+			symbolName = symbolName.substr(0, pos);
+		}
+
+		if ( visitedSymbolNames.find(symbolName) != visitedSymbolNames.end() ) {
+			// Symbol already visited
+			continue;
+		}
+
+		visitedSymbolNames.insert(symbolName);
+
+		if ( !enabledSymbol.empty() ) {
+			auto nameToBeChecked = symbolName + "." + enabledSymbol;
+			auto enabledSymbol = _symbolTable->get(nameToBeChecked);
+			bool value = enabledDefault;
+			if ( enabledSymbol && (
+			         (enabledSymbol->values.size() != 1)
+			       || !Private::fromString(value, enabledSymbol->values[0])) ) {
+				// Value cannot be converted to boolean
+				continue;
+			}
+
+			if ( !value ) {
+				// Value or default for value is false
+				continue;
+			}
+		}
+
+		symbolNames.push_back(std::string(symbolName));
+	}
+
+	return symbolNames;
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
