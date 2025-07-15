@@ -78,6 +78,8 @@ custom database script which rely on it. Please be aware of that change.
     -   Save map measurements as GeoJSON
     -   Add support for built-in FontAwesome icons as map symbols.
     -   Print map symbols in map legends.
+-   scesv
+    -   Support station annotations (shift+F9).
 -   scolv
     -   Focal mechanisms show the station distribution on the map if station
         display is enabled (F9).
@@ -108,6 +110,7 @@ custom database script which rely on it. Please be aware of that change.
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
         date is not specified for the StationXML node.
+    -   Use best precision when showing number differences in warnings.
 -   scamp
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
