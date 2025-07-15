@@ -343,7 +343,7 @@ Scientific and technical terms
       seismicity. It is the main development and service company for |scname|.
 
    GEOFON
-      GEOFON (https://geofon.gfz-potsdam.de) is part of the Modular Earth Science
+      GEOFON (https://geofon.gfz.de) is part of the Modular Earth Science
       Infrastructure (MESI) at :term:`GFZ`.
 
    geometrical spreading
@@ -351,8 +351,8 @@ Scientific and technical terms
       increasing distance from a given source.
 
    GFZ
-      Helmholtz Centre Potsdam `German Research Centre for Geosciences <http://www.gfz-potsdam.de/>`_.
-      |scname| was originally developed at GFZ.
+      `GFZ Helmholtz Centre for Geosciences <http://www.gfz.de/>`_. |scname| was
+      originally developed at GFZ.
 
    GMPE
       Ground Motion Prediction Equation
@@ -991,7 +991,7 @@ Scientific and technical terms
       :term:`SeisComP` Markup Language. SCML is a flavor of `QuakeML
       <https://quake.ethz.ch/quakeml/>`_  and is used by |scname| and by
       products of :term:`gempa GmbH` for exchange. For details read the
-      `UML diagram <https://geofon.gfz-potsdam.de/_uml/>`_.
+      `UML diagram <https://geofon.gfz.de/_uml/>`_.
 
    SDS
       |scname| Data Structure which is used for archiving waveform data. Below the
@@ -1019,10 +1019,9 @@ Scientific and technical terms
       seismological data acquisition and real-time data exchange over internet.
       Its data transmission protocol SeedLink became a de facto world standard.
       The first version of SeisComP was developed for the `GEOFON
-      <http://geofon.gfz-potsdam.de/geofon/>`_ network and further extended
-      within the MEREDIAN project under the lead of `GEOFON
-      <http://geofon.gfz-potsdam.de/geofon/>`_/`GFZ
-      <http://www.gfz-potsdam.de/>`_ Potsdam and `ORFEUS
+      <http://geofon.gfz.de>`_ network and further extended within the MEREDIAN
+      project under the lead of `GEOFON <http://geofon.gfz.de>`_/`GFZ
+      <http://www.gfz.de>`_ Potsdam and `ORFEUS
       <http://www.orfeus-eu.org/>`_. Originally SeisComP was designed as a high
       standard fully automatic data acquisition and (near-)real-time data
       processing tool including quality control, event detection and location as

@@ -77,11 +77,11 @@ Examples:
   for your playback.
 
   Example for one hour of data from the GE network from
-  `FDSNWS at GEOFON <https://geofon.gfz-potsdam.de/waveform/webservices/fdsnws.php>`_:
+  `FDSNWS at GEOFON <https://geofon.gfz.de/waveform/webservices/fdsnws.php>`_:
 
   .. code-block:: sh
 
-     wget -O data.mseed "http://geofon.gfz-potsdam.de/fdsnws/dataselect/1/query?net=GE&cha=BH*&starttime=2021-04-01T06:00:00Z&endtime=2021-04-01T07:00:00Z"
+     wget -O data.mseed "http://geofon.gfz.de/fdsnws/dataselect/1/query?net=GE&cha=BH*&starttime=2021-04-01T06:00:00Z&endtime=2021-04-01T07:00:00Z"
      scmssort -u -E data.mseed > [your miniSEED file]
 
 * **CAPS server:** Extract the data from gempa's CAPS server :cite:p:`caps`

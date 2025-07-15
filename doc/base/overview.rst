@@ -126,8 +126,9 @@ Here *alphanumeric* means the digits 0 to 9, and uppercase letters A-Z.
 
 For publicly-available seismic stations these are typically supplied
 by external servers such as :ref:`seedlink` or :cite:t:`caps` servers.
-For example, the :cite:t:`geofon` seismic network makes data available at port 18000
-at geofon.gfz-potsdam.de which you may query and test using :ref:`slinktool`.
+For example, the :cite:t:`geofon` seismic network makes data available at port
+*18000* at *geofon.gfz.de* which you may query and test using
+:ref:`slinktool`.
 
 If you operate your own seismic network, you may collect data directly
 from your station's digitizer using one of the many plugins included with

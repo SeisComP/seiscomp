@@ -52,13 +52,13 @@ Check data are available
 ========================
 
 First, we'll query the upstream Seedlink server, which runs on
-host `geofon.gfz-potsdam.de` at port 18000.
+host *geofon.gfz.de* at port *18000*.
 We do this with SeisComP's :ref:`slinktool` command, giving the ``-L`` option
 to :ref:`slinktool`
 
 .. code-block:: sh
 
-   $ slinktool -L geofon.gfz-potsdam.de
+   $ slinktool -L geofon.gfz.de
    6C GF01  GF01
    6C GF02  GF02
    6C GF03  GF03
@@ -76,7 +76,7 @@ code GE
 
 .. code-block:: sh
   
-   $ slinktool -Q geofon.gfz-potsdam.de | grep ^GE.*BHZ
+   $ slinktool -Q geofon.gfz.de | grep ^GE.*BHZ
    GE ACRG     BHZ D 2019/11/28 06:51:48.7500  -  2019/11/28 09:18:32.1000
    GE APE      BHZ D 2019/11/28 07:40:52.0400  -  2019/11/28 12:22:00.3950
    GE ARPR     BHZ D 2019/11/27 23:23:27.4400  -  2019/11/28 09:41:22.1500
@@ -130,7 +130,7 @@ StationXML format.
 
 .. code-block:: sh
 
-   $ wget "http://geofon.gfz-potsdam.de/fdsnws/station/1/query?net=GE&level=response" -O ge.xml
+   $ wget "http://geofon.gfz.de/fdsnws/station/1/query?net=GE&level=response" -O ge.xml
 
 
 Option 2: Using WebDC3
@@ -144,7 +144,7 @@ from different data centres among other possibilities.
 You can find detailed information about WebDC3 in the on-line documentation at
 :cite:t:`webdc3-documentation`.
 
-* Go to http://eida.gfz-potsdam.de/webdc3 with a browser.
+* Go to http://eida.gfz.de/webdc3 with a browser.
 
 * Click on "Explore stations" and move the slider to select only the current year
   and only "Public permanent nets" on the Network type list.
@@ -335,10 +335,9 @@ References
 
 .. target-notes::
 
-.. [#WebDC] The WebDC3 service is available at http://eida.gfz-potsdam.de.
-            See also
+.. [#WebDC] The WebDC3 service is available at http://eida.gfz.de. See also
             M. Bianchi, *et al.* (2015): WebDC3 Web Interface. GFZ Data Services.
             doi:`10.5880/GFZ.2.4/2016.001 <http://dx.doi.org/10.5880/GFZ.2.4/2016.001>`_
 
 .. [#NETPAGES] For instance that of the GEOFON Program, at
-               https://geofon.gfz-potsdam.de/waveform/archive/network.php?ncode=GE.
+               https://geofon.gfz.de/waveform/archive/network.php?ncode=GE.

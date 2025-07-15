@@ -256,7 +256,7 @@ Examples
       /home/sysop/seiscomp/etc/key/seedlink/profile_geofon
       --------------------------------------------------------------------------------
       sources = chain
-      sources.chain.address = geofon.gfz-potsdam.de
+      sources.chain.address = geofon.gfz.de
       sources.chain.port = 18000
       --------------------------------------------------------------------------------
 

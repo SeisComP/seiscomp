@@ -127,12 +127,12 @@ Check it Works
 Further Information
 ===================
 
-* The `URL Builder at GEOFON <https://geofon.gfz-potsdam.de/waveform/builder.php>`_
+* The `URL Builder at GEOFON <https://geofon.gfz.de/waveform/builder.php>`_
   lets you fill out a form to tailor your request.
   The URL to use to make your request is displayed at the bottom of that page.
 
 * More example requests are at the
-  `FDSNWS description at GEOFON <https://geofon.gfz-potsdam.de/waveform/webservices.php>`_
+  `FDSNWS description at GEOFON <https://geofon.gfz.de/waveform/webservices.php>`_
 
 * The FDSN Web Services specification document :cite:p:`fdsn-specs` provides the
   technical documentation and examples.

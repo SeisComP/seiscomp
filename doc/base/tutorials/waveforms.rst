@@ -39,10 +39,10 @@ First, we'll query the upstream Seedlink server,
 to confirm that it has current data.
 We do this with SeisComP's :program:`slinktool` command,
 giving it the '-L' option to list the available stations.
-For this example, we'll use the server at host `geofon.gfz-potsdam.de`
+For this example, we'll use the server at host `geofon.gfz.de`
 on port 18000 (the default) ::
 
-  $ slinktool -L geofon.gfz-potsdam.de
+  $ slinktool -L geofon.gfz.de
   AW VNA1  VNA1
   AW VNA2  VNA2
   [..]
@@ -56,7 +56,7 @@ This can be a long list. It shows the network code and station code of each
 of the stations for which data is available from this Seedlink server.
 We can restrict the output to our station of interest using `grep`. ::
 
-  $ slinktool -Q geofon.gfz-potsdam.de | grep GR.CLL
+  $ slinktool -Q geofon.gfz.de | grep GR.CLL
   GR CLL      LHN D 2020/05/06 15:13:41.2249  -  2020/05/06 21:15:28.0299
   GR CLL      BHZ D 2020/05/06 15:13:41.2249  -  2020/05/06 21:22:13.1300
   GR CLL      BHN D 2020/05/06 15:13:41.2249  -  2020/05/06 21:22:15.4300
