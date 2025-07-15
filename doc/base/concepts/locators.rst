@@ -11,7 +11,7 @@ further.
 
 |scname| ships with built-in locators:
 
-* :ref:`FixedHypocenter <global_fixedhypocenter>` (FH)
+* :ref:`FixedHypocenter <global_fixedhypocenter>`
 * :ref:`Hypo71 <global_hypo71>`
 * :ref:`iLoc <global_iloc>`
 * :ref:`LOCSAT <global_locsat>`, the default locator in :ref:`scautoloc` and :ref:`scolv`
@@ -41,7 +41,7 @@ A comparison of the locators is given in the table below.
 
 .. csv-table::
    :widths: 30 10 10 10 10 10 10 10
-   :header: , FH, Hypo71, iLoc, LocExt, LOCSAT, NonLinLoc, StdLoc
+   :header: , Fixed Hypocenter, Hypo71, iLoc, LocExt, LOCSAT, NonLinLoc, StdLoc
    :align: center
 
    **Applications**, ,,,,,,
