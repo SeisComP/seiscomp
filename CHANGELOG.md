@@ -2,6 +2,18 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.8.0
+
+-   NonLinLoc locator plugin
+    -   Allow `SAVE_NLLOC_EXPECTATION` in NLL configuration
+        files.
+-   scwfparam
+    -   Add support for custom list of periods.
+-   LocSAT
+    -   Fix bug when a function with only one sample is
+        interpolated. That usually lead to location
+        errors such as "SVD routine can't decompose matrix".
+
 ## 6.7.9
 
 -   trunk
