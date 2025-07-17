@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.8.1
+
+-   scconfig
+    -   Allow parenthesis as profile names, e.g. for amplitude
+        profiles.
+
 ## 6.8.0
 
 -   NonLinLoc locator plugin
