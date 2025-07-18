@@ -2,6 +2,14 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.8.2
+
+-   scolv
+    -   Attempt to fix a crash that is indicated by the terminal output:
+        ```
+        QThread: Destroyed while thread is still running
+        ```
+
 ## 6.8.1
 
 -   scconfig
