@@ -2,6 +2,16 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.8.3
+
+-   caps_plugin
+    -   Exit if pipe to `seedlink` is broken.
+-   trunk
+    -   Fix crash with empty filter parameter list and newer
+        C++ compiler versions.
+    -   Do not call combined:// real-time recordstream with zero
+        requests.
+
 ## 6.8.2
 
 -   scolv
