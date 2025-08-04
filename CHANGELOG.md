@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.8.4
+
+-   scevent
+    -   Read `eventAssociation.minimumScore` from configuration.
+
 ## 6.8.3
 
 -   caps_plugin
