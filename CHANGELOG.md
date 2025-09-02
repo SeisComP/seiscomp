@@ -134,6 +134,9 @@ custom database script which rely on it. Please be aware of that change.
         with `--ep`.
     -   Add command-line option `--reprocess` for ignoring event objects in
         input along with `--ep`.
+    -   Add `eventAssociation.enablePreferredFMSelection` option to control
+        whether the preferred focalmechanism should be assigned automatically
+        or not.
 -   scmag
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
