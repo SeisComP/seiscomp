@@ -141,6 +141,9 @@ custom database script which rely on it. Please be aware of that change.
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
     -   Fix segmentation fault when processing arrivals without distance.
+-   scolv
+    -   Add `picker.auxiliary.profile` which supports multiple profiles to define
+        and check for auxiliary channels.
 -   screpick
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
