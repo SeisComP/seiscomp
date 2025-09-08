@@ -107,6 +107,11 @@ custom database script which rely on it. Please be aware of that change.
         - `picker.preOffset`
         - `picker.postOffset`
         - `picker.minimumTimeWindow`
+    -   Add `picker.auxiliary.profile` which supports multiple profiles to define
+        and check for auxiliary channels.
+    -   Add spectrogram settings like in `scrttv` in a dockable widget (ctrl+shift+s) and
+        remove the very basic spectrogram settings from the toolbar.
+    -   Add optional allow-/denylist for phases to be imported to ImportPicks dialog.
 -   scmv
     -   Handle unset origin.depth and do not crash.
 -   fdsnxml2inv
@@ -141,9 +146,6 @@ custom database script which rely on it. Please be aware of that change.
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
     -   Fix segmentation fault when processing arrivals without distance.
--   scolv
-    -   Add `picker.auxiliary.profile` which supports multiple profiles to define
-        and check for auxiliary channels.
 -   screpick
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
