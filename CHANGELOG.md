@@ -112,6 +112,7 @@ custom database script which rely on it. Please be aware of that change.
     -   Add spectrogram settings like in `scrttv` in a dockable widget (ctrl+shift+s) and
         remove the very basic spectrogram settings from the toolbar.
     -   Add optional allow-/denylist for phases to be imported to ImportPicks dialog.
+    -   Add default configuration options for "Import picks" dialog.
 -   scmv
     -   Handle unset origin.depth and do not crash.
 -   fdsnxml2inv
