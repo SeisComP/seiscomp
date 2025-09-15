@@ -109,6 +109,8 @@ custom database script which rely on it. Please be aware of that change.
         - `picker.minimumTimeWindow`
     -   Add `picker.auxiliary.profile` which supports multiple profiles to define
         and check for auxiliary channels.
+        -   Add controls to explicitly load auxiliary profiles
+        -   Add controls to toggle visibility of auxiliary profiles
     -   Add spectrogram settings like in `scrttv` in a dockable widget (ctrl+shift+s) and
         remove the very basic spectrogram settings from the toolbar.
     -   Add optional allow-/denylist for phases to be imported to ImportPicks dialog.
