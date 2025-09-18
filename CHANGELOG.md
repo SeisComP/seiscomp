@@ -2,6 +2,22 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.8.5
+
+-   fdsnxml2inv
+    -   Fix samplerate conversion from double to fraction.
+-   scmv
+    -   Fix crash if origin depth is not set.
+-   fdsnws
+    -   Fix data availability sort for Python >= 3.13.
+    -   Fix conditional station requests. Requests involving the
+        If-Modified-Since header failed since Twisted
+        version 24.7. The http.stringToDatetime() now requires a
+        byte string.
+-   trunk
+    -   Fix LOCSAT station correction file lookup if `SEISCOMP_LOCSAT_TABLE_DIR`
+        environment variable is being used.
+
 ## 6.8.4
 
 -   scevent
