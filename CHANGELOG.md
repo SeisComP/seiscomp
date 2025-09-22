@@ -2,7 +2,9 @@
 
 All notable changes to SeisComP are documented here.
 
-## 6.8.5
+## 6.9.0
+
+```SC_API_VERSION 16.4.0```
 
 -   fdsnxml2inv
     -   Fix samplerate conversion from double to fraction.
@@ -17,6 +19,10 @@ All notable changes to SeisComP are documented here.
 -   trunk
     -   Fix LOCSAT station correction file lookup if `SEISCOMP_LOCSAT_TABLE_DIR`
         environment variable is being used.
+    -   Decode tokens when parsing a URL.
+-   scevent
+    -   Provide optional REST API to return the target event an origin would be
+        associated to.
 
 ## 6.8.4
 
