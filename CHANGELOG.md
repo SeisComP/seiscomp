@@ -2,6 +2,14 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.9.1
+
+-   trunk
+    -   Fix crash in decimation and resampling if a record without data is received.
+    -   Fix TimeSpan rounding in combination with negative numbers.
+-   fdsnws
+    -   Fix data segment query for start and end times with milli second precision.
+
 ## 6.9.0
 
 ```SC_API_VERSION 16.4.0```
