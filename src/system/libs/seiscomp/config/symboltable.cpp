@@ -20,7 +20,6 @@
 #include <seiscomp/config/symboltable.h>
 
 #include <sstream>
-#include <ctype.h>
 #include <algorithm>
 #include <iostream>
 
@@ -119,12 +118,12 @@ Logger *SymbolTable::logger() {
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-void SymbolTable::add(const std::string& name,
-                      const std::string& ns,
-                      const std::string& content,
-                      const std::vector<std::string>& values,
-                      const std::string& uri,
-                      const std::string& comment,
+void SymbolTable::add(const std::string &name,
+                      const std::string &ns,
+                      const std::string &content,
+                      const std::vector<std::string> &values,
+                      const std::string &uri,
+                      const std::string &comment,
                       int stage, int line) {
 	std::pair<Symbols::iterator, bool> itp;
 	itp = _symbols.insert(Symbols::value_type(name, Symbol()));

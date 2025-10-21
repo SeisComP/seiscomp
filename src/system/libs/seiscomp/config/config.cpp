@@ -401,32 +401,38 @@ bool Config::writeConfig(bool localOnly)
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 void Config::writeValues(std::ostream &os, const Symbol *symbol,
-                         bool multilineLists)
-{
-	if ( symbol->values.empty() )
+                         bool multilineLists) {
+	if ( symbol->values.empty() ) {
 		os << "\"\"";
+	}
 	else if ( multilineLists ) {
 		os << quote(escapeDoubleQuotes(symbol->values[0]));
 		if ( symbol->values.size() > 1 ) {
 			// Evaluate the complete length of the values
 			size_t valueCharacterLength = 0;
-			for ( size_t i = 0; i < symbol->values.size(); ++i )
+			for ( size_t i = 0; i < symbol->values.size(); ++i ) {
 				valueCharacterLength += symbol->values[i].size();
+			}
 			valueCharacterLength += (symbol->values.size()-1)*2;
 
 			if ( valueCharacterLength > 80 ) {
 				os << ",\\" << std::endl;
 				size_t prefix = symbol->name.size() + 3;
 				for ( size_t i = 1; i < symbol->values.size(); ++i ) {
-					for ( size_t f = 0; f < prefix; ++f ) os << ' ';
+					for ( size_t f = 0; f < prefix; ++f ) {
+						os << ' ';
+					}
 					os << quote(escapeDoubleQuotes(symbol->values[i]));
-					if ( i < symbol->values.size()-1 )
+					if ( i < symbol->values.size() - 1 ) {
 						os << ",\\" << std::endl;
+					}
 				}
 			}
 			else {
 				for ( size_t i = 1; i < symbol->values.size(); ++i ) {
-					if ( i != 0 ) os << ", ";
+					if ( i != 0 ) {
+						os << ", ";
+					}
 					os << quote(escapeDoubleQuotes(symbol->values[i]));
 				}
 			}
@@ -434,7 +440,9 @@ void Config::writeValues(std::ostream &os, const Symbol *symbol,
 	}
 	else {
 		for ( size_t i = 0; i < symbol->values.size(); ++i ) {
-			if ( i != 0 ) os << ", ";
+			if ( i != 0 ) {
+				os << ", ";
+			}
 			os << quote(escapeDoubleQuotes(symbol->values[i]));
 		}
 	}
@@ -453,30 +461,37 @@ void Config::writeContent(std::ostream &os, const Symbol *symbol,
 		std::vector<std::string> values;
 		std::string errorMsg;
 		if ( !multilineLists
-		  || !parseRValue(symbol->content, values, nullptr, false, true, &errorMsg) )
+		  || !parseRValue(symbol->content, values, nullptr, false, true, &errorMsg) ) {
 			os << symbol->content;
+		}
 		else if ( !values.empty() ) {
 			os << values[0];
 			if ( values.size() > 1 ) {
 				// Evaluate the complete length of the values
 				size_t valueCharacterLength = 0;
-				for ( size_t i = 0; i < values.size(); ++i )
+				for ( size_t i = 0; i < values.size(); ++i ) {
 					valueCharacterLength += values[i].size();
+				}
 				valueCharacterLength += (values.size()-1)*2;
 
 				if ( valueCharacterLength > 80 ) {
 					os << ",\\" << std::endl;
 					size_t prefix = symbol->name.size() + 3;
 					for ( size_t i = 1; i < values.size(); ++i ) {
-						for ( size_t f = 0; f < prefix; ++f ) os << ' ';
+						for ( size_t f = 0; f < prefix; ++f ) {
+							os << ' ';
+						}
 						os << values[i];
-						if ( i < values.size()-1 )
+						if ( i < values.size()-1 ) {
 							os << ",\\" << std::endl;
+						}
 					}
 				}
 				else {
 					for ( size_t i = 1; i < values.size(); ++i ) {
-						if ( i != 0 ) os << ", ";
+						if ( i != 0 ) {
+							os << ", ";
+						}
 						os << values[i];
 					}
 				}
