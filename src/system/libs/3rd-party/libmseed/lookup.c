@@ -1,232 +1,239 @@
 /***************************************************************************
- * lookup.c:
+ * Generic lookup routines for miniSEED information.
  *
- * Generic lookup routines for Mini-SEED information.
+ * This file is part of the miniSEED Library.
  *
- * Written by Chad Trabant, ORFEUS/EC-Project MEREDIAN
+ * Copyright (c) 2024 Chad Trabant, EarthScope Data Services
  *
- * modified: 2006.346
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  ***************************************************************************/
 
 #include <string.h>
 
 #include "libmseed.h"
 
-/***************************************************************************
- * ms_samplesize():
+/** ************************************************************************
+ * @brief Determine data sample size for each type
  *
- * Returns the sample size based on type code or 0 for unknown.
+ * @param[in] sampletype Library sample type code:
+ * @parblock
+ *   - \c 't' - Text data type
+ *   - \c 'i' - 32-bit integer data type
+ *   - \c 'f' - 32-bit float data type
+ *   - \c 'd' - 64-bit float (double) data type
+ * @endparblock
+ *
+ * @returns The sample size based on type code or 0 for unknown.
  ***************************************************************************/
 uint8_t
-ms_samplesize (const char sampletype)
+ms_samplesize (char sampletype)
 {
   switch (sampletype)
   {
+  case 't':
   case 'a':
     return 1;
+    break;
   case 'i':
   case 'f':
     return 4;
+    break;
   case 'd':
     return 8;
+    break;
   default:
     return 0;
-  } /* end switch */
+  }
 
 } /* End of ms_samplesize() */
 
-/***************************************************************************
- * ms_encodingstr():
+/** ************************************************************************
+ * @brief Return sample size and/or type for given encoding value
  *
- * Returns a string describing a data encoding format.
+ * Determine the decoded sample size and/or type based on data
+ * encoding.  The \a samplesize and \a sampletype values will only be
+ * set if not NULL, allowing lookup of either value or both.
+ *
+ * @param[in] encoding Data sample encoding code
+ * @param[out] samplesize Size of sample, pointer that will be set
+ * @param[out] sampletype Sample type, pointer to \c char that will be set
+ *
+ * @returns 0 on success, -1 on error
  ***************************************************************************/
-char *
-ms_encodingstr (const char encoding)
+int
+ms_encoding_sizetype (uint8_t encoding, uint8_t *samplesize, char *sampletype)
+{
+  switch (encoding)
+  {
+  case DE_TEXT:
+    if (samplesize)
+      *samplesize = 1;
+    if (sampletype)
+      *sampletype = 't';
+    break;
+  case DE_INT16:
+  case DE_INT32:
+  case DE_STEIM1:
+  case DE_STEIM2:
+  case DE_CDSN:
+  case DE_SRO:
+  case DE_DWWSSN:
+    if (samplesize)
+      *samplesize = 4;
+    if (sampletype)
+      *sampletype = 'i';
+    break;
+  case DE_FLOAT32:
+  case DE_GEOSCOPE24:
+  case DE_GEOSCOPE163:
+  case DE_GEOSCOPE164:
+    if (samplesize)
+      *samplesize = 4;
+    if (sampletype)
+      *sampletype = 'f';
+    break;
+  case DE_FLOAT64:
+    if (samplesize)
+      *samplesize = 8;
+    if (sampletype)
+      *sampletype = 'd';
+    break;
+  default:
+    return -1;
+  }
+
+  return 0;
+} /* End of ms_encodingstr_sizetype() */
+
+/** ************************************************************************
+ * @brief Descriptive string for data encodings
+ *
+ * @param[in] encoding Data sample encoding code
+ *
+ * @returns a string describing a data encoding format
+ ***************************************************************************/
+const char *
+ms_encodingstr (uint8_t encoding)
 {
   switch (encoding)
   {
   case 0:
-    return "ASCII text";
+    return "Text";
+    break;
   case 1:
-    return "16 bit integers";
+    return "16-bit integer";
+    break;
   case 2:
-    return "24 bit integers";
+    return "24-bit integer";
+    break;
   case 3:
-    return "32 bit integers";
+    return "32-bit integer";
+    break;
   case 4:
-    return "IEEE floating point";
+    return "32-bit float (IEEE single)";
+    break;
   case 5:
-    return "IEEE double precision float";
+    return "64-bit float (IEEE double)";
+    break;
   case 10:
-    return "STEIM 1 Compression";
+    return "STEIM-1 integer compression";
+    break;
   case 11:
-    return "STEIM 2 Compression";
+    return "STEIM-2 integer compression";
+    break;
   case 12:
-    return "GEOSCOPE Muxed 24 bit int";
+    return "GEOSCOPE Muxed 24-bit integer";
+    break;
   case 13:
-    return "GEOSCOPE Muxed 16/3 bit gain/exp";
+    return "GEOSCOPE Muxed 16/3-bit gain/exp";
+    break;
   case 14:
-    return "GEOSCOPE Muxed 16/4 bit gain/exp";
+    return "GEOSCOPE Muxed 16/4-bit gain/exp";
+    break;
   case 15:
     return "US National Network compression";
+    break;
   case 16:
-    return "CDSN 16 bit gain ranged";
+    return "CDSN 16-bit gain ranged";
+    break;
   case 17:
-    return "Graefenberg 16 bit gain ranged";
+    return "Graefenberg 16-bit gain ranged";
+    break;
   case 18:
-    return "IPG - Strasbourg 16 bit gain";
+    return "IPG - Strasbourg 16-bit gain";
+    break;
   case 19:
-    return "STEIM 3 Compression";
+    return "STEIM-3 integer compression";
+    break;
   case 30:
-    return "SRO Gain Ranged Format";
+    return "SRO gain ranged";
+    break;
   case 31:
-    return "HGLP Format";
+    return "HGLP";
+    break;
   case 32:
-    return "DWWSSN Format";
+    return "DWWSSN";
+    break;
   case 33:
     return "RSTN 16 bit gain ranged";
+    break;
   default:
-    return "Unknown format code";
-  } /* end switch */
+    return "Unknown";
+  }
 
 } /* End of ms_encodingstr() */
 
-/***************************************************************************
- * ms_blktdesc():
+/** ************************************************************************
+ * @brief Descriptive string for library @ref return-values
  *
- * Return a string describing a given blockette type or NULL if the
- * type is unknown.
- ***************************************************************************/
-char *
-ms_blktdesc (uint16_t blkttype)
-{
-  switch (blkttype)
-  {
-  case 100:
-    return "Sample Rate";
-  case 200:
-    return "Generic Event Detection";
-  case 201:
-    return "Murdock Event Detection";
-  case 300:
-    return "Step Calibration";
-  case 310:
-    return "Sine Calibration";
-  case 320:
-    return "Pseudo-random Calibration";
-  case 390:
-    return "Generic Calibration";
-  case 395:
-    return "Calibration Abort";
-  case 400:
-    return "Beam";
-  case 500:
-    return "Timing";
-  case 1000:
-    return "Data Only SEED";
-  case 1001:
-    return "Data Extension";
-  case 2000:
-    return "Opaque Data";
-  } /* end switch */
-
-  return NULL;
-
-} /* End of ms_blktdesc() */
-
-/***************************************************************************
- * ms_blktlen():
+ * @param[in] errorcode Library error code
  *
- * Returns the total length of a given blockette type in bytes or 0 if
- * type unknown.
- ***************************************************************************/
-uint16_t
-ms_blktlen (uint16_t blkttype, const char *blkt, flag swapflag)
-{
-  uint16_t blktlen = 0;
-
-  switch (blkttype)
-  {
-  case 100: /* Sample Rate */
-    blktlen = 12;
-    break;
-  case 200: /* Generic Event Detection */
-    blktlen = 28;
-    break;
-  case 201: /* Murdock Event Detection */
-    blktlen = 36;
-    break;
-  case 300: /* Step Calibration */
-    blktlen = 32;
-    break;
-  case 310: /* Sine Calibration */
-    blktlen = 32;
-    break;
-  case 320: /* Pseudo-random Calibration */
-    blktlen = 28;
-    break;
-  case 390: /* Generic Calibration */
-    blktlen = 28;
-    break;
-  case 395: /* Calibration Abort */
-    blktlen = 16;
-    break;
-  case 400: /* Beam */
-    blktlen = 16;
-    break;
-  case 500: /* Timing */
-    blktlen = 8;
-    break;
-  case 1000: /* Data Only SEED */
-    blktlen = 8;
-    break;
-  case 1001: /* Data Extension */
-    blktlen = 8;
-    break;
-  case 2000: /* Opaque Data */
-    /* First 2-byte field after the blockette header is the length */
-    if (blkt)
-    {
-      memcpy ((void *)&blktlen, blkt + 4, sizeof (int16_t));
-      if (swapflag)
-        ms_gswap2 (&blktlen);
-    }
-    break;
-  } /* end switch */
-
-  return blktlen;
-
-} /* End of ms_blktlen() */
-
-/***************************************************************************
- * ms_errorstr():
- *
- * Return a string describing a given libmseed error code or NULL if the
+ * @returns a string describing the library error code or NULL if the
  * code is unknown.
  ***************************************************************************/
-char *
+const char *
 ms_errorstr (int errorcode)
 {
   switch (errorcode)
   {
   case MS_ENDOFFILE:
     return "End of file reached";
+    break;
   case MS_NOERROR:
     return "No error";
+    break;
   case MS_GENERROR:
     return "Generic error";
+    break;
   case MS_NOTSEED:
-    return "No SEED data detected";
+    return "No miniSEED data detected";
+    break;
   case MS_WRONGLENGTH:
     return "Length of data read does not match record length";
+    break;
   case MS_OUTOFRANGE:
     return "SEED record length out of range";
+    break;
   case MS_UNKNOWNFORMAT:
     return "Unknown data encoding format";
+    break;
   case MS_STBADCOMPFLAG:
     return "Bad Steim compression flag(s) detected";
-  } /* end switch */
+    break;
+  case MS_INVALIDCRC:
+    return "Invalid CRC detected";
+    break;
+  }
 
   return NULL;
-
-} /* End of ms_blktdesc() */
+} /* End of ms_errorstr() */

@@ -5,32 +5,27 @@ ELSE(WIN32)
 ENDIF(WIN32)
 
 ADD_LIBRARY(mseed ${TYPE}
+	crc32c.c
+	extraheaders.c
 	fileutils.c
 	genutils.c
-	gswap.c
-	lmplatform.c
+	gmtime64.c
 	logging.c
 	lookup.c
+	msio.c
 	msrutils.c
 	pack.c
 	packdata.c
-	traceutils.c
-	unpack.c
-	unpackdata.c
+	parseutils.c
 	selection.c
 	tracelist.c
-	parseutils.c
+	unpack.c
+	unpackdata.c
+	yyjson.c
 )
 
-SET_TARGET_PROPERTIES(mseed PROPERTIES VERSION 2.19)
+SET_TARGET_PROPERTIES(mseed PROPERTIES VERSION 3.1.9)
 
 IF(NOT WIN32)
-	INSTALL(TARGETS mseed
-		DESTINATION ${SC3_PACKAGE_LIB_DIR}
-	)
+	INSTALL(TARGETS mseed DESTINATION ${SC3_PACKAGE_LIB_DIR})
 ENDIF(NOT WIN32)
-
-INSTALL(
-	FILES libmseed.h
-	DESTINATION ${SC3_PACKAGE_INCLUDE_DIR}
-)
