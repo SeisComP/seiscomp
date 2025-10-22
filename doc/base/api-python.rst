@@ -47,10 +47,12 @@ EventParameters
       MomentTensorPhaseSetting [label="MomentTensorPhaseSetting", href="../base/api-python.html#api-python-datamodel-momenttensorphasesetting", target="_top"]
       MomentTensorStationContribution [label="MomentTensorStationContribution", href="../base/api-python.html#api-python-datamodel-momenttensorstationcontribution", target="_top"]
       MomentTensorComponentContribution [label="MomentTensorComponentContribution", href="../base/api-python.html#api-python-datamodel-momenttensorcomponentcontribution", target="_top"]
+      Catalog [label="Catalog", href="../base/api-python.html#api-python-datamodel-catalog", target="_top"]
       Event [label="Event", href="../base/api-python.html#api-python-datamodel-event", target="_top"]
       EventDescription [label="EventDescription", href="../base/api-python.html#api-python-datamodel-eventdescription", target="_top"]
       OriginReference [label="OriginReference", href="../base/api-python.html#api-python-datamodel-originreference", target="_top"]
       FocalMechanismReference [label="FocalMechanismReference", href="../base/api-python.html#api-python-datamodel-focalmechanismreference", target="_top"]
+      Event [label="Event", href="../base/api-python.html#api-python-datamodel-event", target="_top"]
       EventParameters [label="EventParameters", href="../base/api-python.html#api-python-datamodel-eventparameters", target="_top"]
       EventParameters -> Pick [dir=back arrowtail=diamond]
       MomentTensor -> Comment [dir=back arrowtail=diamond]
@@ -60,6 +62,7 @@ EventParameters
       StationMagnitude -> Comment [dir=back arrowtail=diamond]
       Pick -> Comment [dir=back arrowtail=diamond]
       Event -> Comment [dir=back arrowtail=diamond]
+      Catalog -> Comment [dir=back arrowtail=diamond]
       Origin -> Comment [dir=back arrowtail=diamond]
       EventParameters -> Amplitude [dir=back arrowtail=diamond]
       EventParameters -> Reading [dir=back arrowtail=diamond]
@@ -77,10 +80,14 @@ EventParameters
       MomentTensor -> MomentTensorPhaseSetting [dir=back arrowtail=diamond]
       MomentTensor -> MomentTensorStationContribution [dir=back arrowtail=diamond]
       MomentTensorStationContribution -> MomentTensorComponentContribution [dir=back arrowtail=diamond]
+      EventParameters -> Catalog [dir=back arrowtail=diamond]
+      Catalog -> Event [dir=back arrowtail=diamond]
       EventParameters -> Event [dir=back arrowtail=diamond]
       Event -> EventDescription [dir=back arrowtail=diamond]
       Event -> OriginReference [dir=back arrowtail=diamond]
       Event -> FocalMechanismReference [dir=back arrowtail=diamond]
+      Catalog -> Event [dir=back arrowtail=diamond]
+      EventParameters -> Event [dir=back arrowtail=diamond]
    }
 
 .. graphviz::
@@ -477,6 +484,27 @@ EventParameters
           href = "../base/api-python.html#api-python-datamodel-momenttensorcomponentcontribution"
           target = "_top"
       ]
+      Catalog [
+          labeltooltip = "Catalog"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Catalog</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="name"><font color="#8b0000">+ name: string</font></td></tr>
+                  <tr><td align="left" port="description"><font color="#8b0000">+ description: string</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left" port="start"><font color="#8b0000">+ start: datetime</font></td></tr>
+                  <tr><td align="left" port="end"><font color="#8b0000">+ end: datetime  [0..1]</font></td></tr>
+                  <tr><td align="left" port="dynamic"><font color="#8b0000">+ dynamic: boolean</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ event: Event [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-catalog"
+          target = "_top"
+      ]
       Event [
           labeltooltip = "Event"
           label = <
@@ -540,6 +568,29 @@ EventParameters
           href = "../base/api-python.html#api-python-datamodel-focalmechanismreference"
           target = "_top"
       ]
+      Event [
+          labeltooltip = "Event"
+          label = <
+              <table border="0" cellpadding="0" cellspacing="2">
+                  <tr><td>Event</td></tr>
+                  <hr/>
+                  <tr><td> </td></tr>
+                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
+                  <tr><td align="left" port="preferredOriginID"><font color="#8b0000">+ preferredOriginID: string</font></td></tr>
+                  <tr><td align="left" port="preferredMagnitudeID"><font color="#8b0000">+ preferredMagnitudeID: string</font></td></tr>
+                  <tr><td align="left" port="preferredFocalMechanismID"><font color="#8b0000">+ preferredFocalMechanismID: string</font></td></tr>
+                  <tr><td align="left" port="type"><font color="#8b0000">+ type: EventType  [0..1]</font></td></tr>
+                  <tr><td align="left" port="typeCertainty"><font color="#8b0000">+ typeCertainty: EventTypeCertainty  [0..1]</font></td></tr>
+                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ eventDescription: EventDescription [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ originReference: OriginReference [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ focalMechanismReference: FocalMechanismReference [0..*]</font></td></tr>
+              </table>
+          >
+          href = "../base/api-python.html#api-python-datamodel-event"
+          target = "_top"
+      ]
       EventParameters [
           labeltooltip = "EventParameters"
           label = <
@@ -553,6 +604,7 @@ EventParameters
                   <tr><td align="left"><font color="#8b0000">+ reading: Reading [0..*]</font></td></tr>
                   <tr><td align="left"><font color="#8b0000">+ origin: Origin [0..*]</font></td></tr>
                   <tr><td align="left"><font color="#8b0000">+ focalMechanism: FocalMechanism [0..*]</font></td></tr>
+                  <tr><td align="left"><font color="#8b0000">+ catalog: Catalog [0..*]</font></td></tr>
                   <tr><td align="left"><font color="#8b0000">+ event: Event [0..*]</font></td></tr>
               </table>
           >
@@ -567,6 +619,7 @@ EventParameters
       StationMagnitude -> Comment [dir=back arrowtail=diamond]
       Pick -> Comment [dir=back arrowtail=diamond]
       Event -> Comment [dir=back arrowtail=diamond]
+      Catalog -> Comment [dir=back arrowtail=diamond]
       Origin -> Comment [dir=back arrowtail=diamond]
       EventParameters -> Amplitude [dir=back arrowtail=diamond]
       EventParameters -> Reading [dir=back arrowtail=diamond]
@@ -584,10 +637,14 @@ EventParameters
       MomentTensor -> MomentTensorPhaseSetting [dir=back arrowtail=diamond]
       MomentTensor -> MomentTensorStationContribution [dir=back arrowtail=diamond]
       MomentTensorStationContribution -> MomentTensorComponentContribution [dir=back arrowtail=diamond]
+      EventParameters -> Catalog [dir=back arrowtail=diamond]
+      Catalog -> Event [dir=back arrowtail=diamond]
       EventParameters -> Event [dir=back arrowtail=diamond]
       Event -> EventDescription [dir=back arrowtail=diamond]
       Event -> OriginReference [dir=back arrowtail=diamond]
       Event -> FocalMechanismReference [dir=back arrowtail=diamond]
+      Catalog -> Event [dir=back arrowtail=diamond]
+      EventParameters -> Event [dir=back arrowtail=diamond]
    }
 
 
@@ -5475,6 +5532,280 @@ Blob
 
       :rtype: string
 
+.. _api-python-datamodel-catalog:
+
+Catalog
+............................................................
+
+.. py:class:: Catalog
+
+   Inherits :ref:`PublicObject <api-python-datamodel-publicobject>`.
+
+
+   **Parents**:
+
+   - ``eventParameters`` -- :ref:`EventParameters <api-python-datamodel-eventparameters>`
+
+   **Children**:
+
+   - ``comment`` -- :ref:`Comment <api-python-datamodel-comment>`
+   - ``event`` -- :ref:`Event <api-python-datamodel-event>`
+
+   **Attributes**:
+
+   - ``publicID``: string
+   - ``name`` -- string
+   - ``description`` -- string
+   - ``creationInfo`` -- :ref:`CreationInfo <api-python-datamodel-creationinfo>` (optional)
+   - ``start`` -- seiscomp.core.Time
+   - ``end`` -- seiscomp.core.Time (optional)
+   - ``dynamic`` -- boolean
+
+   **Methods**:
+
+   .. py:staticmethod:: Cast(obj)
+
+      :param obj: The object to be casted.
+      :rtype: An object of type Catalog if the cast was successful,
+              None otherwise.
+
+      Cast an arbitrary object to Catalog if the internal wrapped
+      representation is an Catalog object. The cast is important if
+      instances of type :ref:`Object <api-python-datamodel-object>`
+      are passed to methods which need access to the real type.
+
+
+
+   .. py:staticmethod:: Create()
+
+      :rtype: A new object of type Catalog.
+
+      Creates and registers (if enabled) a Catalog instance. The
+      publicID is auto-generated.
+
+   .. py:staticmethod:: Create(publicID)
+
+      :rtype: A new object of type Catalog.
+
+      Creates and registers (if enabled) a Catalog instance with
+      passed publicID.
+
+   .. py:method:: equal(other)
+
+      :param other: Another object of type Catalog to compare this
+                    instance to
+      :rtype: A Boolean value indicating True if both objects are equal or
+              False otherwise.
+
+      Compares two objects without its child objects. Both objects are compared
+      by value.
+
+   .. py:method:: setName(name)
+
+      :param name: string
+
+   .. py:method:: name()
+
+      :rtype: string
+
+   .. py:method:: setDescription(description)
+
+      :param description: string
+
+      Catalog description
+
+   .. py:method:: description()
+
+      :rtype: string
+
+   .. py:method:: setCreationInfo(creationInfo)
+
+      :param creationInfo: :ref:`CreationInfo <api-python-datamodel-creationinfo>`
+
+      CreationInfo for the Catalog object.
+
+   .. py:method:: creationInfo()
+
+      :rtype: :ref:`CreationInfo <api-python-datamodel-creationinfo>`
+
+      .. note::
+
+         As this attribute is optional, this method throws a ValueError if
+         the value of the attribute is not set.
+
+   .. py:method:: setStart(start)
+
+      :param start: seiscomp.core.Time
+
+      Start of epoch in ISO datetime format
+
+   .. py:method:: start()
+
+      :rtype: seiscomp.core.Time
+
+   .. py:method:: setEnd(end)
+
+      :param end: seiscomp.core.Time
+
+      End of epoch \(empty if the catalog epoch is open\)
+
+   .. py:method:: end()
+
+      :rtype: seiscomp.core.Time
+
+      .. note::
+
+         As this attribute is optional, this method throws a ValueError if
+         the value of the attribute is not set.
+
+   .. py:method:: setDynamic(dynamic)
+
+      :param dynamic: boolean
+
+   .. py:method:: dynamic()
+
+      :rtype: boolean
+
+   .. py:method:: add(comment)
+
+      :param comment: Object of type :ref:`Comment <api-python-datamodel-comment>`
+      :rtype: A Boolean value indicating success with True, False otherwise.
+
+      Adds a Comment object to Catalog. The object is not
+      copied but managed by this instance. Any change to the passed object
+      will also change the child.
+
+   .. py:method:: add(event)
+
+      :param event: Object of type :ref:`Event <api-python-datamodel-event>`
+      :rtype: A Boolean value indicating success with True, False otherwise.
+
+      Adds a Event object to Catalog. The object is not
+      copied but managed by this instance. Any change to the passed object
+      will also change the child.
+
+   .. py:method:: remove(comment)
+
+      :param comment: Object of type :ref:`Comment <api-python-datamodel-comment>`
+      :rtype: A Boolean value indicating success with True, False otherwise.
+
+      Removes a previously added Comment object from Catalog.
+
+   .. py:method:: remove(event)
+
+      :param event: Object of type :ref:`Event <api-python-datamodel-event>`
+      :rtype: A Boolean value indicating success with True, False otherwise.
+
+      Removes a previously added Event object from Catalog.
+
+   .. py:method:: removeComment(idx)
+
+      :param idx: An integer index of the object to be removed.
+      :rtype: A Boolean value indicating success with True, False otherwise.
+
+   .. py:method:: removeComment(commentIndex);
+
+      :param commentIndex: The index of the object to be removed of type CommentIndex.
+      :rtype: A Boolean value indicating success with True, False otherwise.
+
+   .. py:method:: removeEvent(idx)
+
+      :param idx: An integer index of the object to be removed.
+      :rtype: A Boolean value indicating success with True, False otherwise.
+
+   .. py:method:: commentCount()
+
+      :rtype: integer value indicating the number of child objects.
+
+      Returns the number of Comment child objects.
+
+   .. py:method:: eventCount()
+
+      :rtype: integer value indicating the number of child objects.
+
+      Returns the number of Event child objects.
+
+   .. py:method:: comment(idx)
+
+      :param idx: An integer index of the object to be returned.
+      :rtype: Object of type :ref:`Comment <api-python-datamodel-comment>`.
+
+      Returns the Comment at index idx.
+
+   .. py:method:: comment(commentIndex)
+
+      :param commentIndex: The index of the object to be removed of type CommentIndex.
+      :rtype: Object of type :ref:`Comment <api-python-datamodel-comment>`.
+
+      Returns the Comment at given index. The indexes of all child objects
+      are compared by value which makes this function slower than the direct
+      integer index look-up.
+
+   .. py:method:: event(idx)
+
+      :param idx: An integer index of the object to be returned.
+      :rtype: Object of type :ref:`Event <api-python-datamodel-event>`.
+
+      Returns the Event at index idx.
+
+   .. py:method:: findEvent(publicID)
+
+      :param publicID: The publicID of the object to find.
+      :rtype: Object of type :ref:`Event <api-python-datamodel-event>`.
+
+      Returns the child object with a certain publicID, None otherwise.
+
+   .. py:method:: eventParameters()
+
+      :rtype: EventParameters
+
+      Returns the parent EventParameters if available. Returns None
+      if the parent is not a EventParameters. This is a convenience wrapper
+      for parent().
+
+   .. py:method:: assign(other)
+
+      This method implements the :ref:`Object <api-python-datamodel-object>` interface.
+
+   .. py:method:: attachTo(parent)
+
+      This method implements the :ref:`Object <api-python-datamodel-object>` interface.
+
+   .. py:method:: detachFrom(parent)
+
+      This method implements the :ref:`Object <api-python-datamodel-object>` interface.
+
+   .. py:method:: detach()
+
+      This method implements the :ref:`Object <api-python-datamodel-object>` interface.
+
+   .. py:method:: clone()
+
+      :rtype: A cloned Catalog.
+
+      Returns a new instance that is a clone of the current instance. Child
+      objects are being ignored.
+
+
+   .. py:method:: updateChild(ref)
+
+      :param ref: A child object derived from class Object.
+      :rtype: A Boolean flag indicating success with True, False otherwise
+
+      This method takes the passed reference object and searches for a child
+      with the same publicID (if derived from :ref:`PublicObject <api-python-datamodel-publicobject>`)
+      or the same index (if derived from :ref:`Object <api-python-datamodel-object>`).
+      The the child was found the reference objects attributes are copied to
+      the child object. Children of child are being ignored during this operation.
+      This method implements the :ref:`PublicObject <api-python-datamodel-publicobject>` interface.
+
+
+   .. py:method:: accept(visitor)
+
+      :param visitor: A visitor.
+
+      This method implements the :ref:`PublicObject <api-python-datamodel-publicobject>` interface.
+
 .. _api-python-datamodel-comment:
 
 Comment
@@ -5496,6 +5827,7 @@ Comment
    - ``stationMagnitude`` -- :ref:`StationMagnitude <api-python-datamodel-stationmagnitude>`
    - ``pick`` -- :ref:`Pick <api-python-datamodel-pick>`
    - ``event`` -- :ref:`Event <api-python-datamodel-event>`
+   - ``catalog`` -- :ref:`Catalog <api-python-datamodel-catalog>`
    - ``origin`` -- :ref:`Origin <api-python-datamodel-origin>`
    - ``parameter`` -- :ref:`Parameter <api-python-datamodel-parameter>`
    - ``parameterSet`` -- :ref:`ParameterSet <api-python-datamodel-parameterset>`
@@ -5669,6 +6001,14 @@ Comment
 
       Returns the parent Event if available. Returns None
       if the parent is not a Event. This is a convenience wrapper
+      for parent().
+
+   .. py:method:: catalog()
+
+      :rtype: Catalog
+
+      Returns the parent Catalog if available. Returns None
+      if the parent is not a Catalog. This is a convenience wrapper
       for parent().
 
    .. py:method:: origin()
@@ -6764,6 +7104,7 @@ CreationInfo
 
    - :func:`Amplitude.creationInfo`
    - :func:`Arrival.creationInfo`
+   - :func:`Catalog.creationInfo`
    - :func:`Comment.creationInfo`
    - :func:`ConfigStation.creationInfo`
    - :func:`Event.creationInfo`
@@ -8495,6 +8836,7 @@ Event
 
    **Parents**:
 
+   - ``catalog`` -- :ref:`Catalog <api-python-datamodel-catalog>`
    - ``eventParameters`` -- :ref:`EventParameters <api-python-datamodel-eventparameters>`
 
    **Children**:
@@ -8821,6 +9163,14 @@ Event
       are compared by value which makes this function slower than the direct
       integer index look-up.
 
+   .. py:method:: catalog()
+
+      :rtype: Catalog
+
+      Returns the parent Catalog if available. Returns None
+      if the parent is not a Catalog. This is a convenience wrapper
+      for parent().
+
    .. py:method:: eventParameters()
 
       :rtype: EventParameters
@@ -9009,6 +9359,7 @@ EventParameters
    - ``reading`` -- :ref:`Reading <api-python-datamodel-reading>`
    - ``origin`` -- :ref:`Origin <api-python-datamodel-origin>`
    - ``focalMechanism`` -- :ref:`FocalMechanism <api-python-datamodel-focalmechanism>`
+   - ``catalog`` -- :ref:`Catalog <api-python-datamodel-catalog>`
    - ``event`` -- :ref:`Event <api-python-datamodel-event>`
 
    **Attributes**:
@@ -9085,6 +9436,15 @@ EventParameters
       copied but managed by this instance. Any change to the passed object
       will also change the child.
 
+   .. py:method:: add(catalog)
+
+      :param catalog: Object of type :ref:`Catalog <api-python-datamodel-catalog>`
+      :rtype: A Boolean value indicating success with True, False otherwise.
+
+      Adds a Catalog object to EventParameters. The object is not
+      copied but managed by this instance. Any change to the passed object
+      will also change the child.
+
    .. py:method:: add(event)
 
       :param event: Object of type :ref:`Event <api-python-datamodel-event>`
@@ -9129,6 +9489,13 @@ EventParameters
 
       Removes a previously added FocalMechanism object from EventParameters.
 
+   .. py:method:: remove(catalog)
+
+      :param catalog: Object of type :ref:`Catalog <api-python-datamodel-catalog>`
+      :rtype: A Boolean value indicating success with True, False otherwise.
+
+      Removes a previously added Catalog object from EventParameters.
+
    .. py:method:: remove(event)
 
       :param event: Object of type :ref:`Event <api-python-datamodel-event>`
@@ -9157,6 +9524,11 @@ EventParameters
       :rtype: A Boolean value indicating success with True, False otherwise.
 
    .. py:method:: removeFocalMechanism(idx)
+
+      :param idx: An integer index of the object to be removed.
+      :rtype: A Boolean value indicating success with True, False otherwise.
+
+   .. py:method:: removeCatalog(idx)
 
       :param idx: An integer index of the object to be removed.
       :rtype: A Boolean value indicating success with True, False otherwise.
@@ -9195,6 +9567,12 @@ EventParameters
       :rtype: integer value indicating the number of child objects.
 
       Returns the number of FocalMechanism child objects.
+
+   .. py:method:: catalogCount()
+
+      :rtype: integer value indicating the number of child objects.
+
+      Returns the number of Catalog child objects.
 
    .. py:method:: eventCount()
 
@@ -9237,6 +9615,13 @@ EventParameters
 
       Returns the FocalMechanism at index idx.
 
+   .. py:method:: catalog(idx)
+
+      :param idx: An integer index of the object to be returned.
+      :rtype: Object of type :ref:`Catalog <api-python-datamodel-catalog>`.
+
+      Returns the Catalog at index idx.
+
    .. py:method:: event(idx)
 
       :param idx: An integer index of the object to be returned.
@@ -9276,6 +9661,13 @@ EventParameters
 
       :param publicID: The publicID of the object to find.
       :rtype: Object of type :ref:`FocalMechanism <api-python-datamodel-focalmechanism>`.
+
+      Returns the child object with a certain publicID, None otherwise.
+
+   .. py:method:: findCatalog(publicID)
+
+      :param publicID: The publicID of the object to find.
+      :rtype: Object of type :ref:`Catalog <api-python-datamodel-catalog>`.
 
       Returns the child object with a certain publicID, None otherwise.
 
@@ -15138,22 +15530,13 @@ QCLog
       Compares two objects without its child objects. Both objects are compared
       by value.
 
-   .. py:method:: index()
-
-      :rtype: The object's index of type QCLogIndex.
-
-       Returns the objects index which is also used for the database as unique
-       constraint.
-
-   .. py:method:: equalIndex(lhs)
-
-      :param lhs: :ref:`QCLog <api-python-datamodel-qclog>`
-      :rtype: A Boolean value indicating True if both indexes are equal or
-              False otherwise.
-
    .. py:method:: setWaveformID(waveformID)
 
       :param waveformID: :ref:`WaveformStreamID <api-python-datamodel-waveformstreamid>`
+
+      The waveform identifier for which the annotation is valid. Each component
+      can contain wildcards \(asterisk or question mark\) but no regular
+      expressions.
 
    .. py:method:: waveformID()
 
@@ -15348,11 +15731,6 @@ QualityControl
       :param idx: An integer index of the object to be removed.
       :rtype: A Boolean value indicating success with True, False otherwise.
 
-   .. py:method:: removeQCLog(qCLogIndex);
-
-      :param qCLogIndex: The index of the object to be removed of type QCLogIndex.
-      :rtype: A Boolean value indicating success with True, False otherwise.
-
    .. py:method:: removeWaveformQuality(idx)
 
       :param idx: An integer index of the object to be removed.
@@ -15397,15 +15775,6 @@ QualityControl
       :rtype: Object of type :ref:`QCLog <api-python-datamodel-qclog>`.
 
       Returns the QCLog at index idx.
-
-   .. py:method:: qCLog(qCLogIndex)
-
-      :param qCLogIndex: The index of the object to be removed of type QCLogIndex.
-      :rtype: Object of type :ref:`QCLog <api-python-datamodel-qclog>`.
-
-      Returns the QCLog at given index. The indexes of all child objects
-      are compared by value which makes this function slower than the direct
-      integer index look-up.
 
    .. py:method:: waveformQuality(idx)
 

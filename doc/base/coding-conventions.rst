@@ -21,6 +21,7 @@ used to fill the space. The recommended tab width is 4 characters.
    >   if ( a > 5 ) {
    >   >   SEISCOMP_DEBUG("A is greater than 5. Its current value is %d",
    >   >   ...............a);
+   >   }
    >   return a;
    }
 
@@ -84,14 +85,14 @@ C++ code is (or should be) written with the following code style:
    }
 
 
-   namespace Foo {
-   namespace Bar {
+   namespace Foo::Bar {
 
 
    void foo(int a, int b) {
        for ( int i = 0; i < a; ++i ) {
-           if (  i < b )
+           if (  i < b ) {
                bar(i);
+           }
            else {
                bar(i);
                bar(b);
@@ -100,8 +101,7 @@ C++ code is (or should be) written with the following code style:
    }
 
 
-   } // namespace Bar
-   } // namespace Foo
+   } // namespace Foo::Bar
 
    #endif
 
@@ -217,22 +217,25 @@ Check a null pointer with implicit boolean conversion.
 
 .. code-block:: c++
 
-   if ( !ptr )
+   if ( !ptr ) {
        do_something();
+   }
 
 rather than
 
 .. code-block:: c++
 
-   if ( ptr == 0 )
+   if ( ptr == 0 ) {
        do_something();
+   }
 
 or
 
 .. code-block:: c++
 
-   if ( ptr == NULL )
+   if ( ptr == NULL ) {
        do_something();
+   }
 
 Virtual Functions
 =================

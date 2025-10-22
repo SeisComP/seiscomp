@@ -1,17 +1,19 @@
 .. _tutorials_upgrade:
 
-******************
-Upgrading SeisComP
-******************
+***************************
+Updating/Upgrading SeisComP
+***************************
 
 You will ...
 
-* Upgrade a SeisComP system
+* Update/Upgrade a SeisComP system
 * Migrate a SeisComP3 system to a newer SeisComP version
 
 Pre-requisites for this tutorial:
 
-* Tutorial on :ref:`installation <tutorials_postinstall>` and SeisComP previously installed
+* :ref:`Documentation of installation <installation>`
+* Tutorial on :ref:`installation <tutorials_postinstall>` and |scname|
+  previously installed
 
 Afterwards/Results/Outcomes:
 
@@ -28,9 +30,10 @@ Background
 ==========
 
 
-Installing a new SeisComP :ref:`release version <tutorials_upgrade_versions>`
-is typically simple and the step described in :ref:`tutorials_upgrade-normal`
-can be applied. **More actions** are required when
+Updating/upgrading |scname| to a higher
+:ref:`release version <installation_versions>` is typically simple and the
+steps described in :ref:`tutorials_upgrade-normal` can be applied.
+**More actions** are required when
 
 * Upgrading the major version of SeisComP as described in :ref:`tutorials_upgrade-normal`.
 * Upgrading :ref:`from SeisComP3 to SeisComP in version 4.0.0. or higher <tutorials_upgrade_v4>`.
@@ -38,66 +41,32 @@ can be applied. **More actions** are required when
   SeisComP in version 4 or higher <tutorials_upgrade_seedlink>`.
 
 
-.. _tutorials_upgrade_versions:
+Upgrade vs. update
+------------------
 
-SeisComP versions
------------------
-
-SeisComP has :ref:`developed over time <history>`. The versions can be distinguished
-by the name of the release:
-
-* **SeisComP since version 4.0.0** uses release version numbers such as *5.2.1*
-  where
-
-  * 5: major version with changes in API and database schema version, new features,
-    bug fixed, optimizations,
-  * 2: minor version with new features, bug fixed, optimizations,
-  * 1: patch number with bug fixes, optimizations.
-
-  .. note ::
-
-     When increasing the major version number, an upgrade of
-     the database is required.
-
-* **SeisComP3** uses release versions, names, numbers and patch numbers.
-
-  Full example:  *SeisComP3-jakarta-2020.330.02*
-
-  * 3: release version
-  * jakarta: release name
-  * 2020.330: release number
-  * 02: patch number
-
-  Names are adjusted depending on changes in source code:
-
-  * **Release version:** major changes in module groups, functionality, concepts, data model.
-    Example: SeisComp3 is SeisComP in version 3.0
-    in comparison to version 2.5 the GUIs were introduced.
-  * **Release name:** major changes in functionality, concepts, data model.
-    Example: with SeisComP3-Seattle the new user friendly configuration GUI :ref:`scconfig`
-    was introduced.
-  * **Release number:** changes in data model version and/or major changes in applications and optimizations.
-    The numbers include the year and the day of the year of the software release.
-    Example: Jakarta-2018.327
-  * **Patch number:** optimizations of applications without changes in the data model version.
+Here we understand that *upgrades* increase the major release version number
+while *updates* only increase the minor version or the patch number, see section
+:ref:`installation_versions`.
 
 
-Upgrade SeisComP on multiple machines
--------------------------------------
+Upgrading multiple machines
+---------------------------
 
 Applications can only connect to a messaging system that runs with a database
-in an equal or lower data base schema version. In distributed |scname| systems
-one machine host the messaging system and the database and all other machines
-are connected to this messaging or are running independently, the |scname|
-installation on the machine operating the messaging is always updated last.
+in an equal or lower data base schema version. However, upgrading |scname| to a
+higher major release version typically increases the database scheme version.
+Therefore, in distributed |scname| systems where one machine hosts the messaging
+system and the database and all other machines are connected to this messaging,
+the |scname| installation on the machine operating the messaging is always
+upgraded last.
 
 **Example:** A distributed system includes a processing system with the
 messaging system and database and a GUI work station connected to the processing
 system:
 
-#. Upgrade the GUI work station
-#. Upgrade the processing system, take actions to
-   :ref:`upgrade the database version <tutorials_upgrade-db>`.
+#. :ref:`Upgrade <tutorials_upgrade-normal>` the GUI work station
+#. :ref:`Upgrade <tutorials_upgrade-normal>` the processing system, take actions
+   to :ref:`upgrade the database version <tutorials_upgrade-db>`.
 
 .. note::
 
@@ -110,98 +79,50 @@ system:
 
 .. _tutorials_upgrade_download:
 
-Package Download
-================
+Package download
+----------------
 
-Get the SeisComP package in the latest version or older ones from gempa GmbH or
-from the download website of :cite:t:`seiscomp`.
-
-.. note ::
-
-   gempa provides :cite:t:`gsm` for convenient and consistent download and
-   installation of SeisComP and other packages.
+Get and install the |scname| package in the any available version from
+:cite:t:`gempa` or from the download website of :cite:t:`seiscomp` as described
+in section :ref:`installation-packages`.
 
 
 .. _tutorials_upgrade_changelog:
 
-Documentation of Changes
-========================
+Documentation of changes
+------------------------
 
-The important novelties, optimizations and changes that are available after upgrading
-are documented in the change log which can be read
-`online <https://www.seiscomp.de/doc/base/changelog.html>`_.
-It is recommend to read the change log before taking further actions.
-
-The details can also be found locally in the file
-
-.. code-block:: sh
-
-   $SEISCOMP_ROOT/share/doc/seiscomp/CHANGELOG
-
-which is integrated in the :ref:`documentation <sc-changelog>` or accessible
-from the *Docs* panel in :ref:`scconfig`.
+The important novelties, optimizations and changes that are available after
+upgrading are documented in the Changelog which is part of this documentation
+and which can also be accessed through the *Docs* panel of :ref:`scconfig`.
+The installed locally installed file is
+:file:`$SEISCOMP_ROOT/share/doc/seiscomp/CHANGELOG`
+The Changelog can also be read
+`online <https://www.seiscomp.de/doc/base/changelog.html>`_ but care should be
+take that the version number matches your.´
 
 .. note::
 
-   New features are regularly advertised and described in detail on the
-   `News website of gempa GmbH <https://www.gempa.de/news/>`_ and on the
-   :cite:t:`seiscomp-forum`.
-
-
-.. _tutorials_upgrade-normal:
-
-Normal Upgrade
-==============
-
-The normal upgrade including upgrading the major version of SeisComP takes only
-a few steps:
-
-#. :ref:`Download <tutorials_upgrade_download>` the SeisComP package.
-#. Stop all SeisComP modules:
-
-   .. code-block:: sh
-
-      seiscomp stop
-
-#. Install the new packages.
-
-   .. note::
-
-      Users of external, e.g., |gempa| modules must ensure that these external
-      modules match the SeisComP release version if they depend on SeisComP
-      libraries.
-
-#. Test the database schema version and update bindings
-
-   .. code-block:: sh
-
-      seiscomp update-config
-
-   :ref:`Upgrade the database schema version <tutorials_upgrade-db>` if
-   mismatches are reported.
-
-#. After a successful upgrade, start all modules again and observe the status:
-
-   .. code-block:: sh
-
-      seiscomp start
-      seiscomp status started
+   New major release with the features are regularly advertised and described in
+   detail on the `News website of gempa GmbH <https://www.gempa.de/news/>`_ and
+   on the :cite:t:`seiscomp-forum`.
 
 
 .. _tutorials_upgrade-db:
 
 Upgrade database schema version
-===============================
+-------------------------------
 
-When installing a new SeisComP release with a higher major version number,
-upgrading the database may be required. The database version will be tested and
-the required actions will be shown when executing:
+When upgrading |scname| to a higher major version number as set out in section
+:ref:`tutorials_upgrade-normal`, upgrading the database schema is typically
+required, too. The database version will be tested and the required actions will
+be reported when executing:
 
 .. code-block:: sh
 
-   seiscomp update-config
+   seiscomp update-config**Special case:**
 
-or when pressing the Update Configuration button in scconfig.
+or when pressing the Update Configuration button in :ref:`scconfig`.
 An upgrade from version SeisComP3 jakarta-2017.334 to SeisComP in version 5.1.0
 will give, e.g.:
 
@@ -219,12 +140,22 @@ will give, e.g.:
      * migration to the current version is required. apply the following
        scripts in exactly the given order:
        * mysql -u sysop -p -D seiscomp -h localhost < /home/sysop/seiscomp/share/db/migrations/mysql/0_10_to_0_11.sql
-       * mysql -u sysop -p -D seiscomp -h localhost < /home/sysop/seiscomp/share/db/migrations/mysql/0_11_to_0_12.sql
+       * mysql -u sysop -p -D seiscomp -h l
+**Special case:**ocalhost < /home/sysop/seiscomp/share/db/migrations/mysql/0_11_to_0_12.sql
    error: updating configuration for scmaster failed
 
-The shown migration scripts can be used directly as given and in the given order:
+The shown migration scripts can be used directly as given and in the given
+order but you need to first stop all modules writing to or deleting objects from
+the database such as :ref:`scmaster`, :ref:`scdb`, :ref:`scardac` or
+:ref:`scdbstrip` running on the same or any connected machine, e.g.
 
-* MySQL / MariaDB:
+.. code-block:: sh
+
+   seiscomp stop scmaster
+**Special case:**
+Thereafter, apply the migration according to your database:
+
+* MySQL/MariaDB:
 
   .. code-block:: sh
 
@@ -239,13 +170,15 @@ The shown migration scripts can be used directly as given and in the given order
      psql -U sysop -d seiscomp -h localhost -W -f /home/sysop/seiscomp/share/db/migrations/postgresql/0_11_to_0_12.sql
 
 Using the migration scripts provides a more user friendly way than copying the
-lines of MySQL code from the changelog. In future versions we might add the option
+lines of MySQL code from the changelog which was practise in past SeisComP3
+versions. In future versions we might add the option
 to automatically run the migrations.
 
 .. warning::
 
    Upgrading the database make take some time. Do no interrupt the process!
-   During this time, the |scname| messaging system is unavailable causing a downtime of the system.
+   During this time, the |scname| messaging system is unavailable causing a
+   downtime of the system.
 
 After applying the migration scripts the database should be at the correct version.
 Test again with:
@@ -254,16 +187,77 @@ Test again with:
 
    seiscomp update-config
 
-After successfully upgrading the database continue your previous upgrade procedure.
+After successfully upgrading the database continue your previous upgrade
+procedure.
+
+
+.. _tutorials_upgrade-normal:
+
+Normal Update/Upgrade
+=====================
+
+Normal updates/upgrades of the major version of |scname| takes only a few steps:
+
+#. If you are tracking your |scname| installation using :program:`git`
+   (recommended), ensure all previous changes are committed and the installation
+   is clean.
+#. Stop all SeisComP modules:
+
+   .. code-block:: sh
+
+      seiscomp stop
+
+#. Download and install the |scname| package as described in section
+   :ref:`installation-packages`.
+
+#. Understand the Changelog of the installed |scname| as described in section
+   :ref:`tutorials_upgrade_changelog`.
+
+#. Infrequently configuration parameters require changes which
+   are documented in the Changelog. You may also scan your configuration for
+   deprecated or obsolete configuration parameters or values using
+   `gempa-checkSCconfig.py <https://data.gempa.de/packages/Public/tools/>`_
+   provided by :cite:t:`gempa`. Apply changes accordingly.
+
+#. The software dependencies may have changed after upgrading. Install them as
+   described in section :ref:`software_dependencies`.
+
+#. Test the database schema version and update bindings
+
+   .. code-block:: sh
+
+      seiscomp update-config
+
+   :ref:`Upgrade the database schema version <tutorials_upgrade-db>` if
+   mismatches are reported. The mismatch reports will also give the upgrade
+   instructions. Repeat *seiscomp update-config* after upgrading the database
+   schema version.
+
+   **Background:** When upgrading the major |scname| version you
+   typically need to upgrade the database scheme version.
+
+
+
+#. After a successful update/upgrade, start all modules again and observe the
+   status:
+
+   .. code-block:: sh
+
+      seiscomp start
+      seiscomp status started
+
+#. If you are tracking your |scname| installation using :program:`git`
+   (recommended), commit all changes.
 
 
 .. _tutorials_upgrade_v4:
 
-SeisComP3 to version >=4
+Upgrading from SeisComP3
 ========================
 
-SeisComP in version 4 has some major differences to SeisComP3 which require adjustments.
-The main differences are in the :ref:`directories of the SeisComP installation <sec-tutorials_upgrading_path>`
+SeisComP in version >=4 has major differences to SeisComP3 which require
+adjustments. The main differences are in the
+:ref:`directories of the SeisComP installation <sec-tutorials_upgrading_path>`
 and the :ref:`messaging system <sec-tutorials_upgrading_messaging>`.
 The changes and the required actions are explained below. They must be considered
 in addition to the steps set out in section :ref:`tutorials_upgrade-normal`.
@@ -274,8 +268,8 @@ in addition to the steps set out in section :ref:`tutorials_upgrade-normal`.
 Files and directories
 ---------------------
 
-With **SeisComP3** all the default installation typically required all modules and configurations
-in the directories
+With **SeisComP3** all the default installation typically required all modules
+and configurations in the directories
 
 * seiscomp3/ , typically $HOME/seiscomp3 or /opt/seiscomp3/
 * $HOME/.seiscomp3/
@@ -410,14 +404,14 @@ configuration. Migrate the legacy database parameters and configure the new one:
 
             queues.production.groups = ${defaultGroups}, L1PICK, L1LOCATION
 
-       * Set groups per queue in :confval:`queues.$name.groups`,
+       * **Special case:** Set groups per queue in :confval:`queues.$name.groups`,
          ignoring groups in :confval:`defaultGroups`
 
          .. code-block:: properties
 
             queues.production.groups = L1PICK, L1LOCATION, AMPLITUDE, PICK, LOCATION, MAGNITUDE, FOCMECH, EVENT, QC, PUBLICATION, GUI, INVENTORY, ROUTING, CONFIG, LOGGING, IMPORT_GROUP, SERVICE_REQUEST, SERVICE_PROVIDE
 
-       * Set groups in :confval:`defaultGroups`
+       * **Special case:** Set groups in :confval:`defaultGroups`
 
          .. code-block:: properties
 
@@ -426,9 +420,9 @@ configuration. Migrate the legacy database parameters and configure the new one:
        .. warning::
 
           When setting groups in the queues all groups configured in
-          :confval:`defaultGroups` will be ignored unless `${defaultGroups}` is used.
-          Add all groups from :confval:`defaultGroups` to the queues to keep the
-          default groups.
+          :confval:`defaultGroups` will be ignored unless `${defaultGroups}` is
+          used. Add all groups from :confval:`defaultGroups` to the queues to
+          keep the default groups.
 
      * Add the interface name, currently only *dbstore* is supported. Example for
        a queue names *production*
@@ -484,9 +478,8 @@ After adjusting the structure, variables and configuration parameters, check if 
 Seedlink
 --------
 
-When upgrading from SeisComp3 Jakrata-2018.327 or older and using :ref:`seedlink`,
-consider the sections :ref:`tutorials_upgrade_seedlink` and
-:ref:`tutorials_proc_seedlink`.
+When upgrading from SeisComp3 in version Jakrata-2018.327 or older and using
+:ref:`seedlink`, consider the section :ref:`tutorials_upgrade_2018.327`.
 
 
 Automatic module check
@@ -508,8 +501,10 @@ modules automatically during computer startup, then the startup script must be
 adjusted.
 
 
-Upgrade From SeisComP3 Jakarta-2018.327 or Before
-=================================================
+.. _tutorials_upgrade_2018.327:
+
+Upgrading From SeisComP3 <= Jakarta-2018.327
+============================================
 
 
 .. _tutorials_upgrade_seedlink:
@@ -591,7 +586,7 @@ Script for renaming the seedlink buffer directories:
                 net=""
                 while read a b c; do
                         case $a in
-                                --) break;;
+                                --) break;;tutorials_upgrade_seedlink
                                 name) eval sta=$c;;
                                 network) eval net=$c;;
                         esac

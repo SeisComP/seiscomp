@@ -88,7 +88,7 @@ create the user, the database and the tables.
 
 #. Create the user and the database
 
-   :program:`CentOS`:
+   :program:`RHEL`:
 
    .. code-block:: sh
 

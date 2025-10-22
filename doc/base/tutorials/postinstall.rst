@@ -6,11 +6,14 @@ Installation on Ubuntu
 
 You will ...
 
-* Make a basic |scname| installation
+* Make a basic |scname| installation of SeisComP in version 4.0.0 on Ubuntu 20.04
+* Make an initial configuration
+* Perform function tests
 
 Pre-requisites for this tutorial:
 
 * Internet access
+* :ref:`Documentation of installation <installation>`
 
 Afterwards/Results/Outcomes:
 
@@ -51,18 +54,20 @@ but the steps for other Ubuntu versions are similar.
       $ sudo addgroup admin
       $ sudo usermod -a -G admin,adm,audio sysop
 
-   .. note:
+   .. note::
 
       Adding a new user is not mandatory. You can install under an existing user
       directory. Creating a new user is recommended as it allows an easy cleanup
       of the system later simply by removing the new user if needed.
 
 #. Check the size and the architecture. This is espcially required when installing
-   :ref:`pre-compiled packages<tutorials_postinstall_package>`: ::
+   :ref:`pre-compiled packages<tutorials_postinstall_package>`:
 
-     $ df -h
-     $ cat /etc/issue
-     $ uname -m
+   .. code-block:: sh
+
+      $ df -h
+      $ cat /etc/issue
+      $ uname -m
 
    Compare the available disk space with the requirements given in
    the :ref:`installation` section.
@@ -75,9 +80,10 @@ but the steps for other Ubuntu versions are similar.
 Install from source code
 ========================
 
-To compile SeisComP from the source code follow the
-:ref:`instructions in the development section <build>`. You may later download and add
-maps as described below in the :ref:`package section <tutorials_postinstall_package>`.
+To compile |scname| from the source code follow the
+:ref:`instructions in the development section <build>`. You may later download
+and add maps as described below in the
+:ref:`Documentation of installation <installation>`.
 
 
 .. _tutorials_postinstall_package:
@@ -85,7 +91,18 @@ maps as described below in the :ref:`package section <tutorials_postinstall_pack
 Install pre-compiled release packages
 =====================================
 
-You may download and installed pre-compile SeisComP binary package, maps and documentation.
+
+You may install the |scname| packages in either way:
+
+* :ref:`gsm<installation-gsm>` (recommended) a package manager provided by
+  :cite:t:`gempa`,
+* :ref:`manually by extracting packages <installation-manual>`.
+
+Here we refer to the manual extraction of packages. More details are given
+in section :ref:`installation`.
+
+You may download and installed pre-compile |scname| binary package, maps and
+documentation.
 
 #. Download the appropriate |scname| binary package taking into
    account your Linux distribution and the architecture.
@@ -99,15 +116,16 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
      
      .. code-block:: sh
    
-        wget "https://www.seiscomp.de/downloader/seiscomp-maps.tar.gz"
+        $ wget "https://www.seiscomp.de/downloader/seiscomp-maps.tar.gz"
 
    * the documentation package. Make sure, the documentation matches your
-     SeisComP version.
+     |scname| version.
 
      .. note::
 
-        The |scname| packages received from gempa GmbH contain the documentation
-        for the respective version and no separate download is required.
+        The |scname| packages received from :cite:t:`gempa-download` contain the
+        documentation for the respective version and no separate download is
+        required.
 
 #. Untar the :file:`seiscomp*` files (binary package, maps and documentation)
    you will find in your home or downloads directory. For SeisComP in version
@@ -180,7 +198,7 @@ You may download and installed pre-compile SeisComP binary package, maps and doc
 
    For PostgreSQL, also see the detailed :ref:`installation` instructions.
 
-   .. warning ::
+   .. warning::
 
       For Ubuntu 18.04 and newer, take care with MariaDB/MySQL installation.
       Before the next step, you must set a root password *for MariaDB/MySQL*
@@ -250,14 +268,14 @@ Find a detailed description in section :ref:`getting-started` and short guide be
 
    .. hint::
 
-      If, when you attempt to run a SeisComP command such as :ref:`scconfig` or
+      If, when you attempt to run a |scname| command such as :ref:`scconfig` or
       :ref:`scolv`, you receive an error message like 
 
       .. code-block:: sh
 
          scconfig: command not found
 
-      then the most likely explanation is that you have not set your SeisComP
+      then the most likely explanation is that you have not set your |scname|
       environment variables correctly.
 
       Run the `seiscomp` command with the full path to
@@ -278,7 +296,7 @@ Find a detailed description in section :ref:`getting-started` and short guide be
    Datacenter ID. These are used for Arclink and Seedlink, and in the information
    describing data model objects such as origins and events.
 
-#. The `seiscomp` command is a wrapper, which controls the SeisComP modules.
+#. The `seiscomp` command is a wrapper, which controls the |scname| modules.
    See :ref:`system-management`.
    Run something by typing seiscomp followed by a command
 
@@ -296,15 +314,22 @@ Find a detailed description in section :ref:`getting-started` and short guide be
 
      Use 'help [command]' to get more help about a command
 
-#. Start :ref:`scmaster`.
+#. Start and test :ref:`scmaster`.
    As described in the :ref:`overview`, these are needed for
-   communication between the SeisComP database and the individual
-   SeisComP modules.
+   communication between the |scname| database and the individual
+   |scname| modules.
 
    .. code-block:: sh
 
       $ seiscomp start scmaster
       starting scmaster
+      $ seiscomp status scmaster
+
+   In case errors are reported you should understand the full debug log:
+
+   .. code-block:: sh
+
+      $ scmaster --debug
 
 #. Install all dependencies needed for the GUI
 
@@ -333,7 +358,7 @@ Find a detailed description in section :ref:`getting-started` and short guide be
 
       $ seiscomp exec scrttv
 
-   After seeing the SeisComP splash screen,
+   After seeing the |scname| splash screen,
    you'll likely get an error message "Could not read inventory (NULL)".
    After a new installation, that's okay.
    Click that box away, and you'll see a screen with

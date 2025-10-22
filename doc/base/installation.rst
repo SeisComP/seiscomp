@@ -10,10 +10,12 @@ long-term support (LTS). The Linux flavors under which |scname| has been tested
 are given along with the |scname| package names on the download sites of
 :cite:t:`seiscomp` and :cite:t:`gempa`.
 
-The software can be obtained and installed from
+|scname| can be obtained and installed from
 
-* Officially released packages (TAR files) for different release versions,
-  Linux systems and architectures,
+* Officially released packages (TAR files) for different
+  :ref:`release versions <installation_versions>`, Linux systems and
+  architectures from the download sites of |scname| :cite:p:`seiscomp` or from
+  :cite:t:`gempa-download`.,
 * :ref:`Source code available on GitHub <build>`.
 
 Packages may include
@@ -30,8 +32,86 @@ Download these packages from :cite:t:`seiscomp` or :cite:t:`gempa-download`.
 The next sections describe the installation of the binary packages of |scname|
 on
 
-* :program:`Ubuntu 18`, 64 bit system,
-* :program:`CentOS 7`, 64 bit system.
+* :program:`Ubuntu`, 64 bit system,
+* :program:`RHEL`, 64 bit system.
+
+
+.. _installation_versions:
+
+SeisComP Versions
+=================
+
+|scname| has :ref:`developed over time <history>`. The versions can be
+distinguished by the name of the release:
+
+* **SeisComP since version 4.0.0** uses release version numbers such as *5.2.1*
+  where
+
+  * 5: major version with changes in API and database schema version, new features,
+    bug fixed, optimizations,
+  * 2: minor version with new features, bug fixed, optimizations,
+  * 1: patch number with bug fixes, optimizations.
+
+* **SeisComP3** uses release versions, names, numbers and patch numbers.
+
+  Full example:  *SeisComP3-jakarta-2020.330.02*
+
+  * 3: release version
+  * jakarta: release name
+  * 2020.330: release number
+  * 02: patch number
+
+  Names are adjusted depending on changes in source code:
+
+  * **Release version:** major changes in module groups, functionality,
+    concepts, data model.
+    Example: SeisComp3 is SeisComP in version 3.0
+    in comparison to version 2.5 the GUIs were introduced.
+  * **Release name:** major changes in functionality, concepts, data model.
+    Example: with SeisComP3-Seattle the new user friendly configuration GUI
+    :ref:`scconfig` was introduced.
+  * **Release number:** changes in data model version and/or major changes in
+    applications and optimizations.
+    The numbers include the year and the day of the year of the software
+    release. Example: Jakarta-2018.327
+  * **Patch number:** optimizations of applications without changes in the data
+    model version.
+
+The version number of the installed |scname| can be obtained by
+
+* This documentation where it printed in the header along with the SeisComP icon
+* The running any |scname| module on the command-line using :option:`-V` such as
+
+  .. code-block:: sh
+
+     $ scm -V
+
+     scm
+     Framework: 6.8.4 Release
+     API version: 16.3.0
+     Data schema version: 0.13
+     GIT HEAD: c28f6323
+     Compiler: c++ (Ubuntu 13.2.0-23ubuntu4) 13.2.0
+     Build system: Linux 6.8.12-11-pve
+     OS: Ubuntu 24.04 LTS / Linux
+
+
+.. _installation-os:
+
+Supported Operating Systems
+===========================
+
+|scname| is developed and tested on Linux for the latest stable flavors with
+long-term support (LTS) and on x86_64 architecture. For |scname| in version
+7.*.*. the minimum OS and version are
+
+* Debian: 11
+* RHEL: 8
+* Ubuntu: 22.04
+
+Higher versions of |scname| will require higher OS versions.
+Packages for more flavors and versions may be found on
+`the SeisComP website <https://www.seiscomp.de/downloader/>`_.
 
 
 .. _installation-hw:
@@ -52,7 +132,6 @@ Minimum requirements are:
    CPU; 2
    RAM; 4 GB
    HDD; 20 GB
-   OS; Ubuntu last 3 major LTS versions, 64bit, Debian 8.0 64bit, RHEL 7, CentOS 7 64bit
 
 In case large networks (>100 stations) are operated, a distributed system is
 recommended. Normally a |scname| system is separated in several subsystems.
@@ -95,17 +174,58 @@ GUI system:
 
 .. _installation-packages:
 
-Installation from Packages
-==========================
+Installation of Packages
+========================
 
-This section describes the installation of |scname| from compiled |scname|
-packages which ship as :file:`*.tar.gz` files.
+This section describes the initial installation of |scname| from compiled
+|scname| packages which ship as :file:`*.tar.gz` files. For installation from
+source code follow the instructions outlined in section :ref:`compiling_source`.
+
+You may install the |scname| packages in either way:
+
+* :ref:`gsm<installation-gsm>` (recommended) a package manager provided by
+  :cite:t:`gempa`,
+* :ref:`manually by extracting packages <installation-manual>`.
+
+For later updates/upgrades read the tutorial :ref:`tutorials_upgrade`.
+
+.. hint::
+
+   We recommend to track any changes in the installation and configuration of
+   |scname| except :file:`seiscomp/var`, :file:`seiscomp/share/maps` and large
+   binary files or files changing often during |scname| operation
+   (e.g. :ref:`global_hypo71`, :ref:`global_nonlinloc` input and output files)
+   using :program:`git`.
+
+.. _installation-gsm:
+
+gsm
+---
+
+Installation of packages by gsm :cite:p:`gsm` is
+recommended allowing to easily update/upgrade or add/remove packages in the
+future and in order to maintain a clean file structure also after
+updates/upgrades. If you wish to install and maintain |scname|
+by :program:`gsm` :cite:p:`gsm`, then read the instruction given in the
+:cite:t:`gsm-doc`.
+
+.. note::
+
+   While :program:`gsm` :cite:p:`gsm` allows the installation of software
+   packages the OpenSource map package of |scname| must be
+   :ref:`installed manually <installation-manual>`.
 
 
-Steps to take
--------------
+.. _installation-manual:
 
-Simply follow a few steps to complete your installation of |scname|:
+Manual unpacking
+----------------
+
+A simply installation can be done by simply downloading and unpacking the
+packages, but installation and maintenance using :ref:`gsm<installation-gsm>`
+is recommended.
+For simple unpacking follow a few steps to complete your installation of
+|scname|:
 
 #. Log in to your Linux system as user, e.g. sysop, the standard user in this
    documentation.
@@ -152,16 +272,18 @@ Simply follow a few steps to complete your installation of |scname|:
 
       user@host:~$ tar xzf seiscomp-[version]-doc.tar.gz
 
-Unpacking these files creates the |scname| :ref:`directory structure<directory_structure>`.
-
 
 .. _directory_structure:
 
-Directory structure
--------------------
+Directory Structure
+===================
 
-All installed files and directories are found below the *seiscomp* directory.
-The directory structure of the installed system is described the table below.
+The installation of |scname| creates the |scname|
+:ref:`directory structure<directory_structure>`.
+All installed files and directories are found below the *seiscomp* directory
+unless an alternative directory is given when installing with :program:`gsm` or
+:ref:`compiling from source code<compiling_source>`.
+The directory structure of the installed system is described in the table below.
 
 .. csv-table::
    :widths: 10 90
@@ -190,8 +312,8 @@ The directory structure of the installed system is described the table below.
 
 .. _software_dependencies:
 
-Software dependencies
----------------------
+Software Dependencies
+=====================
 
 |scname| depends on a number of additional software packages shipped with each
 Linux distribution.
@@ -204,37 +326,29 @@ using the MariaDB database, give 'mariadb-server' as parameter.
 .. code-block:: sh
 
    user@host:~$ seiscomp/bin/seiscomp install-deps base mariadb-server
-   Distribution: Ubuntu 18.04
+   Distribution: Ubuntu 24.04
    [sudo] password for sysop:
    Reading package lists... Done
    Building dependency tree
    Reading state information... Done
    ...
 
-More requirements for systems with GUIs and/or FDSNWS are:
+More requirements for systems with GUIs, FDSNWS and iLoc are:
 
 .. code-block:: sh
 
    user@host:~$ seiscomp/bin/seiscomp install-deps gui
    user@host:~$ seiscomp/bin/seiscomp install-deps fdsnws
+   user@host:~$ seiscomp/bin/seiscomp install-deps iloc
 
 
 If your distribution is not supported by :ref:`seiscomp` *install-deps*,
-install the above packages manually from the scripts within the OS-dependent
-directories:
-
-:program:`Ubuntu` `version`
+install the above packages manually from the scripts within the OS- and
+version-dependent directories:
 
 .. code-block:: sh
 
-   user@host:~$ cd seiscomp/share/deps/ubuntu/[version]
-   ...
-
-:program:`RHEL` `version`
-
-.. code-block:: sh
-
-   user@host:~$ cd seiscomp/share/deps/rhel/[version]
+   user@host:~$ cd seiscomp/share/deps/[OS]/[version]
    ...
 
 Read the section :ref:`System management<system-management>` for more detailed
@@ -301,7 +415,7 @@ MariaDB / MySQL
     innodb_buffer_pool_size = <your value>
     innodb_flush_log_at_trx_commit = 2
 
-  .. note ::
+  .. note::
 
      The location of the configuration file can differ between distributions.
 
@@ -309,7 +423,7 @@ MariaDB / MySQL
 
      :file:`/etc/mysql/mariadb.conf.d/50-server.cnf`
 
-     :program:`CentOS`:
+     :program:`RHEL`:
 
      :file:`/etc/my.cnf`
 
@@ -324,7 +438,7 @@ MariaDB / MySQL
 
      user@host:~$ sudo systemctl enable mariadb
 
-  :program:`CentOS`
+  :program:`RHEL`
 
   .. code-block:: sh
 
@@ -334,11 +448,15 @@ MariaDB / MySQL
 * If you make a fresh installation of MariaDB/MySQL, secure the database and set
   a password for the root user
 
-  :program:`Ubuntu` ::
+  :program:`Ubuntu`
+
+  .. code-block:: sh
 
      user@host:~$ sudo mysql_secure_installation
 
-  :program:`CentOS` ::
+  :program:`RHEL`
+
+  .. code-block:: sh
 
      user@host:~$ su root
      root@host:~$ mysql_secure_installation
@@ -358,14 +476,14 @@ MariaDB / MySQL
 
      user@host:~$ sudo systemctl restart mariadb
 
-  :program:`CentOS`:
+  :program:`RHEL`:
 
   .. code-block:: sh
 
      user@host:~$ su root
      root@host:~$ systemctl restart mariadb
 
-.. note ::
+.. note::
 
    Replace mariadb by mysql when using MySQL instead of MariaDB.
 
@@ -382,15 +500,14 @@ PostgreSQL
   after |scname| database initialization. Here an example how to enable
   user/password authentication for local and remote connections.
 
-
 .. code-block:: sh
 
-     # TYPE  DATABASE        USER            ADDRESS                 METHOD
-      # IPv4 local connections:
-      host    seiscomp        sysop           0.0.0.0/0               md5
-      host    all             all             127.0.0.1/32            ident
+   # TYPE  DATABASE        USER            ADDRESS                 METHOD
+   # IPv4 local connections:
+   host    seiscomp        sysop           0.0.0.0/0               md5
+   host    all             all             127.0.0.1/32            ident
 
-.. note ::
+.. note::
 
      The order of the rules matters and the location of the configuration file
      can differ between distributions.
@@ -399,7 +516,7 @@ PostgreSQL
 
      :file:`/etc/postgresql/10/main/pg_hba.conf`
 
-     :program:`CentOS`:
+     :program:`RHEL`:
 
      :file:`/var/lib/pgsql/data/pg_hba.conf`
 
@@ -411,7 +528,7 @@ PostgreSQL
 
      listen_addresses = 0.0.0.0/0
 
-  .. note ::
+  .. note::
 
      The location of the configuration file can differ between distributions.
 
@@ -419,7 +536,7 @@ PostgreSQL
 
      :file:`/etc/postgresql/10/main/postgresql.conf`
 
-     :program:`CentOS`:
+     :program:`RHEL`:
 
      :file:`/var/lib/pgsql/data/postgresql.conf`
 
