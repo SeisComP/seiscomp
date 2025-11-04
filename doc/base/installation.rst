@@ -499,6 +499,9 @@ PostgreSQL
   leads to the fact that :program:`scmaster` can not connect to the database
   after |scname| database initialization. Here an example how to enable
   user/password authentication for local and remote connections.
+  Note: The following configuration changes are intended for a standard installation
+  and may override security concepts. For production systems, we recommend
+  coordinating the database configuration with the system administrator.
 
 .. code-block:: sh
 
@@ -526,7 +529,7 @@ PostgreSQL
 
   .. code-block:: sh
 
-     listen_addresses = 0.0.0.0/0
+     listen_addresses = *
 
   .. note::
 
