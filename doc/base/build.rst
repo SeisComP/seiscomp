@@ -105,30 +105,63 @@ The required packages are (Debian/Ubuntu package names):
 * flex
 * g++
 * git
-* cmakecmake-gui
-* crypto-dev
-* libboost
+* make
+* swig
+* cmake-gui
+* cmake-curses-gui
+* libcrypto-dev
+* libboost-all-dev
 * libbson-dev
 * libfl-dev
 * libssl-dev
 * libxml2-dev
+* openjdk-21-jre-headless
+* gsoap
+* libgsoap-dev
+* libnetcdf-dev
+* libv4l-dev
+* libjpeg-turbo8-dev
+* libshp-dev
+* libusb-1.0-0-dev
+* gfortran
+* librrd-dev
+* liblapack-dev
 
-Optional, depending on the modules to be built are (Debian/Ubuntu package names):
+Depending on the |scname| modules to be built the optional packages are
+(Debian/Ubuntu package names):
+
+* libqwt-qt5-dev
+* libqt5svg5-dev
+* libqt5webkit5-dev
+* libqt5webengine5
+* qtwebengine5-dev
+* qtwebengine5-dev-tools
+* libmysql++-dev
+* libmariadb-dev
+* libmariadb-dev-compat
 * libmysqlclient-dev
+* postgresql-server-dev-16
 * libpq-dev
-* libqt5-dev
 * libsqlite3-dev
-* ncurses-dev
+* libncurses-dev
+* qttools5-dev
 * python3-dev
+* python3-twisted
+* python3-dateutil
 * python3-numpy (required if Numpy support is enabled which is also the default configuration)
 * qtbase5-dev
 
-As of |scname| in version 5.0.0 support for Python 2 is dropped and Python 3 has
-become the default.
-The Python development libraries are required if Python wrappers should be
-compiled which is the default configuration. The development files must
-match the used Python interpreter of the system.
+.. note::
 
+   * The package names may vary depending on version of the Linux distribution.
+   * As of |scname| in version 5.0.0 support for Python 2 is dropped and
+     Python 3 has become the default.
+     The Python development libraries are required if Python wrappers should be
+     compiled which is the default configuration. The development files must
+     match the used Python interpreter of the system.
+
+
+.. _compile_macos:
 
 Compiling |scname| for MacOS
 ============================
