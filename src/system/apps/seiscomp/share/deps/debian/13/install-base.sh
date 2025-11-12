@@ -1,1 +1,1 @@
-apt install libxml2 libboost-filesystem1.83.0 libboost-iostreams1.83.0 libboost-thread1.83.0 libboost-program-options1.83.0 libboost-regex1.83.0 libboost-system1.83.0 libssl3 libncurses6 libmariadb3 libpq5 libpython3.13 python3-numpy libbson-1.0-0
+apt install libxml2 libboost-filesystem1.83.0 libboost-iostreams1.83.0 libboost-thread1.83.0 libboost-program-options1.83.0 libboost-regex1.83.0 libboost-system1.83.0 libssl3 libncurses6 libmariadb3 libpq5 libpython3.13 python3-numpy libbson-1.0-0 pkexec
