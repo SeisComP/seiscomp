@@ -54,6 +54,7 @@ EventParameters
       FocalMechanismReference [label="FocalMechanismReference", href="../base/api-python.html#api-python-datamodel-focalmechanismreference", target="_top"]
       Event [label="Event", href="../base/api-python.html#api-python-datamodel-event", target="_top"]
       EventParameters [label="EventParameters", href="../base/api-python.html#api-python-datamodel-eventparameters", target="_top"]
+      { rank = same; Pick; Amplitude; Reading; Origin; FocalMechanism; Catalog; Event; }
       EventParameters -> Pick [dir=back arrowtail=diamond]
       MomentTensor -> Comment [dir=back arrowtail=diamond]
       FocalMechanism -> Comment [dir=back arrowtail=diamond]
@@ -611,6 +612,7 @@ EventParameters
           href = "../base/api-python.html#api-python-datamodel-eventparameters"
           target = "_top"
       ]
+      { rank = same; Pick; Amplitude; Reading; Origin; FocalMechanism; Catalog; Event; }
       EventParameters -> Pick [dir=back arrowtail=diamond]
       MomentTensor -> Comment [dir=back arrowtail=diamond]
       FocalMechanism -> Comment [dir=back arrowtail=diamond]
@@ -777,6 +779,7 @@ Config
           href = "../base/api-python.html#api-python-datamodel-config"
           target = "_top"
       ]
+      { rank = same; ParameterSet; ConfigModule; }
       Config -> ParameterSet [dir=back arrowtail=diamond]
       ParameterSet -> Parameter [dir=back arrowtail=diamond]
       Parameter -> Comment [dir=back arrowtail=diamond]
@@ -875,6 +878,7 @@ QualityControl
           href = "../base/api-python.html#api-python-datamodel-qualitycontrol"
           target = "_top"
       ]
+      { rank = same; QCLog; WaveformQuality; Outage; }
       QualityControl -> QCLog [dir=back arrowtail=diamond]
       QualityControl -> WaveformQuality [dir=back arrowtail=diamond]
       QualityControl -> Outage [dir=back arrowtail=diamond]
@@ -914,6 +918,7 @@ Inventory
       AuxStream [label="AuxStream", href="../base/api-python.html#api-python-datamodel-auxstream", target="_top"]
       Stream [label="Stream", href="../base/api-python.html#api-python-datamodel-stream", target="_top"]
       Inventory [label="Inventory", href="../base/api-python.html#api-python-datamodel-inventory", target="_top"]
+      { rank = same; StationGroup; AuxDevice; Sensor; Datalogger; ResponsePAZ; ResponseFIR; ResponseIIR; ResponsePolynomial; ResponseFAP; Network; }
       Inventory -> StationGroup [dir=back arrowtail=diamond]
       StationGroup -> StationReference [dir=back arrowtail=diamond]
       Inventory -> AuxDevice [dir=back arrowtail=diamond]
@@ -1422,6 +1427,7 @@ Inventory
           href = "../base/api-python.html#api-python-datamodel-inventory"
           target = "_top"
       ]
+      { rank = same; StationGroup; AuxDevice; Sensor; Datalogger; ResponsePAZ; ResponseFIR; ResponseIIR; ResponsePolynomial; ResponseFAP; Network; }
       Inventory -> StationGroup [dir=back arrowtail=diamond]
       StationGroup -> StationReference [dir=back arrowtail=diamond]
       Inventory -> AuxDevice [dir=back arrowtail=diamond]
@@ -1544,6 +1550,7 @@ Routing
           href = "../base/api-python.html#api-python-datamodel-routing"
           target = "_top"
       ]
+      { rank = same; Route; Access; }
       Routing -> Route [dir=back arrowtail=diamond]
       Route -> RouteArclink [dir=back arrowtail=diamond]
       Route -> RouteSeedlink [dir=back arrowtail=diamond]
@@ -1595,6 +1602,7 @@ Journaling
           href = "../base/api-python.html#api-python-datamodel-journaling"
           target = "_top"
       ]
+      { rank = same; JournalEntry; }
       Journaling -> JournalEntry [dir=back arrowtail=diamond]
    }
 
@@ -1707,6 +1715,7 @@ ArclinkLog
           href = "../base/api-python.html#api-python-datamodel-arclinklog"
           target = "_top"
       ]
+      { rank = same; ArclinkRequest; ArclinkUser; }
       ArclinkLog -> ArclinkRequest [dir=back arrowtail=diamond]
       ArclinkRequest -> ArclinkStatusLine [dir=back arrowtail=diamond]
       ArclinkRequest -> ArclinkRequestLine [dir=back arrowtail=diamond]
@@ -1798,6 +1807,7 @@ DataAvailability
           href = "../base/api-python.html#api-python-datamodel-dataavailability"
           target = "_top"
       ]
+      { rank = same; DataExtent; }
       DataAvailability -> DataExtent [dir=back arrowtail=diamond]
       DataExtent -> DataSegment [dir=back arrowtail=diamond]
       DataExtent -> DataAttributeExtent [dir=back arrowtail=diamond]
