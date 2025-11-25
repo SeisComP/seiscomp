@@ -1,1 +1,1 @@
-apt-get install mysql-server mysql-client
+apt install mysql-server mysql-client

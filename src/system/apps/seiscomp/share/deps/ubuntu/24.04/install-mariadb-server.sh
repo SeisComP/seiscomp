@@ -1,1 +1,1 @@
-apt-get install mariadb-server mariadb-client
+apt install mariadb-server mariadb-client

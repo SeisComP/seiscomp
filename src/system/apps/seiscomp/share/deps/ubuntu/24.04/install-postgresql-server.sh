@@ -1,1 +1,1 @@
-apt-get install postgresql postgresql-client
+apt install postgresql postgresql-client
