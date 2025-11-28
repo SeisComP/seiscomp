@@ -52,7 +52,6 @@ EventParameters
       EventDescription [label="EventDescription", href="../base/api-python.html#api-python-datamodel-eventdescription", target="_top"]
       OriginReference [label="OriginReference", href="../base/api-python.html#api-python-datamodel-originreference", target="_top"]
       FocalMechanismReference [label="FocalMechanismReference", href="../base/api-python.html#api-python-datamodel-focalmechanismreference", target="_top"]
-      Event [label="Event", href="../base/api-python.html#api-python-datamodel-event", target="_top"]
       EventParameters [label="EventParameters", href="../base/api-python.html#api-python-datamodel-eventparameters", target="_top"]
       { rank = same; Pick; Amplitude; Reading; Origin; FocalMechanism; Catalog; Event; }
       EventParameters -> Pick [dir=back arrowtail=diamond]
@@ -87,8 +86,6 @@ EventParameters
       Event -> EventDescription [dir=back arrowtail=diamond]
       Event -> OriginReference [dir=back arrowtail=diamond]
       Event -> FocalMechanismReference [dir=back arrowtail=diamond]
-      Catalog -> Event [dir=back arrowtail=diamond]
-      EventParameters -> Event [dir=back arrowtail=diamond]
    }
 
 .. graphviz::
@@ -569,29 +566,6 @@ EventParameters
           href = "../base/api-python.html#api-python-datamodel-focalmechanismreference"
           target = "_top"
       ]
-      Event [
-          labeltooltip = "Event"
-          label = <
-              <table border="0" cellpadding="0" cellspacing="2">
-                  <tr><td>Event</td></tr>
-                  <hr/>
-                  <tr><td> </td></tr>
-                  <tr><td align="left" port="publicID"><font color="#8b0000">+ publicID: string</font></td></tr>
-                  <tr><td align="left" port="preferredOriginID"><font color="#8b0000">+ preferredOriginID: string</font></td></tr>
-                  <tr><td align="left" port="preferredMagnitudeID"><font color="#8b0000">+ preferredMagnitudeID: string</font></td></tr>
-                  <tr><td align="left" port="preferredFocalMechanismID"><font color="#8b0000">+ preferredFocalMechanismID: string</font></td></tr>
-                  <tr><td align="left" port="type"><font color="#8b0000">+ type: EventType  [0..1]</font></td></tr>
-                  <tr><td align="left" port="typeCertainty"><font color="#8b0000">+ typeCertainty: EventTypeCertainty  [0..1]</font></td></tr>
-                  <tr><td align="left" port="creationInfo"><font color="#8b0000">+ creationInfo: CreationInfo  [0..1]</font></td></tr>
-                  <tr><td align="left"><font color="#8b0000">+ eventDescription: EventDescription [0..*]</font></td></tr>
-                  <tr><td align="left"><font color="#8b0000">+ comment: Comment [0..*]</font></td></tr>
-                  <tr><td align="left"><font color="#8b0000">+ originReference: OriginReference [0..*]</font></td></tr>
-                  <tr><td align="left"><font color="#8b0000">+ focalMechanismReference: FocalMechanismReference [0..*]</font></td></tr>
-              </table>
-          >
-          href = "../base/api-python.html#api-python-datamodel-event"
-          target = "_top"
-      ]
       EventParameters [
           labeltooltip = "EventParameters"
           label = <
@@ -645,8 +619,6 @@ EventParameters
       Event -> EventDescription [dir=back arrowtail=diamond]
       Event -> OriginReference [dir=back arrowtail=diamond]
       Event -> FocalMechanismReference [dir=back arrowtail=diamond]
-      Catalog -> Event [dir=back arrowtail=diamond]
-      EventParameters -> Event [dir=back arrowtail=diamond]
    }
 
 

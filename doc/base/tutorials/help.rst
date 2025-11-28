@@ -53,7 +53,7 @@ It contains the description of configuration and command-line parameters along w
 an overview with many detailed information.
 
 .. figure:: media/gui_help.png
-   :width: 16cm
+   :width: 15cm
    :align: center
 
    :ref:`scmv` with access to the HTML documentation.
@@ -142,7 +142,7 @@ The SeisComP Forum
 ------------------
 
 .. figure:: media/help_forum.png
-   :width: 16cm
+   :width: 15cm
    :align: center
 
    The :cite:t:`seiscomp-forum`.
@@ -164,9 +164,9 @@ if you report a problem.
 Logging
 -------
 
-Most SeisComP applications use a standard logging approach.
-By default, they log to files in your :file:`~/.seiscomp/log` directory,
-such as :file:`scamp.log`.
+Most |scname| modules use a standard logging approach.
+By default, the module log to unique files per module in your
+:file:`~/.seiscomp/log` directory, such as :file:`scamp.log`.
 Further options for logging are described in
 :ref:`concepts_configuration`.
 
@@ -175,7 +175,7 @@ You can control how often these are rotated
 Alternatively you can use the system-wide logging facility `syslog`
 and send logs to /var/log or another "standard" place.
 
-There are four levels of severity of SeisComP log messages,
+There are four levels of severity of |scname| log messages,
 and applications can be configured to show only those which
 are more severe than a given threshold.
 
@@ -184,11 +184,11 @@ are more severe than a given threshold.
 * 3 = INFO
 * 4 = DEBUG.
 
-Default is 2.
+Default is 2. The level is control by configuration of :confval:`logging.level`.
 Setting `logging.level = 4` results in the most messages.
 
-For other modules such as :ref:`seedlink`, the log files are written to
-:file:`seiscomp/var/log/`
+For :ref:`standalone modules<standalone module>` such as :ref:`seedlink`, the
+log files are written to :file:`seiscomp/var/log/`
 
 
 .. _sec_tutorial_help_debugging:

@@ -347,7 +347,7 @@ Find a detailed description in section :ref:`getting-started` and short guide be
    You should see a screen/window like this.
 
    .. figure:: media/postinstall_scconfig.png
-      :width: 16cm
+      :width: 15cm
       :align: center
 
       First view of :ref:`scconfig` configurator.
@@ -368,10 +368,11 @@ Find a detailed description in section :ref:`getting-started` and short guide be
    :ref:`waveforms <tutorials_geofon_waveforms>` to your system.
 
    .. figure:: media/postinstall_scrttv.png
-      :width: 14.6cm
+      :width: 15cm
       :align: center
 
-      First view of the :ref:`scconfig` configuration tool.
+      First view of the :ref:`scrttv`. The list of streams is still empty due to
+      the missing of configuration.
 
 
 Congratulations, you're done with this tutorial.

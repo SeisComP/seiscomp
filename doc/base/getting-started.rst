@@ -39,18 +39,6 @@ for |scname|.
 For setting up the database manually with MariaDB follow the instructions
 below.
 
-.. note::
-
-    With **Ubuntu 16.04** MariaDB has become the standard flavor of MySQL in
-    Ubuntu and either MariaDB or MySQL can be installed. The implementation
-    of MariaDB in Ubuntu requires additional steps. They must be taken
-    **before** the initial configuration in order to allow |scname| to make
-    use of MariaDB. Previously, the :ref:`scconfig` wizard and
-    :command:`seiscomp setup` could not be used to set up the MariaDB database.
-    **The option "Create database" had to be unchecked or answered with "no"**.
-    The issue is resolved in this release and both, :ref:`scconfig` wizard and
-    :command:`seiscomp setup` are now fully capable of the required actions.
-
 The full procedure to create the seiscomp database:
 
 .. code-block:: sh
@@ -154,16 +142,17 @@ for |scname|. If you want to use MySQL continue with the
 General |scname| Setup
 ======================
 
-Use :command:`seiscomp setup` or the wizard from within :ref:`scconfig` (:kbd:`Ctrl+N`) for the
-initial configuration including the database parameters. :command:`seiscomp setup` is the
-successor of the former :program:`./setup` script.
+Use :command:`seiscomp setup` or the wizard from within :ref:`scconfig`
+(:kbd:`Ctrl+N`) for the initial configuration including the database parameters.
+:command:`seiscomp setup` is the successor of the former :program:`./setup`
+script.
 
 In :command:`seiscomp setup` default values are given in brackets []: ::
 
    user@host:~$ seiscomp/bin/seiscomp setup
 
    ====================================================================
-   seiscomp setup
+   SeisComP setup
    ====================================================================
 
    This initializes the configuration of your installation.
@@ -191,10 +180,13 @@ parameters and the logging backend.
 
 .. code-block:: none
 
-   Organization name []:
+   Agency ID []:
+   Datacenter ID []:
+   Organization string []:
+   EventID Prefix []:
 
-Sets the organisation name printed e.g. when you say *hello* to Seedlink
-or Arclink.
+Sets for example the organisation name printed e.g. when you say *hello* to
+Seedlink or Arclink.
 
 ----
 
@@ -241,15 +233,15 @@ backend to be used.
 .. code-block:: none
 
    Create database [yes]:
+   Run as super user [yes]:
 
-----
 
 .. code-block:: none
 
    MYSQL root password (input not echoed) []:
 
 Give the MySQL root password for your database server to create the database
-tables. This is only required if the last question has been answered with 'yes'.
+tables. This is only required if the last question has been answered with 'no'.
 
 ----
 
@@ -260,6 +252,17 @@ tables. This is only required if the last question has been answered with 'yes'.
 If a database with the same name (to be selected later) exists already and the
 database should be created for you, an error is raised. To delete an existing
 database with the same name, say 'yes' here.
+
+----
+
+.. code-block:: none
+
+   0) utf8mb4
+   1) utf8
+   Character set [0]:
+
+Only relevant for MariaDB (see section :ref:`getting-started-mariadb`):
+
 
 ----
 
@@ -279,8 +282,8 @@ Setup the various database options valid for all database backends. Give
 ----
 
 If all question have been answered the final choice needs to be made to either
-create the initial configuration, go back to the last question or to quit
-without doing anything.
+create the initial configuration, dump the entered configuration parameters, go
+back to the last question or to quit without doing anything.
 
 .. code-block:: none
 
@@ -288,6 +291,7 @@ without doing anything.
    --------------
 
    P) Proceed to apply configuration
+   D) Dump entered parameters
    B) Back to last parameter
    Q) Quit without changes
    Command? [P]:
