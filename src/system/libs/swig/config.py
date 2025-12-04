@@ -120,6 +120,426 @@ class SwigPyIterator(object):
 
 # Register SwigPyIterator in _config:
 _config.SwigPyIterator_swigregister(SwigPyIterator)
+class StringVector(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _config.StringVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _config.StringVector___nonzero__(self)
+
+    def __bool__(self):
+        return _config.StringVector___bool__(self)
+
+    def __len__(self):
+        return _config.StringVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _config.StringVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _config.StringVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _config.StringVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _config.StringVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _config.StringVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _config.StringVector___setitem__(self, *args)
+
+    def pop(self):
+        return _config.StringVector_pop(self)
+
+    def append(self, x):
+        return _config.StringVector_append(self, x)
+
+    def empty(self):
+        return _config.StringVector_empty(self)
+
+    def size(self):
+        return _config.StringVector_size(self)
+
+    def swap(self, v):
+        return _config.StringVector_swap(self, v)
+
+    def begin(self):
+        return _config.StringVector_begin(self)
+
+    def end(self):
+        return _config.StringVector_end(self)
+
+    def rbegin(self):
+        return _config.StringVector_rbegin(self)
+
+    def rend(self):
+        return _config.StringVector_rend(self)
+
+    def clear(self):
+        return _config.StringVector_clear(self)
+
+    def get_allocator(self):
+        return _config.StringVector_get_allocator(self)
+
+    def pop_back(self):
+        return _config.StringVector_pop_back(self)
+
+    def erase(self, *args):
+        return _config.StringVector_erase(self, *args)
+
+    def __init__(self, *args):
+        _config.StringVector_swiginit(self, _config.new_StringVector(*args))
+
+    def push_back(self, x):
+        return _config.StringVector_push_back(self, x)
+
+    def front(self):
+        return _config.StringVector_front(self)
+
+    def back(self):
+        return _config.StringVector_back(self)
+
+    def assign(self, n, x):
+        return _config.StringVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _config.StringVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _config.StringVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _config.StringVector_reserve(self, n)
+
+    def capacity(self):
+        return _config.StringVector_capacity(self)
+    __swig_destroy__ = _config.delete_StringVector
+
+# Register StringVector in _config:
+_config.StringVector_swigregister(StringVector)
+class IntVector(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _config.IntVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _config.IntVector___nonzero__(self)
+
+    def __bool__(self):
+        return _config.IntVector___bool__(self)
+
+    def __len__(self):
+        return _config.IntVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _config.IntVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _config.IntVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _config.IntVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _config.IntVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _config.IntVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _config.IntVector___setitem__(self, *args)
+
+    def pop(self):
+        return _config.IntVector_pop(self)
+
+    def append(self, x):
+        return _config.IntVector_append(self, x)
+
+    def empty(self):
+        return _config.IntVector_empty(self)
+
+    def size(self):
+        return _config.IntVector_size(self)
+
+    def swap(self, v):
+        return _config.IntVector_swap(self, v)
+
+    def begin(self):
+        return _config.IntVector_begin(self)
+
+    def end(self):
+        return _config.IntVector_end(self)
+
+    def rbegin(self):
+        return _config.IntVector_rbegin(self)
+
+    def rend(self):
+        return _config.IntVector_rend(self)
+
+    def clear(self):
+        return _config.IntVector_clear(self)
+
+    def get_allocator(self):
+        return _config.IntVector_get_allocator(self)
+
+    def pop_back(self):
+        return _config.IntVector_pop_back(self)
+
+    def erase(self, *args):
+        return _config.IntVector_erase(self, *args)
+
+    def __init__(self, *args):
+        _config.IntVector_swiginit(self, _config.new_IntVector(*args))
+
+    def push_back(self, x):
+        return _config.IntVector_push_back(self, x)
+
+    def front(self):
+        return _config.IntVector_front(self)
+
+    def back(self):
+        return _config.IntVector_back(self)
+
+    def assign(self, n, x):
+        return _config.IntVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _config.IntVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _config.IntVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _config.IntVector_reserve(self, n)
+
+    def capacity(self):
+        return _config.IntVector_capacity(self)
+    __swig_destroy__ = _config.delete_IntVector
+
+# Register IntVector in _config:
+_config.IntVector_swigregister(IntVector)
+class DoubleVector(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _config.DoubleVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _config.DoubleVector___nonzero__(self)
+
+    def __bool__(self):
+        return _config.DoubleVector___bool__(self)
+
+    def __len__(self):
+        return _config.DoubleVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _config.DoubleVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _config.DoubleVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _config.DoubleVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _config.DoubleVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _config.DoubleVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _config.DoubleVector___setitem__(self, *args)
+
+    def pop(self):
+        return _config.DoubleVector_pop(self)
+
+    def append(self, x):
+        return _config.DoubleVector_append(self, x)
+
+    def empty(self):
+        return _config.DoubleVector_empty(self)
+
+    def size(self):
+        return _config.DoubleVector_size(self)
+
+    def swap(self, v):
+        return _config.DoubleVector_swap(self, v)
+
+    def begin(self):
+        return _config.DoubleVector_begin(self)
+
+    def end(self):
+        return _config.DoubleVector_end(self)
+
+    def rbegin(self):
+        return _config.DoubleVector_rbegin(self)
+
+    def rend(self):
+        return _config.DoubleVector_rend(self)
+
+    def clear(self):
+        return _config.DoubleVector_clear(self)
+
+    def get_allocator(self):
+        return _config.DoubleVector_get_allocator(self)
+
+    def pop_back(self):
+        return _config.DoubleVector_pop_back(self)
+
+    def erase(self, *args):
+        return _config.DoubleVector_erase(self, *args)
+
+    def __init__(self, *args):
+        _config.DoubleVector_swiginit(self, _config.new_DoubleVector(*args))
+
+    def push_back(self, x):
+        return _config.DoubleVector_push_back(self, x)
+
+    def front(self):
+        return _config.DoubleVector_front(self)
+
+    def back(self):
+        return _config.DoubleVector_back(self)
+
+    def assign(self, n, x):
+        return _config.DoubleVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _config.DoubleVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _config.DoubleVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _config.DoubleVector_reserve(self, n)
+
+    def capacity(self):
+        return _config.DoubleVector_capacity(self)
+    __swig_destroy__ = _config.delete_DoubleVector
+
+# Register DoubleVector in _config:
+_config.DoubleVector_swigregister(DoubleVector)
+class BoolVector(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def iterator(self):
+        return _config.BoolVector_iterator(self)
+    def __iter__(self):
+        return self.iterator()
+
+    def __nonzero__(self):
+        return _config.BoolVector___nonzero__(self)
+
+    def __bool__(self):
+        return _config.BoolVector___bool__(self)
+
+    def __len__(self):
+        return _config.BoolVector___len__(self)
+
+    def __getslice__(self, i, j):
+        return _config.BoolVector___getslice__(self, i, j)
+
+    def __setslice__(self, *args):
+        return _config.BoolVector___setslice__(self, *args)
+
+    def __delslice__(self, i, j):
+        return _config.BoolVector___delslice__(self, i, j)
+
+    def __delitem__(self, *args):
+        return _config.BoolVector___delitem__(self, *args)
+
+    def __getitem__(self, *args):
+        return _config.BoolVector___getitem__(self, *args)
+
+    def __setitem__(self, *args):
+        return _config.BoolVector___setitem__(self, *args)
+
+    def pop(self):
+        return _config.BoolVector_pop(self)
+
+    def append(self, x):
+        return _config.BoolVector_append(self, x)
+
+    def empty(self):
+        return _config.BoolVector_empty(self)
+
+    def size(self):
+        return _config.BoolVector_size(self)
+
+    def swap(self, v):
+        return _config.BoolVector_swap(self, v)
+
+    def begin(self):
+        return _config.BoolVector_begin(self)
+
+    def end(self):
+        return _config.BoolVector_end(self)
+
+    def rbegin(self):
+        return _config.BoolVector_rbegin(self)
+
+    def rend(self):
+        return _config.BoolVector_rend(self)
+
+    def clear(self):
+        return _config.BoolVector_clear(self)
+
+    def get_allocator(self):
+        return _config.BoolVector_get_allocator(self)
+
+    def pop_back(self):
+        return _config.BoolVector_pop_back(self)
+
+    def erase(self, *args):
+        return _config.BoolVector_erase(self, *args)
+
+    def __init__(self, *args):
+        _config.BoolVector_swiginit(self, _config.new_BoolVector(*args))
+
+    def push_back(self, x):
+        return _config.BoolVector_push_back(self, x)
+
+    def front(self):
+        return _config.BoolVector_front(self)
+
+    def back(self):
+        return _config.BoolVector_back(self)
+
+    def assign(self, n, x):
+        return _config.BoolVector_assign(self, n, x)
+
+    def resize(self, *args):
+        return _config.BoolVector_resize(self, *args)
+
+    def insert(self, *args):
+        return _config.BoolVector_insert(self, *args)
+
+    def reserve(self, n):
+        return _config.BoolVector_reserve(self, n)
+
+    def capacity(self):
+        return _config.BoolVector_capacity(self)
+    __swig_destroy__ = _config.delete_BoolVector
+
+# Register BoolVector in _config:
+_config.BoolVector_swigregister(BoolVector)
 ERROR = _config.ERROR
 WARNING = _config.WARNING
 INFO = _config.INFO
@@ -397,424 +817,4 @@ class Config(object):
 
 # Register Config in _config:
 _config.Config_swigregister(Config)
-class VectorStr(object):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def iterator(self):
-        return _config.VectorStr_iterator(self)
-    def __iter__(self):
-        return self.iterator()
-
-    def __nonzero__(self):
-        return _config.VectorStr___nonzero__(self)
-
-    def __bool__(self):
-        return _config.VectorStr___bool__(self)
-
-    def __len__(self):
-        return _config.VectorStr___len__(self)
-
-    def __getslice__(self, i, j):
-        return _config.VectorStr___getslice__(self, i, j)
-
-    def __setslice__(self, *args):
-        return _config.VectorStr___setslice__(self, *args)
-
-    def __delslice__(self, i, j):
-        return _config.VectorStr___delslice__(self, i, j)
-
-    def __delitem__(self, *args):
-        return _config.VectorStr___delitem__(self, *args)
-
-    def __getitem__(self, *args):
-        return _config.VectorStr___getitem__(self, *args)
-
-    def __setitem__(self, *args):
-        return _config.VectorStr___setitem__(self, *args)
-
-    def pop(self):
-        return _config.VectorStr_pop(self)
-
-    def append(self, x):
-        return _config.VectorStr_append(self, x)
-
-    def empty(self):
-        return _config.VectorStr_empty(self)
-
-    def size(self):
-        return _config.VectorStr_size(self)
-
-    def swap(self, v):
-        return _config.VectorStr_swap(self, v)
-
-    def begin(self):
-        return _config.VectorStr_begin(self)
-
-    def end(self):
-        return _config.VectorStr_end(self)
-
-    def rbegin(self):
-        return _config.VectorStr_rbegin(self)
-
-    def rend(self):
-        return _config.VectorStr_rend(self)
-
-    def clear(self):
-        return _config.VectorStr_clear(self)
-
-    def get_allocator(self):
-        return _config.VectorStr_get_allocator(self)
-
-    def pop_back(self):
-        return _config.VectorStr_pop_back(self)
-
-    def erase(self, *args):
-        return _config.VectorStr_erase(self, *args)
-
-    def __init__(self, *args):
-        _config.VectorStr_swiginit(self, _config.new_VectorStr(*args))
-
-    def push_back(self, x):
-        return _config.VectorStr_push_back(self, x)
-
-    def front(self):
-        return _config.VectorStr_front(self)
-
-    def back(self):
-        return _config.VectorStr_back(self)
-
-    def assign(self, n, x):
-        return _config.VectorStr_assign(self, n, x)
-
-    def resize(self, *args):
-        return _config.VectorStr_resize(self, *args)
-
-    def insert(self, *args):
-        return _config.VectorStr_insert(self, *args)
-
-    def reserve(self, n):
-        return _config.VectorStr_reserve(self, n)
-
-    def capacity(self):
-        return _config.VectorStr_capacity(self)
-    __swig_destroy__ = _config.delete_VectorStr
-
-# Register VectorStr in _config:
-_config.VectorStr_swigregister(VectorStr)
-class VectorInt(object):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def iterator(self):
-        return _config.VectorInt_iterator(self)
-    def __iter__(self):
-        return self.iterator()
-
-    def __nonzero__(self):
-        return _config.VectorInt___nonzero__(self)
-
-    def __bool__(self):
-        return _config.VectorInt___bool__(self)
-
-    def __len__(self):
-        return _config.VectorInt___len__(self)
-
-    def __getslice__(self, i, j):
-        return _config.VectorInt___getslice__(self, i, j)
-
-    def __setslice__(self, *args):
-        return _config.VectorInt___setslice__(self, *args)
-
-    def __delslice__(self, i, j):
-        return _config.VectorInt___delslice__(self, i, j)
-
-    def __delitem__(self, *args):
-        return _config.VectorInt___delitem__(self, *args)
-
-    def __getitem__(self, *args):
-        return _config.VectorInt___getitem__(self, *args)
-
-    def __setitem__(self, *args):
-        return _config.VectorInt___setitem__(self, *args)
-
-    def pop(self):
-        return _config.VectorInt_pop(self)
-
-    def append(self, x):
-        return _config.VectorInt_append(self, x)
-
-    def empty(self):
-        return _config.VectorInt_empty(self)
-
-    def size(self):
-        return _config.VectorInt_size(self)
-
-    def swap(self, v):
-        return _config.VectorInt_swap(self, v)
-
-    def begin(self):
-        return _config.VectorInt_begin(self)
-
-    def end(self):
-        return _config.VectorInt_end(self)
-
-    def rbegin(self):
-        return _config.VectorInt_rbegin(self)
-
-    def rend(self):
-        return _config.VectorInt_rend(self)
-
-    def clear(self):
-        return _config.VectorInt_clear(self)
-
-    def get_allocator(self):
-        return _config.VectorInt_get_allocator(self)
-
-    def pop_back(self):
-        return _config.VectorInt_pop_back(self)
-
-    def erase(self, *args):
-        return _config.VectorInt_erase(self, *args)
-
-    def __init__(self, *args):
-        _config.VectorInt_swiginit(self, _config.new_VectorInt(*args))
-
-    def push_back(self, x):
-        return _config.VectorInt_push_back(self, x)
-
-    def front(self):
-        return _config.VectorInt_front(self)
-
-    def back(self):
-        return _config.VectorInt_back(self)
-
-    def assign(self, n, x):
-        return _config.VectorInt_assign(self, n, x)
-
-    def resize(self, *args):
-        return _config.VectorInt_resize(self, *args)
-
-    def insert(self, *args):
-        return _config.VectorInt_insert(self, *args)
-
-    def reserve(self, n):
-        return _config.VectorInt_reserve(self, n)
-
-    def capacity(self):
-        return _config.VectorInt_capacity(self)
-    __swig_destroy__ = _config.delete_VectorInt
-
-# Register VectorInt in _config:
-_config.VectorInt_swigregister(VectorInt)
-class VectorDouble(object):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def iterator(self):
-        return _config.VectorDouble_iterator(self)
-    def __iter__(self):
-        return self.iterator()
-
-    def __nonzero__(self):
-        return _config.VectorDouble___nonzero__(self)
-
-    def __bool__(self):
-        return _config.VectorDouble___bool__(self)
-
-    def __len__(self):
-        return _config.VectorDouble___len__(self)
-
-    def __getslice__(self, i, j):
-        return _config.VectorDouble___getslice__(self, i, j)
-
-    def __setslice__(self, *args):
-        return _config.VectorDouble___setslice__(self, *args)
-
-    def __delslice__(self, i, j):
-        return _config.VectorDouble___delslice__(self, i, j)
-
-    def __delitem__(self, *args):
-        return _config.VectorDouble___delitem__(self, *args)
-
-    def __getitem__(self, *args):
-        return _config.VectorDouble___getitem__(self, *args)
-
-    def __setitem__(self, *args):
-        return _config.VectorDouble___setitem__(self, *args)
-
-    def pop(self):
-        return _config.VectorDouble_pop(self)
-
-    def append(self, x):
-        return _config.VectorDouble_append(self, x)
-
-    def empty(self):
-        return _config.VectorDouble_empty(self)
-
-    def size(self):
-        return _config.VectorDouble_size(self)
-
-    def swap(self, v):
-        return _config.VectorDouble_swap(self, v)
-
-    def begin(self):
-        return _config.VectorDouble_begin(self)
-
-    def end(self):
-        return _config.VectorDouble_end(self)
-
-    def rbegin(self):
-        return _config.VectorDouble_rbegin(self)
-
-    def rend(self):
-        return _config.VectorDouble_rend(self)
-
-    def clear(self):
-        return _config.VectorDouble_clear(self)
-
-    def get_allocator(self):
-        return _config.VectorDouble_get_allocator(self)
-
-    def pop_back(self):
-        return _config.VectorDouble_pop_back(self)
-
-    def erase(self, *args):
-        return _config.VectorDouble_erase(self, *args)
-
-    def __init__(self, *args):
-        _config.VectorDouble_swiginit(self, _config.new_VectorDouble(*args))
-
-    def push_back(self, x):
-        return _config.VectorDouble_push_back(self, x)
-
-    def front(self):
-        return _config.VectorDouble_front(self)
-
-    def back(self):
-        return _config.VectorDouble_back(self)
-
-    def assign(self, n, x):
-        return _config.VectorDouble_assign(self, n, x)
-
-    def resize(self, *args):
-        return _config.VectorDouble_resize(self, *args)
-
-    def insert(self, *args):
-        return _config.VectorDouble_insert(self, *args)
-
-    def reserve(self, n):
-        return _config.VectorDouble_reserve(self, n)
-
-    def capacity(self):
-        return _config.VectorDouble_capacity(self)
-    __swig_destroy__ = _config.delete_VectorDouble
-
-# Register VectorDouble in _config:
-_config.VectorDouble_swigregister(VectorDouble)
-class VectorBool(object):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def iterator(self):
-        return _config.VectorBool_iterator(self)
-    def __iter__(self):
-        return self.iterator()
-
-    def __nonzero__(self):
-        return _config.VectorBool___nonzero__(self)
-
-    def __bool__(self):
-        return _config.VectorBool___bool__(self)
-
-    def __len__(self):
-        return _config.VectorBool___len__(self)
-
-    def __getslice__(self, i, j):
-        return _config.VectorBool___getslice__(self, i, j)
-
-    def __setslice__(self, *args):
-        return _config.VectorBool___setslice__(self, *args)
-
-    def __delslice__(self, i, j):
-        return _config.VectorBool___delslice__(self, i, j)
-
-    def __delitem__(self, *args):
-        return _config.VectorBool___delitem__(self, *args)
-
-    def __getitem__(self, *args):
-        return _config.VectorBool___getitem__(self, *args)
-
-    def __setitem__(self, *args):
-        return _config.VectorBool___setitem__(self, *args)
-
-    def pop(self):
-        return _config.VectorBool_pop(self)
-
-    def append(self, x):
-        return _config.VectorBool_append(self, x)
-
-    def empty(self):
-        return _config.VectorBool_empty(self)
-
-    def size(self):
-        return _config.VectorBool_size(self)
-
-    def swap(self, v):
-        return _config.VectorBool_swap(self, v)
-
-    def begin(self):
-        return _config.VectorBool_begin(self)
-
-    def end(self):
-        return _config.VectorBool_end(self)
-
-    def rbegin(self):
-        return _config.VectorBool_rbegin(self)
-
-    def rend(self):
-        return _config.VectorBool_rend(self)
-
-    def clear(self):
-        return _config.VectorBool_clear(self)
-
-    def get_allocator(self):
-        return _config.VectorBool_get_allocator(self)
-
-    def pop_back(self):
-        return _config.VectorBool_pop_back(self)
-
-    def erase(self, *args):
-        return _config.VectorBool_erase(self, *args)
-
-    def __init__(self, *args):
-        _config.VectorBool_swiginit(self, _config.new_VectorBool(*args))
-
-    def push_back(self, x):
-        return _config.VectorBool_push_back(self, x)
-
-    def front(self):
-        return _config.VectorBool_front(self)
-
-    def back(self):
-        return _config.VectorBool_back(self)
-
-    def assign(self, n, x):
-        return _config.VectorBool_assign(self, n, x)
-
-    def resize(self, *args):
-        return _config.VectorBool_resize(self, *args)
-
-    def insert(self, *args):
-        return _config.VectorBool_insert(self, *args)
-
-    def reserve(self, n):
-        return _config.VectorBool_reserve(self, n)
-
-    def capacity(self):
-        return _config.VectorBool_capacity(self)
-    __swig_destroy__ = _config.delete_VectorBool
-
-# Register VectorBool in _config:
-_config.VectorBool_swigregister(VectorBool)
 
