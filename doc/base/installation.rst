@@ -323,6 +323,11 @@ After installation of |scname| these packages can be installed using the
 required packages. For example, to install the dependencies for
 using the MariaDB database, give 'mariadb-server' as parameter.
 
+.. note::
+
+   The user needs to be in the sudo group.
+
+
 .. code-block:: sh
 
    user@host:~$ seiscomp/bin/seiscomp install-deps base mariadb-server
@@ -503,14 +508,16 @@ PostgreSQL
   and may override security concepts. For production systems, we recommend
   coordinating the database configuration with the system administrator.
 
-.. code-block:: sh
+  .. code-block:: sh
 
-   # TYPE  DATABASE        USER            ADDRESS                 METHOD
-   # IPv4 local connections:
-   host    seiscomp        sysop           0.0.0.0/0               md5
-   host    all             all             127.0.0.1/32            ident
+     # TYPE  DATABASE        USER            ADDRESS                 METHOD
+     # IPv4 local connections:
+     host    seiscomp        sysop           0.0.0.0/0               md5
+     host    all             all             127.0.0.1/32            ident
+     # IPv6 local connections:
+     host    seiscomp        sysop           ::1/128                 md5
 
-.. note::
+  .. note::
 
      The order of the rules matters and the location of the configuration file
      can differ between distributions.

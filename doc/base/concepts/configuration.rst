@@ -22,7 +22,7 @@ starting with **sc**, e.g. `scautopick`. Other modules might be available
 as well such as third party modules which use other naming conventions.
 
 A way to discover a module that uses the |scname| configuration schema
-is to call it with ``--help``. The first lines of a typical output look like
+is to call it with :option:`--help`. The first lines of a typical output look like
 this:
 
 .. code-block:: sh
@@ -42,7 +42,7 @@ Again, the two indicators that a module uses the following configuration
 schema are:
 
 * The module name is prefixed with **sc**, e.g. *scautopick*
-* The output of ``--help`` looks like the text fragment above
+* The output of :option:`--help` looks like the text fragment above
 
 A typical configuration requires the following steps:
 
@@ -569,13 +569,13 @@ database address. A module never reads the key directory. It only
 gets the bindings from the configuration tables.
 
 As with inventory information there might are cases when a module should
-not connect to a database and work offline, in particular when ``--ep`` is being
-used.
+not connect to a database and work offline, in particular when :option:`--ep` is
+being used.
 
 In order to
 read the bindings configuration from XML files (again in SCML format),
 use :ref:`scxmldump` to dump the configuration XML file and let
-the module use this XML file, ``--config-db`` must be used:
+the module use this XML file, :option:`--config-db` must be used:
 
 .. code-block:: sh
 
@@ -598,7 +598,7 @@ with ``bindings2cfg``:
    $ bindings2cfg -o config.xml
 
 To create an XML file from a temporary key directory, an alternative directory
-can be specified with ``--key-dir``:
+can be specified with :option:`--key-dir`:
 
 .. code-block:: sh
 
@@ -855,23 +855,28 @@ with `@var@`, e.g.
 
    autoloc.stationConfig = @DATAGDIR@/autoloc/station.conf
 
+The list of internal |scname| variables can be queried using the :ref:`seiscomp`
+command:
+
+.. code-block:: sh
+
+   seiscomp print variables
+
 Available internal |scname| variables are:
 
-+------------------+-----------------------------+
-| Variable         | Value                       |
-+==================+=============================+
-| ROOTDIR          | $SEISCOMP_ROOT              |
-+------------------+-----------------------------+
-| DEFAUTLCONFIGDIR | $SEISCOMP_ROOT/etc/defaults |
-+------------------+-----------------------------+
-| SYSTEMCONFIGDIR  | $SEISCOMP_ROOT/etc          |
-+------------------+-----------------------------+
-| DATADIR          | $SEISCOMP_ROOT/share        |
-+------------------+-----------------------------+
-| CONFIGDIR        | $HOME/.seiscomp             |
-+------------------+-----------------------------+
-| LOGDIR           | $HOME/.seiscomp/log         |
-+------------------+-----------------------------+
+.. csv-table::
+   :widths: 40 60
+   :header: Variable, Value
+   :delim: ;
+   :align: center
+
+   HOMEDIR          ; $HOME
+   ROOTDIR          ; $SEISCOMP_ROOT
+   DEFAUTLCONFIGDIR ; $SEISCOMP_ROOT/etc/defaults
+   SYSTEMCONFIGDIR  ; $SEISCOMP_ROOT/etc
+   DATADIR          ; $SEISCOMP_ROOT/share
+   CONFIGDIR        ; $HOME/.seiscomp
+   LOGDIR           ; $HOME/.seiscomp/log
 
 The list of internal |scname| variables can also be read in the information
 panel of :ref:`scconfig`.

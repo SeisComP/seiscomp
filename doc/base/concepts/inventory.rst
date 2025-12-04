@@ -123,7 +123,6 @@ format is :cite:t:`smp`. Tools are provided to convert between other formats:
 
    arclink2inv, Arclink XML to SeisComPML
    :ref:`dlsv2inv`, dataless SEED to SeisComPML
-   :ref:`inv2dlsv`, SeisComPML to dataless SEED
    :ref:`fdsnxml2inv`, FDSN StationXML to SeisComPML and back
 
 
@@ -236,7 +235,6 @@ Related Tools
 * :ref:`fdsnxml2inv`
 * :ref:`import_inv`
 * :ref:`invextr`
-* :ref:`inv2dlsv`
 * :ref:`sccnv`
 * :ref:`scinv`
 * :ref:`scxmldump`
