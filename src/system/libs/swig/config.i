@@ -24,12 +24,19 @@
 %feature("director") Seiscomp::Config::Logger;
 
 
-// 
+//
 // typemaps
 //
 %include <typemaps.i>
 %include <std_string.i>
 %include <std_vector.i>
+
+namespace std {
+	%template(StringVector) vector<string>;
+	%template(IntVector) vector<int>;
+	%template(DoubleVector) vector<double>;
+	%template(BoolVector) vector<bool>;
+}
 
 %include "seiscomp/config/api.h"
 %include "seiscomp/config/log.h"
@@ -52,8 +59,3 @@
 
 %include "seiscomp/config/symboltable.h"
 %include "seiscomp/config/config.h"
-
-%template(VectorStr) std::vector<std::string>;
-%template(VectorInt) std::vector<int>;
-%template(VectorDouble) std::vector<double>;
-%template(VectorBool) std::vector<bool>;
