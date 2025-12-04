@@ -2,6 +2,25 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.0.1
+
+-   trunk
+    -   Add 0.14 schema and QuakeML XSLT scripts.
+    -   Fix Python wrapper to allow access to complex arrays again,
+        e.g. `ResponsePAZ().poles().content()`.
+-   GUI
+    -   Use process manager for event list export.
+    -   Fix crash if no map tiles are configured or available.
+-   scconfig
+    -   Do not initialize panels anytime they are shown. Do that
+        only initially.
+-   scqc
+    -   Fix default configuration file: replace `True` with `true`
+        and `False` with `false`.
+-   scwfparam
+    -   Fix default configuration file: replace '1' with 'true'.
+
+
 ## 7.0.0
 
 **Important**: `scevent` removed "gfz" as default `eventIDPrefix`. The new
