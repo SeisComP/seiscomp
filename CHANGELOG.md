@@ -2,21 +2,29 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 7.0.0
+
+**Important**: `scevent` removed "gfz" as default `eventIDPrefix`. The new
+                prefix is just an empty string and will render eventIDs like
+                "2025abcd". If you haven't configured the `eventIDPrefix` in
+                `scevent.cfg`, then your eventIDs will change! This is not a bug
+                but an intended behaviour. The "gfz" prefix should be solely
+                used at GFZ and not at any installation using the defaults.
 
 ```SC_API_VERSION 17.0.0```
 
-With this version we add support for Qt 6 of all GUI applications. Binary distributions
-will build against the Qt version which is available by default in the respective
-Linux distribution, either Qt 5 or Qt 6.
+With this version we add support for Qt 6 of all GUI applications. Binary
+distributions will build against the Qt version which is available by default in
+the respective Linux distribution, either Qt 5 or Qt 6.
 
-The database schema changes from version 0.13.2 to 0.14. This basically incorporates
-the addition of a new object `Catalog` as part of the EventParameters datamodel and
-changes indexes from object `QCLog`. Both objects are not yet used in SeisComP and
-they are added as basis for new features. The database schema applies changes in its
-datatypes: BLOBS will be converted to LONGTEXT (MySQL) or TEXT (PostgreSQL, SQLite3).
-The database migration to schema version 0.14 can be a long lasting operation so
-please schedule a downtime of your system accordingly.
+The database schema changes from version 0.13.2 to 0.14. This basically
+incorporates the addition of a new object `Catalog` as part of the
+EventParameters datamodel and changes indexes from object `QCLog`. Both objects
+are not yet used in SeisComP and they are added as basis for new features. The
+database schema applies changes in its datatypes: BLOBS will be converted to
+LONGTEXT (MySQL) or TEXT (PostgreSQL, SQLite3). The database migration to schema
+version 0.14 can be a long lasting operation so please schedule a downtime of
+your system accordingly.
 
 Furthermore the foreign key constraints from a concrete type table like Origin to
 the Object table is removed. This constraint was never required by SeisComP itself
@@ -24,38 +32,78 @@ as it takes care of correct removal of all derived table rows but it introduces 
 performance penalty when deleting objects. Dropping the constraint might affect
 custom database script which rely on it. Please be aware of that change.
 
+-   processor architecture
+    -   Support Arm processors in addition to x86.
 -   seiscomp
-    -   Fix module count with `seiscomp status`
+    -   Fix module count with `seiscomp status`.
 -   documentation
     -   Consider new parameters `values` and `range` in description of
         configuration and command-line parameters which will be highlighted in
         documentation and exposed in scconfig.
 -   trunk
+    -   Drop database foreign key constraint which is actually not required and
+        may reduce performance.
+    -   Use LOCSAT/iasp91 travel time table as default for generic travel time
+        computation rather than libtau.
     -   ITAPER(): Support time spans with double precision, update filter
         documentation.
     -   Application CLI option `-q, --quiet` took an argument which was not
         correct. It has been converted to a switch without argument.
+    -   Speed up trace rendering for large number of records.
+    -   Add support for reading GeoJSON and BNA in Flinn-Engdahl region polygons
+        in the directories @DATADIR@/fep or $HOME/.seiscomp/fep.
+    -   Add support for reading fep files in the directories
+        @DATADIR@/spatial/vector or $HOME/.seiscomp/spatial/vector.
+    -   Log each SQLite3 statement to debug if "debug" option is passed to URL.
+    -   Add Catalog support to datamodel.
+    -   Add options attribute to description of configuration parameters which
+        can be be evaluated, e.g. by scconfig.
+    -   Output proxy recordstream URL if dec:// or resample:// is being used.
+    -   Fix crash in dec:// and resample:// if a record without data is received.
+    -   Add support for custom logging output implementations through plugins.
+    -   Remove BSON support.
+    -   Remove Arclink RecordStream support.
+    -   Corrected Flinn-Engdahl region names and unnecessary and inconsistent
+        abbreviations.
+    -   Add support for miniSEED in version 3
+        (<https://docs.fdsn.org/projects/miniseed3/en/latest/>) by most modules.
+    -   Add process manager which is available in all GUIs triggering external
+        process. The feature is currently only available with the new custom
+        actions.
+-   mainx
+    -   Add new software repository for new modules and plugins developed
+        by gempa GmbH.
+-   scmsdemux
+    -   New module in mainx repository for demultiplexing miniSEED data which
+        are written to individual files.
+-   scmvx
+    -   Add new module to mainx repository as a successor of scmv.
+-   scmv
+    -   Handle unset origin.depth and do not crash.
+    -   Deprecate this module. Future features will be developed for scmvx.
+-   amplitudes/magnitudes
     -   Add `minPeriod` and `maxPeriod` to amplitude type configuration. Both
         are checked against the measured period to skip emitting amplitudes which
         are outside the allowed period range.
+    -   Support configuration of distance and depth ranges by `minDist`,
+        `maxDist`, `minDepth` and `maxDepth` for all amplitudes and magnitudes.
+        The actual lower and upper limits depend on amplitude and magnitudes
+        types.
+    -   Support SI units in amplitude and magnitude configuration for `minDist`,
+        `maxDist`, `minDepth` and `maxDepth`.
+
+        ```
+
+        amplitudes.MLv.maxDist = 8deg
+        amplitudes.MLv.maxDepth = 80km
+
+        ```
     -   Support amplitude data conversion without `enableResponses = true`,
         e.g. when computing amplitudes on acceleration data. This implicitly
         includes support for amplitude updates for such data.
-    -   Add locrouter plugin, see
-        https://github.com/SeisComP/common/blob/master/plugins/locator/router/descriptions/global_locrouter.rst.
-    -   Speed up trace rendering for large number of records.
-    -   Add support for reading GeoJSON and BNA in fep directory
-    -   Add support for reading fep file in spatial/vector
-    -   Add GeoJSON write support
-    -   Log each SQLite3 statement to debug if "debug" option is passed to URL.
-    -   Support SI units in amplitude and magnitude configuration for `minDist`, `maxDist`,
-        `minDepth` and `maxDepth`.
-        ```
-        amplitudes.MLv.maxDist = 8deg
-        amplitudes.MLv.maxDepth = 80km
-        ```
-    -   Add Catalog support to datamodel.
--   magnitudes
+    -   Disable amplitude computation if regions are configured but all are disabled.
+    -   Check mb/mB distance and depths limits in setup for amplitudes and
+        magnitudes.
     -   MLc:
         -   Add correction terms `c6` und `H` for considering vertical distance.
         -   Consider source depth instead of vertical distance between station
@@ -66,21 +114,29 @@ custom database script which rely on it. Please be aware of that change.
     -   Add FocalMechanismReference to event for the preferred focal mechanism to
         force association.
 -   GUI
-    -   Add Qt6 support
+    -   Add Qt6 support.
+    -   Support HDPI scaling modes.
     -   EventLists support passing the IDs of events in selected rows to an
         external script which can be configured with `eventlist.scripts.export`.
     -   Add CSV table header information when exporting from the event list.
     -   Hypocentral instead of epicentral distances may be shown if configured
         with `scheme.distanceHypocentral`.
-    -   Allow map zooming with shift + left mouse + dragging.
+    -   Allow map zooming with shift + left mouse + dragging (rubber band).
     -   Fix segmentation fault if the magnitude table should be sorted and
         station magnitudes could not be found in the database or memory.
-    -   Save map measurements as GeoJSON
-    -   Add support for built-in FontAwesome icons as map symbols.
+    -   Support saving map measurements as GeoJSON by default and in addition to
+        BNA.
+    -   Add support for built-in SeisComP icons as map symbols.
     -   Print map symbols in map legends.
+    -   Add extern process manager to each GUI application which will track
+        and list all executed processed ran by the application. As this will
+        require cooperation with the application, not all started processes might
+        be listed there. Applications will be translated over time.
 -   scesv
     -   Support station annotations (shift+F9).
 -   scolv
+    -   Remember position of zoom window in Picker window when changing event
+        while the Picker window remains open.
     -   Focal mechanisms show the station distribution on the map if station
         display is enabled (F9).
     -   Add LQT rotation to picker.
@@ -90,37 +146,59 @@ custom database script which rely on it. Please be aware of that change.
         according to the methodID and earthModelID. If that is not found then
         the default locator will be set again rather than keeping the last selection.
     -   Set OriginLocatorView depth type to "depth type set by locator" when
-        presetFromOrigin is true and the depth type is unset, resetting the state of
-        the origin set before.
+        presetFromOrigin is true and the depth type is unset, resetting the state
+        of the origin set before.
     -   Add tooltip with attribute content to method and earthModel label to
         allow inspecting long strings which do not fit into the label itself.
     -   Add more flexible "Add station" dialog in picker which allows to filter
         identifiers, network and station types and sensor units.
     -   Add more option to control initial picker behaviour.
+
         ```
+
         picker.rotation = ZRT
         picker.unit = Velocity
         picker.limitFilterToZoomTrace = true
         olv.loadAdditionalStations = true
+
         ```
-    -   Increase precision to milliseconds for the following picker configuration values:
-        - `picker.preOffset`
-        - `picker.postOffset`
-        - `picker.minimumTimeWindow`
+
+    -   Increase precision to milliseconds for the following picker configuration
+        values:
+        -   `picker.preOffset`
+        -   `picker.postOffset`
+        -   `picker.minimumTimeWindow`
     -   Add `picker.auxiliary.profile` which supports multiple profiles to define
         and check for auxiliary channels.
         -   Add controls to explicitly load auxiliary profiles
         -   Add controls to toggle visibility of auxiliary profiles
-    -   Add spectrogram settings like in `scrttv` in a dockable widget (ctrl+shift+s) and
-        remove the very basic spectrogram settings from the toolbar.
-    -   Add optional allow-/denylist for phases to be imported to ImportPicks dialog.
+    -   Add spectrogram settings like in `scrttv` in a dockable widget
+        (Ctrl+Shift+S) and remove the very basic spectrogram settings from the
+        toolbar.
+    -   Add optional allow-/denylist for phases to be imported to ImportPicks
+        dialog.
     -   Add default configuration options for "Import picks" dialog.
--   scmv
-    -   Handle unset origin.depth and do not crash.
+    -   In Location tab add shortcuts to open picker (P), compute magnitudes (M)
+        and relocate (R).
+    -   Allow to unset the preferred focal mechanism in event editor
+    -   In phase and amplitude picker windows rework icons and replace old
+        image-based icons with new scalable SVG coloured icons.
+    -   In phase picker window add amplitude level output label which can be
+        grabbed by, e.g. Text2Speech tools to support picking for users with a
+        visual impairment. This feature must be activated with
+        `picker.showAmpLevel = true`.
+    -   Add custom menu actions allowing to configure scolv with an unlimited
+        number of custom actions. Adding any custom action will add an entry in
+        a list of actions of new *Run* button generated next to the  Relocate
+        button.
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
         date is not specified for the StationXML node.
     -   Use best precision when showing number differences in warnings.
+-   invextr
+    -   Add command-line option `--output`.
+    -   Update documentation on removing unassociated sensor, data logger and
+        response information.
 -   scamp
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
@@ -135,7 +213,9 @@ custom database script which rely on it. Please be aware of that change.
         database. This option might make the most sense on `Inventory`,
         `EventParameters` or `Config`.
         ```
+
         $ scdb -d localhost -x Inventory
+
         ```
 -   scevent
     -   Add command-line option `--formatted` for generating formatted XML along
@@ -145,19 +225,43 @@ custom database script which rely on it. Please be aware of that change.
     -   Add `eventAssociation.enablePreferredFMSelection` option to control
         whether the preferred focalmechanism should be assigned automatically
         or not.
+    -   Remove "gfz" as default `eventIDPrefix` and use an empty string.
 -   scmag
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
     -   Fix segmentation fault when processing arrivals without distance.
+-   screloc
+    -   Add configuration parameter `picks.streamsSetUnused` and command-line
+        option `--streams-set-unused` for setting arrivals to unused based on
+        the given stream IDs which are compared with the referenced picks.
 -   screpick
     -   Add command-line option `--formatted` for generating formatted XML along
         with `--ep`.
--   scdumpobject
-    -   Tool removed entirely. The functionality has been added to scxmldump.
+-   scconfig
+    -   Rework layout and design and replace icons with redesigned SVG versions.
+    -   Make parameter search a much more useful function which now supports
+        navigating through all hits and also allow to search in descriptions and
+        values.
+    -   Evaluate parameter the attributes type, range, values and options
+        during startup and when modifying values. Notifications are printed to
+        stderr and in the parameter evaluation text.
+    -   Support importing inventory from any FDSNWS source directly in the
+        Inventory.
+    -   Add hotkeys 1-6 for switching panels.
+    -   Indicate selected and opened binding profiles in all sections of the
+        bindings panel by coloring icons.
+    -   Deactivate the mode change field and edit menu. The configuration mode
+        can still be changed by the new `Switch mode` button.
+    -   Add relevant SeisComP and system variable and software details to the
+        information panel.
 -   scxmldump
+    -   Add option `--with-root` for also adding the top-level object of the
+        object dumped in combination with `--public-id`.
     -   Add `--public-id` and `--with-childs` to export an object by its publicID
         from the database. This will even work with database extensions by
         loading the corresponding plugins such as `dmsm`.
+-   scdumpobject
+    -   Tool removed entirely. The functionality has been added to scxmldump.
 -   scwfparam
     -   Add support for custom list of periods.
 -   LocSAT
@@ -167,6 +271,8 @@ custom database script which rely on it. Please be aware of that change.
     -   Add PKiKP and PKIKP phases.
     -   Update PKKP table.
     -   Support custom phase list via [model].ph file.
+    -   Add SEISCOMP_LOCSAT_TABLE_DIR variable to override the location of
+        LOCSAT travel time tables.
 -   NLL
     -   Allow the use of SAVE_NLLOC_EXPECTATION.
 -   iLoc
@@ -183,6 +289,85 @@ custom database script which rely on it. Please be aware of that change.
     -   Replace Sphinx m2r2 with sphinx_mdinclude
 -   diskmon
     -   Fix stopped modules counter for diskmon.
+-   documentation
+    -   Replace Sphinx m2r2 with sphinx_mdinclude
+    -   Consider new parameters `values` and `range` in description of
+        configuration and command-line parameters which will be highlighted in
+        documentation and exposed in scconfig.
+-   seedlink
+    -   Change default server address of chain plugin to geofon.gfz.de.
+
+## 6.9.1
+
+-   trunk
+    -   Fix crash in decimation and resampling if a record without data is received.
+    -   Fix TimeSpan rounding in combination with negative numbers.
+-   fdsnws
+    -   Fix data segment query for start and end times with milli second precision.
+
+## 6.9.0
+
+```SC_API_VERSION 16.4.0```
+
+-   fdsnxml2inv
+    -   Fix samplerate conversion from double to fraction.
+-   scmv
+    -   Fix crash if origin depth is not set.
+-   fdsnws
+    -   Fix data availability sort for Python >= 3.13.
+    -   Fix conditional station requests. Requests involving the
+        If-Modified-Since header failed since Twisted
+        version 24.7. The http.stringToDatetime() now requires a
+        byte string.
+-   trunk
+    -   Fix LOCSAT station correction file lookup if `SEISCOMP_LOCSAT_TABLE_DIR`
+        environment variable is being used.
+    -   Decode tokens when parsing a URL.
+-   scevent
+    -   Provide optional REST API to return the target event an origin would be
+        associated to.
+
+## 6.8.4
+
+-   scevent
+    -   Read `eventAssociation.minimumScore` from configuration.
+
+## 6.8.3
+
+-   caps_plugin
+    -   Exit if pipe to `seedlink` is broken.
+-   trunk
+    -   Fix crash with empty filter parameter list and newer
+        C++ compiler versions.
+    -   Do not call combined:// real-time recordstream with zero
+        requests.
+
+## 6.8.2
+
+-   scolv
+    -   Attempt to fix a crash that is indicated by the terminal output:
+
+        ```
+        QThread: Destroyed while thread is still running
+        ```
+
+## 6.8.1
+
+-   scconfig
+    -   Allow parenthesis as profile names, e.g. for amplitude
+        profiles.
+
+## 6.8.0
+
+-   NonLinLoc locator plugin
+    -   Allow `SAVE_NLLOC_EXPECTATION` in NLL configuration
+        files.
+-   scwfparam
+    -   Add support for custom list of periods.
+-   LocSAT
+    -   Fix bug when a function with only one sample is
+        interpolated. That usually lead to location
+        errors such as "SVD routine can't decompose matrix".
 
 ## 6.7.9
 
@@ -268,13 +453,12 @@ will be tackled in future updates.
 -   trunk
     -   ITAPER(): Support time spans with double precision, update filter
         documentation.
-    -   Add locrouter plugin, see
-        https://github.com/SeisComP/common/blob/master/plugins/locator/router/descriptions/global_locrouter.rst.
     -   Add option `amplitudes.[type].considerUnusedArrivals` which if enabled
         considers stations with unused (disabled) arrivals for amplitude and
         implicitly magnitude computations. Affects scamp, scmag and scolv.
-    -   Add router locator.
-        -   The RouterLocator is a meta locator which selects an actual
+    -   Add Router locator by locrouter plugin, see
+        <https://github.com/SeisComP/common/blob/master/plugins/locator/router/descriptions/global_locrouter.rst>.
+        -   The Router locator is a meta locator which selects an actual
             locator based on region profiles configured in GeoJSON or BNA
             files.
         -   The locator supports both, the initial location based on a pick
@@ -293,16 +477,16 @@ will be tackled in future updates.
         according to the methodID and earthModelID. If that is not found then
         the default locator will be set again rather than keeping the last selection.
     -   Set OriginLocatorView depth type to "depth type set by locator" when
-        presetFromOrigin is true and the depth type is unset, resetting the state of
-        the origin set before.
+        presetFromOrigin is true and the depth type is unset, resetting the
+        state of the origin set before.
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
         date is not specified for the StationXML node.
 -   iLoc
-    -   When reading a local velocity model file, If CONRAD is not specified,
-        the index of the Conrad discontinuity was not set properly, therefore iLoc
-        assumed the very first depth as the Conrad thus preventing the calculation
-        of Pg/Sg phases. The calculation of travel times from a local velocity model
+    -   When reading a local velocity model file where CONRAD is not specified,
+        iLoc still assumed the existence of the Conrad discontinuity and set it
+        to the very first layer. This prevented the calculation of Pg/Sg phases.
+        The calculation of travel times from a local velocity model
         was restricted to up to 6 degree distance.
         The Conrad discontinuity is no longer set to the surface when CONRAD is not
         specified in the local velocity model. Travel-time calculations from local
@@ -354,7 +538,7 @@ will be tackled in future updates.
         configured user does not yet exists as database role.
     -   Fix MYSQL setup script escape warnings.
 -   Third Party
-    -   Update libmseed to 2.19.8
+    -   Update libmseed to 2.19.8.
 -   trunk
     -   Allow creating amplitude aliases by configuration of `amplitudes.aliases`
         in global module configuration and amplitude type profiles in global
@@ -387,9 +571,9 @@ will be tackled in future updates.
     -   Derive stream sampling rate from decimation stages if not given
         explicitly.
 -   scalert
-    -    Fix message string and value precision.
+    -   Fix message string and value precision.
 -   scart
-    -   Fix option `--rename`. 
+    -   Fix option `--rename`.
 -   scautopick
     -   Add configuration parameters `thresholds.minDuration` and
         `thresholds.maxDuration` for constraining pick generation.
@@ -482,15 +666,15 @@ will be tackled in future updates.
     -   Support dumping picks by publicID using `--pick`.
     -   Ignore unpreferred magnitudes with `-p`.
 -   scrttv
-    -    Add option `--3c` to show all three components of `detecStream`.
-    -    Use consistent menu entry names.
+    -   Add option `--3c` to show all three components of `detecStream`.
+    -   Use consistent menu entry names.
 -   stdloc
-    -    GridSearch.cellSize replaced by GridSearch.numPoints.
-    -    Default method is now LeastSquares.
-    -    Add LeastSquares.depthInit (like LOCSAT locator).
+    -   GridSearch.cellSize replaced by GridSearch.numPoints.
+    -   Default method is now LeastSquares.
+    -   Add LeastSquares.depthInit (like LOCSAT locator).
 -   screloc
-    -    Add `allowAnyStatus` option to allow origins to be relocated
-         without checking their evaluationStatus.
+    -   Add `allowAnyStatus` option to allow origins to be relocated
+        without checking their evaluationStatus.
 
 ## 6.4.4
 
@@ -899,8 +1083,8 @@ Changes:
         precision.
     -   Changed KM_OF_DEGREE constant according to WGS84 mean radius definition.
     -   Changed default values of Wood-Anderson instrument filter to
-        recommendations by IASPEI magnitude group, 2011 and Uhrhammer et al.,
-        1990. The change systematically reduces magnitudes by 0.13 when making
+        recommendations by IASPEI magnitude group, 2011 and Uhrhammer et al., 1990.
+        The change systematically reduces magnitudes by 0.13 when making
         use of amplitudes measured on waveforms corrected for Wood-Anderson
         seismometers with default.
     -   Remove `MYSQL_OPT_RECONNECT` option from MYSQL database driver to get
@@ -1027,8 +1211,8 @@ Changes:
 ## 5.5.13
 
 -   seedlink
-    -   Fix plugin update-config if global parameters are modified,
-        e.g. mseeedfifo plugin. 
+    -   Fix plugin update-config if global parameters are modified, e.g.,
+        mseeedfifo plugin.
 
 ## 5.5.12
 
@@ -1218,11 +1402,13 @@ Changes:
     -   Add notion of auxilliary channels (configurable). Auxilliary channels can
         be skipped while adding stations in range because a minimum or maximum
         distance has not been reached.
+
         ```
         picker.auxilliary.channels = AB.*.*.*
         picker.auxilliary.minimumDistance = 0 # Optional, default 0
         picker.auxilliary.maximumDistance = 1 # Optional, default 1000
         ```
+
     -   Read journal entries also from offline XML files
     -   Fix regression in 5.4 which prevents the picker from resetting the
         amplitude scaling of the zoom trace when scaling to visible amplitudes
@@ -1264,11 +1450,15 @@ Changes:
     -   Simplify the configuration of the travel-time interface homogeneous:
         Deprecated global configuration parameter -> new parameter, dropped
         '.profile':
+
         ```
+
         ttt.homogeneous.profile.[profile].[parameters]  -> ttt.homogeneous.[profile].[parameters]
+
         ```
+
     -   Add stdloc locator plugin which implements a new locator called StdLoc.
-        It has been contributed by Luca Scarabello / ETH. The algorithms 
+        It has been contributed by Luca Scarabello / ETH. The algorithms
         implemented in StdLoc are standard methods described in
         "Routine Data Processing in Earthquake Seismology" by Jens Havskov
         and Lars Ottemoller.
@@ -1276,11 +1466,15 @@ Changes:
 -   amplitudes
     -   Allow configuration of Wood-Anderson instrument parameters in amplitudes
         global section of module configuration.
+
         ```
+
         amplitudes.WoodAnderson.gain = ...
         amplitudes.WoodAnderson.T0 = ...
         amplitudes.WoodAnderson.h = ...
+
         ```
+
 -   GUI
     -   Fix tooltip display of MapWidget under some circumstances
     -   Add View and Settings menus consistently to all GUIs.
@@ -1594,7 +1788,9 @@ to 0.12.
         to extract back azimuth and slowness for three-component stations.
 
         ```
+
         fx = DFX
+
         ```
 
 -   scbulletin
@@ -1662,6 +1858,7 @@ to 0.12.
         Deprecated global configuration parameter -> new parameter:
 
         ```
+
         eventlist.customColumn                 -> eventlist.customColumn.name
         eventlist.regions                      -> eventlist.filter.regions.profiles
         eventlist.region.$name.name            -> eventlist.filter.regions.region.$name.name
@@ -1672,11 +1869,15 @@ to 0.12.
         eventedit.customColumn.originCommentID -> eventedit.origin.customColumn.originCommentID
         eventedit.customColumn.pos             -> eventedit.origin.customColumn.pos
         eventedit.customColumn.colors          -> eventedit.origin.customColumn.colors
+
         ```
     -   Add support for event list filters based on polygons defined in either
         the fep or bna/geojson directories.
+
         ```
+
         eventlist.filter.regions.region.Test.poly = "my polygon"
+
         ```
 
 -   trunk
@@ -2193,7 +2394,8 @@ to 0.12.
         errors with init scripts
     -   Add fixed hypocenter locator
     -   Add external locator plugin (locext)
-    -   Fix combined RecordStream for slinkMax|rtMax|1stMax units `s` and `h`
+    -   Fix  units `s` and `h` for options `slinkMax`|`rtMax`|`1stMax` of
+        combined RecordStream.
     -   Fix LOCSAT travel time computation for phases which do not provide
         a table file or with zero depth layers. Sometimes LOCSAT produced
         fake travel times for non existing phases after switching tables.
