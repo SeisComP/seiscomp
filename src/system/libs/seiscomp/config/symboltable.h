@@ -26,7 +26,6 @@
 #include <vector>
 #include <map>
 #include <set>
-#include <sstream>
 
 #include <seiscomp/config/log.h>
 
@@ -36,7 +35,7 @@ namespace Config {
 
 
 struct SC_CONFIG_API Symbol {
-	typedef std::vector<std::string> Values;
+	using Values = std::vector<std::string>;
 
 	Symbol(const std::string& name, const std::string& ns,
 	       const std::vector<std::string>& values,
