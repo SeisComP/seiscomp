@@ -120,6 +120,283 @@ class SwigPyIterator(object):
 
 # Register SwigPyIterator in _config:
 _config.SwigPyIterator_swigregister(SwigPyIterator)
+ERROR = _config.ERROR
+WARNING = _config.WARNING
+INFO = _config.INFO
+DEBUG = _config.DEBUG
+class Logger(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _config.delete_Logger
+
+    def log(self, arg0, filename, line, msg):
+        return _config.Logger_log(self, arg0, filename, line, msg)
+
+    def __init__(self):
+        if self.__class__ == Logger:
+            _self = None
+        else:
+            _self = self
+        _config.Logger_swiginit(self, _config.new_Logger(_self, ))
+    def __disown__(self):
+        self.this.disown()
+        _config.disown_Logger(self)
+        return weakref.proxy(self)
+
+# Register Logger in _config:
+_config.Logger_swigregister(Logger)
+class Exception(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        _config.Exception_swiginit(self, _config.new_Exception(*args))
+    __swig_destroy__ = _config.delete_Exception
+
+    def what(self):
+        return _config.Exception_what(self)
+
+# Register Exception in _config:
+_config.Exception_swigregister(Exception)
+class OptionNotFoundException(Exception):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        _config.OptionNotFoundException_swiginit(self, _config.new_OptionNotFoundException(*args))
+    __swig_destroy__ = _config.delete_OptionNotFoundException
+
+# Register OptionNotFoundException in _config:
+_config.OptionNotFoundException_swigregister(OptionNotFoundException)
+class TypeConversionException(Exception):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        _config.TypeConversionException_swiginit(self, _config.new_TypeConversionException(*args))
+    __swig_destroy__ = _config.delete_TypeConversionException
+
+# Register TypeConversionException in _config:
+_config.TypeConversionException_swigregister(TypeConversionException)
+class SyntaxException(Exception):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        _config.SyntaxException_swiginit(self, _config.new_SyntaxException(*args))
+    __swig_destroy__ = _config.delete_SyntaxException
+
+# Register SyntaxException in _config:
+_config.SyntaxException_swigregister(SyntaxException)
+class CaseSensitivityException(Exception):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        _config.CaseSensitivityException_swiginit(self, _config.new_CaseSensitivityException(*args))
+    __swig_destroy__ = _config.delete_CaseSensitivityException
+
+# Register CaseSensitivityException in _config:
+_config.CaseSensitivityException_swigregister(CaseSensitivityException)
+class Symbol(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        _config.Symbol_swiginit(self, _config.new_Symbol(*args))
+
+    def set(self, name, ns, values, uri, comment, stage=-1):
+        return _config.Symbol_set(self, name, ns, values, uri, comment, stage)
+
+    def __eq__(self, symbol):
+        return _config.Symbol___eq__(self, symbol)
+
+    def toString(self):
+        return _config.Symbol_toString(self)
+    name = property(_config.Symbol_name_get, _config.Symbol_name_set)
+    ns = property(_config.Symbol_ns_get, _config.Symbol_ns_set)
+    content = property(_config.Symbol_content_get, _config.Symbol_content_set)
+    values = property(_config.Symbol_values_get, _config.Symbol_values_set)
+    uri = property(_config.Symbol_uri_get, _config.Symbol_uri_set)
+    comment = property(_config.Symbol_comment_get, _config.Symbol_comment_set)
+    stage = property(_config.Symbol_stage_get, _config.Symbol_stage_set)
+    line = property(_config.Symbol_line_get, _config.Symbol_line_set)
+    __swig_destroy__ = _config.delete_Symbol
+
+# Register Symbol in _config:
+_config.Symbol_swigregister(Symbol)
+class SymbolTable(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        _config.SymbolTable_swiginit(self, _config.new_SymbolTable())
+
+    def setLogger(self, arg2):
+        return _config.SymbolTable_setLogger(self, arg2)
+
+    def logger(self):
+        return _config.SymbolTable_logger(self)
+
+    def add(self, *args):
+        return _config.SymbolTable_add(self, *args)
+
+    def get(self, *args):
+        return _config.SymbolTable_get(self, *args)
+
+    def remove(self, name):
+        return _config.SymbolTable_remove(self, name)
+
+    def incrementObjectCount(self):
+        return _config.SymbolTable_incrementObjectCount(self)
+
+    def decrementObjectCount(self):
+        return _config.SymbolTable_decrementObjectCount(self)
+
+    def objectCount(self):
+        return _config.SymbolTable_objectCount(self)
+
+    def toString(self):
+        return _config.SymbolTable_toString(self)
+
+    def hasFileBeenIncluded(self, fileName):
+        return _config.SymbolTable_hasFileBeenIncluded(self, fileName)
+
+    def addToIncludedFiles(self, fileName):
+        return _config.SymbolTable_addToIncludedFiles(self, fileName)
+
+    def includesBegin(self):
+        return _config.SymbolTable_includesBegin(self)
+
+    def includesEnd(self):
+        return _config.SymbolTable_includesEnd(self)
+
+    def begin(self):
+        return _config.SymbolTable_begin(self)
+
+    def end(self):
+        return _config.SymbolTable_end(self)
+    __swig_destroy__ = _config.delete_SymbolTable
+
+# Register SymbolTable in _config:
+_config.SymbolTable_swigregister(SymbolTable)
+class Config(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        _config.Config_swiginit(self, _config.new_Config())
+    __swig_destroy__ = _config.delete_Config
+
+    def readConfig(self, file, stage=-1, raw=False):
+        return _config.Config_readConfig(self, file, stage, raw)
+
+    def writeConfig(self, *args):
+        return _config.Config_writeConfig(self, *args)
+
+    def setLogger(self, logger):
+        return _config.Config_setLogger(self, logger)
+
+    def symbolsToString(self):
+        return _config.Config_symbolsToString(self)
+
+    def names(self):
+        return _config.Config_names(self)
+
+    def visitedFilesToString(self):
+        return _config.Config_visitedFilesToString(self)
+
+    def getInt(self, *args):
+        return _config.Config_getInt(self, *args)
+
+    def setInt(self, name, value):
+        return _config.Config_setInt(self, name, value)
+
+    def getDouble(self, *args):
+        return _config.Config_getDouble(self, *args)
+
+    def setDouble(self, name, value):
+        return _config.Config_setDouble(self, name, value)
+
+    def getBool(self, *args):
+        return _config.Config_getBool(self, *args)
+
+    def setBool(self, name, value):
+        return _config.Config_setBool(self, name, value)
+
+    def getString(self, *args):
+        return _config.Config_getString(self, *args)
+
+    def setString(self, name, value):
+        return _config.Config_setString(self, name, value)
+
+    def remove(self, name):
+        return _config.Config_remove(self, name)
+
+    def getInts(self, *args):
+        return _config.Config_getInts(self, *args)
+
+    def setInts(self, name, values):
+        return _config.Config_setInts(self, name, values)
+
+    def getDoubles(self, *args):
+        return _config.Config_getDoubles(self, *args)
+
+    def setDoubles(self, name, values):
+        return _config.Config_setDoubles(self, name, values)
+
+    def getBools(self, *args):
+        return _config.Config_getBools(self, *args)
+
+    def setBools(self, name, values):
+        return _config.Config_setBools(self, name, values)
+
+    def getStrings(self, *args):
+        return _config.Config_getStrings(self, *args)
+
+    def setStrings(self, name, values):
+        return _config.Config_setStrings(self, name, values)
+
+    def findSymbols(self, *args):
+        return _config.Config_findSymbols(self, *args)
+
+    def symbolTable(self):
+        return _config.Config_symbolTable(self)
+
+    def eval(self, rvalue, result, resolveReferences=True, errmsg=None):
+        return _config.Config_eval(self, rvalue, result, resolveReferences, errmsg)
+
+    @staticmethod
+    def Eval(rvalue, result, resolveReferences=True, symtab=None, errmsg=None):
+        return _config.Config_Eval(rvalue, result, resolveReferences, symtab, errmsg)
+
+    @staticmethod
+    def writeValues(os, symbol, multilineLists=False):
+        return _config.Config_writeValues(os, symbol, multilineLists)
+
+    @staticmethod
+    def writeContent(os, symbol, multilineLists=False):
+        return _config.Config_writeContent(os, symbol, multilineLists)
+
+    @staticmethod
+    def writeSymbol(os, symbol, multilineLists=False):
+        return _config.Config_writeSymbol(os, symbol, multilineLists)
+
+    @staticmethod
+    def escapeIdentifier(arg1):
+        return _config.Config_escapeIdentifier(arg1)
+
+    def trackVariables(self, enabled):
+        return _config.Config_trackVariables(self, enabled)
+
+    def getVariables(self):
+        return _config.Config_getVariables(self)
+
+    def escape(self, arg2):
+        return _config.Config_escape(self, arg2)
+
+# Register Config in _config:
+_config.Config_swigregister(Config)
 class StringVector(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
@@ -540,281 +817,4 @@ class BoolVector(object):
 
 # Register BoolVector in _config:
 _config.BoolVector_swigregister(BoolVector)
-ERROR = _config.ERROR
-WARNING = _config.WARNING
-INFO = _config.INFO
-DEBUG = _config.DEBUG
-class Logger(object):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-    __swig_destroy__ = _config.delete_Logger
-
-    def log(self, arg0, filename, line, msg):
-        return _config.Logger_log(self, arg0, filename, line, msg)
-
-    def __init__(self):
-        if self.__class__ == Logger:
-            _self = None
-        else:
-            _self = self
-        _config.Logger_swiginit(self, _config.new_Logger(_self, ))
-    def __disown__(self):
-        self.this.disown()
-        _config.disown_Logger(self)
-        return weakref.proxy(self)
-
-# Register Logger in _config:
-_config.Logger_swigregister(Logger)
-class Exception(object):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        _config.Exception_swiginit(self, _config.new_Exception(*args))
-    __swig_destroy__ = _config.delete_Exception
-
-    def what(self):
-        return _config.Exception_what(self)
-
-# Register Exception in _config:
-_config.Exception_swigregister(Exception)
-class OptionNotFoundException(Exception):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        _config.OptionNotFoundException_swiginit(self, _config.new_OptionNotFoundException(*args))
-    __swig_destroy__ = _config.delete_OptionNotFoundException
-
-# Register OptionNotFoundException in _config:
-_config.OptionNotFoundException_swigregister(OptionNotFoundException)
-class TypeConversionException(Exception):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        _config.TypeConversionException_swiginit(self, _config.new_TypeConversionException(*args))
-    __swig_destroy__ = _config.delete_TypeConversionException
-
-# Register TypeConversionException in _config:
-_config.TypeConversionException_swigregister(TypeConversionException)
-class SyntaxException(Exception):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        _config.SyntaxException_swiginit(self, _config.new_SyntaxException(*args))
-    __swig_destroy__ = _config.delete_SyntaxException
-
-# Register SyntaxException in _config:
-_config.SyntaxException_swigregister(SyntaxException)
-class CaseSensitivityException(Exception):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        _config.CaseSensitivityException_swiginit(self, _config.new_CaseSensitivityException(*args))
-    __swig_destroy__ = _config.delete_CaseSensitivityException
-
-# Register CaseSensitivityException in _config:
-_config.CaseSensitivityException_swigregister(CaseSensitivityException)
-class Symbol(object):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def __init__(self, *args):
-        _config.Symbol_swiginit(self, _config.new_Symbol(*args))
-
-    def set(self, name, ns, values, uri, comment, stage=-1):
-        return _config.Symbol_set(self, name, ns, values, uri, comment, stage)
-
-    def __eq__(self, symbol):
-        return _config.Symbol___eq__(self, symbol)
-
-    def toString(self):
-        return _config.Symbol_toString(self)
-    name = property(_config.Symbol_name_get, _config.Symbol_name_set)
-    ns = property(_config.Symbol_ns_get, _config.Symbol_ns_set)
-    content = property(_config.Symbol_content_get, _config.Symbol_content_set)
-    values = property(_config.Symbol_values_get, _config.Symbol_values_set)
-    uri = property(_config.Symbol_uri_get, _config.Symbol_uri_set)
-    comment = property(_config.Symbol_comment_get, _config.Symbol_comment_set)
-    stage = property(_config.Symbol_stage_get, _config.Symbol_stage_set)
-    line = property(_config.Symbol_line_get, _config.Symbol_line_set)
-    __swig_destroy__ = _config.delete_Symbol
-
-# Register Symbol in _config:
-_config.Symbol_swigregister(Symbol)
-class SymbolTable(object):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def __init__(self):
-        _config.SymbolTable_swiginit(self, _config.new_SymbolTable())
-
-    def setLogger(self, arg2):
-        return _config.SymbolTable_setLogger(self, arg2)
-
-    def logger(self):
-        return _config.SymbolTable_logger(self)
-
-    def add(self, *args):
-        return _config.SymbolTable_add(self, *args)
-
-    def get(self, *args):
-        return _config.SymbolTable_get(self, *args)
-
-    def remove(self, name):
-        return _config.SymbolTable_remove(self, name)
-
-    def incrementObjectCount(self):
-        return _config.SymbolTable_incrementObjectCount(self)
-
-    def decrementObjectCount(self):
-        return _config.SymbolTable_decrementObjectCount(self)
-
-    def objectCount(self):
-        return _config.SymbolTable_objectCount(self)
-
-    def toString(self):
-        return _config.SymbolTable_toString(self)
-
-    def hasFileBeenIncluded(self, fileName):
-        return _config.SymbolTable_hasFileBeenIncluded(self, fileName)
-
-    def addToIncludedFiles(self, fileName):
-        return _config.SymbolTable_addToIncludedFiles(self, fileName)
-
-    def includesBegin(self):
-        return _config.SymbolTable_includesBegin(self)
-
-    def includesEnd(self):
-        return _config.SymbolTable_includesEnd(self)
-
-    def begin(self):
-        return _config.SymbolTable_begin(self)
-
-    def end(self):
-        return _config.SymbolTable_end(self)
-    __swig_destroy__ = _config.delete_SymbolTable
-
-# Register SymbolTable in _config:
-_config.SymbolTable_swigregister(SymbolTable)
-class Config(object):
-    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-    __repr__ = _swig_repr
-
-    def __init__(self):
-        _config.Config_swiginit(self, _config.new_Config())
-    __swig_destroy__ = _config.delete_Config
-
-    def readConfig(self, file, stage=-1, raw=False):
-        return _config.Config_readConfig(self, file, stage, raw)
-
-    def writeConfig(self, *args):
-        return _config.Config_writeConfig(self, *args)
-
-    def setLogger(self, logger):
-        return _config.Config_setLogger(self, logger)
-
-    def symbolsToString(self):
-        return _config.Config_symbolsToString(self)
-
-    def names(self):
-        return _config.Config_names(self)
-
-    def visitedFilesToString(self):
-        return _config.Config_visitedFilesToString(self)
-
-    def getInt(self, *args):
-        return _config.Config_getInt(self, *args)
-
-    def setInt(self, name, value):
-        return _config.Config_setInt(self, name, value)
-
-    def getDouble(self, *args):
-        return _config.Config_getDouble(self, *args)
-
-    def setDouble(self, name, value):
-        return _config.Config_setDouble(self, name, value)
-
-    def getBool(self, *args):
-        return _config.Config_getBool(self, *args)
-
-    def setBool(self, name, value):
-        return _config.Config_setBool(self, name, value)
-
-    def getString(self, *args):
-        return _config.Config_getString(self, *args)
-
-    def setString(self, name, value):
-        return _config.Config_setString(self, name, value)
-
-    def remove(self, name):
-        return _config.Config_remove(self, name)
-
-    def getInts(self, *args):
-        return _config.Config_getInts(self, *args)
-
-    def setInts(self, name, values):
-        return _config.Config_setInts(self, name, values)
-
-    def getDoubles(self, *args):
-        return _config.Config_getDoubles(self, *args)
-
-    def setDoubles(self, name, values):
-        return _config.Config_setDoubles(self, name, values)
-
-    def getBools(self, *args):
-        return _config.Config_getBools(self, *args)
-
-    def setBools(self, name, values):
-        return _config.Config_setBools(self, name, values)
-
-    def getStrings(self, *args):
-        return _config.Config_getStrings(self, *args)
-
-    def setStrings(self, name, values):
-        return _config.Config_setStrings(self, name, values)
-
-    def findSymbols(self, *args):
-        return _config.Config_findSymbols(self, *args)
-
-    def symbolTable(self):
-        return _config.Config_symbolTable(self)
-
-    def eval(self, rvalue, result, resolveReferences=True, errmsg=None):
-        return _config.Config_eval(self, rvalue, result, resolveReferences, errmsg)
-
-    @staticmethod
-    def Eval(rvalue, result, resolveReferences=True, symtab=None, errmsg=None):
-        return _config.Config_Eval(rvalue, result, resolveReferences, symtab, errmsg)
-
-    @staticmethod
-    def writeValues(os, symbol, multilineLists=False):
-        return _config.Config_writeValues(os, symbol, multilineLists)
-
-    @staticmethod
-    def writeContent(os, symbol, multilineLists=False):
-        return _config.Config_writeContent(os, symbol, multilineLists)
-
-    @staticmethod
-    def writeSymbol(os, symbol, multilineLists=False):
-        return _config.Config_writeSymbol(os, symbol, multilineLists)
-
-    @staticmethod
-    def escapeIdentifier(arg1):
-        return _config.Config_escapeIdentifier(arg1)
-
-    def trackVariables(self, enabled):
-        return _config.Config_trackVariables(self, enabled)
-
-    def getVariables(self):
-        return _config.Config_getVariables(self)
-
-    def escape(self, arg2):
-        return _config.Config_escape(self, arg2)
-
-# Register Config in _config:
-_config.Config_swigregister(Config)
 
