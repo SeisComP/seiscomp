@@ -31,13 +31,6 @@
 %include <std_string.i>
 %include <std_vector.i>
 
-namespace std {
-	%template(StringVector) vector<string>;
-	%template(IntVector) vector<int>;
-	%template(DoubleVector) vector<double>;
-	%template(BoolVector) vector<bool>;
-}
-
 %include "seiscomp/config/api.h"
 %include "seiscomp/config/log.h"
 %include "seiscomp/config/exceptions.h"
@@ -59,3 +52,10 @@ namespace std {
 
 %include "seiscomp/config/symboltable.h"
 %include "seiscomp/config/config.h"
+
+namespace std {
+	%template(StringVector) vector<string>;
+	%template(IntVector) vector<int>;
+	%template(DoubleVector) vector<double>;
+	%template(BoolVector) vector<bool>;
+}
