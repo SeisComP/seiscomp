@@ -2,6 +2,31 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.0.2
+
+-   trunk
+    -   Set correct defaults for Ms\_20 amplitude.
+    -   Set minimum depth for MLc to -10 kilometers.
+    -   Update ML, MLv, MLc, Ms\_20 descriptions.
+    -   Update stdloc descriptions.
+    -   Disable command line parameter guessing which breaks
+        overriding configuration parameters, e.g. `--de` has been
+        accepted as `--debug`.
+-   scmaster
+    -   Fix MYSQL setup if root password is provided.
+-   scconfig
+    -   Fix compilation with Qt5.
+    -   Fix crash when reloading the configuration and
+        selecting binding profiles.
+    -   Add splash screen.
+    -   Take aliases into account when populating structures
+        such as magnitudes and amplitudes.
+-   GUI
+    -   Use new splash screen.
+    -   Consider HDPI displays when rendering focal mechanism
+        map symbols.
+    -   Fix record border rendering which now default to 'box' again.
+
 ## 7.0.1
 
 -   trunk
