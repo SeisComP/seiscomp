@@ -2,6 +2,19 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.0.3
+
+-   fdsnws
+    -   Fix event query crossing date line.
+-   GUI
+    -   Update splash screen again: add a dark border to better
+        distinguish the splash screen from a light background.
+    -   Fix ProcessManager icon rendering with hDPI displays.
+-   trunk
+    -   Fix SSL client connection with SNI routing.
+    -   Redirect FDSNWS requests on all 3xx response codes.
+    -   Fix `seiscomp setup` if database storage is not enabled.
+
 ## 7.0.2
 
 -   trunk
