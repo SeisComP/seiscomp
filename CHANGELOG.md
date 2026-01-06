@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.9.2
+
+-   trunk
+    -   Fix SSL client connection with SNI routing.
+    -   Redirect FDSNWS requests on all 3xx response codes.
+
 ## 6.9.1
 
 -   trunk
