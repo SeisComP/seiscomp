@@ -354,6 +354,12 @@ custom database script which rely on it. Please be aware of that change.
 -   seedlink
     -   Change default server address of chain plugin to geofon.gfz.de.
 
+## 6.9.2
+
+-   trunk
+    -   Fix SSL client connection with SNI routing.
+    -   Redirect FDSNWS requests on all 3xx response codes.
+
 ## 6.9.1
 
 -   trunk
