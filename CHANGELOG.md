@@ -2,6 +2,50 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.1.0
+
+-   scconfig
+    -   Fix crash when changing from a station binding to a profile.
+-   doc
+    -   Fix modules descriptions w.r.t. units.
+    -   Improve module descriptions by providing possible value sets.
+    -   Replace IRIS with EarthScope.
+-   trunk
+    -   Fix seedlink recordstream connection to respect the requested
+        record datatype.
+    -   Add NSLC to warning message of miniSEED decoding.
+    -   Fix miniSEED int16 decoding in combination with byte swapping.
+    -   Log errors of database URL if it cannot be decoded correctly.
+    -   Fix FDSNWS recordstream w.r.t. to redirects which could have
+        caused infinite loops.
+    -   SWIG Python wrappers are now generated with SWIG 4.4.1
+        to fix an issue caused by SWIG 4.3.
+    -   Fix Python wrappers for optional TravelTime.azi attribute
+-   GUI
+    -   Fix typos in ProcessManager.
+    -   Do not exit application if child processes are still running.
+        Instead open the ProcessManager and aks if exit should be aborted
+        or all child processes should be killed.
+    -   Add LogManager to manage and inspect logging output in each
+        GUI application.
+    -   Add two new shortcuts to open process manager (alt+ctrl+p) and
+        logging manager (alt+ctrl+l).
+-   NLL
+    -   Fix crash.
+-   scolv
+    -   Use correct publish icon.
+    -   If travel times cannot be computed and the origin depth is negative,
+        try again with depth of 1m and render the blue markers (predicted
+        arrival time) with a dashed pattern.
+-   scevtls
+    -   Set correct return code.
+-   scbulletin
+    -   Fix scautoloc3 output if depth is zero.
+-   scevent
+    -   Populate "region name" with custom regions only if `populateFERegion=true`.
+-   scqcv
+    -   Fix crash if a values uncertainty is not set.
+
 ## 7.0.3
 
 -   fdsnws
@@ -130,6 +174,8 @@ custom database script which rely on it. Please be aware of that change.
 -   mainx
     -   Add new software repository for new modules and plugins developed
         by gempa GmbH.
+-   fdsnws
+    -   Add JWT authentication.
 -   scmsdemux
     -   New module in mainx repository for demultiplexing miniSEED data which
         are written to individual files.
