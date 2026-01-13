@@ -2,6 +2,28 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.0.4
+
+-   scconfig
+    -   Fix crash when changing from a station binding to a profile.
+-   doc
+    -   Fix modules descriptions w.r.t. units.
+    -   Improve module descriptions by providing possible value sets.
+-   trunk
+    -   Fix seedlink recordstream connection to respect the requested
+        record datatype.
+    -   Add NSLC to warning message of miniSEED decoding.
+    -   Fix miniSEED int16 decoding in combination with byte swapping.
+    -   Log errors of database URL if it cannot be decoded correctly.
+-   GUI
+    -   Fix typos in ProcessManager.
+-   scolv
+    -   Use correct publish icon.
+-   scevtls
+    -   Set correct return code.
+-   scbulletin
+    -   Fix scautoloc3 output if depth is zero.
+
 ## 7.0.3
 
 -   fdsnws
