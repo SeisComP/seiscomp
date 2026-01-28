@@ -281,6 +281,49 @@ Examples
    defined and what module the station is bound to.
 
 
+.. _system-management-ext-env:
+
+Extending the SeisComP environment
+==================================
+
+Sometimes it might be useful to set custom variables or to override SeisComP
+variables. For example if there are multiple SeisComP installations and if the
+local configuration and logging directory should be located in some other
+directory as :file:`~/.seiscomp` for a particular SeisComP installation, then
+the environment for this particular installation can be changed, namely, the
+variable "SEISCOMP_LOCAL_CONFIG" can be set to match the new location.
+
+For that purpose :program:`seiscomp` supports sourcing custom shell scripts
+during its initialization phase and prior to calling a service or module.
+
+The environment script is checked in
+:file:`$SEISCOMP_ROOT/etc/env/by-hostname/$(hostname)`. If the hostname
+is "proc" and the installation directory is :file:`~/seiscomp-proc`, then the
+script in :file:`~/seiscomp-proc/etc/env/by-hostname/proc` can be used with the
+following content:
+
+.. code-block:: sh
+
+   export SEISCOMP_LOCAL_CONFIG=/home/sysop/.seiscomp-proc
+
+This will override the local configuration directory for all trunk modules such
+as :ref:`scautopick` or :ref:`scautoloc` and they will write their
+log files into :file:`/home/sysop/.seiscomp-proc/scautopick.log`.
+
+These environment variables can also be used in the SeisComP configuration files:
+
+.. code-block:: sh
+
+   option.someOption=${SEISCOMP_LOCAL_CONFIG}
+
+Of course other installation specific initializations can be done there whether
+they override SeisComP variables or send emails, everything is possible.
+
+But keep in mind that the script is called at each :program:`seiscomp`
+invocation and as such it can increase the runtime (or decrease performance)
+if too much work is done there. For complex tasks consider a custom SeisComP
+module instead.
+
 .. _system-management-init:
 
 Module Init Scripts
