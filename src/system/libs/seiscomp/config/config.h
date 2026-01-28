@@ -306,7 +306,8 @@ class SC_CONFIG_API Config {
 		std::vector<std::string> tokenize(const std::string& entry);
 		static bool reference(const std::string &name,
 		                      std::vector<std::string> &value,
-		                      const SymbolTable *symtab);
+		                      const SymbolTable *symtab,
+		                      std::string *errmsg);
 		static bool parseRValue(const std::string &entry,
 		                        std::vector<std::string> &parsedValues,
 		                        const SymbolTable *symtab,

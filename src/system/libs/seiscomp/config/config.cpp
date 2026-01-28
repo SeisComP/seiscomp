@@ -907,30 +907,26 @@ void Config::handleAssignment(const std::string& name,
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 bool Config::reference(const std::string &name,
                        std::vector<std::string> &values,
-                       const SymbolTable *symtab)
+                       const SymbolTable *symtab,
+                       std::string *errmsg)
 {
 	if ( symtab ) {
-		const Symbol* symbol = nullptr;
 		try {
-			symbol = symtab->get(name);
+			auto symbol = symtab->get(name);
+			if ( symbol ) {
+				values.insert(values.end(), symbol->values.begin(), symbol->values.end());
+				return true;
+			}
 		}
-		catch ( Exception& e ) {
-			//SEISCOMP_DEBUG("%s", e.what());
-		}
-
-		if ( symbol ) {
-			values = symbol->values;
-			return true;
-		}
+		catch ( Exception &e ) {}
 	}
 
 	char *env = getenv(name.c_str());
 	if ( env ) {
-		values.clear();
-		values.push_back(std::string(env));
-		return true;
+		return parseRValue(env, values, symtab, true, false, errmsg);
 	}
 
+	if ( errmsg ) *errmsg = "Cannot resolve '" + name + "'";
 	return false;
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1097,7 +1093,7 @@ bool Config::parseRValue(const std::string& entry,
 			}
 
 			std::vector<std::string> values;
-			if ( !reference(variable, values, symtab) ) {
+			if ( !reference(variable, values, symtab, errmsg) ) {
 				/*
 				SEISCOMP_DEBUG(
 					"[%s:%d] Cannot reference variable: %s Assigning NULL object.",
@@ -1106,7 +1102,6 @@ bool Config::parseRValue(const std::string& entry,
 					variable.c_str()
 				);
 				*/
-				if ( errmsg ) *errmsg = "Cannot resolve '" + variable + "'";
 				values.push_back(CONF_NULL_OBJECT);
 			}
 
