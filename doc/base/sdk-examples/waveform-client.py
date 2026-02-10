@@ -2,19 +2,20 @@
 # -*- coding: utf-8 -*-
 
 import sys
+
 from seiscomp import core, client
 
 
 class App(client.StreamApplication):
 
     def __init__(self, argc, argv):
-        client.StreamApplication.__init__(self, argc, argv)
+        super().__init__(argc, argv)
         # Do not connect to messaging and do not use database at all
         self.setMessagingEnabled(False)
         self.setDatabaseEnabled(False, False)
 
     def init(self):
-        if not client.StreamApplication.init(self):
+        if not super().init():
             return False
 
         # For testing purposes we subscribe to the last 5 minutes of data.
@@ -22,7 +23,7 @@ class App(client.StreamApplication):
         # a real-time capable backend such as Seedlink.
 
         # First, query now
-        now = core.Time.GMT()
+        now = core.Time.UTC()
         # Substract 5 minutes for the start time
         start = now - core.TimeSpan(300, 0)
         # Set the start time in our RecordStream
@@ -42,20 +43,27 @@ class App(client.StreamApplication):
         # Print the streamID which is a join of NSLC separated with '.'
         print(rec.streamID())
         # Print the records start time in ISO format
-        print("{:s}".format(rec.startTime().iso()))
+        print(rec.startTime().iso())
         # Print the sampling frequency
-        print("{:f} Hz".format(rec.samplingFrequency()))
+        print(f"{rec.samplingFrequency()} Hz")
         # If data is available
         if rec.data():
             # Print the number of samples
-            print("  {:d} samples".format(rec.data().size()))
+            print(f"  {rec.data().size()} samples")
             # Try to extract a float array. If the samples are of other
             # data types, use rec.dataType() to query the type and use
             # the appropriate array classes.
-            data = core.FloatArray.Cast(rec.data())
+
+            print(f"  {rec.dataType().toString()}", file=sys.stderr)
+            if rec.dataType() == 2:
+                data = core.FloatArray.Cast(rec.data())
+            elif rec.dataType() == 3:
+                data = core.DoubleArray.Cast(rec.data())
+            else:
+                print(f"  unsupported data type {rec.dataType()}", file=sys.stderr)
             # Print the samples
             if data:
-                print("  data: {:s}".format(str([data.get(i) for i in range(data.size())])))
+                print(f"  data: {[data.get(i) for i in range(data.size())]}")
             else:
                 print("  no data")
 

@@ -2,70 +2,69 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import traceback
-from seiscomp import core, client, datamodel
+
+from seiscomp import core, client
 
 
 class ListStreamsApp(client.Application):
 
     def __init__(self, argc, argv):
-        client.Application.__init__(self, argc, argv)
-        self.setMessagingEnabled(False)
-        self.setDatabaseEnabled(True, False)
-        self.setLoggingToStdErr(True)
+        super().__init__(argc, argv)
         self.setDaemonEnabled(False)
-#       self.setLoadInventoryEnabled(True)
+        self.setMessagingEnabled(False)
+        self.setDatabaseEnabled(True, True)
+        self.setLoadStationsEnabled(True)
+        self.setLoggingToStdErr(True)
 
     def validateParameters(self):
-        try:
-            if not client.Application.validateParameters(self):
-                return False
-            return True
-        except Exception:
-            traceback.print_exc()
-            sys.exit(-1)
+        if not super().validateParameters():
+            return False
+
+        # no database is needed when inventory is provided by an SCML file
+        if not self.isInventoryDatabaseEnabled():
+            self.setDatabaseEnabled(False, False)
+
+        return True
 
     def run(self):
-        try:
-            dbr = datamodel.DatabaseReader(self.database())
-            now = core.Time.GMT()
-            inv = datamodel.Inventory()
-            dbr.loadNetworks(inv)
+        now = core.Time.UTC()
+        inv = client.Inventory.Instance().inventory()
 
-            result = []
+        result = []
 
-            for inet in range(inv.networkCount()):
-                network = inv.network(inet)
-                dbr.load(network)
-                for ista in range(network.stationCount()):
-                    station = network.station(ista)
-                    try:
-                        start = station.start()
-                    except Exception:
+        for inet in range(inv.networkCount()):
+            network = inv.network(inet)
+            for ista in range(network.stationCount()):
+                station = network.station(ista)
+                try:
+                    start = station.start()
+                except Exception:
+                    continue
+
+                try:
+                    end = station.end()
+                    if not start <= now <= end:
                         continue
+                except Exception:
+                    pass
 
-                    try:
-                        end = station.end()
-                        if not start <= now <= end:
-                            continue
-                    except Exception:
-                        pass
+                for iloc in range(station.sensorLocationCount()):
+                    location = station.sensorLocation(iloc)
+                    for istr in range(location.streamCount()):
+                        stream = location.stream(istr)
+                        result.append(
+                            (
+                                network.code(),
+                                station.code(),
+                                location.code(),
+                                stream.code(),
+                            )
+                        )
 
-                    for iloc in range(station.sensorLocationCount()):
-                        location = station.sensorLocation(iloc)
-                        for istr in range(location.streamCount()):
-                            stream = location.stream(istr)
-                            result.append((network.code(), station.code(),
-                                           location.code(), stream.code()))
+        for net, sta, loc, cha in result:
+            print(f"{net} {sta} {loc} {cha}")
 
-            for net, sta, loc, cha in result:
-                print("{:2} {:5} {:2} {:3}".format(net, sta, loc, cha))
-
-            return True
-
-        except Exception:
-            traceback.print_exc()
-            sys.exit(-1)
+        return True
 
 
 def main():
