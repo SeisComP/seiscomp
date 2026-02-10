@@ -10,22 +10,22 @@ Please consider :doc:`contributing</base/contributing-docs>` to this documentati
 
    <div class="four column layout">
 
-.. figure:: base/media/apps/scmv.png
-   :alt: scmv
+.. figure:: base/media/scmvx.png
+   :alt: scmvx
 
-   scmv: MapView with sensor stations and detected events
+   scmvx: MapView with sensor stations and detected events
 
-.. figure:: base/media/apps/scrttv.png
+.. figure:: base/media/scrttv.png
    :alt: scrttv
 
    scrttv: TraceView with filtered data from configured streams
 
-.. figure:: base/media/apps/scolv-location.png
+.. figure:: base/media/scolv-location.png
    :alt: scolv
 
    scolv: OriginLocatorView with event and phase information
 
-.. figure:: base/media/apps/scolv-picker.png
+.. figure:: base/media/scolv-picker.png
    :alt: scolv picker
 
    scolv: OriginLocatorView phase picker with waveforms and phase information

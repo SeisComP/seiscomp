@@ -211,7 +211,7 @@ to all modules running locally or on remote computers.
 
 .. _config-fig-binding:
 
-.. figure:: ../media/binding.*
+.. figure:: ../media/binding.png
    :align: center
 
    Binding
