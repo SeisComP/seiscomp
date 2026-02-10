@@ -363,6 +363,9 @@ e.g. ::
 
    user@host:~$ scrttv
 
+For more details on the :program:`seiscomp` script and on how to use environment
+variables in the configuration files see: :ref:`system-management-ext-env`.
+
 
 Activate/Enable Modules
 =======================
