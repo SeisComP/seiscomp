@@ -146,7 +146,8 @@ class Simple:
         )
         xmls = glob.glob(desc_pattern)
 
-        setup_groups = {}
+        module_setup_groups = {}
+        plugin_setup_groups = {}
 
         for f in xmls:
             try:
@@ -172,7 +173,7 @@ class Simple:
                     sys.stderr.write("%s: skipping module without name\n" % f)
                     continue
 
-                if modname in setup_groups:
+                if modname in module_setup_groups:
                     raise Exception(
                         "%s: duplicate module name: %s" % (f, modname)
                     )
@@ -217,12 +218,19 @@ class Simple:
                 if len(groups) == 0:
                     continue
 
-                if modname in setup_groups:
-                    setup_groups[modname] += groups
+                if modname in plugin_setup_groups:
+                    plugin_setup_groups[modname] += groups
                 else:
-                    setup_groups[modname] = groups
+                    plugin_setup_groups[modname] = groups
 
-        for name, groups in sorted(setup_groups.items()):
+        # Make sure that modules are displayed before plugins
+        for modname, groups in plugin_setup_groups.items():
+            if modname in module_setup_groups:
+                module_setup_groups[modname] += groups
+            else:
+                module_setup_groups[modname] = groups
+
+        for name, groups in sorted(module_setup_groups.items()):
             self.addGroups(self.setupTree, name, groups)
 
         # Always descend to the first child (if available)
