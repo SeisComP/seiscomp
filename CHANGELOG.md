@@ -4,11 +4,108 @@ All notable changes to SeisComP are documented here.
 
 ## x.y.z
 
+-   doc
+    -   Update figures and references.
+-   seiscomp
+    -   Fix setup command with module plugins.
+-   trunk
+    -   Handle environment variables in configuration files correctly
+        when parsing lists.
+    -   Improve SDSArchive start time search stability when dealing with
+        files contained records of mixed record length.
+    -   Allow empty URL hosts to enable `-d postgresql://` again.
+    -   Install schema 0.14 XML files.
+-   scmaster
+    -   Fix crash in combination with concurrent connections.
+-   scautopick
+    -   Add support for addtional publicIDPattern tokens.
+-   GUI
+    -   Avoid duplicate entries when building legends from spatial/vector.
+    -   Fix error if duplicates are given in `eventlist.visibleColumns`.
+    -   Update icons.
+-   scrttv
+    -   Add amplitude mode which shows the currently hovered amplitude per
+        trace.
+    -   Add axis rendering with profiles.
+-   scevtstreams
+    -   Add option to only consider used arrivals.
+    -   Read multiple events, via -E an/or by file.
+-   scevtls
+    -   Add option --origin-count listing number of origin references per event.
+    -   Output data while iterating over result set to reduce memory consumption.
+    -   Support filter for unknown/empty event type.
+-   iLoc
+    -   Update to version 4.3.
+
+## 7.1.0
+
+-   scconfig
+    -   Fix crash when changing from a station binding to a profile.
+-   doc
+    -   Fix modules descriptions w.r.t. units.
+    -   Improve module descriptions by providing possible value sets.
+    -   Replace IRIS with EarthScope.
+-   trunk
+    -   Fix seedlink recordstream connection to respect the requested
+        record datatype.
+    -   Add NSLC to warning message of miniSEED decoding.
+    -   Fix miniSEED int16 decoding in combination with byte swapping.
+    -   Log errors of database URL if it cannot be decoded correctly.
+    -   Fix FDSNWS recordstream w.r.t. to redirects which could have
+        caused infinite loops.
+    -   SWIG Python wrappers are now generated with SWIG 4.4.1
+        to fix an issue caused by SWIG 4.3.
+    -   Fix Python wrappers for optional TravelTime.azi attribute
+-   GUI
+    -   Fix typos in ProcessManager.
+    -   Do not exit application if child processes are still running.
+        Instead open the ProcessManager and aks if exit should be aborted
+        or all child processes should be killed.
+    -   Add LogManager to manage and inspect logging output in each
+        GUI application.
+    -   Add two new shortcuts to open process manager (alt+ctrl+p) and
+        logging manager (alt+ctrl+l).
+-   NLL
+    -   Fix crash.
+-   scolv
+    -   Use correct publish icon.
+    -   If travel times cannot be computed and the origin depth is negative,
+        try again with depth of 1m and render the blue markers (predicted
+        arrival time) with a dashed pattern.
+-   scevtls
+    -   Set correct return code.
+-   scbulletin
+    -   Fix scautoloc3 output if depth is zero.
+-   scevent
+    -   Populate "region name" with custom regions only if `populateFERegion=true`.
+-   scqcv
+    -   Fix crash if a values uncertainty is not set.
+
+## 7.0.3
+
+-   fdsnws
+    -   Fix event query crossing date line.
+-   GUI
+    -   Update splash screen again: add a dark border to better
+        distinguish the splash screen from a light background.
+    -   Fix ProcessManager icon rendering with hDPI displays.
+-   trunk
+    -   Fix SSL client connection with SNI routing.
+    -   Redirect FDSNWS requests on all 3xx response codes.
+    -   Fix `seiscomp setup` if database storage is not enabled.
+
+## 7.0.2
+
 -   trunk
     -   Set correct defaults for Ms\_20 amplitude.
-    -   Set minimum depth for MLc to 10 kilometers.
+    -   Set minimum depth for MLc to -10 kilometers.
     -   Update ML, MLv, MLc, Ms\_20 descriptions.
     -   Update stdloc descriptions.
+    -   Disable command line parameter guessing which breaks
+        overriding configuration parameters, e.g. `--de` has been
+        accepted as `--debug`.
+-   scmaster
+    -   Fix MYSQL setup if root password is provided.
 -   scconfig
     -   Fix compilation with Qt5.
     -   Fix crash when reloading the configuration and
@@ -20,6 +117,7 @@ All notable changes to SeisComP are documented here.
     -   Use new splash screen.
     -   Consider HDPI displays when rendering focal mechanism
         map symbols.
+    -   Fix record border rendering which now default to 'box' again.
 
 ## 7.0.1
 
