@@ -27,7 +27,7 @@ from seiscomp import config
 
 # Python version depended string conversion
 if sys.version_info[0] < 3:
-    py3input = raw_input #pylint: disable=E0602
+    py3input = raw_input  # pylint: disable=E0602
 else:
     py3input = input
 
@@ -45,19 +45,19 @@ def oneliner(txt):
 
 
 def block(txt, width=80):
-    lines = [l.strip() for l in txt.strip().replace("\r", "").split('\n')]
+    lines = [l.strip() for l in txt.strip().replace("\r", "").split("\n")]
     line = "\n".join(lines)
 
     current = 0
     lines = []
 
     while current < len(line):
-        end = line.find('\n', current)
+        end = line.find("\n", current)
         if (end == -1) or (end - current > width):
             if len(line) - current > width:
-                end = line.rfind(' ', current, current+width)
+                end = line.rfind(" ", current, current + width)
                 if end == -1:
-                    end = line.find(' ', current)
+                    end = line.find(" ", current)
                     if end == -1:
                         end = len(line)
             else:
@@ -71,7 +71,7 @@ def block(txt, width=80):
 
 
 class SetupNode:
-    def __init__(self, parent, inp, next = None):
+    def __init__(self, parent, inp, next=None):
         self.parent = parent
         self.next = next
         self.child = None
@@ -134,7 +134,7 @@ class Simple:
     passed to all init modules that have a setup method.
     """
 
-    def __init__(self, args = []):
+    def __init__(self, args=[]):
         self.modules = args
         self.setupTree = SetupNode(None, None)
         self.paths = []
@@ -142,7 +142,8 @@ class Simple:
 
     def run(self, env):
         desc_pattern = os.path.join(
-            env.SEISCOMP_ROOT, "etc", "descriptions", "*.xml")
+            env.SEISCOMP_ROOT, "etc", "descriptions", "*.xml"
+        )
         xmls = glob.glob(desc_pattern)
 
         setup_groups = {}
@@ -158,21 +159,23 @@ class Simple:
             root = tree.getroot()
             if tagname(root) != "seiscomp":
                 sys.stderr.write(
-                    "%s: wrong root tag, expected 'seiscomp'\n" % f)
+                    "%s: wrong root tag, expected 'seiscomp'\n" % f
+                )
                 continue
 
             # Read all modules
             mods = tree.findall("module")
 
             for mod in mods:
-                modname = mod.get('name')
+                modname = mod.get("name")
                 if not modname:
                     sys.stderr.write("%s: skipping module without name\n" % f)
                     continue
 
                 if modname in setup_groups:
                     raise Exception(
-                        "%s: duplicate module name: %s" % (f, modname))
+                        "%s: duplicate module name: %s" % (f, modname)
+                    )
 
                 if self.modules and modname not in self.modules:
                     continue
@@ -185,20 +188,22 @@ class Simple:
                 if len(groups) == 0:
                     continue
 
-                setup_groups[modname] = groups
+                module_setup_groups[modname] = groups
 
             # Read all plugin's
             plugins = tree.findall("plugin")
 
             for plugin in plugins:
                 try:
-                    modname = plugin.find('extends').text.strip()
+                    modname = plugin.find("extends").text.strip()
                 except:
                     raise Exception("%s: plugin does not define 'extends'" % f)
 
-                if modname.find('\n') >= 0:
-                    raise Exception("%s: wrong module name in plugin." \
-                                    "extends: no newlines allowed" % f)
+                if modname.find("\n") >= 0:
+                    raise Exception(
+                        "%s: wrong module name in plugin."
+                        "extends: no newlines allowed" % f
+                    )
 
                 if not modname:
                     sys.stderr.write("%s: skipping module without name\n" % f)
@@ -224,7 +229,8 @@ class Simple:
         self.setupTree.activeChild = self.setupTree.child
         self.currentNode = self.setupTree.activeChild
 
-        sys.stdout.write('''
+        sys.stdout.write(
+            """
 ====================================================================
 SeisComP setup
 ====================================================================
@@ -247,7 +253,8 @@ Hint: Entered values starting with a dot (.) are handled
       with backslash, e.g. "\\.value".
 --------------------------------------------------------------------
 
-''')
+"""
+        )
 
         try:
             self.fillTree()
@@ -261,33 +268,34 @@ Hint: Entered values starting with a dot (.) are handled
 
     def addGroups(self, node, modname, groups):
         for g in groups:
-            self.addInputs(None, node, modname, g.get(
-                'name'), g, g.get('name', "") + ".")
+            self.addInputs(
+                None, node, modname, g.get("name"), g, g.get("name", "") + "."
+            )
 
     def addInputs(self, obj, parent, modname, group, xml, prefix):
-        childs = parent.child;
+        childs = parent.child
         if not childs is None:
             while not childs.next is None:
                 childs = childs.next
 
         inputs = xml.findall("input")
         for inp in inputs:
-            name = inp.get('name')
+            name = inp.get("name")
             if not name:
                 raise Exception("%s: no name defined" % prefix)
 
-            input_ = Input(name, inp.get('type'), inp.get('default'))
+            input_ = Input(name, inp.get("type"), inp.get("default"))
             try:
-                input_.text = oneliner(inp.find('text').text)
+                input_.text = oneliner(inp.find("text").text)
             except Exception:
                 input_.text = input_.name
 
             try:
-                input_.desc = block(inp.find('description').text)
+                input_.desc = block(inp.find("description").text)
             except Exception:
                 pass
 
-            input_.echo = inp.get('echo')
+            input_.echo = inp.get("echo")
 
             if obj:
                 obj.inputs.append(input_)
@@ -306,12 +314,12 @@ Hint: Entered values starting with a dot (.) are handled
                 parent.child = childs
             else:
                 childs.next = node
-                childs = childs.next;
+                childs = childs.next
 
             options = node.child
 
             for opt in opts:
-                value = opt.get('value')
+                value = opt.get("value")
                 if not value:
                     raise Exception("%s: option without value" % prefix)
 
@@ -324,7 +332,7 @@ Hint: Entered values starting with a dot (.) are handled
 
                 option = Option(value)
                 try:
-                    option.desc = block(opt.find('description').text, 74)
+                    option.desc = block(opt.find("description").text, 74)
                 except Exception:
                     pass
                 input_.options.append(option)
@@ -336,8 +344,9 @@ Hint: Entered values starting with a dot (.) are handled
                     options.next = optionNode
                     options = options.next
 
-                self.addInputs(option, optionNode, modname,
-                               group, opt, node.path + ".")
+                self.addInputs(
+                    option, optionNode, modname, group, opt, node.path + "."
+                )
 
     def fillTree(self):
         while True:
@@ -348,7 +357,7 @@ Hint: Entered values starting with a dot (.) are handled
                 sys.stdout.write("B) Back to last parameter\n")
                 sys.stdout.write("Q) Quit without changes\n")
 
-                value = py3input('Command? [P]: ').upper()
+                value = py3input("Command? [P]: ").upper()
                 if value == "Q":
                     raise StopIteration()
                 if value == "D":
@@ -383,12 +392,13 @@ Hint: Entered values starting with a dot (.) are handled
             prompt = self.currentNode.input.text
 
             if isPassword:
-                node_text = '*' * len(node_text)
+                node_text = "*" * len(node_text)
                 prompt += " (input not echoed)"
 
-            if (not self.currentNode.input.type or \
-                self.currentNode.input.type != "boolean") and \
-                len(self.currentNode.input.options) > 0:
+            if (
+                not self.currentNode.input.type
+                or self.currentNode.input.type != "boolean"
+            ) and len(self.currentNode.input.options) > 0:
                 idx = 0
                 def_idx = 0
                 for opt in self.currentNode.input.options:
@@ -413,8 +423,9 @@ Hint: Entered values starting with a dot (.) are handled
                 value = default_value
             elif value == ".help":
                 if self.currentNode.input.desc:
-                    sys.stdout.write("\n%s\n\n" %
-                                     "\n".join(self.currentNode.input.desc))
+                    sys.stdout.write(
+                        "\n%s\n\n" % "\n".join(self.currentNode.input.desc)
+                    )
                 else:
                     sys.stdout.write("\nSorry, no help available.\n\n")
                 continue
@@ -424,13 +435,15 @@ Hint: Entered values starting with a dot (.) are handled
             elif value == ".quit":
                 raise StopIteration()
             elif value.startswith("."):
-                sys.stdout.write("Unknown command. Values starting with '.' are handled has commands such as\n"
-                                 "'.help', '.quit' or '.back'. To use a leading dot in a value, escape it with '\'\n"
-                                 "e.g. '\\.color'\n")
+                sys.stdout.write(
+                    "Unknown command. Values starting with '.' are handled has commands such as\n"
+                    "'.help', '.quit' or '.back'. To use a leading dot in a value, escape it with ''\n"
+                    "e.g. '\\.color'\n"
+                )
                 continue
             else:
                 # Replace leading \. with .
-                if value.startswith('\\.'):
+                if value.startswith("\\."):
                     value = value[1:]
 
                 if isChoice:
@@ -439,12 +452,17 @@ Hint: Entered values starting with a dot (.) are handled
                     except ValueError:
                         idx = -1
                     if idx < 0 or idx >= len(self.currentNode.input.options):
-                        sys.stdout.write("\nEnter a number between 0 and %d\n\n" % (
-                            len(self.currentNode.input.options)-1))
+                        sys.stdout.write(
+                            "\nEnter a number between 0 and %d\n\n"
+                            % (len(self.currentNode.input.options) - 1)
+                        )
                         continue
                     value = self.currentNode.input.options[idx].value
 
-            if self.currentNode.input.type and self.currentNode.input.type == "boolean":
+            if (
+                self.currentNode.input.type
+                and self.currentNode.input.type == "boolean"
+            ):
                 if not value in ["yes", "no"]:
                     sys.stdout.write("Please enter 'yes' or 'no'\n")
                     continue
