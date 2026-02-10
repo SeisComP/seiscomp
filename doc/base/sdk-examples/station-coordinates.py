@@ -2,68 +2,67 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import traceback
-from seiscomp import core, client, datamodel
+
+from seiscomp import core, client
 
 
 class InvApp(client.Application):
 
     def __init__(self, argc, argv):
-        client.Application.__init__(self, argc, argv)
+        super().__init__(argc, argv)
+        self.setDaemonEnabled(False)
         self.setMessagingEnabled(False)
-        self.setDatabaseEnabled(True, False)
+        self.setDatabaseEnabled(True, True)
+        self.setLoadInventoryEnabled(True)
         self.setLoggingToStdErr(True)
 
     def validateParameters(self):
-        try:
-            if client.Application.validateParameters(self) is False:
-                return False
-            return True
-        except Exception:
-            traceback.print_exc()
-            sys.exit(-1)
+        if not super().validateParameters():
+            return False
+
+        # no database is needed when inventory is provided by SCML file
+        if not self.isInventoryDatabaseEnabled():
+            self.setDatabaseEnabled(False, False)
+
+        return True
 
     def run(self):
-        now = core.Time.GMT()
-        try:
-            lines = []
-            dbr = datamodel.DatabaseReader(self.database())
-            inv = datamodel.Inventory()
-            dbr.loadNetworks(inv)
-            nnet = inv.networkCount()
-            for inet in range(nnet):
-                net = inv.network(inet)
-                dbr.load(net)
-                nsta = net.stationCount()
-                for ista in range(nsta):
-                    sta = net.station(ista)
-                    try:
-                        elev = sta.elevation()
-                    except Exception:
-                        elev = float("NaN")
-                    line = "{:2} {:5} {:9.4f} {:9.4f} {:6.1f}".format(
-                        net.code(), sta.code(), sta.latitude(), sta.longitude(), elev)
+        now = core.Time.UTC()
+        lines = []
+        inv = client.Inventory.Instance().inventory()
+        nnet = inv.networkCount()
+        for inet in range(nnet):
+            net = inv.network(inet)
+            nsta = net.stationCount()
+            for ista in range(nsta):
+                sta = net.station(ista)
+                try:
+                    elev = sta.elevation()
+                except Exception:
+                    elev = float("NaN")
+                line = (
+                    f"{net.code()} {sta.code()} {sta.latitude():9.4f} "
+                    f"{sta.longitude():9.4f} {elev:6.1f}"
+                )
 
-                    try:
-                        start = sta.start()
-                    except Exception:
+                try:
+                    start = sta.start()
+                except Exception:
+                    continue
+                try:
+                    end = sta.end()
+                    if not start <= now <= end:
                         continue
-                    try:
-                        end = sta.end()
-                        if not start <= now <= end:
-                            continue
-                    except Exception:
-                        pass
+                except Exception:
+                    pass
 
-                    lines.append(line)
+                lines.append(line)
 
-            lines.sort()
-            for i, line in enumerate(lines):
-                print(i, line)
-            return True
-        except Exception:
-            traceback.print_exc()
-            sys.exit(-1)
+        lines.sort()
+        for i, line in enumerate(lines):
+            print(i, line)
+
+        return True
 
 
 def main():
