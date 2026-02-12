@@ -2,49 +2,22 @@
 
 All notable changes to SeisComP are documented here.
 
-## x.y.z
+## 8.x.y (nightly)
 
--   doc
-    -   Update figures and references.
--   seiscomp
-    -   Fix setup command with module plugins.
--   trunk
-    -   Handle environment variables in configuration files correctly
-        when parsing lists.
-    -   Improve SDSArchive start time search stability when dealing with
-        files contained records of mixed record length.
-    -   Allow empty URL hosts to enable `-d postgresql://` again.
-    -   Install schema 0.14 XML files.
--   scmaster
-    -   Fix crash in combination with concurrent connections.
--   scautopick
-    -   Add support for addtional publicIDPattern tokens.
--   GUI
-    -   Avoid duplicate entries when building legends from spatial/vector.
-    -   Fix error if duplicates are given in `eventlist.visibleColumns`.
-    -   Update icons.
--   scrttv
-    -   Add amplitude mode which shows the currently hovered amplitude per
-        trace.
-    -   Add axis rendering with profiles.
--   scevtstreams
-    -   Add option to only consider used arrivals.
-    -   Read multiple events, via -E an/or by file.
--   scevtls
-    -   Add option --origin-count listing number of origin references per event.
-    -   Output data while iterating over result set to reduce memory consumption.
-    -   Support filter for unknown/empty event type.
--   iLoc
-    -   Update to version 4.3.
+-   scolv
+    -   Add tooltips to amplitude view time window trace handles
+-   scmvx
+    -   Render beachballs along with origin symbols
 
 ## 7.1.0
 
--   scconfig
-    -   Fix crash when changing from a station binding to a profile.
+-   seiscomp
+    -   Fix setup command with module plugins.
 -   doc
     -   Fix modules descriptions w.r.t. units.
     -   Improve module descriptions by providing possible value sets.
     -   Replace IRIS with EarthScope.
+    -   Update figures and references.
 -   trunk
     -   Fix seedlink recordstream connection to respect the requested
         record datatype.
@@ -56,6 +29,12 @@ All notable changes to SeisComP are documented here.
     -   SWIG Python wrappers are now generated with SWIG 4.4.1
         to fix an issue caused by SWIG 4.3.
     -   Fix Python wrappers for optional TravelTime.azi attribute
+    -   Handle environment variables in configuration files correctly
+        when parsing lists.
+    -   Improve SDSArchive start time search stability when dealing with
+        files contained records of mixed record length.
+    -   Allow empty URL hosts to enable `-d postgresql://` again.
+    -   Install schema 0.14 XML files.
 -   GUI
     -   Fix typos in ProcessManager.
     -   Do not exit application if child processes are still running.
@@ -65,6 +44,11 @@ All notable changes to SeisComP are documented here.
         GUI application.
     -   Add two new shortcuts to open process manager (alt+ctrl+p) and
         logging manager (alt+ctrl+l).
+    -   Avoid duplicate entries when building legends from spatial/vector.
+    -   Fix error if duplicates are given in `eventlist.visibleColumns`.
+    -   Update icons.
+-   scmaster
+    -   Fix crash in combination with concurrent connections.
 -   NLL
     -   Fix crash.
 -   scolv
@@ -72,14 +56,30 @@ All notable changes to SeisComP are documented here.
     -   If travel times cannot be computed and the origin depth is negative,
         try again with depth of 1m and render the blue markers (predicted
         arrival time) with a dashed pattern.
+-   scrttv
+    -   Add amplitude mode which shows the currently hovered amplitude per
+        trace.
+    -   Add axis rendering with profiles.
 -   scevtls
     -   Set correct return code.
+    -   Add option --origin-count listing number of origin references per event.
+    -   Output data while iterating over result set to reduce memory consumption.
+    -   Support filter for unknown/empty event type.
+-   scevtstreams
+    -   Add option to only consider used arrivals.
+    -   Read multiple events, via -E an/or by file.
 -   scbulletin
     -   Fix scautoloc3 output if depth is zero.
+-   scautopick
+    -   Add support for addtional publicIDPattern tokens.
 -   scevent
     -   Populate "region name" with custom regions only if `populateFERegion=true`.
+-   scconfig
+    -   Fix crash when changing from a station binding to a profile.
 -   scqcv
     -   Fix crash if a values uncertainty is not set.
+-   iLoc
+    -   Update to version 4.3.
 
 ## 7.0.3
 
