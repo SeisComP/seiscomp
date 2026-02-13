@@ -2,6 +2,15 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.1.1
+
+-   trunk
+    -   Enable empty database URLs again. This is especially important
+        when using commandline options such as `-d postgresql://`.
+-   GUI
+    -   Disable logmanager context menu to hide the toolbar. Otherwise
+        it cannot be restored without touching the config file.
+
 ## 7.1.0
 
 -   seiscomp
