@@ -2,6 +2,15 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.1.2
+
+-   trunk
+    -   Fix exception if timezone information is not available.
+        Time parsing for applications will now fail without
+        crashing the application.
+-   scheli
+    -   Fix recordstream requests in combination with capture mode.
+
 ## 7.1.1
 
 -   trunk
