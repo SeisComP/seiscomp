@@ -2,6 +2,33 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.2.0
+
+-   installation
+    -   Add utils.ipp file.
+-   trunk
+    -   Update cities.xml w.r.t. country ID and population data.
+        Thanks to Mustafa Comoglu for providing the update.
+-   scconfig
+    -   Fix bindings drag & drop when using Wayland instead X.
+-   scevent
+    -   Fix bug that caused wrong event updates and error messages in `scmaster`,
+        in particular: `Event ‘agency2026abcd’ already stored in database`.
+-   scinv
+    -   Fix logging of source files when checking overlapping epochs.
+-   GUI
+    -   Add pause/resume button to log manager.
+-   scolv
+    -   Show evaluation status in pick tooltip.
+    -   Show pick comments in pick tooltip.
+    -   Add shortcut 'A' to toggle amplitude annotations on picker
+        cursor. The annotations show the value of the trace under the cursor
+        as well as the spectrogram amplitude if enabled.
+-   scqcv
+    -   Left align stream column.
+-   scmvx
+    -   Improve synchronization of current event layer with event list.
+
 ## 7.1.2
 
 -   trunk
