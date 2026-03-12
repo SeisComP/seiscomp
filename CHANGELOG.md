@@ -9,6 +9,61 @@ All notable changes to SeisComP are documented here.
 -   scmvx
     -   Render beachballs along with origin symbols
 
+## 7.2.1
+
+-   scevent
+    -   Fix regression which prevented events from being created.
+-   swig
+    -   Update Python wrapper with latest API
+
+## 7.2.0
+
+**Important**: DO NOT INSTALL THIS VERSION as `scevent` contains
+               a severe bug preventing events from being created.
+
+-   installation
+    -   Add utils.ipp file.
+-   trunk
+    -   Update cities.xml w.r.t. country ID and population data.
+        Thanks to Mustafa Comoglu for providing the update.
+-   scconfig
+    -   Fix bindings drag & drop when using Wayland instead X.
+-   scevent
+    -   Fix bug that caused wrong event updates and error messages in `scmaster`,
+        in particular: `Event ‘agency2026abcd’ already stored in database`.
+-   scinv
+    -   Fix logging of source files when checking overlapping epochs.
+-   GUI
+    -   Add pause/resume button to log manager.
+-   scolv
+    -   Show evaluation status in pick tooltip.
+    -   Show pick comments in pick tooltip.
+    -   Add shortcut 'A' to toggle amplitude annotations on picker
+        cursor. The annotations show the value of the trace under the cursor
+        as well as the spectrogram amplitude if enabled.
+-   scqcv
+    -   Left align stream column.
+-   scmvx
+    -   Improve synchronization of current event layer with event list.
+
+## 7.1.2
+
+-   trunk
+    -   Fix exception if timezone information is not available.
+        Time parsing for applications will now fail without
+        crashing the application.
+-   scheli
+    -   Fix recordstream requests in combination with capture mode.
+
+## 7.1.1
+
+-   trunk
+    -   Enable empty database URLs again. This is especially important
+        when using commandline options such as `-d postgresql://`.
+-   GUI
+    -   Disable logmanager context menu to hide the toolbar. Otherwise
+        it cannot be restored without touching the config file.
+
 ## 7.1.0
 
 -   seiscomp
