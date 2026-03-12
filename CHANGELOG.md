@@ -2,7 +2,17 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.2.1
+
+-   scevent
+    -   Fix regression which prevented events from being created.
+-   swig
+    -   Update Python wrapper with latest API
+
 ## 7.2.0
+
+**Important**: DO NOT INSTALL THIS VERSION as `scevent` contains
+               a severe bug preventing events from being created.
 
 -   installation
     -   Add utils.ipp file.
