@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.9.3
+
+-   scmaster
+    -   Fix possible segmentation fault which occurred with many sessions
+        connecting at the same time.
+
 ## 6.9.2
 
 -   trunk
