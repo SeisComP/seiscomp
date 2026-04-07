@@ -2,6 +2,11 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.2.3
+
+-   fdsnws
+    -   Fix start up.
+
 ## 7.2.2
 
 -   scmaster
