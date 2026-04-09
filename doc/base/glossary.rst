@@ -698,7 +698,7 @@ Scientific and technical terms
       Moment magnitude derived from :term:`Mwp <magnitude, broadband P-wave moment (Mwp)>`
       magnitudes using linear conversion after :cite:t:`whitmore-2002`:
 
-      Mw(Mwp) = 1.31 Mwp - 1.91
+      Mw(Mwp) = 1.186 Mwp - 1.222
 
    magnitude, summary (M)
 
