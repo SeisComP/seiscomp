@@ -285,15 +285,19 @@ bool Config::readConfig(const std::string &filename, int stage, bool raw) {
 	_stage = stage;
 	_resolveReferences = !raw;
 
-	if ( !_symbolTable ) init();
+	if ( !_symbolTable ) {
+		init();
+	}
+
 	_line = 0;
 	_fileName.assign(filename);
 
 	std::istream *is;
 	std::fstream file;
 
-	if ( _fileName == "-" )
+	if ( _fileName == "-" ) {
 		is = &std::cin;
+	}
 	else {
 		file.open(_fileName.c_str(), std::ios_base::in);
 		if ( file.rdstate() != std::ios_base::goodbit ) {
@@ -909,6 +913,65 @@ bool Config::reference(const std::string &name,
                        std::vector<std::string> &values,
                        const SymbolTable *symtab,
                        std::string *errmsg) {
+	if ( name.empty() ) {
+		if ( errmsg ) {
+			*errmsg = "Empty variable references are not allowed";
+		}
+		return false;
+	}
+
+	if ( name.front() == '@' ) {
+		// Read the file contents
+		auto filename = name.substr(1);
+
+		if ( filename.empty() ) {
+			if ( errmsg ) {
+				*errmsg = "Empty filename references are not allowed";
+			}
+			return false;
+		}
+
+		// Resolve ~ for home directory
+		if ( filename[0] == '~' ) {
+			filename = homeDir() + filename.substr(1);
+		}
+
+		if ( filename[0] != '/' ) {
+			// Relative filename
+			auto root = getenv("SEISCOMP_ROOT");
+			if ( !root ) {
+				if ( errmsg ) {
+					*errmsg = "Relative filenames as references are not allowed without $SEISCOMP_ROOT";
+				}
+				return false;
+			}
+
+			filename = std::string(root) + "/etc/" + filename;
+		}
+
+		std::ifstream ifs(filename);
+		if ( !ifs.is_open() ) {
+			if ( errmsg ) {
+				*errmsg = "Reference file '" + filename + "' not found";
+			}
+			return false;
+		}
+
+		ifs.seekg(0, std::ios_base::end);
+		auto length = ifs.tellg();
+		std::string content;
+		content.resize(length);
+		ifs.seekg(0, std::ios_base::beg);
+		if ( !ifs.read(content.data(), content.length()) ) {
+			if ( errmsg ) {
+				*errmsg = "Reference file '" + filename + "' could not be read";
+			}
+			return false;
+		}
+
+		return parseRValue(content, values, symtab, true, false, errmsg);
+	}
+
 	if ( symtab ) {
 		try {
 			auto symbol = symtab->get(name);
@@ -936,8 +999,7 @@ bool Config::reference(const std::string &name,
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-std::vector<std::string> Config::tokenize(const std::string& entry)
-{
+std::vector<std::string> Config::tokenize(const std::string& entry) {
 	std::vector<std::string> tokens;
 	std::string nextToken;
 	bool stringMode = false;
@@ -1235,15 +1297,17 @@ bool Config::eval(const std::string &rvalue, std::vector<std::string> &result,
 
 
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-bool Config::Eval(const std::string &rvalue, std::vector<std::string> &result,
+bool Config::Eval(const std::string &rvalue,
+                  std::vector<std::string> &result,
                   bool resolveReferences, SymbolTable *symtab,
                   std::string *errmsg) {
-	if ( !parseRValue(rvalue, result, symtab, resolveReferences, false, errmsg) )
+	if ( !parseRValue(rvalue, result, symtab, resolveReferences, false, errmsg) ) {
 		return false;
+	}
 
-	std::vector<std::string>::iterator it;
-	for ( it = result.begin(); it != result.end(); ++it )
-		*it = stripEscapes(*it);
+	for ( auto &s : result ) {
+		s = stripEscapes(s);
+	}
 
 	return true;
 }
