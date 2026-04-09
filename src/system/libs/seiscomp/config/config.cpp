@@ -908,8 +908,7 @@ void Config::handleAssignment(const std::string& name,
 bool Config::reference(const std::string &name,
                        std::vector<std::string> &values,
                        const SymbolTable *symtab,
-                       std::string *errmsg)
-{
+                       std::string *errmsg) {
 	if ( symtab ) {
 		try {
 			auto symbol = symtab->get(name);
@@ -926,7 +925,9 @@ bool Config::reference(const std::string &name,
 		return parseRValue(env, values, symtab, true, false, errmsg);
 	}
 
-	if ( errmsg ) *errmsg = "Cannot resolve '" + name + "'";
+	if ( errmsg ) {
+		*errmsg = "Cannot resolve '" + name + "'";
+	}
 	return false;
 }
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1009,8 +1010,8 @@ std::vector<std::string> Config::tokenize(const std::string& entry)
 
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-bool Config::parseRValue(const std::string& entry,
-                         std::vector<std::string>& parsedValues,
+bool Config::parseRValue(const std::string &entry,
+                         std::vector<std::string> &parsedValues,
                          const SymbolTable *symtab,
                          bool resolveReferences, bool rawMode,
                          std::string *errmsg) {
@@ -1135,8 +1136,10 @@ bool Config::parseRValue(const std::string& entry,
 		}
 		return false;
 	}
-	if ( !parsedEntry.empty() )
+
+	if ( !parsedEntry.empty() ) {
 		tokens.push_back(parsedEntry);
+	}
 
 	//for ( size_t i = 0; i < tokens.size(); ++i )
 	//	SEISCOMP_DEBUG("token%lu: %s", i ,tokens[i].c_str());
@@ -1201,6 +1204,13 @@ bool Config::parseRValue(const std::string& entry,
 				parsedValues.push_back(token);
 			}
 		}
+	}
+
+	if ( parsedValues.empty() ) {
+		if ( errmsg ) {
+			*errmsg = "Empty rvalue";
+		}
+		return false;
 	}
 
 	//for ( size_t i = 0; i < parsedValues.size(); ++i )
