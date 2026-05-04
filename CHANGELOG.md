@@ -9,6 +9,34 @@ All notable changes to SeisComP are documented here.
 -   scmvx
     -   Render beachballs along with origin symbols
 
+## 7.2.3
+
+-   fdsnws
+    -   Fix start up.
+
+## 7.2.2
+
+-   scmaster
+    -   Fix possible segmentation fault which occurred with many sessions
+        connecting at the same time.
+-   trunk
+    -   Issue warning and abort waveform processing if time windows are
+        empty.
+-   scolv
+    -   If travel times cannot be computed and the origin depth is negative,
+        try again with depth of 1m in amplitude review window when adding
+        stations.
+-   scconfig
+    -   Update parameter tooltip after its value has changed.
+-   scmvx
+    -   Reset view with ctrl+n rather than just n.
+    -   Render beachballs on balls if focal mechanism is available.
+-   scart
+    -   Fix possible exception when data for a particular requested time
+        window is not available.
+    -   Fix logging of record end time. Due to a typo record start time
+        has been used instead.
+
 ## 7.2.1
 
 -   scevent
