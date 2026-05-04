@@ -4,10 +4,32 @@ All notable changes to SeisComP are documented here.
 
 ## 8.x.y (nightly)
 
+-   seiscomp
+    -   Add support for AlmaLinux which maps to RHEL.
+-   trunk
+    -   Add Seedlink4 recordstream
+-   scmaster
+    -   Fix possible segmentation fault when handling already
+        disconnected sessions.
+    -   Fix resource leak in combination with disconnected sessions.
+-   scmag
+    -   Add configuration option `updateParent` which updates the
+        modification time of an origin if a magnitude has been
+        added or removed.
+-   ql2sc
+    -   Add description for `allowRemoval`.
+    -   Add option `strictModificationTime` which if enabled will
+        block adding / removing local childs. This requires `scmag`
+        to be configured with `updateParent = true`.
+-   GUI
+    -   Add optional eventlist highlight rules.
 -   scolv
-    -   Add tooltips to amplitude view time window trace handles
+    -   Set default messaging target groups for picks and amplitudes
+        to LOCATION to prevent a race condition in scmag which could
+        have caused duplicate magnitudes.
+    -   Add tooltips to amplitude view time window trace handles.
 -   scmvx
-    -   Render beachballs along with origin symbols
+    -   Render beachballs along with origin symbols.
 
 ## 7.2.3
 
