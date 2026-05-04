@@ -6,6 +6,7 @@ All notable changes to SeisComP are documented here.
 
 -   seiscomp
     -   Add support for AlmaLinux which maps to RHEL.
+    -   Add support for Ubuntu 26.04.
 -   trunk
     -   Add Seedlink4 recordstream
 -   scmaster
