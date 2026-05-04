@@ -301,7 +301,7 @@ def stop_kernel_modules():
 
 
 def detectOS():
-    OSReleaseMap = {"centos": "rhel", "rocky": "rhel", "raspbian": "debian"}
+    OSReleaseMap = {"centos": "rhel", "rocky": "rhel", "almalinux": "rhel", "raspbian": "debian"}
 
     try:
         arch = platform.machine()
