@@ -1,0 +1,1 @@
+apt install libqt6gui6 libqt6xml6 libqt6opengl6 libqt6sql6-sqlite libqt6svg6 libqt6printsupport6

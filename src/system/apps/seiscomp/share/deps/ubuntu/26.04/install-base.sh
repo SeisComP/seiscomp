@@ -1,0 +1,1 @@
+apt install libxml2-16 libboost-filesystem1.90.0 libboost-iostreams1.90.0 libboost-thread1.90.0 libboost-program-options1.90.0 libboost-regex1.90.0 libssl3t64 libncurses6 libmysqlclient24 libmariadb3 libpq5 libpython3.14 python3-numpy libboost-container1.90.0 pkexec
