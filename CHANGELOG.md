@@ -591,6 +591,18 @@ custom database script which rely on it. Please be aware of that change.
 -   seedlink
     -   Change default server address of chain plugin to geofon.gfz.de.
 
+## 6.9.4
+
+-   smaster
+    -   Another fix of a potential segmentation fault in combination with
+        many concurrent sessions connecting simultaneously.
+
+## 6.9.3
+
+-   scmaster
+    -   Fix possible segmentation fault which occurred with many sessions
+        connecting at the same time.
+
 ## 6.9.2
 
 -   trunk
