@@ -2,6 +2,12 @@
 
 All notable changes to SeisComP are documented here.
 
+## 6.9.4
+
+-   smaster
+    -   Another fix of a potential segmentation fault in combination with
+        many concurrent sessions connecting simultaneously.
+
 ## 6.9.3
 
 -   scmaster
