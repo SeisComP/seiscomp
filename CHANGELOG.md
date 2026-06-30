@@ -2,6 +2,220 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.4.0
+
+**Important**: Version 7.0 introduced a fix to the computation of ML* amplitudes
+               in IASPEI mode. With prior versions, amplitudes computed using
+               peak-to-trough in IASPEI mode were not divided by 2, which was
+               not consistent with the non-IASPEI implementation and not in
+               accordance with IASPEI recommendations.
+               Without any further configuration changes, you will notice ML*
+               magnitudes offset by about −0.3 (−log(2)). Furthermore the
+               resulting SNR is halved. You will need to account
+               for this in your calibration function and the `minSNR` setting.
+               Unfortunately, this change was not clearly announced during the
+               release of version 7.0, so we are using this release note to
+               address it.
+               Furthermore the LOCSAT code has been fixed to properly initialize
+               variables and to correctly read travel-time tables. This change
+               can lead to different locations when existing locations are
+               relocated or when processing an identical pickset compared to
+               older versions.
+
+```SC_API_VERSION 17.4.0```
+
+-   seiscomp
+    -   Add support for AlmaLinux which maps to RHEL.
+    -   Add support for Ubuntu 26.04.
+-   trunk
+    -   Fix LOCSAT variable initializations and clean up code to get
+        reproducible results in different build environments.
+    -   Fix reading of LOCSAT travel time tables potential segmentation fault
+        when too many distance samples are provided.
+    -   Rename configuration option `messaging.encoding` to `messaging.contentType`
+        in accordance with the configuration description, e.g. presented in
+        scconfig.
+    -   Add missed files to SDK: timewindow.ipp, endianess.h
+    -   Add option `populateCIVersionAttribute` to all applications to enable
+        the population of the creationInfo.version attribute with the current
+        SeisComP version. If enabled then all modules which support that
+        option (most standard processing modules do) will respect that setting.
+    -   Fix possible infinite loop with a messaging connection if the connection
+        is terminated while reading messages.
+    -   Populate `Amplitude.filterID` in MLc, ML and MLv if `preFilter` is set.
+    -   Preserve polygon definition order when reading FEP and spatial vector
+        directories.
+    -   Separate minimum and maximum range values in description of configuration
+        parameters by `..` instead of `:`.
+    -   Remove duplicate cities from `@DATADIR@/cities.xml`.
+    -   Travel-time interface homogeneous
+        -   Allow configuration of any phase and constant velocity by new global
+            configuration parameter `ttt.homogeneous.[profile].velocities` which
+            overrides `ttt.homogeneous.[profile].P-velocity` and
+            `ttt.homogeneous.[profile].S-velocity`.
+        -   Normalize coordinates of global configuration parameter
+            `ttt.homogeneous.[profile].origin` supporting coordinate values within any
+            range.
+        -   Return with error in case of configuration errors and report the error.
+-   magnitudes
+    -   Ms_20: Test and report obsolete bindings configuration parameters.
+-   scmaster
+    -   Fix possible segmentation fault when handling already
+        disconnected sessions.
+    -   Fix resource leak in combination with disconnected sessions.
+-   GUI
+    -   Fix creation of logging manager if a Qt application is being used
+        in tty mode only. Otherwise memory consumption will grow without limits.
+    -   Show event description "felt report" in EventList (deactivated by
+        default). The new column name is "FeltReport".
+    -   Make `eventedit.origin.customColumn.*` work in combination with custom
+        scripts to evaluate origins. Thanks to Luca Scarabello (SED) for the fix.
+    -   Fix compilation with more Qt 6.x versions.
+    -   Add tooltip to all lables in EventSummary (the panel which can be
+        opened with F8 in scolv).
+    -   Add map tiles store `xyz` contributed by Mustafa Comoglu (GA) which allows
+        to read tiles from OSM and other online sources.
+    -   Fix EventList database reading with eventID filter set.
+-   seedlink
+    -   Add seedlink servers to address description.
+    -   Fix socket reuse option in ewexport_pasv_plugin.
+-   fdsnws
+    -   Add `agencyIDPolicy` config parameter.
+-   scdispatch
+    -   Add final log about the number of messages sent.
+-   scautopick
+    -   Fix bug where scautopick fails to detect picks on historical data: the issue
+        happened if the station was closed and if the bindings did not provide a fixed
+        channel (detectStream contains 2 characters, so it relies on SeisComP to find
+        the vertical component) and the sensor doesn't have a Z component.
+    -   Update FX documentation.
+-   scautoloc
+    -   Internal code rework.
+    -   Correct statement on output objects when processing XML files.
+    -   Use default period of 1 for mb amplitudes if not set. Picks without mb period
+        values will now be considered assuming a period of 1 instead of ignoring them.
+        This update changes the behavior of scautoloc if more picks become available
+        for processing.
+    -   Add playback --timing option which should be used with `creationTime` for
+        fidelity processing of picks created in real time.
+    -   Process manual picks if `autoloc.useManualPicks = true` independent of
+        `autoloc.useManualOrigins`.
+    -   Consider configuration of global parameters `LOCSAT.usePickBackazimuth` and
+        `LOCSAT.usePickSlowness`.
+-   scmag
+    -   Fix `--reprocess` silently dropping other amplitude types per pick. Thank to
+        Mustafa Comoglu (GA) for the fix.
+    -   Add configuration option `updateParent` which updates the
+        modification time of an origin if a magnitude has been
+        added or removed.
+-   scevent
+    -   Add remote event ID synchronization. This feature allows `scevent` to synchronize
+        with another instance on an eventID for a given origin. That enabled two
+        systems (redundant setup) to maintain the same set of eventIDs.
+    -   Add `EvFeltReport` command.
+-   scevtls
+    -   Do not print delimiter after last value.
+-   scxmldump
+    -   Rename `--with-childs` to `--with-children`.
+-   scdb
+    -   Handle multiple root objects, e.g. `Inventory` and `EventParameters` in one file.
+-   fdsnxml2inv
+    -   Extend valid date ranges and set year >= 2500 to unset when converting to FDSN StationXML.
+-   ql2sc
+    -   Add description for `allowRemoval`.
+    -   Add option `strictModificationTime` which if enabled will
+        block adding / removing local childs. This requires `scmag`
+        to be configured with `updateParent = true`.
+    -   Print processing variables and resolve placeholders for publicIDs provided in
+        `processing.[white|black]list.publicIDs`.
+    -   Fix forwarding EvPrefMw journal. Thise fixes in particular an issue when
+        an incoming revision has fixed an Mw magnitude but ql2sc just checked the
+        timestamp when any magnitude has been set. As both operations use different
+        journals, the timestamps were computed incorrectly and the local update was
+        rejected.
+    -   Only request a local magnitude type change if the remote revision includes
+        a more recent journal to do so or if the local version does not have a
+        journal regarding that operation yet.
+    -   Add mode `syncJournals` to forward event journals from `quakelink` to the
+        local system. As journals are more a semantically description of the actions
+        applied this is more performant and reliable than synchronizing event attributes.
+        If this mode is enabled then synchronizing event attributes and event preferred
+        pointers should be disabled.
+    -   Fix routing configuration.
+    -   Add support for "felt report" description.
+-   scconfig
+    -   Fix deleting parameter structures when saving to file.
+    -   Sort binding profiles in Bindings panel alphabetically.
+    -   Allow copying text in Information panel to clipboard.
+    -   Open the global configuration by default when navigating to the Modules panel.
+    -   Ask to save parameters before switching the configuration mode.
+    -   Report empty parameters not as errors but give corresponding information.
+    -   Add checkbox to exclude global parameters from searching.
+    -   Add command-line help invoked with `-h`/`--help`.
+    -   Add command-line option `-p` for selecting a panel during startup.
+    -   Add command-line option `-m` for displaying module configuration parameters or
+        binding profiles according to the selected panel.
+    -   Add command-line option `-s` for navigating to a station in the Bindings panel
+        during startup. Along with `-m` the parameters of the respective module are
+        shown.
+    -   Add command-line option `--parameter` for navigating to the given parameters
+        during startup in combination with `-p` and `-m`.
+    -   Set cursor position to parameter input field when starting to edit.
+    -   Add file and directory browser for parameters of type `file` and `directory`,
+        respectively.
+    -   Add a line editor for adjusting or copying parameters. The line editor is
+        invoked by clicking on the parameter name.
+    -   Add a data and time picker for configuration parameters of type `time`.
+    -   Add combo boxes for configuring parameters where type is a list except for list
+        of files and directories.
+    -   Allow selecting parameter values in drop-down menu when `values` is defined for
+        a configuration parameter.
+    -   Show color and add a color editor for configuring parameters where type is
+        `color`.
+    -   Report by an information text when configuration parameters are read from
+        file by include statement in module or binding configuration file.
+    -   Except for standalone modules report by an information text when configuration
+        parameters starting with `module.trunk` are found in module configuration file.
+-   scmvx
+    -   Add networks and stations menus to map and main menus.
+        -   Save network and station codes of stations with issues to file or clipboard.
+        -   On demand show stations where all streams have end times in the past.
+        -   Allow filtering of networks by network code.
+    -   Select overlaying stations and events from list.
+    -   Confine station selection to visible stations.
+    -   Print important event parameters in event info window.
+    -   Open event info dialog when clicking on latest event widget.
+    -   Add enabled and disabled stations to the status menus.
+    -   Add a search item to station status actions.
+    -   Allow enabling/disabling stations.
+    -   Update Station information window.
+    -   Add picks to traces in station info.
+    -   Add report generation for all stations.
+    -   Clicking on latest event widget centers the map around the event and
+        shows event details.
+    -   Allow hiding the last event widget by configuration of
+        `events.showLatestEventWidget`.
+    -   Indicate the number of shown vs. the number of available stations with currently
+        open epoch in an interactive filter button when filtering networks.
+    -   Fix showing stations on map after searching.
+    -   Allow filtering station search by their visibility on map.
+    -   Optionally allow searching stations for currently closed stations.
+-   scolv
+    -   Add felt report editor in "Commit with options" which will populate
+        the `event.description["felt report"]` attribute.
+    -   Add `feltReport` to custom commit options of the configuration.
+    -   Add fixed depth presets configurable via `olv.fixDepthPresets`. 
+    -   Add `olv.commonEventTypeCertainties` to configure commonly used event type
+        certainties which will be on top of the selection list. Similar to
+        `olv.commonEventTypes`.
+    -   Set default messaging target groups for picks and amplitudes
+        to LOCATION to prevent a race condition in scmag which could
+        have caused duplicate magnitudes.
+    -   Align TTT handling between Picker and Amplitude views.
+        -   TTT fallback to compute with depth 10m instead of 1m.
+        -   TTT fallback to compute with depth 10m only on out-of-range exception.
+        -   Use station elevation in amplitude view.
+
 ## 7.3.1
 
 -   trunk
@@ -29,7 +243,7 @@ All notable changes to SeisComP are documented here.
     -   Separate FDSNWS POST requests by only LF and not CRLF as some
         servers do not support the latter but all servers tested support
         LF only.
-    -   Disable usage of backazimuth and slowness by default in LocSAT
+    -   Disable usage of backazimuth and slowness by default in LOCSAT
         locator. It needs to enabled explicitely with
         ```
         LOCSAT.usePickBackazimuth = true
@@ -309,7 +523,7 @@ All notable changes to SeisComP are documented here.
                 prefix is just an empty string and will render eventIDs like
                 "2025abcd". If you haven't configured the `eventIDPrefix` in
                 `scevent.cfg`, then your eventIDs will change! This is not a bug
-                but an intended behaviour. The "gfz" prefix should be solely
+                but an intended behavior. The "gfz" prefix should be solely
                 used at GFZ and not at any installation using the defaults.
 
 ```SC_API_VERSION 17.0.0```
@@ -331,10 +545,10 @@ Furthermore the foreign key constraints from a concrete type table like Origin t
 the Object table is removed. This constraint was never required by SeisComP itself
 as it takes care of correct removal of all derived table rows but it introduces a
 performance penalty when deleting objects. Dropping the constraint might affect
-custom database script which rely on it. Please be aware of that change.
+custom database scripts which rely on it. Please be aware of that change.
 
 -   processor architecture
-    -   Support Arm processors in addition to x86.
+    -   Support ARM processors in addition to x86.
 -   seiscomp
     -   Fix module count with `seiscomp status`.
 -   documentation
@@ -424,19 +638,19 @@ custom database script which rely on it. Please be aware of that change.
     -   Add CSV table header information when exporting from the event list.
     -   Hypocentral instead of epicentral distances may be shown if configured
         with `scheme.distanceHypocentral`.
-    -   Allow map zooming with shift + left mouse + dragging (rubber band).
+    -   Allow map zooming with Shift + left mouse + dragging (rubber band).
     -   Fix segmentation fault if the magnitude table should be sorted and
         station magnitudes could not be found in the database or memory.
     -   Support saving map measurements as GeoJSON by default and in addition to
         BNA.
     -   Add support for built-in SeisComP icons as map symbols.
     -   Print map symbols in map legends.
-    -   Add extern process manager to each GUI application which will track
+    -   Add external process manager to each GUI application which will track
         and list all executed processed ran by the application. As this will
         require cooperation with the application, not all started processes might
         be listed there. Applications will be translated over time.
 -   scesv
-    -   Support station annotations (shift+F9).
+    -   Support station annotations (Shift+F9).
 -   scolv
     -   Remember position of zoom window in Picker window when changing event
         while the Picker window remains open.
@@ -455,7 +669,7 @@ custom database script which rely on it. Please be aware of that change.
         allow inspecting long strings which do not fit into the label itself.
     -   Add more flexible "Add station" dialog in picker which allows to filter
         identifiers, network and station types and sensor units.
-    -   Add more option to control initial picker behaviour.
+    -   Add more options to control initial picker behavior.
 
         ```
 
@@ -478,21 +692,21 @@ custom database script which rely on it. Please be aware of that change.
     -   Add spectrogram settings like in `scrttv` in a dockable widget
         (Ctrl+Shift+S) and remove the very basic spectrogram settings from the
         toolbar.
-    -   Add optional allow-/denylist for phases to be imported to ImportPicks
+    -   Add optional allow-/deny list for phases to be imported to ImportPicks
         dialog.
     -   Add default configuration options for "Import picks" dialog.
     -   In Location tab add shortcuts to open picker (P), compute magnitudes (M)
         and relocate (R).
     -   Allow to unset the preferred focal mechanism in event editor
     -   In phase and amplitude picker windows rework icons and replace old
-        image-based icons with new scalable SVG coloured icons.
+        image-based icons with new scalable SVG colored icons.
     -   In phase picker window add amplitude level output label which can be
-        grabbed by, e.g. Text2Speech tools to support picking for users with a
+        grabbed by, e.g., Text2Speech tools to support picking for users with a
         visual impairment. This feature must be activated with
         `picker.showAmpLevel = true`.
     -   Add custom menu actions allowing to configure scolv with an unlimited
         number of custom actions. Adding any custom action will add an entry in
-        a list of actions of new *Run* button generated next to the  Relocate
+        a list of actions of new *Run* button generated next to the Relocate
         button.
 -   fdsnxml2inv
     -   Set default start date to 1902-01-01 rather than 1980-01-01 if a start
@@ -526,7 +740,7 @@ custom database script which rely on it. Please be aware of that change.
     -   Add command-line option `--reprocess` for ignoring event objects in
         input along with `--ep`.
     -   Add `eventAssociation.enablePreferredFMSelection` option to control
-        whether the preferred focalmechanism should be assigned automatically
+        whether the preferred focal mechanism should be assigned automatically
         or not.
     -   Remove "gfz" as default `eventIDPrefix` and use an empty string.
 -   scmag
@@ -545,17 +759,17 @@ custom database script which rely on it. Please be aware of that change.
     -   Make parameter search a much more useful function which now supports
         navigating through all hits and also allow to search in descriptions and
         values.
-    -   Evaluate parameter the attributes type, range, values and options
+    -   Evaluate the parameter attributes type, range, values and options
         during startup and when modifying values. Notifications are printed to
         stderr and in the parameter evaluation text.
     -   Support importing inventory from any FDSNWS source directly in the
-        Inventory.
+        Inventory panel.
     -   Add hotkeys 1-6 for switching panels.
     -   Indicate selected and opened binding profiles in all sections of the
         bindings panel by coloring icons.
     -   Deactivate the mode change field and edit menu. The configuration mode
         can still be changed by the new `Switch mode` button.
-    -   Add relevant SeisComP and system variable and software details to the
+    -   Add relevant SeisComP and system variables and software details to the
         information panel.
 -   scxmldump
     -   Add option `--with-root` for also adding the top-level object of the
@@ -567,8 +781,8 @@ custom database script which rely on it. Please be aware of that change.
     -   Tool removed entirely. The functionality has been added to scxmldump.
 -   scwfparam
     -   Add support for custom list of periods.
--   LocSAT
-    -   Rewrite old old code to support reentrant processing and dynamic station
+-   LOCSAT
+    -   Rewrite old code to support reentrant processing and dynamic station
         count.
     -   Improve performance.
     -   Add PKiKP and PKIKP phases.
@@ -579,7 +793,7 @@ custom database script which rely on it. Please be aware of that change.
 -   NLL
     -   Allow the use of SAVE_NLLOC_EXPECTATION.
 -   iLoc
-    -   When reading a local velocity model file, If CONRAD is not specified,
+    -   When reading a local velocity model file, if CONRAD is not specified,
         the index of the Conrad discontinuity was not set properly, therefore iLoc
         assumed the very first depth as the Conrad thus preventing the calculation
         of Pg/Sg phases. The calculation of travel times from a local velocity model
@@ -685,7 +899,7 @@ custom database script which rely on it. Please be aware of that change.
         files.
 -   scwfparam
     -   Add support for custom list of periods.
--   LocSAT
+-   LOCSAT
     -   Fix bug when a function with only one sample is
         interpolated. That usually lead to location
         errors such as "SVD routine can't decompose matrix".
@@ -707,7 +921,7 @@ custom database script which rely on it. Please be aware of that change.
 
 ## 6.7.7
 
--   LocSAT
+-   LOCSAT
     -   Update PKKP table
     -   Add PKiKP and PKIKP table
     -   Add following phases to list of supported phases for which
@@ -1608,7 +1822,7 @@ Changes:
     -   Run in import mode by default.
 -   scamp
     -   Fix re-computation of amplitudes anytime a new origin is received. This restores
-        the behaviour of version < 5.5.0.
+        the behavior of version < 5.5.0.
 -   scevtls
     -   Support date format %F, e.g. `scevtls --begin 2023-09-13`.
 -   scmapcut
@@ -1811,9 +2025,9 @@ Changes:
     -   Add option to define magnitude comment profiles to populate
         arbitrary comments when reviewing a network magnitude
     -   Make `olv.arrivalPlot.showUncertainties` configurable in scconfig
-    -   Change picker behaviour when hovering another component when pick mode
+    -   Change picker behavior when hovering another component when pick mode
         is active: only the component of the zoom trace is changed and not the
-        overall component. The old behaviour can be restored with
+        overall component. The old behavior can be restored with
         `picker.componentFollowsMouse = true`.
 -   scart
     -   Allow to rename net, sta, loc, ch codes in dump and import modes,
