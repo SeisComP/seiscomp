@@ -2,6 +2,15 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.3.1
+
+-   trunk
+    -   Fix LOCSAT relocation from picks which caused the pickIDs
+        of the arrival to be the index and not the publicID of the
+        referenced pick.
+-   scmvx
+    -   Fix real-time station color updates.
+
 ## 7.3.0
 
 **Important**: The `LOCSAT` locator does not take backazimuth and slowness of
