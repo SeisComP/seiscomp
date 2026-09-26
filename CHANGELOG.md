@@ -14,6 +14,11 @@ All notable changes to SeisComP are documented here.
         review window.
 -   scmvx
     -   Render beachballs along with origin symbols.
+-   dbmysql
+    -   Add database URL parameters `ssl_mode`, `ssl_ca`, `ssl_capath`,
+        `ssl_cert`, `ssl_key` and `ssl_cipher` to configure encrypted
+        connections. This allows the plugin linked against the MariaDB
+        client library to connect to servers requiring secure transport.
 
 ## 7.4.0
 

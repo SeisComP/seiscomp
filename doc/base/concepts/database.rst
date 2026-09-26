@@ -58,6 +58,68 @@ the database commands along with debug log output. Example for using
    scolv -d localhost?debug --offline --debug
 
 
+.. _concepts_database_tls:
+
+Encrypted connections (MySQL / MariaDB)
+---------------------------------------
+
+Whether the *dbmysql* plugin encrypts the connection by default depends on the
+client library it is linked against. The MySQL client library (libmysqlclient)
+uses TLS if the server supports it. The MariaDB client library (libmariadb)
+before version 3.4 does not. A server configured with
+``require_secure_transport=ON`` therefore rejects connections from the latter.
+
+Encryption can be configured explicitly with the following parameters of the
+database URL. They are supported by both client libraries.
+
+.. csv-table::
+   :widths: 1 3
+   :header: Parameter, Description
+   :align: left
+
+   ssl_mode, "One of
+
+   * *disabled*: do not use TLS.
+   * *preferred*: use TLS if the server supports it, otherwise connect unencrypted.
+   * *required*: use TLS, fail if the server does not support it. The server
+     certificate is not verified.
+   * *verify_ca*: like *required*, and verify the server certificate against
+     the CA certificate(s) given with *ssl_ca* or *ssl_capath*.
+   * *verify_identity*: like *verify_ca*, and verify that the host name of the
+     database URL matches the server certificate.
+
+   The value is case-insensitive. The default is the client library default,
+   or *required* if any other ``ssl_*`` parameter is set."
+   ssl_ca, "File with the certificate(s) of the certificate authority (PEM)."
+   ssl_capath, "Directory with certificates of trusted certificate authorities (PEM)."
+   ssl_cert, "Client certificate (PEM), e.g. for users created with ``REQUIRE X509``."
+   ssl_key, "Private key of the client certificate (PEM)."
+   ssl_cipher, "List of permissible ciphers for TLS 1.2 and earlier."
+
+Example connecting to a database which requires secure transport and verifying
+the server certificate:
+
+.. code-block:: sh
+
+   scolv -d "mysql://sysop:sysop@db.example.org/seiscomp?ssl_mode=verify_identity&ssl_ca=/etc/ssl/certs/db-ca.pem"
+
+.. note::
+
+   * *verify_ca* and *verify_identity* require *ssl_ca* or *ssl_capath*. Use
+     ``ssl_capath=/etc/ssl/certs`` to verify against the certificate
+     authorities trusted by the system.
+   * The MariaDB client library also verifies the host name with
+     *verify_ca*. Use a host name in the database URL which is listed in the
+     server certificate.
+   * With *required*, *verify_ca* and *verify_identity* the connection is
+     refused if it is not encrypted, independent of the client library.
+   * The host name *localhost* makes the client libraries use a Unix socket
+     instead of TCP. Unix socket connections are not encrypted.
+   * The database URL configured in :ref:`scmaster` is passed to the connected
+     modules. The certificate and key files must be available at the same
+     location on all hosts running these modules.
+
+
 Database schema
 ---------------
 
