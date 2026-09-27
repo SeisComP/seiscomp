@@ -19,6 +19,10 @@ All notable changes to SeisComP are documented here.
         `ssl_cert`, `ssl_key` and `ssl_cipher` to configure encrypted
         connections. This allows the plugin linked against the MariaDB
         client library to connect to servers requiring secure transport.
+-   dbpostgresql
+    -   Add database URL parameters `ssl_mode`, `ssl_ca`, `ssl_cert` and
+        `ssl_key` to configure encrypted connections, see the `dbmysql`
+        change.
 
 ## 7.4.0
 
