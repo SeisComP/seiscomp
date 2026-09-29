@@ -82,8 +82,8 @@ database URL.
    * *verify_identity*: like *verify_ca*, and verify that the host name of the
      database URL matches the server certificate.
 
-   The value is case-insensitive. The default is the client library default,
-   or *required* if any other ``ssl_*`` parameter is set."
+   The value is case-insensitive. The default is *preferred*, or *required*
+   if any other ``ssl_*`` parameter is set."
    ssl_ca, "File with the certificate(s) of the certificate authority (PEM)."
    ssl_capath, "Directory with certificates of trusted certificate authorities
    (PEM). MySQL / MariaDB only."
@@ -111,7 +111,11 @@ percent-encoded, e.g. ``%20`` and ``%26``.
    * With *required*, *verify_ca* and *verify_identity* the connection is
      refused if it is not encrypted, also when reconnecting.
    * The host name *localhost* makes the MySQL / MariaDB client libraries use
-     a Unix socket instead of TCP. Unix socket connections are not encrypted.
+     a Unix socket instead of TCP. Use a host name or IP address to connect
+     via TCP.
+   * *preferred* does not verify the server certificate and silently falls
+     back to an unencrypted connection. Use *verify_identity* to protect
+     against man-in-the-middle attacks.
    * The database URL configured in :ref:`scmaster` is passed to the connected
      modules. The certificate and key files must be available at the same
      location on all hosts running these modules.
@@ -119,12 +123,12 @@ percent-encoded, e.g. ``%20`` and ``%26``.
 MySQL / MariaDB
 ~~~~~~~~~~~~~~~
 
-Whether the *dbmysql* plugin encrypts the connection without *ssl_mode*
-depends on the client library it is linked against. The MySQL client library
-(libmysqlclient) uses TLS if the server supports it. The MariaDB client
-library (libmariadb) before version 3.4 does not. A server configured with
-``require_secure_transport=ON`` therefore rejects connections from the latter
-unless *ssl_mode* is set.
+Without *ssl_mode* the *dbmysql* plugin uses TLS if the server supports it,
+independent of the client library it is linked against (MySQL client library
+libmysqlclient or MariaDB client library libmariadb). Before, only
+libmysqlclient did so and servers configured with
+``require_secure_transport=ON`` rejected connections from the plugin linked
+against libmariadb.
 
 The MariaDB client library also verifies the host name with *verify_ca*. Use a
 host name in the database URL which is listed in the server certificate.
