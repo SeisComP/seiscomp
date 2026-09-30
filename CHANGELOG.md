@@ -2,6 +2,85 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.5.0
+
+```SC_API_VERSION 17.5.0```
+
+-   seedlink
+    -   Change mseedfifo plugin `noexit` parameter default to true.
+    -   Add location support to ewexport and ewexport_pasv plugin.
+    -   Expose netto, netdly and keepalive as station parameters from
+        chain_plugin.
+-   slarchive
+    -   Skip purging stations for keep < 0.
+-   trunk
+    -   Add Mwpd duration-amplitude moment magnitude plugin contributed
+        by Mustafa Comoglu (GA).
+    -   Fix some application config descriptions w.r.t. the available
+        value set.
+    -   Add SQLite3 database connection `busy_timeout` and `journal` URL
+        parameters.
+    -   Report homogeneous travel time table duplicate velocity definition.
+    -   Add MYSQL/PostgreSQL database TLS connection support contributed
+        by Mustafa Comoglu (GA).
+    -   stdloc
+        -   Add methodID and earthModelID to profile options.
+        -   Make default methodID and earthModelID compatible with QuakeML
+            by replacing colon with slash.
+        -   Use the sum of the weighted residuals in the likelihood function.
+        -   Compute GridSearch/OctTree covariance around the expected hypocenter.
+        -   Use pick weights in the LeastSquares covariance matrix.
+        -   Compute full hypocenter uncertainties with fixed depth for all methods.
+        -   Compute confidence ellipsoid orientation as defined by QuakeML.
+        -   Warn user when the computed uncertainty is not reliable. 
+    -   Add `populateCIVersionAttributeTemplate` to configure a template
+        pattern to generate the version attribute content.
+    -   Make default stdloc methodID and earthModelID compatible with QuakeML.
+-   fdsnws
+    -   Fix event geographic, depth and event type filters.
+    -   Support updatedafter in the event service.
+    -   Export station magnitudes, amplitudes and all referenced magnitudes.
+        -   New request parameter includestationmagnitudes (stationmagnitudes,
+            stamags) adds the station magnitudes of the exported origins, the
+            station magnitude contributions of the exported magnitudes, the
+            referenced amplitudes and, with includearrivals, their picks. The new
+            configuration parameter hideStationMagnitudes (default: true) has to
+            be disabled to allow it.
+    -   Event service version is 1.3.0.
+-   GUI
+    -   Add Equal Earth map projection contributed by Mustafa Comoglu (GA).
+    -   Add `eventlist.filter.fx.enabled` option.
+    -   Keep unassociated origins at the bottom of the event list and list
+        unassociated origins in sort order.
+-   scalert
+    -   Add eventType filter.
+-   scardac
+    -   Improve performance by not parsing record samples.
+    -   Fix multi-threading segfault.
+-   scimex
+    -   Add `hosts.<sink>.condition` for evaluation mode/status/type
+        filtering contributed by Mustafa Comoglu (GA).
+-   scquery
+    -   Allow to read queries from external files.
+-   scxmldump
+    -   Export also amplitudes which are only referenced through station
+        magnitudes.
+-   scproclat
+    -   Fix writing of log files which was broken.
+    -   Add the stream ID to the pick and amplitude lines written to stdout.
+-   scolv
+    -   Fix "New event added" desktop notification which hasn't been shown
+        anymore in previous version.
+    -   Show the time residuals of the arrivals in the picker. Toggle the
+        display with Ctrl+R (disabled by default).
+    -   Sort picker traces by the largest absolute residual of all phases,
+        not only P.
+    -   Fix adding two rows with the picker filter add button.
+    -   Validate filters in settings panel while typing.
+-   scmvx
+    -   Fix indicating closed stations with multiple epochs.
+    -   Fix showing names of filtered stations.
+
 ## 7.4.0
 
 **Important**: Version 7.0 introduced a fix to the computation of ML* amplitudes
