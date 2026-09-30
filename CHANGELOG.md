@@ -2,6 +2,57 @@
 
 All notable changes to SeisComP are documented here.
 
+## 7.5.0
+
+```SC_API_VERSION 17.5.0```
+
+-   seedlink
+    -   Change mseedfifo plugin `noexit` parameter default to true.
+    -   Add location support to ewexport and ewexport_pasv plugin.
+    -   Expose netto, netdly and keepalive as station parameters from
+        chain_plugin.
+-   trunk
+    -   Add Mwpd duration-amplitude moment magnitude plugin contributed
+        by Mustafa Comoglu (GA).
+    -   Fix some application config descriptions w.r.t. the available
+        value set.
+    -   Add SQLite3 database connection `busy_timeout` and `journal` URL
+        parameters.
+    -   Report homogeneous travel time table duplicate velocity definition.
+    -   Add MYSQL/PostgreSQL database TLS connection support contributed
+        by Mustafa Comoglu (GA).
+    -   Add methodID and earthModelID to stdloc profile options
+    -   stdloc
+        -   Make default methodID and earthModelID compatible with QuakeML
+            by replacing colon with slash.
+-   GUI
+    -   Add Equal Earth map projection contributed by Mustafa Comoglu (GA).
+    -   Add `eventlist.filter.fx.enabled` option.
+-   scardac
+    -   Improve performance by not parsing record samples.
+    -   Fix multi-threading segfault.
+-   scimex
+    -   Add `hosts.<sink>.condition` for evaluation mode/status/type
+        filtering contributed by Mustafa Comoglu (GA).
+-   scquery
+    -   Allow to read queries from external files.
+-   scxmldump
+    -   Export also amplitudes which are only referenced through station
+        magnitudes.
+-   scproclat
+    -   Fix writing of log files which was broken.
+    -   Add the stream ID to the pick and amplitude lines written to stdout.
+-   scolv
+    -   Fix "New event added" desktop notification which hasn't been shown
+        anymore in previous version.
+    -   Show the time residuals of the arrivals in the picker. Toggle the
+        display with Ctrl+R (disabled by default).
+    -   Sort picker traces by the largest absolute residual of all phases,
+        not only P.
+-   scmvx
+    -   Fix indicating closed stations with multiple epochs.
+    -   Fix showing names of filtered stations.
+
 ## 7.4.0
 
 **Important**: Version 7.0 introduced a fix to the computation of ML* amplitudes
