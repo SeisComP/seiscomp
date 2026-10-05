@@ -6,8 +6,6 @@ All notable changes to SeisComP are documented here.
 
 -   magnitudes
     -   Ms_20: Test and report obsolete bindings configuration parameters.
--   GUI
-    -   Add optional eventlist highlight rules.
 -   scolv
     -   Add tooltips to amplitude view time window trace handles.
     -   Add azimuth column to station magnitude table in magnitude
