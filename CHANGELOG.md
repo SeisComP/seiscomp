@@ -10,6 +10,7 @@ All notable changes to SeisComP are documented here.
     -   Add tooltips to amplitude view time window trace handles.
     -   Add azimuth column to station magnitude table in magnitude
         review window.
+    -   Show arrival stations on the EventEdit Origins tab map (F9).
 -   scmvx
     -   Render beachballs along with origin symbols.
 
