@@ -4,6 +4,8 @@ All notable changes to SeisComP are documented here.
 
 ## 7.5.0
 
+-   seedlink
+    -   Change mseedfifo plugin `noexit` parameter default to true.
 -   trunk
     -   Add Mwpd duration-amplitude moment magnitude plugin contributed
         by Mustafa Comoglu (GA).
