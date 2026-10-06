@@ -6,6 +6,7 @@ All notable changes to SeisComP are documented here.
 
 -   seedlink
     -   Change mseedfifo plugin `noexit` parameter default to true.
+    -   Add location support to ewexport and ewexport_pasv plugin.
 -   trunk
     -   Add Mwpd duration-amplitude moment magnitude plugin contributed
         by Mustafa Comoglu (GA).
