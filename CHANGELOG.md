@@ -14,6 +14,8 @@ All notable changes to SeisComP are documented here.
     -   Add azimuth column to station magnitude table in magnitude
         review window.
     -   Show arrival stations on the EventEdit Origins tab map (F9).
+    -   Add `picker.initialAlignment` to align traces on a phase, e.g. P,
+        when opening the picker.
 -   scmvx
     -   Render beachballs along with origin symbols.
 
