@@ -142,6 +142,8 @@ All notable changes to SeisComP are documented here.
         pointers should be disabled.
     -   Fix routing configuration.
     -   Add support for "felt report" description.
+-   scproclat
+    -   Fix writing of log files which was broken. 
 -   scmvx
     -   Add networks and stations menus to map and main menus.
         -   Save network and station codes of stations with issues to file or clipboard.
