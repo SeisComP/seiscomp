@@ -58,6 +58,95 @@ the database commands along with debug log output. Example for using
    scolv -d localhost?debug --offline --debug
 
 
+.. _concepts_database_tls:
+
+Encrypted connections
+---------------------
+
+The *dbmysql* and *dbpostgresql* plugins can encrypt the connection to the
+database server with TLS. It is configured by the following parameters of the
+database URL.
+
+.. csv-table::
+   :widths: 1 3
+   :header: Parameter, Description
+   :align: left
+
+   ssl_mode, "One of
+
+   * *disabled*: do not use TLS.
+   * *preferred*: use TLS if the server supports it, otherwise connect unencrypted.
+   * *required*: use TLS, fail if the server does not support it.
+   * *verify_ca*: like *required*, and verify the server certificate against
+     the CA certificate(s) given with *ssl_ca* (or *ssl_capath*).
+   * *verify_identity*: like *verify_ca*, and verify that the host name of the
+     database URL matches the server certificate.
+
+   The value is case-insensitive. The default is *preferred*, or *required*
+   if any other ``ssl_*`` parameter is set."
+   ssl_ca, "File with the certificate(s) of the certificate authority (PEM)."
+   ssl_capath, "Directory with certificates of trusted certificate authorities
+   (PEM). MySQL / MariaDB only."
+   ssl_cert, "Client certificate (PEM), e.g. for MySQL / MariaDB users created
+   with ``REQUIRE X509`` or PostgreSQL *cert* authentication."
+   ssl_key, "Private key of the client certificate (PEM)."
+   ssl_cipher, "List of permissible ciphers for TLS 1.2 and earlier. MySQL /
+   MariaDB only."
+
+Example connecting to a database which requires secure transport and verifying
+the server certificate:
+
+.. code-block:: sh
+
+   scolv -d "mysql://sysop:sysop@db.example.org/seiscomp?ssl_mode=verify_identity&ssl_ca=/etc/ssl/certs/db-ca.pem"
+
+File names containing special characters like space or ``&`` must be
+percent-encoded, e.g. ``%20`` and ``%26``.
+
+.. note::
+
+   * *verify_ca* and *verify_identity* require *ssl_ca* (or *ssl_capath* for
+     MySQL / MariaDB). With MySQL / MariaDB use ``ssl_capath=/etc/ssl/certs``
+     to verify against the certificate authorities trusted by the system.
+   * With *required*, *verify_ca* and *verify_identity* the connection is
+     refused if it is not encrypted, also when reconnecting.
+   * The host name *localhost* makes the MySQL / MariaDB client libraries use
+     a Unix socket instead of TCP. Use a host name or IP address to connect
+     via TCP.
+   * *preferred* does not verify the server certificate and silently falls
+     back to an unencrypted connection. Use *verify_identity* to protect
+     against man-in-the-middle attacks.
+   * The database URL configured in :ref:`scmaster` is passed to the connected
+     modules. The certificate and key files must be available at the same
+     location on all hosts running these modules.
+
+MySQL / MariaDB
+~~~~~~~~~~~~~~~
+
+Without *ssl_mode* the *dbmysql* plugin uses TLS if the server supports it,
+independent of the client library it is linked against (MySQL client library
+libmysqlclient or MariaDB client library libmariadb). Before, only
+libmysqlclient did so and servers configured with
+``require_secure_transport=ON`` rejected connections from the plugin linked
+against libmariadb.
+
+The MariaDB client library also verifies the host name with *verify_ca*. Use a
+host name in the database URL which is listed in the server certificate.
+
+PostgreSQL
+~~~~~~~~~~
+
+The parameters are passed to libpq as *sslmode* (*disable*, *prefer*,
+*require*, *verify-ca*, *verify-full*), *sslrootcert*, *sslcert* and *sslkey*.
+Without *ssl_mode* libpq uses TLS if the server supports it (*prefer*). The
+libpq environment variables, e.g. ``PGSSLMODE``, apply to parameters which
+are not given in the database URL.
+
+With *required* and *ssl_ca* libpq also verifies the server certificate
+against the CA, like *verify_ca*. The private key file given with *ssl_key*
+must not be readable by other users.
+
+
 Database schema
 ---------------
 
